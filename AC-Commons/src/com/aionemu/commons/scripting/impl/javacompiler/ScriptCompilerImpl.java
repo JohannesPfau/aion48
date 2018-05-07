@@ -32,7 +32,6 @@ package com.aionemu.commons.scripting.impl.javacompiler;
 import com.aionemu.commons.scripting.CompilationResult;
 import com.aionemu.commons.scripting.ScriptClassLoader;
 import com.aionemu.commons.scripting.ScriptCompiler;
-import com.sun.tools.javac.api.JavacTool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -78,12 +77,9 @@ public class ScriptCompilerImpl implements ScriptCompiler {
      * @throws RuntimeException if compiler is not available
      */
     public ScriptCompilerImpl() {
-        this.javaCompiler = JavacTool.create();
-
+        javaCompiler = ToolProvider.getSystemJavaCompiler();
         if (javaCompiler == null) {
-            if (ToolProvider.getSystemJavaCompiler() != null) {
-                throw new RuntimeException(new InstantiationException("JavaCompiler is not aviable."));
-            }
+            throw new NullPointerException("Could not find compiler! Make sure javac is in PATH.");
         }
     }
 
@@ -129,7 +125,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
      * @return CompilationResult with needed files
      * @throws IllegalArgumentException if size of classNames not equals to size
      *                                  of sourceCodes
-     * @throws RuntimeException         if compilation failed with errros
+     * @throws RuntimeException         if compilation failed with errors
      */
     @Override
     public CompilationResult compile(String[] classNames, String[] sourceCode) throws IllegalArgumentException {
@@ -138,7 +134,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
             throw new IllegalArgumentException("Amount of classes is not equal to amount of sources");
         }
 
-        List<JavaFileObject> compilationUnits = new ArrayList<JavaFileObject>();
+        List<JavaFileObject> compilationUnits = new ArrayList<>();
 
         for (int i = 0; i < classNames.length; i++) {
             JavaFileObject compilationUnit = new JavaSourceFromString(classNames[i], sourceCode[i]);
@@ -157,7 +153,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
      */
     @Override
     public CompilationResult compile(Iterable<File> compilationUnits) {
-        List<JavaFileObject> list = new ArrayList<JavaFileObject>();
+        List<JavaFileObject> list = new ArrayList<>();
 
         for (File f : compilationUnits) {
             list.add(new JavaSourceFromFile(f, JavaFileObject.Kind.SOURCE));
@@ -172,12 +168,12 @@ public class ScriptCompilerImpl implements ScriptCompiler {
      *
      * @param compilationUnits Units that will be compiled
      * @return CompilationResult with compiledClasses
-     * @throws RuntimeException if compilation failed with errros
+     * @throws RuntimeException if compilation failed with errors
      */
     protected CompilationResult doCompilation(Iterable<JavaFileObject> compilationUnits) {
         List<String> options = Arrays.asList("-encoding", "UTF-8", "-g");
         DiagnosticListener<JavaFileObject> listener = new ErrorListener();
-        ClassFileManager manager = new ClassFileManager(JavacTool.create(), listener);
+        ClassFileManager manager = new ClassFileManager(javaCompiler, listener);
         manager.setParentClassLoader(parentClassLoader);
 
         if (libraries != null) {

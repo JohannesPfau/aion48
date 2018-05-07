@@ -1,6 +1,5 @@
 @ECHO off
 cls
-color 4E
 TITLE InsaneAion 4.8 - GameServer Panel
 :MENU
 CLS

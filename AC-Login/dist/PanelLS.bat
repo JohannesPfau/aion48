@@ -1,6 +1,5 @@
 @ECHO off
 TITLE InsaneAion 4.8 Login Panel
-color 4E
 :MENU
 CLS
 ECHO.

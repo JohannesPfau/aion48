@@ -29,17 +29,25 @@
  */
 package com.aionemu.commons.utils.xml;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlAdapter;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.util.*;
 
 /**
- * @param <K> Map Key
- * @param <V> Map Value
+ * @param <K>
+ *            Map Key
+ * @param <V>
+ *            Map Value
  * @author Oleh_Faizulin
  */
 public class GenericMapAdapter<K, V> extends XmlAdapter<GenericMapAdapter.KeyValuePairContainer<K, V>, Map<K, V>> {
@@ -50,7 +58,7 @@ public class GenericMapAdapter<K, V> extends XmlAdapter<GenericMapAdapter.KeyVal
             return null;
         }
 
-        KeyValuePairContainer<K, V> result = new KeyValuePairContainer<K, V>();
+        KeyValuePairContainer<K, V> result = new KeyValuePairContainer<>();
         for (Map.Entry<K, V> entry : v.entrySet()) {
             result.addElement(entry);
         }
@@ -58,9 +66,9 @@ public class GenericMapAdapter<K, V> extends XmlAdapter<GenericMapAdapter.KeyVal
     }
 
     @Override
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({ "unchecked" })
     public Map<K, V> unmarshal(KeyValuePairContainer<K, V> v) throws Exception {
-        Map<K, V> result = new HashMap<K, V>();
+        Map<K, V> result = new HashMap<>();
         for (KeyValuePair<K, V> kvp : v.getValues()) {
             if (kvp.getMapValue() != null) {
                 result.put(kvp.getKey(), (V) kvp.getMapValue());
@@ -82,9 +90,9 @@ public class GenericMapAdapter<K, V> extends XmlAdapter<GenericMapAdapter.KeyVal
 
         public void addElement(Map.Entry<K, V> entry) {
             if (values == null) {
-                values = new ArrayList<KeyValuePair<K, V>>();
+                values = new ArrayList<>();
             }
-            values.add(new KeyValuePair<K, V>(entry));
+            values.add(new KeyValuePair<>(entry));
         }
 
         public List<KeyValuePair<K, V>> getValues() {

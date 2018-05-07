@@ -121,7 +121,8 @@ public class ClientChannelHandler extends AbstractChannelHandler {
     }
 
     /**
-     * @param state the state to set
+     * @param state
+     *            the state to set
      */
     public void setState(State state) {
         this.state = state;
@@ -135,7 +136,8 @@ public class ClientChannelHandler extends AbstractChannelHandler {
     }
 
     /**
-     * @param chatClient the chatClient to set
+     * @param chatClient
+     *            the chatClient to set
      */
     public void setChatClient(ChatClient chatClient) {
         this.chatClient = chatClient;

@@ -55,7 +55,7 @@ public class SM_HOUSE_SCRIPTS extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(address);
         writeH(to - from + 1);
         Map<Integer, PlayerScript> scriptMap = scripts.getScripts();

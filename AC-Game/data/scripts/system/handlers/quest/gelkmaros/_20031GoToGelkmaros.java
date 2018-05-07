@@ -29,13 +29,13 @@
  */
 package quest.gelkmaros;
 
+import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
+import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,56 +50,56 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _20031GoToGelkmaros extends QuestHandler {
 
     private final static int questId = 20031;
-	private final static int[] mobs = {216091, 216095, 216092, 216096, 216093, 216097};
+    private final static int[] mobs = { 216091, 216095, 216092, 216096, 216093, 216097 };
+
     public _20031GoToGelkmaros() {
         super(questId);
     }
 
     @Override
     public void register() {
-        int[] npcs = {204052, 798800, 798409, 799225, 799364, 799365}; 	
-		qe.registerOnLevelUp(questId);
+        int[] npcs = { 204052, 798800, 798409, 799225, 799364, 799365 };
+        qe.registerOnLevelUp(questId);
         qe.registerOnEnterWorld(questId);
-		qe.registerQuestItem(182215590, questId);
+        qe.registerQuestItem(182215590, questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }
-		for (int mob : mobs) {
+        for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
     }
-	
-	@Override
+
+    @Override
     public boolean onLvlUpEvent(QuestEnv env) {
         return defaultOnLvlUpEvent(env);
     }
-	
+
     @Override
     public boolean onEnterWorldEvent(QuestEnv env) {
         Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-        if (player.getWorldId() == 120010000) {            
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (player.getWorldId() == 120010000) {
             if (qs == null) {
                 env.setQuestId(questId);
                 if (QuestService.startQuest(env)) {
                     return true;
                 }
-            }			
+            }
+        } else if (player.getWorldId() == 220070000) {
+            if (qs != null && qs.getStatus() == QuestStatus.START) {
+                int var = qs.getQuestVars().getQuestVars();
+                if (var == 3) {
+                    qs.setQuestVar(++var);
+                    updateQuestStatus(env);
+                    return playQuestMovie(env, 551);
+                }
+            }
         }
-		else if (player.getWorldId() == 220070000) {
-			if (qs != null && qs.getStatus() == QuestStatus.START) {
-            int var = qs.getQuestVars().getQuestVars();
-            if (var == 3) {
-					qs.setQuestVar(++var);
-					updateQuestStatus(env);
-                    return playQuestMovie(env, 551);					
-				}
-			}
-		}	
         return false;
     }
-	
-	@Override
+
+    @Override
     public boolean onKillEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -140,12 +140,11 @@ public class _20031GoToGelkmaros extends QuestHandler {
                         }
                     case SETPRO1:
                         qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
+                        updateQuestStatus(env);
+                        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                        return true;
                 }
-            }
-            else if (targetId == 798800) {
+            } else if (targetId == 798800) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 1) {
@@ -153,12 +152,11 @@ public class _20031GoToGelkmaros extends QuestHandler {
                         }
                     case SETPRO2:
                         qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-                }				
-            }
-			else if (targetId == 798409) {
+                        updateQuestStatus(env);
+                        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                        return true;
+                }
+            } else if (targetId == 798409) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 2) {
@@ -166,12 +164,11 @@ public class _20031GoToGelkmaros extends QuestHandler {
                         }
                     case SETPRO3:
                         qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						TeleportService2.teleportTo(player, 220070000, 1, 1868, 2746, 531, (byte) 20);
-						return true;
-                }				
-            }
-			else if (targetId == 799225) {
+                        updateQuestStatus(env);
+                        TeleportService2.teleportTo(player, 220070000, 1, 1868, 2746, 531, (byte) 20);
+                        return true;
+                }
+            } else if (targetId == 799225) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 4) {
@@ -179,12 +176,11 @@ public class _20031GoToGelkmaros extends QuestHandler {
                         }
                     case SETPRO5:
                         qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-                }				
-            }
-			else if (targetId == 799364) {
+                        updateQuestStatus(env);
+                        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                        return true;
+                }
+            } else if (targetId == 799364) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 5) {
@@ -192,12 +188,11 @@ public class _20031GoToGelkmaros extends QuestHandler {
                         }
                     case SETPRO6:
                         qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-                }				
-            }
-			else if (targetId == 799365) {
+                        updateQuestStatus(env);
+                        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                        return true;
+                }
+            } else if (targetId == 799365) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 6) {
@@ -205,41 +200,38 @@ public class _20031GoToGelkmaros extends QuestHandler {
                         }
                     case SETPRO7:
                         qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-                }				
-            }
-			else if (targetId == 799226) {
+                        updateQuestStatus(env);
+                        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                        return true;
+                }
+            } else if (targetId == 799226) {
                 switch (env.getDialog()) {
-				case QUEST_SELECT: {
+                    case QUEST_SELECT: {
                         if (var == 7) {
                             return sendQuestDialog(env, 3398);
-                        }
-						else if (var == 10) {
+                        } else if (var == 10) {
                             return sendQuestDialog(env, 3399);
                         }
-					}
+                    }
                     case SETPRO8:
-						if (var == 7) {
-						giveQuestItem(env, 182215590, 1);
-                        qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-						}
-					case SETPRO11:
-						if (var == 10) {
-						removeQuestItem(env, 182215591, 1);
-                        qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-						}
-                }				
+                        if (var == 7) {
+                            giveQuestItem(env, 182215590, 1);
+                            qs.setQuestVarById(0, var + 1);
+                            updateQuestStatus(env);
+                            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                            return true;
+                        }
+                    case SETPRO11:
+                        if (var == 10) {
+                            removeQuestItem(env, 182215591, 1);
+                            qs.setStatus(QuestStatus.REWARD);
+                            updateQuestStatus(env);
+                            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                            return true;
+                        }
+                }
             }
-        }
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+        } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 799225) {
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
@@ -252,14 +244,14 @@ public class _20031GoToGelkmaros extends QuestHandler {
         }
         return false;
     }
-	
-	@Override
+
+    @Override
     public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             if (player.isInsideZone(ZoneName.get("DF4_ITEMUSEAREA_Q20031"))) {
-				playQuestMovie(env, 566);
+                playQuestMovie(env, 566);
                 return HandlerResult.fromBoolean(useQuestItem(env, item, 9, 10, false)); // 10
             }
         }

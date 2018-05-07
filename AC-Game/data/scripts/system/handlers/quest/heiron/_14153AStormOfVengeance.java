@@ -29,6 +29,7 @@
  */
 package quest.heiron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,7 +37,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,7 +51,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _14153AStormOfVengeance extends QuestHandler {
 
     private final static int questId = 14153;
-	
+
     public _14153AStormOfVengeance() {
         super(questId);
     }
@@ -72,26 +72,26 @@ public class _14153AStormOfVengeance extends QuestHandler {
         final Player player = env.getPlayer();
         final QuestState qs = player.getQuestStateList().getQuestState(questId);
         int targetId = 0;
-		
+
         if (env.getVisibleObject() instanceof Npc) {
             targetId = ((Npc) env.getVisibleObject()).getNpcId();
         }
-		
+
         if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-            if (targetId == 204504) {  // Sofne
+            if (targetId == 204504) { // Sofne
                 if (env.getDialog() == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 4762);
                 } else {
                     return sendQuestStartDialog(env);
                 }
             }
-        }		
+        }
 
-		if (qs == null) {
-		    return false;
-		}
-				
-        int var = qs.getQuestVarById(0); 		
+        if (qs == null) {
+            return false;
+        }
+
+        int var = qs.getQuestVarById(0);
 
         if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 204505) {
@@ -114,8 +114,8 @@ public class _14153AStormOfVengeance extends QuestHandler {
                         return true;
                     }
                     return false;
-			default:
-				break;
+                default:
+                    break;
             }
         } else if (targetId == 204533) {
             switch (env.getDialog()) {
@@ -140,8 +140,8 @@ public class _14153AStormOfVengeance extends QuestHandler {
                         return true;
                     }
                     return false;
-			default:
-				break;
+                default:
+                    break;
             }
         } else if (targetId == 204535) {
             switch (env.getDialog()) {
@@ -160,8 +160,8 @@ public class _14153AStormOfVengeance extends QuestHandler {
                         return true;
                     }
                     return false;
-			default:
-				break;
+                default:
+                    break;
             }
         } else if (targetId == 700282 && var == 2) {
             if (env.getDialog() == DialogAction.USE_OBJECT) {
@@ -206,13 +206,12 @@ public class _14153AStormOfVengeance extends QuestHandler {
         if (qs == null || qs.getStatus() == QuestStatus.COMPLETE) {
             return HandlerResult.UNKNOWN;
         }
-        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-                0), true);
+        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
-                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-                        1, 0), true);
+                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
                 playQuestMovie(env, 192);
                 removeQuestItem(env, 182215459, 1);
                 qs.setQuestVarById(0, 5);

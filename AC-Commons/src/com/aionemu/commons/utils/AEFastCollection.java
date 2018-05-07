@@ -29,13 +29,13 @@
  */
 package com.aionemu.commons.utils;
 
-import javolution.util.FastCollection;
-import javolution.util.FastCollection.Record;
-
 import java.lang.reflect.Array;
 import java.util.Collection;
 import java.util.List;
 import java.util.RandomAccess;
+
+import javolution.util.FastCollection;
+import javolution.util.FastCollection.Record;
 
 /**
  * @author NB4L1
@@ -137,7 +137,7 @@ public abstract class AEFastCollection<E> implements Collection<E> {
     private boolean addAll(AEFastCollection<? extends E> c) {
         boolean modified = false;
 
-        for (Record r = c.head(), end = c.tail(); (r = r.getNext()) != end; ) {
+        for (Record r = c.head(), end = c.tail(); (r = r.getNext()) != end;) {
             if (add(c.valueOf(r))) {
                 modified = true;
             }
@@ -149,7 +149,7 @@ public abstract class AEFastCollection<E> implements Collection<E> {
     private boolean addAll(FastCollection<? extends E> c) {
         boolean modified = false;
 
-        for (Record r = c.head(), end = c.tail(); (r = r.getNext()) != end; ) {
+        for (Record r = c.head(), end = c.tail(); (r = r.getNext()) != end;) {
             if (add(c.valueOf(r))) {
                 modified = true;
             }
@@ -161,7 +161,7 @@ public abstract class AEFastCollection<E> implements Collection<E> {
     private boolean addAll(List<? extends E> c) {
         boolean modified = false;
 
-        for (int i = 0, size = c.size(); i < size; ) {
+        for (int i = 0, size = c.size(); i < size;) {
             if (add(c.get(i++))) {
                 modified = true;
             }
@@ -208,7 +208,7 @@ public abstract class AEFastCollection<E> implements Collection<E> {
     }
 
     private boolean containsAll(AEFastCollection<?> c) {
-        for (Record r = c.head(), end = c.tail(); (r = r.getNext()) != end; ) {
+        for (Record r = c.head(), end = c.tail(); (r = r.getNext()) != end;) {
             if (!contains(c.valueOf(r))) {
                 return false;
             }
@@ -218,7 +218,7 @@ public abstract class AEFastCollection<E> implements Collection<E> {
     }
 
     private boolean containsAll(FastCollection<?> c) {
-        for (Record r = c.head(), end = c.tail(); (r = r.getNext()) != end; ) {
+        for (Record r = c.head(), end = c.tail(); (r = r.getNext()) != end;) {
             if (!contains(c.valueOf(r))) {
                 return false;
             }
@@ -228,7 +228,7 @@ public abstract class AEFastCollection<E> implements Collection<E> {
     }
 
     private boolean containsAll(List<?> c) {
-        for (int i = 0, size = c.size(); i < size; ) {
+        for (int i = 0, size = c.size(); i < size;) {
             if (!contains(c.get(i++))) {
                 return false;
             }
@@ -285,7 +285,7 @@ public abstract class AEFastCollection<E> implements Collection<E> {
         }
 
         int i = 0;
-        for (Record r = head(), end = tail(); (r = r.getNext()) != end; ) {
+        for (Record r = head(), end = tail(); (r = r.getNext()) != end;) {
             array[i++] = (T) valueOf(r);
         }
 

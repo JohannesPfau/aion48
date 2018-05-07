@@ -29,9 +29,9 @@
  */
 package quest.verteron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,7 +49,7 @@ public class _14013AFrillOfAFuss extends QuestHandler {
 
     @Override
     public void register() {
-        int[] mobs = {210126, 210200, 210201, 210202};
+        int[] mobs = { 210126, 210200, 210201, 210202 };
         qe.registerQuestNpc(203129).addOnTalkEvent(questId);
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
@@ -113,9 +113,9 @@ public class _14013AFrillOfAFuss extends QuestHandler {
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             if (var == 1) {
-                int[] rakec = {210126};
-                int[] girakec = {210200, 210201};
-                int[] trandila = {210202};
+                int[] rakec = { 210126 };
+                int[] girakec = { 210200, 210201 };
+                int[] trandila = { 210202 };
                 switch (targetId) {
                     case 210126: {
                         return defaultOnKillEvent(env, rakec, 0, 5, 1);

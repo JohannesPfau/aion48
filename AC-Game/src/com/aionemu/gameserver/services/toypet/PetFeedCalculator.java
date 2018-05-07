@@ -73,7 +73,8 @@ import com.aionemu.gameserver.model.templates.pet.PetRewards;
  * { 800, 2000, 3200, 4000, 8000, 16000 }, // level 51~55 items (feed points
  * 80)<br>
  * { 880, 2200, 3520, 4400, 8800, 17600 } // level 56~60 items (feed points
- * 88)<br> };
+ * 88)<br>
+ * };
  */
 public final class PetFeedCalculator {
 
@@ -83,7 +84,7 @@ public final class PetFeedCalculator {
     static final int[][] pointValues;
 
     static {
-        TreeSet<Short> counts = new TreeSet<Short>();
+        TreeSet<Short> counts = new TreeSet<>();
         for (PetFlavour flavour : DataManager.PET_FEED_DATA.getPetFlavours()) {
             if (flavour.getFullCount() > 0) {
                 counts.add((short) (flavour.getFullCount() & 0xFFFF));
@@ -134,8 +135,10 @@ public final class PetFeedCalculator {
     /**
      * Formula to calculate pointValues array
      *
-     * @param feedPoints   - feed points for item
-     * @param maxFeedCount - max feeding count
+     * @param feedPoints
+     *            - feed points for item
+     * @param maxFeedCount
+     *            - max feeding count
      * @return byte increment count after all items are fed
      */
     static int getPoints(int feedPoints, int maxFeedCount) {
@@ -146,7 +149,7 @@ public final class PetFeedCalculator {
             boolean needSwitch = false;
             int oldPoints = points;
             if ((state == 0 && consumed > maxFeedCount * 0.5f) || (state == 1 && consumed > maxFeedCount * 0.8f)
-                    || (state == 2 && consumed > maxFeedCount * 1.05)) {
+                || (state == 2 && consumed > maxFeedCount * 1.05)) {
                 needSwitch = true;
             }
             points += feedPoints;
@@ -177,8 +180,8 @@ public final class PetFeedCalculator {
         boolean needSwitch = false;
 
         if ((currHungryLevel == PetHungryLevel.HUNGRY && progress.getRegularCount() > maxFeedCount * 0.5f)
-                || (currHungryLevel == PetHungryLevel.CONTENT && progress.getRegularCount() > maxFeedCount * 0.8f)
-                || (currHungryLevel == PetHungryLevel.SEMIFULL && progress.getRegularCount() > maxFeedCount * 1.05)) {
+            || (currHungryLevel == PetHungryLevel.CONTENT && progress.getRegularCount() > maxFeedCount * 0.8f)
+            || (currHungryLevel == PetHungryLevel.SEMIFULL && progress.getRegularCount() > maxFeedCount * 1.05)) {
             // forcefully switch level
             needSwitch = true;
         } else {
@@ -197,7 +200,7 @@ public final class PetFeedCalculator {
             // just a prevention to not switch level
             PetHungryLevel nextLevel = progress.getHungryLevel().getNextValue();
             if (nextLevel == PetHungryLevel.CONTENT && progress.getRegularCount() <= 0.487f * maxFeedCount
-                    || nextLevel == PetHungryLevel.SEMIFULL && progress.getRegularCount() <= 0.78f * maxFeedCount) {
+                || nextLevel == PetHungryLevel.SEMIFULL && progress.getRegularCount() <= 0.78f * maxFeedCount) {
                 progress.setTotalPoints(oldPoints);
             } else {
                 progress.setHungryLevel(nextLevel);
@@ -220,7 +223,7 @@ public final class PetFeedCalculator {
             if (rewardGroup.getResults().size() == 1) {
                 return rewardGroup.getResults().get(0);
             }
-            List<PetFeedResult> validRewards = new ArrayList<PetFeedResult>();
+            List<PetFeedResult> validRewards = new ArrayList<>();
             int maxLevel = 0;
             for (PetFeedResult result : rewardGroup.getResults()) {
                 int resultLevel = DataManager.ITEM_DATA.getItemTemplate(result.getItem()).getLevel();

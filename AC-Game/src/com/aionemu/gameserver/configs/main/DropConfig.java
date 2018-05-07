@@ -36,12 +36,13 @@ import com.aionemu.commons.configuration.Property;
  * @rework Blackfire
  */
 public class DropConfig {
-   /**
-    * Enable announce when a player get Epic item / Mythic item from chest.
-    */
+
+    /**
+     * Enable announce when a player get Epic item / Mythic item from chest.
+     */
     @Property(key = "gameserver.unique.chest.drop.announce.enable", defaultValue = "false")
     public static boolean ENABLE_UNIQUE_CHEST_DROP_ANNOUNCE;
-	
+
     /**
      * Disable drop rate reduction based on level diference between players and
      * mobs

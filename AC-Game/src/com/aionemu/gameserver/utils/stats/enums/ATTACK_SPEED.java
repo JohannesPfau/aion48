@@ -51,6 +51,7 @@ public enum ATTACK_SPEED {
     GUNNER(1500),
     ARTIST(1500),
     BARD(1500);
+
     private int value;
 
     private ATTACK_SPEED(int value) {

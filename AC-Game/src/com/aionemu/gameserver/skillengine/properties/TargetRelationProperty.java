@@ -44,20 +44,20 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 
 /**
  * @author ATracer
- (Aion-Core)
+ *         (Aion-Core)
  */
 public class TargetRelationProperty {
 
     public static boolean isNpcInvul(Creature player, Creature npc) {
         if (player instanceof Player && npc instanceof Npc) {
             switch (CreatureType.getCreatureType(npc.getType(player))) {
-	            case INVULNERABLE:
-	                return true;
+                case INVULNERABLE:
+                    return true;
             }
-		}    	
+        }
         return false;
-    }	
-	
+    }
+
     /**
      * @param skill
      * @param properties
@@ -75,20 +75,20 @@ public class TargetRelationProperty {
             case ALL:
                 break;
             case ENEMY:
-                for (Iterator<Creature> iter = effectedList.iterator(); iter.hasNext(); ) {
+                for (Iterator<Creature> iter = effectedList.iterator(); iter.hasNext();) {
                     Creature nextEffected = iter.next();
 
-					if (!isNpcInvul(effector, nextEffected)) {
-	                    if (effector.isEnemy(nextEffected) || isMaterialSkill) {
-	                        continue;
-	                    }
-					}
-                    
+                    if (!isNpcInvul(effector, nextEffected)) {
+                        if (effector.isEnemy(nextEffected) || isMaterialSkill) {
+                            continue;
+                        }
+                    }
+
                     iter.remove();
                 }
                 break;
             case FRIEND:
-                for (Iterator<Creature> iter = effectedList.iterator(); iter.hasNext(); ) {
+                for (Iterator<Creature> iter = effectedList.iterator(); iter.hasNext();) {
                     Creature nextEffected = iter.next();
 
                     if (!effector.isEnemy(nextEffected) && isBuffAllowed(nextEffected) || isMaterialSkill) {
@@ -106,7 +106,7 @@ public class TargetRelationProperty {
                 }
                 break;
             case MYPARTY:
-                for (Iterator<Creature> iter = effectedList.iterator(); iter.hasNext(); ) {
+                for (Iterator<Creature> iter = effectedList.iterator(); iter.hasNext();) {
                     Creature nextEffected = iter.next();
 
                     Player player = null;

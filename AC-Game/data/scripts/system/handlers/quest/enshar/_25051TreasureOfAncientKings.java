@@ -29,10 +29,10 @@
  */
 package quest.enshar;
 
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -55,9 +55,9 @@ public class _25051TreasureOfAncientKings extends QuestHandler {
         qe.registerQuestNpc(804915).addOnTalkEvent(questId);
         qe.registerQuestNpc(731553).addOnTalkEvent(questId);
         qe.registerQuestNpc(805160).addOnTalkEvent(questId);
-		qe.registerQuestNpc(731554).addOnTalkEvent(questId);
-		qe.registerQuestNpc(731555).addOnTalkEvent(questId);
-		qe.registerQuestNpc(804916).addOnTalkEvent(questId);
+        qe.registerQuestNpc(731554).addOnTalkEvent(questId);
+        qe.registerQuestNpc(731555).addOnTalkEvent(questId);
+        qe.registerQuestNpc(804916).addOnTalkEvent(questId);
     }
 
     @Override
@@ -76,52 +76,52 @@ public class _25051TreasureOfAncientKings extends QuestHandler {
             }
         } else if (qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
-			if (targetId == 731553) { 
+            if (targetId == 731553) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     if (var == 0) {
                         return sendQuestDialog(env, 1011);
                     }
                 } else if (dialog == DialogAction.SETPRO1) {
-					QuestService.addNewSpawn(220080000, player.getInstanceId(), 805160, 2046.8f, 1588.8f, 348.4f, (byte) 90);
-					changeQuestStep(env, 0, 1, false); 
+                    QuestService.addNewSpawn(220080000, player.getInstanceId(), 805160, 2046.8f, 1588.8f, 348.4f, (byte) 90);
+                    changeQuestStep(env, 0, 1, false);
                     return closeDialogWindow(env);
                 }
             }
-			if (targetId == 805160) { 
+            if (targetId == 805160) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     if (var == 1) {
                         return sendQuestDialog(env, 1352);
                     }
                 } else if (dialog == DialogAction.SETPRO2) {
-					Npc npc = (Npc) env.getVisibleObject();
+                    Npc npc = (Npc) env.getVisibleObject();
                     npc.getController().onDelete();
-					changeQuestStep(env, 1, 2, false); 
+                    changeQuestStep(env, 1, 2, false);
                     return closeDialogWindow(env);
                 }
             }
-			if (targetId == 731554) { 
+            if (targetId == 731554) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     if (var == 2) {
                         return sendQuestDialog(env, 1693);
                     }
                 } else if (dialog == DialogAction.SETPRO3) {
-					giveQuestItem(env, 182215720, 1);
-					changeQuestStep(env, 2, 3, false); 
+                    giveQuestItem(env, 182215720, 1);
+                    changeQuestStep(env, 2, 3, false);
                     return closeDialogWindow(env);
                 }
             }
-			if (targetId == 731555) { 
+            if (targetId == 731555) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     if (var == 3) {
                         return sendQuestDialog(env, 2034);
                     }
                 } else if (dialog == DialogAction.SET_SUCCEED) {
-					removeQuestItem(env, 182215720, 1);
-					QuestService.addNewSpawn(220080000, player.getInstanceId(), 220031, 1933.8f, 1418.8f, 359.6f, (byte) 37);
-					changeQuestStep(env, 3, 4, true); 
+                    removeQuestItem(env, 182215720, 1);
+                    QuestService.addNewSpawn(220080000, player.getInstanceId(), 220031, 1933.8f, 1418.8f, 359.6f, (byte) 37);
+                    changeQuestStep(env, 3, 4, true);
                     return closeDialogWindow(env);
                 }
-            }			
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 804916) {
                 if (dialog == DialogAction.QUEST_SELECT) {

@@ -28,7 +28,7 @@
  * @Aion-Core Dev.
  */
 package quest.brusthonin;
- 
+
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -36,19 +36,19 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
- 
+
 /**
  * @author FrozenKiller
  */
- 
+
 public class _24202LetMeInLetMeIn extends QuestHandler {
 
     private final static int questId = 24202;
 
     public _24202LetMeInLetMeIn() {
         super(questId);
-    }    
-	
+    }
+
     @Override
     public void register() {
         qe.registerQuestNpc(205150).addOnQuestStart(questId);
@@ -56,9 +56,8 @@ public class _24202LetMeInLetMeIn extends QuestHandler {
         qe.registerQuestNpc(205159).addOnTalkEvent(questId); // Neligor
         qe.registerQuestNpc(205198).addOnTalkEvent(questId); // Cayron
     }
-	
-	
-	@Override
+
+    @Override
     public boolean onDialogEvent(final QuestEnv env) {
         final Player player = env.getPlayer();
         int targetId = env.getTargetId();
@@ -73,41 +72,41 @@ public class _24202LetMeInLetMeIn extends QuestHandler {
                     return sendQuestStartDialog(env);
                 }
             }
-		} else if (qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (targetId == 205159) { // Neligor
-				switch (dialog) {
-					case QUEST_SELECT: {
-						if (var == 0) {
-							return sendQuestDialog(env, 1352);
-						} 
-					}
-					case SETPRO1: {
-						return defaultCloseDialog(env, 0, 1); // 1
-					}
-				default:
-					break;
-				}
-			} else if (targetId == 205198) { // Cayron
-				if (var == 1) {
-					switch (dialog) {
-						case QUEST_SELECT: {
-							return sendQuestDialog(env, 1693);
-						}
-						case SETPRO2: {
-							return defaultCloseDialog(env, 1, 2);
-						}
-					default:
-						break;
-					}
-				}
-			} else if (targetId == 205150) { // Surt
-				if (var == 2) {
-					switch (dialog) {
-						case QUEST_SELECT: {
-							return sendQuestDialog(env, 2375);
-						}
-						case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
+        } else if (qs.getStatus() == QuestStatus.START) {
+            int var = qs.getQuestVarById(0);
+            if (targetId == 205159) { // Neligor
+                switch (dialog) {
+                    case QUEST_SELECT: {
+                        if (var == 0) {
+                            return sendQuestDialog(env, 1352);
+                        }
+                    }
+                    case SETPRO1: {
+                        return defaultCloseDialog(env, 0, 1); // 1
+                    }
+                    default:
+                        break;
+                }
+            } else if (targetId == 205198) { // Cayron
+                if (var == 1) {
+                    switch (dialog) {
+                        case QUEST_SELECT: {
+                            return sendQuestDialog(env, 1693);
+                        }
+                        case SETPRO2: {
+                            return defaultCloseDialog(env, 1, 2);
+                        }
+                        default:
+                            break;
+                    }
+                }
+            } else if (targetId == 205150) { // Surt
+                if (var == 2) {
+                    switch (dialog) {
+                        case QUEST_SELECT: {
+                            return sendQuestDialog(env, 2375);
+                        }
+                        case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
                             if (QuestService.collectItemCheck(env, true)) {
                                 changeQuestStep(env, 2, 3, true);
                                 return sendQuestDialog(env, 5);
@@ -115,16 +114,16 @@ public class _24202LetMeInLetMeIn extends QuestHandler {
                                 return closeDialogWindow(env);
                             }
                         }
-					default:
-						break;
-					}
-				}
-			}
+                        default:
+                            break;
+                    }
+                }
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 205150) { // Surt
+            if (targetId == 205150) { // Surt
                 return sendQuestEndDialog(env);
-			}
-		}
+            }
+        }
         return false;
     }
 }

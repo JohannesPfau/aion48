@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PetRewards", propOrder = {"results"})
+@XmlType(name = "PetRewards", propOrder = { "results" })
 public class PetRewards {
 
     @XmlElement(name = "result")
@@ -54,7 +54,7 @@ public class PetRewards {
 
     public List<PetFeedResult> getResults() {
         if (results == null) {
-            results = new ArrayList<PetFeedResult>();
+            results = new ArrayList<>();
         }
         return this.results;
     }

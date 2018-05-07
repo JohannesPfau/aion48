@@ -65,13 +65,13 @@ public class CM_EQUIP_ITEM extends AionClientPacket {
 
     @Override
     protected void runImpl() {
-    	
+
         final Player activePlayer = getConnection().getActivePlayer();
         activePlayer.getController().cancelUseItem();
-        
+
         Equipment equipment = activePlayer.getEquipment();
         Item resultItem = null;
-        
+
         if (!RestrictionsManager.canChangeEquip(activePlayer)) {
             return;
         }
@@ -79,9 +79,10 @@ public class CM_EQUIP_ITEM extends AionClientPacket {
         switch (action) {
             case 0:
                 Item targetItem = activePlayer.getInventory().getItemByObjId(itemUniqueId);
-                if (targetItem == null) return;
-        		if (targetItem.getItemTemplate().getCategory() == ItemCategory.PLUME){
-        		}
+                if (targetItem == null)
+                    return;
+                if (targetItem.getItemTemplate().getCategory() == ItemCategory.PLUME) {
+                }
                 resultItem = equipment.equipItem(itemUniqueId, slotRead);
                 break;
             case 1:
@@ -93,7 +94,7 @@ public class CM_EQUIP_ITEM extends AionClientPacket {
                     return;
                 }
                 // checking for stance
-                if (activePlayer.getController().isUnderStance()){
+                if (activePlayer.getController().isUnderStance()) {
                     activePlayer.getController().stopStance();
                 }
                 equipment.switchHands();
@@ -101,7 +102,8 @@ public class CM_EQUIP_ITEM extends AionClientPacket {
         }
 
         if (resultItem != null || action == 2) {
-            PacketSendUtility.broadcastPacket(activePlayer, new SM_UPDATE_PLAYER_APPEARANCE(activePlayer.getObjectId(), equipment.getEquippedForApparence()), true);
+            PacketSendUtility.broadcastPacket(activePlayer,
+                new SM_UPDATE_PLAYER_APPEARANCE(activePlayer.getObjectId(), equipment.getEquippedForApparence()), true);
         }
 
     }

@@ -29,7 +29,8 @@
  */
 package ai.instance.steelRake;
 
-import ai.GeneralNpcAI2;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -43,7 +44,7 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz
@@ -101,6 +102,7 @@ public class TamerAnikikiAI2 extends GeneralNpcAI2 {
         super.handleSpawned();
         if (getNpcId() != 219040) {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     SkillEngine.getInstance().getSkill(getOwner(), 18189, 20, getOwner()).useNoAnimationSkill();

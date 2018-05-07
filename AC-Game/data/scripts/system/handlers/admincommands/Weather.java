@@ -29,6 +29,8 @@
  */
 package admincommands;
 
+import java.util.List;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.world.WeatherTable;
@@ -38,8 +40,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
-
-import java.util.List;
 
 /**
  * Admin command allowing to change weathers of the world.

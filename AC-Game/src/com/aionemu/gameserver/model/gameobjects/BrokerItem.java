@@ -40,7 +40,6 @@ import com.aionemu.gameserver.model.broker.BrokerRace;
 
 /**
  * @author kosyachok
-
  */
 public class BrokerItem implements Comparable<BrokerItem> {
 
@@ -57,7 +56,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
     private boolean isSettled;
     private Timestamp expireTime;
     private Timestamp settleTime;
-	private boolean isSplitSell;
+    private boolean isSplitSell;
     PersistentState state;
     private int ExpireTimeinMillis = BrokerConfig.ITEMS_EXPIRETIME * 24 * 3600 * 1000; // default: 8-days (691200000 ms)
 
@@ -70,7 +69,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
      * @param sellerId
      * @param sold
      * @param itemBrokerRace
-	 * @param isSplitSell
+     * @param isSplitSell
      */
     public BrokerItem(Item item, long price, String seller, int sellerId, BrokerRace itemBrokerRace, boolean isSplitSell) {
         this.item = item;
@@ -87,7 +86,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
         this.expireTime = new Timestamp(Calendar.getInstance().getTimeInMillis() + ExpireTimeinMillis);
         this.settleTime = new Timestamp(Calendar.getInstance().getTimeInMillis());
 
-		this.isSplitSell = isSplitSell;
+        this.isSplitSell = isSplitSell;
         this.state = PersistentState.NEW;
     }
 
@@ -100,11 +99,10 @@ public class BrokerItem implements Comparable<BrokerItem> {
      * @param seller
      * @param sellerId
      * @param itemBrokerRace
-	 * @param isSplitSell
+     * @param isSplitSell
      */
-    public BrokerItem(Item item, int itemId, int itemUniqueId, long itemCount, String itemCreator, long price,
-                      String seller, int sellerId, BrokerRace itemBrokerRace, boolean isSold, boolean isSettled, Timestamp expireTime,
-                      Timestamp settleTime, boolean isSplitSell) {
+    public BrokerItem(Item item, int itemId, int itemUniqueId, long itemCount, String itemCreator, long price, String seller, int sellerId,
+        BrokerRace itemBrokerRace, boolean isSold, boolean isSettled, Timestamp expireTime, Timestamp settleTime, boolean isSplitSell) {
         this.item = item;
         this.itemId = itemId;
         this.itemUniqueId = itemUniqueId;
@@ -114,8 +112,8 @@ public class BrokerItem implements Comparable<BrokerItem> {
         this.seller = seller;
         this.sellerId = sellerId;
         this.itemBrokerRace = itemBrokerRace;
-		this.isSplitSell = isSplitSell;
-		
+        this.isSplitSell = isSplitSell;
+
         if (item == null) {
             this.isSold = true;
             this.isSettled = true;
@@ -132,7 +130,8 @@ public class BrokerItem implements Comparable<BrokerItem> {
     }
 
     /**
-     * @param return itemCreator
+     * @param return
+     *            itemCreator
      */
     public String getItemCreator() {
         if (itemCreator == null) {
@@ -142,7 +141,8 @@ public class BrokerItem implements Comparable<BrokerItem> {
     }
 
     /**
-     * @param itemCreator the itemCreator to set
+     * @param itemCreator
+     *            the itemCreator to set
      */
     public void setItemCreator(String itemCreator) {
         this.itemCreator = itemCreator;
@@ -191,7 +191,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
     public boolean isSplitSell() {
         return this.isSplitSell;
     }
-	
+
     /**
      * @return
      */
@@ -284,16 +284,16 @@ public class BrokerItem implements Comparable<BrokerItem> {
 
     public void setItemCount(long count) {
         this.itemCount = count;
-    }    
-    
+    }
+
     public void setPrice(long ItemPrice) {
         this.price = ItemPrice;
     }
-    
+
     public void setItemUniqueId(int newObjId) {
         itemUniqueId = newObjId;
-    }    
-    
+    }
+
     /**
      * Default sorting: using itemUniqueId
      */
@@ -306,6 +306,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
      * Sorting using price of item
      */
     static Comparator<BrokerItem> NAME_SORT_ASC = new Comparator<BrokerItem>() {
+
         @Override
         public int compare(BrokerItem o1, BrokerItem o2) {
             if (o1 == null || o2 == null) {
@@ -315,6 +316,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
         }
     };
     static Comparator<BrokerItem> NAME_SORT_DESC = new Comparator<BrokerItem>() {
+
         @Override
         public int compare(BrokerItem o1, BrokerItem o2) {
             if (o1 == null || o2 == null) {
@@ -327,6 +329,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
      * Sorting using price of item
      */
     static Comparator<BrokerItem> PRICE_SORT_ASC = new Comparator<BrokerItem>() {
+
         @Override
         public int compare(BrokerItem o1, BrokerItem o2) {
             if (o1 == null || o2 == null) {
@@ -339,6 +342,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
         }
     };
     static Comparator<BrokerItem> PRICE_SORT_DESC = new Comparator<BrokerItem>() {
+
         @Override
         public int compare(BrokerItem o1, BrokerItem o2) {
             if (o1 == null || o2 == null) {
@@ -354,6 +358,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
      * Sorting using piece price of item
      */
     static Comparator<BrokerItem> PIECE_PRICE_SORT_ASC = new Comparator<BrokerItem>() {
+
         @Override
         public int compare(BrokerItem o1, BrokerItem o2) {
             if (o1 == null || o2 == null) {
@@ -366,6 +371,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
         }
     };
     static Comparator<BrokerItem> PIECE_PRICE_SORT_DESC = new Comparator<BrokerItem>() {
+
         @Override
         public int compare(BrokerItem o1, BrokerItem o2) {
             if (o1 == null || o2 == null) {
@@ -381,6 +387,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
      * Sorting using level of item
      */
     static Comparator<BrokerItem> LEVEL_SORT_ASC = new Comparator<BrokerItem>() {
+
         @Override
         public int compare(BrokerItem o1, BrokerItem o2) {
             if (o1 == null || o2 == null) {
@@ -393,6 +400,7 @@ public class BrokerItem implements Comparable<BrokerItem> {
         }
     };
     static Comparator<BrokerItem> LEVEL_SORT_DESC = new Comparator<BrokerItem>() {
+
         @Override
         public int compare(BrokerItem o1, BrokerItem o2) {
             if (o1 == null || o2 == null) {

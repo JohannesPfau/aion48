@@ -29,16 +29,12 @@
  */
 package com.aionemu.gameserver.services;
 
-
-
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
-
-import javolution.util.FastMap;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
@@ -75,11 +71,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
+import javolution.util.FastMap;
+
 /**
  * @author kosyachok
  * @author ATracer
  * @author Antraxx
-
  */
 public class BrokerService {
 
@@ -89,7 +86,9 @@ public class BrokerService {
     private Map<Integer, BrokerItem> asmodianSettledItems = new FastMap<Integer, BrokerItem>().shared();
     private static final Logger log = LoggerFactory.getLogger("EXCHANGE_LOG");
     private final int DELAY_BROKER_SAVE = (BrokerConfig.SAVEMANAGER_INTERVAL * 1000) >= 6000 ? (BrokerConfig.SAVEMANAGER_INTERVAL * 1000) : 6000;
-    private final int DELAY_BROKER_CHECK = (BrokerConfig.CHECK_EXPIREDITEMS_INTERVAL * 1000) >= 60000 ? (BrokerConfig.CHECK_EXPIREDITEMS_INTERVAL * 1000) : 60000;
+    private final int DELAY_BROKER_CHECK = (BrokerConfig.CHECK_EXPIREDITEMS_INTERVAL * 1000) >= 60000
+        ? (BrokerConfig.CHECK_EXPIREDITEMS_INTERVAL * 1000)
+        : 60000;
     private BrokerPeriodicTaskManager saveManager;
     private Map<Integer, BrokerPlayerCache> playerBrokerCache = new FastMap<Integer, BrokerPlayerCache>().shared();
 
@@ -101,6 +100,7 @@ public class BrokerService {
         initBrokerService();
         saveManager = new BrokerPeriodicTaskManager(DELAY_BROKER_SAVE);
         ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 checkExpiredItems();
@@ -174,7 +174,7 @@ public class BrokerService {
         getPlayerCache(player).setBrokerStartPageCache(startPage);
 
         if (itemList != null) {
-            List<BrokerItem> itemsFound = new ArrayList<BrokerItem>();
+            List<BrokerItem> itemsFound = new ArrayList<>();
             for (BrokerItem item : searchItems) {
                 if (itemList.contains(item.getItemId())) {
                     itemsFound.add(item);
@@ -201,7 +201,7 @@ public class BrokerService {
      * @return
      */
     private BrokerItem[] getItemsByMask(Player player, int clientMask, boolean cached) {
-        List<BrokerItem> searchItems = new ArrayList<BrokerItem>();
+        List<BrokerItem> searchItems = new ArrayList<>();
         BrokerItemMask brokerMask = BrokerItemMask.getBrokerMaskById(clientMask);
         if (cached) {
             BrokerItem[] brokerItems = getFilteredItems(player);
@@ -254,7 +254,7 @@ public class BrokerService {
      * @return
      */
     private BrokerItem[] getRequestedPage(BrokerItem[] brokerItems, int startPage) {
-        List<BrokerItem> page = new ArrayList<BrokerItem>();
+        List<BrokerItem> page = new ArrayList<>();
         int startingElement = startPage * 9;
         for (int i = startingElement, limit = 0; i < brokerItems.length && limit < 45; i++, limit++) {
             page.add(brokerItems[i]);
@@ -302,7 +302,7 @@ public class BrokerService {
         Race playerRace = player.getRace();
 
         BrokerItem buyingItem = getRaceBrokerItems(playerRace).get(itemUniqueId);
-        
+
         if (!RestrictionsManager.canTrade(player)) {
             return;
         }
@@ -310,30 +310,31 @@ public class BrokerService {
         if (buyingItem == null) {
             return;
         }
-        
+
         long price = buyingItem.getPrice();
         float PricePerItem = (float) price / (float) buyingItem.getItemCount();
         long TotalBuyPrice = (long) (PricePerItem * itemCount);
-        
+
         // 100% Hack - CM_BUY_BROKER_ITEM Packet Injection
         // need to Implement Suspicious Packets to be traced by Admins.
-        if (itemCount > buyingItem.getItemCount()){
-        	
-        	if (BrokerConfig.ANTIHACK_PUNISHMENT == 0) {
-        		PacketSendUtility.sendMessage(player, "Sorry, you can not buy items more than total count! are you hacking!");
-        	}else if (BrokerConfig.ANTIHACK_PUNISHMENT == 1) {
-        		PacketSendUtility.sendMessage(player, "Sorry, you can not buy items more than total count! are you hacking! you have been kicked from game due to malfunction data.");
-        		player.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
-        	}
-    		log.info("[BROKER EXCHANGE] > Malfunction data is received from packet [CM_BUY_BROKER_ITEM]. Buy items count are more than total item count."
-    				+ " [Player: " + player.getName() + "] bought [Item: " + buyingItem.getItemId() + "] "
-                    + "[Total Item Count: " + (buyingItem.getItemCount() + itemCount) + "] "
-                    + "[Buy Count: " + itemCount + "]"
+        if (itemCount > buyingItem.getItemCount()) {
+
+            if (BrokerConfig.ANTIHACK_PUNISHMENT == 0) {
+                PacketSendUtility.sendMessage(player, "Sorry, you can not buy items more than total count! are you hacking!");
+            } else if (BrokerConfig.ANTIHACK_PUNISHMENT == 1) {
+                PacketSendUtility.sendMessage(player,
+                    "Sorry, you can not buy items more than total count! are you hacking! you have been kicked from game due to malfunction data.");
+                player.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
+            }
+            log.info(
+                "[BROKER EXCHANGE] > Malfunction data is received from packet [CM_BUY_BROKER_ITEM]. Buy items count are more than total item count."
+                    + " [Player: " + player.getName() + "] bought [Item: " + buyingItem.getItemId() + "] " + "[Total Item Count: "
+                    + (buyingItem.getItemCount() + itemCount) + "] " + "[Buy Count: " + itemCount + "]"
                     + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? " [Item Name: " + buyingItem.getItem().getItemName() : "]") + " from [Player: "
                     + buyingItem.getSeller() + "] for [Price: " + TotalBuyPrice + "]");
             return;
         }
-        	
+
         if ((buyingItem.isSold() || buyingItem.isSettled()) && (buyingItem.getItem() != null)) {
             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_VENDOR_SOLD_OUT(buyingItem.getItem().getNameId()));
             return;
@@ -355,9 +356,9 @@ public class BrokerService {
                 PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_VENDOR_SOLD_OUT(buyingItem.getItem().getNameId()));
                 return;
             }
-                     
+
             Item item = buyingItem.getItem();
-            
+
             if (player.getInventory().isFull(item.getItemTemplate().getExtraInventoryId())) {
                 PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY);
                 return;
@@ -365,54 +366,52 @@ public class BrokerService {
             if (player.getInventory().getKinah() < TotalBuyPrice) {
                 return;
             }
-      
+
             boolean isBuyWholeItem = false;
             Item newItem = null;
-                        
-            if (itemCount == buyingItem.getItemCount()){
-            	
-            	isBuyWholeItem = true;
-            	getRaceBrokerItems(playerRace).remove(itemUniqueId);
-            	putToSettled(playerRace, buyingItem, true);
-            	
+
+            if (itemCount == buyingItem.getItemCount()) {
+
+                isBuyWholeItem = true;
+                getRaceBrokerItems(playerRace).remove(itemUniqueId);
+                putToSettled(playerRace, buyingItem, true);
+
             } else {
-            	
-            	//itemCount is lower than Broker itemCount.
-            	item.setItemCount(buyingItem.getItemCount() - itemCount);
+
+                //itemCount is lower than Broker itemCount.
+                item.setItemCount(buyingItem.getItemCount() - itemCount);
                 buyingItem.setItemCount(buyingItem.getItemCount() - itemCount);
                 buyingItem.setPrice(price - TotalBuyPrice);
-            	
-            	isBuyWholeItem = false;
-            	
-            	buyingItem.setPersistentState(PersistentState.UPDATE_ITEM_BROKER);
-            	saveManager.add(new BrokerOpSaveTask(buyingItem, item, null, buyingItem.getSellerId())); 
-            	newItem = BuySplitSell(playerRace, buyingItem, TotalBuyPrice, itemCount);
+
+                isBuyWholeItem = false;
+
+                buyingItem.setPersistentState(PersistentState.UPDATE_ITEM_BROKER);
+                saveManager.add(new BrokerOpSaveTask(buyingItem, item, null, buyingItem.getSellerId()));
+                newItem = BuySplitSell(playerRace, buyingItem, TotalBuyPrice, itemCount);
             }
 
             if (!isEmptyCache) {
-            	
-            	BrokerItem[] newCache;
-            	
-            	if (isBuyWholeItem){
-            		newCache = (BrokerItem[]) ArrayUtils.removeElement(getFilteredItems(player), buyingItem);
-            	} else {
-            		int buyingItemIndex = ArrayUtils.indexOf(getFilteredItems(player), buyingItem);
-            		newCache = (BrokerItem[]) ArrayUtils.removeElement(getFilteredItems(player), buyingItem);
-            		newCache = (BrokerItem[]) ArrayUtils.add(newCache, buyingItemIndex, buyingItem);            		
-            	}
+
+                BrokerItem[] newCache;
+
+                if (isBuyWholeItem) {
+                    newCache = (BrokerItem[]) ArrayUtils.removeElement(getFilteredItems(player), buyingItem);
+                } else {
+                    int buyingItemIndex = ArrayUtils.indexOf(getFilteredItems(player), buyingItem);
+                    newCache = (BrokerItem[]) ArrayUtils.removeElement(getFilteredItems(player), buyingItem);
+                    newCache = (BrokerItem[]) ArrayUtils.add(newCache, buyingItemIndex, buyingItem);
+                }
                 getPlayerCache(player).setBrokerListCache(newCache);
             }
-            
-            
+
             player.getInventory().decreaseKinah(TotalBuyPrice);
             Item boughtItem = player.getInventory().add(isBuyWholeItem ? item : newItem);
 
             if (LoggingConfig.LOG_BROKER_EXCHANGE) {
                 log.info("[BROKER EXCHANGE] > [Player: " + player.getName() + "] bought [Item: " + buyingItem.getItemId() + "] "
-                        + "[Total Item Count: " + (buyingItem.getItemCount() + itemCount) + "] "
-                        + "[Buy Count: " + itemCount + "]"
-                        + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? " [Item Name: " + buyingItem.getItem().getItemName() : "]") + " from [Player: "
-                        + buyingItem.getSeller() + "] for [Price: " + TotalBuyPrice + "]");
+                    + "[Total Item Count: " + (buyingItem.getItemCount() + itemCount) + "] " + "[Buy Count: " + itemCount + "]"
+                    + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? " [Item Name: " + buyingItem.getItem().getItemName() : "]") + " from [Player: "
+                    + buyingItem.getSeller() + "] for [Price: " + TotalBuyPrice + "]");
             }
 
             // create save task
@@ -420,45 +419,46 @@ public class BrokerService {
             saveManager.add(bost);
         }
         showRequestedItems(player, getPlayerCache(player).getBrokerMaskCache(), getPlayerCache(player).getBrokerSortTypeCache(),
-                getPlayerCache(player).getBrokerStartPageCache(), getPlayerCache(player).getSearchItemList());
+            getPlayerCache(player).getBrokerStartPageCache(), getPlayerCache(player).getSearchItemList());
     }
-    
+
     /**
      * @param race
      * @param brokerItem
      * @param TotalBuyPrice
      */
     private Item BuySplitSell(Race race, BrokerItem brokerItem, long TotalBuyPrice, long BuyItemCount) {
-    	
+
         Item item = brokerItem.getItem();
-    	int itemNameId = item.getNameId();
-    	
+        int itemNameId = item.getNameId();
+
         BrokerRace brRace;
 
         if (race == Race.ASMODIANS) {
             brRace = BrokerRace.ASMODIAN;
         } else if (race == Race.ELYOS) {
             brRace = BrokerRace.ELYOS;
-        }else{
-        	return item;
-        } 
-    	
-    	Item newItem = ItemFactory.newItem(item.getItemId(), BuyItemCount);
-    	copyItemInfo(item, newItem);
-    	BrokerItem newBrokerItem = new BrokerItem(newItem, TotalBuyPrice, brokerItem.getSeller(), brokerItem.getSellerId(), brRace, brokerItem.isSplitSell());
+        } else {
+            return item;
+        }
 
-    	newBrokerItem.setItemCount(BuyItemCount);
+        Item newItem = ItemFactory.newItem(item.getItemId(), BuyItemCount);
+        copyItemInfo(item, newItem);
+        BrokerItem newBrokerItem = new BrokerItem(newItem, TotalBuyPrice, brokerItem.getSeller(), brokerItem.getSellerId(), brRace,
+            brokerItem.isSplitSell());
+
+        newBrokerItem.setItemCount(BuyItemCount);
         newBrokerItem.removeItem();
         newBrokerItem.setPersistentState(PersistentState.NEW);
         saveManager.add(new BrokerOpSaveTask(newBrokerItem));
-        
+
         switch (race) {
             case ASMODIANS:
-            	asmodianBrokerItems.put(brokerItem.getItemUniqueId(), brokerItem);
+                asmodianBrokerItems.put(brokerItem.getItemUniqueId(), brokerItem);
                 asmodianSettledItems.put(newBrokerItem.getItemUniqueId(), newBrokerItem);
                 break;
             case ELYOS:
-            	elyosBrokerItems.put(brokerItem.getItemUniqueId(), brokerItem);
+                elyosBrokerItems.put(brokerItem.getItemUniqueId(), brokerItem);
                 elyosSettledItems.put(newBrokerItem.getItemUniqueId(), newBrokerItem);
                 break;
             default:
@@ -471,19 +471,18 @@ public class BrokerService {
             PacketSendUtility.sendPacket(seller, new SM_BROKER_SERVICE(true, getTotalSettledKinah(seller)));
             PacketSendUtility.sendPacket(seller, SM_SYSTEM_MESSAGE.STR_VENDOR_REGISTER_SOLD_OUT(itemNameId));
         }
-        
+
         return newItem;
-    }    
-    
-    
+    }
+
     /**
      * Copy some item values like item stones and enchant level
      */
     private static void copyItemInfo(Item sourceItem, Item newItem) {
-    	
+
         newItem.setOptionalSocket(sourceItem.getOptionalSocket());
         newItem.setItemCreator(sourceItem.getItemCreator());
-        
+
         if (sourceItem.hasManaStones()) {
             for (ManaStone manaStone : sourceItem.getItemStones()) {
                 ItemSocketService.addManaStone(newItem, manaStone.getItemId());
@@ -503,22 +502,22 @@ public class BrokerService {
         newItem.setRandomCount(sourceItem.getRandomCount());
         newItem.setIdianStone(sourceItem.getIdianStone());
         newItem.setItemColor(sourceItem.getItemColor());
-        newItem.setItemSkinTemplate(sourceItem.getItemSkinTemplate());    	
-    	newItem.setColorExpireTime(sourceItem.getColorExpireTime());
-    	newItem.setExpireTime(sourceItem.getExpireTime());
-    	newItem.setActivationCount(sourceItem.getActivationCount());
-    	newItem.setEquipped(sourceItem.isEquipped());
-    	newItem.setEquipmentSlot(sourceItem.getEquipmentSlot());
-    	newItem.setItemLocation(sourceItem.getItemLocation());
-    	newItem.setFusionedItem(sourceItem.getFusionedItemTemplate());
-    	newItem.setOptionalFusionSocket(sourceItem.getOptionalFusionSocket());
-    	newItem.setPackCount(sourceItem.getPackCount());
-    	newItem.setAuthorize(sourceItem.getAuthorize());
-    	newItem.setPacked(sourceItem.isPacked());
-    	newItem.setAmplified(sourceItem.isAmplified());
-    	newItem.setBuffSkill(sourceItem.getBuffSkill());    	
-    }    
-    
+        newItem.setItemSkinTemplate(sourceItem.getItemSkinTemplate());
+        newItem.setColorExpireTime(sourceItem.getColorExpireTime());
+        newItem.setExpireTime(sourceItem.getExpireTime());
+        newItem.setActivationCount(sourceItem.getActivationCount());
+        newItem.setEquipped(sourceItem.isEquipped());
+        newItem.setEquipmentSlot(sourceItem.getEquipmentSlot());
+        newItem.setItemLocation(sourceItem.getItemLocation());
+        newItem.setFusionedItem(sourceItem.getFusionedItemTemplate());
+        newItem.setOptionalFusionSocket(sourceItem.getOptionalFusionSocket());
+        newItem.setPackCount(sourceItem.getPackCount());
+        newItem.setAuthorize(sourceItem.getAuthorize());
+        newItem.setPacked(sourceItem.isPacked());
+        newItem.setAmplified(sourceItem.isAmplified());
+        newItem.setBuffSkill(sourceItem.getBuffSkill());
+    }
+
     /**
      * @param race
      * @param brokerItem
@@ -572,12 +571,12 @@ public class BrokerService {
     /**
      * @param player
      * @param itemUniqueId
-	 * @param count
+     * @param count
      * @param price
      */
     public void registerItem(Player player, int itemUniqueId, long count, long PricePerItem, boolean isSplitSell) {
         long TotalItemPrice = PricePerItem * count;
-		Item itemToRegister = player.getInventory().getItemByObjId(itemUniqueId);
+        Item itemToRegister = player.getInventory().getItemByObjId(itemUniqueId);
         Race playerRace = player.getRace();
 
         if (itemToRegister == null || count > itemToRegister.getItemCount()) {
@@ -670,87 +669,87 @@ public class BrokerService {
 
         PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(newBrokerItem, 0, registeredItemsCount));
     }
-	
+
     /**
-     * @param player	
+     * @param player
      * @param sortType
      * @param itemUniqueId
      */
     public long GetItemAveLowHigh(Player player, int sortType, int itemUniqueId) {
         BrokerItem[] searchItems = null;
-		long AveItemPrice = 0; // 7-day item's price average 
-		
-		Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(player.getRace());
-		searchItems = brokerItems.values().toArray(new BrokerItem[brokerItems.values().size()]);
+        long AveItemPrice = 0; // 7-day item's price average 
+
+        Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(player.getRace());
+        searchItems = brokerItems.values().toArray(new BrokerItem[brokerItems.values().size()]);
 
         if (searchItems == null || searchItems.length <= 0) {
             return 0;
         }
-		Item TargetItem = player.getInventory().getItemByObjId(itemUniqueId);
+        Item TargetItem = player.getInventory().getItemByObjId(itemUniqueId);
         if (TargetItem == null) {
             return 0;
         }
-        
-		List<BrokerItem> itemsFound = new ArrayList<BrokerItem>();
-		for (BrokerItem item : searchItems) {
-			if (TargetItem.getItemId() == item.getItemId()) {
-				itemsFound.add(item);
-				AveItemPrice += item.getPiecePrice();
-			}
-		}
-		if (itemsFound == null || itemsFound.size() <= 0) {
-			return 0;
-		}
-		AveItemPrice = (AveItemPrice / itemsFound.size());
-		
-		searchItems = itemsFound.toArray(new BrokerItem[itemsFound.size()]);
 
-		if (sortType == 1){ // Current Low
-			if (searchItems.length > 1){
-				sortBrokerItems(searchItems, 6); // PIECE_PRICE_SORT_ASC
-			}
-			return searchItems[0].getPiecePrice();
-			
-		} else if (sortType == 2){ // Current High
-			if (searchItems.length > 1){
-				sortBrokerItems(searchItems, 7); // PIECE_PRICE_SORT_DESC
-			}
-			return searchItems[0].getPiecePrice();
-			
-		} else if (sortType == 3){ // 7-day Average
-			return AveItemPrice;
-			
-		} else {
-			return 0;
-		}
+        List<BrokerItem> itemsFound = new ArrayList<>();
+        for (BrokerItem item : searchItems) {
+            if (TargetItem.getItemId() == item.getItemId()) {
+                itemsFound.add(item);
+                AveItemPrice += item.getPiecePrice();
+            }
+        }
+        if (itemsFound == null || itemsFound.size() <= 0) {
+            return 0;
+        }
+        AveItemPrice = (AveItemPrice / itemsFound.size());
+
+        searchItems = itemsFound.toArray(new BrokerItem[itemsFound.size()]);
+
+        if (sortType == 1) { // Current Low
+            if (searchItems.length > 1) {
+                sortBrokerItems(searchItems, 6); // PIECE_PRICE_SORT_ASC
+            }
+            return searchItems[0].getPiecePrice();
+
+        } else if (sortType == 2) { // Current High
+            if (searchItems.length > 1) {
+                sortBrokerItems(searchItems, 7); // PIECE_PRICE_SORT_DESC
+            }
+            return searchItems[0].getPiecePrice();
+
+        } else if (sortType == 3) { // 7-day Average
+            return AveItemPrice;
+
+        } else {
+            return 0;
+        }
     }
-	
+
     /**
      * @param player
-	 * @param itemUniqueId
+     * @param itemUniqueId
      */
     public void CalcItemAveLowHigh(Player player, int itemUniqueId) {
-		
-		long Ave7day = 0;
-		boolean IsLowHighSame;	
-		long CurrentLow = 0;
-		long CurrentHigh = 0;
-		
-		CurrentLow = GetItemAveLowHigh(player, 1, itemUniqueId); // items's lowest price
-		CurrentHigh = GetItemAveLowHigh(player, 2, itemUniqueId); // items's highest price
-		Ave7day = GetItemAveLowHigh(player, 3, itemUniqueId); // 7-day item's price average 
-		IsLowHighSame = (CurrentLow == CurrentHigh ? true : false); // Calculate "IsLowHighSame"
-		
+
+        long Ave7day = 0;
+        boolean IsLowHighSame;
+        long CurrentLow = 0;
+        long CurrentHigh = 0;
+
+        CurrentLow = GetItemAveLowHigh(player, 1, itemUniqueId); // items's lowest price
+        CurrentHigh = GetItemAveLowHigh(player, 2, itemUniqueId); // items's highest price
+        Ave7day = GetItemAveLowHigh(player, 3, itemUniqueId); // 7-day item's price average 
+        IsLowHighSame = (CurrentLow == CurrentHigh ? true : false); // Calculate "IsLowHighSame"
+
         PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(itemUniqueId, Ave7day, CurrentLow, CurrentHigh, IsLowHighSame));
-    }	
-	
+    }
+
     /**
      * @param player
      */
     public void showRegisteredItems(Player player) {
         Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(player.getRace());
 
-        List<BrokerItem> registeredItems = new ArrayList<BrokerItem>();
+        List<BrokerItem> registeredItems = new ArrayList<>();
         int playerId = player.getObjectId();
 
         for (BrokerItem item : brokerItems.values()) {
@@ -805,7 +804,7 @@ public class BrokerService {
      */
     public void showSettledItems(Player player) {
         Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(player.getRace());
-        List<BrokerItem> settledItems = new ArrayList<BrokerItem>();
+        List<BrokerItem> settledItems = new ArrayList<>();
         int playerId = player.getObjectId();
         long totalKinah = 0;
         for (BrokerItem item : brokerSettledItems.values()) {
@@ -855,7 +854,7 @@ public class BrokerService {
     public void settleAccount(Player player) {
         Race playerRace = player.getRace();
         Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(playerRace);
-        List<BrokerItem> collectedItems = new ArrayList<BrokerItem>();
+        List<BrokerItem> collectedItems = new ArrayList<>();
         int playerId = player.getObjectId();
         long kinahCollect = 0;
         boolean itemsLeft = false;

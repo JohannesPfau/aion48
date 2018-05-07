@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.eventEngine.battleground;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -41,6 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.eventEngine.battleground.model.templates.BattleGroundTemplate;
 import com.aionemu.gameserver.eventEngine.battleground.model.templates.SpawnInfo;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author Eloann
@@ -53,7 +53,7 @@ public class BattleGroundData {
     private List<BattleGroundTemplate> bgList;
     @XmlElement(name = "bg_agent")
     private List<SpawnInfo> agentLocations;
-    private TIntObjectHashMap<BattleGroundTemplate> bgData = new TIntObjectHashMap<BattleGroundTemplate>();
+    private TIntObjectHashMap<BattleGroundTemplate> bgData = new TIntObjectHashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (BattleGroundTemplate bg : bgList) {

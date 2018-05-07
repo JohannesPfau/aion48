@@ -51,8 +51,8 @@ public class AbyssRankingResult {
     private int legionLevel;
     private int legionMembers;
 
-    public AbyssRankingResult(String playerName, int playerAbyssRank, int playerId, int ap, int gp,
-                              int title, PlayerClass playerClass, Gender playerGender, int playerLevel, String legionName, int oldRankPos, int rankPos) {
+    public AbyssRankingResult(String playerName, int playerAbyssRank, int playerId, int ap, int gp, int title, PlayerClass playerClass,
+        Gender playerGender, int playerLevel, String legionName, int oldRankPos, int rankPos) {
         this.playerName = playerName;
         this.playerAbyssRank = playerAbyssRank;
         this.playerId = playerId;

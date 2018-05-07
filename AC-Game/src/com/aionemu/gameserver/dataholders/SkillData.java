@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -42,6 +40,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -56,7 +56,7 @@ public class SkillData {
     /**
      * Map that contains skillId - SkillTemplate key-value pair
      */
-    private TIntObjectHashMap<SkillTemplate> skillData = new TIntObjectHashMap<SkillTemplate>();
+    private TIntObjectHashMap<SkillTemplate> skillData = new TIntObjectHashMap<>();
 
     /**
      * @param u
@@ -92,7 +92,8 @@ public class SkillData {
     }
 
     /**
-     * @param skillTemplates the skillTemplates to set
+     * @param skillTemplates
+     *            the skillTemplates to set
      */
     public void setSkillTemplates(List<SkillTemplate> skillTemplates) {
         this.skillTemplates = skillTemplates;
@@ -104,7 +105,7 @@ public class SkillData {
      * representative cooldownIds
      */
     public void initializeCooldownGroups() {
-        cooldownGroups = new HashMap<Integer, ArrayList<Integer>>();
+        cooldownGroups = new HashMap<>();
         for (SkillTemplate skillTemplate : skillTemplates) {
             int cooldownId = skillTemplate.getCooldownId();
             if (!cooldownGroups.containsKey(cooldownId)) {

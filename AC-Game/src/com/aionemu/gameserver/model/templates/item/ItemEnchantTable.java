@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.model.templates.item;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -42,33 +40,33 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author Alcapwnd
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "ItemEnchantTable")
 public class ItemEnchantTable {
 
-	@XmlAttribute(name = "id")
+    @XmlAttribute(name = "id")
     private int id;
-	@XmlAttribute(name = "type")
+    @XmlAttribute(name = "type")
     private String type;
-	@XmlAttribute(name = "part")
+    @XmlAttribute(name = "part")
     private String part;
     @XmlElement(name = "item_enchant", required = false)
     private List<ItemEnchantBonus> item_enchant;
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @XmlTransient
     private TIntObjectHashMap<List<StatFunction>> enchants = new TIntObjectHashMap();
 
     public List<StatFunction> getStats(int level) {
         for (ItemEnchantBonus ib : getItemEnchant()) {
-        	if (ib.getLevel() != level)
-        		continue;
-        	
-        	return ib.getModifiers();
+            if (ib.getLevel() != level)
+                continue;
+
+            return ib.getModifiers();
         }
         return null;
     }
@@ -80,13 +78,13 @@ public class ItemEnchantTable {
     public int getId() {
         return this.id;
     }
-    
+
     public String getType() {
-    	return this.type;
+        return this.type;
     }
-    
+
     public String getPart() {
-    	return this.part;
+        return this.part;
     }
-    
+
 }

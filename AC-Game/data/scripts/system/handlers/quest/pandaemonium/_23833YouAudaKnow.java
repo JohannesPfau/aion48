@@ -29,9 +29,9 @@
  */
 package quest.pandaemonium;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -81,7 +81,7 @@ public class _23833YouAudaKnow extends QuestHandler {
                 }
             }
         } else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-            if (targetId == 204061) { 
+            if (targetId == 204061) {
                 return sendQuestEndDialog(env);
             }
         }

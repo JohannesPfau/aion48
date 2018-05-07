@@ -30,10 +30,10 @@
 package quest.black_cloud_traders;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -41,12 +41,11 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _39515UntruthUpset extends QuestHandler {
 
     private final static int questId = 39515;
-    private int[] mobs = {218307, 218309, 218311, 218313, 218315};
+    private int[] mobs = { 218307, 218309, 218311, 218313, 218315 };
 
     public _39515UntruthUpset() {
         super(questId);
@@ -128,8 +127,7 @@ public class _39515UntruthUpset extends QuestHandler {
             if (Rnd.get(1, 100) < 20) {
                 Npc npc = (Npc) env.getVisibleObject();
                 npc.getController().onDelete();
-                QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 701154, npc.getX(), npc.getY(),
-                        npc.getZ(), (byte) 0);
+                QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 701154, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
                 return true;
             }
         }

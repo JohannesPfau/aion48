@@ -29,13 +29,13 @@
  */
 package quest.inggison;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -56,7 +56,7 @@ public class _11031CanIEatIt extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {798959};
+        int[] npcs = { 798959 };
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }
@@ -135,13 +135,12 @@ public class _11031CanIEatIt extends QuestHandler {
         if (id != 182206724) {
             return HandlerResult.UNKNOWN;
         }
-        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, 0,
-                0), true);
+        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, 0, 0), true);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
-                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-                        1, 0), true);
+                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
                 removeQuestItem(env, 182206724, 1);
                 qs.setStatus(QuestStatus.REWARD);
                 updateQuestStatus(env);

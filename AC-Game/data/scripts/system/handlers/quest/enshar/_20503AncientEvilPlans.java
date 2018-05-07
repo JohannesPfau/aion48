@@ -29,10 +29,10 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -52,42 +52,42 @@ public class _20503AncientEvilPlans extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {804728, 804729};
+        int[] npcs = { 804728, 804729 };
         qe.registerOnEnterZone(ZoneName.get("AETHERIC_FIELD_SITE_220080000"), questId);
-		qe.registerOnLevelUp(questId);
+        qe.registerOnLevelUp(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }
     }
-	
-	@Override
+
+    @Override
     public boolean onLvlUpEvent(QuestEnv env) {
         return defaultOnLvlUpEvent(env, 20502, true);
     }
 
-	@Override
+    @Override
     public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             if (var == 3) {
-				playQuestMovie(env, 862);
-				QuestService.addNewSpawn(220080000, 1, 805221, 2201.8f, 1129.4f, 326.08f, (byte) 24);
-				QuestService.addNewSpawn(220080000, 1, 804859, 2201.6f, 1149.5f, 325.0f, (byte) 113);
-				QuestService.addNewSpawn(220080000, 1, 804860, 2224.1f, 1136.6f, 325.0f, (byte) 53);
-				QuestService.addNewSpawn(220080000, 1, 804861, 2204.4f, 1138.4f, 325.0f, (byte) 14);
+                playQuestMovie(env, 862);
+                QuestService.addNewSpawn(220080000, 1, 805221, 2201.8f, 1129.4f, 326.08f, (byte) 24);
+                QuestService.addNewSpawn(220080000, 1, 804859, 2201.6f, 1149.5f, 325.0f, (byte) 113);
+                QuestService.addNewSpawn(220080000, 1, 804860, 2224.1f, 1136.6f, 325.0f, (byte) 53);
+                QuestService.addNewSpawn(220080000, 1, 804861, 2204.4f, 1138.4f, 325.0f, (byte) 14);
                 changeQuestStep(env, 3, 4, true);
                 return true;
             }
         }
         return false;
     }
-	
+
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         final Player player = env.getPlayer();
-		final Npc npc = (Npc) env.getVisibleObject();
+        final Npc npc = (Npc) env.getVisibleObject();
         final QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs == null) {
             return false;
@@ -107,30 +107,29 @@ public class _20503AncientEvilPlans extends QuestHandler {
                             return sendQuestDialog(env, 1011);
                         }
                     case SETPRO1:
-                        changeQuestStep(env, 0, 1, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 0, 1, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804729) {
+            if (targetId == 804729) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 1) {
                             return sendQuestDialog(env, 1352);
-                        }
-						else if (var == 2) {
+                        } else if (var == 2) {
                             return sendQuestDialog(env, 1693);
                         }
                     case SETPRO2:
-                        changeQuestStep(env, 1, 2, false); 
-						return closeDialogWindow(env);
-					case CHECK_USER_HAS_QUEST_ITEM:
-                    if (QuestService.collectItemCheck(env, true)) {
-                        qs.setQuestVarById(0, var + 1);
-                        updateQuestStatus(env);
-                        return sendQuestDialog(env, 10000);
-                    } else {
-                        return sendQuestDialog(env, 10001);
-                    }	
+                        changeQuestStep(env, 1, 2, false);
+                        return closeDialogWindow(env);
+                    case CHECK_USER_HAS_QUEST_ITEM:
+                        if (QuestService.collectItemCheck(env, true)) {
+                            qs.setQuestVarById(0, var + 1);
+                            updateQuestStatus(env);
+                            return sendQuestDialog(env, 10000);
+                        } else {
+                            return sendQuestDialog(env, 10001);
+                        }
                 }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {

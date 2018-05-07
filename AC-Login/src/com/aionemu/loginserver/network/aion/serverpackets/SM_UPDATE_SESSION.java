@@ -53,7 +53,8 @@ public class SM_UPDATE_SESSION extends AionServerPacket {
     /**
      * Constructs new instance of <tt>SM_UPDATE_SESSION </tt> packet.
      *
-     * @param key session key
+     * @param key
+     *            session key
      */
     public SM_UPDATE_SESSION(SessionKey key) {
         super(0x0c);

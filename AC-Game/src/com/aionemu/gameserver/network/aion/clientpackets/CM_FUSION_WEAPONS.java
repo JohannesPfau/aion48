@@ -63,9 +63,10 @@ public class CM_FUSION_WEAPONS extends AionClientPacket {
      */
     @Override
     protected void runImpl() {
-    	Player player = getConnection().getActivePlayer();
-    	if (player == null) return;
-    	
+        Player player = getConnection().getActivePlayer();
+        if (player == null)
+            return;
+
         ArmsfusionService.fusionWeapons(getConnection().getActivePlayer(), firstItemId, secondItemId);
     }
 }

@@ -167,7 +167,7 @@ public class PortalService {
                         instance = InstanceService.getRegisteredInstance(mapId, player.getPlayerGroup2().getTeamId());
                     }
                     break;
-                default:  // alliance
+                default: // alliance
                     if (player.isInAlliance2()) {
                         if (player.isInLeague()) {
                             instance = InstanceService.getRegisteredInstance(mapId, player.getPlayerAlliance2().getLeague().getObjectId());
@@ -462,7 +462,7 @@ public class PortalService {
                 int questStep = quest.getQuestStep();
                 final QuestState qs = player.getQuestStateList().getQuestState(questId);
                 if (qs == null || (questStep == 0 && qs.getStatus() != QuestStatus.COMPLETE
-                        || (qs.getQuestVarById(0) < quest.getQuestStep() && qs.getStatus() != QuestStatus.COMPLETE))) {
+                    || (qs.getQuestVarById(0) < quest.getQuestStep() && qs.getStatus() != QuestStatus.COMPLETE))) {
                     int errDialog = quest.getErrQuest();
                     if (errDialog != 0) {
                         PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcObjectId, errDialog));
@@ -499,12 +499,14 @@ public class PortalService {
             InstanceService.registerPlayerWithInstance(instance, requester);
             transfer(requester, loc, instance, reenter);
         } else {
-            /*WorldMap worldMap = World.getInstance().getWorldMap(worldId);
-             if (worldMap == null) {
-             log.warn("There is no registered map with id " + worldId);
-             return;
-             }
-             instance = worldMap.getWorldMapInstance();*/
+            /*
+             * WorldMap worldMap = World.getInstance().getWorldMap(worldId);
+             * if (worldMap == null) {
+             * log.warn("There is no registered map with id " + worldId);
+             * return;
+             * }
+             * instance = worldMap.getWorldMapInstance();
+             */
             easyTransfer(requester, loc);
         }
     }
@@ -530,7 +532,8 @@ public class PortalService {
     private static void transfer(Player player, PortalLoc loc, WorldMapInstance instance, boolean reenter) {
         player.setInstanceStartPos(loc.getX(), loc.getY(), loc.getZ());
         InstanceService.registerPlayerWithInstance(instance, player);
-        TeleportService2.teleportTo(player, loc.getWorldId(), instance.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(), TeleportAnimation.BEAM_ANIMATION);
+        TeleportService2.teleportTo(player, loc.getWorldId(), instance.getInstanceId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(),
+            TeleportAnimation.BEAM_ANIMATION);
         long useDelay = DataManager.INSTANCE_COOLTIME_DATA.getInstanceEntranceCooltime(player, instance.getMapId());
         if (useDelay > 0 && !reenter) {
             player.getPortalCooldownList().addPortalCooldown(loc.getWorldId(), useDelay);

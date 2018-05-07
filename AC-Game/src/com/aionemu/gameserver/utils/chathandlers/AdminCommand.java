@@ -58,8 +58,8 @@ public abstract class AdminCommand extends ChatCommand {
 
         if (!checkLevel(player)) {
             if (LoggingConfig.LOG_GMAUDIT) {
-                log.info("[ADMIN COMMAND] > [Player: " + player.getName() + "] has tried to use the command " + getAlias()
-                        + " without having the rights");
+                log.info(
+                    "[ADMIN COMMAND] > [Player: " + player.getName() + "] has tried to use the command " + getAlias() + " without having the rights");
             }
             if (player.isGM()) {
                 PacketSendUtility.sendMessage(player, "[WARN] You need to have access level " + this.getLevel() + " or more to use " + getAlias());

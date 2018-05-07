@@ -46,7 +46,7 @@ public class SM_SUMMON_OWNER_REMOVE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(summonObjId);
     }
 }

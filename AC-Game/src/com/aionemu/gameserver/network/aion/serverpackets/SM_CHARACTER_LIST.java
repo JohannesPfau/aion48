@@ -50,7 +50,6 @@ import com.aionemu.gameserver.services.player.PlayerService;
  * In this packet Server is sending Character List to client.
  *
  * @author Nemesiss, AEJTester
-
  */
 public class SM_CHARACTER_LIST extends PlayerInfo {
 
@@ -71,14 +70,14 @@ public class SM_CHARACTER_LIST extends PlayerInfo {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(playOk2);
 
         Account account = con.getAccount();
-        
+
         /* Checks for Deleted Characters for each client request */
         removeDeletedCharacters(account);
-        
+
         writeC(account.size()); // characters count
 
         for (PlayerAccountData playerData : account.getSortedAccountsList()) {
@@ -121,9 +120,8 @@ public class SM_CHARACTER_LIST extends PlayerInfo {
             }
         }
     }
-    
+
     /**
-     * 
      * @param account
      */
     public void removeDeletedCharacters(Account account) {
@@ -147,5 +145,5 @@ public class SM_CHARACTER_LIST extends PlayerInfo {
 
     private static void removeAccountWH(int accountId) {
         DAOManager.getDAO(InventoryDAO.class).deleteAccountWH(accountId);
-    }      
+    }
 }

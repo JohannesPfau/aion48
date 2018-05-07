@@ -58,8 +58,8 @@ public class LoginToClientPipeLineFactory implements ChannelPipelineFactory {
 
     public LoginToClientPipeLineFactory(ClientPacketHandler clientPacketHandler) {
         this.clientPacketHandler = clientPacketHandler;
-        this.executionHandler = new ExecutionHandler(new OrderedMemoryAwareThreadPoolExecutor(THREADS_MAX,
-                MEMORY_PER_CHANNEL, TOTAL_MEMORY, TIMEOUT, TimeUnit.MILLISECONDS, Executors.defaultThreadFactory()));
+        this.executionHandler = new ExecutionHandler(new OrderedMemoryAwareThreadPoolExecutor(THREADS_MAX, MEMORY_PER_CHANNEL, TOTAL_MEMORY, TIMEOUT,
+            TimeUnit.MILLISECONDS, Executors.defaultThreadFactory()));
     }
 
     /**

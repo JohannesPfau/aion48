@@ -33,10 +33,10 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,13 +50,13 @@ public class _18821AlmostForgotMyBlessings extends QuestHandler {
     private static final Set<Integer> butlers;
 
     static {
-        butlers = new HashSet<Integer>();
+        butlers = new HashSet<>();
         butlers.add(810017);
         butlers.add(810018);
         butlers.add(810019);
         butlers.add(810020);
         butlers.add(810021);
-		butlers.add(810022);
+        butlers.add(810022);
     }
 
     public _18821AlmostForgotMyBlessings() {

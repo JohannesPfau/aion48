@@ -29,11 +29,11 @@
  */
 package quest.eltnen;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -53,7 +53,7 @@ public class _1039SomethingInTheWater extends QuestHandler {
 
     @Override
     public void register() {
-        int[] mobs = {210946, 210968, 210969, 210947};
+        int[] mobs = { 210946, 210968, 210969, 210947 };
         qe.registerQuestItem(182201009, questId);
         qe.registerQuestNpc(203946).addOnTalkEvent(questId);
         qe.registerQuestNpc(203705).addOnTalkEvent(questId);
@@ -143,8 +143,8 @@ public class _1039SomethingInTheWater extends QuestHandler {
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             if (var == 4) {
-                int[] vaegir = {210946, 210968};
-                int[] fighter = {210969, 210947};
+                int[] vaegir = { 210946, 210968 };
+                int[] fighter = { 210969, 210947 };
                 switch (targetId) {
                     case 210946:
                     case 210968: {

@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MeshList", propOrder = {"meshMaterials"})
+@XmlType(name = "MeshList", propOrder = { "meshMaterials" })
 public class MeshList {
 
     @XmlElement(name = "mesh", required = true)
@@ -51,9 +51,9 @@ public class MeshList {
     @XmlAttribute(name = "world_id", required = true)
     protected int worldId;
     @XmlTransient
-    Map<String, Integer> materialIdsByPath = new HashMap<String, Integer>();
+    Map<String, Integer> materialIdsByPath = new HashMap<>();
     @XmlTransient
-    Map<Integer, String> pathZones = new HashMap<Integer, String>();
+    Map<Integer, String> pathZones = new HashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (meshMaterials == null) {
@@ -77,7 +77,8 @@ public class MeshList {
     /**
      * Find material ID for the specific mesh
      *
-     * @param meshPath Mesh geo path
+     * @param meshPath
+     *            Mesh geo path
      * @return 0 if not found
      */
     public int getMeshMaterialId(String meshPath) {

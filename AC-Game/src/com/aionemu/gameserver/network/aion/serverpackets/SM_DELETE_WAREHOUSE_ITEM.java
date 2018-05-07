@@ -51,7 +51,7 @@ public class SM_DELETE_WAREHOUSE_ITEM extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(warehouseType);
         writeD(itemObjId);
         writeC(deleteType.getMask());

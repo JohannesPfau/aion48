@@ -29,7 +29,9 @@
  */
 package ai.instance.sauroSupplyBase;
 
-import ai.AggressiveNpcAI2;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -37,9 +39,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import java.util.List;
-import java.util.concurrent.Future;
-
+import ai.AggressiveNpcAI2;
 
 @AIName("teselik")
 public class TeselikAI2 extends AggressiveNpcAI2 {
@@ -94,6 +94,7 @@ public class TeselikAI2 extends AggressiveNpcAI2 {
     private void random() {
         if (!isAlreadyDead()) {
             enrageTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 public void run() {
                     if (!isAlreadyDead()) {
                         spawn(284455, 472.12497f, 344.17401f, 181.625f, (byte) 0);
@@ -107,6 +108,7 @@ public class TeselikAI2 extends AggressiveNpcAI2 {
     private void random2() {
         if (!isAlreadyDead()) {
             enrageTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 public void run() {
                     if (!isAlreadyDead()) {
                         spawn(284455, 472.12497f, 328.17401f, 181.625f, (byte) 0);

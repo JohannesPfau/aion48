@@ -29,7 +29,9 @@
  */
 package ai.instance.steelRake;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
@@ -47,8 +49,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -98,6 +99,7 @@ public class GoldenEyeMantutuAI2 extends AggressiveNpcAI2 {
 
     private void startFeedTime(final Npc npc) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead() && npc != null) {
@@ -179,6 +181,7 @@ public class GoldenEyeMantutuAI2 extends AggressiveNpcAI2 {
 
     private void doSchedule() {
         hungerTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 int rnd = Rnd.get(1, 2);

@@ -29,9 +29,9 @@
  */
 package quest.hero;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -77,12 +77,11 @@ public class _23523ConquerTheDanuarMysticarium extends QuestHandler {
                             return closeDialogWindow(env);
                         }
 
-                        if (qs1.getStatus() == QuestStatus.COMPLETE && qs2.getStatus() == QuestStatus.COMPLETE && qs3.getStatus() == QuestStatus.COMPLETE
-                                && qs4.getStatus() == QuestStatus.COMPLETE ) {
+                        if (qs1.getStatus() == QuestStatus.COMPLETE && qs2.getStatus() == QuestStatus.COMPLETE
+                            && qs3.getStatus() == QuestStatus.COMPLETE && qs4.getStatus() == QuestStatus.COMPLETE) {
                             QuestService.startQuest(env);
                             return sendQuestDialog(env, 2375);
-                        }
-                        else
+                        } else
                             return closeDialogWindow(env);
                     }
 
@@ -109,6 +108,7 @@ public class _23523ConquerTheDanuarMysticarium extends QuestHandler {
         }
         return false;
     }
+
     @Override
     public boolean onEnterWorldEvent(QuestEnv env) {
         Player player = env.getPlayer();
@@ -123,8 +123,8 @@ public class _23523ConquerTheDanuarMysticarium extends QuestHandler {
         }
 
         if (qs1.getStatus() == QuestStatus.COMPLETE && qs2.getStatus() == QuestStatus.COMPLETE && qs3.getStatus() == QuestStatus.COMPLETE
-            && qs4.getStatus() == QuestStatus.COMPLETE ) {
-            if (qs == null || qs.getStatus() == QuestStatus.NONE){
+            && qs4.getStatus() == QuestStatus.COMPLETE) {
+            if (qs == null || qs.getStatus() == QuestStatus.NONE) {
                 QuestService.startQuest(env);
                 return true;
             }
@@ -132,4 +132,3 @@ public class _23523ConquerTheDanuarMysticarium extends QuestHandler {
         return false;
     }
 }
-

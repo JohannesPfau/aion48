@@ -147,6 +147,7 @@ public class VertexBuffer extends GLObject implements Cloneable {
         UnsignedShort(2),
         Int(4),
         UnsignedInt(4);
+
         private int componentSize = 0;
 
         Format(int componentSize) {
@@ -229,8 +230,8 @@ public class VertexBuffer extends GLObject implements Cloneable {
     }
 
     public void setUsage(Usage usage) {
-//        if (id != -1)
-//            throw new UnsupportedOperationException("Data has already been sent. Cannot set usage.");
+        //        if (id != -1)
+        //            throw new UnsupportedOperationException("Data has already been sent. Cannot set usage.");
 
         this.usage = usage;
     }
@@ -460,7 +461,7 @@ public class VertexBuffer extends GLObject implements Cloneable {
     }
 
     @Override
-	public VertexBuffer clone() {
+    public VertexBuffer clone() {
         // NOTE: Superclass GLObject automatically creates shallow clone
         // e.g re-use ID.
         VertexBuffer vb = (VertexBuffer) super.clone();
@@ -493,15 +494,12 @@ public class VertexBuffer extends GLObject implements Cloneable {
         if (data != null) {
             dataTxt = ", elements=" + data.capacity();
         }
-        return getClass().getSimpleName() + "[fmt=" + format.name()
-                + ", type=" + bufType.name()
-                + ", usage=" + usage.name()
-                + dataTxt + "]";
+        return getClass().getSimpleName() + "[fmt=" + format.name() + ", type=" + bufType.name() + ", usage=" + usage.name() + dataTxt + "]";
     }
 
     @Override
     public void resetObject() {
-//        assert this.id != -1;
+        //        assert this.id != -1;
         this.id = -1;
         setUpdateNeeded();
     }

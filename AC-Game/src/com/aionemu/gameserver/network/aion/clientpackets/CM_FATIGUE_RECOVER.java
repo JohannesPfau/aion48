@@ -35,7 +35,6 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.player.FatigueService;
 
-
 /**
  * @author Alcapwnd
  */
@@ -58,12 +57,12 @@ public class CM_FATIGUE_RECOVER extends AionClientPacket {
         removeCount = readD();
     }
 
-
     @Override
     protected void runImpl() {
-    	Player player = getConnection().getActivePlayer();
-    	if (player == null) return;
-    	
+        Player player = getConnection().getActivePlayer();
+        if (player == null)
+            return;
+
         FatigueService.getInstance().removeRecoverCount(player, removeCount);
     }
 }

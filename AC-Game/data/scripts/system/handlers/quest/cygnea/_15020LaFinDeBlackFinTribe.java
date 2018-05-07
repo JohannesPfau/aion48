@@ -29,12 +29,13 @@
  */
 package quest.cygnea;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+
 /**
  * @author pralinka
  */
@@ -48,13 +49,13 @@ public class _15020LaFinDeBlackFinTribe extends QuestHandler {
 
     @Override
     public void register() {
-		qe.registerQuestNpc(804876).addOnQuestStart(questId);
+        qe.registerQuestNpc(804876).addOnQuestStart(questId);
         qe.registerQuestNpc(804876).addOnTalkEvent(questId);
-		qe.registerQuestNpc(235826).addOnKillEvent(questId);
-		qe.registerQuestNpc(235827).addOnKillEvent(questId);
+        qe.registerQuestNpc(235826).addOnKillEvent(questId);
+        qe.registerQuestNpc(235827).addOnKillEvent(questId);
     }
 
-	@Override
+    @Override
     public boolean onKillEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -71,8 +72,8 @@ public class _15020LaFinDeBlackFinTribe extends QuestHandler {
                         } else if (var1 == 4) {
                             if (var2 == 5) {
                                 qs.setQuestVar(1);
-								qs.setStatus(QuestStatus.REWARD);
-								updateQuestStatus(env);
+                                qs.setStatus(QuestStatus.REWARD);
+                                updateQuestStatus(env);
                                 return true;
                             } else {
                                 return defaultOnKillEvent(env, 235826, 4, 5, 1);
@@ -86,8 +87,8 @@ public class _15020LaFinDeBlackFinTribe extends QuestHandler {
                         } else if (var2 == 4) {
                             if (var1 == 5) {
                                 qs.setQuestVar(1);
-								qs.setStatus(QuestStatus.REWARD);
-								updateQuestStatus(env);
+                                qs.setStatus(QuestStatus.REWARD);
+                                updateQuestStatus(env);
                                 return true;
                             } else {
                                 return defaultOnKillEvent(env, 235827, 4, 5, 2);
@@ -100,7 +101,7 @@ public class _15020LaFinDeBlackFinTribe extends QuestHandler {
         }
         return false;
     }
-	
+
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         Player player = env.getPlayer();

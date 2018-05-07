@@ -29,7 +29,13 @@
  */
 package admincommands;
 
-import ch.qos.logback.classic.Logger;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
@@ -42,13 +48,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.WorldMapType;
 
-import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
+import ch.qos.logback.classic.Logger;
 
 /**
  * @author Mrakobes
@@ -56,7 +56,7 @@ import java.util.ArrayList;
  */
 public class Bk extends AdminCommand {
 
-    ArrayList<Bookmark> bookmarks = new ArrayList<Bookmark>();
+    ArrayList<Bookmark> bookmarks = new ArrayList<>();
     private static final Logger log = (Logger) LoggerFactory.getLogger(Bk.class);
     private String bookmark_name = "";
 
@@ -85,22 +85,22 @@ public class Bk extends AdminCommand {
                 final int char_id = player.getObjectId();
                 final int world_id = player.getWorldId();
 
-                DB.insertUpdate("INSERT INTO bookmark (" + "`name`,`char_id`, `x`, `y`, `z`,`world_id` )" + " VALUES "
-                        + "(?, ?, ?, ?, ?, ?)", new IUStH() {
-                    @Override
-                    public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
-                        ps.setString(1, bookmark_name);
-                        ps.setInt(2, char_id);
-                        ps.setFloat(3, x);
-                        ps.setFloat(4, y);
-                        ps.setFloat(5, z);
-                        ps.setInt(6, world_id);
-                        ps.execute();
-                    }
-                });
+                DB.insertUpdate("INSERT INTO bookmark (" + "`name`,`char_id`, `x`, `y`, `z`,`world_id` )" + " VALUES " + "(?, ?, ?, ?, ?, ?)",
+                    new IUStH() {
 
-                PacketSendUtility
-                        .sendMessage(player, "Bookmark " + bookmark_name + " sucessfully added to your bookmark list!");
+                        @Override
+                        public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
+                            ps.setString(1, bookmark_name);
+                            ps.setInt(2, char_id);
+                            ps.setFloat(3, x);
+                            ps.setFloat(4, y);
+                            ps.setFloat(5, z);
+                            ps.setInt(6, world_id);
+                            ps.execute();
+                        }
+                    });
+
+                PacketSendUtility.sendMessage(player, "Bookmark " + bookmark_name + " sucessfully added to your bookmark list!");
 
                 updateInfo(player.getObjectId());
             } catch (Exception e) {
@@ -122,8 +122,7 @@ public class Bk extends AdminCommand {
                 return;
             } finally {
                 DatabaseFactory.close(con);
-                PacketSendUtility.sendMessage(player, "Bookmark " + bookmark_name
-                        + " sucessfully removed from your bookmark list!");
+                PacketSendUtility.sendMessage(player, "Bookmark " + bookmark_name + " sucessfully removed from your bookmark list!");
                 updateInfo(player.getObjectId());
             }
         } else if (params[0].equals("tele")) {
@@ -155,8 +154,8 @@ public class Bk extends AdminCommand {
             PacketSendUtility.sendMessage(player, "=====Bookmark list begin=====");
             for (Bookmark b : bookmarks) {
                 String chatLink = ChatUtil.position(b.getName(), player.getRace().getRaceId(), b.getWorld_id(), b.getX(), b.getY(), b.getZ());
-                PacketSendUtility.sendMessage(player, " = " + chatLink + " =  " + WorldMapType.getWorld(b.getWorld_id())
-                        + "  ( " + b.getX() + " ," + b.getY() + " ," + b.getZ() + " )");
+                PacketSendUtility.sendMessage(player, " = " + chatLink + " =  " + WorldMapType.getWorld(b.getWorld_id()) + "  ( " + b.getX() + " ,"
+                    + b.getY() + " ," + b.getZ() + " )");
             }
             PacketSendUtility.sendMessage(player, "=====Bookmark list end=======");
         }
@@ -169,6 +168,7 @@ public class Bk extends AdminCommand {
         bookmarks.clear();
 
         DB.select("SELECT * FROM `bookmark` where char_id= ?", new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, objId);
@@ -189,7 +189,8 @@ public class Bk extends AdminCommand {
     }
 
     /**
-     * @param bk_name - bookmark name
+     * @param bk_name
+     *            - bookmark name
      * @return Bookmark from bookmark name
      */
     public Bookmark selectByName(String bk_name) {
@@ -202,7 +203,8 @@ public class Bk extends AdminCommand {
     }
 
     /**
-     * @param bk_name - bookmark name
+     * @param bk_name
+     *            - bookmark name
      * @return true if bookmark exists
      */
     public boolean isBookmarkExists(final String bk_name, final int objId) {
@@ -210,8 +212,7 @@ public class Bk extends AdminCommand {
         int bkcount = 0;
         try {
             con = DatabaseFactory.getConnection();
-            PreparedStatement statement = con
-                    .prepareStatement("SELECT count(id) as bkcount FROM bookmark WHERE ? = name AND char_id = ?");
+            PreparedStatement statement = con.prepareStatement("SELECT count(id) as bkcount FROM bookmark WHERE ? = name AND char_id = ?");
             statement.setString(1, bk_name);
             statement.setInt(2, objId);
             ResultSet rset = statement.executeQuery();

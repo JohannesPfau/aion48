@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.world;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -39,9 +37,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Future;
-
-import javolution.util.FastList;
-import javolution.util.FastMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,10 +63,12 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastList;
+import javolution.util.FastMap;
+
 /**
  * World map instance object.
- *
-
  */
 public abstract class WorldMapInstance {
 
@@ -90,7 +87,7 @@ public abstract class WorldMapInstance {
     /**
      * Map of active regions.
      */
-    protected final TIntObjectHashMap<MapRegion> regions = new TIntObjectHashMap<MapRegion>();
+    protected final TIntObjectHashMap<MapRegion> regions = new TIntObjectHashMap<>();
     /**
      * All objects spawned in this world map instance
      */
@@ -106,9 +103,9 @@ public abstract class WorldMapInstance {
      * Id of this instance (channel)
      */
     private int instanceId;
-    private final FastList<Integer> questIds = new FastList<Integer>();
+    private final FastList<Integer> questIds = new FastList<>();
     private InstanceHandler instanceHandler;
-    private Map<ZoneName, ZoneInstance> zones = new HashMap<ZoneName, ZoneInstance>();
+    private Map<ZoneName, ZoneInstance> zones = new HashMap<>();
     // TODO: Merge this with owner
     private Integer soloPlayer;
     private PlayerAlliance registredAlliance;
@@ -197,9 +194,8 @@ public abstract class WorldMapInstance {
      */
     public void addObject(VisibleObject object) {
         if (worldMapObjects.put(object.getObjectId(), object) != null) {
-            throw new DuplicateAionObjectException("Object with templateId "
-                    + String.valueOf(object.getObjectTemplate().getTemplateId()) + " already spawned in the instance "
-                    + String.valueOf(this.getMapId()) + " " + String.valueOf(this.getInstanceId()));
+            throw new DuplicateAionObjectException("Object with templateId " + String.valueOf(object.getObjectTemplate().getTemplateId())
+                + " already spawned in the instance " + String.valueOf(this.getMapId()) + " " + String.valueOf(this.getInstanceId()));
         }
         if (object instanceof Npc) {
             QuestNpc data = QuestEngine.getInstance().getQuestNpc(((Npc) object).getNpcId());
@@ -237,7 +233,7 @@ public abstract class WorldMapInstance {
      * @return npc
      */
     public Npc getNpc(int npcId) {
-        for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext(); ) {
+        for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext();) {
             VisibleObject obj = iter.next();
             if (obj instanceof Npc) {
                 Npc npc = (Npc) obj;
@@ -250,7 +246,7 @@ public abstract class WorldMapInstance {
     }
 
     public List<Player> getPlayersInside() {
-        List<Player> playersInside = new ArrayList<Player>();
+        List<Player> playersInside = new ArrayList<>();
         Iterator<Player> players = playerIterator();
         while (players.hasNext()) {
             playersInside.add(players.next());
@@ -263,8 +259,8 @@ public abstract class WorldMapInstance {
      * @return List<npc>
      */
     public List<Npc> getNpcs(int npcId) {
-        List<Npc> npcs = new ArrayList<Npc>();
-        for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext(); ) {
+        List<Npc> npcs = new ArrayList<>();
+        for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext();) {
             VisibleObject obj = iter.next();
             if (obj instanceof Npc) {
                 Npc npc = (Npc) obj;
@@ -280,8 +276,8 @@ public abstract class WorldMapInstance {
      * @return List<npcs>
      */
     public List<Npc> getNpcs() {
-        List<Npc> npcs = new ArrayList<Npc>();
-        for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext(); ) {
+        List<Npc> npcs = new ArrayList<>();
+        for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext();) {
             VisibleObject obj = iter.next();
             if (obj instanceof Npc) {
                 npcs.add((Npc) obj);
@@ -294,8 +290,8 @@ public abstract class WorldMapInstance {
      * @return List<doors>
      */
     public Map<Integer, StaticDoor> getDoors() {
-        Map<Integer, StaticDoor> doors = new HashMap<Integer, StaticDoor>();
-        for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext(); ) {
+        Map<Integer, StaticDoor> doors = new HashMap<>();
+        for (Iterator<VisibleObject> iter = objectIterator(); iter.hasNext();) {
             VisibleObject obj = iter.next();
             if (obj instanceof StaticDoor) {
                 StaticDoor door = (StaticDoor) obj;
@@ -400,7 +396,8 @@ public abstract class WorldMapInstance {
     }
 
     /**
-     * @param emptyInstanceTask the emptyInstanceTask to set
+     * @param emptyInstanceTask
+     *            the emptyInstanceTask to set
      */
     public void setEmptyInstanceTask(Future<?> emptyInstanceTask) {
         this.emptyInstanceTask = emptyInstanceTask;
@@ -457,7 +454,7 @@ public abstract class WorldMapInstance {
     }
 
     protected ZoneInstance[] filterZones(int mapId, int regionId, float startX, float startY, float minZ, float maxZ) {
-        List<ZoneInstance> regionZones = new ArrayList<ZoneInstance>();
+        List<ZoneInstance> regionZones = new ArrayList<>();
         RegionZone regionZone = new RegionZone(startX, startY, minZ, maxZ);
 
         for (ZoneInstance zoneInstance : zones.values()) {

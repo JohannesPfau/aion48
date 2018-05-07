@@ -29,9 +29,9 @@
  */
 package quest.heiron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,7 +50,7 @@ public class _1054ThePowerofElim extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {730024, 204647, 730008, 730019};
+        int[] npcs = { 730024, 204647, 730008, 730019 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         for (int npc : npcs) {
@@ -96,8 +96,7 @@ public class _1054ThePowerofElim extends QuestHandler {
                         return defaultCloseDialog(env, 1, 2); // 2
                     }
                     case SELECT_ACTION_2376: {
-                        if (player.getInventory().getItemCountByItemId(182201606) > 0
-                                && player.getInventory().getItemCountByItemId(182201607) > 0) {
+                        if (player.getInventory().getItemCountByItemId(182201606) > 0 && player.getInventory().getItemCountByItemId(182201607) > 0) {
                             return sendQuestDialog(env, 2376);
                         } else {
                             return sendQuestDialog(env, 2461);

@@ -43,6 +43,7 @@ public enum CreatureVisualState {
     HIDE13(13), // Hide from Npc?
     HIDE20(20), // Hide from Npc?
     BLINKING(64); // Blinking when entering to zone
+
     private int id;
 
     private CreatureVisualState(int id) {

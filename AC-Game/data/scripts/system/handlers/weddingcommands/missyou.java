@@ -72,23 +72,24 @@ public class missyou extends WeddingCommand {
         }
 
         if (!player.isCommandInUse()) {
-            TeleportService2.teleportTo(player, partner.getWorldId(), partner.getInstanceId(), partner.getX(), partner.getY(), partner.getZ(), partner.getHeading(), TeleportAnimation.BEAM_ANIMATION);
+            TeleportService2.teleportTo(player, partner.getWorldId(), partner.getInstanceId(), partner.getX(), partner.getY(), partner.getZ(),
+                partner.getHeading(), TeleportAnimation.BEAM_ANIMATION);
             PacketSendUtility.sendMessage(player, "Teleported to player " + partner.getName() + ".");
             player.setCommandUsed(true);
 
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-				@Override
-				public void run() {
-					player.setCommandUsed(false);
-				}
-			}, 60 * 60 * 1000);
-		}
-		else
-			PacketSendUtility.sendMessage(player, "Only 1 TP per hour.");
-	}
+            ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-	@Override
-	public void onFail(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Failed");
-	}
+                @Override
+                public void run() {
+                    player.setCommandUsed(false);
+                }
+            }, 60 * 60 * 1000);
+        } else
+            PacketSendUtility.sendMessage(player, "Only 1 TP per hour.");
+    }
+
+    @Override
+    public void onFail(Player player, String message) {
+        PacketSendUtility.sendMessage(player, "Failed");
+    }
 }

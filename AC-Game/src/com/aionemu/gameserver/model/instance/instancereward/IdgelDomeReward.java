@@ -46,39 +46,38 @@ import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-
 /**
  * @author GiGatR00n (Aion-Core)
  */
 public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward> {
-	
-	/**
-	 *  Calculates Total Asmo & Elyos Point<br><br>
-	 *  Default Start Points: 1000
-	 */
+
+    /**
+     * Calculates Total Asmo & Elyos Point<br>
+     * <br>
+     * Default Start Points: 1000
+     */
     private MutableInt asmodiansPoints = new MutableInt(1000);
     private MutableInt elyosPoins = new MutableInt(1000);
-    
-	/**
-	 *  Calculates Total Asmo & Elyos PvP Kills<br><br>
-	 *  Default PvP Kills: 0
-	 */
+
+    /**
+     * Calculates Total Asmo & Elyos PvP Kills<br>
+     * <br>
+     * Default PvP Kills: 0
+     */
     private MutableInt asmodiansPvpKills = new MutableInt(0);
     private MutableInt elyosPvpKills = new MutableInt(0);
-    
+
     // Determines the Winner or Looser Race
     private Race race;
-    
+
     protected WorldMapInstance instance;
-    
+
     private long instanceStartTime;
     private long instanceEndTime;
     private long PreparingTime;
     private int bonusTime;
-    
-    
-    public IdgelDomeReward (Integer mapId, int instanceId, WorldMapInstance instance) 
-    {
+
+    public IdgelDomeReward(Integer mapId, int instanceId, WorldMapInstance instance) {
         super(mapId, instanceId);
         this.instance = instance;
         this.PreparingTime = 97504; //v4.7.5.13 NA Retail
@@ -88,40 +87,38 @@ public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward> {
 
     /**
      * Calculates the Abyss Bonus Reward for Winner and Looser Team individually.
-     * 
-     * 5156(Win+BossKilled)   :  3163(Win)
-     * 3024(Loss+BossKilled)  :  1031(Loss)
+     * 5156(Win+BossKilled) : 3163(Win)
+     * 3024(Loss+BossKilled) : 1031(Loss)
      */
     public int CalcBonusAbyssReward(boolean isWin, boolean isBossKilled) {
-    	int BossKilled = 1993;
-    	int Win = 3163;
-    	int Loss = 1031;
-    	
-    	if (isBossKilled) {
-    		return isWin ? (Win + BossKilled) : (Loss + BossKilled);
-    	} else {
-    		return isWin ? Win : Loss;
-    	}
+        int BossKilled = 1993;
+        int Win = 3163;
+        int Loss = 1031;
+
+        if (isBossKilled) {
+            return isWin ? (Win + BossKilled) : (Loss + BossKilled);
+        } else {
+            return isWin ? Win : Loss;
+        }
     }
-    
+
     /**
      * Calculates the Glory Bonus Reward for Winner and Looser Team individually.
-     * 
-     * 200(Win+BossKilled)   :  150(Win)
-     * 125(Loss+BossKilled)  :  75(Loss)
+     * 200(Win+BossKilled) : 150(Win)
+     * 125(Loss+BossKilled) : 75(Loss)
      */
     public int CalcBonusGloryReward(boolean isWin, boolean isBossKilled) {
-    	int BossKilled = 50;
-    	int Win = 150;
-    	int Loss = 75;
-    	
-    	if (isBossKilled) {
-    		return isWin ? (Win + BossKilled) : (Loss + BossKilled);
-    	} else {
-    		return isWin ? Win : Loss;
-    	}
+        int BossKilled = 50;
+        int Win = 150;
+        int Loss = 75;
+
+        if (isBossKilled) {
+            return isWin ? (Win + BossKilled) : (Loss + BossKilled);
+        } else {
+            return isWin ? Win : Loss;
+        }
     }
-    
+
     @Override
     public void clear() {
         super.clear();
@@ -141,10 +138,11 @@ public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward> {
     @Override
     public IdgelDomePlayerReward getPlayerReward(Integer object) {
         return (IdgelDomePlayerReward) super.getPlayerReward(object);
-    }    
-    
+    }
+
     public List<IdgelDomePlayerReward> sortPoints() {
         return sort(getInstanceRewards(), on(PvPArenaPlayerReward.class).getScorePoints(), new Comparator<Integer>() {
+
             @Override
             public int compare(Integer o1, Integer o2) {
                 return o2 != null ? o2.compareTo(o1) : -o1.compareTo(o2);
@@ -152,30 +150,28 @@ public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward> {
         });
     }
 
-    public void portToPosition(Player player) 
-    {
-    	/*
-    	 * Get Random Position (Elyos - Asmo)
-    	 */
-    	float Rx = Rnd.get(-5, 5);
-    	float Ry = Rnd.get(-5, 5);
-    	Point3D ElyosStartPoint = new Point3D(270.1437f + Rx, 348.6699f + Ry, 79.44365f);//Elyos Center
-    	Point3D AsmoStartPoint = new Point3D(258.5553f + Rx, 169.85149f + Ry, 79.430855f);//Asmo Center
-    	
+    public void portToPosition(Player player) {
+        /*
+         * Get Random Position (Elyos - Asmo)
+         */
+        float Rx = Rnd.get(-5, 5);
+        float Ry = Rnd.get(-5, 5);
+        Point3D ElyosStartPoint = new Point3D(270.1437f + Rx, 348.6699f + Ry, 79.44365f);//Elyos Center
+        Point3D AsmoStartPoint = new Point3D(258.5553f + Rx, 169.85149f + Ry, 79.430855f);//Asmo Center
+
         if (player.getRace() == Race.ASMODIANS) {
             TeleportService2.teleportTo(player, mapId, instanceId, AsmoStartPoint.getX(), AsmoStartPoint.getY(), AsmoStartPoint.getZ(), (byte) 45);
         } else {
-            TeleportService2.teleportTo(player, mapId, instanceId, ElyosStartPoint.getX(), ElyosStartPoint.getY(), ElyosStartPoint.getZ(), (byte) 105);
+            TeleportService2.teleportTo(player, mapId, instanceId, ElyosStartPoint.getX(), ElyosStartPoint.getY(), ElyosStartPoint.getZ(),
+                (byte) 105);
         }
     }
 
-    public MutableInt getPointsByRace(Race race) 
-    {
-    	return (race == Race.ELYOS) ? elyosPoins : (race == Race.ASMODIANS) ? asmodiansPoints : null;
+    public MutableInt getPointsByRace(Race race) {
+        return (race == Race.ELYOS) ? elyosPoins : (race == Race.ASMODIANS) ? asmodiansPoints : null;
     }
 
-    public void addPointsByRace(Race race, int points) 
-    {
+    public void addPointsByRace(Race race, int points) {
         MutableInt racePoints = getPointsByRace(race);
         racePoints.add(points);
         if (racePoints.intValue() < 0) {
@@ -184,7 +180,7 @@ public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward> {
     }
 
     public MutableInt getPvpKillsByRace(Race race) {
-    	return (race == Race.ELYOS) ? elyosPvpKills : (race == Race.ASMODIANS) ? asmodiansPvpKills : null;
+        return (race == Race.ELYOS) ? elyosPvpKills : (race == Race.ASMODIANS) ? asmodiansPvpKills : null;
     }
 
     public void addPvpKillsByRace(Race race, int points) {
@@ -193,7 +189,7 @@ public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward> {
         if (racePoints.intValue() < 0) {
             racePoints.setValue(0);
         }
-    }  
+    }
 
     public void setWinningRace(Race race) {
         this.race = race;
@@ -209,18 +205,17 @@ public class IdgelDomeReward extends InstanceReward<IdgelDomePlayerReward> {
 
     public void setInstanceStartTime() {
         this.instanceStartTime = System.currentTimeMillis();
-    }    
-    
+    }
+
     public long getPreparingTime() {
-    	return this.PreparingTime;
+        return this.PreparingTime;
     }
-    
+
     public long getEndTime() {
-    	return (this.PreparingTime + this.instanceEndTime);
+        return (this.PreparingTime + this.instanceEndTime);
     }
-    
-    public int getRemainingTime() 
-    {
+
+    public int getRemainingTime() {
         long result = System.currentTimeMillis() - instanceStartTime;
         if (result < PreparingTime) {
             return (int) (PreparingTime - result);//...Count Down Before Starting Instance. 60,59,58,57,...,0

@@ -29,11 +29,11 @@
  */
 package quest.brusthonin;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -75,7 +75,7 @@ public class _2091MeettheReapers extends QuestHandler {
             if (env.getDialog() == DialogAction.QUEST_SELECT) {
                 return sendQuestDialog(env, 10002);
             } else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-                    && qs.getStatus() != QuestStatus.NONE) {
+                && qs.getStatus() != QuestStatus.NONE) {
                 qs.setStatus(QuestStatus.REWARD);
                 qs.setQuestVarById(0, 1);
                 updateQuestStatus(env);
@@ -84,10 +84,9 @@ public class _2091MeettheReapers extends QuestHandler {
             return false;
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
-                int[] ids = {2092, 2093, 2094};
+                int[] ids = { 2092, 2093, 2094 };
                 for (int id : ids) {
-                    QuestEngine.getInstance().onEnterZoneMissionEnd(
-                            new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+                    QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
                 }
             }
             return sendQuestEndDialog(env);

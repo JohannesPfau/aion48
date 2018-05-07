@@ -35,8 +35,6 @@ import static ch.lambdaj.Lambda.sort;
 import java.util.Comparator;
 import java.util.List;
 
-import javolution.util.FastList;
-
 import org.apache.commons.lang.mutable.MutableInt;
 
 import com.aionemu.commons.utils.Rnd;
@@ -53,6 +51,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
+import javolution.util.FastList;
+
 /**
  * @author Eloann
  */
@@ -66,7 +66,7 @@ public class EternalBastionWarReward extends InstanceReward<EternalBastionWarPla
     private MutableInt asmodiansPoints = new MutableInt(0);
     private MutableInt elyosPoins = new MutableInt(0);
     private Race race;
-    private FastList<EternalBastionGroupReward> groups = new FastList<EternalBastionGroupReward>();
+    private FastList<EternalBastionGroupReward> groups = new FastList<>();
     private Point3D asmodiansStartPosition;
     private Point3D elyosStartPosition;
     private final byte buffId;
@@ -104,7 +104,7 @@ public class EternalBastionWarReward extends InstanceReward<EternalBastionWarPla
     }
 
     public FastList<Player> getPlayersInside(EternalBastionGroupReward group) {
-        FastList<Player> players = new FastList<Player>();
+        FastList<Player> players = new FastList<>();
         for (Player playerInside : instance.getPlayersInside()) {
             if (group.containPlayer(playerInside.getObjectId())) {
                 players.add(playerInside);
@@ -123,6 +123,7 @@ public class EternalBastionWarReward extends InstanceReward<EternalBastionWarPla
 
     public List<EternalBastionWarPlayerReward> sortPoints() {
         return sort(getInstanceRewards(), on(PvPArenaPlayerReward.class).getScorePoints(), new Comparator<Integer>() {
+
             @Override
             public int compare(Integer o1, Integer o2) {
                 return o2 != null ? o2.compareTo(o1) : -o1.compareTo(o2);
@@ -144,14 +145,15 @@ public class EternalBastionWarReward extends InstanceReward<EternalBastionWarPla
 
     public void portToPosition(Player player) {
         if (player.getRace() == Race.ASMODIANS) {
-            TeleportService2.teleportTo(player, mapId, instanceId, asmodiansStartPosition.getX(), asmodiansStartPosition.getY(), asmodiansStartPosition.getZ());
+            TeleportService2.teleportTo(player, mapId, instanceId, asmodiansStartPosition.getX(), asmodiansStartPosition.getY(),
+                asmodiansStartPosition.getZ());
         } else {
             TeleportService2.teleportTo(player, mapId, instanceId, elyosStartPosition.getX(), elyosStartPosition.getY(), elyosStartPosition.getZ());
         }
     }
 
     public MutableInt getPointsByRace(Race race) {
-    	return (race == Race.ELYOS) ? elyosPoins : (race == Race.ASMODIANS) ? asmodiansPoints : null;
+        return (race == Race.ELYOS) ? elyosPoins : (race == Race.ASMODIANS) ? asmodiansPoints : null;
     }
 
     public void addPointsByRace(Race race, int points) {
@@ -213,6 +215,7 @@ public class EternalBastionWarReward extends InstanceReward<EternalBastionWarPla
 
     public void sendPacket(final int type, final Integer object) {
         instance.doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(type, getTime(), getInstanceReward(), object));

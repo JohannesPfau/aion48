@@ -41,6 +41,7 @@ public enum LegionPermissionsMask {
     WH_DEPOSIT(0x1000),
     ARTIFACT(0x400),
     GUARDIAN_STONE(0x800);
+
     private int rank;
 
     private LegionPermissionsMask(int rank) {

@@ -36,11 +36,11 @@ import java.util.concurrent.ConcurrentHashMap;
 /**
  * @author Rolandas
  */
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class LastUsedCache<K extends Comparable, V> implements ICache<K, V>, Serializable {
 
     private static final long serialVersionUID = 3674312987828041877L;
-    Map<K, Item> map = new ConcurrentHashMap<K, Item>();
+    Map<K, Item> map = new ConcurrentHashMap<>();
     Item startItem = new Item();
     Item endItem = new Item();
     int maxSize;

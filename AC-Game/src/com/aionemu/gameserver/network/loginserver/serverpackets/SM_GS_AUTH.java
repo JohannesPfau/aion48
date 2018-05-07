@@ -40,8 +40,6 @@ import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 /**
  * This is authentication packet that gs will send to login server for
  * registration.
- *
-
  */
 public class SM_GS_AUTH extends LsServerPacket {
 

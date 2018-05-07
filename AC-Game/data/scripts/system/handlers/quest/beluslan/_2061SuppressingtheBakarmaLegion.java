@@ -29,12 +29,12 @@
  */
 package quest.beluslan;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -47,7 +47,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 
     private final static int questId = 2061;
-    private final static int[] npc_ids = {204702, 278001, 204807, 700295, 204052};
+    private final static int[] npc_ids = { 204702, 278001, 204807, 700295, 204052 };
 
     public _2061SuppressingtheBakarmaLegion() {
         super(questId);
@@ -67,13 +67,13 @@ public class _2061SuppressingtheBakarmaLegion extends QuestHandler {
 
     @Override
     public boolean onZoneMissionEndEvent(QuestEnv env) {
-        int[] quests = {2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060};
+        int[] quests = { 2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060 };
         return defaultOnZoneMissionEndEvent(env, quests);
     }
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {2500, 2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060};
+        int[] quests = { 2500, 2051, 2052, 2053, 2054, 2055, 2056, 2057, 2058, 2059, 2060 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 

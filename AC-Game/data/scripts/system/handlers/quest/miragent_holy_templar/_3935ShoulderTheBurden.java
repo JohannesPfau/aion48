@@ -29,9 +29,9 @@
  */
 package quest.miragent_holy_templar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,7 +50,7 @@ public class _3935ShoulderTheBurden extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {203316, 203702, 203329, 203752, 203701};
+        int[] npcs = { 203316, 203702, 203329, 203752, 203701 };
         qe.registerQuestNpc(203701).addOnQuestStart(questId);// Lavirintos
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);

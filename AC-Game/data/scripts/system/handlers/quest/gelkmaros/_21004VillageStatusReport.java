@@ -47,7 +47,7 @@ public class _21004VillageStatusReport extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {799227, 799268, 799269};
+        int[] npcs = { 799227, 799268, 799269 };
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }

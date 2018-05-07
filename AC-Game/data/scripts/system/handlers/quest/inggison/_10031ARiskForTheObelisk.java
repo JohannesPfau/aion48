@@ -47,7 +47,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _10031ARiskForTheObelisk extends QuestHandler {
 
     private final static int questId = 10031;
-		private final static int[] mobs = {215504, 215505, 216463, 216464, 215516, 215517, 215508, 215509};
+    private final static int[] mobs = { 215504, 215505, 216463, 216464, 215516, 215517, 215508, 215509 };
+
     public _10031ARiskForTheObelisk() {
         super(questId);
     }
@@ -55,74 +56,73 @@ public class _10031ARiskForTheObelisk extends QuestHandler {
     @Override
     public void register() {
         qe.registerOnEnterWorld(questId);
-		int[] npcs = {203700, 798600, 798408, 798926, 799052, 798927, 730224, 702662, 700600}; 	
-		qe.registerOnLevelUp(questId);
+        int[] npcs = { 203700, 798600, 798408, 798926, 799052, 798927, 730224, 702662, 700600 };
+        qe.registerOnLevelUp(questId);
         qe.registerOnEnterWorld(questId);
-		qe.registerQuestItem(182215590, questId);
+        qe.registerQuestItem(182215590, questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }
-		for (int mob : mobs) {
+        for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
     }
 
-	@Override
+    @Override
     public boolean onLvlUpEvent(QuestEnv env) {
         return defaultOnLvlUpEvent(env);
-    } 
-	
+    }
+
     @Override
     public boolean onEnterWorldEvent(QuestEnv env) {
         Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-        if (player.getWorldId() == 110010000) {            
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (player.getWorldId() == 110010000) {
             if (qs == null) {
                 env.setQuestId(questId);
                 if (QuestService.startQuest(env)) {
                     return true;
                 }
-            }			
+            }
+        } else if (player.getWorldId() == 210050000) {
+            if (qs != null && qs.getStatus() == QuestStatus.START) {
+                int var = qs.getQuestVars().getQuestVars();
+                if (var == 3) {
+                    qs.setQuestVar(++var);
+                    updateQuestStatus(env);
+                    return playQuestMovie(env, 501);
+                }
+            }
         }
-		else if (player.getWorldId() == 210050000) {
-			if (qs != null && qs.getStatus() == QuestStatus.START) {
-            int var = qs.getQuestVars().getQuestVars();
-            if (var == 3) {
-					qs.setQuestVar(++var);
-					updateQuestStatus(env);
-                    return playQuestMovie(env, 501);					
-				}
-			}
-		}	
         return false;
     }
-	
-	@Override
+
+    @Override
     public boolean onKillEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             if (var == 9) {
-				int[] balaurs = {215504, 215505, 216463, 216464, 215516, 215517};
-				int[] spallers = {215508, 215509};
+                int[] balaurs = { 215504, 215505, 216463, 216464, 215516, 215517 };
+                int[] spallers = { 215508, 215509 };
                 int targetId = env.getTargetId();
                 int var1 = qs.getQuestVarById(1);
                 int var2 = qs.getQuestVarById(2);
                 switch (targetId) {
-					case 215504:
-					case 215505:
-					case 216463:
-					case 216464:
-					case 215516:
+                    case 215504:
+                    case 215505:
+                    case 216463:
+                    case 216464:
+                    case 215516:
                     case 215517: {
                         if (var1 < 9) {
                             return defaultOnKillEvent(env, balaurs, 0, 9, 1);
                         } else if (var1 == 9) {
                             if (var2 == 2) {
                                 qs.setQuestVar(10);
-								qs.setStatus(QuestStatus.REWARD);
-								updateQuestStatus(env);
+                                qs.setStatus(QuestStatus.REWARD);
+                                updateQuestStatus(env);
                                 return true;
                             } else {
                                 return defaultOnKillEvent(env, balaurs, 9, 10, 1);
@@ -130,15 +130,15 @@ public class _10031ARiskForTheObelisk extends QuestHandler {
                         }
                         break;
                     }
-					case 215508:
+                    case 215508:
                     case 215509: {
                         if (var2 < 1) {
                             return defaultOnKillEvent(env, spallers, 0, 1, 2);
                         } else if (var2 == 1) {
                             if (var1 == 10) {
                                 qs.setQuestVar(10);
-								qs.setStatus(QuestStatus.REWARD);
-								updateQuestStatus(env);
+                                qs.setStatus(QuestStatus.REWARD);
+                                updateQuestStatus(env);
                                 return true;
                             } else {
                                 return defaultOnKillEvent(env, spallers, 1, 2, 2);
@@ -173,26 +173,24 @@ public class _10031ARiskForTheObelisk extends QuestHandler {
                         }
                     case SETPRO1:
                         qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
+                        updateQuestStatus(env);
+                        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                        return true;
                 }
-            }
-            else if (targetId == 798600) {
+            } else if (targetId == 798600) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 1) {
                             return sendQuestDialog(env, 1352);
                         }
                     case SETPRO2:
-						giveQuestItem(env, 182215615, 1);
+                        giveQuestItem(env, 182215615, 1);
                         qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-                }				
-            }
-			else if (targetId == 798408) {
+                        updateQuestStatus(env);
+                        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                        return true;
+                }
+            } else if (targetId == 798408) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 2) {
@@ -200,26 +198,24 @@ public class _10031ARiskForTheObelisk extends QuestHandler {
                         }
                     case SETPRO3:
                         qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						TeleportService2.teleportTo(player, 210050000, 1, 1440, 408, 553, (byte) 77);
-						return true;
-                }				
-            }
-			else if (targetId == 798926) {
+                        updateQuestStatus(env);
+                        TeleportService2.teleportTo(player, 210050000, 1, 1440, 408, 553, (byte) 77);
+                        return true;
+                }
+            } else if (targetId == 798926) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 4) {
                             return sendQuestDialog(env, 2375);
                         }
                     case SETPRO5:
-						removeQuestItem(env, 182215615, 1);
+                        removeQuestItem(env, 182215615, 1);
                         qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-                }				
-            }
-			else if (targetId == 799052) {
+                        updateQuestStatus(env);
+                        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                        return true;
+                }
+            } else if (targetId == 799052) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 5) {
@@ -227,58 +223,55 @@ public class _10031ARiskForTheObelisk extends QuestHandler {
                         }
                     case SETPRO6:
                         qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-                }				
-            }
-			else if (targetId == 798927) {
+                        updateQuestStatus(env);
+                        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                        return true;
+                }
+            } else if (targetId == 798927) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 6) {
                             return sendQuestDialog(env, 3057);
                         }
                     case SETPRO7:
-						giveQuestItem(env, 182215616, 1);
-						giveQuestItem(env, 182215617, 1);
-						playQuestMovie(env, 516);
+                        giveQuestItem(env, 182215616, 1);
+                        giveQuestItem(env, 182215617, 1);
+                        playQuestMovie(env, 516);
                         qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-                }				
-            }
-			else if (targetId == 730224) {
+                        updateQuestStatus(env);
+                        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                        return true;
+                }
+            } else if (targetId == 730224) {
                 switch (env.getDialog()) {
-				case USE_OBJECT: {
+                    case USE_OBJECT: {
                         if (var == 7) {
                             return sendQuestDialog(env, 3398);
                         }
-					}
+                    }
                     case SETPRO8:
-						if (var == 7) {
-						removeQuestItem(env, 182215616, 1);
-                        qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-						}
-                }				
-            }
-			else if (targetId == 702662) {
+                        if (var == 7) {
+                            removeQuestItem(env, 182215616, 1);
+                            qs.setQuestVarById(0, var + 1);
+                            updateQuestStatus(env);
+                            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                            return true;
+                        }
+                }
+            } else if (targetId == 702662) {
                 switch (env.getDialog()) {
-				case USE_OBJECT: {
-                    if (var == 8) {
-						removeQuestItem(env, 182215617, 1);						
-                        qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						QuestService.addNewSpawn(210050000, 1, 700600, 2192f, 368f, 431f, (byte) 0);
-						return true;
-						}
-					}				
-				}
-			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
+                    case USE_OBJECT: {
+                        if (var == 8) {
+                            removeQuestItem(env, 182215617, 1);
+                            qs.setQuestVarById(0, var + 1);
+                            updateQuestStatus(env);
+                            QuestService.addNewSpawn(210050000, 1, 700600, 2192f, 368f, 431f, (byte) 0);
+                            return true;
+                        }
+                    }
+                }
+            }
+        } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 798927) {
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);

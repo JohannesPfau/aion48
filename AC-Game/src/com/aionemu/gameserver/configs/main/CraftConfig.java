@@ -88,5 +88,5 @@ public class CraftConfig {
     public static int CRAFT_TIMERMORPH_PERIOD;
     @Property(key = "gameserver.craft.extract_cast_delay", defaultValue = "5000")
     public static int EXTRACT_CAST_DELAY;
-    
+
 }

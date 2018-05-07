@@ -29,12 +29,12 @@
  */
 package quest.verteron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -59,9 +59,9 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _1019FlyingReconnaissance extends QuestHandler {
 
     private final static int questId = 1019;
-    private final static int[] npcs = {203146, 203098, 203147, 700037};
-    private final static int[] mobs = {210697, 216891};
-    private final static int[] items = {182200505, 182200023};
+    private final static int[] npcs = { 203146, 203098, 203147, 700037 };
+    private final static int[] mobs = { 210697, 216891 };
+    private final static int[] items = { 182200505, 182200023 };
 
     public _1019FlyingReconnaissance() {
         super(questId);

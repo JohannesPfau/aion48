@@ -29,6 +29,11 @@
  */
 package admincommands;
 
+import java.sql.Timestamp;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -45,11 +50,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.sql.Timestamp;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author MrPoke
@@ -226,8 +226,7 @@ public class Quest extends AdminCommand {
             for (int i = 0; i < 5; i++) {
                 sb.append(Integer.toString(qs.getQuestVarById(i)) + " ");
             }
-            PacketSendUtility.sendMessage(admin, "Quest state: " + qs.getStatus().toString() + "; vars: " + sb.toString()
-                    + qs.getQuestVarById(5));
+            PacketSendUtility.sendMessage(admin, "Quest state: " + qs.getStatus().toString() + "; vars: " + sb.toString() + qs.getQuestVarById(5));
             sb.setLength(0);
             sb = null;
         }

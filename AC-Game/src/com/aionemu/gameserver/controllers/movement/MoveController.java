@@ -45,7 +45,7 @@ public interface MoveController {
     void setNewDirection(float x, float y, float z, byte heading);
 
     void startMovingToDestination();
-    
+
     void skillMovement();
 
     void abortMove();

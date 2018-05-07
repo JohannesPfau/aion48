@@ -50,7 +50,8 @@ public class SM_LOGIN_OK extends AionServerPacket {
     /**
      * Constructs new instance of <tt>SM_LOGIN_OK</tt> packet.
      *
-     * @param key session key
+     * @param key
+     *            session key
      */
     public SM_LOGIN_OK(SessionKey key) {
         super(0x03);

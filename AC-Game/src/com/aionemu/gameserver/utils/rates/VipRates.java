@@ -34,7 +34,7 @@ import com.aionemu.gameserver.configs.main.RateConfig;
 
 /**
  * @author ATracer
- (Aion-Core) 
+ *         (Aion-Core)
  */
 public class VipRates extends Rates {
 
@@ -84,8 +84,8 @@ public class VipRates extends Rates {
     public float getQuestApRate() {
         return RateConfig.VIP_QUEST_AP_RATE + holidayRate;
     }
-	
-	 @Override
+
+    @Override
     public float getQuestGpRate() {
         return RateConfig.VIP_QUEST_GP_RATE + holidayRate;
     }
@@ -159,14 +159,14 @@ public class VipRates extends Rates {
     public float getKamarRewardRate() {
         return RateConfig.KAMAR_REWARD_RATE + holidayRate;
     }
-    
+
     @Override
     public float getIdgelDomeBoxRewardRate() {
         return RateConfig.IDGEL_DOME_BOX_REWARD_RATE + holidayRate;
     }
 
-	@Override
-	public float getGpNpcRate() {
-		return RateConfig.VIP_GP_NPC_RATE + holidayRate;
-	}
+    @Override
+    public float getGpNpcRate() {
+        return RateConfig.VIP_GP_NPC_RATE + holidayRate;
+    }
 }

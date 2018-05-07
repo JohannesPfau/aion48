@@ -62,7 +62,7 @@ public class AdminConfig {
     /**
      * Admin options
      */
-	@Property(key = "gameserver.administration.gm.mode.connection", defaultValue = "false")
+    @Property(key = "gameserver.administration.gm.mode.connection", defaultValue = "false")
     public static boolean GM_MODE_CONNECTION;
     @Property(key = "gameserver.administration.invis.gm.connection", defaultValue = "false")
     public static boolean INVISIBLE_GM_CONNECTION;

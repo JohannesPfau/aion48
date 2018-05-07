@@ -59,6 +59,7 @@ public class NoReduceSpellATKInstantEffect extends DamageEffect {
         }
         int critAddDmg = this.critAddDmg2 + this.critAddDmg1 * effect.getSkillLevel();
 
-        AttackUtil.calculateMagicalSkillResult(effect, valueWithDelta, null, getElement(), false, true, true, getMode(), this.critProbMod2, critAddDmg, shared, false);
+        AttackUtil.calculateMagicalSkillResult(effect, valueWithDelta, null, getElement(), false, true, true, getMode(), this.critProbMod2,
+            critAddDmg, shared, false);
     }
 }

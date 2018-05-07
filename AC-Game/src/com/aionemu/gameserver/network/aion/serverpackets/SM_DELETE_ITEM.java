@@ -53,7 +53,7 @@ public class SM_DELETE_ITEM extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(itemObjectId);
         writeC(deleteType.getMask());
     }

@@ -29,10 +29,10 @@
  */
 package quest.inggison;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -44,7 +44,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _14062IdelingDragonbound extends QuestHandler {
 
     private final static int questId = 14062;
-    private final static int[] mob_ids = {215661, 215662, 215664, 215664, 215666};
+    private final static int[] mob_ids = { 215661, 215662, 215664, 215664, 215666 };
 
     public _14062IdelingDragonbound() {
         super(questId);

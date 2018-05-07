@@ -54,6 +54,7 @@ public class FlyController {
     private static final long FLY_REUSE_TIME = 10000;
     private Player player;
     private ActionObserver glideObserver = new ActionObserver(ObserverType.ABNORMALSETTED) {
+
         @Override
         public void abnormalsetted(AbnormalState state) {
             if ((state.getId() & AbnormalState.CANT_MOVE_STATE.getId()) > 0 && !player.isInvulnerableWing()) {
@@ -105,7 +106,7 @@ public class FlyController {
 
             // this is probably needed to change back fly speed into speed.
             PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_EMOTE2, 0, 0), true);
-            
+
             if (forceEndFly) {
                 PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.LAND, 0, 0), true);
             }

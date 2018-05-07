@@ -29,7 +29,9 @@
  */
 package ai.instance.padmarashkasCave;
 
-import ai.AggressiveNpcAI2;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -44,8 +46,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import java.util.List;
-import java.util.concurrent.Future;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu, Luzien
@@ -90,6 +91,7 @@ public class PadmarashkaAI2 extends AggressiveNpcAI2 {
 
     private void startMainSkillTask() {
         mainSkillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 SkillEngine.getInstance().getSkill(getOwner(), Rnd.get(2) == 0 ? 20401 : 20093, 48, getTarget()).useNoAnimationSkill();
@@ -130,6 +132,7 @@ public class PadmarashkaAI2 extends AggressiveNpcAI2 {
 
     private void attackPlayer(final Npc npc) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 npc.setTarget(getTarget());
@@ -241,6 +244,7 @@ public class PadmarashkaAI2 extends AggressiveNpcAI2 {
             return;
         } else {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     stage2();
@@ -254,6 +258,7 @@ public class PadmarashkaAI2 extends AggressiveNpcAI2 {
             return;
         } else {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     stage1();
@@ -267,6 +272,7 @@ public class PadmarashkaAI2 extends AggressiveNpcAI2 {
             return;
         } else {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     scheduleSpawnEntrance();

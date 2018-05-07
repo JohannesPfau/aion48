@@ -29,17 +29,18 @@
  */
 package admincommands;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.geo.GeoService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author Source
@@ -60,16 +61,16 @@ public class Warp extends AdminCommand {
             return;
         }
 
-        if(!GeoDataConfig.GEO_ENABLE){
+        if (!GeoDataConfig.GEO_ENABLE) {
             onFail(player, "");
             return;
         }
 
         //[pos:Location;1 120010000 1304.7 1423.1 0.0 0]  <-- uses this format of Location
-        try{
+        try {
 
             String LocS, first, last;
-            float x,y,z;
+            float x, y, z;
             LocS = "";
             int mapL = 0;
             int layerI = -1;
@@ -82,37 +83,36 @@ public class Warp extends AdminCommand {
             z = Float.parseFloat(params[4]);
             last = params[5];
 
-
             Pattern f = Pattern.compile("\\[pos:([^;]+);\\s*+(\\d{1})");
             Pattern l = Pattern.compile("(\\d)\\]");
             Matcher fm = f.matcher(first);
             Matcher lm = l.matcher(last);
 
-            if(fm.find()){
+            if (fm.find()) {
                 LocS = fm.group(1);
                 race = Integer.parseInt(fm.group(2));
             }
 
-            if(lm.find()){
+            if (lm.find()) {
                 layerI = Integer.parseInt(lm.group(1));
             }
 
-            z = GeoService.getInstance().getZ(mapL, x , y);
+            z = GeoService.getInstance().getZ(mapL, x, y);
             PacketSendUtility.sendMessage(player, "Map ID (" + mapL + ")\n" + "x: " + x + "y: " + y + "z: " + z + " L(" + layerI + ")");
 
-            if(mapL == 400010000){
+            if (mapL == 400010000) {
                 PacketSendUtility.sendMessage(player, "Sorry you can't warp at abyss");
-            }else{
+            } else {
                 TeleportService2.teleportTo(player, mapL, x, y, z);
                 PacketSendUtility.sendMessage(player, "You have successfully warped to this location --- > " + LocS);
                 log.info("[warp] GM : " + player.getName() + " has warped to map id [" + mapL + "]");
             }
 
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
 
             //[pos:Location;120010000 1304.7 1423.1 0.0 0]  <-- uses this format of Location
 
-            if(params.length < 5){
+            if (params.length < 5) {
                 onFail(player, "");
                 return;
             }
@@ -143,8 +143,7 @@ public class Warp extends AdminCommand {
             }
 
             zF = GeoService.getInstance().getZ(mapL, xF, yF);
-            PacketSendUtility.sendMessage(player, "MapId (" + mapL + ")\n" + "x:" + xF + " y:" + yF + " z:" + zF + " l("
-                    + layerI + ")");
+            PacketSendUtility.sendMessage(player, "MapId (" + mapL + ")\n" + "x:" + xF + " y:" + yF + " z:" + zF + " l(" + layerI + ")");
 
             if (mapL == 400010000) {
                 PacketSendUtility.sendMessage(player, "Sorry you can't warp at abyss");

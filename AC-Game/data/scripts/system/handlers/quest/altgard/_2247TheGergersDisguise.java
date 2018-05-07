@@ -29,11 +29,11 @@
  */
 package quest.altgard;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -41,7 +41,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Ritsu
- *
  */
 public class _2247TheGergersDisguise extends QuestHandler {
 
@@ -89,8 +88,7 @@ public class _2247TheGergersDisguise extends QuestHandler {
                             if (!giveQuestItem(env, 182203231, 1)) {
                                 return true;
                             }
-                            PacketSendUtility
-                                    .sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                             return true;
                         }
                 }

@@ -133,6 +133,7 @@ public enum AionAuthResponse {
      * You cannot access the game through this IP.
      */
     BAN_IP(22);
+
     /**
      * id of this enum that may be sent to client
      */
@@ -141,7 +142,8 @@ public enum AionAuthResponse {
     /**
      * Constructor.
      *
-     * @param msgId id of the message
+     * @param msgId
+     *            id of the message
      */
     private AionAuthResponse(int msgId) {
         messageId = msgId;

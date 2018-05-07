@@ -29,6 +29,11 @@
  */
 package playercommands;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -38,11 +43,6 @@ import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author Chuck
@@ -141,6 +141,7 @@ public class cmd_reskin extends PlayerCommand {
         final int tollPrice = 750;
         final long tolls = player.getClientConnection().getAccount().getToll();
         RequestResponseHandler responseHandler = new RequestResponseHandler(player) {
+
             @Override
             public void acceptRequest(Creature p2, Player p) {
                 if (tolls < tollPrice) {

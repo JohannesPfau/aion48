@@ -56,8 +56,7 @@ public class cmd_preview extends PlayerCommand {
         try {
             itemId = Integer.parseInt(params[0]);
         } catch (Exception e) {
-            PacketSendUtility.sendMessage(admin,
-                    "Error! Item id's are numbers like 187000090 or [item:187000090]!");
+            PacketSendUtility.sendMessage(admin, "Error! Item id's are numbers like 187000090 or [item:187000090]!");
             return;
         }
         ItemRemodelService.commandPreviewRemodelItem(admin, itemId, REMODEL_PREVIEW_DURATION);

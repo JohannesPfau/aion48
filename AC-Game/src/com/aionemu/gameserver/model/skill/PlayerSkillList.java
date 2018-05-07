@@ -52,11 +52,11 @@ public final class PlayerSkillList implements SkillList<Player> {
     private final List<PlayerSkillEntry> deletedSkills;
 
     public PlayerSkillList() {
-        this.skills = new HashMap<Integer, PlayerSkillEntry>();
-        this.basicSkills = new HashMap<Integer, PlayerSkillEntry>(0);
-        this.stigmaSkills = new HashMap<Integer, PlayerSkillEntry>(0);
-        this.linkedSkills = new HashMap<Integer, PlayerSkillEntry>(0);
-        this.deletedSkills = new ArrayList<PlayerSkillEntry>(0);
+        this.skills = new HashMap<>();
+        this.basicSkills = new HashMap<>(0);
+        this.stigmaSkills = new HashMap<>(0);
+        this.linkedSkills = new HashMap<>(0);
+        this.deletedSkills = new ArrayList<>(0);
     }
 
     public PlayerSkillList(List<PlayerSkillEntry> skills) {
@@ -76,7 +76,7 @@ public final class PlayerSkillList implements SkillList<Player> {
      * Returns array with all skills
      */
     public PlayerSkillEntry[] getAllSkills() {
-        List<PlayerSkillEntry> allSkills = new ArrayList<PlayerSkillEntry>();
+        List<PlayerSkillEntry> allSkills = new ArrayList<>();
         allSkills.addAll(basicSkills.values());
         allSkills.addAll(stigmaSkills.values());
         allSkills.addAll(linkedSkills.values());
@@ -96,7 +96,7 @@ public final class PlayerSkillList implements SkillList<Player> {
     }
 
     public PlayerSkillEntry[] getLinkedSkills() {
-    	return linkedSkills.values().toArray(new PlayerSkillEntry[linkedSkills.size()]);
+        return linkedSkills.values().toArray(new PlayerSkillEntry[linkedSkills.size()]);
     }
 
     public PlayerSkillEntry getSkillEntry(int skillId) {
@@ -155,6 +155,7 @@ public final class PlayerSkillList implements SkillList<Player> {
             PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skill, 1300401, false));
         }
     }
+
     public void addStigmaSkill(Player player, int n2, int n3, boolean bl, boolean bl2) {
         PlayerSkillEntry playerSkillEntry = new PlayerSkillEntry(n2, true, false, n3, PersistentState.NOACTION);
         this.stigmaSkills.put(n2, playerSkillEntry);
@@ -162,6 +163,7 @@ public final class PlayerSkillList implements SkillList<Player> {
             PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(playerSkillEntry, bl ? 1300401 : 0, false));
         }
     }
+
     private synchronized boolean addSkill(Player player, int skillId, int skillLevel, boolean isStigma, boolean isLinked, PersistentState state) {
         PlayerSkillEntry existingSkill = isStigma ? stigmaSkills.get(skillId) : basicSkills.get(skillId);
 
@@ -173,7 +175,7 @@ public final class PlayerSkillList implements SkillList<Player> {
             existingSkill.setSkillLvl(skillLevel);
         } else {
             if (isStigma) {
-                stigmaSkills.put(skillId, new PlayerSkillEntry(skillId, true,  false, skillLevel, state));
+                stigmaSkills.put(skillId, new PlayerSkillEntry(skillId, true, false, skillLevel, state));
             } else if (isLinked) {
                 basicSkills.put(skillId, new PlayerSkillEntry(skillId, false, true, skillLevel, state));
                 linkedSkills.put(skillId, new PlayerSkillEntry(skillId, false, true, skillLevel, state));

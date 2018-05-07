@@ -41,11 +41,11 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 @AIName("puddle")
 public class PuddleAI2 extends NpcAI2 {
 
-	@Override
-	protected void handleCreatureSee(Creature creature) {
-		if (creature instanceof Player) {
-			final Player player = (Player) creature;
-			SkillEngine.getInstance().getSkill(getOwner(), 21356, 56, player).useNoAnimationSkill();
-		}
-	}
+    @Override
+    protected void handleCreatureSee(Creature creature) {
+        if (creature instanceof Player) {
+            final Player player = (Player) creature;
+            SkillEngine.getInstance().getSkill(getOwner(), 21356, 56, player).useNoAnimationSkill();
+        }
+    }
 }

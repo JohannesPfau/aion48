@@ -37,10 +37,10 @@ import static org.hamcrest.Matchers.lessThan;
 
 import java.util.List;
 
+import com.aionemu.gameserver.model.gameobjects.Item;
+
 import javolution.util.FastList;
 import javolution.util.FastMap;
-
-import com.aionemu.gameserver.model.gameobjects.Item;
 
 /**
  * @author KID

@@ -46,29 +46,28 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldType;
 
-
 /**
  * @author Alcapwnd
  * @see service isnt fully implemented in ncsoft client
- * much things are mystery and not really tested (so it looks like)
- * things like recover fatigue arent complete implemented!
- * this service is only testy and shouldnt be enabled on a working machine
+ *      much things are mystery and not really tested (so it looks like)
+ *      things like recover fatigue arent complete implemented!
+ *      this service is only testy and shouldnt be enabled on a working machine
  * @see implemented the service so good as its possible
- * need to wait until it will be released on ncsoft to do it retail like
- * but so its until yet done its retail like :)
+ *      need to wait until it will be released on ncsoft to do it retail like
+ *      but so its until yet done its retail like :)
  */
 public class FatigueService {
 
     private static final Logger log = LoggerFactory.getLogger(FatigueService.class);
     private Calendar calendar = Calendar.getInstance();
-    
+
     private int iconSet = 256;
     private int isFull = 0;
     private int fatigueRecover = 0;
     private int effectEnabled = 0;
     private String message = null;
-    private List<Future<?>> delays = new ArrayList<Future<?>>();
-    private List<Player> players = new ArrayList<Player>();
+    private List<Future<?>> delays = new ArrayList<>();
+    private List<Player> players = new ArrayList<>();
 
     private FatigueService() {
         log.info("FatigueService initialized");
@@ -77,12 +76,13 @@ public class FatigueService {
     public static FatigueService getInstance() {
         return SingletonHolder.instance;
     }
-    
+
     @SuppressWarnings("synthetic-access")
     private static class SingletonHolder {
+
         protected static final FatigueService instance = new FatigueService();
-    }    
-    
+    }
+
     public void checkFatigueLost(Player player) {
         long lastOnline = player.getCommonData().getLastOnline().getTime();
         long secondsOffline = (System.currentTimeMillis() / 1000) - lastOnline / 1000;
@@ -140,7 +140,7 @@ public class FatigueService {
         }
 
         if (isFull == 1) {
-            fatigueRecover = 0/*player.getCommonData().getFatigueRecover()*/;
+            fatigueRecover = 0/* player.getCommonData().getFatigueRecover() */;
             effectEnabled = 1;
         } else {
             fatigueRecover = 0; //only send if fatigue isFull
@@ -194,7 +194,7 @@ public class FatigueService {
     }
 
     public void resetFatigue() {
-    	//need to clear it before start
+        //need to clear it before start
         players.clear();
         // Reset fatigue
         Iterator<Player> onlinePlayers;
@@ -205,7 +205,7 @@ public class FatigueService {
                 activePlayer.getCommonData().setFatigue(0);
                 activePlayer.getCommonData().setFatigueRecover(1);
                 activePlayer.getCommonData().setFatigueReset(1);
-                
+
                 players.add(activePlayer);
             } catch (Exception e) {
                 log.error("Error while reset player fatigue " + e.getMessage());
@@ -214,8 +214,8 @@ public class FatigueService {
         log.info("All players fatigue are reseted...");
         load();
         log.info("Fatigue got reseted...");
-    }    
-    
+    }
+
     public void onPlayerLogin(Player player) {
         if (player == null)
             return;
@@ -240,7 +240,7 @@ public class FatigueService {
                     player.getCommonData().setFatigueReset(0);
                 break;
         }
-        
+
         checkFatigueLost(player);
 
         if (player.getCommonData().getFatigue() == 100) {
@@ -250,7 +250,7 @@ public class FatigueService {
         }
 
         if (isFull == 1) {
-            fatigueRecover = 0/*player.getCommonData().getFatigueRecover()*/;
+            fatigueRecover = 0/* player.getCommonData().getFatigueRecover() */;
             effectEnabled = 1;
         } else {
             fatigueRecover = 0; //only send if fatigue isFull
@@ -269,7 +269,6 @@ public class FatigueService {
         log.info("Added player " + player.getName() + " to fatigue update pool");
         load();
 
-    	
     }
 
     public void onPlayerLogout(Player player) {

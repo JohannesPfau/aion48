@@ -30,7 +30,6 @@
 package com.aionemu.chatserver.model;
 
 /**
- *
  * @author nrg
  */
 public enum RestartFrequency {
@@ -39,6 +38,7 @@ public enum RestartFrequency {
     DAILY(1),
     WEEKLY(2),
     MONTHLY(3);
+
     private int id;
 
     private RestartFrequency(int id) {

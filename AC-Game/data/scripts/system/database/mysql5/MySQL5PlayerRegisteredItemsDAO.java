@@ -29,12 +29,31 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
-import com.aionemu.gameserver.model.gameobjects.*;
+import com.aionemu.gameserver.model.gameobjects.AionObject;
+import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
+import com.aionemu.gameserver.model.gameobjects.HouseObject;
+import com.aionemu.gameserver.model.gameobjects.PersistentState;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
@@ -45,16 +64,8 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import javolution.util.FastList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import javax.annotation.Nullable;
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
+import javolution.util.FastList;
 
 /**
  * @author Rolandas
@@ -65,44 +76,50 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
     public static final String CLEAN_PLAYER_QUERY = "DELETE FROM `player_registered_items` WHERE `player_id` = ?";
     public static final String SELECT_QUERY = "SELECT * FROM `player_registered_items` WHERE `player_id`=?";
     public static final String INSERT_QUERY = "INSERT INTO `player_registered_items` "
-            + "(`expire_time`,`color`,`color_expires`,`owner_use_count`,`visitor_use_count`,`x`,`y`,`z`,`h`,`area`,`floor`,`player_id`,`item_unique_id`,`item_id`) VALUES "
-            + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        + "(`expire_time`,`color`,`color_expires`,`owner_use_count`,`visitor_use_count`,`x`,`y`,`z`,`h`,`area`,`floor`,`player_id`,`item_unique_id`,`item_id`) VALUES "
+        + "(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     public static final String UPDATE_QUERY = "UPDATE `player_registered_items` SET "
-            + "`expire_time`=?,`color`=?,`color_expires`=?,`owner_use_count`=?,`visitor_use_count`=?,`x`=?,`y`=?,`z`=?,`h`=?,`area`=?,`floor`=? "
-            + "WHERE `player_id`=? AND `item_unique_id`=? AND `item_id`=?";
+        + "`expire_time`=?,`color`=?,`color_expires`=?,`owner_use_count`=?,`visitor_use_count`=?,`x`=?,`y`=?,`z`=?,`h`=?,`area`=?,`floor`=? "
+        + "WHERE `player_id`=? AND `item_unique_id`=? AND `item_id`=?";
     public static final String DELETE_QUERY = "DELETE FROM `player_registered_items` WHERE `item_unique_id` = ?";
     public static final String RESET_QUERY = "UPDATE `player_registered_items` SET x=0,y=0,z=0,h=0,area='NONE' WHERE `player_id`=? AND `area` != 'DECOR'";
     private static final Predicate<HouseObject<?>> objectsToAddPredicate = new Predicate<HouseObject<?>>() {
+
         @Override
         public boolean apply(@Nullable HouseObject<?> input) {
             return input != null && (input.getPersistentState() == PersistentState.NEW);
         }
     };
     private static final Predicate<HouseObject<?>> objectsToUpdatePredicate = new Predicate<HouseObject<?>>() {
+
         @Override
         public boolean apply(@Nullable HouseObject<?> input) {
             return input != null && (input.getPersistentState() == PersistentState.UPDATE_REQUIRED);
         }
     };
     private static final Predicate<HouseObject<?>> objectsToDeletePredicate = new Predicate<HouseObject<?>>() {
+
         @Override
         public boolean apply(@Nullable HouseObject<?> input) {
             return input != null && PersistentState.DELETED == input.getPersistentState();
         }
     };
     private static final Predicate<HouseDecoration> partsToAddPredicate = new Predicate<HouseDecoration>() {
+
         @Override
         public boolean apply(@Nullable HouseDecoration input) {
             return input != null && (input.getPersistentState() == PersistentState.NEW);
         }
     };
     private static final Predicate<HouseDecoration> partsToUpdatePredicate = new Predicate<HouseDecoration>() {
+
         @Override
         public boolean apply(@Nullable HouseDecoration input) {
             return input != null && (input.getPersistentState() == PersistentState.UPDATE_REQUIRED);
         }
     };
     private static final Predicate<HouseDecoration> partsToDeletePredicate = new Predicate<HouseDecoration>() {
+
         @Override
         public boolean apply(@Nullable HouseDecoration input) {
             return input != null && PersistentState.DELETED == input.getPersistentState();
@@ -112,7 +129,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
     @Override
     public int[] getUsedIDs() {
         PreparedStatement statement = DB.prepareStatement("SELECT item_unique_id FROM player_registered_items WHERE item_unique_id <> 0",
-                ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
         try {
             ResultSet rs = statement.executeQuery();
@@ -149,7 +166,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
             stmt = con.prepareStatement(SELECT_QUERY);
             stmt.setInt(1, playerId);
             ResultSet rset = stmt.executeQuery();
-            HashMap<PartType, List<HouseDecoration>> usedParts = new HashMap<PartType, List<HouseDecoration>>();
+            HashMap<PartType, List<HouseDecoration>> usedParts = new HashMap<>();
             while (rset.next()) {
                 String area = rset.getString("area");
                 if ("DECOR".equals(area)) {
@@ -161,7 +178,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
                         }
                         List<HouseDecoration> usedForType = usedParts.get(dec.getTemplate().getType());
                         if (usedForType == null) {
-                            usedForType = new ArrayList<HouseDecoration>();
+                            usedForType = new ArrayList<>();
                             usedParts.put(dec.getTemplate().getType(), usedForType);
                         }
                         usedForType.add(dec);
@@ -200,8 +217,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
         }
     }
 
-    private HouseObject<?> constructObject(final HouseRegistry registry, House house, ResultSet rset) throws SQLException,
-            IllegalAccessException {
+    private HouseObject<?> constructObject(final HouseRegistry registry, House house, ResultSet rset) throws SQLException, IllegalAccessException {
         int itemUniqueId = rset.getInt("item_unique_id");
         VisibleObject visObj = World.getInstance().findVisibleObject(itemUniqueId);
         HouseObject<?> obj = null;

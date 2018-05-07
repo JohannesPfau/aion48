@@ -59,6 +59,7 @@ public class GameTimeService {
          * Update players with current game time
          */
         ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 log.info("Sending current game time to all players");

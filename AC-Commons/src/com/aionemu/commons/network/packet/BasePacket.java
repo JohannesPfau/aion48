@@ -59,8 +59,10 @@ public abstract class BasePacket {
     /**
      * Constructs a new packet with specified type and id.
      *
-     * @param packetType Type of packet
-     * @param opcode     Id of packet
+     * @param packetType
+     *            Type of packet
+     * @param opcode
+     *            Id of packet
      */
     protected BasePacket(PacketType packetType, int opcode) {
         this.packetType = packetType;

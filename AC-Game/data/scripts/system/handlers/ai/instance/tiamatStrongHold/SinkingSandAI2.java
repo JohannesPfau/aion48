@@ -48,6 +48,7 @@ public class SinkingSandAI2 extends NpcAI2 {
 
     private void useskill() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 AI2Actions.useSkill(SinkingSandAI2.this, 20721);

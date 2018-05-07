@@ -79,16 +79,17 @@ public class AuraEffect extends EffectTemplate {
             return;
         }
         if (effector.isInGroup2() || effector.isInAlliance2()) {
-            Collection<Player> onlynePlayers = effector.isInGroup2() ? effector.getPlayerGroup2().getOnlineMembers() : effector.getPlayerAllianceGroup2().getOnlineMembers();
+            Collection<Player> onlynePlayers = effector.isInGroup2() ? effector.getPlayerGroup2().getOnlineMembers()
+                : effector.getPlayerAllianceGroup2().getOnlineMembers();
             final int actualRange = (int) (distance * effector.getGameStats().getStat(StatEnum.BOOST_MANTRA_RANGE, 100).getCurrent() / 100f);
             for (Player player : onlynePlayers) {
                 if (MathUtil.isIn3dRange(effector, player, actualRange)) {
-                    if(!DuelService.getInstance().isDueling(player.getObjectId()) && player != effector){
+                    if (!DuelService.getInstance().isDueling(player.getObjectId()) && player != effector) {
                         applyAuraTo(player, effect);
                     }
-                    if(DuelService.getInstance().isDueling(effector.getObjectId()) && DuelService.getInstance().isDueling(player.getObjectId())){
+                    if (DuelService.getInstance().isDueling(effector.getObjectId()) && DuelService.getInstance().isDueling(player.getObjectId())) {
                         applyAuraTo(effector, effect);
-                    }else{
+                    } else {
                         applyAuraTo(effector, effect);
                     }
                 }

@@ -44,6 +44,7 @@ public enum ItemAttackType {
     MAGICAL_WATER(true, SkillElement.WATER),
     MAGICAL_WIND(true, SkillElement.WIND),
     MAGICAL_FIRE(true, SkillElement.FIRE);
+
     private boolean magic;
     private SkillElement elem;
 

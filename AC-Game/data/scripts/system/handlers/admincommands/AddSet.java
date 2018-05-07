@@ -88,8 +88,7 @@ public class AddSet extends AdminCommand {
         }
 
         if (receiver.getInventory().getFreeSlots() < itemSet.getItempart().size()) {
-            PacketSendUtility
-                    .sendMessage(player, "Inventory needs at least " + itemSet.getItempart().size() + " free slots.");
+            PacketSendUtility.sendMessage(player, "Inventory needs at least " + itemSet.getItempart().size() + " free slots.");
             return;
         }
 

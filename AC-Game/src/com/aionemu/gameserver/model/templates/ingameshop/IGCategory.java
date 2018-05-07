@@ -51,7 +51,7 @@ public class IGCategory {
 
     public List<IGSubCategory> getSubCategories() {
         if (subCategories == null) {
-            subCategories = new ArrayList<IGSubCategory>();
+            subCategories = new ArrayList<>();
         }
         return this.subCategories;
     }

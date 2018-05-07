@@ -37,7 +37,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * Talk to Tumblusen (203989). Get rid of the Kaidan Scouts (212010) to the
@@ -52,8 +51,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1040ScoutingtheScouts extends QuestHandler {
 
     private final static int questId = 1040;
-    private final static int[] npcs = {203989, 203901, 204020, 204024};
-	private final static int[] mobs = { 212010, 212011, 204046 };
+    private final static int[] npcs = { 203989, 203901, 204020, 204024 };
+    private final static int[] mobs = { 212010, 212011, 204046 };
 
     public _1040ScoutingtheScouts() {
         super(questId);
@@ -79,7 +78,7 @@ public class _1040ScoutingtheScouts extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {1300, 1036};
+        int[] quests = { 1300, 1036 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 
@@ -90,18 +89,18 @@ public class _1040ScoutingtheScouts extends QuestHandler {
             targetId = ((Npc) env.getVisibleObject()).getNpcId();
         }
 
-		if (targetId == 212010) {
-			return defaultOnKillEvent(env, targetId, 1, 4); // 2, 3, 4
-		} else if (targetId == 212011) {
-			return defaultOnKillEvent(env, targetId, 1, 4); // 2, 3, 4
-		}else if (targetId == 204046) {
-			if (defaultOnKillEvent(env, targetId, 8, 9)) // 9
-			{
-				playQuestMovie(env, 36);
-				return true;
-			}
-		}
-		return false;
+        if (targetId == 212010) {
+            return defaultOnKillEvent(env, targetId, 1, 4); // 2, 3, 4
+        } else if (targetId == 212011) {
+            return defaultOnKillEvent(env, targetId, 1, 4); // 2, 3, 4
+        } else if (targetId == 204046) {
+            if (defaultOnKillEvent(env, targetId, 8, 9)) // 9
+            {
+                playQuestMovie(env, 36);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -151,7 +150,7 @@ public class _1040ScoutingtheScouts extends QuestHandler {
                         }
                     case SETPRO3:
                         if (var == 5) {
-			TeleportService2.teleportTo(player, 210020000, 1596, 1529, 317, (byte) 120, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, 210020000, 1596, 1529, 317, (byte) 120, TeleportAnimation.BEAM_ANIMATION);
                             return defaultCloseDialog(env, 5, 6); // 6
                         }
                 }
@@ -160,7 +159,7 @@ public class _1040ScoutingtheScouts extends QuestHandler {
                 switch (env.getDialog()) {
                     case USE_OBJECT:
                         if (var == 7) {
-							return sendQuestDialog(env, 2035);
+                            return sendQuestDialog(env, 2035);
                         }
                     case QUEST_SELECT:
                         if (var == 6) {
@@ -173,7 +172,7 @@ public class _1040ScoutingtheScouts extends QuestHandler {
                             TeleportService2.teleportTo(player, 210020000, 2211, 811, 513);
                             qs.setQuestVarById(0, 7); // 7
                             updateQuestStatus(env);
-		      	    TeleportService2.teleportTo(player, 210020000, 2211, 811, 513);							
+                            TeleportService2.teleportTo(player, 210020000, 2211, 811, 513);
                             return true;
                         }
                     case SETPRO7:

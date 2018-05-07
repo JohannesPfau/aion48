@@ -44,7 +44,7 @@ public class SM_BLOCK_LIST extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         BlockList list = con.getActivePlayer().getBlockList();
         writeH(list.getSize());
         writeC(0); // Unk

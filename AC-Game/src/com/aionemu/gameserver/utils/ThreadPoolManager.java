@@ -50,7 +50,7 @@ import com.aionemu.commons.utils.internal.chmv8.ForkJoinPool;
 import com.aionemu.gameserver.configs.main.ThreadConfig;
 
 /**
-, NB4L1, MrPoke, lord_rex
+ * , NB4L1, MrPoke, lord_rex
  */
 public final class ThreadPoolManager {
 
@@ -66,12 +66,11 @@ public final class ThreadPoolManager {
         final int instantPoolSize = Math.max(1, ThreadConfig.BASE_THREAD_POOL_SIZE) * Runtime.getRuntime().availableProcessors();
 
         instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(100000),
-                new PriorityThreadFactory("InstantPool", ThreadConfig.USE_PRIORITIES ? 7 : Thread.NORM_PRIORITY));
+            new PriorityThreadFactory("InstantPool", ThreadConfig.USE_PRIORITIES ? 7 : Thread.NORM_PRIORITY));
         instantPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
         instantPool.prestartAllCoreThreads();
 
-        scheduledPool = new ScheduledThreadPoolExecutor(Math.max(1, ThreadConfig.EXTRA_THREAD_PER_CORE)
-                * Runtime.getRuntime().availableProcessors());
+        scheduledPool = new ScheduledThreadPoolExecutor(Math.max(1, ThreadConfig.EXTRA_THREAD_PER_CORE) * Runtime.getRuntime().availableProcessors());
         scheduledPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
         scheduledPool.prestartAllCoreThreads();
 
@@ -80,11 +79,12 @@ public final class ThreadPoolManager {
         longRunningPool.prestartAllCoreThreads();
 
         WorkStealThreadFactory forkJoinThreadFactory = new WorkStealThreadFactory("ForkJoinPool");
-        workStealingPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors(), forkJoinThreadFactory,
-                new ThreadUncaughtExceptionHandler(), true);
+        workStealingPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors(), forkJoinThreadFactory, new ThreadUncaughtExceptionHandler(),
+            true);
         forkJoinThreadFactory.setDefaultPool(workStealingPool);
 
         Thread maintainThread = new Thread(new Runnable() {
+
             @Override
             public void run() {
                 purge();
@@ -94,8 +94,8 @@ public final class ThreadPoolManager {
         maintainThread.setDaemon(true);
         scheduleAtFixedRate(maintainThread, 150000, 150000);
 
-        log.info("ThreadPoolManager: Initialized with " + scheduledPool.getPoolSize() + " scheduler, " + instantPool.getPoolSize()
-                + " instant, " + longRunningPool.getPoolSize() + " long running, and forking " + workStealingPool.getPoolSize() + " thread(s).");
+        log.info("ThreadPoolManager: Initialized with " + scheduledPool.getPoolSize() + " scheduler, " + instantPool.getPoolSize() + " instant, "
+            + longRunningPool.getPoolSize() + " long running, and forking " + workStealingPool.getPoolSize() + " thread(s).");
     }
 
     private long validate(long delay) {
@@ -152,7 +152,8 @@ public final class ThreadPoolManager {
     /**
      * Executes a loginServer packet task
      *
-     * @param pkt runnable packet for Login Server
+     * @param pkt
+     *            runnable packet for Login Server
      */
     public void executeLsPacket(Runnable pkt) {
         execute(pkt);
@@ -207,7 +208,7 @@ public final class ThreadPoolManager {
     }
 
     public List<String> getStats() {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
 
         list.add("");
         list.add("Scheduled pool:");

@@ -51,7 +51,7 @@ public class AssemblyItem {
 
     public List<Integer> getParts() {
         if (parts == null) {
-            parts = new ArrayList<Integer>();
+            parts = new ArrayList<>();
         }
         return this.parts;
     }

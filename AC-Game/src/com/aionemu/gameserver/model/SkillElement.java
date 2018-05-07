@@ -43,6 +43,7 @@ public enum SkillElement {
     EARTH(4),
     LIGHT(5),
     DARK(6);
+
     private int element;
 
     private SkillElement(int id) {

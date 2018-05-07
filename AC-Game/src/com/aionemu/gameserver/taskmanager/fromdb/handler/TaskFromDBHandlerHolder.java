@@ -37,6 +37,7 @@ public enum TaskFromDBHandlerHolder {
     SHUTDOWN(ShutdownHandler.class),
     FATIGUE(FatigueHandler.class),
     RESTART(RestartHandler.class);
+
     private Class<? extends TaskFromDBHandler> taskClass;
 
     private TaskFromDBHandlerHolder(Class<? extends TaskFromDBHandler> taskClass) {

@@ -57,7 +57,8 @@ public class StumbleEffect extends EffectTemplate {
 
     @Override
     public void applyEffect(Effect effect) {
-        if (!effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL) && !effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.CANNOT_MOVE)) {
+        if (!effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL)
+            && !effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.CANNOT_MOVE)) {
             effect.addToEffectedController();
             effect.setIsPhysicalState(true);
             final Creature effected = effect.getEffected();
@@ -67,10 +68,9 @@ public class StumbleEffect extends EffectTemplate {
             effected.getController().cancelCurrentSkill();
             effected.getEffectController().removeParalyzeEffects();
             effected.getMoveController().abortMove();
-            World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(),
-                    effected.getHeading());
-            PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(),
-                    new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
+            World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
+            PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_FORCED_MOVE(effect.getEffector(),
+                effect.getEffected().getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
         }
     }
 
@@ -98,8 +98,8 @@ public class StumbleEffect extends EffectTemplate {
         float y1 = (float) (Math.sin(radian) * direction);
         float z = effected.getZ();
         byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-        Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1,
-                effected.getY() + y1, effected.getZ() - 0.4f, false, intentions);
+        Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1,
+            effected.getZ() - 0.4f, false, intentions);
         x1 = closestCollision.x;
         y1 = closestCollision.y;
         z = closestCollision.z;

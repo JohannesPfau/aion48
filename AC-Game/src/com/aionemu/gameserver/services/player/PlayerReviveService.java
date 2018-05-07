@@ -95,7 +95,8 @@ public class PlayerReviveService {
         }
 
         if (player.isInResPostState()) {
-            TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getResPosX(), player.getResPosY(), player.getResPosZ());
+            TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getResPosX(), player.getResPosY(),
+                player.getResPosZ());
         }
         player.unsetResPosState();
         //unset isflyingbeforedeath
@@ -137,7 +138,7 @@ public class PlayerReviveService {
         //unset isflyingbeforedeath
         player.setIsFlyingBeforeDeath(false);
     }
-    
+
     public static final void battlegroundRevive(Player player) {
         revive(player, 100, 100, true, 0);
 
@@ -145,8 +146,9 @@ public class PlayerReviveService {
             player.battlegroundFlag.getController().dropped = true;
             player.battlegroundFlag.setFlagHolder(null);
             player.getBattleGround().broadcastToBattleGround(
-                    player.getCommonData().getName() + (player.getLegion() != null ? " of " + player.getLegion().getLegionName() : "") + " has dropped the "
-                    + (player.battlegroundFlag.getRace() == Race.ELYOS ? "Elyos" : "Asmodian") + " flag !", null);
+                player.getCommonData().getName() + (player.getLegion() != null ? " of " + player.getLegion().getLegionName() : "")
+                    + " has dropped the " + (player.battlegroundFlag.getRace() == Race.ELYOS ? "Elyos" : "Asmodian") + " flag !",
+                null);
             player.battlegroundFlag = null;
             if (player.getController().getTask(TaskId.BATTLEGROUND_CARRY_FLAG) != null) {
                 player.getController().getTask(TaskId.BATTLEGROUND_CARRY_FLAG).cancel(true);
@@ -247,8 +249,10 @@ public class PlayerReviveService {
         player.getGameStats().updateStatsAndSpeedVisually();
         PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
         PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
-        if (map.isInstanceType() && (player.getInstanceStartPosX() != 0 && player.getInstanceStartPosY() != 0 && player.getInstanceStartPosZ() != 0)) {
-            TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceStartPosX(), player.getInstanceStartPosY(), player.getInstanceStartPosZ());
+        if (map.isInstanceType()
+            && (player.getInstanceStartPosX() != 0 && player.getInstanceStartPosY() != 0 && player.getInstanceStartPosZ() != 0)) {
+            TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceStartPosX(), player.getInstanceStartPosY(),
+                player.getInstanceStartPosZ());
         } else {
             bindRevive(player);
         }
@@ -257,6 +261,7 @@ public class PlayerReviveService {
 
     public static final void revive(final Player player, int hpPercent, int mpPercent, boolean setSoulsickness, int resurrectionSkill) {
         player.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player visitor) {
                 VisibleObject target = visitor.getTarget();
@@ -304,7 +309,8 @@ public class PlayerReviveService {
         int useDelay = useLimits.getDelayTime();
         player.addItemCoolDown(useLimits.getDelayId(), System.currentTimeMillis() + useDelay, useDelay / 1000);
         player.getController().cancelUseItem();
-        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemTemplate().getTemplateId()), true);
+        PacketSendUtility.broadcastPacket(player,
+            new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemTemplate().getTemplateId()), true);
         if (!player.getInventory().decreaseByObjectId(item.getObjectId(), 1)) {
             cancelRes(player);
             return;

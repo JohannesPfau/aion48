@@ -31,8 +31,6 @@ package ai.instance.IdgelDome;
 
 import java.util.concurrent.Future;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -43,6 +41,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
+import ai.AggressiveNpcAI2;
 
 /**
  * @author GiGatR00n (Aion-Core)
@@ -50,20 +49,20 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @AIName("danuar_icon") //702300, 702301
 public class DanuarIconAI2 extends AggressiveNpcAI2 {
 
-	private Future<?> task;
-	
-	@Override
-	public void handleDespawned() {
-		cancelTask();
-		super.handleDespawned();
-	}	
-	
+    private Future<?> task;
+
+    @Override
+    public void handleDespawned() {
+        cancelTask();
+        super.handleDespawned();
+    }
+
     @Override
     protected void handleDied() {
-    	cancelTask();
+        cancelTask();
         super.handleDied();
-    } 	
-	
+    }
+
     @Override
     protected void handleCreatureSee(Creature creature) {
         checkDistance(this, creature);
@@ -72,51 +71,50 @@ public class DanuarIconAI2 extends AggressiveNpcAI2 {
     @Override
     protected void handleCreatureNotSee(Creature creature) {
         if (task != null) {
-        	cancelTask();
+            cancelTask();
             task = null;
         }
-    }    
-    
+    }
+
     @Override
     protected void handleCreatureMoved(Creature creature) {
         checkDistance(this, creature);
-    }  
-    
-    private void checkDistance(NpcAI2 ai, Creature creature) 
-    {
+    }
+
+    private void checkDistance(NpcAI2 ai, Creature creature) {
         if (creature instanceof Player && creature.getRace() != getOwner().getRace() && !creature.getLifeStats().isAlreadyDead()) {
-        	if (task == null) {
-	            if (MathUtil.isIn3dRange(getOwner(), creature, 30)) {
-	            	AI2Actions.targetCreature(this, creature);
-	            	Fire();
-	            }
-        	}
+            if (task == null) {
+                if (MathUtil.isIn3dRange(getOwner(), creature, 30)) {
+                    AI2Actions.targetCreature(this, creature);
+                    Fire();
+                }
+            }
         }
     }
-    
-    private void Fire() 
-    {
+
+    private void Fire() {
         final Player pTarget = (Player) getOwner().getTarget();
         task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (pTarget == null || pTarget.getLifeStats().isAlreadyDead()) {
                     cancelTask();
                 } else {
-                	useSkill(21420); //SkillId:21420 (Wide Area Bombardment)
+                    useSkill(21420); //SkillId:21420 (Wide Area Bombardment)
                 }
             }
         }, 0, 3300);
         getOwner().getController().addTask(TaskId.SKILL_USE, task);
-    }    
-    
+    }
+
     private void useSkill(int skillId) {
         SkillEngine.getInstance().getSkill(getOwner(), skillId, 65, getOwner().getTarget()).useSkill();
     }
-    
+
     private void cancelTask() {
         if (task != null && !task.isDone()) {
-        	task.cancel(true);
+            task.cancel(true);
         }
     }
 }

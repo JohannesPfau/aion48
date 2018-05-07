@@ -30,12 +30,12 @@
 
 package quest.heiron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -60,7 +60,7 @@ public class _14054KrallingToKralltumagna extends QuestHandler {
         qe.registerQuestNpc(204602).addOnTalkEvent(questId);
         qe.registerQuestNpc(800413).addOnTalkEvent(questId);
         qe.registerQuestNpc(802050).addOnTalkEvent(questId);
-        int[] mobs = {233861, 702040, 214009, 214010, 214081, 214160, 214161, 214018, 214020, 214021, 214087, 214088, 214022, 214023};
+        int[] mobs = { 233861, 702040, 214009, 214010, 214081, 214160, 214161, 214018, 214020, 214021, 214087, 214088, 214022, 214023 };
         for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
@@ -82,7 +82,7 @@ public class _14054KrallingToKralltumagna extends QuestHandler {
         int targetId = env.getTargetId();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         @SuppressWarnings("unused")
-		DialogAction dialog = env.getDialog();
+        DialogAction dialog = env.getDialog();
         if (qs == null) {
             return false;
         }
@@ -94,9 +94,9 @@ public class _14054KrallingToKralltumagna extends QuestHandler {
         } else if (qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             @SuppressWarnings("unused")
-			int var1 = qs.getQuestVarById(1);
+            int var1 = qs.getQuestVarById(1);
             @SuppressWarnings("unused")
-			int var2 = qs.getQuestVarById(2);
+            int var2 = qs.getQuestVarById(2);
             if (targetId == 204602) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
@@ -110,8 +110,8 @@ public class _14054KrallingToKralltumagna extends QuestHandler {
                             PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                             return true;
                         }
-				default:
-					break;
+                    default:
+                        break;
                 }
             } else if (targetId == 800413) {
                 switch (env.getDialog()) {
@@ -126,8 +126,8 @@ public class _14054KrallingToKralltumagna extends QuestHandler {
                             updateQuestStatus(env);
                             return true;
                         }
-				default:
-					break;
+                    default:
+                        break;
                 }
             } else if (targetId == 802050) {
                 switch (env.getDialog()) {
@@ -147,8 +147,8 @@ public class _14054KrallingToKralltumagna extends QuestHandler {
                     case SETPRO6:
                         TeleportService2.teleportTo(player, 210040000, 2773f, 1874f, 153.7f, (byte) 1111, TeleportAnimation.BEAM_ANIMATION);
                         return defaultCloseDialog(env, 4, 4, true, false);
-				default:
-					break;
+                    default:
+                        break;
                 }
             }
         }
@@ -167,9 +167,8 @@ public class _14054KrallingToKralltumagna extends QuestHandler {
             targetId = ((Npc) env.getVisibleObject()).getNpcId();
         }
         int var = qs.getQuestVarById(0);
-        if (targetId == 214009 || targetId == 214010 || targetId == 214022 || targetId == 214023
-                || targetId == 214020 || targetId == 214021 || targetId == 214087 || targetId == 214088
-                || targetId == 214160 || targetId == 214160 || targetId == 214018 || targetId == 214081) {
+        if (targetId == 214009 || targetId == 214010 || targetId == 214022 || targetId == 214023 || targetId == 214020 || targetId == 214021
+            || targetId == 214087 || targetId == 214088 || targetId == 214160 || targetId == 214160 || targetId == 214018 || targetId == 214081) {
             switch (qs.getQuestVarById(1)) {
                 case 0:
                 case 1:

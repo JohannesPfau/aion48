@@ -29,9 +29,9 @@
  */
 package quest.udas_temple;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -42,7 +42,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _30005HealMeKillMe extends QuestHandler {
 
     private final static int questId = 30005;
-    private int[] mobs = {215857, 215814, 215858, 215815};
+    private int[] mobs = { 215857, 215814, 215858, 215815 };
 
     public _30005HealMeKillMe() {
         super(questId);

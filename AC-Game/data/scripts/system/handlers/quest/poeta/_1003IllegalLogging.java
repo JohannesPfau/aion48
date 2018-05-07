@@ -44,7 +44,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1003IllegalLogging extends QuestHandler {
 
     private final static int questId = 1003;
-    private final static int[] mob_ids = {210096, 210149, 210145, 210146, 210150, 210151, 210092, 210160, 210154, 210685};
+    private final static int[] mob_ids = { 210096, 210149, 210145, 210146, 210150, 210151, 210092, 210160, 210154, 210685 };
 
     public _1003IllegalLogging() {
         super(questId);

@@ -41,7 +41,7 @@ import com.aionemu.gameserver.services.FindGroupService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
-, MrPoke
+ * , MrPoke
  */
 public class CM_FIND_GROUP extends AionClientPacket {
 

@@ -147,7 +147,7 @@ public class Drop implements DropCalculator {
 
     @Override
     public String toString() {
-        return "Drop [itemId=" + itemId + ", minAmount=" + minAmount + ", maxAmount=" + maxAmount + ", chance=" + chance
-                + ", noReduce=" + noReduce + ", eachMember=" + eachMember + "]";
+        return "Drop [itemId=" + itemId + ", minAmount=" + minAmount + ", maxAmount=" + maxAmount + ", chance=" + chance + ", noReduce=" + noReduce
+            + ", eachMember=" + eachMember + "]";
     }
 }

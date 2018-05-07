@@ -29,6 +29,21 @@
  */
 package mysql5;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.HousesDAO;
@@ -40,16 +55,6 @@ import com.aionemu.gameserver.model.templates.housing.Building;
 import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
 import com.aionemu.gameserver.model.templates.housing.HousingLand;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import java.sql.*;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author Rolandas
@@ -60,14 +65,14 @@ public class MySQL5HousesDAO extends HousesDAO {
     private static final String SELECT_HOUSES_QUERY = "SELECT * FROM houses WHERE address <> 2001 AND address <> 3001";
     private static final String SELECT_STUDIOS_QUERY = "SELECT * FROM houses WHERE address = 2001 OR address = 3001";
     private static final String ADD_HOUSE_QUERY = "INSERT INTO houses (id, address, building_id, player_id, acquire_time, settings, status, fee_paid, next_pay, sell_started, sign_notice) "
-            + " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
+        + " VALUES (?,?,?,?,?,?,?,?,?,?,?)";
     private static final String UPDATE_HOUSE_QUERY = "UPDATE houses SET building_id=?, player_id=?, acquire_time=?, settings=?, status=?, fee_paid=?, next_pay=?, sell_started=?, sign_notice=? WHERE id=?";
     private static final String DELETE_HOUSE_QUERY = "DELETE FROM houses WHERE player_id=?";
 
     @Override
     public int[] getUsedIDs() {
         PreparedStatement statement = DB.prepareStatement("SELECT DISTINCT id FROM houses", ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY);
+            ResultSet.CONCUR_READ_ONLY);
 
         try {
             ResultSet rs = statement.executeQuery();
@@ -222,9 +227,9 @@ public class MySQL5HousesDAO extends HousesDAO {
 
     @Override
     public Map<Integer, House> loadHouses(Collection<HousingLand> lands, boolean studios) {
-        Map<Integer, House> houses = new HashMap<Integer, House>();
-        Map<Integer, HouseAddress> addressesById = new HashMap<Integer, HouseAddress>();
-        Map<Integer, List<Building>> buildingsForAddress = new HashMap<Integer, List<Building>>();
+        Map<Integer, House> houses = new HashMap<>();
+        Map<Integer, HouseAddress> addressesById = new HashMap<>();
+        Map<Integer, List<Building>> buildingsForAddress = new HashMap<>();
         for (HousingLand land : lands) {
             for (HouseAddress address : land.getAddresses()) {
                 addressesById.put(address.getId(), address);
@@ -232,7 +237,7 @@ public class MySQL5HousesDAO extends HousesDAO {
             }
         }
 
-        HashMap<Integer, Integer> addressHouseIds = new HashMap<Integer, Integer>();
+        HashMap<Integer, Integer> addressHouseIds = new HashMap<>();
 
         Connection con = null;
         PreparedStatement stmt = null;

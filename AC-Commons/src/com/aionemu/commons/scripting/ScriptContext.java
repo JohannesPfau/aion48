@@ -29,10 +29,10 @@
  */
 package com.aionemu.commons.scripting;
 
-import com.aionemu.commons.scripting.classlistener.ClassListener;
-
 import java.io.File;
 import java.util.Collection;
+
+import com.aionemu.commons.scripting.classlistener.ClassListener;
 
 /**
  * This class represents script context that can be loaded, unloaded, etc...<br>
@@ -84,7 +84,8 @@ public interface ScriptContext {
     /**
      * Sets files that represents jar files, they will be used as libraries
      *
-     * @param files that points to jar file, will be used as libraries
+     * @param files
+     *            that points to jar file, will be used as libraries
      */
     public void setLibraries(Iterable<File> files);
 
@@ -116,14 +117,16 @@ public interface ScriptContext {
      * called. Duplicated child contexts are not allowed, in such case child
      * will be ignored
      *
-     * @param context child context
+     * @param context
+     *            child context
      */
     public void addChildScriptContext(ScriptContext context);
 
     /**
      * Sets the class listener for this script context.
      *
-     * @param cl class listener
+     * @param cl
+     *            class listener
      */
     public void setClassListener(ClassListener cl);
 
@@ -132,8 +135,9 @@ public interface ScriptContext {
      * If it's null - returns parent classListener.<br>
      * If parent is null and classListener is null - it will add the following
      * class listeners as default implementation (order saved):
+     * 
      * <pre>
-     *     	AggregatedClassListener acl = new AggregatedClassListener();
+     * AggregatedClassListener acl = new AggregatedClassListener();
      * acl.addClassListener(new OnClassLoadUnloadListener());
      * acl.addClassListener(new ScheduledTaskClassListener());
      * </pre>
@@ -148,7 +152,8 @@ public interface ScriptContext {
      * Sets compiler class name for this script context.<br>
      * Compiler is not inherrited by children.<br>
      *
-     * @param className compiler class name
+     * @param className
+     *            compiler class name
      */
     public void setCompilerClassName(String className);
 
@@ -164,7 +169,8 @@ public interface ScriptContext {
      * Comparation is done by comparing root files and parent contexts (if there
      * is any parent)
      *
-     * @param obj object to compare with
+     * @param obj
+     *            object to compare with
      * @return result of comparation
      */
     @Override
@@ -184,7 +190,8 @@ public interface ScriptContext {
      * will not be collected by GC. If such situation happens -
      * {@link #shutdown()} is called to ensure that resources were released.
      *
-     * @throws Throwable if something goes wrong during finalization
+     * @throws Throwable
+     *             if something goes wrong during finalization
      */
     void finalize() throws Throwable;
 }

@@ -54,8 +54,10 @@ public abstract class AbstractArea implements Area {
     /**
      * Creates new AbstractArea with min and max z
      *
-     * @param minZ min z
-     * @param maxZ max z
+     * @param minZ
+     *            min z
+     * @param maxZ
+     *            max z
      */
     protected AbstractArea(ZoneName zoneName, int worldId, float minZ, float maxZ) {
         if (minZ > maxZ) {
@@ -163,7 +165,7 @@ public abstract class AbstractArea implements Area {
      * {@inheritDoc}
      */
     @Override
-	public float getMinZ() {
+    public float getMinZ() {
         return minZ;
     }
 
@@ -171,7 +173,7 @@ public abstract class AbstractArea implements Area {
      * {@inheritDoc}
      */
     @Override
-	public float getMaxZ() {
+    public float getMaxZ() {
         return maxZ;
     }
 

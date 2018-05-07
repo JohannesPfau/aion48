@@ -29,6 +29,15 @@
  */
 package mysql5;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
@@ -40,14 +49,6 @@ import com.aionemu.gameserver.model.gameobjects.player.BlockList;
 import com.aionemu.gameserver.model.gameobjects.player.BlockedPlayer;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Ben
@@ -66,6 +67,7 @@ public class MySQL5BlockListDAO extends BlockListDAO {
     @Override
     public boolean addBlockedUser(final int playerObjId, final int objIdToBlock, final String reason) {
         return DB.insertUpdate(ADD_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, playerObjId);
@@ -82,6 +84,7 @@ public class MySQL5BlockListDAO extends BlockListDAO {
     @Override
     public boolean delBlockedUser(final int playerObjId, final int objIdToDelete) {
         return DB.insertUpdate(DEL_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, playerObjId);
@@ -96,9 +99,10 @@ public class MySQL5BlockListDAO extends BlockListDAO {
      */
     @Override
     public BlockList load(final Player player) {
-        final Map<Integer, BlockedPlayer> list = new HashMap<Integer, BlockedPlayer>();
+        final Map<Integer, BlockedPlayer> list = new HashMap<>();
 
         DB.select(LOAD_QUERY, new ParamReadStH() {
+
             @Override
             public void handleRead(ResultSet rset) throws SQLException {
                 PlayerDAO playerDao = DAOManager.getDAO(PlayerDAO.class);
@@ -106,8 +110,8 @@ public class MySQL5BlockListDAO extends BlockListDAO {
                     int blockedOid = rset.getInt("blocked_player");
                     PlayerCommonData pcd = playerDao.loadPlayerCommonData(blockedOid);
                     if (pcd == null) {
-                        log.error("Attempt to load block list for " + player.getName()
-                                + " tried to load a player which does not exist: " + blockedOid);
+                        log.error(
+                            "Attempt to load block list for " + player.getName() + " tried to load a player which does not exist: " + blockedOid);
                     } else {
                         list.put(blockedOid, new BlockedPlayer(pcd, rset.getString("reason")));
                     }
@@ -129,6 +133,7 @@ public class MySQL5BlockListDAO extends BlockListDAO {
     @Override
     public boolean setReason(final int playerObjId, final int blockedPlayerObjId, final String reason) {
         return DB.insertUpdate(SET_REASON_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setString(1, reason);

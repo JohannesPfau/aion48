@@ -29,9 +29,9 @@
  */
 package com.aionemu.gameserver.controllers.movement;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
+
+import javolution.util.FastMap;
 
 /**
  * @author Rolandas

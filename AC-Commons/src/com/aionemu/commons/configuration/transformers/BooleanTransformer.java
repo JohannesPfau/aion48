@@ -29,10 +29,10 @@
  */
 package com.aionemu.commons.configuration.transformers;
 
+import java.lang.reflect.Field;
+
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
-
-import java.lang.reflect.Field;
 
 /**
  * This class implements basic boolean transfromer.
@@ -54,10 +54,13 @@ public class BooleanTransformer implements PropertyTransformer<Boolean> {
     /**
      * Transforms string to boolean.
      *
-     * @param value value that will be transformed
-     * @param field value will be assigned to this field
+     * @param value
+     *            value that will be transformed
+     * @param field
+     *            value will be assigned to this field
      * @return Boolean object that represents transformed value
-     * @throws TransformationException if something goes wrong
+     * @throws TransformationException
+     *             if something goes wrong
      */
     @Override
     public Boolean transform(String value, Field field) throws TransformationException {

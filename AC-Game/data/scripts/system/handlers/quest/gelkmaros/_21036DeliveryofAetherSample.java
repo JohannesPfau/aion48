@@ -48,7 +48,7 @@ public class _21036DeliveryofAetherSample extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {799258, 799238, 798713, 799239};
+        int[] npcs = { 799258, 799238, 798713, 799239 };
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }

@@ -53,7 +53,7 @@ import com.aionemu.gameserver.world.World;
 public class PetitionService {
 
     private static Logger log = LoggerFactory.getLogger(PetitionService.class);
-    private static SortedMap<Integer, Petition> registeredPetitions = new TreeMap<Integer, Petition>();
+    private static SortedMap<Integer, Petition> registeredPetitions = new TreeMap<>();
 
     public static final PetitionService getInstance() {
         return SingletonHolder.instance;
@@ -73,7 +73,7 @@ public class PetitionService {
     }
 
     public void deletePetition(int playerObjId) {
-        Set<Petition> petitions = new HashSet<Petition>();
+        Set<Petition> petitions = new HashSet<>();
         for (Petition p : registeredPetitions.values()) {
             if (p.getPlayerObjId() == playerObjId) {
                 petitions.add(p);
@@ -104,8 +104,7 @@ public class PetitionService {
         }
     }
 
-    public synchronized Petition registerPetition(Player sender, int typeId, String title, String contentText,
-                                                  String additionalData) {
+    public synchronized Petition registerPetition(Player sender, int typeId, String title, String contentText, String additionalData) {
         int id = DAOManager.getDAO(PetitionDAO.class).getNextAvailableId();
         Petition ptt = new Petition(id, sender.getObjectId(), typeId, title, contentText, additionalData, 0);
         DAOManager.getDAO(PetitionDAO.class).insertPetition(ptt);
@@ -128,8 +127,7 @@ public class PetitionService {
         while (players.hasNext()) {
             Player p = players.next();
             if (p.getAccessLevel() > 0) {
-                PacketSendUtility
-                        .sendBrightYellowMessageOnCenter(p, "New Support Petition from: " + sender.getName() + " (#" + petitionId + ")");
+                PacketSendUtility.sendBrightYellowMessageOnCenter(p, "New Support Petition from: " + sender.getName() + " (#" + petitionId + ")");
             }
         }
     }

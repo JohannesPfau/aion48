@@ -52,8 +52,10 @@ public class CompilationResult {
      * Creates new instance of CompilationResult with classes that has to be
      * parsed and classloader that was used to load classes
      *
-     * @param compiledClasses classes compiled by compiler
-     * @param classLoader     classloader that was used by compiler
+     * @param compiledClasses
+     *            classes compiled by compiler
+     * @param classLoader
+     *            classloader that was used by compiler
      */
     public CompilationResult(Class<?>[] compiledClasses, ScriptClassLoader classLoader) {
         this.compiledClasses = compiledClasses;
@@ -86,8 +88,7 @@ public class CompilationResult {
         final StringBuilder sb = new StringBuilder();
         sb.append("CompilationResult");
         sb.append("{classLoader=").append(classLoader);
-        sb.append(", compiledClasses=")
-                .append(compiledClasses == null ? "null" : Arrays.asList(compiledClasses).toString());
+        sb.append(", compiledClasses=").append(compiledClasses == null ? "null" : Arrays.asList(compiledClasses).toString());
         sb.append('}');
         return sb.toString();
     }

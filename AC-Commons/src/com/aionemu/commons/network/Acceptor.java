@@ -78,10 +78,12 @@ public class Acceptor {
      * Constructor that accept <code>ConnectionFactory</code> and
      * <code>NioServer</code> as parameter<br>
      *
-     * @param factory   <code>ConnectionFactory</code> that will be used to<br>
-     * @param nioServer <code>NioServer</code> that created this Acceptor
-     *                  object<br>
-     *                  creating new <code>AConnection</code> instances.
+     * @param factory
+     *            <code>ConnectionFactory</code> that will be used to<br>
+     * @param nioServer
+     *            <code>NioServer</code> that created this Acceptor
+     *            object<br>
+     *            creating new <code>AConnection</code> instances.
      * @see com.aionemu.commons.network.ConnectionFactory
      * @see com.aionemu.commons.network.NioServer
      * @see com.aionemu.commons.network.AConnection
@@ -104,6 +106,7 @@ public class Acceptor {
      * @param key <code>SelectionKey</code> representing
      *            <code>ServerSocketChannel</code> that is accepting<br>
      *            new socket connection.
+     * 
      * @throws IOException
      * @see com.aionemu.commons.network.Dispatcher
      * @see java.nio.channels.ServerSocketChannel

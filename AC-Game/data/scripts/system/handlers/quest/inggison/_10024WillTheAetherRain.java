@@ -29,12 +29,12 @@
  */
 package quest.inggison;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -47,7 +47,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _10024WillTheAetherRain extends QuestHandler {
 
     private final static int questId = 10024;
-    private final static int[] npc_ids = {799020, 700605, 798970, 798979, 203793, 216498};
+    private final static int[] npc_ids = { 799020, 700605, 798970, 798979, 203793, 216498 };
 
     public _10024WillTheAetherRain() {
         super(questId);

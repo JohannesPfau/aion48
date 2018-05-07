@@ -46,7 +46,6 @@ import com.aionemu.gameserver.services.item.ItemSocketService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
 /**
  * @author Alcapwnd
  */
@@ -59,31 +58,35 @@ public class GodstoneAction extends AbstractItemAction {
         return !player.isAttackMode() && targetItem.getItemTemplate().isWeapon() && targetItem.canSocketGodstone();
     }
 
-
     @Override
     public void act(final Player player, final Item parentItem, final Item targetItem) {
         final int parentItemId = parentItem.getItemId();
         final int targetItemId = targetItem.getItemId();
         final int parentObjectId = parentItem.getObjectId();
         final int parentNameId = parentItem.getNameId();
-        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 0, 0), true);
+        PacketSendUtility.broadcastPacket(player,
+            new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 0, 0), true);
         final ItemUseObserver observer = new ItemUseObserver() {
+
             @Override
             public void abort() {
                 player.getController().cancelTask(TaskId.ITEM_USE);
                 player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
                 PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentNameId)));
-                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, 2, 0), true);
+                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, 2, 0),
+                    true);
                 player.getObserveController().removeObserver(this);
             }
         };
         player.getObserveController().attach(observer);
         player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 player.getObserveController().removeObserver(observer);
 
-                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, 1, 1), true);
+                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, 1, 1),
+                    true);
 
                 GodStone godStone = targetItem.getGodStone();
                 if (godStone != null) {

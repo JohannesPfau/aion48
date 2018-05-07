@@ -29,7 +29,8 @@
  */
 package ai.instance.aturamSkyFortress;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -42,7 +43,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -93,11 +94,13 @@ public class AshunatalShadowslipAI2 extends AggressiveNpcAI2 {
     private void doSchedule() {
         if (!isAlreadyDead()) {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     if (!isAlreadyDead()) {
                         SkillEngine.getInstance().getSkill(getOwner(), 19417, 49, getOwner()).useNoAnimationSkill();
                         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                             @Override
                             public void run() {
                                 if (!isAlreadyDead()) {
@@ -108,8 +111,10 @@ public class AshunatalShadowslipAI2 extends AggressiveNpcAI2 {
                                     setStateIfNot(AIState.WALKING);
                                     think();
                                     getOwner().setState(1);
-                                    PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+                                    PacketSendUtility.broadcastPacket(getOwner(),
+                                        new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
                                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                         @Override
                                         public void run() {
                                             if (!isAlreadyDead()) {

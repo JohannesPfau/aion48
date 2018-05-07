@@ -42,8 +42,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastList;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instanceposition.ChaosInstancePosition;
@@ -57,13 +55,15 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
+import javolution.util.FastList;
+
 /**
  * @author xTz
  */
 public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 
-    private Map<Integer, Boolean> positions = new HashMap<Integer, Boolean>();
-    private FastList<Integer> zones = new FastList<Integer>();
+    private Map<Integer, Boolean> positions = new HashMap<>();
+    private FastList<Integer> zones = new FastList<>();
     private int round = 1;
     private Integer zone;
     private int bonusTime;
@@ -79,8 +79,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
         boolean isSolo = isSoloArena();
         capPoints = isSolo ? 14400 : 50000;
         bonusTime = isSolo ? 8100 : 12000;
-        Collections.addAll(zones, isSolo ? new Integer[]{1, 2, 3, 4}
-                : new Integer[]{1, 2, 3, 4, 5, 6});
+        Collections.addAll(zones, isSolo ? new Integer[] { 1, 2, 3, 4 } : new Integer[] { 1, 2, 3, 4, 5, 6 });
         int positionSize;
         if (isSolo) {
             positionSize = 4;
@@ -125,7 +124,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
     }
 
     private List<Integer> getFreePositions() {
-        List<Integer> p = new ArrayList<Integer>();
+        List<Integer> p = new ArrayList<>();
         for (Integer key : positions.keySet()) {
             if (!positions.get(key)) {
                 p.add(key);
@@ -184,6 +183,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 
     public List<PvPArenaPlayerReward> sortPoints() {
         return sort(getInstanceRewards(), on(PvPArenaPlayerReward.class).getScorePoints(), new Comparator<Integer>() {
+
             @Override
             public int compare(Integer o1, Integer o2) {
                 return o2 != null ? o2.compareTo(o1) : -o1.compareTo(o2);
@@ -273,6 +273,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
     public void sendPacket() {
         final List<Player> players = instance.getPlayersInside();
         instance.doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(getTime(), getInstanceReward(), players));

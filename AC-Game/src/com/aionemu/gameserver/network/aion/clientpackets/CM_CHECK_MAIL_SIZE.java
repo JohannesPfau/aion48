@@ -34,6 +34,7 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 
 public class CM_CHECK_MAIL_SIZE extends AionClientPacket {
+
     public int onlyExpress;
 
     /**
@@ -45,7 +46,8 @@ public class CM_CHECK_MAIL_SIZE extends AionClientPacket {
         super(opcode, state, restStates);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.commons.network.packet.BaseClientPacket#readImpl()
      */
     @Override
@@ -54,7 +56,8 @@ public class CM_CHECK_MAIL_SIZE extends AionClientPacket {
         onlyExpress = readC();
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
      */
     @Override

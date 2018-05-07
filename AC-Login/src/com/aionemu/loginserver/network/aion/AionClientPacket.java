@@ -29,12 +29,13 @@
  */
 package com.aionemu.loginserver.network.aion;
 
-import com.aionemu.commons.network.packet.BaseClientPacket;
-import com.aionemu.loginserver.model.Account;
+import java.nio.ByteBuffer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.ByteBuffer;
+import com.aionemu.commons.network.packet.BaseClientPacket;
+import com.aionemu.loginserver.model.Account;
 
 /**
  * Base class for every Aion -> LS Client Packet
@@ -51,9 +52,12 @@ public abstract class AionClientPacket extends BaseClientPacket<LoginConnection>
     /**
      * Constructs new client packet.
      *
-     * @param buf    packet data
-     * @param client client
-     * @param opcode packet id
+     * @param buf
+     *            packet data
+     * @param client
+     *            client
+     * @param opcode
+     *            packet id
      */
     protected AionClientPacket(ByteBuffer buf, LoginConnection client, int opcode) {
         super(buf, opcode);

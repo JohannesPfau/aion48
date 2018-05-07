@@ -29,13 +29,14 @@
  */
 package ai.instance.crucibleChallenge;
 
-import ai.GeneralNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz
@@ -58,7 +59,6 @@ public class PoppyOnTheRunAI2 extends GeneralNpcAI2 {
     protected void handleSpawned() {
         super.handleSpawned();
         getOwner().setState(1);
-        PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0,
-                getObjectId()));
+        PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
     }
 }

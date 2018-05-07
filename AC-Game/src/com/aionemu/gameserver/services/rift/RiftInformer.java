@@ -33,8 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.controllers.RVController;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -44,6 +42,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
+import javolution.util.FastMap;
+
 /**
  * @author Source
  */
@@ -51,7 +51,7 @@ public class RiftInformer {
 
     public static List<Npc> getSpawned(int worldId) {
         List<Npc> rifts = RiftManager.getSpawned();
-        List<Npc> worldRifts = new CopyOnWriteArrayList<Npc>();
+        List<Npc> worldRifts = new CopyOnWriteArrayList<>();
         for (Npc rift : rifts) {
             if (rift.getWorldId() == worldId) {
                 worldRifts.add(rift);
@@ -92,7 +92,7 @@ public class RiftInformer {
     }
 
     private static List<AionServerPacket> getPackets(int worldId, int objId) {
-        List<AionServerPacket> packets = new ArrayList<AionServerPacket>();
+        List<AionServerPacket> packets = new ArrayList<>();
         if (objId == -1) {
             for (Npc rift : getSpawned(worldId)) {
                 RVController controller = (RVController) rift.getController();
@@ -139,6 +139,7 @@ public class RiftInformer {
      */
     private static void syncRiftsState(int worldId, final List<AionServerPacket> packets, final boolean isDespawnInfo) {
         World.getInstance().getWorldMap(worldId).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 syncRiftsState(player, packets);
@@ -147,7 +148,7 @@ public class RiftInformer {
     }
 
     private static FastMap<Integer, Integer> getAnnounceData(int worldId) {
-        FastMap<Integer, Integer> localRifts = new FastMap<Integer, Integer>();
+        FastMap<Integer, Integer> localRifts = new FastMap<>();
 
         // init empty list
         for (int i = 0; i < 8; i++) {
@@ -164,7 +165,7 @@ public class RiftInformer {
 
     private static FastMap<Integer, Integer> calcRiftsData(RVController rift, FastMap<Integer, Integer> local) {
         if (rift.isMaster()) {
-        	local.putEntry(0, local.get(0) + 1);
+            local.putEntry(0, local.get(0) + 1);
             if (rift.isVortex()) {
                 local.putEntry(1, local.get(1) + 1);
             }
@@ -183,29 +184,29 @@ public class RiftInformer {
 
     private static int getTwinId(int worldId) {
         switch (worldId) {
-            case 110070000:			// Kaisinel Academy -> Brusthonin
+            case 110070000: // Kaisinel Academy -> Brusthonin
                 return 220050000;
-            case 210020000:			// Eltnen -> Morheim
+            case 210020000: // Eltnen -> Morheim
                 return 220020000;
-            case 210040000:			// Heiron -> Beluslan
+            case 210040000: // Heiron -> Beluslan
                 return 220040000;
-            case 210050000:			// Inggison -> Gelkmaros
+            case 210050000: // Inggison -> Gelkmaros
                 return 220070000;
-            case 210060000:			// Theobomos -> Marchutan Priory
+            case 210060000: // Theobomos -> Marchutan Priory
                 return 120080000;
-            case 210070000:			// Cygnea -> Enshar
+            case 210070000: // Cygnea -> Enshar
                 return 220080000;
-            case 120080000:			// Marchutan Priory -> Theobomos
+            case 120080000: // Marchutan Priory -> Theobomos
                 return 210060000;
-            case 220020000:			// Morheim -> Eltnen
+            case 220020000: // Morheim -> Eltnen
                 return 210020000;
-            case 220040000:			// Beluslan -> Heiron
+            case 220040000: // Beluslan -> Heiron
                 return 210040000;
-            case 220050000:			// Brusthonin -> Kaisinel Academy
+            case 220050000: // Brusthonin -> Kaisinel Academy
                 return 110070000;
-            case 220070000:			// Gelkmaros -> Inggison
+            case 220070000: // Gelkmaros -> Inggison
                 return 210050000;
-            case 220080000:			// Enshar -> Cygnea
+            case 220080000: // Enshar -> Cygnea
                 return 210070000;
             default:
                 return 0;

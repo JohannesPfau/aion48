@@ -29,6 +29,8 @@
  */
 package ai.instance.dragonLordsRefuge;
 
+import java.util.concurrent.Future;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.poll.AIAnswer;
@@ -38,8 +40,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Cheatkiller
@@ -59,6 +59,7 @@ public class CalindiSurkanaAI2 extends NpcAI2 {
 
     private void reflect() {
         skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 NpcShoutsService.getInstance().sendMsg(getOwner(), 1401543);

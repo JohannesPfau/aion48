@@ -29,7 +29,8 @@
  */
 package ai.instance.theobomosLab;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -38,7 +39,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu
@@ -107,6 +108,7 @@ public class TriroansSummonAI2 extends AggressiveNpcAI2 {
                 SkillEngine.getInstance().getSkill(boss, helperSkill, 50, boss).useSkill();
             } else {
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         Npc boss = getPosition().getWorldMapInstance().getNpc(214669);
@@ -150,6 +152,7 @@ public class TriroansSummonAI2 extends AggressiveNpcAI2 {
 
     private void startDespawnTask() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 AI2Actions.deleteOwner(TriroansSummonAI2.this);

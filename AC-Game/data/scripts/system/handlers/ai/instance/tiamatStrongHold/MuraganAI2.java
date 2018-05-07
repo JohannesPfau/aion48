@@ -29,7 +29,6 @@
  */
 package ai.instance.tiamatStrongHold;
 
-import ai.GeneralNpcAI2;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -47,6 +46,8 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -102,6 +103,7 @@ public class MuraganAI2 extends GeneralNpcAI2 {
         getMoveController().moveToPoint(838, 1317, 396);
         PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 forQuest(player);

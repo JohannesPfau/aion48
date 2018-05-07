@@ -115,7 +115,8 @@ public class LegionMemberEx extends LegionMember {
     /**
      * sets the exp value
      *
-     * @param admin : enable decrease level
+     * @param admin
+     *            : enable decrease level
      */
     public void setExp(long exp) {
         // maxLevel is 51 but in game 50 should be shown with full XP bar
@@ -149,7 +150,8 @@ public class LegionMemberEx extends LegionMember {
     }
 
     /**
-     * @param online the online to set
+     * @param online
+     *            the online to set
      */
     public void setOnline(boolean online) {
         this.online = online;

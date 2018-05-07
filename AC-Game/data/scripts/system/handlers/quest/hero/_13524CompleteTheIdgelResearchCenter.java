@@ -29,9 +29,9 @@
  */
 package quest.hero;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -66,25 +66,24 @@ public class _13524CompleteTheIdgelResearchCenter extends QuestHandler {
         int targetId = env.getTargetId();
         if (qs == null || qs.getStatus() == QuestStatus.NONE) {
             if (targetId == 800918) {
-            switch (dialog) {
-                case QUEST_SELECT: {
-                    if (qs1 == null || qs2 == null || qs3 == null || qs4 == null || qs5 == null) {
-                        return closeDialogWindow(env);
+                switch (dialog) {
+                    case QUEST_SELECT: {
+                        if (qs1 == null || qs2 == null || qs3 == null || qs4 == null || qs5 == null) {
+                            return closeDialogWindow(env);
+                        }
+
+                        if (qs1.getStatus() == QuestStatus.COMPLETE && qs2.getStatus() == QuestStatus.COMPLETE
+                            && qs3.getStatus() == QuestStatus.COMPLETE && qs4.getStatus() == QuestStatus.COMPLETE
+                            && qs5.getStatus() == QuestStatus.COMPLETE) {
+                            QuestService.startQuest(env);
+                            return sendQuestDialog(env, 2375);
+                        } else
+                            return closeDialogWindow(env);
                     }
 
-                    if (qs1.getStatus() == QuestStatus.COMPLETE && qs2.getStatus() == QuestStatus.COMPLETE && qs3.getStatus() == QuestStatus.COMPLETE
-                            && qs4.getStatus() == QuestStatus.COMPLETE && qs5.getStatus() == QuestStatus.COMPLETE) {
-                        QuestService.startQuest(env);
-                        return sendQuestDialog(env, 2375);
-                    }
-                    else
-                        return closeDialogWindow(env);
                 }
-
             }
-        }
-        }
-        else if (qs.getStatus() == QuestStatus.START) {
+        } else if (qs.getStatus() == QuestStatus.START) {
             switch (targetId) {
                 case 800915: {
                     switch (dialog) {
@@ -121,8 +120,8 @@ public class _13524CompleteTheIdgelResearchCenter extends QuestHandler {
         }
 
         if (qs1.getStatus() == QuestStatus.COMPLETE && qs2.getStatus() == QuestStatus.COMPLETE && qs3.getStatus() == QuestStatus.COMPLETE
-                && qs4.getStatus() == QuestStatus.COMPLETE && qs5.getStatus() == QuestStatus.COMPLETE) {
-            if (qs == null || qs.getStatus() == QuestStatus.NONE){
+            && qs4.getStatus() == QuestStatus.COMPLETE && qs5.getStatus() == QuestStatus.COMPLETE) {
+            if (qs == null || qs.getStatus() == QuestStatus.NONE) {
                 QuestService.startQuest(env);
                 return true;
             }
@@ -130,4 +129,3 @@ public class _13524CompleteTheIdgelResearchCenter extends QuestHandler {
         return false;
     }
 }
-

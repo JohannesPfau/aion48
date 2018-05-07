@@ -29,19 +29,21 @@
  */
 package mysql5;
 
-import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.gameserver.dao.InGameShopDAO;
-import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-import com.aionemu.gameserver.model.ingameshop.IGItem;
-import javolution.util.FastMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.database.DatabaseFactory;
+import com.aionemu.gameserver.dao.InGameShopDAO;
+import com.aionemu.gameserver.dao.MySQL5DAOUtils;
+import com.aionemu.gameserver.model.ingameshop.IGItem;
+
+import javolution.util.FastMap;
 
 /**
  * @author xTz
@@ -81,8 +83,8 @@ public class MySQL5inGameShopDAO extends InGameShopDAO {
                 if (!items.containsKey(category)) {
                     items.put(category, new ArrayList<IGItem>());
                 }
-                items.get(category).add(new IGItem(objectId, itemId, itemCount, itemPrice,
-                        category, subCategory, list, salesRanking, itemType, gift, titleDescription, description));
+                items.get(category).add(new IGItem(objectId, itemId, itemCount, itemPrice, category, subCategory, list, salesRanking, itemType, gift,
+                    titleDescription, description));
             }
             rset.close();
             stmt.close();
@@ -116,14 +118,14 @@ public class MySQL5inGameShopDAO extends InGameShopDAO {
     }
 
     @Override
-    public void saveIngameShopItem(int objectId, int itemId, long itemCount, long itemPrice, byte category, byte subCategory, int list, int salesRanking,
-                                   byte itemType, byte gift, String titleDescription, String description) {
+    public void saveIngameShopItem(int objectId, int itemId, long itemCount, long itemPrice, byte category, byte subCategory, int list,
+        int salesRanking, byte itemType, byte gift, String titleDescription, String description) {
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
-            PreparedStatement stmt = con
-                    .prepareStatement("INSERT INTO ingameshop(object_id, item_id, item_count, item_price, category, sub_category, list, sales_ranking, item_type, gift, title_description, description)"
-                            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            PreparedStatement stmt = con.prepareStatement(
+                "INSERT INTO ingameshop(object_id, item_id, item_count, item_price, category, sub_category, list, sales_ranking, item_type, gift, title_description, description)"
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
             stmt.setInt(1, objectId);
             stmt.setInt(2, itemId);

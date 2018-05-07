@@ -57,7 +57,7 @@ public class CM_OPEN_STATICDOOR extends AionClientPacket {
 
     @Override
     protected void runImpl() {
-    	Player player = this.getConnection().getActivePlayer();
+        Player player = this.getConnection().getActivePlayer();
         if (player.getBattleGround() != null && !player.getBattleGround().running) {
             return;
         } else {

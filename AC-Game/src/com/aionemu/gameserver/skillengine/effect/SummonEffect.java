@@ -65,6 +65,7 @@ public class SummonEffect extends EffectTemplate {
             final Player effector = (Player) effect.getEffected();
             final Summon summon = effector.getSummon();
             Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     if ((summon != null) && (summon.isSpawned())) {

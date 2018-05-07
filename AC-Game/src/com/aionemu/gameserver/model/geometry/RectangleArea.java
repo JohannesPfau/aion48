@@ -38,8 +38,6 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * Rectangle area, most wide spread in the game
- *
-
  */
 public class RectangleArea extends AbstractArea {
 
@@ -92,12 +90,18 @@ public class RectangleArea extends AbstractArea {
     /**
      * Creates new area from given points. Point order doesn't matter
      *
-     * @param p1   point
-     * @param p2   point
-     * @param p3   point
-     * @param p4   point
-     * @param minZ minimal z
-     * @param maxZ maximal z
+     * @param p1
+     *            point
+     * @param p2
+     *            point
+     * @param p3
+     *            point
+     * @param p4
+     *            point
+     * @param minZ
+     *            minimal z
+     * @param maxZ
+     *            maximal z
      */
     public RectangleArea(ZoneName zoneName, int worldId, Point p1, Point p2, Point p3, Point p4, int minZ, int maxZ) {
         super(zoneName, worldId, minZ, maxZ);
@@ -117,12 +121,18 @@ public class RectangleArea extends AbstractArea {
     /**
      * Creates new are from given coords
      *
-     * @param minX mimal x point
-     * @param minY minimal y point
-     * @param maxX maximal x point
-     * @param maxY maximal y point
-     * @param minZ minimal z point
-     * @param maxZ maximal z point
+     * @param minX
+     *            mimal x point
+     * @param minY
+     *            minimal y point
+     * @param maxX
+     *            maximal x point
+     * @param maxY
+     *            maximal y point
+     * @param minZ
+     *            minimal z point
+     * @param maxZ
+     *            maximal z point
      */
     public RectangleArea(ZoneName zoneName, int worldId, float minX, float minY, float maxX, float maxY, float minZ, float maxZ) {
         super(zoneName, worldId, minZ, maxZ);
@@ -217,7 +227,8 @@ public class RectangleArea extends AbstractArea {
         }
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.gameserver.model.geometry.Area#intersectsRectangle(com.aionemu.gameserver.model.geometry.RectangleArea)
      */
     @Override

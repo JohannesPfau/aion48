@@ -30,6 +30,7 @@
 package com.aionemu.commons.callbacks.util;
 
 import com.aionemu.commons.callbacks.Callback;
+
 import javolution.util.FastComparator;
 
 public class CallbackPriorityFastComparator extends FastComparator<Callback<?>> {

@@ -34,8 +34,6 @@ import com.aionemu.gameserver.network.loginserver.LsClientPacket;
 
 /**
  * This packet is request kicking player.
- *
-
  */
 public class CM_REQUEST_KICK_ACCOUNT extends LsClientPacket {
 

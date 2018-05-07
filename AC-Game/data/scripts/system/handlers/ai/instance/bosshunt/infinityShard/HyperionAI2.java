@@ -29,7 +29,12 @@
  */
 package ai.instance.bosshunt.infinityShard;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -39,11 +44,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Eloann
@@ -56,7 +57,7 @@ public class HyperionAI2 extends AggressiveNpcAI2 {
     private Future<?> skillTask;
     private Future<?> BlasterTask;
     private Future<?> EnergyTask;
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
 
     @Override
     protected void handleAttack(Creature creature) {
@@ -159,11 +160,12 @@ public class HyperionAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{80, 75, 60, 55, 52, 50, 40, 35, 30, 25, 20, 10, 5, 2});
+        Collections.addAll(percents, new Integer[] { 80, 75, 60, 55, 52, 50, 40, 35, 30, 25, 20, 10, 5, 2 });
     }
 
     private void startSkillTask() {
         skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -177,6 +179,7 @@ public class HyperionAI2 extends AggressiveNpcAI2 {
 
     private void startBlasterTask() {
         BlasterTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -190,6 +193,7 @@ public class HyperionAI2 extends AggressiveNpcAI2 {
 
     private void startEnergyTask() {
         EnergyTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -222,6 +226,7 @@ public class HyperionAI2 extends AggressiveNpcAI2 {
     private void Throw() {
         SkillEngine.getInstance().getSkill(getOwner(), 21250, 55, getOwner()).useNoAnimationSkill();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 SkillEngine.getInstance().getSkill(getOwner(), 21251, 55, getOwner()).useNoAnimationSkill();

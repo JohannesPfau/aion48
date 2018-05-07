@@ -29,21 +29,22 @@
  */
 package mysql5;
 
-import com.aionemu.commons.database.DB;
-import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.commons.database.IUStH;
-import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-import com.aionemu.gameserver.dao.PlayerMacrossesDAO;
-import com.aionemu.gameserver.model.gameobjects.player.MacroList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.database.DB;
+import com.aionemu.commons.database.DatabaseFactory;
+import com.aionemu.commons.database.IUStH;
+import com.aionemu.gameserver.dao.MySQL5DAOUtils;
+import com.aionemu.gameserver.dao.PlayerMacrossesDAO;
+import com.aionemu.gameserver.model.gameobjects.player.MacroList;
 
 /**
  * @author Aquanox
@@ -59,12 +60,15 @@ public class MySQL5PlayerMacrossesDAO extends PlayerMacrossesDAO {
     /**
      * Add a macro information into database
      *
-     * @param playerId player object id
-     * @param macro    macro contents.
+     * @param playerId
+     *            player object id
+     * @param macro
+     *            macro contents.
      */
     @Override
     public void addMacro(final int playerId, final int macroPosition, final String macro) {
         DB.insertUpdate(INSERT_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 log.debug("[DAO: MySQL5PlayerMacrossesDAO] storing macro " + playerId + " " + macroPosition);
@@ -79,6 +83,7 @@ public class MySQL5PlayerMacrossesDAO extends PlayerMacrossesDAO {
     @Override
     public void updateMacro(final int playerId, final int macroPosition, final String macro) {
         DB.insertUpdate(UPDATE_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 log.debug("[DAO: MySQL5PlayerMacrossesDAO] updating macro " + playerId + " " + macroPosition);
@@ -96,6 +101,7 @@ public class MySQL5PlayerMacrossesDAO extends PlayerMacrossesDAO {
     @Override
     public void deleteMacro(final int playerId, final int macroPosition) {
         DB.insertUpdate(DELETE_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 log.debug("[DAO: MySQL5PlayerMacrossesDAO] removing macro " + playerId + " " + macroPosition);
@@ -111,7 +117,7 @@ public class MySQL5PlayerMacrossesDAO extends PlayerMacrossesDAO {
      */
     @Override
     public MacroList restoreMacrosses(final int playerId) {
-        final Map<Integer, String> macrosses = new HashMap<Integer, String>();
+        final Map<Integer, String> macrosses = new HashMap<>();
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();

@@ -64,9 +64,9 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class NpcFactions {
 
     private Player owner;
-    private Map<Integer, NpcFaction> factions = new HashMap<Integer, NpcFaction>();
+    private Map<Integer, NpcFaction> factions = new HashMap<>();
     private NpcFaction[] activeNpcFaction = new NpcFaction[2];
-    private int[] timeLimit = new int[]{0, 0};
+    private int[] timeLimit = new int[] { 0, 0 };
 
     /**
      * @param owner
@@ -204,6 +204,7 @@ public class NpcFactions {
         final NpcFaction activeNpcFaction = getActiveNpcFaction(npcFactionTemplate.isMentor());
         NpcFactionTemplate activeNpcFactionTemplate = DataManager.NPC_FACTIONS_DATA.getNpcFactionById(activeNpcFaction.getId());
         RequestResponseHandler responseHandler = new RequestResponseHandler(owner) {
+
             @Override
             public void acceptRequest(Creature requester, Player responder) {
                 leaveNpcFaction(activeNpcFaction);
@@ -216,8 +217,8 @@ public class NpcFactions {
         };
         boolean requested = owner.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_ASK_JOIN_NEW_FACTION, responseHandler);
         if (requested) {
-            PacketSendUtility.sendPacket(owner, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_JOIN_NEW_FACTION, 0, 0, new DescriptionId(
-                    activeNpcFactionTemplate.getNameId()), new DescriptionId(npcFactionTemplate.getNameId())));
+            PacketSendUtility.sendPacket(owner, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_JOIN_NEW_FACTION, 0, 0,
+                new DescriptionId(activeNpcFactionTemplate.getNameId()), new DescriptionId(npcFactionTemplate.getNameId())));
         }
         return;
     }

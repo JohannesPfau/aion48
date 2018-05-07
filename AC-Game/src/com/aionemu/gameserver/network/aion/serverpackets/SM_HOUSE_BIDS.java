@@ -59,7 +59,7 @@ public class SM_HOUSE_BIDS extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         Player player = con.getActivePlayer();
         int secondsTillAuction = HousingBidService.getInstance().getSecondsTillAuction();
 

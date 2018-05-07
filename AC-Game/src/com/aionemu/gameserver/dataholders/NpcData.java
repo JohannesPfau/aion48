@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
@@ -46,6 +44,8 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate}
@@ -65,7 +65,7 @@ public class NpcData extends ReloadableData {
     /**
      * A map containing all npc templates
      */
-    private TIntObjectHashMap<NpcTemplate> npcData = new TIntObjectHashMap<NpcTemplate>();
+    private TIntObjectHashMap<NpcTemplate> npcData = new TIntObjectHashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (NpcTemplate npc : npcs) {
@@ -82,7 +82,8 @@ public class NpcData extends ReloadableData {
     /**
      * /** Returns an {@link NpcTemplate} object with given id.
      *
-     * @param id id of NPC
+     * @param id
+     *            id of NPC
      * @return NpcTemplate object containing data about NPC with that id.
      */
     public NpcTemplate getNpcTemplate(int id) {
@@ -103,7 +104,7 @@ public class NpcData extends ReloadableData {
             JAXBContext jc = JAXBContext.newInstance(StaticData.class);
             Unmarshaller un = jc.createUnmarshaller();
             un.setSchema(getSchema("./data/static_data/static_data.xsd"));
-            List<NpcTemplate> newTemplates = new ArrayList<NpcTemplate>();
+            List<NpcTemplate> newTemplates = new ArrayList<>();
             for (File file : listFiles(dir, true)) {
                 NpcData data = (NpcData) un.unmarshal(file);
                 if (data != null && data.getData() != null) {
@@ -120,12 +121,12 @@ public class NpcData extends ReloadableData {
     }
 
     @Override
-	protected List<NpcTemplate> getData() {
+    protected List<NpcTemplate> getData() {
         return npcs;
     }
 
     @Override
-	@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     protected void setData(List<?> templates) {
         this.npcs = (List<NpcTemplate>) templates;
         afterUnmarshal(null, null);

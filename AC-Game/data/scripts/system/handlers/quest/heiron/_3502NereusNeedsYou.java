@@ -29,10 +29,10 @@
  */
 package quest.heiron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,8 +51,8 @@ import com.aionemu.gameserver.services.QuestService;
 public class _3502NereusNeedsYou extends QuestHandler {
 
     private final static int questId = 3502;
-    private final static int[] npcs = {204656, 203752, 730192};
-    private final static int[] mobs = {214894, 214895, 214896, 214897, 214904};
+    private final static int[] npcs = { 204656, 203752, 730192 };
+    private final static int[] mobs = { 214894, 214895, 214896, 214897, 214904 };
 
     public _3502NereusNeedsYou() {
         super(questId);
@@ -133,8 +133,7 @@ public class _3502NereusNeedsYou extends QuestHandler {
                     if (var == 2 && var1 != 1) {
                         defaultOnKillEvent(env, 214895, 0, 1, 1); // 1: 1
                         if (var2 == 1 && var3 == 1) {
-                            QuestService.addNewSpawn(300040000, player.getInstanceId(), 214904, 275.34537f, 323.02072f,
-                                    (float) 130.9302f, (byte) 52);
+                            QuestService.addNewSpawn(300040000, player.getInstanceId(), 214904, 275.34537f, 323.02072f, (float) 130.9302f, (byte) 52);
                             return true;
                         }
                         return true;
@@ -145,8 +144,7 @@ public class _3502NereusNeedsYou extends QuestHandler {
                     if (var == 2 && var2 != 1) {
                         defaultOnKillEvent(env, 214896, 0, 1, 2); // 2: 1
                         if (var1 == 1 && var3 == 1) {
-                            QuestService.addNewSpawn(300040000, player.getInstanceId(), 214904, 275.34537f, 323.02072f,
-                                    (float) 130.9302f, (byte) 52);
+                            QuestService.addNewSpawn(300040000, player.getInstanceId(), 214904, 275.34537f, 323.02072f, (float) 130.9302f, (byte) 52);
                             return true;
                         }
                         return true;
@@ -157,8 +155,7 @@ public class _3502NereusNeedsYou extends QuestHandler {
                     if (var == 2 && var3 != 1) {
                         defaultOnKillEvent(env, 214897, 0, 1, 3); // 3: 1
                         if (var1 == 1 && var2 == 1) {
-                            QuestService.addNewSpawn(300040000, player.getInstanceId(), 214904, 275.34537f, 323.02072f,
-                                    (float) 130.9302f, (byte) 52);
+                            QuestService.addNewSpawn(300040000, player.getInstanceId(), 214904, 275.34537f, 323.02072f, (float) 130.9302f, (byte) 52);
                             return true;
                         }
                         return true;

@@ -29,18 +29,13 @@
  */
 package quest.aturam_sky_fortress;
 
-import java.util.Collections;
-
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.services.item.ItemService;
 
 /**
  * @author pralinka
@@ -82,34 +77,34 @@ public class _18314WhatNotToForgetDuringAMission extends QuestHandler {
             return false;
         }
         int var = qs.getQuestVarById(0);
-		int var1 = qs.getQuestVarById(1);
+        int var1 = qs.getQuestVarById(1);
         if (qs.getStatus() == QuestStatus.START) {
             if (targetId == 730373) {
                 switch (env.getDialog()) {
                     case USE_OBJECT:
-                    if (var == 0) {
-						if (var1 >= 0 && var1 < 6) {
-							if (env.getVisibleObject() instanceof Npc) {
-                            targetId = ((Npc) env.getVisibleObject()).getNpcId();
-                            Npc npc = (Npc) env.getVisibleObject();
-                            npc.getController().onDelete();
-                            changeQuestStep(env, var1, var1 + 1, false, 1);
-                            updateQuestStatus(env);
-                            return closeDialogWindow(env);
-							} 
-						} else if (var1 == 6) {
-							qs.setQuestVar(0);
-                            Npc npc = (Npc) env.getVisibleObject();
-                            npc.getController().onDelete();
-							qs.setStatus(QuestStatus.REWARD);
-							updateQuestStatus(env);
-							return closeDialogWindow(env);
-							}
-						}
-					}
+                        if (var == 0) {
+                            if (var1 >= 0 && var1 < 6) {
+                                if (env.getVisibleObject() instanceof Npc) {
+                                    targetId = ((Npc) env.getVisibleObject()).getNpcId();
+                                    Npc npc = (Npc) env.getVisibleObject();
+                                    npc.getController().onDelete();
+                                    changeQuestStep(env, var1, var1 + 1, false, 1);
+                                    updateQuestStatus(env);
+                                    return closeDialogWindow(env);
+                                }
+                            } else if (var1 == 6) {
+                                qs.setQuestVar(0);
+                                Npc npc = (Npc) env.getVisibleObject();
+                                npc.getController().onDelete();
+                                qs.setStatus(QuestStatus.REWARD);
+                                updateQuestStatus(env);
+                                return closeDialogWindow(env);
+                            }
+                        }
                 }
-            }  else if (qs.getStatus() == QuestStatus.REWARD) {
-				if (targetId == 799530) {
+            }
+        } else if (qs.getStatus() == QuestStatus.REWARD) {
+            if (targetId == 799530) {
                 switch (env.getDialog()) {
                     case USE_OBJECT:
                         return sendQuestDialog(env, 10002);

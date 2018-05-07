@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "QuestWorkItems", propOrder = {"questWorkItem"})
+@XmlType(name = "QuestWorkItems", propOrder = { "questWorkItem" })
 public class QuestWorkItems {
 
     @XmlElement(name = "quest_work_item")
@@ -54,6 +54,7 @@ public class QuestWorkItems {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getQuestWorkItem().add(newItem);
      * </pre>
@@ -63,7 +64,7 @@ public class QuestWorkItems {
      */
     public List<QuestItems> getQuestWorkItem() {
         if (questWorkItem == null) {
-            questWorkItem = new ArrayList<QuestItems>();
+            questWorkItem = new ArrayList<>();
         }
         return this.questWorkItem;
     }

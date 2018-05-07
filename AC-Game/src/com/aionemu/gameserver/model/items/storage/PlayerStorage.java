@@ -56,7 +56,7 @@ public class PlayerStorage extends Storage {
     }
 
     @Override
-	public void onLoadHandler(Item item) {
+    public void onLoadHandler(Item item) {
         if (item.isEquipped()) {
             actor.getEquipment().onLoadHandler(item);
         } else {

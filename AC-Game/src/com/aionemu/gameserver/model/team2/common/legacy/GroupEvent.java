@@ -42,6 +42,7 @@ public enum GroupEvent {
     ENTER(13),
     UPDATE(13),
     UNK(9); // to do
+
     private int id;
 
     private GroupEvent(int id) {

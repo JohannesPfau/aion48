@@ -69,11 +69,11 @@ public class CM_CRAFT extends AionClientPacket {
         targetObjId = readD();
         materialsCount = readH();
         craftType = readC();
-//		un used
-//		for (int i = 0; i < materialsCount; i++) {
-//			readD(); // materialId
-//			readQ(); // materialCount
-//		}
+        //		un used
+        //		for (int i = 0; i < materialsCount; i++) {
+        //			readD(); // materialId
+        //			readQ(); // materialCount
+        //		}
     }
 
     @Override
@@ -92,7 +92,7 @@ public class CM_CRAFT extends AionClientPacket {
         if (unk != 129) {
             VisibleObject staticObject = player.getKnownList().getKnownObjects().get(targetObjId);
             if (staticObject == null || !MathUtil.isIn3dRange(player, staticObject, 10)
-                    || staticObject.getObjectTemplate().getTemplateId() != targetTemplateId) {
+                || staticObject.getObjectTemplate().getTemplateId() != targetTemplateId) {
                 return;
             }
         }

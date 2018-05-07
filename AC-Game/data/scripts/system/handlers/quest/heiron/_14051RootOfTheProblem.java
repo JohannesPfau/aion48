@@ -45,7 +45,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _14051RootOfTheProblem extends QuestHandler {
 
     private final static int questId = 14051;
-    private final static int[] npc_ids = {204500, 204549, 730026, 730024};
+    private final static int[] npc_ids = { 204500, 204549, 730026, 730024 };
 
     public _14051RootOfTheProblem() {
         super(questId);

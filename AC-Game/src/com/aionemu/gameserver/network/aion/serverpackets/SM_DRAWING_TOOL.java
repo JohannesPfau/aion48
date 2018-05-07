@@ -61,7 +61,7 @@ public class SM_DRAWING_TOOL extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection aionconnection) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(action);
         if (action != 1) {
             writeC(unk2);

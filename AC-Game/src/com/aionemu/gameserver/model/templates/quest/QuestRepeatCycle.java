@@ -47,6 +47,7 @@ public enum QuestRepeatCycle {
     FRI(5),
     SAT(6),
     SUN(7);
+
     private int weekDay;
 
     private QuestRepeatCycle(int weekDay) {

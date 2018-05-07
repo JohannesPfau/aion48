@@ -40,11 +40,8 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
 
 import com.aionemu.chatserver.configs.Config;
 import com.aionemu.chatserver.network.netty.NettyServer;
@@ -54,7 +51,10 @@ import com.aionemu.chatserver.service.GameServerService;
 import com.aionemu.chatserver.service.RestartService;
 import com.aionemu.chatserver.utils.IdFactory;
 import com.aionemu.commons.utils.AEInfos;
-import org.slf4j.Logger;
+
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
 
 /**
  * @author ATracer, KID, nrg
@@ -69,6 +69,7 @@ public class ChatServer {
     private static void initalizeLoggger() {
         new File("./log/backup/").mkdirs();
         File[] files = new File("log").listFiles(new FilenameFilter() {
+
             @Override
             public boolean accept(File dir, String name) {
                 return name.endsWith(".log");

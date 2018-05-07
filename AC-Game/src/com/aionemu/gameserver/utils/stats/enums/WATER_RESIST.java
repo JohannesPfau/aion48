@@ -51,6 +51,7 @@ public enum WATER_RESIST {
     GUNNER(0),
     ARTIST(0),
     BARD(0);
+
     private int value;
 
     private WATER_RESIST(int value) {

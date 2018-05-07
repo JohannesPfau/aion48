@@ -139,8 +139,8 @@ public class CraftingRewards extends QuestHandler {
     }
 
     private boolean canLearn(Player player) {
-        return levelReward == 400 ? CraftSkillUpdateService.canLearnMoreExpertCraftingSkill(player) : levelReward == 500
-                ? CraftSkillUpdateService.canLearnMoreMasterCraftingSkill(player) : true;
+        return levelReward == 400 ? CraftSkillUpdateService.canLearnMoreExpertCraftingSkill(player)
+            : levelReward == 500 ? CraftSkillUpdateService.canLearnMoreMasterCraftingSkill(player) : true;
     }
 
     @Override

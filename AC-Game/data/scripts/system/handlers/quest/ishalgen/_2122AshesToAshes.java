@@ -29,12 +29,12 @@
  */
 package quest.ishalgen;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -44,12 +44,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Cheatkiller
  * @Reworked GiGatR00n
- *
  */
 public class _2122AshesToAshes extends QuestHandler {
 
     private final static int questId = 2122;
-    private int[] npcs = {203551, 700148, 730029};
+    private int[] npcs = { 203551, 700148, 730029 };
 
     public _2122AshesToAshes() {
         super(questId);
@@ -66,22 +65,22 @@ public class _2122AshesToAshes extends QuestHandler {
 
     @Override
     public boolean onDialogEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
+        Player player = env.getPlayer();
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		DialogAction dialog = env.getDialog();
-		int targetId = env.getTargetId();
+        DialogAction dialog = env.getDialog();
+        int targetId = env.getTargetId();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 0) {
-				if (dialog == DialogAction.QUEST_ACCEPT_1) {
-					QuestService.startQuest(env);
-					return closeDialogWindow(env);
-	            } else if (dialog == DialogAction.QUEST_REFUSE_1 || dialog == DialogAction.QUEST_REFUSE_2) {
-	                PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
-	            }					
-			}
-		} else if (qs.getStatus() == QuestStatus.START) {
+        if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+            if (targetId == 0) {
+                if (dialog == DialogAction.QUEST_ACCEPT_1) {
+                    QuestService.startQuest(env);
+                    return closeDialogWindow(env);
+                } else if (dialog == DialogAction.QUEST_REFUSE_1 || dialog == DialogAction.QUEST_REFUSE_2) {
+                    PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
+                }
+            }
+        } else if (qs.getStatus() == QuestStatus.START) {
             if (targetId == 203551) {
                 switch (dialog) {
                     case QUEST_SELECT: {

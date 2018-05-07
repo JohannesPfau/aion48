@@ -29,11 +29,11 @@
  */
 package quest.gelkmaros;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -48,7 +48,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _20025QuestForSielsRelics extends QuestHandler {
 
     private final static int questId = 20025;
-    private final static int[] npc_ids = {799225, 799226, 799341, 798800, 204182, 799239, 204837, 799327, 799328};
+    private final static int[] npc_ids = { 799225, 799226, 799341, 798800, 204182, 799239, 204837, 799327, 799328 };
 
     public _20025QuestForSielsRelics() {
         super(questId);

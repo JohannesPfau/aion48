@@ -47,7 +47,7 @@ public class CsPacketHandler {
      * logger for this class
      */
     private static final Logger log = LoggerFactory.getLogger(CsPacketHandler.class);
-    private Map<State, Map<Integer, CsClientPacket>> packetPrototypes = new HashMap<State, Map<Integer, CsClientPacket>>();
+    private Map<State, Map<Integer, CsClientPacket>> packetPrototypes = new HashMap<>();
 
     /**
      * Reads one packet from given ByteBuffer
@@ -71,7 +71,7 @@ public class CsPacketHandler {
         for (State state : states) {
             Map<Integer, CsClientPacket> pm = packetPrototypes.get(state);
             if (pm == null) {
-                pm = new HashMap<Integer, CsClientPacket>();
+                pm = new HashMap<>();
                 packetPrototypes.put(state, pm);
             }
             pm.put(packetPrototype.getOpcode(), packetPrototype);

@@ -32,61 +32,40 @@ public class cmd_help extends PlayerCommand {
     }
 
     @Override
-    public void execute(Player player, String... params){
+    public void execute(Player player, String... params) {
         if (params.length != 0) {
             onFail(player, null);
             return;
         }
 
-
-		if (player.getRace() == Race.ASMODIANS ||player.getRace() == Race.ELYOS){
-			PacketSendUtility.sendWhiteMessage(player, "" +
-			"\n" +
-				"========================\n" +
-                "Available .[dot] Commands for Players!" +
-                "\n========================\n" +
-                " .skills : refresh or get new skills.\n" +
-                " .ffa enter : to join free for all\n" +
-                " .arena : to join battleground 1vs1\n" +
-		     " .2v2 : to leave battleground 2vs2\n" +
-		     " .pvp : will teleport you to insane pvp map [beluslan/heiron]\n" +
-                " .clean <item id/link> : to delete an item\n" +
-                " .dye <color> : to dye yourself.\n" +
-                " .unstuck : go to obelisk location\n" +
-                " .skin : will remove your candy look,\n" +
-                " .unlockcube : opens all slots of your inventory\n" +
-                " .asmo : asmodian world chat\n" +
-                " .ely : elyos world chat\n" +
-                " .world : open world chat\n" +                " .givestigma add : will give you your class stigma's\n" +
-                " .givestigma unlock :  will open your stigma slots.\n" +
-                " .augmentme : will augment all your equiptment\n" +
-                " .enchant 15 : will enchant your equiptment to 15.\n" +
-                " .gmlist : shows available gm's \n" +
-                " .drop : shows the drop list of an npc\n" +
-                " .divorce : divorces from a Player\n" +
-                " .marry : marry another player\n" +
-                " .showgp : shows your current GP\n" +
-                " .support : issues a short ticket for gm to view\n" +
-                " .fixwep : gets weapon buff if you dont have one.");
+        if (player.getRace() == Race.ASMODIANS || player.getRace() == Race.ELYOS) {
             PacketSendUtility.sendWhiteMessage(player,
-                " .toll : shows current toll you have in you're account.\n" +
-                " .queue : registers you in an on-going event hosted by a gm.\n" +
-				" .remodel : cross remodel with use of tiamat bloody tear \n" +
-				" .reskinvip : reskin two handed weapons with use of tiamat bloody tear [VIP]\n");
+                "" + "\n" + "========================\n" + "Available .[dot] Commands for Players!" + "\n========================\n"
+                    + " .skills : refresh or get new skills.\n" + " .ffa enter : to join free for all\n" + " .arena : to join battleground 1vs1\n"
+                    + " .2v2 : to leave battleground 2vs2\n" + " .pvp : will teleport you to insane pvp map [beluslan/heiron]\n"
+                    + " .clean <item id/link> : to delete an item\n" + " .dye <color> : to dye yourself.\n" + " .unstuck : go to obelisk location\n"
+                    + " .skin : will remove your candy look,\n" + " .unlockcube : opens all slots of your inventory\n"
+                    + " .asmo : asmodian world chat\n" + " .ely : elyos world chat\n" + " .world : open world chat\n"
+                    + " .givestigma add : will give you your class stigma's\n" + " .givestigma unlock :  will open your stigma slots.\n"
+                    + " .augmentme : will augment all your equiptment\n" + " .enchant 15 : will enchant your equiptment to 15.\n"
+                    + " .gmlist : shows available gm's \n" + " .drop : shows the drop list of an npc\n" + " .divorce : divorces from a Player\n"
+                    + " .marry : marry another player\n" + " .showgp : shows your current GP\n" + " .support : issues a short ticket for gm to view\n"
+                    + " .fixwep : gets weapon buff if you dont have one.");
+            PacketSendUtility.sendWhiteMessage(player,
+                " .toll : shows current toll you have in you're account.\n" + " .queue : registers you in an on-going event hosted by a gm.\n"
+                    + " .remodel : cross remodel with use of tiamat bloody tear \n"
+                    + " .reskinvip : reskin two handed weapons with use of tiamat bloody tear [VIP]\n");
 
             PacketSendUtility.sendWhiteMessage(player,
-                "========================\n" +
-                "Available // [add] Commands for Players!" +
-                "\n========================\n" +
-                " //add <player> <item id> <quantity> : add items\n" +
-                " //addset <player> <item id> : add sets to inv\n" +
-		        " //add kinah <quantity> : adds kinah to your character\n");
-     
-	}
-			
+                "========================\n" + "Available // [add] Commands for Players!" + "\n========================\n"
+                    + " //add <player> <item id> <quantity> : add items\n" + " //addset <player> <item id> : add sets to inv\n"
+                    + " //add kinah <quantity> : adds kinah to your character\n");
+
+        }
+
     }
-    public void onFail(Player player, String msg){
+
+    public void onFail(Player player, String msg) {
         PacketSendUtility.sendWhiteMessage(player, "Syntax : .help");
     }
 }
-

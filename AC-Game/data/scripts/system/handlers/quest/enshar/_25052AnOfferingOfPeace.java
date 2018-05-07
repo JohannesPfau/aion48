@@ -29,9 +29,9 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,7 +49,7 @@ public class _25052AnOfferingOfPeace extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {804913, 804915, 731561};
+        int[] npcs = { 804913, 804915, 731561 };
         qe.registerQuestNpc(804913).addOnQuestStart(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -64,7 +64,7 @@ public class _25052AnOfferingOfPeace extends QuestHandler {
         int targetId = env.getTargetId();
 
         if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-            if (targetId == 804913) { 
+            if (targetId == 804913) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 4762);
                 } else {
@@ -75,16 +75,16 @@ public class _25052AnOfferingOfPeace extends QuestHandler {
             int var = qs.getQuestVarById(0);
             switch (targetId) {
                 case 731561: {
-					if (dialog == DialogAction.USE_OBJECT) {
-						if (var == 0) {
-							giveQuestItem(env, 182215721, 1);
-							changeQuestStep(env, 0, 1, true);
-							return true;
-						}
-					}	
+                    if (dialog == DialogAction.USE_OBJECT) {
+                        if (var == 0) {
+                            giveQuestItem(env, 182215721, 1);
+                            changeQuestStep(env, 0, 1, true);
+                            return true;
+                        }
+                    }
                     break;
                 }
-				case 804915: { 
+                case 804915: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 1) {
@@ -102,10 +102,10 @@ public class _25052AnOfferingOfPeace extends QuestHandler {
                         }
                     }
                     break;
-                }                
+                }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-            if (targetId == 804915) { 
+            if (targetId == 804915) {
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
                 } else {

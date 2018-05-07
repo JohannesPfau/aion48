@@ -41,16 +41,16 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "ArcadeTab")
 public class ArcadeTab {
 
-	@XmlAttribute(name = "id")
-	private int id;
-	@XmlElement(name = "item")
-	private List<ArcadeTabItemList> arcadeTabItem;
+    @XmlAttribute(name = "id")
+    private int id;
+    @XmlElement(name = "item")
+    private List<ArcadeTabItemList> arcadeTabItem;
 
-	public int getId() {
-		return id;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public List<ArcadeTabItemList> getArcadeTabItems() {
-		return arcadeTabItem;
-	}
+    public List<ArcadeTabItemList> getArcadeTabItems() {
+        return arcadeTabItem;
+    }
 }

@@ -29,9 +29,9 @@
  */
 package quest.cygnea;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,23 +49,23 @@ public class _15073PerennialStruggles extends QuestHandler {
 
     @Override
     public void register() {
-		qe.registerQuestNpc(804709).addOnQuestStart(questId);
+        qe.registerQuestNpc(804709).addOnQuestStart(questId);
         qe.registerQuestNpc(804709).addOnTalkEvent(questId);
-		qe.registerQuestNpc(235892).addOnKillEvent(questId);
-		qe.registerQuestNpc(235893).addOnKillEvent(questId);
-		qe.registerQuestNpc(235888).addOnKillEvent(questId);
-		qe.registerQuestNpc(235889).addOnKillEvent(questId);
+        qe.registerQuestNpc(235892).addOnKillEvent(questId);
+        qe.registerQuestNpc(235893).addOnKillEvent(questId);
+        qe.registerQuestNpc(235888).addOnKillEvent(questId);
+        qe.registerQuestNpc(235889).addOnKillEvent(questId);
     }
 
-	@Override
+    @Override
     public boolean onKillEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             if (var == 0) {
-                int[] ettins = {235892, 235893};
-                int[] lizards = {235888, 235889};
+                int[] ettins = { 235892, 235893 };
+                int[] lizards = { 235888, 235889 };
                 int targetId = env.getTargetId();
                 int var1 = qs.getQuestVarById(1);
                 int var2 = qs.getQuestVarById(2);
@@ -77,8 +77,8 @@ public class _15073PerennialStruggles extends QuestHandler {
                         } else if (var1 == 4) {
                             if (var2 == 5) {
                                 qs.setQuestVar(1);
-								qs.setStatus(QuestStatus.REWARD);
-								updateQuestStatus(env);
+                                qs.setStatus(QuestStatus.REWARD);
+                                updateQuestStatus(env);
                                 return true;
                             } else {
                                 return defaultOnKillEvent(env, lizards, 4, 5, 1);
@@ -86,15 +86,15 @@ public class _15073PerennialStruggles extends QuestHandler {
                         }
                         break;
                     }
-					case 235892:
+                    case 235892:
                     case 235893: {
                         if (var2 < 4) {
                             return defaultOnKillEvent(env, ettins, 0, 4, 2);
                         } else if (var2 == 4) {
                             if (var1 == 5) {
                                 qs.setQuestVar(1);
-								qs.setStatus(QuestStatus.REWARD);
-								updateQuestStatus(env);
+                                qs.setStatus(QuestStatus.REWARD);
+                                updateQuestStatus(env);
                                 return true;
                             } else {
                                 return defaultOnKillEvent(env, ettins, 4, 5, 2);
@@ -107,7 +107,7 @@ public class _15073PerennialStruggles extends QuestHandler {
         }
         return false;
     }
-	
+
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         Player player = env.getPlayer();

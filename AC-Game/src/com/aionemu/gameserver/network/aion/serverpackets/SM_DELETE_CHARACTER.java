@@ -35,8 +35,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * In this packet Server is sending response for CM_DELETE_CHARACTER.
- *
-
  */
 public class SM_DELETE_CHARACTER extends AionServerPacket {
 
@@ -56,7 +54,7 @@ public class SM_DELETE_CHARACTER extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         if (playerObjId != 0) {
             writeD(0x00);// unk
             writeD(playerObjId);

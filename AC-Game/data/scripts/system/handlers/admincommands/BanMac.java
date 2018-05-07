@@ -29,13 +29,14 @@
  */
 package admincommands;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.BannedMacManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author KID, nrg
@@ -75,7 +76,7 @@ public class BanMac extends AdminCommand {
         //is mac defined?
         if (params.length > 1) {
             address = params[1];
-        } else {  //no address defined
+        } else { //no address defined
             VisibleObject target = player.getTarget();
             if (target != null && target instanceof Player) {
                 if (target.getObjectId() == player.getObjectId()) {
@@ -94,7 +95,7 @@ public class BanMac extends AdminCommand {
         }
 
         BannedMacManager.getInstance().banAddress(address, System.currentTimeMillis() + time * 60 * 1000,
-                "author=" + player.getName() + ", " + player.getObjectId() + "; target=" + targetName);
+            "author=" + player.getName() + ", " + player.getObjectId() + "; target=" + targetName);
         log.info("[banmac] GM : " + player.getName() + " has banned mac [" + address + "] for [" + time + "] in mapId '" + player.getWorldId() + "'");
     }
 

@@ -55,7 +55,7 @@ public class SM_HOUSE_RENDER extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(0);
         writeD(house.getAddress().getId());
 

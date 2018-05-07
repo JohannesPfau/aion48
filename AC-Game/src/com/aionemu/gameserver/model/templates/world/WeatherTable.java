@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "WeatherTable", propOrder = {"zoneData"})
+@XmlType(name = "WeatherTable", propOrder = { "zoneData" })
 public class WeatherTable {
 
     @XmlElement(name = "table", required = true)
@@ -90,7 +90,7 @@ public class WeatherTable {
     }
 
     public List<WeatherEntry> getWeathersForZone(int zoneId) {
-        List<WeatherEntry> result = new ArrayList<WeatherEntry>();
+        List<WeatherEntry> result = new ArrayList<>();
         for (WeatherEntry entry : getZoneData()) {
             if (entry.getZoneId() == zoneId) {
                 result.add(entry);

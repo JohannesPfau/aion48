@@ -29,7 +29,8 @@
  */
 package ai.instance.rentusBase;
 
-import ai.GeneralNpcAI2;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -44,7 +45,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz
@@ -89,6 +90,7 @@ public class MeropsAI2 extends GeneralNpcAI2 {
                     break;
             }
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     if (!isAlreadyDead()) {
@@ -99,6 +101,7 @@ public class MeropsAI2 extends GeneralNpcAI2 {
                             spawn(282546, 751.380f, 625.360f, 157f, (byte) 10);
                             spawn(282546, 748.950f, 645.180f, 157f, (byte) 114);
                             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                 @Override
                                 public void run() {
                                     if (!isAlreadyDead()) {
@@ -114,6 +117,7 @@ public class MeropsAI2 extends GeneralNpcAI2 {
                             spawn(282547, 255.980f, 684.432f, 170f, (byte) 7);
                             spawn(282547, 270.590f, 672.190f, 170f, (byte) 22);
                             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                 @Override
                                 public void run() {
                                     if (!isAlreadyDead()) {
@@ -127,6 +131,7 @@ public class MeropsAI2 extends GeneralNpcAI2 {
                         } else if (getNpcId() == 799673) {
                             spawn(282548, 160.981f, 310.663f, 252.031f, (byte) 85);
                             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                 @Override
                                 public void run() {
                                     if (!isAlreadyDead()) {
@@ -141,12 +146,15 @@ public class MeropsAI2 extends GeneralNpcAI2 {
                                         setStateIfNot(AIState.WALKING);
                                         think();
                                         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                             @Override
                                             public void run() {
                                                 if (!isAlreadyDead()) {
                                                     getOwner().setState(1);
-                                                    PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+                                                    PacketSendUtility.broadcastPacket(getOwner(),
+                                                        new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
                                                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                                         @Override
                                                         public void run() {
                                                             if (!isAlreadyDead()) {
@@ -172,17 +180,20 @@ public class MeropsAI2 extends GeneralNpcAI2 {
                                 sendMsg(1500435, 4000);
                                 sendMsg(1500436, 13000);
                                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                     @Override
                                     public void run() {
                                         if (!isAlreadyDead()) {
                                             if (vasharti != null && !vasharti.getLifeStats().isAlreadyDead()) {
                                                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                                     @Override
                                                     public void run() {
                                                         if (vasharti != null && !vasharti.getLifeStats().isAlreadyDead()) {
                                                             sendMsg(1500437, 0);
                                                             vasharti.getController().onDelete();
                                                             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                                                 @Override
                                                                 public void run() {
                                                                     spawn(217313, 188.17f, 414.06f, 260.75488f, (byte) 86);

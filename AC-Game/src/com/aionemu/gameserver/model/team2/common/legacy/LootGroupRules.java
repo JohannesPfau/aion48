@@ -31,8 +31,6 @@ package com.aionemu.gameserver.model.team2.common.legacy;
 
 import java.util.Collection;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.player.InRoll;
@@ -40,6 +38,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.services.drop.DropDistributionService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import javolution.util.FastList;
 
 /**
  * @author ATracer, xTz
@@ -56,7 +56,7 @@ public class LootGroupRules {
     private int misc;
     private int nrMisc;
     private int nrRoundRobin;
-    private FastList<DropItem> itemsToBeDistributed = new FastList<DropItem>();
+    private FastList<DropItem> itemsToBeDistributed = new FastList<>();
 
     public LootGroupRules() {
         lootRule = LootRuleType.ROUNDROBIN;
@@ -68,8 +68,8 @@ public class LootGroupRules {
         ethernal_item_above = 2;
     }
 
-    public LootGroupRules(LootRuleType lootRule, LootDistribution autodistribution, int commonItemAbove,
-                          int superiorItemAbove, int heroicItemAbove, int fabledItemAbove, int ethernalItemAbove, int misc) {
+    public LootGroupRules(LootRuleType lootRule, LootDistribution autodistribution, int commonItemAbove, int superiorItemAbove, int heroicItemAbove,
+        int fabledItemAbove, int ethernalItemAbove, int misc) {
         super();
         this.lootRule = lootRule;
         this.autodistribution = autodistribution;
@@ -166,7 +166,8 @@ public class LootGroupRules {
     }
 
     /**
-     * @param nrMisc .
+     * @param nrMisc
+     *            .
      */
     public void setNrMisc(int nrMisc) {
         this.nrMisc = nrMisc;
@@ -174,6 +175,7 @@ public class LootGroupRules {
 
     public void setPlayersInRoll(final Collection<Player> players, int time, final int index, final int npcId) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 for (Player player : players) {
@@ -183,13 +185,13 @@ public class LootGroupRules {
                             case 2:
                                 if (inRoll.getIndex() == index && inRoll.getNpcId() == npcId) {
                                     DropDistributionService.getInstance().handleRoll(player, 0, inRoll.getItemId(), inRoll.getNpcId(),
-                                            inRoll.getIndex());
+                                        inRoll.getIndex());
                                 }
                                 break;
                             case 3:
                                 if (inRoll.getIndex() == index && inRoll.getNpcId() == npcId) {
                                     DropDistributionService.getInstance().handleBid(player, 0, inRoll.getItemId(), inRoll.getNpcId(),
-                                            inRoll.getIndex());
+                                        inRoll.getIndex());
                                 }
                                 break;
                         }
@@ -207,7 +209,8 @@ public class LootGroupRules {
     }
 
     /**
-     * @param nrRoundRobin .
+     * @param nrRoundRobin
+     *            .
      */
     public void setNrRoundRobin(int nrRoundRobin) {
         this.nrRoundRobin = nrRoundRobin;

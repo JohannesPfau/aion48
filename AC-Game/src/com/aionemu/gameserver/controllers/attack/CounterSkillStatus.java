@@ -38,6 +38,7 @@ public enum CounterSkillStatus {
     PARRY(64),
     DODGE(128),
     RESIST(256);
+
     private final int type;
 
     private CounterSkillStatus(int type) {

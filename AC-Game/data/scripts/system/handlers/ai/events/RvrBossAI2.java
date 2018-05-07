@@ -29,7 +29,10 @@
  */
 package ai.events;
 
-import ai.AggressiveNpcAI2;
+import java.util.List;
+
+import org.joda.time.DateTime;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
@@ -39,9 +42,8 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import org.joda.time.DateTime;
 
-import java.util.List;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Bobobear
@@ -79,6 +81,7 @@ public class RvrBossAI2 extends AggressiveNpcAI2 {
     private void scheduleRespawn() {
         if ((int) getPosition().getMapId() == 600010000) {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     spawn(219641, 658.7087f, 795.21857f, 293.14087f, (byte) 7);
@@ -103,7 +106,8 @@ public class RvrBossAI2 extends AggressiveNpcAI2 {
             if (hour >= 19 && hour <= 23) {
                 List<Player> eventPlayerList = SiegeService.getInstance().getRvrPlayersOnEvent();
                 for (Player rewardedPlayer : eventPlayerList) {
-                    SystemMailService.getInstance().sendMail("EventService", rewardedPlayer.getName(), "EventReward", "Medal", 186000147, 1, 0, LetterType.NORMAL);
+                    SystemMailService.getInstance().sendMail("EventService", rewardedPlayer.getName(), "EventReward", "Medal", 186000147, 1, 0,
+                        LetterType.NORMAL);
                 }
             }
             SiegeService.getInstance().clearRvrPlayersOnEvent();

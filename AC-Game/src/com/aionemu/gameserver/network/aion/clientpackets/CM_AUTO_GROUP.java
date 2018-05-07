@@ -45,7 +45,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Shepper, Guapo, nrg
- (Aion-Core)
+ *         (Aion-Core)
  */
 public class CM_AUTO_GROUP extends AionClientPacket {
 

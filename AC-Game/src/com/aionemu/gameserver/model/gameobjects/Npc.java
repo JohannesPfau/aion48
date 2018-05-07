@@ -166,19 +166,22 @@ public class Npc extends Creature {
     public int getAggroRange() {
         return ai2.modifyARange(aRange);
     }
-	
-	public NpcRating getRating() {
-		return getObjectTemplate().getRating();
-	}
-	public NpcRank getRank() {
-		return getObjectTemplate().getRank();
-	}
-	public AbyssNpcType getAbyssNpcType() {
-		return getObjectTemplate().getAbyssNpcType();
-	}
-	public int getHpGauge() {
-		return getObjectTemplate().getHpGauge();
-	}	
+
+    public NpcRating getRating() {
+        return getObjectTemplate().getRating();
+    }
+
+    public NpcRank getRank() {
+        return getObjectTemplate().getRank();
+    }
+
+    public AbyssNpcType getAbyssNpcType() {
+        return getObjectTemplate().getAbyssNpcType();
+    }
+
+    public int getHpGauge() {
+        return getObjectTemplate().getHpGauge();
+    }
 
     /**
      * Check whether npc located near initial spawn location
@@ -213,7 +216,7 @@ public class Npc extends Creature {
     public int getType(Creature creature) {
         int typeForPlayer = -1;
         if (TribeRelationService.isInvulnerable(this, creature)) {
-        	typeForPlayer = CreatureType.INVULNERABLE.getId();
+            typeForPlayer = CreatureType.INVULNERABLE.getId();
         } else if (TribeRelationService.isNone(this, creature)) {
             typeForPlayer = CreatureType.PEACE.getId();
         } else if (TribeRelationService.isAggressive(this, creature)) {
@@ -268,7 +271,7 @@ public class Npc extends Creature {
 
     /**
      * @return UniqueId of the VisibleObject which created this Npc (could be
-     * player or house)
+     *         player or house)
      */
     public int getCreatorId() {
         return creatorId;
@@ -366,13 +369,13 @@ public class Npc extends Creature {
 
         return false;
     }
-	
-	public boolean isRewardGP() {
-		if (this instanceof Creature) {
-			return true;
-		}
-		return false;
-	}
+
+    public boolean isRewardGP() {
+        if (this instanceof Creature) {
+            return true;
+        }
+        return false;
+    }
 
     public boolean mayShout(int delaySeconds) {
         if (!DataManager.NPC_SHOUT_DATA.hasAnyShout(getPosition().getMapId(), getNpcId())) {
@@ -382,19 +385,18 @@ public class Npc extends Creature {
     }
 
     public void shout(final NpcShout shout, final Creature target, final Object param, int delaySeconds) {
-        if (shout.getWhen() != ShoutEventType.DIED && shout.getWhen() != ShoutEventType.BEFORE_DESPAWN
-                && getLifeStats().isAlreadyDead() || !mayShout(delaySeconds)) {
+        if (shout.getWhen() != ShoutEventType.DIED && shout.getWhen() != ShoutEventType.BEFORE_DESPAWN && getLifeStats().isAlreadyDead()
+            || !mayShout(delaySeconds)) {
             return;
         }
 
-        if (shout.getPattern() != null
-                && !((AITemplate) getAi2()).onPatternShout(shout.getWhen(), shout.getPattern(), shout.getSkillNo())) {
+        if (shout.getPattern() != null && !((AITemplate) getAi2()).onPatternShout(shout.getWhen(), shout.getPattern(), shout.getSkillNo())) {
             return;
         }
 
         final int shoutRange = getObjectTemplate().getMinimumShoutRange();
-        if (shout.getShoutType() == ShoutType.SAY && !(target instanceof Player) || target != null
-                && !MathUtil.isIn3dRange(target, this, shoutRange)) {
+        if (shout.getShoutType() == ShoutType.SAY && !(target instanceof Player)
+            || target != null && !MathUtil.isIn3dRange(target, this, shoutRange)) {
             return;
         }
 
@@ -403,10 +405,11 @@ public class Npc extends Creature {
         lastShoutedSeconds = System.currentTimeMillis() / 1000;
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (thisNpc.getLifeStats().isAlreadyDead() && shout.getWhen() != ShoutEventType.DIED
-                        && shout.getWhen() != ShoutEventType.BEFORE_DESPAWN) {
+                    && shout.getWhen() != ShoutEventType.BEFORE_DESPAWN) {
                     return;
                 }
 
@@ -438,4 +441,3 @@ public class Npc extends Creature {
         this.oldHeading = oldHeading;
     }
 }
-

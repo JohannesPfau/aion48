@@ -133,6 +133,7 @@ public class SpawnEngine {
     static SpawnTemplate createSpawnTemplate(int worldId, int npcId, float x, float y, float z, byte heading, String walkerId, int walkerIdx) {
         return new SpawnTemplate(new SpawnGroup2(worldId, npcId), x, y, z, heading, 0, walkerId, walkerIdx, 0, 0);
     }
+
     public static void spawnFFAInstance(int worldId, int instanceId, byte difficultId, int ownerId) {
         StaticDoorSpawnManager.spawnTemplate(worldId, instanceId);
     }
@@ -141,9 +142,9 @@ public class SpawnEngine {
      * Should be used when you need to add a siegespawn through code and not
      * from static_data spawns (e.g. CustomBalaurAssault)
      */
-    
-    public static SiegeSpawnTemplate addNewSiegeSpawn(int worldId, int npcId, int siegeId, SiegeRace race, SiegeModType mod, float x,
-                                                      float y, float z, byte heading) {
+
+    public static SiegeSpawnTemplate addNewSiegeSpawn(int worldId, int npcId, int siegeId, SiegeRace race, SiegeModType mod, float x, float y,
+        float z, byte heading) {
         SiegeSpawnTemplate spawnTemplate = new SiegeSpawnTemplate(new SpawnGroup2(worldId, npcId), x, y, z, heading, 0, null, 0, 0);
         spawnTemplate.setSiegeId(siegeId);
         spawnTemplate.setSiegeRace(race);
@@ -172,7 +173,8 @@ public class SpawnEngine {
         return spawnTemplate;
     }
 
-    public static SpawnTemplate addNewSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int respawnTime, String walkerId, int walkerIdx) {
+    public static SpawnTemplate addNewSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int respawnTime, String walkerId,
+        int walkerIdx) {
         SpawnTemplate spawnTemplate = createSpawnTemplate(worldId, npcId, x, y, z, heading, walkerId, walkerIdx);
         spawnTemplate.setRespawnTime(respawnTime);
         return spawnTemplate;
@@ -194,14 +196,15 @@ public class SpawnEngine {
     }
 
     public static SpawnTemplate addNewSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int creatorId,
-                                                      String masterName) {
+        String masterName) {
         SpawnTemplate template = addNewSpawn(worldId, npcId, x, y, z, heading, 0);
         template.setCreatorId(creatorId);
         template.setMasterName(masterName);
         return template;
     }
 
-    public static SpawnTemplate addNewSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading, String walkerId, int walkerIdx) {
+    public static SpawnTemplate addNewSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading, String walkerId,
+        int walkerIdx) {
         return addNewSpawn(worldId, npcId, x, y, z, heading, 0, walkerId, walkerIdx);
     }
 
@@ -383,9 +386,10 @@ public class SpawnEngine {
     public static SpawnTemplate addNewSingleTimeSpawnCron(int worldId, int npcId, float x, float y, float z, byte heading, int randomWalk) {
         return addNewSpawn2Cron(worldId, npcId, x, y, z, heading, 0, randomWalk);
     }
-    
+
     public static BattleGroundHealer spawnBGHealer(SpawnTemplate spawn, int instanceId, Race race) {
-        BattleGroundHealer healer = new BattleGroundHealer(IDFactory.getInstance().nextId(), new BattleGroundHealerController(), spawn, DataManager.NPC_DATA.getNpcTemplate(((race == Race.ELYOS) ? 278641 : 278140)));
+        BattleGroundHealer healer = new BattleGroundHealer(IDFactory.getInstance().nextId(), new BattleGroundHealerController(), spawn,
+            DataManager.NPC_DATA.getNpcTemplate(((race == Race.ELYOS) ? 278641 : 278140)));
         healer.setKnownlist(new NpcKnownList(healer));
         healer.setEffectController(new EffectController(healer));
         healer.getController().onRespawn();
@@ -396,7 +400,8 @@ public class SpawnEngine {
     }
 
     public static BattleGroundFlag spawnBGFlag(SpawnTemplate spawn, int instanceId, Race race) {
-        BattleGroundFlag flag = new BattleGroundFlag(IDFactory.getInstance().nextId(), new BattleGroundFlagController(), spawn, DataManager.NPC_DATA.getNpcTemplate(((race == Race.ELYOS) ? 700336 : 700037)));
+        BattleGroundFlag flag = new BattleGroundFlag(IDFactory.getInstance().nextId(), new BattleGroundFlagController(), spawn,
+            DataManager.NPC_DATA.getNpcTemplate(((race == Race.ELYOS) ? 700336 : 700037)));
         flag.setKnownlist(new NpcKnownList(flag));
         flag.setEffectController(new EffectController(flag));
         flag.getController().onRespawn();
@@ -407,7 +412,8 @@ public class SpawnEngine {
     }
 
     public static BattleGroundAgent spawnBGAgent(SpawnTemplate spawn, int instanceId, int npcId) {
-        BattleGroundAgent agent = new BattleGroundAgent(IDFactory.getInstance().nextId(), new BattleGroundAgentController(), spawn, DataManager.NPC_DATA.getNpcTemplate(npcId));
+        BattleGroundAgent agent = new BattleGroundAgent(IDFactory.getInstance().nextId(), new BattleGroundAgentController(), spawn,
+            DataManager.NPC_DATA.getNpcTemplate(npcId));
         agent.setKnownlist(new NpcKnownList(agent));
         agent.setEffectController(new EffectController(agent));
         agent.getController().onRespawn();

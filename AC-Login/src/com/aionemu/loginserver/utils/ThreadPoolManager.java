@@ -29,15 +29,22 @@
  */
 package com.aionemu.loginserver.utils;
 
-import com.aionemu.commons.utils.concurrent.AionRejectedExecutionHandler;
-import com.aionemu.commons.utils.concurrent.RunnableWrapper;
-import com.aionemu.commons.utils.concurrent.ScheduledFutureWrapper;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.*;
+import com.aionemu.commons.utils.concurrent.AionRejectedExecutionHandler;
+import com.aionemu.commons.utils.concurrent.RunnableWrapper;
+import com.aionemu.commons.utils.concurrent.ScheduledFutureWrapper;
 
 /**
  * @author -Nemesiss-, NB4L1, MrPoke, lord_rex
@@ -60,25 +67,24 @@ public final class ThreadPoolManager {
         scheduledPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
         scheduledPool.prestartAllCoreThreads();
 
-        instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS,
-                new ArrayBlockingQueue<Runnable>(100000));
+        instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<Runnable>(100000));
         instantPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
         instantPool.prestartAllCoreThreads();
 
-        longRunningPool = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
-                new SynchronousQueue<Runnable>());
+        longRunningPool = new ThreadPoolExecutor(0, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
         longRunningPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
         longRunningPool.prestartAllCoreThreads();
 
         scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 purge();
             }
         }, 150000, 150000);
 
-        log.info("ThreadPoolManager: Initialized with " + scheduledPool.getPoolSize() + " scheduler, "
-                + instantPool.getPoolSize() + " instant, " + longRunningPool.getPoolSize() + " long running thread(s).");
+        log.info("ThreadPoolManager: Initialized with " + scheduledPool.getPoolSize() + " scheduler, " + instantPool.getPoolSize() + " instant, "
+            + longRunningPool.getPoolSize() + " long running thread(s).");
     }
 
     private long validate(long delay) {
@@ -152,7 +158,8 @@ public final class ThreadPoolManager {
     /**
      * Executes a loginServer packet task
      *
-     * @param pkt runnable packet for Login Server
+     * @param pkt
+     *            runnable packet for Login Server
      */
     public void executeLsPacket(Runnable pkt) {
         execute(pkt);
@@ -161,8 +168,10 @@ public final class ThreadPoolManager {
     /**
      * TaskManager schedulers
      *
-     * @param r     runnable task
-     * @param delay wait before task execution
+     * @param r
+     *            runnable task
+     * @param delay
+     *            wait before task execution
      * @return scheduled task
      */
     public ScheduledFuture<?> scheduleTaskManager(Runnable r, long delay) {
@@ -213,7 +222,7 @@ public final class ThreadPoolManager {
     }
 
     public List<String> getStats() {
-        List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<>();
 
         list.add("");
         list.add("Scheduled pool:");

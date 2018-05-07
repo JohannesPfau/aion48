@@ -29,7 +29,10 @@
  */
 package ai.instance.sauroSupplyBase;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -39,10 +42,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Future;
-
+import ai.AggressiveNpcAI2;
 
 @AIName("rohuka")
 public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
@@ -106,6 +106,7 @@ public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
     private void skill() {
         SkillEngine.getInstance().getSkill(getOwner(), 18158, 100, getOwner()).useNoAnimationSkill();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             public void run() {
                 SkillEngine.getInstance().getSkill(getOwner(), 18160, 100, getOwner()).useNoAnimationSkill();
             }
@@ -125,7 +126,6 @@ public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
             }, delay);
         }
     }
-
 
     private void stage3() {
         int delay = 15000;
@@ -152,7 +152,7 @@ public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
     }
 
     public Player getRandomTarget() {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (Player player : getKnownList().getKnownPlayers().values()) {
             if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 16))
                 players.add(player);
@@ -178,6 +178,5 @@ public class CaptainRohukaAI2 extends AggressiveNpcAI2 {
         isStart = false;
         stage = 0;
     }
-
 
 }

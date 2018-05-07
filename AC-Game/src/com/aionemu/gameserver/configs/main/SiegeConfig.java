@@ -88,18 +88,18 @@ public class SiegeConfig {
      */
     @Property(key = "gameserver.siege.ida", defaultValue = "false")
     public static boolean SIEGE_IDA_ENABLED;
-	
-	@Property(key = "gameserver.agent.fight.time", defaultValue = "0 0 1 ? * *")
-	public static String AGENT_FIGHT_SPAWN_SCHEDULE;
-	
-	/**
-	 * Beritra Invasions
-	 */
-	@Property(key = "gameserver.beritra.enable", defaultValue = "true")
-	public static boolean BERITRA_ENABLED;
-	@Property(key = "gameserver.beritra.schedule", defaultValue = "0 0 4 ? * *")
-	public static String BERITRA_SCHEDULE;
-	@Property(key = "gameserver.beritra.duration", defaultValue = "2")
-	public static int BERITRA_DURATION;
-	
+
+    @Property(key = "gameserver.agent.fight.time", defaultValue = "0 0 1 ? * *")
+    public static String AGENT_FIGHT_SPAWN_SCHEDULE;
+
+    /**
+     * Beritra Invasions
+     */
+    @Property(key = "gameserver.beritra.enable", defaultValue = "true")
+    public static boolean BERITRA_ENABLED;
+    @Property(key = "gameserver.beritra.schedule", defaultValue = "0 0 4 ? * *")
+    public static String BERITRA_SCHEDULE;
+    @Property(key = "gameserver.beritra.duration", defaultValue = "2")
+    public static int BERITRA_DURATION;
+
 }

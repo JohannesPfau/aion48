@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,6 +44,8 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.QuestService;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author MrPoke
  */
@@ -55,8 +55,8 @@ public class QuestsData {
 
     @XmlElement(name = "quest", required = true)
     protected List<QuestTemplate> questsData;
-    private TIntObjectHashMap<QuestTemplate> questData = new TIntObjectHashMap<QuestTemplate>();
-    private TIntObjectHashMap<List<QuestTemplate>> sortedByFactionId = new TIntObjectHashMap<List<QuestTemplate>>();
+    private TIntObjectHashMap<QuestTemplate> questData = new TIntObjectHashMap<>();
+    private TIntObjectHashMap<List<QuestTemplate>> sortedByFactionId = new TIntObjectHashMap<>();
 
     /**
      * @param u
@@ -72,7 +72,7 @@ public class QuestsData {
                 continue;
             }
             if (!sortedByFactionId.containsKey(npcFactionId)) {
-                List<QuestTemplate> factionQuests = new ArrayList<QuestTemplate>();
+                List<QuestTemplate> factionQuests = new ArrayList<>();
                 factionQuests.add(quest);
                 sortedByFactionId.put(npcFactionId, factionQuests);
             } else {
@@ -87,7 +87,7 @@ public class QuestsData {
 
     public List<QuestTemplate> getQuestsByNpcFaction(int npcFactionId, Player player) {
         List<QuestTemplate> factionQuests = sortedByFactionId.get(npcFactionId);
-        List<QuestTemplate> quests = new ArrayList<QuestTemplate>();
+        List<QuestTemplate> quests = new ArrayList<>();
         QuestEnv questEnv = new QuestEnv(null, player, 0, 0);
         for (QuestTemplate questTemplate : factionQuests) {
             if (!QuestEngine.getInstance().isHaveHandler(questTemplate.getId())) {
@@ -116,7 +116,8 @@ public class QuestsData {
     }
 
     /**
-     * @param questsData the questsData to set
+     * @param questsData
+     *            the questsData to set
      */
     public void setQuestsData(List<QuestTemplate> questsData) {
         this.questsData = questsData;

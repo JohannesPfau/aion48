@@ -76,11 +76,13 @@ public class ShugoDelightedAdmirerAI2 extends NpcAI2 {
                 switch (getNpcId()) {
                     case 831114:
                     case 831306:
-                        TeleportService2.teleportTo(player, 300560000, instanceId, 346.27332f, 424.07101f, 294.75793f, (byte) 90, TeleportAnimation.BEAM_ANIMATION);
+                        TeleportService2.teleportTo(player, 300560000, instanceId, 346.27332f, 424.07101f, 294.75793f, (byte) 90,
+                            TeleportAnimation.BEAM_ANIMATION);
                         break;
                     case 831115:
                     case 831195:
-                        TeleportService2.teleportTo(player, 300560000, instanceId, 450.8527f, 105.94637f, 212.20023f, (byte) 90, TeleportAnimation.BEAM_ANIMATION);
+                        TeleportService2.teleportTo(player, 300560000, instanceId, 450.8527f, 105.94637f, 212.20023f, (byte) 90,
+                            TeleportAnimation.BEAM_ANIMATION);
                         break;
                 }
                 break;

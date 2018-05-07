@@ -8,15 +8,15 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
  * Created by Kill3r
  */
 public class Showgp extends PlayerCommand {
+
     public Showgp() {
         super("showgp");
     }
 
-    public void execute(Player player, String...params){
+    public void execute(Player player, String... params) {
         int gp = player.getAbyssRank().getGp();
 
-        PacketSendUtility.sendMessage(player, "You have "+gp+" in total!");
+        PacketSendUtility.sendMessage(player, "You have " + gp + " in total!");
     }
-
 
 }

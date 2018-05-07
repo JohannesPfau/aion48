@@ -56,8 +56,7 @@ public class CmdGiveTitle extends AbstractGMHandler {
         } else {
             if (t != null) {
                 if (!t.getTitleList().addTitle(titleId, false, 0)) {
-                    PacketSendUtility.sendMessage(admin, "you can't add title #" + titleId + " to "
-                            + (t.equals(admin) ? "yourself" : t.getName()));
+                    PacketSendUtility.sendMessage(admin, "you can't add title #" + titleId + " to " + (t.equals(admin) ? "yourself" : t.getName()));
                 } else {
                     PacketSendUtility.sendMessage(admin, "you added to " + t.getName() + " title #" + titleId);
                     PacketSendUtility.sendMessage(t, admin.getName() + " gave you title #" + titleId);

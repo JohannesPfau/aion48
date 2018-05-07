@@ -32,8 +32,6 @@ package com.aionemu.gameserver.controllers;
 import java.util.List;
 import java.util.concurrent.Future;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,11 +62,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.ChargeSkill;
 import com.aionemu.gameserver.skillengine.model.HealType;
-import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
-import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.aionemu.gameserver.utils.Util;
-import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
 import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
@@ -79,11 +72,13 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneUpdateService;
 
+import javolution.util.FastMap;
+
 /**
  * This class is for controlling Creatures [npc's, players etc]
- *
-, ATracer(2009-09-29), Sarynth
- (Aion-Core)
+ * , ATracer(2009-09-29), Sarynth
+ * (Aion-Core)
+ * 
  * @modified by Wakizashi
  */
 public abstract class CreatureController<T extends Creature> extends VisibleObjectController<Creature> {
@@ -91,8 +86,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
     private static final Logger log = LoggerFactory.getLogger(CreatureController.class);
     private FastMap<Integer, Future<?>> tasks = new FastMap<Integer, Future<?>>().shared();
     private int SimpleAttackType; //0=Ground Attacks  |  1=Air Attacks (v4.7.5.17)
-    
-    
+
     @Override
     public void notSee(VisibleObject object, boolean isOutOfRange) {
         super.notSee(object, isOutOfRange);
@@ -177,7 +171,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
     public void onDieEvent(Creature lastAttacker) {
         this.getOwner().getMoveController().abortMove();
         this.getOwner().setCasting(null);
- 
+
         // exception for player
         if (getOwner() instanceof Player) {
             if (((Player) getOwner()).getIsFlyingBeforeDeath()) {
@@ -196,6 +190,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
         }
         this.getOwner().getObserveController().notifyDeathObservers(lastAttacker);
     }
+
     public void onDie(Creature lastAttacker) {
         this.getOwner().getMoveController().abortMove();
         this.getOwner().setCasting(null);
@@ -312,6 +307,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
         // notify all NPC's around that creature is attacking me
         getOwner().getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+
             @Override
             public void visit(Npc object) {
                 object.getAi2().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner());
@@ -361,9 +357,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
     /**
      * Perform reward operation
      */
-	 public void doReward() {
-	}
-	
+    public void doReward() {
+    }
+
     /**
      * This method should be overriden in more specific controllers
      *
@@ -373,13 +369,13 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
     }
 
     public int getSimpleAttackType() {
-    	return this.SimpleAttackType;
+        return this.SimpleAttackType;
     }
-    
+
     public void setSimpleAttackType(int attackType) {
-    	this.SimpleAttackType = attackType;
+        this.SimpleAttackType = attackType;
     }
-    
+
     /**
      * @param target
      * @param time
@@ -418,7 +414,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
             damage += result.getDamage();
         }
 
-        PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time, attackType, attackResult));
+        PacketSendUtility.broadcastPacketAndReceive(getOwner(),
+            new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time, attackType, attackResult));
 
         getOwner().getGameStats().increaseAttackCounter();
         if (addAttackObservers) {

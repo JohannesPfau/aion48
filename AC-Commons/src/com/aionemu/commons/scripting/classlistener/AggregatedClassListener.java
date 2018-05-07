@@ -29,9 +29,9 @@
  */
 package com.aionemu.commons.scripting.classlistener;
 
-import com.google.common.collect.Lists;
-
 import java.util.List;
+
+import com.google.common.collect.Lists;
 
 /**
  * ClassListener that aggregates a collection of ClassListeners.<br>

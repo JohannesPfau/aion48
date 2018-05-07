@@ -29,19 +29,20 @@
  */
 package mysql5;
 
-import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.gameserver.dao.HouseBidsDAO;
-import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-import com.aionemu.gameserver.model.house.PlayerHouseBid;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.database.DatabaseFactory;
+import com.aionemu.gameserver.dao.HouseBidsDAO;
+import com.aionemu.gameserver.dao.MySQL5DAOUtils;
+import com.aionemu.gameserver.model.house.PlayerHouseBid;
 
 /*
  * This file is part of aion-lightning <aion-lightning.com>.
@@ -79,7 +80,7 @@ public class MySQL5HouseBidsDAO extends HouseBidsDAO {
     @Override
     public Set<PlayerHouseBid> loadBids() {
         Connection con = null;
-        Set<PlayerHouseBid> results = new HashSet<PlayerHouseBid>();
+        Set<PlayerHouseBid> results = new HashSet<>();
         try {
             con = DatabaseFactory.getConnection();
             PreparedStatement stmt = con.prepareStatement(LOAD_QUERY);

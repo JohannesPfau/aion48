@@ -29,14 +29,14 @@
  */
 package com.aionemu.loginserver;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import com.aionemu.commons.network.IPRange;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.GsConnection.State;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * This class represents GameServer at LoginServer side. It contain info about
@@ -82,7 +82,7 @@ public class GameServerInfo {
     /**
      * Map<AccId,Account> of accounts logged in on this GameServer.
      */
-    private final Map<Integer, Account> accountsOnGameServer = new HashMap<Integer, Account>();
+    private final Map<Integer, Account> accountsOnGameServer = new HashMap<>();
 
     /**
      * Constructor.
@@ -154,7 +154,8 @@ public class GameServerInfo {
     /**
      * Sets default server address
      *
-     * @param defaultAddress default server address
+     * @param defaultAddress
+     *            default server address
      */
     public void setDefaultAddress(byte[] defaultAddress) {
         this.defaultAddress = defaultAddress;
@@ -172,7 +173,8 @@ public class GameServerInfo {
     /**
      * Sets IPRange mappings
      *
-     * @param ipRanges ipRangeMappings
+     * @param ipRanges
+     *            ipRangeMappings
      */
     public void setIpRanges(List<IPRange> ipRanges) {
         this.ipRanges = ipRanges;
@@ -295,12 +297,13 @@ public class GameServerInfo {
      * we need to send different ip adresses.<br>
      * If gameserver is not online - it returns 127.0.0.1 as server address.
      *
-     * @param playerIp Player address
+     * @param playerIp
+     *            Player address
      * @return ip address that is valid for player
      */
     public byte[] getIPAddressForPlayer(String playerIp) {
         if (!isOnline()) {
-            return new byte[]{127, 0, 0, 1};
+            return new byte[] { 127, 0, 0, 1 };
         }
 
         for (IPRange ipr : ipRanges) {

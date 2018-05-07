@@ -41,9 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PortalDialog", propOrder = {
-        "portalPath"
-})
+@XmlType(name = "PortalDialog", propOrder = { "portalPath" })
 public class PortalDialog {
 
     @XmlElement(name = "portal_path")

@@ -63,7 +63,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 public class ExchangeService {
 
     private static final Logger log = LoggerFactory.getLogger("EXCHANGE_LOG");
-    private Map<Integer, Exchange> exchanges = new HashMap<Integer, Exchange>();
+    private Map<Integer, Exchange> exchanges = new HashMap<>();
     private ExchangePeriodicTaskManager saveManager;
     private final int DELAY_EXCHANGE_SAVE = 5000;
 
@@ -163,7 +163,8 @@ public class ExchangeService {
             currentExchange.addKinah(countToAdd);
             if (LoggingConfig.LOG_PLAYER_EXCHANGE) {
                 log.info("[PLAYER EXCHANGE] > [Player: " + activePlayer.getName() + "] exchanged [Item: 182400001"
-                        + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "] [Item Name: Kinah]" : "]") + " [Count: " + countToAdd + "] with [Partner: " + partner.getName() + "]");
+                    + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "] [Item Name: Kinah]" : "]") + " [Count: " + countToAdd + "] with [Partner: "
+                    + partner.getName() + "]");
             }
         }
     }
@@ -252,7 +253,8 @@ public class ExchangeService {
 
         if (LoggingConfig.LOG_PLAYER_EXCHANGE) {
             log.info("[PLAYER EXCHANGE] > [Player: " + activePlayer.getName() + "] exchanged [Item: " + exchangedItem.getItemId()
-                    + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "] [Item Name: " + exchangedItem.getItemName() + "]" : "]") + " [Count: " + exchangeItem.getItemCount() + " with [Partner: " + partner.getName() + "]");
+                + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "] [Item Name: " + exchangedItem.getItemName() + "]" : "]") + " [Count: "
+                + exchangeItem.getItemCount() + " with [Partner: " + partner.getName() + "]");
         }
     }
 
@@ -321,8 +323,7 @@ public class ExchangeService {
         cleanupExchanges(activePlayer, currentPartner);
 
         if (!removeItemsFromInventory(activePlayer, exchange1) || !removeItemsFromInventory(currentPartner, exchange2)) {
-            AuditLogger.info(activePlayer, "Exchange kinah exploit partner: "
-                    + currentPartner.getName());
+            AuditLogger.info(activePlayer, "Exchange kinah exploit partner: " + currentPartner.getName());
             return;
         }
 
@@ -332,8 +333,8 @@ public class ExchangeService {
         putItemToInventory(currentPartner, exchange1, exchange2);
         putItemToInventory(activePlayer, exchange2, exchange1);
 
-        saveManager.add(new ExchangeOpSaveTask(exchange1.getActiveplayer().getObjectId(), exchange2.getActiveplayer()
-                .getObjectId(), exchange1.getItemsToUpdate(), exchange2.getItemsToUpdate()));
+        saveManager.add(new ExchangeOpSaveTask(exchange1.getActiveplayer().getObjectId(), exchange2.getActiveplayer().getObjectId(),
+            exchange1.getItemsToUpdate(), exchange2.getItemsToUpdate()));
     }
 
     /**

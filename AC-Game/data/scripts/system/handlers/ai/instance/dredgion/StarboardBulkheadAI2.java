@@ -16,19 +16,19 @@
  */
 package ai.instance.dredgion;
 
-import ai.OneDmgPerHitAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
+
+import ai.OneDmgPerHitAI2;
 
 /**
  * @author Dr.Nism
  */
 @AIName("starboard_bulkhead")
 public class StarboardBulkheadAI2 extends OneDmgPerHitAI2 {
-	
-	@Override
-	protected void handleDied() {
-		super.handleDied();
-		getOwner().getController().onDespawn();
-	}
+
+    @Override
+    protected void handleDied() {
+        super.handleDied();
+        getOwner().getController().onDespawn();
+    }
 }

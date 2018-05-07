@@ -144,8 +144,7 @@ public class AI2Actions {
      * Add RequestResponseHandler to player with senderId equal to objectId of
      * AI owner
      */
-    public static void addRequest(AbstractAI ai2, Player player, int requestId, AI2Request request,
-                                  Object... requestParams) {
+    public static void addRequest(AbstractAI ai2, Player player, int requestId, AI2Request request, Object... requestParams) {
         addRequest(ai2, player, requestId, ai2.getObjectId(), request, requestParams);
     }
 
@@ -153,9 +152,10 @@ public class AI2Actions {
      * Add RequestResponseHandler to player, which cancels request on movement
      */
     public static void addRequest(AbstractAI ai2, Player player, int requestId, int senderId, int range, final AI2Request request,
-                                  Object... requestParams) {
+        Object... requestParams) {
 
         boolean requested = player.getResponseRequester().putRequest(requestId, new RequestResponseHandler(ai2.getOwner()) {
+
             @Override
             public void denyRequest(Creature requester, Player responder) {
                 request.denyRequest(requester, responder);
@@ -170,6 +170,7 @@ public class AI2Actions {
         if (requested) {
             if (range > 0) {
                 player.getObserveController().addObserver(new DialogObserver(ai2.getOwner(), player, range) {
+
                     @Override
                     public void tooFar(Creature requester, Player responder) {
                         request.denyRequest(requester, responder);
@@ -183,8 +184,7 @@ public class AI2Actions {
     /**
      * Add RequestResponseHandler to player
      */
-    public static void addRequest(AbstractAI ai2, Player player, int requestId, int senderId, final AI2Request request,
-                                  Object... requestParams) {
+    public static void addRequest(AbstractAI ai2, Player player, int requestId, int senderId, final AI2Request request, Object... requestParams) {
         addRequest(ai2, player, requestId, senderId, 0, request, requestParams);
     }
 }

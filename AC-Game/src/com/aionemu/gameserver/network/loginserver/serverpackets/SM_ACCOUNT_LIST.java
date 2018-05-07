@@ -37,8 +37,6 @@ import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 
 /**
  * GameServer packet that sends list of logged in accounts
- *
-
  */
 public class SM_ACCOUNT_LIST extends LsServerPacket {
 

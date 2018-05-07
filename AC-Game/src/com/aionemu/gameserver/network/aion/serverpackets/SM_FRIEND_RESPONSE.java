@@ -90,7 +90,7 @@ public class SM_FRIEND_RESPONSE extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeS(player);
         writeC(code);
     }

@@ -29,9 +29,9 @@
  */
 package quest.cygnea;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -42,32 +42,33 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _25223HeadToHenor extends QuestHandler {
 
-	private final static int questId = 25223;
+    private final static int questId = 25223;
 
-	public _25223HeadToHenor() {
-		super(questId);
-	}
+    public _25223HeadToHenor() {
+        super(questId);
+    }
 
-	@Override
-	public void register() {
-		qe.registerQuestNpc(804719).addOnQuestStart(questId);
-		qe.registerQuestNpc(804719).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("CORAL_RISE_210070000"), questId);
-		qe.registerOnKillInWorld(210070000, questId);
-	}
-	
-	@Override
-	public boolean onKillInWorldEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		if (env.getVisibleObject() instanceof Player && player != null && player.isInsideZone(ZoneName.get("CORAL_RISE_210070000"))) {
-			if ((env.getPlayer().getLevel() >= (((Player)env.getVisibleObject()).getLevel() - 5)) && (env.getPlayer().getLevel() <= (((Player)env.getVisibleObject()).getLevel() + 9))) {
-				return defaultOnKillRankedEvent(env, 0, 2, true);
-			}
-		}
-		return false;
-	}
+    @Override
+    public void register() {
+        qe.registerQuestNpc(804719).addOnQuestStart(questId);
+        qe.registerQuestNpc(804719).addOnTalkEvent(questId);
+        qe.registerOnEnterZone(ZoneName.get("CORAL_RISE_210070000"), questId);
+        qe.registerOnKillInWorld(210070000, questId);
+    }
 
-	@Override
+    @Override
+    public boolean onKillInWorldEvent(QuestEnv env) {
+        Player player = env.getPlayer();
+        if (env.getVisibleObject() instanceof Player && player != null && player.isInsideZone(ZoneName.get("CORAL_RISE_210070000"))) {
+            if ((env.getPlayer().getLevel() >= (((Player) env.getVisibleObject()).getLevel() - 5))
+                && (env.getPlayer().getLevel() <= (((Player) env.getVisibleObject()).getLevel() + 9))) {
+                return defaultOnKillRankedEvent(env, 0, 2, true);
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean onDialogEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);

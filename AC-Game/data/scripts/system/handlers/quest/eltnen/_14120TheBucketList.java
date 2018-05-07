@@ -38,15 +38,14 @@ public class _14120TheBucketList extends QuestHandler {
     @Override
     public void register() {
         qe.registerQuestItem(182215478, questId);
-		qe.registerQuestNpc(203932).addOnQuestStart(questId); // Phomona
+        qe.registerQuestNpc(203932).addOnQuestStart(questId); // Phomona
         qe.registerQuestNpc(203932).addOnTalkEvent(questId);
         qe.registerQuestNpc(730020).addOnTalkEvent(questId); // Demro
         qe.registerQuestNpc(730019).addOnTalkEvent(questId); // Lodas
         qe.registerQuestNpc(700157).addOnTalkEvent(questId); // Kerubian Bucket
     }
 
-
-	@Override
+    @Override
     public boolean onDialogEvent(final QuestEnv env) {
         final Player player = env.getPlayer();
         int targetId = env.getTargetId();

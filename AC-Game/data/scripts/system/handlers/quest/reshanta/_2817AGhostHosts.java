@@ -29,9 +29,9 @@
  */
 package quest.reshanta;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -39,7 +39,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author pralinka
  */
- 
+
 public class _2817AGhostHosts extends QuestHandler {
 
     private final static int questId = 2817;
@@ -50,7 +50,7 @@ public class _2817AGhostHosts extends QuestHandler {
 
     @Override
     public void register() {
-		int[] npcs = {279007, 263569, 263267, 264769, 263567, 263265, 264767};
+        int[] npcs = { 279007, 263569, 263267, 264769, 263567, 263265, 264767 };
         qe.registerQuestNpc(279007).addOnQuestStart(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -106,7 +106,7 @@ public class _2817AGhostHosts extends QuestHandler {
                             }
                         }
                         case SETPRO3: {
-							giveQuestItem(env, 182215689, 1);
+                            giveQuestItem(env, 182215689, 1);
                             return defaultCloseDialog(env, 2, 3); // 3
                         }
                     }
@@ -120,8 +120,8 @@ public class _2817AGhostHosts extends QuestHandler {
                             }
                         }
                         case SETPRO4: {
-							removeQuestItem(env, 182215689, 1);
-							giveQuestItem(env, 182215690, 3);
+                            removeQuestItem(env, 182215689, 1);
+                            giveQuestItem(env, 182215690, 3);
                             return defaultCloseDialog(env, 3, 4); // 4
                         }
                     }
@@ -136,7 +136,7 @@ public class _2817AGhostHosts extends QuestHandler {
                             }
                         }
                         case SETPRO5: {
-							removeQuestItem(env, 182215690, 1);
+                            removeQuestItem(env, 182215690, 1);
                             return defaultCloseDialog(env, 4, 5); // 5
                         }
                     }
@@ -150,7 +150,7 @@ public class _2817AGhostHosts extends QuestHandler {
                             }
                         }
                         case SETPRO6: {
-							removeQuestItem(env, 182215690, 1);
+                            removeQuestItem(env, 182215690, 1);
                             return defaultCloseDialog(env, 5, 6); // 6
                         }
                     }
@@ -164,7 +164,7 @@ public class _2817AGhostHosts extends QuestHandler {
                             }
                         }
                         case SET_SUCCEED: {
-							removeQuestItem(env, 182215690, 1);
+                            removeQuestItem(env, 182215690, 1);
                             return defaultCloseDialog(env, 6, 6, true, false);
                         }
                     }

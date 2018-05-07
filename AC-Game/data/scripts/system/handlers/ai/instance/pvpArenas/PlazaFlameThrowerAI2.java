@@ -29,7 +29,8 @@
  */
 package ai.instance.pvpArenas;
 
-import ai.ShifterAI2;
+import java.util.List;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -38,7 +39,7 @@ import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.instancereward.PvPArenaReward;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import java.util.List;
+import ai.ShifterAI2;
 
 /**
  * @author xTz

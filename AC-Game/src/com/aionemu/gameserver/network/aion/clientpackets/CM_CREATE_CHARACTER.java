@@ -59,7 +59,6 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 /**
  * In this packets aion client is requesting creation of character.
  *
-
  * @modified cura
  */
 public class CM_CREATE_CHARACTER extends AionClientPacket {

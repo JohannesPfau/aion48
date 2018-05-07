@@ -60,11 +60,11 @@ public class RndSelector<E> {
     private final List<RndNode<E>> nodes;
 
     public RndSelector() {
-        nodes = new ArrayList<RndNode<E>>();
+        nodes = new ArrayList<>();
     }
 
     public RndSelector(int initialCapacity) {
-        nodes = new ArrayList<RndNode<E>>(initialCapacity);
+        nodes = new ArrayList<>(initialCapacity);
     }
 
     public void add(E value, int weight) {
@@ -72,7 +72,7 @@ public class RndSelector<E> {
             return;
         }
         totalWeight += weight;
-        nodes.add(new RndNode<E>(value, weight));
+        nodes.add(new RndNode<>(value, weight));
     }
 
     public E chance(int maxWeight) {

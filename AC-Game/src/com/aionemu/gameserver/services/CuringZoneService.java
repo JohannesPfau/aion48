@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.services;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,13 +41,15 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
+import javolution.util.FastList;
+
 /**
  * @author xTz
  */
 public class CuringZoneService {
 
     Logger log = LoggerFactory.getLogger(CuringZoneService.class);
-    private FastList<CuringObject> curingObjects = new FastList<CuringObject>();
+    private FastList<CuringObject> curingObjects = new FastList<>();
 
     private CuringZoneService() {
         for (CuringTemplate t : DataManager.CURING_OBJECTS_DATA.getCuringObject()) {
@@ -64,10 +64,12 @@ public class CuringZoneService {
     private void startTask() {
 
         ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 for (final CuringObject obj : curingObjects) {
                     obj.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
                         @Override
                         public void visit(Player player) {
                             if (MathUtil.isIn3dRange(obj, player, obj.getRange()) && !player.getEffectController().hasAbnormalEffect(8751)) {

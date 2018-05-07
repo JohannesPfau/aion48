@@ -51,8 +51,6 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * Packet that reads Whisper chat messages.<br>
- *
-
  */
 public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket {
 
@@ -114,9 +112,8 @@ public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket {
             sendPacket(SM_SYSTEM_MESSAGE.STR_CANT_WHISPER_LEVEL(String.valueOf(CustomConfig.LEVEL_TO_WHISPER)));
         } else if (receiver.getBlockList().contains(sender.getObjectId())) {
             sendPacket(SM_SYSTEM_MESSAGE.STR_YOU_EXCLUDED(receiver.getName()));
-        } else if ((!CustomConfig.SPEAKING_BETWEEN_FACTIONS)
-                && (sender.getRace().getRaceId() != receiver.getRace().getRaceId())
-                && (sender.getAccessLevel() < AdminConfig.GM_LEVEL) && (receiver.getAccessLevel() < AdminConfig.GM_LEVEL)) {
+        } else if ((!CustomConfig.SPEAKING_BETWEEN_FACTIONS) && (sender.getRace().getRaceId() != receiver.getRace().getRaceId())
+            && (sender.getAccessLevel() < AdminConfig.GM_LEVEL) && (receiver.getAccessLevel() < AdminConfig.GM_LEVEL)) {
             sendPacket(SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(formatname));
         } else {
             if (RestrictionsManager.canChat(sender)) {

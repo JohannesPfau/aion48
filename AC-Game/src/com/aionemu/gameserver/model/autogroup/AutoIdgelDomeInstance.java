@@ -44,7 +44,6 @@ import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.model.team2.group.PlayerGroupService;
 import com.aionemu.gameserver.services.instance.IdgelDomeService;
 
-
 /**
  * @author GiGatR00n (Aion-Core)
  */

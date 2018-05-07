@@ -74,8 +74,7 @@ public class LifeStatsRestoreService {
      * @return
      */
     public Future<?> scheduleFpReduceTask(final PlayerLifeStats lifeStats, Integer costFp) {
-        return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpReduceTask(lifeStats, costFp), 2000,
-                DEFAULT_FPREDUCE_DELAY);
+        return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpReduceTask(lifeStats, costFp), 2000, DEFAULT_FPREDUCE_DELAY);
     }
 
     /**
@@ -83,8 +82,7 @@ public class LifeStatsRestoreService {
      * @return
      */
     public Future<?> scheduleFpRestoreTask(PlayerLifeStats lifeStats) {
-        return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpRestoreTask(lifeStats), 2000,
-                DEFAULT_FPRESTORE_DELAY);
+        return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpRestoreTask(lifeStats), 2000, DEFAULT_FPRESTORE_DELAY);
     }
 
     public static LifeStatsRestoreService getInstance() {
@@ -102,7 +100,8 @@ public class LifeStatsRestoreService {
         @Override
         public void run() {
             boolean inWorld = World.getInstance().isInWorld(lifeStats.getOwner());
-            if (!inWorld || lifeStats.isAlreadyDead() || lifeStats.isFullyRestoredHp() || lifeStats.getOwner().getAi2().getState().equals(AIState.FIGHT)) {
+            if (!inWorld || lifeStats.isAlreadyDead() || lifeStats.isFullyRestoredHp()
+                || lifeStats.getOwner().getAi2().getState().equals(AIState.FIGHT)) {
                 lifeStats.cancelRestoreTask();
                 lifeStats = null;
             } else {

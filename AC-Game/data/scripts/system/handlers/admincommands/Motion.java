@@ -29,6 +29,9 @@
  */
 package admincommands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
@@ -37,9 +40,6 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.services.MotionLoggingService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author kecimis
@@ -50,7 +50,8 @@ public class Motion extends AdminCommand implements StatOwner {
         super("motion");
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.gameserver.utils.chathandlers.AdminCommand#execute(com.aionemu.gameserver.model.gameobjects.player.Player, java.lang.String[])
      */
     @Override
@@ -103,7 +104,7 @@ public class Motion extends AdminCommand implements StatOwner {
         if (i == 0) {
             player.getGameStats().endEffect(this);
         } else {
-            List<IStatFunction> modifiers = new ArrayList<IStatFunction>();
+            List<IStatFunction> modifiers = new ArrayList<>();
             modifiers.add(new StatAddFunction(StatEnum.ATTACK_SPEED, i, true));
             player.getGameStats().endEffect(this);
             player.getGameStats().addEffect(this, modifiers);

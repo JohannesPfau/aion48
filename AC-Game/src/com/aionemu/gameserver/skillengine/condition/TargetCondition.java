@@ -70,11 +70,11 @@ public class TargetCondition extends Condition {
             return true;
         }
         if (skill.getSkillTemplate().getProperties().getFirstTarget() != FirstTargetAttribute.TARGET
-                && skill.getSkillTemplate().getProperties().getFirstTarget() != FirstTargetAttribute.TARGETORME) {
+            && skill.getSkillTemplate().getProperties().getFirstTarget() != FirstTargetAttribute.TARGETORME) {
             return true;
         }
         if (skill.getSkillTemplate().getProperties().getFirstTarget() == FirstTargetAttribute.TARGETORME
-                && skill.getEffector() == skill.getFirstTarget()) {
+            && skill.getEffector() == skill.getFirstTarget()) {
             return true;
         }
 

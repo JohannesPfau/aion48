@@ -42,9 +42,10 @@ import com.aionemu.gameserver.world.World;
  * @author ATracer
  */
 public class ChatService {
-	private static final Logger log = LoggerFactory.getLogger(ChatService.class);
 
-    private static byte[] ip = {127, 0, 0, 1};
+    private static final Logger log = LoggerFactory.getLogger(ChatService.class);
+
+    private static byte[] ip = { 127, 0, 0, 1 };
     private static int port = 10241;
 
     /**
@@ -69,33 +70,33 @@ public class ChatService {
         }
     }
 
-	/**
-	 * @return the ip
-	 */
-	public static byte[] getIp() {
-		return ip;
-	}
+    /**
+     * @return the ip
+     */
+    public static byte[] getIp() {
+        return ip;
+    }
 
-	/**
-	 * @return the port
-	 */
-	public static int getPort() {
-		return port;
-	}
+    /**
+     * @return the port
+     */
+    public static int getPort() {
+        return port;
+    }
 
-	/**
-	 * @param ip
-	 *          the ip to set
-	 */
-	public static void setIp(byte[] _ip) {
-		ip = _ip;
-	}
+    /**
+     * @param ip
+     *            the ip to set
+     */
+    public static void setIp(byte[] _ip) {
+        ip = _ip;
+    }
 
-	/**
-	 * @param port
-	 *          the port to set
-	 */
-	public static void setPort(int _port) {
-		port = _port;
-	}
+    /**
+     * @param port
+     *            the port to set
+     */
+    public static void setPort(int _port) {
+        port = _port;
+    }
 }

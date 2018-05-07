@@ -42,9 +42,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "InstanceBonusAttr", propOrder = {
-        "penaltyAttr"
-})
+@XmlType(name = "InstanceBonusAttr", propOrder = { "penaltyAttr" })
 public class InstanceBonusAttr {
 
     @XmlElement(name = "penalty_attr")
@@ -63,8 +61,9 @@ public class InstanceBonusAttr {
      * <p/>
      * <p/>
      * For example, to add a new item, do as follows:
+     * 
      * <pre>
-     *    getPenaltyAttr().add(newItem);
+     * getPenaltyAttr().add(newItem);
      * </pre>
      * <p/>
      * <p/>
@@ -74,7 +73,7 @@ public class InstanceBonusAttr {
      */
     public List<InstancePenaltyAttr> getPenaltyAttr() {
         if (penaltyAttr == null) {
-            penaltyAttr = new ArrayList<InstancePenaltyAttr>();
+            penaltyAttr = new ArrayList<>();
         }
         return this.penaltyAttr;
     }

@@ -29,9 +29,9 @@
  */
 package quest.heiron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -46,7 +46,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class _18602NightmareinShiningArmor extends QuestHandler {
 
     private final static int questId = 18602;
-    private final static int[] npc_ids = {205229, 700939};
+    private final static int[] npc_ids = { 205229, 700939 };
 
     public _18602NightmareinShiningArmor() {
         super(questId);
@@ -61,7 +61,7 @@ public class _18602NightmareinShiningArmor extends QuestHandler {
         }
         qe.registerQuestNpc(205229).addOnQuestStart(questId);
         qe.registerQuestNpc(217005).addOnKillEvent(questId);
-	qe.registerQuestNpc(217006).addOnKillEvent(questId);
+        qe.registerQuestNpc(217006).addOnKillEvent(questId);
         qe.registerQuestNpc(700939).addOnAtDistanceEvent(questId);
         qe.registerOnMovieEndQuest(454, questId);
     }
@@ -96,23 +96,23 @@ public class _18602NightmareinShiningArmor extends QuestHandler {
         return false;
     }
 
-	@Override
-	public boolean onKillEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		int targetId = env.getTargetId();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (targetId == 217005) {
-				return defaultOnKillEvent(env, 217005, 3, true);
-			}
-			if (targetId == 217006) {
-				qs.setStatus(QuestStatus.REWARD);
-				updateQuestStatus(env);
-				return true;
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean onKillEvent(QuestEnv env) {
+        Player player = env.getPlayer();
+        int targetId = env.getTargetId();
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (qs != null && qs.getStatus() == QuestStatus.START) {
+            if (targetId == 217005) {
+                return defaultOnKillEvent(env, 217005, 3, true);
+            }
+            if (targetId == 217006) {
+                qs.setStatus(QuestStatus.REWARD);
+                updateQuestStatus(env);
+                return true;
+            }
+        }
+        return false;
+    }
 
     @Override
     public boolean onMovieEndEvent(QuestEnv env, int movieId) {
@@ -149,8 +149,7 @@ public class _18602NightmareinShiningArmor extends QuestHandler {
                 } else if (env.getDialog() == DialogAction.SETPRO1) {
                     WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300230000);
                     InstanceService.registerPlayerWithInstance(newInstance, player);
-                    TeleportService2.teleportTo(player, 300230000, newInstance.getInstanceId(), 244.98566f, 244.14162f,
-                            189.52058f, (byte) 30);
+                    TeleportService2.teleportTo(player, 300230000, newInstance.getInstanceId(), 244.98566f, 244.14162f, 189.52058f, (byte) 30);
                     changeQuestStep(env, 0, 1, false); // 1
                     return closeDialogWindow(env);
                 }

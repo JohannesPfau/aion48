@@ -124,7 +124,8 @@ public class TransformModel {
     }
 
     /**
-     * @param transformTribe the transformTribe to set
+     * @param transformTribe
+     *            the transformTribe to set
      */
     public void setTribe(TribeClass transformTribe, boolean override) {
         if (override) {

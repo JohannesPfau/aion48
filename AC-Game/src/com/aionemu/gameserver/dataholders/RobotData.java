@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -43,11 +41,13 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.robot.RobotInfo;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author Ever'
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"robots"})
+@XmlType(name = "", propOrder = { "robots" })
 @XmlRootElement(name = "robots")
 public class RobotData {
 
@@ -57,7 +57,7 @@ public class RobotData {
     private TIntObjectHashMap<RobotInfo> robotInfos;
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
-        robotInfos = new TIntObjectHashMap<RobotInfo>();
+        robotInfos = new TIntObjectHashMap<>();
         for (RobotInfo info : robots) {
             robotInfos.put(info.getRobotId(), info);
         }

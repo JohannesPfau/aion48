@@ -29,14 +29,15 @@
  */
 package admincommands;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.PunishmentService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author lord_rex Command: //sprison <player> <delay>(minutes) This command is
@@ -68,8 +69,10 @@ public class SPrison extends AdminCommand {
 
             if (playerToPrison != null) {
                 PunishmentService.setIsInPrison(playerToPrison, true, delay, reason);
-                PacketSendUtility.sendMessage(admin, "Player " + playerToPrison.getName() + " sent to prison for " + delay + " minute(s) because " + reason + ".");
-                log.info("[sprison] GM : " + admin.getName() + " has jailed the player [" + playerToPrison.getName() + "] for [" + delay + "] minutes because [" + reason + "] ");
+                PacketSendUtility.sendMessage(admin,
+                    "Player " + playerToPrison.getName() + " sent to prison for " + delay + " minute(s) because " + reason + ".");
+                log.info("[sprison] GM : " + admin.getName() + " has jailed the player [" + playerToPrison.getName() + "] for [" + delay
+                    + "] minutes because [" + reason + "] ");
             }
         } catch (Exception e) {
             sendInfo(admin);

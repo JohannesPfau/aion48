@@ -39,8 +39,6 @@ import com.aionemu.gameserver.services.player.PlayerService;
 
 /**
  * In this packets aion client is requesting cancellation of character deleting.
- *
-
  */
 public class CM_RESTORE_CHARACTER extends AionClientPacket {
 

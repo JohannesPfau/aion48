@@ -77,7 +77,7 @@ public class EternalBastionReward extends InstanceReward<EternalBastionPlayerRew
     }
 
     @Override
-	public boolean isRewarded() {
+    public boolean isRewarded() {
         return isRewarded;
     }
 

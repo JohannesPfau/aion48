@@ -29,21 +29,20 @@
  */
 package quest.fort_tiamat;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _30715AnuhartLess extends QuestHandler {
 
     private final static int questId = 30715;
-    private final static int npcs[] = {800068, 205825, 205844};
+    private final static int npcs[] = { 800068, 205825, 205844 };
 
     public _30715AnuhartLess() {
         super(questId);

@@ -58,7 +58,7 @@ public class InstanceEngine implements GameEngine {
     private static ScriptManager scriptManager = new ScriptManager();
     public static final File INSTANCE_DESCRIPTOR_FILE = new File("./data/scripts/system/instancehandlers.xml");
     public static final InstanceHandler DUMMY_INSTANCE_HANDLER = new GeneralInstanceHandler();
-    private Map<Integer, Class<? extends InstanceHandler>> handlers = new HashMap<Integer, Class<? extends InstanceHandler>>();
+    private Map<Integer, Class<? extends InstanceHandler>> handlers = new HashMap<>();
 
     @Override
     public void load(CountDownLatch progressLatch) {

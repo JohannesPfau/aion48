@@ -29,10 +29,14 @@
  */
 package com.aionemu.commons.database;
 
+import java.sql.CallableStatement;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.sql.*;
 
 /**
  * <b>DB Documentation</b>
@@ -366,7 +370,8 @@ public final class DB {
      * Begins new transaction
      *
      * @return new Transaction object
-     * @throws java.sql.SQLException if was unable to create transaction
+     * @throws java.sql.SQLException
+     *             if was unable to create transaction
      */
     public static Transaction beginTransaction() throws SQLException {
         Connection con = DatabaseFactory.getConnection();
@@ -378,7 +383,8 @@ public final class DB {
      * Statemens are created with {@link java.sql.ResultSet#TYPE_FORWARD_ONLY}
      * and {@link java.sql.ResultSet#CONCUR_READ_ONLY}
      *
-     * @param sql SQL querry
+     * @param sql
+     *            SQL querry
      * @return Prepared statement if ok or null if error happend while creating
      */
     public static PreparedStatement prepareStatement(String sql) {
@@ -388,14 +394,17 @@ public final class DB {
     /**
      * Creates {@link java.sql.PreparedStatement} with given sql<br>
      *
-     * @param sql                  SQL querry
-     * @param resultSetType        a result set type; one of <br>
-     *                             <code>ResultSet.TYPE_FORWARD_ONLY</code>,<br>
-     *                             <code>ResultSet.TYPE_SCROLL_INSENSITIVE</code>, or <br>
-     *                             <code>ResultSet.TYPE_SCROLL_SENSITIVE</code>
-     * @param resultSetConcurrency a concurrency type; one of <br>
-     *                             <code>ResultSet.CONCUR_READ_ONLY</code> or <br>
-     *                             <code>ResultSet.CONCUR_UPDATABLE</code>
+     * @param sql
+     *            SQL querry
+     * @param resultSetType
+     *            a result set type; one of <br>
+     *            <code>ResultSet.TYPE_FORWARD_ONLY</code>,<br>
+     *            <code>ResultSet.TYPE_SCROLL_INSENSITIVE</code>, or <br>
+     *            <code>ResultSet.TYPE_SCROLL_SENSITIVE</code>
+     * @param resultSetConcurrency
+     *            a concurrency type; one of <br>
+     *            <code>ResultSet.CONCUR_READ_ONLY</code> or <br>
+     *            <code>ResultSet.CONCUR_UPDATABLE</code>
      * @return Prepared Statement if ok or null if error happened while creating
      */
     public static PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency) {
@@ -421,9 +430,10 @@ public final class DB {
     /**
      * Executes PreparedStatement
      *
-     * @param statement PreparedStatement to execute
+     * @param statement
+     *            PreparedStatement to execute
      * @return returns result of
-     * {@link java.sql.PreparedStatement#executeQuery()} or -1 in case of error
+     *         {@link java.sql.PreparedStatement#executeQuery()} or -1 in case of error
      */
     public static int executeUpdate(PreparedStatement statement) {
         try {
@@ -438,7 +448,8 @@ public final class DB {
     /**
      * Executes PreparedStatement and closes it and it's connection
      *
-     * @param statement PreparedStatement to close
+     * @param statement
+     *            PreparedStatement to close
      */
     public static void executeUpdateAndClose(PreparedStatement statement) {
         executeUpdate(statement);
@@ -448,7 +459,8 @@ public final class DB {
     /**
      * Executes Querry and returns ResultSet
      *
-     * @param statement preparedStement to execute
+     * @param statement
+     *            preparedStement to execute
      * @return ResultSet or null if error
      */
     public static ResultSet executeQuerry(PreparedStatement statement) {
@@ -464,7 +476,8 @@ public final class DB {
     /**
      * Closes PreparedStatemet, it's connection and last ResultSet
      *
-     * @param statement statement to close
+     * @param statement
+     *            statement to close
      */
     public static void close(PreparedStatement statement) {
 

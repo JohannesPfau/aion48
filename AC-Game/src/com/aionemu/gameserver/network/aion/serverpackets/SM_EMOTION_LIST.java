@@ -53,7 +53,7 @@ public class SM_EMOTION_LIST extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(action);
         if (con.getActivePlayer().havePermission(MembershipConfig.EMOTIONS_ALL)) {
             writeH(92);

@@ -29,7 +29,6 @@
  */
 package ai.instance.beshmundirTemple;
 
-import ai.ActionItemNpcAI2;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AI2Request;
 import com.aionemu.gameserver.ai2.AIName;
@@ -47,6 +46,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
+import ai.ActionItemNpcAI2;
+
 /**
  * @author Gigi
  * @author vlog
@@ -62,6 +63,7 @@ public class BeshmundirsWalkAI2 extends ActionItemNpcAI2 {
     @Override
     public boolean onDialogSelect(Player player, final int dialogId, int questId, int extendedRewardIndex) {
         AI2Request request = new AI2Request() {
+
             @Override
             public void acceptRequest(Creature requester, Player responder) {
                 // TODO: create an instance, depending on difficulty level
@@ -92,13 +94,13 @@ public class BeshmundirsWalkAI2 extends ActionItemNpcAI2 {
                 }
                 break;
             case 4763:// I'll take the safer path
-                AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(),
-                        request, new DescriptionId(1804103));
+                AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(), request,
+                    new DescriptionId(1804103));
                 PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
                 break;
             case 4848:// Give me the dangerous path
-                AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(),
-                        request, new DescriptionId(1804105));
+                AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM, getObjectId(), request,
+                    new DescriptionId(1804105));
                 PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762)); // Path selection
                 break;
         }

@@ -53,19 +53,16 @@ import com.aionemu.gameserver.model.Race;
 @XmlType(name = "MailTemplate")
 public class MailTemplate {
 
-    @XmlElements({
-            @XmlElement(name = "sender", type = Sender.class),
-            @XmlElement(name = "title", type = Title.class),
-            @XmlElement(name = "header", type = Header.class),
-            @XmlElement(name = "body", type = Body.class),
-            @XmlElement(name = "tail", type = Tail.class)})
+    @XmlElements({ @XmlElement(name = "sender", type = Sender.class), @XmlElement(name = "title", type = Title.class),
+        @XmlElement(name = "header", type = Header.class), @XmlElement(name = "body", type = Body.class),
+        @XmlElement(name = "tail", type = Tail.class) })
     private List<MailPart> mailParts;
     @XmlAttribute(name = "name", required = true)
     protected String name;
     @XmlAttribute(name = "race", required = true)
     protected Race race;
     @XmlTransient
-    private Map<MailPartType, MailPart> mailPartsMap = new HashMap<MailPartType, MailPart>();
+    private Map<MailPartType, MailPart> mailPartsMap = new HashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (MailPart part : mailParts) {

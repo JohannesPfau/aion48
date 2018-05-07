@@ -48,6 +48,7 @@ public enum PartType {
     INWALL_ANY(8, 13),
     INFLOOR_ANY(14, 19),
     ADDON(27, 27);
+
     private int lineNrStart;
     private int lineNrEnd;
 

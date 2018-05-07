@@ -86,7 +86,7 @@ public class ChainCondition extends Condition {
                 }
             } else if (preCount > 0) {
                 if (!pl.getChainSkills().chainSkillEnabled(precategory, time)
-                        || preCount != pl.getChainSkills().getChainCount(pl, env.getSkillTemplate(), precategory)) {
+                    || preCount != pl.getChainSkills().getChainCount(pl, env.getSkillTemplate(), precategory)) {
                     return false;
                 }
             } else {// basic chain skill

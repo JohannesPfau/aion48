@@ -49,7 +49,7 @@ public class SM_ABYSS_RANK_UPDATE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(action);
         writeD(player.getObjectId());
         switch (action) {

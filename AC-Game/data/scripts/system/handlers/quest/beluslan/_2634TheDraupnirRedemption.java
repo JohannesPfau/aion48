@@ -30,12 +30,12 @@
 package quest.beluslan;
 
 import com.aionemu.gameserver.ai2.event.AIEventType;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_INFO;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,12 +45,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _2634TheDraupnirRedemption extends QuestHandler {
 
     private final static int questId = 2634;
-    private final static int[] npcs = {204828, 700350, 204830};
+    private final static int[] npcs = { 204828, 700350, 204830 };
 
     public _2634TheDraupnirRedemption() {
         super(questId);
@@ -97,7 +96,8 @@ public class _2634TheDraupnirRedemption extends QuestHandler {
                         case SETPRO1: {
                             Npc npc = (Npc) env.getVisibleObject();
                             npc.getController().onDelete();
-                            Npc survivor = (Npc) QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 204830, player.getX(), player.getY(), player.getZ(), (byte) 0);
+                            Npc survivor = (Npc) QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 204830, player.getX(),
+                                player.getY(), player.getZ(), (byte) 0);
                             PacketSendUtility.sendPacket(player, new SM_NPC_INFO(survivor, player));
                             survivor.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
                             player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, survivor, 204828));

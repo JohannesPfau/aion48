@@ -29,11 +29,11 @@
  */
 package com.aionemu.loginserver.network.aion.clientpackets;
 
+import java.nio.ByteBuffer;
+
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.network.aion.AionClientPacket;
 import com.aionemu.loginserver.network.aion.LoginConnection;
-
-import java.nio.ByteBuffer;
 
 /**
  * This packet is send when client was connected to game server and now is
@@ -60,8 +60,10 @@ public class CM_UPDATE_SESSION extends AionClientPacket {
     /**
      * Constructs new instance of <tt>CM_UPDATE_SESSION </tt> packet.
      *
-     * @param buf    packet data
-     * @param client client
+     * @param buf
+     *            packet data
+     * @param client
+     *            client
      */
     public CM_UPDATE_SESSION(ByteBuffer buf, LoginConnection client) {
         super(buf, client, 0x08);

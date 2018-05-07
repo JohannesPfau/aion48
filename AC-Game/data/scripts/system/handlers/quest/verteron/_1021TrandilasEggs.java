@@ -44,7 +44,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1021TrandilasEggs extends QuestHandler {
 
     private final static int questId = 1021;
-    private final static int[] mob_ids = {210202};
+    private final static int[] mob_ids = { 210202 };
 
     public _1021TrandilasEggs() {
         super(questId);
@@ -67,7 +67,7 @@ public class _1021TrandilasEggs extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {1130, 1015};
+        int[] quests = { 1130, 1015 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 

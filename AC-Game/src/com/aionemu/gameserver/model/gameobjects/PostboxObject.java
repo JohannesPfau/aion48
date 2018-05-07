@@ -48,7 +48,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class PostboxObject extends HouseObject<HousingPostbox> {
 
-    private AtomicReference<Player> usingPlayer = new AtomicReference<Player>();
+    private AtomicReference<Player> usingPlayer = new AtomicReference<>();
 
     public PostboxObject(House owner, int objId, int templateId) {
         super(owner, objId, templateId);
@@ -66,6 +66,7 @@ public class PostboxObject extends HouseObject<HousingPostbox> {
         }
 
         final ItemUseObserver observer = new ItemUseObserver() {
+
             @Override
             public void abort() {
                 player.getObserveController().removeObserver(this);
@@ -77,6 +78,7 @@ public class PostboxObject extends HouseObject<HousingPostbox> {
 
         PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_USE(getObjectTemplate().getNameId()));
         player.getController().addTask(TaskId.HOUSE_OBJECT_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 try {

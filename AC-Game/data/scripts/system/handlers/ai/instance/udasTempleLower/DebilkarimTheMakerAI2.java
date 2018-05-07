@@ -29,7 +29,12 @@
  */
 package ai.instance.udasTempleLower;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -50,11 +55,7 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * Debilkarim BossScript TODO: InfernalRift - Teleport random player to oven -
@@ -70,11 +71,11 @@ public class DebilkarimTheMakerAI2 extends AggressiveNpcAI2 {
     private Future<?> taskHeal;
     private Future<?> taskInfernalRift;
     private Future<?> taskInfernalRiftTeleport;
-    protected List<Integer> percents = new ArrayList<Integer>();
-    private final List<Integer> spawnedNpc = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
+    private final List<Integer> spawnedNpc = new ArrayList<>();
 
     private Player getTargetPlayer() {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (Player player : getKnownList().getKnownPlayers().values()) {
             if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 40) && player != getTarget()) {
                 players.add(player);
@@ -85,7 +86,7 @@ public class DebilkarimTheMakerAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{50, 25, 10, 5});
+        Collections.addAll(percents, new Integer[] { 50, 25, 10, 5 });
     }
 
     private synchronized void checkPercentage(int hpPercentage) {
@@ -163,6 +164,7 @@ public class DebilkarimTheMakerAI2 extends AggressiveNpcAI2 {
 
     private void startHealTask() {
         taskHeal = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 // Spawn Protection of Aion
@@ -184,6 +186,7 @@ public class DebilkarimTheMakerAI2 extends AggressiveNpcAI2 {
     @SuppressWarnings("unused")
     private void startInfernalRiftTask() {
         taskInfernalRift = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead() || isHome.get() == true) {
@@ -221,7 +224,7 @@ public class DebilkarimTheMakerAI2 extends AggressiveNpcAI2 {
         float x = (float) (Math.cos(Math.PI * direction) * distance);
         float y = (float) (Math.sin(Math.PI * direction) * distance);
         return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x, getPosition().getY() + y,
-                getPosition().getZ(), getPosition().getHeading());
+            getPosition().getZ(), getPosition().getHeading());
     }
 
     private void teleportRandomPlayerToOven() {
@@ -237,6 +240,7 @@ public class DebilkarimTheMakerAI2 extends AggressiveNpcAI2 {
         SkillTemplate hoellenRissSkill = DataManager.SKILL_DATA.getSkillTemplate(19000);
         int timer = hoellenRissSkill.getDuration() + 1000;
         taskInfernalRiftTeleport = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 // teleport random player to oven

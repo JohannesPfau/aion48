@@ -29,6 +29,11 @@
  */
 package playercommands;
 
+import java.util.Iterator;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -38,11 +43,6 @@ import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
-
-import java.util.Iterator;
-import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author Wakizashi, Imaginary
@@ -176,6 +176,7 @@ public class cmd_reskin2 extends PlayerCommand {
     public void reskin(final Player admin, final int toll, final int itemId, final List<Item> items) {
         final long tolls = admin.getClientConnection().getAccount().getToll();
         RequestResponseHandler responseHandler = new RequestResponseHandler(admin) {
+
             @Override
             public void acceptRequest(Creature p2, Player p) {
                 if (tolls < toll) {
@@ -196,7 +197,10 @@ public class cmd_reskin2 extends PlayerCommand {
         };
         boolean requested = admin.getResponseRequester().putRequest(902247, responseHandler);
         if (requested) {
-            PacketSendUtility.sendPacket(admin, new SM_QUESTION_WINDOW(902247, 0, 0, "In your inventory, there is no New ItemId. To change the look, for which you have not, you need to" + toll + " Vote Points. On your account, you have :" + tolls + ". Want to reskin the item ?"));
+            PacketSendUtility.sendPacket(admin,
+                new SM_QUESTION_WINDOW(902247, 0, 0,
+                    "In your inventory, there is no New ItemId. To change the look, for which you have not, you need to" + toll
+                        + " Vote Points. On your account, you have :" + tolls + ". Want to reskin the item ?"));
         }
     }
 

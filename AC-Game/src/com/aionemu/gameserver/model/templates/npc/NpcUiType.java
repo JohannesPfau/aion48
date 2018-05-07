@@ -29,7 +29,6 @@
  */
 package com.aionemu.gameserver.model.templates.npc;
 
-
 /**
  * @author Alcapwnd
  */

@@ -13,53 +13,52 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import ai.ActionItemNpcAI2;
 
 /**
- *
  * @author Ghostfur
  */
 @AIName("ffa_portal")
-public class NewFFAAI2 extends ActionItemNpcAI2 {   
+public class NewFFAAI2 extends ActionItemNpcAI2 {
+
     @Override
     protected void handleDialogStart(final Player player) {
-        Npc owner = getOwner();        
+        Npc owner = getOwner();
         int memberBoss = 4;
-        if (owner.getMasterName().equalsIgnoreCase("FFA-" + FFaService.getInstance().worldName)) {  
-        	  if (player.getController().isInCombat() 
-          		|| player.isInPkMode() 
-          		|| player.isInArena() 
-          		|| player.isInDuoFFA() 
-  				|| player.isInBH() 
-          		|| player.isInPrison() 
-          		|| player.getLifeStats().isAlreadyDead()) {
-  	            PacketSendUtility.sendMessage(player, "You can not participate in FFA, while dead/in prison/in combat/in another battleground.");
-  	            return;
-              }    
-			 if (player.isInGroup2()){
-              	PacketSendUtility.sendMessage(player, "Only solo allowed to join FFA, leave group to join");
-              	return;
-              }  
-        	  if (player.getAccessLevel() > 0 && player.getAccessLevel() <= 5) {
-              	PacketSendUtility.sendMessage(player, "GM cannot join in ffa. Log in normal account.");
-              	return;
-              }   
+        if (owner.getMasterName().equalsIgnoreCase("FFA-" + FFaService.getInstance().worldName)) {
+            if (player.getController().isInCombat() || player.isInPkMode() || player.isInArena() || player.isInDuoFFA() || player.isInBH()
+                || player.isInPrison() || player.getLifeStats().isAlreadyDead()) {
+                PacketSendUtility.sendMessage(player, "You can not participate in FFA, while dead/in prison/in combat/in another battleground.");
+                return;
+            }
+            if (player.isInGroup2()) {
+                PacketSendUtility.sendMessage(player, "Only solo allowed to join FFA, leave group to join");
+                return;
+            }
+            if (player.getAccessLevel() > 0 && player.getAccessLevel() <= 5) {
+                PacketSendUtility.sendMessage(player, "GM cannot join in ffa. Log in normal account.");
+                return;
+            }
 
-              if (player.isInAlliance2()){
-              	PacketSendUtility.sendMessage(player, "Only solo allowed to join FFA, leave Alliance to join");
-              	return;
-              }  
-              
+            if (player.isInAlliance2()) {
+                PacketSendUtility.sendMessage(player, "Only solo allowed to join FFA, leave Alliance to join");
+                return;
+            }
+
             RequestResponseHandler responseHandler = new RequestResponseHandler(player) {
+
                 @Override
                 public void acceptRequest(Creature p2, Player p) {
                     start(p);
                 }
+
                 @Override
                 public void denyRequest(Creature p2, Player p) {
                 }
             };
             boolean requested = player.getResponseRequester().putRequest(902247, responseHandler);
             if (requested) {
-            PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(902247, 0, 0,  "In Free For All, everyone is your enemy. Do you want to join FFA?<br><br><br>Location: " + FFaService.getInstance().worldName + "<br>Total Player: " + FFaService.getInstance().getFFASize()));            
-            }            
+                PacketSendUtility.sendPacket(player,
+                    new SM_QUESTION_WINDOW(902247, 0, 0, "In Free For All, everyone is your enemy. Do you want to join FFA?<br><br><br>Location: "
+                        + FFaService.getInstance().worldName + "<br>Total Player: " + FFaService.getInstance().getFFASize()));
+            }
             return;
         }
         super.handleDialogStart(player);
@@ -71,14 +70,14 @@ public class NewFFAAI2 extends ActionItemNpcAI2 {
 
     @Override
     protected void handleUseItemFinish(Player player) {
-      Npc owner = getOwner();        
-      if (owner.getMasterName().equalsIgnoreCase("FFA-" + FFaService.getInstance().worldName)) { 
-		if (player.battlegroundWaiting) {
-        		ArenaService.getInstance().unRegister(player);  
-    		}        	
-        	FFaService.getInstance().TeleIn(player);           	
-       }
-       super.handleUseItemFinish(player);
-    }    
+        Npc owner = getOwner();
+        if (owner.getMasterName().equalsIgnoreCase("FFA-" + FFaService.getInstance().worldName)) {
+            if (player.battlegroundWaiting) {
+                ArenaService.getInstance().unRegister(player);
+            }
+            FFaService.getInstance().TeleIn(player);
+        }
+        super.handleUseItemFinish(player);
+    }
 
 }

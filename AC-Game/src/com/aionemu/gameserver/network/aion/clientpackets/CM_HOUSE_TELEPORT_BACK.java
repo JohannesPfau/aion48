@@ -57,7 +57,7 @@ public class CM_HOUSE_TELEPORT_BACK extends AionClientPacket {
         float[] coords = player.getBattleReturnCoords();
         if (coords != null && player.getBattleReturnMap() != 0) {
             TeleportService2.teleportTo(player, player.getBattleReturnMap(), 1, coords[0], coords[1], coords[2], (byte) 0,
-                    TeleportAnimation.BEAM_ANIMATION);
+                TeleportAnimation.BEAM_ANIMATION);
 
             player.setBattleReturnCoords(0, null);
         }

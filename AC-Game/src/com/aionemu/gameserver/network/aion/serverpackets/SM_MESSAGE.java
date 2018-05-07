@@ -39,8 +39,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * Massage [chat, etc]
- *
-, Sweetkr
+ * , Sweetkr
  */
 public class SM_MESSAGE extends AionServerPacket {
 
@@ -78,9 +77,12 @@ public class SM_MESSAGE extends AionServerPacket {
     /**
      * Constructs new <tt>SM_MESSAGE </tt> packet
      *
-     * @param player   who sent message
-     * @param message  actual message
-     * @param chatType what chat type should be used
+     * @param player
+     *            who sent message
+     * @param message
+     *            actual message
+     * @param chatType
+     *            what chat type should be used
      */
     public SM_MESSAGE(Player player, String message, ChatType chatType) {
         this.player = player;
@@ -97,10 +99,14 @@ public class SM_MESSAGE extends AionServerPacket {
     /**
      * Manual creation of chat message.<br>
      *
-     * @param senderObjectId - can be 0 if system message(like announcements)
-     * @param senderName     - used for shout ATM, can be null in other cases
-     * @param message        - actual text
-     * @param chatType       type of chat, Normal, Shout, Announcements, Etc...
+     * @param senderObjectId
+     *            - can be 0 if system message(like announcements)
+     * @param senderName
+     *            - used for shout ATM, can be null in other cases
+     * @param message
+     *            - actual text
+     * @param chatType
+     *            type of chat, Normal, Shout, Announcements, Etc...
      */
     public SM_MESSAGE(int senderObjectId, String senderName, String message, ChatType chatType) {
         this.senderObjectId = senderObjectId;
@@ -114,12 +120,12 @@ public class SM_MESSAGE extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         boolean canRead = true;
 
         if (race != null) {
             canRead = chatType.isSysMsg() || CustomConfig.SPEAKING_BETWEEN_FACTIONS || player.getAccessLevel() > 0
-                    || (con.getActivePlayer() != null && con.getActivePlayer().getAccessLevel() > 0);
+                || (con.getActivePlayer() != null && con.getActivePlayer().getAccessLevel() > 0);
         }
 
         writeC(chatType.toInteger()); // type

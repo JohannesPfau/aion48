@@ -50,9 +50,9 @@ public class FormCondition extends Condition {
     @XmlAttribute(required = true)
     protected TransformType value;
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.gameserver.skillengine.condition.Condition#validate(com.aionemu.gameserver.skillengine.model.Skill)
-     * 
      * defines tranformtype in which player can cast given skill
      */
     @Override

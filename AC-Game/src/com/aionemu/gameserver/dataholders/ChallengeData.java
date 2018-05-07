@@ -47,13 +47,13 @@ import com.aionemu.gameserver.model.templates.challenge.ChallengeTaskTemplate;
  * @author ViAl
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"task"})
+@XmlType(name = "", propOrder = { "task" })
 @XmlRootElement(name = "challenge_tasks")
 public class ChallengeData {
 
     protected List<ChallengeTaskTemplate> task;
     @XmlTransient
-    protected Map<Integer, ChallengeTaskTemplate> tasksById = new HashMap<Integer, ChallengeTaskTemplate>();
+    protected Map<Integer, ChallengeTaskTemplate> tasksById = new HashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (ChallengeTaskTemplate t : task) {

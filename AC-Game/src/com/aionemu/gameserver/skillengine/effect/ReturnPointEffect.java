@@ -57,11 +57,11 @@ public class ReturnPointEffect extends EffectTemplate {
     @Override
     public void calculate(Effect effect) {
         //cannot use return inside ffa
-        if(effect.getEffected() instanceof Player && ((Player) effect.getEffected()).isInFFA()){
+        if (effect.getEffected() instanceof Player && ((Player) effect.getEffected()).isInFFA()) {
             return;
         }
         //cannot use return inside 1v1
-        if(effect.getEffected() instanceof Player && ((Player) effect.getEffected()).isInDuelArena()){
+        if (effect.getEffected() instanceof Player && ((Player) effect.getEffected()).isInDuelArena()) {
             return;
         }
         ItemTemplate itemTemplate = effect.getItemTemplate();

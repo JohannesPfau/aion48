@@ -42,9 +42,10 @@ public class SiegeFilter extends Filter<ILoggingEvent> {
      * Decides what to do with logging event.<br>
      * This method accepts only log events that contain exceptions.
      *
-     * @param loggingEvent log event that is going to be filtred.
+     * @param loggingEvent
+     *            log event that is going to be filtred.
      * @return {@link org.apache.log4j.spi.Filter#ACCEPT} if admin command,
-     * {@link org.apache.log4j.spi.Filter#DENY} otherwise
+     *         {@link org.apache.log4j.spi.Filter#DENY} otherwise
      */
     @Override
     public FilterReply decide(ILoggingEvent loggingEvent) {

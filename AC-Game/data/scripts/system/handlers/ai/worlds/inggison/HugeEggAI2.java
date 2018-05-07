@@ -29,10 +29,11 @@
  */
 package ai.worlds.inggison;
 
-import ai.GeneralNpcAI2;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Cheatkiller

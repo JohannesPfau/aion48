@@ -54,7 +54,7 @@ public class SM_MEGAPHONE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection client) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeS(player.getName());
         writeS(message);
         writeD(itemId);

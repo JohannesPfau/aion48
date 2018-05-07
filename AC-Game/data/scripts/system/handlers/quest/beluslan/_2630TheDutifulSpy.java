@@ -35,7 +35,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author VladimirZ 
+ * @author VladimirZ
  * @modified Lilith
  */
 public class _2630TheDutifulSpy extends QuestHandler {
@@ -51,7 +51,7 @@ public class _2630TheDutifulSpy extends QuestHandler {
         qe.registerQuestNpc(204799).addOnQuestStart(questId);
         qe.registerQuestNpc(204799).addOnTalkEvent(questId);
         qe.registerQuestNpc(204777).addOnTalkEvent(questId);
-        
+
     }
 
     @Override
@@ -72,9 +72,9 @@ public class _2630TheDutifulSpy extends QuestHandler {
                             return sendQuestDialog(env, 1352);
                         }
                     case SETPRO1:
-                    qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-                    updateQuestStatus(env);
-                    return defaultCloseDialog(env, 1, 2, true, false);
+                        qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
+                        updateQuestStatus(env);
+                        return defaultCloseDialog(env, 1, 2, true, false);
                 }
             }
         }

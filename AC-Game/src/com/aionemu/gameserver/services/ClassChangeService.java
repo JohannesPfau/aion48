@@ -210,8 +210,7 @@ public class ClassChangeService {
         } else {
             qs.setStatus(QuestStatus.COMPLETE);
             qs.setCompleteCount(qs.getCompleteCount() + 1);
-            PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars()
-                    .getQuestVars()));
+            PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars()));
         }
     }
 
@@ -227,7 +226,7 @@ public class ClassChangeService {
         int level = player.getLevel();
         int levelToChange = GSConfig.STARTCLASS_MAXLEVEL - 1;
         PlayerClass oldClass = player.getPlayerClass();
-        if (level != levelToChange){
+        if (level != levelToChange) {
             PacketSendUtility.sendMessage(player, "You can only switch class at level " + levelToChange);
             return false;
         }

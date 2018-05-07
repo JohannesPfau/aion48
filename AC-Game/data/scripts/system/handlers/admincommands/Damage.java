@@ -29,14 +29,14 @@
  */
 package admincommands;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author Source
@@ -83,7 +83,6 @@ public class Damage extends AdminCommand {
 
     @Override
     public void onFail(Player player, String message) {
-        PacketSendUtility.sendMessage(player, "syntax //damage <dmg | dmg%>"
-                + "\n<dmg> must be a number.");
+        PacketSendUtility.sendMessage(player, "syntax //damage <dmg | dmg%>" + "\n<dmg> must be a number.");
     }
 }

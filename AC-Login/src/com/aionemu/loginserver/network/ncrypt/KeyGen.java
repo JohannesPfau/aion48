@@ -29,16 +29,18 @@
  */
 package com.aionemu.loginserver.network.ncrypt;
 
-import com.aionemu.commons.utils.Rnd;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.security.GeneralSecurityException;
+import java.security.KeyPairGenerator;
+import java.security.spec.RSAKeyGenParameterSpec;
 
 import javax.crypto.Cipher;
 import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
-import java.security.GeneralSecurityException;
-import java.security.KeyPairGenerator;
-import java.security.spec.RSAKeyGenParameterSpec;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.utils.Rnd;
 
 /**
  * Key generator. It generates keys or keyPairs for Blowfish and RSA
@@ -77,8 +79,7 @@ public class KeyGen {
         encryptedRSAKeyPairs = new EncryptedRSAKeyPair[10];
 
         for (int i = 0; i < 10; i++) {
-            encryptedRSAKeyPairs[i] = new EncryptedRSAKeyPair(
-                    rsaKeyPairGenerator.generateKeyPair());
+            encryptedRSAKeyPairs[i] = new EncryptedRSAKeyPair(rsaKeyPairGenerator.generateKeyPair());
         }
 
         // Pre-init RSA cipher.. saving about 300ms

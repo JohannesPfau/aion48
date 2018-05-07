@@ -71,8 +71,7 @@ public class SetRace extends AdminCommand {
             PacketSendUtility.sendMessage(target, "Has been moved to Pandaemonium");
         }
         PacketSendUtility.sendMessage(admin,
-                target.getName() + " race has been changed to " + params[0] + ".\n" + target.getName()
-                        + " has been moved to town.");
+            target.getName() + " race has been changed to " + params[0] + ".\n" + target.getName() + " has been moved to town.");
     }
 
     @Override

@@ -31,7 +31,6 @@ package com.aionemu.gameserver.geoEngine.collision.bih;
 
 import static java.lang.Math.max;
 import static java.lang.Math.min;
-import javolution.util.FastList;
 
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
 import com.aionemu.gameserver.geoEngine.collision.Collidable;
@@ -41,6 +40,8 @@ import com.aionemu.gameserver.geoEngine.math.Matrix4f;
 import com.aionemu.gameserver.geoEngine.math.Ray;
 import com.aionemu.gameserver.geoEngine.math.Triangle;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
+
+import javolution.util.FastList;
 
 /**
  * Bounding Interval Hierarchy. Based on: Instant Ray Tracing: The Bounding
@@ -120,9 +121,9 @@ public final class BIHNode {
 
         FastList<BIHStackData> stack = FastList.newInstance();
 
-        float[] minExts = {box.getCenter().x - box.getXExtent(), box.getCenter().y - box.getYExtent(), box.getCenter().z - box.getZExtent()};
+        float[] minExts = { box.getCenter().x - box.getXExtent(), box.getCenter().y - box.getYExtent(), box.getCenter().z - box.getZExtent() };
 
-        float[] maxExts = {box.getCenter().x + box.getXExtent(), box.getCenter().y + box.getYExtent(), box.getCenter().z + box.getZExtent()};
+        float[] maxExts = { box.getCenter().x + box.getXExtent(), box.getCenter().y + box.getYExtent(), box.getCenter().z + box.getZExtent() };
 
         stack.add(new BIHStackData(this, 0, 0));
 
@@ -165,11 +166,12 @@ public final class BIHNode {
                     worldMatrix.mult(t.get3(), t.get3());
                 }
 
-                /* Original code had this
-                 int added = col.collideWith(t, results, 1);
-                 if (added > 0) {
-                 cols += added;
-                 }
+                /*
+                 * Original code had this
+                 * int added = col.collideWith(t, results, 1);
+                 * if (added > 0) {
+                 * cols += added;
+                 * }
                  */
             }
         }
@@ -245,9 +247,9 @@ public final class BIHNode {
         inv.multNormal(r.getDirection(), r.getDirection());
         // inv.multNormalAcross(r.getDirection(), r.getDirection());
 
-        float[] origins = {r.getOrigin().x, r.getOrigin().y, r.getOrigin().z};
+        float[] origins = { r.getOrigin().x, r.getOrigin().y, r.getOrigin().z };
 
-        float[] invDirections = {1f / r.getDirection().x, 1f / r.getDirection().y, 1f / r.getDirection().z};
+        float[] invDirections = { 1f / r.getDirection().x, 1f / r.getDirection().y, 1f / r.getDirection().z };
 
         r.getDirection().normalizeLocal();
 

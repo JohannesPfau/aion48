@@ -37,40 +37,39 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.LoginEventService;
 
-
 /**
  * @author Alcapwnd
- *
  */
 public class CM_LOGIN_REWARD extends AionClientPacket {
 
-	private int timestamp;
-  private int count;
-  private List<Integer> passportId = new ArrayList<Integer>();
-  
-	public CM_LOGIN_REWARD(int opcode, State state, State... restStates) {
-		super(opcode, state, restStates);
-	}
-	
-	@Override
-  protected void readImpl() {
-      count = readH();
-      for (int i = 0; i < count; i++) {
-      	passportId.add(readD());
-          timestamp = readD();
-      }
+    private int timestamp;
+    private int count;
+    private List<Integer> passportId = new ArrayList<>();
 
-  }
+    public CM_LOGIN_REWARD(int opcode, State state, State... restStates) {
+        super(opcode, state, restStates);
+    }
 
-  /* (non-Javadoc)
-   * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
-   */
-  @Override
-  protected void runImpl() {
-      Player player = getConnection().getActivePlayer();
-      if (player == null)
-          return;
-      LoginEventService.getInstance().getReward(player, timestamp, passportId);
+    @Override
+    protected void readImpl() {
+        count = readH();
+        for (int i = 0; i < count; i++) {
+            passportId.add(readD());
+            timestamp = readD();
+        }
 
-  }
+    }
+
+    /*
+     * (non-Javadoc)
+     * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
+     */
+    @Override
+    protected void runImpl() {
+        Player player = getConnection().getActivePlayer();
+        if (player == null)
+            return;
+        LoginEventService.getInstance().getReward(player, timestamp, passportId);
+
+    }
 }

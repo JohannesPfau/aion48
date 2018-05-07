@@ -29,6 +29,8 @@
  */
 package ai.instance.tiamatStrongHold;
 
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -36,8 +38,6 @@ import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Cheatkiller
@@ -55,6 +55,7 @@ public class DistortedSpaceAI2 extends NpcAI2 {
 
     private void useskill() {
         task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (getOwner().getNpcId() == 283232) {
@@ -64,6 +65,7 @@ public class DistortedSpaceAI2 extends NpcAI2 {
         }, 500, 2000);
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 cancelTask();

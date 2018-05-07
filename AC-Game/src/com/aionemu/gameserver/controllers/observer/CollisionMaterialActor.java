@@ -63,7 +63,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class CollisionMaterialActor extends AbstractCollisionObserver implements IActor {
 
     private MaterialTemplate actionTemplate;
-    private AtomicReference<MaterialSkill> currentSkill = new AtomicReference<MaterialSkill>();
+    private AtomicReference<MaterialSkill> currentSkill = new AtomicReference<>();
 
     public CollisionMaterialActor(Creature creature, Spatial geometry, MaterialTemplate actionTemplate) {
         super(creature, geometry, CollisionIntention.MATERIAL.getId());
@@ -157,6 +157,7 @@ public class CollisionMaterialActor extends AbstractCollisionObserver implements
                 return;
             }
             Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
                 @Override
                 public void run() {
                     if (!creature.getEffectController().hasAbnormalEffect(actSkill.getId())) {

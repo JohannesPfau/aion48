@@ -43,8 +43,8 @@ public abstract class PlayerGameStatsDAO implements DAO {
         return PlayerGameStatsDAO.class.getName();
     }
 
-    /* 
-     loaded into PlayerService (at the player connection)
+    /*
+     * loaded into PlayerService (at the player connection)
      */
 
     /**

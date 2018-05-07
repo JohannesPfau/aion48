@@ -30,7 +30,9 @@
 package quest.clash_of_destiny;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -38,8 +40,6 @@ import com.aionemu.gameserver.network.aion.SystemMessageId;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -57,8 +57,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class _24030ShowdownWithDestiny extends QuestHandler {
 
     private final static int questId = 24030;
-    private final static int[] npcs = {204206, 204207, 203550, 700551, 204052};
-    private final static int[] mobs = {798342, 798343, 798344, 798345};
+    private final static int[] npcs = { 204206, 204207, 203550, 700551, 204052 };
+    private final static int[] mobs = { 798342, 798343, 798344, 798345 };
 
     public _24030ShowdownWithDestiny() {
         super(questId);
@@ -75,7 +75,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
         for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
-		qe.registerQuestNpc(798346).addOnKillEvent(questId);
+        qe.registerQuestNpc(798346).addOnKillEvent(questId);
     }
 
     @Override
@@ -139,7 +139,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
                             return checkQuestItems(env, 3, 4, false, 10000, 10001, 182215392, 1);
                         }
                         case SETPRO5: {
-							TeleportService2.teleportTo(player, 400010000, 2249.50f, 2106.68f, 2195.54f, (byte) 30, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, 400010000, 2249.50f, 2106.68f, 2195.54f, (byte) 30, TeleportAnimation.BEAM_ANIMATION);
                             return defaultCloseDialog(env, 4, 5); // 5
                         }
                         case SET_SUCCEED: {
@@ -174,6 +174,7 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
                                 PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));
                                 final QuestEnv qe = env;
                                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                     @Override
                                     public void run() {
                                         changeQuestStep(qe, 5, 6, false); //6
@@ -226,8 +227,8 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
             int var = qs.getQuestVarById(0);
             if (var > 5 && var < 8) {
                 changeQuestStep(env, var, 5, false); // 5
-                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                        DataManager.QUEST_DATA.getQuestById(questId).getName()));
+                PacketSendUtility.sendPacket(player,
+                    new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
                 return true;
             }
         }
@@ -243,8 +244,8 @@ public class _24030ShowdownWithDestiny extends QuestHandler {
                 int var = qs.getQuestVarById(0);
                 if (var > 5 && var < 8) {
                     changeQuestStep(env, var, 5, false); // 5
-                    PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                            DataManager.QUEST_DATA.getQuestById(questId).getName()));
+                    PacketSendUtility.sendPacket(player,
+                        new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
                     return true;
                 }
             }

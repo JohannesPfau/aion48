@@ -29,6 +29,8 @@
  */
 package com.aionemu.loginserver.network.aion.clientpackets;
 
+import java.nio.ByteBuffer;
+
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.network.aion.AionAuthResponse;
@@ -38,8 +40,6 @@ import com.aionemu.loginserver.network.aion.SessionKey;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_LOGIN_FAIL;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_PLAY_FAIL;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_PLAY_OK;
-
-import java.nio.ByteBuffer;
 
 /**
  * @author -Nemesiss-
@@ -85,7 +85,7 @@ public class CM_PLAY extends AionClientPacket {
             if (gsi == null || !gsi.isOnline()) {
                 con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.SERVER_DOWN));
             } // else if(serv gm only)
-            // con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.GM_ONLY));
+              // con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.GM_ONLY));
             else if (gsi.isFull()) {
                 con.sendPacket(new SM_PLAY_FAIL(AionAuthResponse.SERVER_FULL));
             } else {

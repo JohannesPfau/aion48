@@ -29,15 +29,16 @@
  */
 package com.aionemu.commons.scripting.classlistener;
 
-import com.aionemu.commons.scripting.metadata.OnClassLoad;
-import com.aionemu.commons.scripting.metadata.OnClassUnload;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.scripting.metadata.OnClassLoad;
+import com.aionemu.commons.scripting.metadata.OnClassUnload;
 
 /**
  * @author SoulKeeper
@@ -67,8 +68,10 @@ public class OnClassLoadUnloadListener implements ClassListener {
      * Actually invokes method where given annotation class is present. Only
      * static methods can be invoked
      *
-     * @param methods         Methods to scan for annotations
-     * @param annotationClass class of annotation to search for
+     * @param methods
+     *            Methods to scan for annotations
+     * @param annotationClass
+     *            class of annotation to search for
      */
     protected final void doMethodInvoke(Method[] methods, Class<? extends Annotation> annotationClass) {
         for (Method m : methods) {

@@ -29,9 +29,9 @@
  */
 package quest.eltnen;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -39,7 +39,6 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author FrozenKiller
- *
  */
 public class _3340PreparingfortheDestructionoftheLepharistBastion extends QuestHandler {
 
@@ -54,9 +53,9 @@ public class _3340PreparingfortheDestructionoftheLepharistBastion extends QuestH
         qe.registerQuestNpc(203901).addOnQuestStart(questId);
         qe.registerQuestNpc(203901).addOnTalkEvent(questId);
         qe.registerQuestNpc(204042).addOnTalkEvent(questId);
-	}
+    }
 
-	@Override
+    @Override
     public boolean onDialogEvent(final QuestEnv env) {
         final Player player = env.getPlayer();
         int targetId = env.getTargetId();
@@ -72,31 +71,31 @@ public class _3340PreparingfortheDestructionoftheLepharistBastion extends QuestH
                 }
             }
         } else if (qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
+            int var = qs.getQuestVarById(0);
             if (targetId == 204042) {
                 switch (dialog) {
                     case QUEST_SELECT: {
-						if (var == 0) {
-							return sendQuestDialog(env, 1352);
-						} else if (var == 1) {
-							return sendQuestDialog(env, 2375);
-						}
+                        if (var == 0) {
+                            return sendQuestDialog(env, 1352);
+                        } else if (var == 1) {
+                            return sendQuestDialog(env, 2375);
+                        }
                     }
-					case SETPRO1: {
-						return defaultCloseDialog(env, 0, 1); //1
-					}
+                    case SETPRO1: {
+                        return defaultCloseDialog(env, 0, 1); //1
+                    }
                     case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
-						if (QuestService.collectItemCheck(env, true)) {
-							changeQuestStep(env, 1, 1, true);
-							return sendQuestDialog(env, 5);
+                        if (QuestService.collectItemCheck(env, true)) {
+                            changeQuestStep(env, 1, 1, true);
+                            return sendQuestDialog(env, 5);
                         } else {
-							return closeDialogWindow(env);
-						}
-					}
-				default:
-					break;
-				}
-			}
+                            return closeDialogWindow(env);
+                        }
+                    }
+                    default:
+                        break;
+                }
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 204042) {
                 return sendQuestEndDialog(env);

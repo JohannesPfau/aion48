@@ -127,8 +127,7 @@ public class PlayerEffectController extends EffectController {
         if (remainingTime <= 0) {
             return;
         }
-        if (CustomConfig.ABYSSXFORM_LOGOUT
-                && template.isDeityAvatar()) {
+        if (CustomConfig.ABYSSXFORM_LOGOUT && template.isDeityAvatar()) {
 
             if (System.currentTimeMillis() >= endTime) {
                 return;

@@ -29,7 +29,12 @@
  */
 package ai.instance.udasTemple;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -45,11 +50,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * Lord Vallakhan BossScript
@@ -60,9 +61,9 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class LordVallakhanAI2 extends AggressiveNpcAI2 {
 
     private AtomicBoolean isHome = new AtomicBoolean(true);
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
     private Future<?> taskEinsturz;
-    private final List<Integer> spawnedNpc = new ArrayList<Integer>();
+    private final List<Integer> spawnedNpc = new ArrayList<>();
     private boolean canThink = true;
 
     @Override
@@ -72,7 +73,7 @@ public class LordVallakhanAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{99, 75, 30, 10});
+        Collections.addAll(percents, new Integer[] { 99, 75, 30, 10 });
     }
 
     private synchronized void checkPercentage(int hpPercentage) {
@@ -100,6 +101,7 @@ public class LordVallakhanAI2 extends AggressiveNpcAI2 {
 
     private void taskEinsturzStart() {
         taskEinsturz = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isHome.equals(true) || isAlreadyDead()) {
@@ -110,6 +112,7 @@ public class LordVallakhanAI2 extends AggressiveNpcAI2 {
                 NpcShoutsService.getInstance().sendMsg(getOwner(), 1500023, getObjectId(), 0, 0);
 
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         if (isHome.equals(true) || isAlreadyDead()) {
@@ -122,6 +125,7 @@ public class LordVallakhanAI2 extends AggressiveNpcAI2 {
                 }, 2000);
 
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         // normal weiter
@@ -240,6 +244,6 @@ public class LordVallakhanAI2 extends AggressiveNpcAI2 {
         float x = (float) (Math.cos(Math.PI * direction) * distance);
         float y = (float) (Math.sin(Math.PI * direction) * distance);
         return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x, getPosition().getY() + y,
-                getPosition().getZ(), getPosition().getHeading());
+            getPosition().getZ(), getPosition().getHeading());
     }
 }

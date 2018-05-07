@@ -29,7 +29,10 @@
  */
 package ai.instance.tallocsHollow;
 
-import ai.AggressiveNpcAI2;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -44,9 +47,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -74,6 +75,7 @@ public class CelestiusAI2 extends AggressiveNpcAI2 {
 
     private void startHelpersCall() {
         helpersTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead() && getLifeStats().getHpPercentage() < 90) {

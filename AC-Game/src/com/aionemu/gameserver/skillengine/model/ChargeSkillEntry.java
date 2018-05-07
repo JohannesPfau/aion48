@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ChargeSkill", propOrder = {"skills"})
+@XmlType(name = "ChargeSkill", propOrder = { "skills" })
 public class ChargeSkillEntry {
 
     @XmlElement(name = "skill", required = true)

@@ -62,8 +62,8 @@ public class PortalDialogAI2 extends PortalAI2 {
 
     @Override
     protected void handleDialogStart(Player player) {
-		if (getTalkDelay() == 0) {
-			checkDialog(player);
+        if (getTalkDelay() == 0) {
+            checkDialog(player);
         } else {
             super.handleDialogStart(player);
         }
@@ -82,9 +82,11 @@ public class PortalDialogAI2 extends PortalAI2 {
                 PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId()));
             }
             PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-        }/* else if (dialogId == DialogAction.SELECT_ACTION_1012.id()) {
-            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1182));
-        }*/ else if (dialogId == DialogAction.OPEN_INSTANCE_RECRUIT.id()) {
+        } /*
+           * else if (dialogId == DialogAction.SELECT_ACTION_1012.id()) {
+           * PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1182));
+           * }
+           */ else if (dialogId == DialogAction.OPEN_INSTANCE_RECRUIT.id()) {
             AutoGroupType agt = AutoGroupType.getAutoGroup(player.getLevel(), getNpcId());
             if (agt != null) {
                 PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(0x1A, agt.getInstanceMapId()));
@@ -104,8 +106,8 @@ public class PortalDialogAI2 extends PortalAI2 {
 
     @Override
     protected void handleUseItemFinish(Player player) {
-            checkDialog(player);
-	}
+        checkDialog(player);
+    }
 
     private void checkDialog(Player player) {
         int npcId = getNpcId();
@@ -113,7 +115,7 @@ public class PortalDialogAI2 extends PortalAI2 {
         List<Integer> relatedQuests = QuestEngine.getInstance().getQuestNpc(npcId).getOnTalkEvent();
         boolean playerHasQuest = false;
         boolean playerCanStartQuest = false;
-		if (!relatedQuests.isEmpty()) {
+        if (!relatedQuests.isEmpty()) {
             for (int questId : relatedQuests) {
                 QuestState qs = player.getQuestStateList().getQuestState(questId);
                 if (qs != null && (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.REWARD)) {
@@ -127,7 +129,7 @@ public class PortalDialogAI2 extends PortalAI2 {
                 }
             }
         }
-		if (playerHasQuest) {
+        if (playerHasQuest) {
             boolean isRewardStep = false;
             for (int questId : relatedQuests) {
                 QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -143,40 +145,40 @@ public class PortalDialogAI2 extends PortalAI2 {
         } else if (playerCanStartQuest) {
             PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), startingDialogId));
         } else {
-        	switch (npcId) {
-				//Wisplight Abbey 4.7.5
-				case 804677: //Atreia Defense Portal
-				case 804678: //Balaurea Advance Portal
-				case 804679: //Balaurea Invasion Portal
-				case 804680: //Balaurea Frontier Portal
-				//Fatebound Abbey 4.7.5
-				case 804682: //Atreia Defense Portal
-				case 804683: //Balaurea Advance Portal
-				case 804684: //Balaurea Invasion Portal
-				case 804685: //Balaurea Frontier Portal
-				case 831117: //Shugo Imperial Tomb
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, 0));
-				break;
-				case 730840:
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, 0));
-					break;
-				case 730841:
-				case 730883:
-				case 804621:
-				case 804623:
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, 0));
-					break;
-				case 804624:
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, 0));
-					break;
+            switch (npcId) {
+                //Wisplight Abbey 4.7.5
+                case 804677: //Atreia Defense Portal
+                case 804678: //Balaurea Advance Portal
+                case 804679: //Balaurea Invasion Portal
+                case 804680: //Balaurea Frontier Portal
+                    //Fatebound Abbey 4.7.5
+                case 804682: //Atreia Defense Portal
+                case 804683: //Balaurea Advance Portal
+                case 804684: //Balaurea Invasion Portal
+                case 804685: //Balaurea Frontier Portal
+                case 831117: //Shugo Imperial Tomb
+                    PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, 0));
+                    break;
+                case 730840:
+                    PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, 0));
+                    break;
+                case 730841:
+                case 730883:
+                case 804621:
+                case 804623:
+                    PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, 0));
+                    break;
+                case 804624:
+                    PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, 0));
+                    break;
 
-				case 804625:
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762, 0)); // instances with infernal dialog.
-					break;
-				default:
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), teleportationDialogId, 0));
-					break;
-        	}
+                case 804625:
+                    PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 4762, 0)); // instances with infernal dialog.
+                    break;
+                default:
+                    PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), teleportationDialogId, 0));
+                    break;
+            }
         }
     }
 }

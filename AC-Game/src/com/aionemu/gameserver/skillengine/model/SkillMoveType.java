@@ -41,6 +41,7 @@ public enum SkillMoveType {
     KNOCKBACK(28),
     STAGGER(112),
     UNK(54);
+
     private int id;
 
     private SkillMoveType(int id) {

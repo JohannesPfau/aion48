@@ -60,9 +60,12 @@ public class IPRange {
     /**
      * Creates new IPRange object.
      *
-     * @param min     minal ip address
-     * @param max     maximal ip address
-     * @param address ip address that will be used as host for this range
+     * @param min
+     *            minal ip address
+     * @param max
+     *            maximal ip address
+     * @param address
+     *            ip address that will be used as host for this range
      */
     public IPRange(String min, String max, String address) {
         this.min = toLong(toByteArray(min));
@@ -73,9 +76,12 @@ public class IPRange {
     /**
      * Creates new IPRange object
      *
-     * @param min     minimal ip address
-     * @param max     maximal ip address
-     * @param address ip address that will be used as host for this range
+     * @param min
+     *            minimal ip address
+     * @param max
+     *            maximal ip address
+     * @param address
+     *            ip address that will be used as host for this range
      */
     public IPRange(byte[] min, byte[] max, byte[] address) {
         this.min = toLong(min);
@@ -86,7 +92,8 @@ public class IPRange {
     /**
      * Checks if address is in range
      *
-     * @param address address to check if is in range
+     * @param address
+     *            address to check if is in range
      * @return true if is in range, false in other case
      */
     public boolean isInRange(String address) {
@@ -124,7 +131,8 @@ public class IPRange {
     /**
      * Converts IPv4 address to long
      *
-     * @param bytes byte array to convert
+     * @param bytes
+     *            byte array to convert
      * @return long that represents address
      */
     private static long toLong(byte[] bytes) {
@@ -139,7 +147,8 @@ public class IPRange {
     /**
      * Converts long to byte array
      *
-     * @param val long to convert
+     * @param val
+     *            long to convert
      * @return byte array
      */
     private static byte[] toBytes(long val) {
@@ -154,7 +163,8 @@ public class IPRange {
     /**
      * Convers IPv4 address to byte array
      *
-     * @param address String to convert
+     * @param address
+     *            String to convert
      * @return byte array that represents string
      */
     public static byte[] toByteArray(String address) {
@@ -170,7 +180,8 @@ public class IPRange {
     /**
      * Equals of IPRange object. Auto-Generated.
      *
-     * @param o object to compare with
+     * @param o
+     *            object to compare with
      * @return true if IPRanges are equal, false in other case
      */
     @Override

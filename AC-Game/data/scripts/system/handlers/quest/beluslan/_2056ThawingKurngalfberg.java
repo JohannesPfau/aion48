@@ -29,6 +29,7 @@
  */
 package quest.beluslan;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,7 +37,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,7 +51,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _2056ThawingKurngalfberg extends QuestHandler {
 
     private final static int questId = 2056;
-    private final static int[] npc_ids = {204753, 790016, 730036, 279000};
+    private final static int[] npc_ids = { 204753, 790016, 730036, 279000 };
 
     public _2056ThawingKurngalfberg() {
         super(questId);
@@ -98,7 +98,7 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
                 } else {
-                    int[] questItems = {182204313, 182204314, 182204315};
+                    int[] questItems = { 182204313, 182204314, 182204315 };
                     return sendQuestEndDialog(env, questItems);
                 }
             }
@@ -204,17 +204,16 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
         }
 
         if (id != 182204313 && qs.getQuestVarById(0) == 2 || id != 182204314 && qs.getQuestVarById(0) == 3
-                || id != 182204315 && qs.getQuestVarById(0) == 4) {
+            || id != 182204315 && qs.getQuestVarById(0) == 4) {
             return HandlerResult.UNKNOWN;
         }
 
-        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 2000, 0,
-                0), true);
+        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 2000, 0, 0), true);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
-                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-                        1, 0), true);
+                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
                 if (qs.getQuestVarById(0) == 2) {
                     playQuestMovie(env, 243);
                     removeQuestItem(env, id, 1);
@@ -225,8 +224,7 @@ public class _2056ThawingKurngalfberg extends QuestHandler {
                     removeQuestItem(env, id, 1);
                     qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
                     updateQuestStatus(env);
-                } else if (qs.getQuestVarById(0) == 4 && qs.getStatus() != QuestStatus.COMPLETE
-                        && qs.getStatus() != QuestStatus.NONE) {
+                } else if (qs.getQuestVarById(0) == 4 && qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
                     removeQuestItem(env, id, 1);
                     playQuestMovie(env, 245);
                     qs.setStatus(QuestStatus.REWARD);

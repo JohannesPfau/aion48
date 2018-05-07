@@ -72,7 +72,7 @@ public final class AbyssRank {
      * @param lastUpdate
      */
     public AbyssRank(int dailyAP, int dailyGP, int weeklyAP, int weeklyGP, int ap, int gp, int rank, int topRanking, int dailyKill, int weeklyKill,
-                     int allKill, int maxRank, int lastKill, int lastAP, int lastGP, long lastUpdate) {
+        int allKill, int maxRank, int lastKill, int lastAP, int lastGP, long lastUpdate) {
         this.dailyAP = dailyAP;
         this.dailyGP = dailyGP;
         this.weeklyAP = weeklyAP;
@@ -99,6 +99,7 @@ public final class AbyssRank {
         PLAYER_ASMODIANS(2),
         LEGION_ELYOS(4),
         LEGION_ASMODIANS(8);
+
         private int id;
 
         AbyssRankUpdateType(int id) {
@@ -302,7 +303,8 @@ public final class AbyssRank {
     }
 
     /**
-     * @param rank the rank to set
+     * @param rank
+     *            the rank to set
      */
     public void setRank(AbyssRankEnum rank) {
         if (rank.getId() > this.maxRank) {
@@ -324,7 +326,8 @@ public final class AbyssRank {
     }
 
     /**
-     * @param persistentState the persistentState to set
+     * @param persistentState
+     *            the persistentState to set
      */
     public void setPersistentState(PersistentState persistentState) {
         if (persistentState != PersistentState.UPDATE_REQUIRED || this.persistentState != PersistentState.NEW) {
@@ -351,9 +354,8 @@ public final class AbyssRank {
         curCal.setTimeInMillis(System.currentTimeMillis());
 
         // Checking the day - month & year are checked to prevent if a player come back after 1 month, the same day
-        if (lastCal.get(Calendar.DAY_OF_MONTH) != curCal.get(Calendar.DAY_OF_MONTH)
-                || lastCal.get(Calendar.MONTH) != curCal.get(Calendar.MONTH)
-                || lastCal.get(Calendar.YEAR) != curCal.get(Calendar.YEAR)) {
+        if (lastCal.get(Calendar.DAY_OF_MONTH) != curCal.get(Calendar.DAY_OF_MONTH) || lastCal.get(Calendar.MONTH) != curCal.get(Calendar.MONTH)
+            || lastCal.get(Calendar.YEAR) != curCal.get(Calendar.YEAR)) {
             this.dailyAP = 0;
             this.dailyGP = 0;
             this.dailyKill = 0;
@@ -361,8 +363,7 @@ public final class AbyssRank {
         }
 
         // Checking the week - year is checked to prevent if a player come back after 1 year, the same week
-        if (lastCal.get(Calendar.WEEK_OF_YEAR) != curCal.get(Calendar.WEEK_OF_YEAR)
-                || lastCal.get(Calendar.YEAR) != curCal.get(Calendar.YEAR)) {
+        if (lastCal.get(Calendar.WEEK_OF_YEAR) != curCal.get(Calendar.WEEK_OF_YEAR) || lastCal.get(Calendar.YEAR) != curCal.get(Calendar.YEAR)) {
             this.lastKill = this.weeklyKill;
             this.lastAP = this.weeklyAP;
             this.lastGP = this.weeklyGP;

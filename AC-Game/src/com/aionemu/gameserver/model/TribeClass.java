@@ -263,7 +263,7 @@ public enum TribeClass {
     IDF5_U1_WAR_01_GUARD,
     IDF5_U1_WAR_01_GUARD_DARK,
     IDF5_U1_WAR_01_REWARD,
-	IDF5_U3_OBJ,
+    IDF5_U3_OBJ,
     IDF5U1_AGGRESSIVETANK,
     IDF5U1_PCFLAG,
     IDF5U1_TANK,
@@ -368,7 +368,7 @@ public enum TribeClass {
     LDF5_BRAX,
     LDF5_CALYDON,
     LDF5_DARU,
-    LDF5_DEBRIE,	
+    LDF5_DEBRIE,
     LDF5_FUNGY,
     LDF5_GURURU,
     LDF5_LUPYLLINI,
@@ -761,7 +761,6 @@ public enum TribeClass {
     DF5_GUARD_04_DARK,
     LF5_GUARD_TRAP,
     DF5_GUARD_TRAP;
-
 
     private Race guardRace;
     private boolean isBasic;

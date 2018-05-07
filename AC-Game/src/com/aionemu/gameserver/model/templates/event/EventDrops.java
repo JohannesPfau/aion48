@@ -46,7 +46,7 @@ public class EventDrops {
 
     public List<EventDrop> getEventDrops() {
         if (eventDrops == null) {
-            eventDrops = new ArrayList<EventDrop>();
+            eventDrops = new ArrayList<>();
         }
         return this.eventDrops;
     }

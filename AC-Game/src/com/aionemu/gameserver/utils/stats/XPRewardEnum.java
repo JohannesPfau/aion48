@@ -52,6 +52,7 @@ public enum XPRewardEnum {
     PLUS_2(2, 110),
     PLUS_3(3, 115),
     PLUS_4(4, 120);
+
     private int xpRewardPercent;
     private int levelDifference;
 
@@ -65,7 +66,8 @@ public enum XPRewardEnum {
     }
 
     /**
-     * @param levelDifference between two objects
+     * @param levelDifference
+     *            between two objects
      * @return XP reward percentage
      */
     public static int xpRewardFrom(int levelDifference) {

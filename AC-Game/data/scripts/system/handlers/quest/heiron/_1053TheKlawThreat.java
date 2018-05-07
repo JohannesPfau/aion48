@@ -46,7 +46,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1053TheKlawThreat extends QuestHandler {
 
     private final static int questId = 1053;
-    private final static int[] npc_ids = {204583, 204502};
+    private final static int[] npc_ids = { 204583, 204502 };
 
     public _1053TheKlawThreat() {
         super(questId);

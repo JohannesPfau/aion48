@@ -57,7 +57,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public abstract class BattleGround {
 
-    protected List<Player> players = new ArrayList<Player>();
+    protected List<Player> players = new ArrayList<>();
     protected int tplId;
     private long startTime;
     protected WorldMapInstance instance;
@@ -77,7 +77,8 @@ public abstract class BattleGround {
     public void increasePoints(Player player, int value) {
         PacketSendUtility.sendMessage(player, "You have earned " + value + " BG points.");
         player.battlegroundSessionPoints += value;
-        if (player.getBattleGround().getTemplate().getType() == BattleGroundType.CTF && value == player.getBattleGround().getTemplate().getRules().getFlagCap()) {
+        if (player.getBattleGround().getTemplate().getType() == BattleGroundType.CTF
+            && value == player.getBattleGround().getTemplate().getRules().getFlagCap()) {
             player.battlegroundSessionFlags += 1;
         } else if (value == player.getBattleGround().getTemplate().getRules().getKillPlayer()) {
             player.battlegroundSessionKills += 1;
@@ -88,7 +89,8 @@ public abstract class BattleGround {
         PacketSendUtility.sendMessage(player, "You have lost " + value + " BG points.");
 
         player.battlegroundSessionPoints -= value;
-        if (player.getBattleGround().getTemplate().getType() == BattleGroundType.ASSAULT && value == player.getBattleGround().getTemplate().getRules().getDie()) {
+        if (player.getBattleGround().getTemplate().getType() == BattleGroundType.ASSAULT
+            && value == player.getBattleGround().getTemplate().getRules().getDie()) {
             player.battlegroundSessionDeaths += 1;
         }
 
@@ -127,10 +129,10 @@ public abstract class BattleGround {
         BattleGroundTemplate template = DataManager.BATTLEGROUND_DATA.getBattleGroundTemplate(tplId);
         if (player.getCommonData().getRace() == Race.ELYOS) {
             goTo(player, template.getWorldId(), template.getInsertPoint().getXe(), template.getInsertPoint().getYe(),
-                    template.getInsertPoint().getZe(), template.getInsertPoint().getHe());
+                template.getInsertPoint().getZe(), template.getInsertPoint().getHe());
         } else {
             goTo(player, template.getWorldId(), template.getInsertPoint().getXa(), template.getInsertPoint().getYa(),
-                    template.getInsertPoint().getZa(), template.getInsertPoint().getHa());
+                template.getInsertPoint().getZa(), template.getInsertPoint().getHa());
         }
     }
 
@@ -143,8 +145,12 @@ public abstract class BattleGround {
     }
 
     public void invitePlayer(final Player player) {
-        PacketSendUtility.sendPacket(player, new SM_MESSAGE(0, null, "The Battleground: " + template.getName() + " is now ready to start. You will be teleported in 30 seconds. Have fun :)", ChatType.BRIGHT_YELLOW_CENTER));
+        PacketSendUtility.sendPacket(player,
+            new SM_MESSAGE(0, null,
+                "The Battleground: " + template.getName() + " is now ready to start. You will be teleported in 30 seconds. Have fun :)",
+                ChatType.BRIGHT_YELLOW_CENTER));
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 teleportPlayer(player);
@@ -160,6 +166,7 @@ public abstract class BattleGround {
         }
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 broadcastToBattleGround(template.getWaitTime() + " seconds before starting ...", null);
@@ -183,6 +190,7 @@ public abstract class BattleGround {
         }, 31 * 1000);
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 openDoors();
@@ -192,6 +200,7 @@ public abstract class BattleGround {
         }, (template.getWaitTime() + 30) * 1000);
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (running == true) {
@@ -201,6 +210,7 @@ public abstract class BattleGround {
         }, template.getBgTime() * 1000);
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 for (Player p : players) {
@@ -213,6 +223,7 @@ public abstract class BattleGround {
         }, ((template.getBgTime() / 2) + 30) * 1000);
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (running == true) {
@@ -232,7 +243,9 @@ public abstract class BattleGround {
 
     public void end() {
         running = false;
-        broadcastToBattleGround("The battle is now ended! Click on the right bottom button to show the rank board. If you are dead, just use the spell Return and you will be teleported back.", null);
+        broadcastToBattleGround(
+            "The battle is now ended! Click on the right bottom button to show the rank board. If you are dead, just use the spell Return and you will be teleported back.",
+            null);
         for (Player p : players) {
             if (p.battlegroundObserve > 0) {
                 p.unsetVisualState(CreatureVisualState.HIDE20);
@@ -245,7 +258,7 @@ public abstract class BattleGround {
     }
 
     public List<Player> getRanking(Race race, boolean reward) {
-        ArrayList<Player> ranking = new ArrayList<Player>();
+        ArrayList<Player> ranking = new ArrayList<>();
 
         for (Player p : players) {
             if (p.getCommonData().getRace() != race) {
@@ -275,6 +288,7 @@ public abstract class BattleGround {
         player.getCommonData().setBattleGroundPoints(player.getCommonData().getBattleGroundPoints() + player.battlegroundSessionPoints);
         player.getEffectController().removeAllEffects();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 for (final Player p : players) {
@@ -290,8 +304,9 @@ public abstract class BattleGround {
                     if (p.getWorldId() == 110010000 || p.getWorldId() == 120010000) {
                         String message = "Do you want to go play in a battleground again ?";
                         RequestResponseHandler responseHandler = new RequestResponseHandler(p) {
+
                             @Override
-							public void acceptRequest(Creature requester, Player responder) {
+                            public void acceptRequest(Creature requester, Player responder) {
                                 if (p.getBattleGround() != null) {
                                     PacketSendUtility.sendMessage(p, "You are already registered in a battleground.");
                                     PacketSendUtility.sendMessage(p, "Use your spell Return to leave the battleground.");
@@ -307,7 +322,7 @@ public abstract class BattleGround {
                             }
 
                             @Override
-							public void denyRequest(Creature requester, Player responder) {
+                            public void denyRequest(Creature requester, Player responder) {
                                 return;
                             }
                         };

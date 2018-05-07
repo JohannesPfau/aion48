@@ -100,6 +100,7 @@ public enum XPCape {
     _63(2274948),
     _64(2452906),
     _65(2640620);
+
     private int id;
 
     private XPCape(int id) {

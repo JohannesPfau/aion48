@@ -38,8 +38,7 @@ import com.aionemu.gameserver.services.player.PlayerEnterWorldService;
 /**
  * In this packets aion client is asking if given char [by oid] may login into
  * game [ie start playing].
- *
-, Avol
+ * , Avol
  */
 public class CM_ENTER_WORLD extends AionClientPacket {
 

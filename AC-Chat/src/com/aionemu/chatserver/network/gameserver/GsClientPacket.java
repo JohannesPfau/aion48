@@ -37,15 +37,14 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.network.packet.BaseClientPacket;
 
 /**
- *
  * @author KID
- *
  */
 public abstract class GsClientPacket extends BaseClientPacket<GsConnection> {
 
     public GsClientPacket(ByteBuffer buffer, GsConnection connection, int opCode) {
         super(opCode);
     }
+
     private static final Logger log = LoggerFactory.getLogger(GsClientPacket.class);
 
     @Override

@@ -39,6 +39,7 @@ public enum TeamType {
     ALLIANCE(0x3F, 0),
     ALLIANCE_DEFENCE(0x3F, 4),
     ALLIANCE_OFFENCE(0x02, 3);
+
     private int type;
     private int subType;
 

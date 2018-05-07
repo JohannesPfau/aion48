@@ -33,8 +33,7 @@ import java.util.logging.Logger;
 
 public class Eigen3f {
 
-    private static final Logger logger = Logger.getLogger(Eigen3f.class
-            .getName());
+    private static final Logger logger = Logger.getLogger(Eigen3f.class.getName());
     float[] eigenValues = new float[3];
     Vector3f[] eigenVectors = new Vector3f[3];
     static final double ONE_THIRD_DOUBLE = 1.0 / 3.0;
@@ -175,8 +174,7 @@ public class Eigen3f {
      * @param index2
      * @param index3
      */
-    private void computeVectors(Matrix3f mat, Vector3f vect, int index1,
-                                int index2, int index3) {
+    private void computeVectors(Matrix3f mat, Vector3f vect, int index1, int index2, int index3) {
         Vector3f vectorU = new Vector3f(), vectorV = new Vector3f();
         Vector3f.generateComplementBasis(vectorU, vectorV, vect);
 
@@ -202,14 +200,12 @@ public class Eigen3f {
                 invLength = FastMath.invSqrt(p00 * p00 + p01 * p01);
                 p00 *= invLength;
                 p01 *= invLength;
-                vectorU.mult(p01, eigenVectors[index3])
-                        .addLocal(vectorV.mult(p00));
+                vectorU.mult(p01, eigenVectors[index3]).addLocal(vectorV.mult(p00));
             } else {
                 invLength = FastMath.invSqrt(p11 * p11 + p01 * p01);
                 p11 *= invLength;
                 p01 *= invLength;
-                vectorU.mult(p11, eigenVectors[index3])
-                        .addLocal(vectorV.mult(p01));
+                vectorU.mult(p11, eigenVectors[index3]).addLocal(vectorV.mult(p01));
             }
         } else {
             if (row == 0) {
@@ -264,11 +260,14 @@ public class Eigen3f {
      * doing so, store the max magnitude entry in the given float store and the
      * max row of the matrix in the Vector store.
      *
-     * @param matrix            the Matrix3f to analyze.
-     * @param maxMagnitudeStore a float array in which to store (in the 0th
-     *                          position) the max magnitude entry of the matrix.
-     * @param maxRowStore       a Vector3f to store the values of the row of the
-     *                          matrix containing the max magnitude entry.
+     * @param matrix
+     *            the Matrix3f to analyze.
+     * @param maxMagnitudeStore
+     *            a float array in which to store (in the 0th
+     *            position) the max magnitude entry of the matrix.
+     * @param maxRowStore
+     *            a Vector3f to store the values of the row of the
+     *            matrix containing the max magnitude entry.
      * @return true if the given matrix has a non 0 rank.
      */
     private boolean positiveRank(Matrix3f matrix, float[] maxMagnitudeStore, Vector3f maxRowStore) {
@@ -296,24 +295,22 @@ public class Eigen3f {
      * Generate the base eigen values of the given matrix using double precision
      * math.
      *
-     * @param mat        the Matrix3f to analyze.
-     * @param rootsStore a double array to store the results in. Must be at
-     *                   least length 3.
+     * @param mat
+     *            the Matrix3f to analyze.
+     * @param rootsStore
+     *            a double array to store the results in. Must be at
+     *            least length 3.
      */
     private void computeRoots(Matrix3f mat, double[] rootsStore) {
         // Convert the unique matrix entries to double precision.
-        double a = mat.m00, b = mat.m01, c = mat.m02,
-                d = mat.m11, e = mat.m12,
-                f = mat.m22;
+        double a = mat.m00, b = mat.m01, c = mat.m02, d = mat.m11, e = mat.m12, f = mat.m22;
 
         // The characteristic equation is x^3 - c2*x^2 + c1*x - c0 = 0. The
         // eigenvalues are the roots to this equation, all guaranteed to be
         // real-valued, because the matrix is symmetric.
-        double char0 = a * d * f + 2.0 * b * c * e - a
-                * e * e - d * c * c - f * b * b;
+        double char0 = a * d * f + 2.0 * b * c * e - a * e * e - d * c * c - f * b * b;
 
-        double char1 = a * d - b * b + a * f - c * c
-                + d * f - e * e;
+        double char1 = a * d - b * b + a * f - c * c + d * f - e * e;
 
         double char2 = a + d + f;
 
@@ -338,10 +335,8 @@ public class Eigen3f {
         double cos = Math.cos(angle);
         double sin = Math.sin(angle);
         double root0 = char2Div3 + 2.0 * magnitude * cos;
-        double root1 = char2Div3 - magnitude
-                * (cos + ROOT_THREE_DOUBLE * sin);
-        double root2 = char2Div3 - magnitude
-                * (cos - ROOT_THREE_DOUBLE * sin);
+        double root1 = char2Div3 - magnitude * (cos + ROOT_THREE_DOUBLE * sin);
+        double root2 = char2Div3 - magnitude * (cos - ROOT_THREE_DOUBLE * sin);
 
         // Sort in increasing order.
         if (root1 >= root0) {

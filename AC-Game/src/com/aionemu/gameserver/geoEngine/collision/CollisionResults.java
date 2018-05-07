@@ -35,7 +35,7 @@ import java.util.Iterator;
 
 public class CollisionResults implements Iterable<CollisionResult> {
 
-    private final ArrayList<CollisionResult> results = new ArrayList<CollisionResult>();
+    private final ArrayList<CollisionResult> results = new ArrayList<>();
     private boolean sorted = true;
     private final boolean onlyFirst;
     private final byte intentions;
@@ -52,7 +52,7 @@ public class CollisionResults implements Iterable<CollisionResult> {
     }
 
     @Override
-	public Iterator<CollisionResult> iterator() {
+    public Iterator<CollisionResult> iterator() {
         if (!sorted) {
             Collections.sort(results);
             sorted = true;

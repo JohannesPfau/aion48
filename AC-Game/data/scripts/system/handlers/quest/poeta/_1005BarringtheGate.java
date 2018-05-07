@@ -52,7 +52,7 @@ public class _1005BarringtheGate extends QuestHandler {
 
     @Override
     public void register() {
-        int[] talkNpcs = {203067, 203081, 790001, 203085, 203086, 700080, 700081, 700082, 700083};
+        int[] talkNpcs = { 203067, 203081, 790001, 203085, 203086, 700080, 700081, 700082, 700083 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         for (int id : talkNpcs) {
@@ -60,181 +60,182 @@ public class _1005BarringtheGate extends QuestHandler {
         }
     }
 
-	@Override
-	public boolean onDialogEvent(final QuestEnv env) {
-		final Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null) {
-			return false;
-		}
+    @Override
+    public boolean onDialogEvent(final QuestEnv env) {
+        final Player player = env.getPlayer();
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (qs == null) {
+            return false;
+        }
 
-		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc) {
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-		}
+        int var = qs.getQuestVarById(0);
+        int targetId = 0;
+        if (env.getVisibleObject() instanceof Npc) {
+            targetId = ((Npc) env.getVisibleObject()).getNpcId();
+        }
 
-		if (qs.getStatus() == QuestStatus.START) {
-			switch (targetId) {
-				case 203067: // Kalio
-					switch (env.getDialog()) {
-						case QUEST_SELECT:
-						if (var == 0) {
-							return sendQuestDialog(env, 1011);
-						}
-					case SETPRO1:
-						if (var == 0) {
-							qs.setQuestVarById(0, var + 1);
-							updateQuestStatus(env);
-							sendQuestSelectionDialog(env);
-							return true;
-						}						
-					default:
-						break;
-				}
-				break;
-			case 203081: // Oz
-				switch (env.getDialog()) {
-					case QUEST_SELECT:
-						if (var == 1) {
-							return sendQuestDialog(env, 1352);
-						}
-					case SETPRO2:
-						if (var == 1) {
-							qs.setQuestVarById(0, var + 1);
-							updateQuestStatus(env);
-							sendQuestSelectionDialog(env);
-							return true;
-						}
-					default:
-						break;
-				}
-				break;
-			case 790001: // Pernos
-				switch (env.getDialog()) {
-					case QUEST_SELECT:
-						if (var == 2) {
-							return sendQuestDialog(env, 1693);
-						}
-					case SETPRO3:
-						if (var == 2) {
-							qs.setQuestVarById(0, var + 1);
-							updateQuestStatus(env);
-							sendQuestSelectionDialog(env);
-							return true;
-						}
-					default:
-						break;
-				}
-				break;
-			case 203085: // Poa
-				switch (env.getDialog()) {
-					case QUEST_SELECT:
-						if (var == 3) {
-							return sendQuestDialog(env, 2034);
-						}
-					case SETPRO4:
-						if (var == 3) {
-							qs.setQuestVarById(0, var + 1);
-							updateQuestStatus(env);
-							sendQuestSelectionDialog(env);
-							return true;
-						}
-					default:
-						break;
-				}
-				break;
-			case 203086: // Ino
-				switch (env.getDialog()) {
-					case QUEST_SELECT:
-						if (var == 4) {
-							return sendQuestDialog(env, 2375);
-						}
-					case SETPRO5:
-						if (var == 4) {
-							qs.setQuestVarById(0, var + 1);
-							updateQuestStatus(env);
-							sendQuestSelectionDialog(env);
-							return true;
-						}
-					default:
-						break;
-				}
-				break;
-			case 700081: // Green Power Generator
-				if (var == 5) {
-					destroy(6, env);
-					return false;
-				}
-				break;
-			case 700082: // Blue Power Generator
-				if (var == 6) {
-					destroy(7, env);
-					return false;
-				}
-				break;
-			case 700083: // Violet Power Generator
-				if (var == 7) {
-					destroy(8, env);
-					return false;
-				}
-				break;
-			case 700080: // Poeta Abyss Gate
-				if (var == 8) {
-					destroy(-1, env);
-					return false;
-				}
-				break;
-			}
+        if (qs.getStatus() == QuestStatus.START) {
+            switch (targetId) {
+                case 203067: // Kalio
+                    switch (env.getDialog()) {
+                        case QUEST_SELECT:
+                            if (var == 0) {
+                                return sendQuestDialog(env, 1011);
+                            }
+                        case SETPRO1:
+                            if (var == 0) {
+                                qs.setQuestVarById(0, var + 1);
+                                updateQuestStatus(env);
+                                sendQuestSelectionDialog(env);
+                                return true;
+                            }
+                        default:
+                            break;
+                    }
+                    break;
+                case 203081: // Oz
+                    switch (env.getDialog()) {
+                        case QUEST_SELECT:
+                            if (var == 1) {
+                                return sendQuestDialog(env, 1352);
+                            }
+                        case SETPRO2:
+                            if (var == 1) {
+                                qs.setQuestVarById(0, var + 1);
+                                updateQuestStatus(env);
+                                sendQuestSelectionDialog(env);
+                                return true;
+                            }
+                        default:
+                            break;
+                    }
+                    break;
+                case 790001: // Pernos
+                    switch (env.getDialog()) {
+                        case QUEST_SELECT:
+                            if (var == 2) {
+                                return sendQuestDialog(env, 1693);
+                            }
+                        case SETPRO3:
+                            if (var == 2) {
+                                qs.setQuestVarById(0, var + 1);
+                                updateQuestStatus(env);
+                                sendQuestSelectionDialog(env);
+                                return true;
+                            }
+                        default:
+                            break;
+                    }
+                    break;
+                case 203085: // Poa
+                    switch (env.getDialog()) {
+                        case QUEST_SELECT:
+                            if (var == 3) {
+                                return sendQuestDialog(env, 2034);
+                            }
+                        case SETPRO4:
+                            if (var == 3) {
+                                qs.setQuestVarById(0, var + 1);
+                                updateQuestStatus(env);
+                                sendQuestSelectionDialog(env);
+                                return true;
+                            }
+                        default:
+                            break;
+                    }
+                    break;
+                case 203086: // Ino
+                    switch (env.getDialog()) {
+                        case QUEST_SELECT:
+                            if (var == 4) {
+                                return sendQuestDialog(env, 2375);
+                            }
+                        case SETPRO5:
+                            if (var == 4) {
+                                qs.setQuestVarById(0, var + 1);
+                                updateQuestStatus(env);
+                                sendQuestSelectionDialog(env);
+                                return true;
+                            }
+                        default:
+                            break;
+                    }
+                    break;
+                case 700081: // Green Power Generator
+                    if (var == 5) {
+                        destroy(6, env);
+                        return false;
+                    }
+                    break;
+                case 700082: // Blue Power Generator
+                    if (var == 6) {
+                        destroy(7, env);
+                        return false;
+                    }
+                    break;
+                case 700083: // Violet Power Generator
+                    if (var == 7) {
+                        destroy(8, env);
+                        return false;
+                    }
+                    break;
+                case 700080: // Poeta Abyss Gate
+                    if (var == 8) {
+                        destroy(-1, env);
+                        return false;
+                    }
+                    break;
+            }
 
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203067) { // Kalio
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
-					playQuestMovie(env, 171);
-					return sendQuestDialog(env, 2716);
-				}
-				return sendQuestEndDialog(env);
-			}
-		}
-		return false;
-	}
+        } else if (qs.getStatus() == QuestStatus.REWARD) {
+            if (targetId == 203067) { // Kalio
+                if (env.getDialog() == DialogAction.USE_OBJECT) {
+                    playQuestMovie(env, 171);
+                    return sendQuestDialog(env, 2716);
+                }
+                return sendQuestEndDialog(env);
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		int[] quests = { 1100, 1001, 1002, 1003, 1004 };
-		return defaultOnZoneMissionEndEvent(env, quests);
-	}
+    @Override
+    public boolean onZoneMissionEndEvent(QuestEnv env) {
+        int[] quests = { 1100, 1001, 1002, 1003, 1004 };
+        return defaultOnZoneMissionEndEvent(env, quests);
+    }
 
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		int[] quests = { 1100, 1001, 1002, 1003, 1004 };
-		return defaultOnLvlUpEvent(env, quests, true);
-	}
+    @Override
+    public boolean onLvlUpEvent(QuestEnv env) {
+        int[] quests = { 1100, 1001, 1002, 1003, 1004 };
+        return defaultOnLvlUpEvent(env, quests, true);
+    }
 
-	private void destroy(final int var, final QuestEnv env) { //TODO: add Emotion for destroying generators
-		final int targetObjectId = env.getVisibleObject().getObjectId();
+    private void destroy(final int var, final QuestEnv env) { //TODO: add Emotion for destroying generators
+        final int targetObjectId = env.getVisibleObject().getObjectId();
 
-		final Player player = env.getPlayer();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				if (player.getTarget().getObjectId() != targetObjectId) {
-					return;
-				}
-				QuestState qs = player.getQuestStateList().getQuestState(questId);
-				switch (var) {
-					case 6:
-					case 7:
-					case 8:
-						qs.setQuestVar(var);
-						break;
-					case -1:
-						playQuestMovie(env, 21);
-						qs.setStatus(QuestStatus.REWARD);
-						break;
-				}
-				updateQuestStatus(env);
-			}
-		}, 100);
-	}
+        final Player player = env.getPlayer();
+        ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+            @Override
+            public void run() {
+                if (player.getTarget().getObjectId() != targetObjectId) {
+                    return;
+                }
+                QuestState qs = player.getQuestStateList().getQuestState(questId);
+                switch (var) {
+                    case 6:
+                    case 7:
+                    case 8:
+                        qs.setQuestVar(var);
+                        break;
+                    case -1:
+                        playQuestMovie(env, 21);
+                        qs.setStatus(QuestStatus.REWARD);
+                        break;
+                }
+                updateQuestStatus(env);
+            }
+        }, 100);
+    }
 }

@@ -47,7 +47,7 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
  */
 public class PlayerStatFunctions {
 
-    private static final List<IStatFunction> FUNCTIONS = new ArrayList<IStatFunction>();
+    private static final List<IStatFunction> FUNCTIONS = new ArrayList<>();
 
     static {
         FUNCTIONS.add(new PhysicalAttackFunction());
@@ -216,7 +216,7 @@ class DuplicateStatFunction extends StatFunction {
         if (mainWeapon != null) {
             StatFunction func1 = null;
             StatFunction func2 = null;
-            List<StatFunction> functions = new ArrayList<StatFunction>();
+            List<StatFunction> functions = new ArrayList<>();
             List<StatFunction> functions1 = mainWeapon.getItemTemplate().getModifiers();
 
             if (functions1 != null) {
@@ -263,7 +263,7 @@ class DuplicateStatFunction extends StatFunction {
     }
 
     private List<StatFunction> getFunctions(List<StatFunction> list, Stat2 stat, Item item) {
-        List<StatFunction> functions = new ArrayList<StatFunction>();
+        List<StatFunction> functions = new ArrayList<>();
         for (StatFunction func : list) {
             StatFunctionProxy func2 = new StatFunctionProxy(item, func);
             if (func.getName() == getName() && func2.validate(stat, func2)) {

@@ -29,6 +29,12 @@
  */
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.network.IPRange;
 import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.network.gameserver.GsAuthResponse;
@@ -38,11 +44,6 @@ import com.aionemu.loginserver.network.gameserver.GsConnection.State;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_GS_AUTH_RESPONSE;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_MACBAN_LIST;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * This is authentication packet that gs will send to login server for
@@ -88,7 +89,7 @@ public class CM_GS_AUTH extends GsClientPacket {
         byte len1 = (byte) readC();
         defaultAddress = readB(len1);
         int size = readD();
-        ipRanges = new ArrayList<IPRange>(size);
+        ipRanges = new ArrayList<>(size);
         for (int i = 0; i < size; i++) {
             ipRanges.add(new IPRange(readB(readC()), readB(readC()), readB(readC())));
         }
@@ -112,6 +113,7 @@ public class CM_GS_AUTH extends GsClientPacket {
                 client.setState(State.AUTHED);
                 client.sendPacket(new SM_GS_AUTH_RESPONSE(resp));
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         client.sendPacket(new SM_MACBAN_LIST());

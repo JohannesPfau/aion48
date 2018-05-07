@@ -58,7 +58,8 @@ public class GravityAI2 extends NpcAI2 {
     @SuppressWarnings("unused")
     private void checkDistance(NpcAI2 ai, Creature creature) {
         if (creature instanceof Player) {
-            if (MathUtil.isIn3dRange(getOwner(), creature, 50) && creature.getZ() - getOwner().getZ() <= 4 && !creature.getEffectController().hasAbnormalEffect(20738)) {
+            if (MathUtil.isIn3dRange(getOwner(), creature, 50) && creature.getZ() - getOwner().getZ() <= 4
+                && !creature.getEffectController().hasAbnormalEffect(20738)) {
                 AI2Actions.useSkill(this, 20738);
             }
         }

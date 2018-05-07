@@ -49,8 +49,8 @@ public class ReturnEffect extends EffectTemplate {
 
     @Override
     public void applyEffect(Effect effect) {
-    	Player player = (Player) effect.getEffector();
-    	BattleGround battleground = player.getBattleGround();
+        Player player = (Player) effect.getEffector();
+        BattleGround battleground = player.getBattleGround();
         if (battleground != null) {
             battleground.broadcastToBattleGround(player.getName() + " has left the battleground.", player.getCommonData().getRace());
             battleground.removePlayer(player);
@@ -67,18 +67,18 @@ public class ReturnEffect extends EffectTemplate {
                 player.battlegroundObserve = 0;
             }
         }
-        
+
         TeleportService2.moveToBindLocation((Player) effect.getEffector(), true);
     }
 
     @Override
     public void calculate(Effect effect) {
         //cannot use return inside FFA!
-        if(effect.getEffected() instanceof Player && (((Player) effect.getEffected()).isInFFA())){
+        if (effect.getEffected() instanceof Player && (((Player) effect.getEffected()).isInFFA())) {
             return;
         }
         //cannot use return inside 1vs1
-        if(effect.getEffected() instanceof Player && ((Player) effect.getEffected()).isInArena()){
+        if (effect.getEffected() instanceof Player && ((Player) effect.getEffected()).isInArena()) {
             return;
         }
         if (effect.getEffected().isSpawned()) {

@@ -90,8 +90,7 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
                 client.sendPacket(new SM_CHARACTER_SELECT(2, type, chaPasskey.getWrongCount()));
                 break;
             case 2:
-                boolean isSuccess = DAOManager.getDAO(PlayerPasskeyDAO.class).updatePlayerPasskey(client.getAccount().getId(),
-                        passkey, newPasskey);
+                boolean isSuccess = DAOManager.getDAO(PlayerPasskeyDAO.class).updatePlayerPasskey(client.getAccount().getId(), passkey, newPasskey);
 
                 chaPasskey.setIsPass(false);
                 if (isSuccess) {
@@ -104,8 +103,7 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
                 }
                 break;
             case 3:
-                boolean isPass = DAOManager.getDAO(PlayerPasskeyDAO.class).checkPlayerPasskey(client.getAccount().getId(),
-                        passkey);
+                boolean isPass = DAOManager.getDAO(PlayerPasskeyDAO.class).checkPlayerPasskey(client.getAccount().getId(), passkey);
 
                 if (isPass) {
                     chaPasskey.setIsPass(true);
@@ -118,8 +116,7 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
                         PlayerAccountData playerAccData = client.getAccount().getPlayerAccountData(chaPasskey.getObjectId());
 
                         PlayerService.deletePlayer(playerAccData);
-                        client.sendPacket(new SM_DELETE_CHARACTER(chaPasskey.getObjectId(), playerAccData
-                                .getDeletionTimeInSeconds()));
+                        client.sendPacket(new SM_DELETE_CHARACTER(chaPasskey.getObjectId(), playerAccData.getDeletionTimeInSeconds()));
                     }
                 } else {
                     chaPasskey.setIsPass(false);

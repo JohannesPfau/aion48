@@ -61,7 +61,7 @@ public class SM_ALLIANCE_MEMBER_INFO extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         PlayerCommonData pcd = player.getCommonData();
         WorldPosition wp = player.getPosition();
 

@@ -47,7 +47,8 @@ public class OpenAerialEffect extends EffectTemplate {
 
     @Override
     public void applyEffect(Effect effect) {
-        if (!effect.getEffected().getEffectController().hasPhysicalStateEffect() && !effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STUMBLE)) {
+        if (!effect.getEffected().getEffectController().hasPhysicalStateEffect()
+            && !effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.STUMBLE)) {
             effect.addToEffectedController();
             effect.setIsPhysicalState(true);
             effect.getEffected().getEffectController().removeParalyzeEffects();

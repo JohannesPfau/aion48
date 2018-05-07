@@ -29,11 +29,11 @@
  */
 package quest.eltnen;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -52,7 +52,7 @@ public class _1042KeeperoftheKaidanKey extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npc_ids = {203989, 203901, 730342};
+        int[] npc_ids = { 203989, 203901, 730342 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.registerQuestItem(182201026, questId);
@@ -133,7 +133,7 @@ public class _1042KeeperoftheKaidanKey extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {1300, 1040};
+        int[] quests = { 1300, 1040 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 }

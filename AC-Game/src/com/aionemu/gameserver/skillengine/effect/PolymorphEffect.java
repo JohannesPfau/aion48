@@ -57,6 +57,7 @@ public class PolymorphEffect extends TransformEffect {
         if (effect.getEffected() instanceof Player) {
             final Player player = (Player) effect.getEffected();
             player.getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+
                 @Override
                 public void visit(Npc npc) {
                     PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, npc.getType(player), 0));
@@ -83,6 +84,7 @@ public class PolymorphEffect extends TransformEffect {
         if (effect.getEffected() instanceof Player) {
             final Player player = (Player) effect.getEffected();
             player.getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+
                 @Override
                 public void visit(Npc npc) {
                     PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(npc.getObjectId(), 0, npc.getType(player), 0));

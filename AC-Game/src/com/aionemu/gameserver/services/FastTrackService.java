@@ -43,33 +43,31 @@ import com.aionemu.gameserver.services.transfers.FastTrack;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldType;
 
-
 /**
  * @author Eloann - Enomine, Alcapwnd
  */
 public class FastTrackService {
 
-
     private Logger log = LoggerFactory.getLogger(FastTrackService.class);
-    
+
     private static final FastTrackService instance = new FastTrackService();
-    private Map<Integer, Player> accountsOnFast = new HashMap<Integer, Player>(1);
+    private Map<Integer, Player> accountsOnFast = new HashMap<>(1);
 
     /**
-	 * @param player  
-     * @param off 
-	 */
+     * @param player
+     * @param off
+     */
     public void fastTrackBonus(Player player, boolean off) {
     }
-    
+
     public boolean isPvPZone(WorldType wt) {
-    	return wt == WorldType.BALAUREA || wt == WorldType.ABYSS;
+        return wt == WorldType.BALAUREA || wt == WorldType.ABYSS;
     }
-    
+
     public boolean isNormalZone(WorldType wt) {
-    	return wt == WorldType.ASMODAE || wt == WorldType.ELYSEA || wt == WorldType.NONE;
-    }    
-    
+        return wt == WorldType.ASMODAE || wt == WorldType.ELYSEA || wt == WorldType.NONE;
+    }
+
     /**
      * @param player
      */
@@ -79,7 +77,7 @@ public class FastTrackService {
             return;
         }
         PacketSendUtility.sendPacket(player, new SM_SERVER_IDS(new FastTrack(FastTrackConfig.FASTTRACK_SERVER_ID, true, 1, upto)));
-    	
+
     }
 
     public void handleMoveThere(Player player) {
@@ -101,7 +99,8 @@ public class FastTrackService {
                 log.warn("Fast Track Service: Player " + player.getName() + " tried to move twice to ft server!");
                 accountsOnFast.remove(accId);
                 handleMoveBack(player);
-                PacketSendUtility.sendYellowMessage(player, "You got teleported back to the normal server because you tried to enter the fast track server twice!");
+                PacketSendUtility.sendYellowMessage(player,
+                    "You got teleported back to the normal server because you tried to enter the fast track server twice!");
             }
 
             if (accountsOnFast.containsKey(accId) && !accountsOnFast.containsValue(player)) {
@@ -115,10 +114,10 @@ public class FastTrackService {
             PacketSendUtility.sendYellowMessage(player, "You joined the fast track server!");
             fastTrackBonus(player, false);
         }
-    
+
     }
-    
+
     public static FastTrackService getInstance() {
         return instance;
-    }    
+    }
 }

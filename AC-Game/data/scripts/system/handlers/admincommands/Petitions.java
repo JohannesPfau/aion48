@@ -29,6 +29,8 @@
  */
 package admincommands;
 
+import java.util.Collection;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PetitionDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
@@ -41,8 +43,6 @@ import com.aionemu.gameserver.services.mail.MailService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-
-import java.util.Collection;
 
 /**
  * @author zdead
@@ -63,14 +63,12 @@ public class Petitions extends AdminCommand {
             if (petitionsArray.length < 5) {
                 PacketSendUtility.sendMessage(admin, "== " + petitionsArray.length + " first petitions to reply ==");
                 for (int i = 0; i < petitionsArray.length; i++) {
-                    PacketSendUtility.sendMessage(admin, petitionsArray[i].getPetitionId() + " | "
-                            + petitionsArray[i].getTitle());
+                    PacketSendUtility.sendMessage(admin, petitionsArray[i].getPetitionId() + " | " + petitionsArray[i].getTitle());
                 }
             } else {
                 PacketSendUtility.sendMessage(admin, "== 5 first petitions to reply ==");
                 for (int i = 0; i < 5; i++) {
-                    PacketSendUtility.sendMessage(admin, petitionsArray[i].getPetitionId() + " | "
-                            + petitionsArray[i].getTitle());
+                    PacketSendUtility.sendMessage(admin, petitionsArray[i].getPetitionId() + " | " + petitionsArray[i].getTitle());
                 }
             }
             return;
@@ -136,12 +134,10 @@ public class Petitions extends AdminCommand {
                 return;
             }
 
-            MailService.getInstance().sendMail(admin, petitionPlayer, "GM-Re:" + petition.getTitle(), replyMessage, 0, 0, 0,
-                    LetterType.NORMAL);
+            MailService.getInstance().sendMail(admin, petitionPlayer, "GM-Re:" + petition.getTitle(), replyMessage, 0, 0, 0, LetterType.NORMAL);
             PetitionService.getInstance().setPetitionReplied(petitionId);
 
-            PacketSendUtility.sendMessage(admin, "Your reply has been sent to " + petitionPlayer
-                    + ". Petition is now closed.");
+            PacketSendUtility.sendMessage(admin, "Your reply has been sent to " + petitionPlayer + ". Petition is now closed.");
         }
     }
 

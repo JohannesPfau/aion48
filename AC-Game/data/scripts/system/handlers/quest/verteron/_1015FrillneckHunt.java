@@ -29,11 +29,11 @@
  */
 package quest.verteron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,7 +45,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1015FrillneckHunt extends QuestHandler {
 
     private final static int questId = 1015;
-    private final static int[] mob_ids = {210126, 210200, 210201};
+    private final static int[] mob_ids = { 210126, 210200, 210201 };
 
     public _1015FrillneckHunt() {
         super(questId);

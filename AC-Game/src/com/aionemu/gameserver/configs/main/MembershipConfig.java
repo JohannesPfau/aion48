@@ -32,13 +32,12 @@ package com.aionemu.gameserver.configs.main;
 import com.aionemu.commons.configuration.Property;
 
 /**
-
  * @reworked Kill3r
  */
 public class MembershipConfig {
-	
+
     @Property(key = "gameserver.membership.additional.chest.drop", defaultValue = "false")
-    public static boolean ADD_CHEST_DROP; 
+    public static boolean ADD_CHEST_DROP;
     @Property(key = "gameserver.membership.additional.chest.drop.announce", defaultValue = "false")
     public static boolean ADD_CHEST_DROP_ANNOUNCE;
     @Property(key = "gameserver.instances.title.requirement", defaultValue = "10")
@@ -102,9 +101,11 @@ public class MembershipConfig {
      * Membership Welcome Messages
      * (Regular, Premium, VIP)
      */
-    @Property(key = "gameserver.membership.welcome.message.regular", defaultValue = "Your SERVER RATES:\nExp Rate: %d\nQuest Rate: %d\nDrop Rate: %d\n")
+    @Property(key = "gameserver.membership.welcome.message.regular",
+        defaultValue = "Your SERVER RATES:\nExp Rate: %d\nQuest Rate: %d\nDrop Rate: %d\n")
     public static String WELCOME_REGULAR;
-    @Property(key = "gameserver.membership.welcome.message.premium", defaultValue = "Your SERVER RATES:\nExp Rate: %d\nQuest Rate: %d\nDrop Rate: %d\n")
+    @Property(key = "gameserver.membership.welcome.message.premium",
+        defaultValue = "Your SERVER RATES:\nExp Rate: %d\nQuest Rate: %d\nDrop Rate: %d\n")
     public static String WELCOME_PREMIUM;
     @Property(key = "gameserver.membership.welcome.message.vip", defaultValue = "Your SERVER RATES:\nExp Rate: %d\nQuest Rate: %d\nDrop Rate: %d\n")
     public static String WELCOME_VIP;

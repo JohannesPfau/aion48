@@ -29,13 +29,13 @@
  */
 package ai.instance.eternalBastion;
 
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Alcapwnd
@@ -43,6 +43,7 @@ import java.util.concurrent.Future;
 
 @AIName("pashid_assault_pod")
 public class PashidAssaultPodAI2 extends NpcAI2 {
+
     private Future<?> spawntask;
 
     @Override
@@ -59,6 +60,7 @@ public class PashidAssaultPodAI2 extends NpcAI2 {
 
     private void StartTimerPodSpawn() {
         spawntask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {

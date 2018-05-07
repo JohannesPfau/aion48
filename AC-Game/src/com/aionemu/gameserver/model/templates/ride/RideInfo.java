@@ -40,7 +40,7 @@ import com.aionemu.gameserver.model.templates.Bounds;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RideInfo", propOrder = {"bounds"})
+@XmlType(name = "RideInfo", propOrder = { "bounds" })
 public class RideInfo {
 
     protected Bounds bounds;

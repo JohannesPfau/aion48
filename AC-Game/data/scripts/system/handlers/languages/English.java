@@ -225,7 +225,8 @@ public class English extends Language {
         addTranslatedMessage(CustomMessageId.FFA_IS_ALREADY_IN, "You're already on FFA");
         addTranslatedMessage(CustomMessageId.FFA_FROZEN_MESSAGE, "You're frozen for a while...");
         addTranslatedMessage(CustomMessageId.FFA_CURRENT_PLAYERS, "Current Players Size :");
-        addTranslatedMessage(CustomMessageId.FFA_USAGE, "Usage: .FFA enter, to enter the arena .FFA leave, to leave the arena.\n.FFA info, to get current amount of Players on FFA ");
+        addTranslatedMessage(CustomMessageId.FFA_USAGE,
+            "Usage: .FFA enter, to enter the arena .FFA leave, to leave the arena.\n.FFA info, to get current amount of Players on FFA ");
         addTranslatedMessage(CustomMessageId.FFA_YOU_KICKED_OUT, "You aren't any more in FFA!");
         addTranslatedMessage(CustomMessageId.FFA_YOUR_NOT_IN, "You're not member of FFA Arena.");
         addTranslatedMessage(CustomMessageId.FFA_ANNOUNCE_1, "Join our FFA Map now with using .ffa enter ! ");

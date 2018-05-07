@@ -93,8 +93,8 @@ public class ArmsfusionService {
         ItemPacketService.updateItemAfterInfoChange(player, weaponToBreak);
 
         PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUNDED_ITEM_DECOMPOUND_SUCCESS(weaponToBreak.getNameId()));
-    }    
-    
+    }
+
     public static void fusionWeapons(Player player, int firstItemUniqueId, int secondItemUniqueId) {
         Item firstItem = player.getInventory().getItemByObjId(firstItemUniqueId);
         if (firstItem == null) {
@@ -117,12 +117,12 @@ public class ArmsfusionService {
         int level = firstItem.getItemTemplate().getLevel();
 
         int price = (int) (priceMod * priceRate * taxRate * rarity * level * level);
-        log.debug("Rarete: " + rarity + " Prix Ratio: " + priceRate + " Tax: " + taxRate + " Mod: " + priceMod
-                + " NiveauDeLArme: " + level);
+        log.debug("Rarete: " + rarity + " Prix Ratio: " + priceRate + " Tax: " + taxRate + " Mod: " + priceMod + " NiveauDeLArme: " + level);
         log.debug("Prix: " + price);
 
         if (player.getInventory().getKinah() < price) {
-            PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_ENOUGH_MONEY(firstItem.getNameId(), secondItem.getNameId()));
+            PacketSendUtility.sendPacket(player,
+                SM_SYSTEM_MESSAGE.STR_COMPOUND_ERROR_NOT_ENOUGH_MONEY(firstItem.getNameId(), secondItem.getNameId()));
             return;
         }
 
@@ -191,6 +191,6 @@ public class ArmsfusionService {
         ItemPacketService.updateItemAfterInfoChange(player, firstItem);
         player.getInventory().decreaseKinah(price);
         PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_COMPOUND_SUCCESS(firstItem.getNameId(), secondItem.getNameId()));
-        }
-    
+    }
+
 }

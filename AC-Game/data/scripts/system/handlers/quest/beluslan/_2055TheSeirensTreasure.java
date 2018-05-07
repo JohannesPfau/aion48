@@ -48,7 +48,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _2055TheSeirensTreasure extends QuestHandler {
 
     private final static int questId = 2055;
-    private final static int[] npc_ids = {204768, 204743, 204808};
+    private final static int[] npc_ids = { 204768, 204743, 204808 };
 
     public _2055TheSeirensTreasure() {
         super(questId);
@@ -70,7 +70,7 @@ public class _2055TheSeirensTreasure extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {2500, 2054};
+        int[] quests = { 2500, 2054 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 

@@ -136,7 +136,7 @@ public final class QuestService {
         if (template.getCategory() == QuestCategory.MISSION && qs.getCompleteCount() != 0) {
             return false; // prevent repeatable reward because of wrong quest handling
         }
-        List<QuestItems> questItems = new ArrayList<QuestItems>();
+        List<QuestItems> questItems = new ArrayList<>();
         if (!template.getExtendedRewards().isEmpty()) {
             if (qs.getCompleteCount() == template.getMaxRepeatCount() - 1) { // This is the last time
                 questItems.addAll(getRewardItems(env, template, true, reward));
@@ -161,7 +161,7 @@ public final class QuestService {
     private static List<QuestItems> getRewardItems(QuestEnv env, QuestTemplate template, boolean extended, int reward) {
         Player player = env.getPlayer();
         int id = env.getQuestId();
-        List<QuestItems> questItems = new ArrayList<QuestItems>();
+        List<QuestItems> questItems = new ArrayList<>();
         Rewards rewards;
         if (extended) {
             rewards = template.getExtendedRewards().get(0);
@@ -231,8 +231,8 @@ public final class QuestService {
                 if (dialogId - 8 >= 0 && dialogId - 8 < rewards.getSelectableRewardItem().size()) {
                     selectebleRewardItem = rewards.getSelectableRewardItem().get(dialogId - 8);
                 } else {
-                    log.error("The SelectableRewardItem list has no element with the given index (dialogId - 8) of "
-                            + (dialogId - 8) + ". See quest id " + env.getQuestId());
+                    log.error("The SelectableRewardItem list has no element with the given index (dialogId - 8) of " + (dialogId - 8)
+                        + ". See quest id " + env.getQuestId());
                 }
                 if (selectebleRewardItem != null) {
                     questItems.add(selectebleRewardItem);
@@ -303,7 +303,8 @@ public final class QuestService {
             } else if ((index - 1) >= 0 && (index - 1) < rewards.getSelectableRewardItem().size()) {
                 selectebleRewardItem = rewards.getSelectableRewardItem().get(index - 1);
             } else {
-                log.error("The extended SelectableRewardItem list has no element with the given index (extendedRewardIndex - 8) of " + (index - 8) + ". See quest id " + env.getQuestId() + ". The size is: " + rewards.getSelectableRewardItem().size());
+                log.error("The extended SelectableRewardItem list has no element with the given index (extendedRewardIndex - 8) of " + (index - 8)
+                    + ". See quest id " + env.getQuestId() + ". The size is: " + rewards.getSelectableRewardItem().size());
             }
             if (selectebleRewardItem != null) {
                 questItems.add(selectebleRewardItem);
@@ -327,13 +328,11 @@ public final class QuestService {
     private static void giveReward(QuestEnv env, Rewards rewards) {
         Player player = env.getPlayer();
         if (rewards.getGold() != null) {
-            player.getInventory().increaseKinah((long) (player.getRates().getQuestKinahRate() * rewards.getGold()),
-                    ItemUpdateType.INC_KINAH_QUEST);
+            player.getInventory().increaseKinah((long) (player.getRates().getQuestKinahRate() * rewards.getGold()), ItemUpdateType.INC_KINAH_QUEST);
         }
         if (rewards.getExp() != null) {
             NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(env.getTargetId());
-            player.getCommonData().addExp(rewards.getExp(), RewardType.QUEST,
-                    npcTemplate != null ? npcTemplate.getNameId() : 0);
+            player.getCommonData().addExp(rewards.getExp(), RewardType.QUEST, npcTemplate != null ? npcTemplate.getNameId() : 0);
             player.getCommonData().addEventExp(rewards.getExp());
         }
         if (rewards.getTitle() != null) {
@@ -352,9 +351,11 @@ public final class QuestService {
                 WarehouseService.expand(player);
             }
         }
-        /*if (rewards.getExtendStigma() != null) {
-            StigmaService.extendAdvancedStigmaSlots(player);
-        }*/
+        /*
+         * if (rewards.getExtendStigma() != null) {
+         * StigmaService.extendAdvancedStigmaSlots(player);
+         * }
+         */
     }
 
     private static boolean setFinishingState(QuestEnv env, QuestTemplate template, int reward) {
@@ -470,14 +471,14 @@ public final class QuestService {
 
         if (warn && levelDiff > 0 && template.getMinlevelPermitted() != 99) {
             PacketSendUtility.sendPacket(player,
-                    SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_LEVEL(Integer.toString(template.getMinlevelPermitted())));
+                SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_LEVEL(Integer.toString(template.getMinlevelPermitted())));
             return false;
         }
 
         if (template.getMaxlevelPermitted() != 0 && player.getLevel() > template.getMaxlevelPermitted()) {
             if (warn) {
                 PacketSendUtility.sendPacket(player,
-                        SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_LEVEL(Integer.toString(template.getMaxlevelPermitted())));
+                    SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MAX_LEVEL(Integer.toString(template.getMaxlevelPermitted())));
             }
             return false;
         }
@@ -503,13 +504,15 @@ public final class QuestService {
         if (template.getRequiredRank() != 0) {
             if (player.getAbyssRank().getRank().getId() < template.getRequiredRank()) {
                 if (warn) {
-                    PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_RANK(AbyssRankEnum.getRankById(template.getRequiredRank()).getDescriptionId()));
+                    PacketSendUtility.sendPacket(player,
+                        SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_MIN_RANK(AbyssRankEnum.getRankById(template.getRequiredRank()).getDescriptionId()));
                 }
                 return false;
             }
         }
 
-        int requiredStartConditions = template.isMaster() ? 6 - CraftConfig.MAX_MASTER_CRAFTING_SKILLS : template.isExpert() ? 8 - CraftConfig.MAX_EXPERT_CRAFTING_SKILLS : 1;
+        int requiredStartConditions = template.isMaster() ? 6 - CraftConfig.MAX_MASTER_CRAFTING_SKILLS
+            : template.isExpert() ? 8 - CraftConfig.MAX_EXPERT_CRAFTING_SKILLS : 1;
         int fulfilledStartConditions = 0;
         if (!template.getXMLStartConditions().isEmpty()) {
             for (XMLStartCondition startCondition : template.getXMLStartConditions()) {
@@ -527,7 +530,7 @@ public final class QuestService {
         }
 
         if (template.getCombineSkill() != null) {
-            List<Integer> skills = new ArrayList<Integer>(); // skills to check
+            List<Integer> skills = new ArrayList<>(); // skills to check
             if (template.getCombineSkill() == -1) // any skill
             {
                 skills.add(30002);
@@ -607,8 +610,7 @@ public final class QuestService {
             return false;
         }
 
-        if (!template.isNoCount() && !checkQuestListSize(qsl)
-                && !player.havePermission(MembershipConfig.QUEST_LIMIT_DISABLED)) {
+        if (!template.isNoCount() && !checkQuestListSize(qsl) && !player.havePermission(MembershipConfig.QUEST_LIMIT_DISABLED)) {
             PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300622, template.getName()));
             return false;
         }
@@ -648,7 +650,8 @@ public final class QuestService {
      * class
      *
      * @param env
-     * @param status START or LOCKED
+     * @param status
+     *            START or LOCKED
      */
     public static void startMission(QuestEnv env, QuestStatus status) {
         Player player = env.getPlayer();
@@ -684,8 +687,7 @@ public final class QuestService {
         }
 
         // Check permitted class
-        if (template.getClassPermitted().size() != 0
-                && !template.getClassPermitted().contains(player.getCommonData().getPlayerClass())) {
+        if (template.getClassPermitted().size() != 0 && !template.getClassPermitted().contains(player.getCommonData().getPlayerClass())) {
             return false;
         }
 
@@ -696,7 +698,7 @@ public final class QuestService {
 
         // Check required skills
         if (template.getCombineSkill() != null) {
-            List<Integer> skills = new ArrayList<Integer>(); // skills to check
+            List<Integer> skills = new ArrayList<>(); // skills to check
             if (template.getCombineSkill() == -1) // any skill
             {
                 skills.add(30002);
@@ -715,7 +717,7 @@ public final class QuestService {
             for (int skillId : skills) {
                 PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
                 if (skill != null && skill.getSkillLevel() >= template.getCombineSkillPoint()
-                        && skill.getSkillLevel() - 40 <= template.getCombineSkillPoint()) {
+                    && skill.getSkillLevel() - 40 <= template.getCombineSkillPoint()) {
                     result = true;
                     break;
                 }
@@ -833,8 +835,7 @@ public final class QuestService {
 
         for (CollectItem collectItem : collectItems.getCollectItem()) {
             int itemId = collectItem.getItemId();
-            long count = itemId == ItemId.KINAH.value() ? player.getInventory().getKinah() : player.getInventory()
-                    .getItemCountByItemId(itemId);
+            long count = itemId == ItemId.KINAH.value() ? player.getInventory().getKinah() : player.getInventory().getItemCountByItemId(itemId);
             if (collectItem.getCount() > count) {
                 return false;
             }
@@ -868,31 +869,26 @@ public final class QuestService {
             }
         }
         if (requiredItemNameId != 0 && showWarning) {
-            PacketSendUtility.sendPacket(player,
-                    SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_INVENTORY_ITEM(new DescriptionId(requiredItemNameId)));
+            PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_QUEST_ACQUIRE_ERROR_INVENTORY_ITEM(new DescriptionId(requiredItemNameId)));
         }
         return requiredItemNameId == 0;
     }
 
-    public static VisibleObject spawnQuestNpc(int worldId, int instanceId, int templateId, float x, float y, float z,
-                                              byte heading) {
-        return SpawnEngine
-                .spawnObject(SpawnEngine.addNewSingleTimeSpawn(worldId, templateId, x, y, z, heading), instanceId);
+    public static VisibleObject spawnQuestNpc(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading) {
+        return SpawnEngine.spawnObject(SpawnEngine.addNewSingleTimeSpawn(worldId, templateId, x, y, z, heading), instanceId);
     }
 
     /**
      * @param heading
      */
-    public static void addNewSpawn(int worldId, int instanceId, int templateId, float x, float y, float z,
-                                   byte heading) {
+    public static void addNewSpawn(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading) {
         addNewSpawn(worldId, instanceId, templateId, x, y, z, (byte) 0, 5);
     }
 
     /**
      * @param heading
      */
-    public static void addNewSpawn(int worldId, int instanceId, int templateId, float x, float y, float z,
-                                   byte heading, int timeInMin) {
+    public static void addNewSpawn(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading, int timeInMin) {
         final Npc npc = (Npc) spawnQuestNpc(worldId, instanceId, templateId, x, y, z, (byte) 0);
         if (!npc.getPosition().isInstanceMap()) {
             despawnQuestNpc(npc, timeInMin);
@@ -901,6 +897,7 @@ public final class QuestService {
 
     private static void despawnQuestNpc(final Npc npc, int timeInMin) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (npc == null || npc.getLifeStats().isAlreadyDead()) {
@@ -923,7 +920,7 @@ public final class QuestService {
                 continue;
             }
             if (players != null && player.isInGroup2()) {
-                List<Player> pls = new ArrayList<Player>();
+                List<Player> pls = new ArrayList<>();
                 if (drop.isDropEachMemberGroup()) {
                     for (Player member : players) {
                         if (isQuestDrop(member, drop)) {
@@ -952,7 +949,7 @@ public final class QuestService {
                     pls.clear();
                 }
             } else if (players != null && player.isInAlliance2()) {
-                List<Player> pls = new ArrayList<Player>();
+                List<Player> pls = new ArrayList<>();
                 if (drop.isDropEachMemberAlliance()) {
                     for (Player member : players) {
                         if (isQuestDrop(member, drop)) {
@@ -1079,6 +1076,7 @@ public final class QuestService {
 
         // Schedule Action When Timer Finishes
         Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 QuestEngine.getInstance().onQuestTimerEnd(new QuestEnv(null, player, 0, 0));
@@ -1094,6 +1092,7 @@ public final class QuestService {
 
         // Schedule Action When Timer Finishes
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 QuestEngine.getInstance().onInvisibleTimerEnd(new QuestEnv(null, player, 0, 0));
@@ -1109,9 +1108,9 @@ public final class QuestService {
         PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(env.getQuestId(), 0));
         return true;
     }
-    
+
     public static boolean bountyQuest(Player player, int questId) {
-    	QuestTemplate template = questsData.getQuestById(questId);
+        QuestTemplate template = questsData.getQuestById(questId);
         if (template == null) {
             return false;
         }
@@ -1200,7 +1199,7 @@ public final class QuestService {
         if (questDrop.containsKey(npcId)) {
             return questDrop.get(npcId);
         }
-        return Collections.<QuestDrop>emptyList();
+        return Collections.<QuestDrop> emptyList();
     }
 
     public static void addQuestDrop(int npcId, QuestDrop drop) {
@@ -1212,7 +1211,7 @@ public final class QuestService {
     }
 
     public static List<Player> getEachDropMembersGroup(PlayerGroup group, int npcId, int questId) {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (QuestDrop qd : getQuestDrop(npcId)) {
             if (qd.isDropEachMemberGroup()) {
                 for (Player player : group.getMembers()) {
@@ -1228,7 +1227,7 @@ public final class QuestService {
     }
 
     public static List<Player> getEachDropMembersAlliance(PlayerAlliance alliance, int npcId, int questId) {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (QuestDrop qd : getQuestDrop(npcId)) {
             if (qd.isDropEachMemberGroup()) {
                 for (Player player : alliance.getMembers()) {

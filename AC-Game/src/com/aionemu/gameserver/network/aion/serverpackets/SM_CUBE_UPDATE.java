@@ -92,7 +92,7 @@ public class SM_CUBE_UPDATE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(action);
         writeC(actionValue);
         switch (action) {

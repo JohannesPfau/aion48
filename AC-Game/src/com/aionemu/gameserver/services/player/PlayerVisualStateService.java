@@ -39,6 +39,7 @@ public class PlayerVisualStateService {
 
     public static void hideValidate(final Player hiden) {
         hiden.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player observer) {
                 boolean canSee = observer.canSee(hiden);
@@ -55,6 +56,7 @@ public class PlayerVisualStateService {
 
     public static void seeValidate(final Player search) {
         search.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player hide) {
                 boolean canSee = search.canSee(hide);

@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
 public class ResponseRequester {
 
     private Player player;
-    private HashMap<Integer, RequestResponseHandler> map = new HashMap<Integer, RequestResponseHandler>();
+    private HashMap<Integer, RequestResponseHandler> map = new HashMap<>();
     private static Logger log = LoggerFactory.getLogger(ResponseRequester.class);
 
     public ResponseRequester(Player player) {
@@ -53,7 +53,8 @@ public class ResponseRequester {
      * Adds this handler to this messageID, returns false if there already
      * exists one
      *
-     * @param messageId ID of the request message
+     * @param messageId
+     *            ID of the request message
      * @return true or false
      */
     public synchronized boolean putRequest(int messageId, RequestResponseHandler handler) {

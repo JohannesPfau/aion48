@@ -49,6 +49,7 @@ public enum GsAuthResponse {
      * Requested id is not free
      */
     ALREADY_REGISTERED(2);
+
     /**
      * id of this enum that may be sent to client
      */
@@ -57,7 +58,8 @@ public enum GsAuthResponse {
     /**
      * Constructor.
      *
-     * @param responseId id of the message
+     * @param responseId
+     *            id of the message
      */
     private GsAuthResponse(int responseId) {
         this.responseId = (byte) responseId;

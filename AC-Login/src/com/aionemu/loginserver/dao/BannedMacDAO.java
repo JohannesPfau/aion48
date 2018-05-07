@@ -29,10 +29,10 @@
  */
 package com.aionemu.loginserver.dao;
 
+import java.util.Map;
+
 import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.loginserver.model.base.BannedMacEntry;
-
-import java.util.Map;
 
 /**
  * @author KID

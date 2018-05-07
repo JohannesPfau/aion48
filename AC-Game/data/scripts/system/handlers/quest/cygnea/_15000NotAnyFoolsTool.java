@@ -29,19 +29,19 @@
  */
 package quest.cygnea;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.world.zone.ZoneName;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author pralinka
@@ -80,30 +80,30 @@ public class _15000NotAnyFoolsTool extends QuestHandler {
             int var = qs.getQuestVarById(0);
             if (targetId == 804874) {
                 switch (dialog) {
-                case QUEST_SELECT: {
-                    if (var == 0) 
-                        return sendQuestDialog(env, 1011);
-                    if (var == 1) 
-                        return sendQuestDialog(env, 1352);
-                }    
-                case CHECK_USER_HAS_QUEST_ITEM:
-                    if (QuestService.collectItemCheck(env, true)) {
-                        qs.setQuestVarById(0, var + 1);
-                        updateQuestStatus(env);
-                        return sendQuestDialog(env, 10000);
-                    } else {
-                        return sendQuestDialog(env, 10001);
+                    case QUEST_SELECT: {
+                        if (var == 0)
+                            return sendQuestDialog(env, 1011);
+                        if (var == 1)
+                            return sendQuestDialog(env, 1352);
                     }
-                case SETPRO2:
-                    if (var == 1) {
-                        qs.setQuestVarById(0, var + 1);
-                        updateQuestStatus(env);
-						giveQuestItem(env, 182215662, 1);
-                        return true;
-                    }
-                    return false;
-				}
-            } 
+                    case CHECK_USER_HAS_QUEST_ITEM:
+                        if (QuestService.collectItemCheck(env, true)) {
+                            qs.setQuestVarById(0, var + 1);
+                            updateQuestStatus(env);
+                            return sendQuestDialog(env, 10000);
+                        } else {
+                            return sendQuestDialog(env, 10001);
+                        }
+                    case SETPRO2:
+                        if (var == 1) {
+                            qs.setQuestVarById(0, var + 1);
+                            updateQuestStatus(env);
+                            giveQuestItem(env, 182215662, 1);
+                            return true;
+                        }
+                        return false;
+                }
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 804874) {
                 if (dialog == DialogAction.QUEST_SELECT) {
@@ -130,10 +130,11 @@ public class _15000NotAnyFoolsTool extends QuestHandler {
         }
         PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
-				removeQuestItem(env, 182215662, 1);
+                removeQuestItem(env, 182215662, 1);
                 qs.setStatus(QuestStatus.REWARD);
                 updateQuestStatus(env);
             }

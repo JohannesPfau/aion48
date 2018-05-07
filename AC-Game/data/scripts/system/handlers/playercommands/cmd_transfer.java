@@ -29,6 +29,8 @@
  */
 package playercommands;
 
+import java.util.List;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -38,8 +40,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
-
-import java.util.List;
 
 /**
  * @author Source
@@ -114,8 +114,10 @@ public class cmd_transfer extends PlayerCommand {
         player.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
 
         if (owner != null) {
-            PacketSendUtility.sendMessage(owner, "Player: " + player.getName() + " was transferd to yours account." + "\nYou will be disconnected in 5 seconds");
+            PacketSendUtility.sendMessage(owner,
+                "Player: " + player.getName() + " was transferd to yours account." + "\nYou will be disconnected in 5 seconds");
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     if (owner.isOnline()) {

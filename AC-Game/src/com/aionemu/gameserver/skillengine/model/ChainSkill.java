@@ -58,7 +58,8 @@ public class ChainSkill {
     }
 
     /**
-     * @param name the name to set
+     * @param name
+     *            the name to set
      */
     public void setCategory(String name) {
         this.category = name;
@@ -72,7 +73,8 @@ public class ChainSkill {
     }
 
     /**
-     * @param chainCount the chainCount to set
+     * @param chainCount
+     *            the chainCount to set
      */
     public void setChainCount(int chainCount) {
         this.chainCount = chainCount;
@@ -90,7 +92,8 @@ public class ChainSkill {
     }
 
     /**
-     * @param useTime the useTime to set
+     * @param useTime
+     *            the useTime to set
      */
     public void setUseTime(long useTime) {
         this.useTime = useTime;

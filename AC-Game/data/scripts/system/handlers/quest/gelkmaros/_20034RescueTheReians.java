@@ -30,14 +30,14 @@
 package quest.gelkmaros;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.network.aion.SystemMessageId;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -53,7 +53,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class _20034RescueTheReians extends QuestHandler {
 
     private final static int questId = 20034;
-    private final static int[] npc_ids = {799295, 799297, 730243, 799513, 799514, 799515, 799516, 799341, 700706};
+    private final static int[] npc_ids = { 799295, 799297, 730243, 799513, 799514, 799515, 799516, 799341, 700706 };
 
     public _20034RescueTheReians() {
         super(questId);
@@ -62,7 +62,7 @@ public class _20034RescueTheReians extends QuestHandler {
     @Override
     public void register() {
         qe.registerOnDie(questId);
-		qe.registerOnLogOut(questId);
+        qe.registerOnLogOut(questId);
         qe.registerOnLevelUp(questId);
         qe.registerQuestNpc(216592).addOnKillEvent(questId);
         qe.registerOnMovieEndQuest(442, questId);
@@ -85,7 +85,7 @@ public class _20034RescueTheReians extends QuestHandler {
                     updateQuestStatus(env);
                 }
             }
-			if (var == 6) {
+            if (var == 6) {
                 if (player.getWorldId() == 220070000) {
                     qs.setStatus(QuestStatus.REWARD);
                     updateQuestStatus(env);
@@ -106,25 +106,26 @@ public class _20034RescueTheReians extends QuestHandler {
         if (var >= 3 && var < 6) {
             qs.setQuestVar(2);
             updateQuestStatus(env);
-            PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                    DataManager.QUEST_DATA.getQuestById(questId).getName()));
+            PacketSendUtility.sendPacket(player,
+                new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
         }
 
         return false;
     }
-	@Override
-	public boolean onLogOutEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (var >= 3 && var < 6) {
-				PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                    DataManager.QUEST_DATA.getQuestById(questId).getName()));
-			}
-		}
-		return false;
-	}
+
+    @Override
+    public boolean onLogOutEvent(QuestEnv env) {
+        Player player = env.getPlayer();
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (qs != null && qs.getStatus() == QuestStatus.START) {
+            int var = qs.getQuestVarById(0);
+            if (var >= 3 && var < 6) {
+                PacketSendUtility.sendPacket(player,
+                    new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
+            }
+        }
+        return false;
+    }
 
     @Override
     public boolean onZoneMissionEndEvent(QuestEnv env) {
@@ -169,11 +170,11 @@ public class _20034RescueTheReians extends QuestHandler {
                 case QUEST_SELECT:
                     if (var == 0) {
                         return sendQuestDialog(env, 1011);
-                    } 
+                    }
                 case SETPRO1:
-					giveQuestItem(env, 182215630, 1);
+                    giveQuestItem(env, 182215630, 1);
                     return defaultCloseDialog(env, 0, 1); // 1
-                
+
             }
         } else if (targetId == 799295) { //Ortiz
             switch (env.getDialog()) {
@@ -182,8 +183,8 @@ public class _20034RescueTheReians extends QuestHandler {
                         return sendQuestDialog(env, 1352);
                     }
                 case SETPRO2:
-					removeQuestItem(env, 182215630, 1);
-					giveQuestItem(env, 182215595, 1);
+                    removeQuestItem(env, 182215630, 1);
+                    giveQuestItem(env, 182215595, 1);
                     return defaultCloseDialog(env, 1, 2); // 2
             }
         } else if (targetId == 730243) {
@@ -196,22 +197,20 @@ public class _20034RescueTheReians extends QuestHandler {
                     if (var == 2) {
                         WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300150000);
                         InstanceService.registerPlayerWithInstance(newInstance, player);
-                        TeleportService2.teleportTo(player, 300150000, newInstance.getInstanceId(), 561.8651f, 221.91483f,
-                                134.53333f, (byte) 90);
+                        TeleportService2.teleportTo(player, 300150000, newInstance.getInstanceId(), 561.8651f, 221.91483f, 134.53333f, (byte) 90);
                         return true;
                     }
             }
         } else if (targetId == 799513 || targetId == 799514 || targetId == 799515 || targetId == 799516) {
             switch (env.getDialog()) {
                 case USE_OBJECT:
-					if (var == 3 && var1 < 3) {
+                    if (var == 3 && var1 < 3) {
                         qs.setQuestVarById(1, var1 + 1);
                         updateQuestStatus(env);
                         PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                         npc.getController().onDie(player);
                         return true;
-                    }
-                    else if (var == 3 && var1 == 3) {
+                    } else if (var == 3 && var1 == 3) {
                         playQuestMovie(env, 442);
                         qs.setQuestVar(4);
                         updateQuestStatus(env);
@@ -223,25 +222,25 @@ public class _20034RescueTheReians extends QuestHandler {
         } else if (targetId == 799341) {
             switch (env.getDialog()) {
                 case USE_OBJECT:
-                    if (var == 5)  {
+                    if (var == 5) {
                         changeQuestStep(env, 5, 6, false);
                         npc.getController().onDelete();
                         return closeDialogWindow(env);
-                        }
-					}               
+                    }
+            }
         } else if (targetId == 700706) {
             switch (env.getDialog()) {
                 case USE_OBJECT:
                     if (var == 6) {
-						removeQuestItem(env, 182215595, 1);
-                        TeleportService2.teleportTo(env.getPlayer(), 220070000, 2499, 2139, 469, (byte) 10, TeleportAnimation.BEAM_ANIMATION);  
+                        removeQuestItem(env, 182215595, 1);
+                        TeleportService2.teleportTo(env.getPlayer(), 220070000, 2499, 2139, 469, (byte) 10, TeleportAnimation.BEAM_ANIMATION);
                     }
             }
         }
         return false;
     }
-	
-	@Override
+
+    @Override
     public boolean onKillEvent(QuestEnv env) {
         Player player = env.getPlayer();
         int instanceId = player.getInstanceId();
@@ -275,8 +274,7 @@ public class _20034RescueTheReians extends QuestHandler {
         if (qs == null || qs.getStatus() != QuestStatus.START || qs.getQuestVars().getQuestVars() != 4) {
             return false;
         }
-        QuestService.addNewSpawn(300150000, player.getInstanceId(), 216592, (float) 561.8763, (float) 192.25128,
-                (float) 135.88919, (byte) 30);
+        QuestService.addNewSpawn(300150000, player.getInstanceId(), 216592, (float) 561.8763, (float) 192.25128, (float) 135.88919, (byte) 30);
         return true;
     }
 }

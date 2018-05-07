@@ -35,8 +35,6 @@ import java.nio.channels.SocketChannel;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,10 +57,10 @@ import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.google.common.base.Preconditions;
 
+import javolution.util.FastList;
+
 /**
  * Object representing connection between GameServer and Aion Client.
- *
-
  */
 public class AionConnection extends AConnection {
 
@@ -70,10 +68,9 @@ public class AionConnection extends AConnection {
      * Logger for this class.
      */
     private static final Logger log = LoggerFactory.getLogger(AionConnection.class);
-    private static final PacketProcessor<AionConnection> packetProcessor = new PacketProcessor<AionConnection>(
-            NetworkConfig.PACKET_PROCESSOR_MIN_THREADS, NetworkConfig.PACKET_PROCESSOR_MAX_THREADS,
-            NetworkConfig.PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD, NetworkConfig.PACKET_PROCESSOR_THREAD_KILL_THRESHOLD,
-            new ExecuteWrapper());
+    private static final PacketProcessor<AionConnection> packetProcessor = new PacketProcessor<>(
+        NetworkConfig.PACKET_PROCESSOR_MIN_THREADS, NetworkConfig.PACKET_PROCESSOR_MAX_THREADS, NetworkConfig.PACKET_PROCESSOR_THREAD_SPAWN_THRESHOLD,
+        NetworkConfig.PACKET_PROCESSOR_THREAD_KILL_THRESHOLD, new ExecuteWrapper());
 
     /**
      * Possible states of AionConnection
@@ -97,7 +94,7 @@ public class AionConnection extends AConnection {
     /**
      * Server Packet "to send" Queue
      */
-    private final FastList<AionServerPacket> sendMsgQueue = new FastList<AionServerPacket>();
+    private final FastList<AionServerPacket> sendMsgQueue = new FastList<>();
     /**
      * Current state of this connection
      */
@@ -113,7 +110,7 @@ public class AionConnection extends AConnection {
     /**
      * active Player that owner of this connection is playing [entered game]
      */
-    private AtomicReference<Player> activePlayer = new AtomicReference<Player>();
+    private AtomicReference<Player> activePlayer = new AtomicReference<>();
     private String lastPlayerName = "";
     private AionPacketHandler aionPacketHandler;
     private long lastPingTimeMS;
@@ -173,7 +170,7 @@ public class AionConnection extends AConnection {
      * sends key to aion client.
      *
      * @return "false key" that should by used by aion client to encrypt/decrypt
-     * packets.
+     *         packets.
      */
     public final int enableCryptKey() {
         return crypt.enableKey();
@@ -185,7 +182,7 @@ public class AionConnection extends AConnection {
      *
      * @param data
      * @return True if data was processed correctly, False if some error
-     * occurred and connection should be closed NOW.
+     *         occurred and connection should be closed NOW.
      */
     @Override
     protected final boolean processData(ByteBuffer data) {
@@ -254,7 +251,7 @@ public class AionConnection extends AConnection {
      *
      * @param data
      * @return True if data was written to buffer, False indicating that there
-     * are not any more data to write.
+     *         are not any more data to write.
      */
     @Override
     protected final boolean writeData(ByteBuffer data) {
@@ -279,7 +276,7 @@ public class AionConnection extends AConnection {
      * closed.
      *
      * @return time in ms after witch onDisconnect() method will be called.
-     * Always return 0.
+     *         Always return 0.
      */
     @Override
     protected final long getDisconnectionDelay() {
@@ -326,7 +323,8 @@ public class AionConnection extends AConnection {
     /**
      * Sends AionServerPacket to this client.
      *
-     * @param bp AionServerPacket to be sent.
+     * @param bp
+     *            AionServerPacket to be sent.
      */
     public final void sendPacket(AionServerPacket bp) {
         synchronized (guard) {
@@ -350,8 +348,10 @@ public class AionConnection extends AConnection {
      * other things. forced means that server shouldn't wait with removing this
      * connection.
      *
-     * @param closePacket Packet that will be send before closing.
-     * @param forced      have no effect in this implementation.
+     * @param closePacket
+     *            Packet that will be send before closing.
+     * @param forced
+     *            have no effect in this implementation.
      */
     public final void close(AionServerPacket closePacket, boolean forced) {
         synchronized (guard) {
@@ -379,7 +379,8 @@ public class AionConnection extends AConnection {
     /**
      * Sets the state of this connection
      *
-     * @param state state of this connection
+     * @param state
+     *            state of this connection
      */
     public void setState(State state) {
         this.state = state;
@@ -397,7 +398,8 @@ public class AionConnection extends AConnection {
     /**
      * Sets account object associated with this connection
      *
-     * @param account account object associated with this connection
+     * @param account
+     *            account object associated with this connection
      */
     public void setAccount(Account account) {
         Preconditions.checkArgument(account != null, "Account can't be null");
@@ -441,7 +443,8 @@ public class AionConnection extends AConnection {
     }
 
     /**
-     * @param lastPingTimeMS the lastPingTimeMS to set
+     * @param lastPingTimeMS
+     *            the lastPingTimeMS to set
      */
     public void setLastPingTimeMS(long lastPingTimeMS) {
         this.lastPingTimeMS = lastPingTimeMS;
@@ -463,8 +466,8 @@ public class AionConnection extends AConnection {
     public String toString() {
         Player player = activePlayer.get();
         if (player != null) {
-            return "AionConnection [state=" + state + ", account=" + account + ", getObjectId()=" + player.getObjectId()
-                    + ", lastPlayerName=" + lastPlayerName + ", macAddress=" + macAddress + ", getIP()=" + getIP() + "]";
+            return "AionConnection [state=" + state + ", account=" + account + ", getObjectId()=" + player.getObjectId() + ", lastPlayerName="
+                + lastPlayerName + ", macAddress=" + macAddress + ", getIP()=" + getIP() + "]";
         }
         return "";
     }

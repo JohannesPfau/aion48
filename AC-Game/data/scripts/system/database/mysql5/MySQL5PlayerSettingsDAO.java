@@ -29,6 +29,14 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
@@ -37,13 +45,6 @@ import com.aionemu.gameserver.dao.PlayerSettingsDAO;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerSettings;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author ATracer
@@ -114,6 +115,7 @@ public class MySQL5PlayerSettingsDAO extends PlayerSettingsDAO {
 
         if (uiSettings != null) {
             DB.insertUpdate("REPLACE INTO player_settings values (?, ?, ?)", new IUStH() {
+
                 @Override
                 public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                     stmt.setInt(1, playerId);
@@ -126,6 +128,7 @@ public class MySQL5PlayerSettingsDAO extends PlayerSettingsDAO {
 
         if (shortcuts != null) {
             DB.insertUpdate("REPLACE INTO player_settings values (?, ?, ?)", new IUStH() {
+
                 @Override
                 public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                     stmt.setInt(1, playerId);
@@ -138,6 +141,7 @@ public class MySQL5PlayerSettingsDAO extends PlayerSettingsDAO {
 
         if (houseBuddies != null) {
             DB.insertUpdate("REPLACE INTO player_settings values (?, ?, ?)", new IUStH() {
+
                 @Override
                 public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                     stmt.setInt(1, playerId);
@@ -149,6 +153,7 @@ public class MySQL5PlayerSettingsDAO extends PlayerSettingsDAO {
         }
 
         DB.insertUpdate("REPLACE INTO player_settings values (?, ?, ?)", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, playerId);
@@ -159,6 +164,7 @@ public class MySQL5PlayerSettingsDAO extends PlayerSettingsDAO {
         });
 
         DB.insertUpdate("REPLACE INTO player_settings values (?, ?, ?)", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, playerId);

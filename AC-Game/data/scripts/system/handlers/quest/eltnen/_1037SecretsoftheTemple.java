@@ -29,9 +29,9 @@
  */
 package quest.eltnen;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,7 +51,7 @@ public class _1037SecretsoftheTemple extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {203965, 203967, 700151, 700154, 700150, 700153, 700152};
+        int[] npcs = { 203965, 203967, 700151, 700154, 700150, 700153, 700152 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.registerGetingItem(182201027, questId);

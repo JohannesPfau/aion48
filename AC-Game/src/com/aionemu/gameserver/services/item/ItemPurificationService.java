@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.services.item;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +43,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+
+import javolution.util.FastMap;
 
 /**
  * @author Ranastic
@@ -75,10 +75,9 @@ public class ItemPurificationService {
         player.getInventory().decreaseByObjectId(baseItem.getObjectId(), 1);
 
         return true;
-    }    
-    
+    }
+
     public static boolean checkItemUpgrade(Player player, Item baseItem, int resultItemId) {
-    	
 
         ItemPurificationTemplate itemPurificationTemplate = DataManager.ITEM_PURIFICATION_DATA.getItemPurificationTemplate(baseItem.getItemId());
         if (itemPurificationTemplate == null) {
@@ -121,9 +120,10 @@ public class ItemPurificationService {
                 return false;
             }
         }
-        PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(new DescriptionId(baseItem.getNameId()), new DescriptionId(resultItemName.getNameId())));
+        PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(new DescriptionId(baseItem.getNameId()),
+            new DescriptionId(resultItemName.getNameId())));
         ItemService.releaseItemId(resultItemName);
-    	
-    	return true;
+
+        return true;
     }
 }

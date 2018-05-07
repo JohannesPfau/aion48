@@ -57,7 +57,7 @@ public class SM_REPURCHASE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(targetObjectId);
         writeD(1);
         writeH(items.size());

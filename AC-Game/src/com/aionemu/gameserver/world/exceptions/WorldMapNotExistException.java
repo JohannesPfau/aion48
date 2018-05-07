@@ -32,8 +32,6 @@ package com.aionemu.gameserver.world.exceptions;
 /**
  * This Exception will be thrown when some object is referencing to World map
  * that do not exist. This Exception indicating serious error.
- *
-
  */
 @SuppressWarnings("serial")
 public class WorldMapNotExistException extends RuntimeException {
@@ -50,7 +48,8 @@ public class WorldMapNotExistException extends RuntimeException {
      * Constructs an
      * <code>WorldMapNotExistException</code> with the specified detail message.
      *
-     * @param s the detail message.
+     * @param s
+     *            the detail message.
      */
     public WorldMapNotExistException(String s) {
         super(s);

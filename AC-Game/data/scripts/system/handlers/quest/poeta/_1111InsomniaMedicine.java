@@ -29,11 +29,11 @@
  */
 package quest.poeta;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -107,8 +107,7 @@ public class _1111InsomniaMedicine extends QuestHandler {
                 } else {
                     return sendQuestDialog(env, 1693);
                 }
-            } else if (env.getDialog() == DialogAction.SETPRO1 && qs.getStatus() != QuestStatus.COMPLETE
-                    && qs.getStatus() != QuestStatus.NONE) {
+            } else if (env.getDialog() == DialogAction.SETPRO1 && qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
                 if (!giveQuestItem(env, 182200222, 1)) {
                     return true;
                 }
@@ -117,8 +116,7 @@ public class _1111InsomniaMedicine extends QuestHandler {
                 updateQuestStatus(env);
                 PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                 return true;
-            } else if (env.getDialog() == DialogAction.SETPRO2 && qs.getStatus() != QuestStatus.COMPLETE
-                    && qs.getStatus() != QuestStatus.NONE) {
+            } else if (env.getDialog() == DialogAction.SETPRO2 && qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
                 if (!giveQuestItem(env, 182200221, 1)) {
                     return true;
                 }

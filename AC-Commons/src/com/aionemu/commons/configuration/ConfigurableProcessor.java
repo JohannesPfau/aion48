@@ -29,12 +29,12 @@
  */
 package com.aionemu.commons.configuration;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.Properties;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is designed to process classes and interfaces that have fields
@@ -55,9 +55,11 @@ public class ConfigurableProcessor {
      * If class is submitted(Sotmething.class), static fields are parsed.<br>
      * <p/>
      *
-     * @param object     Class or Object that has {@link Property} annotations.
-     * @param properties Properties that should be used while seraching for a
-     *                   {@link Property#key()}
+     * @param object
+     *            Class or Object that has {@link Property} annotations.
+     * @param properties
+     *            Properties that should be used while seraching for a
+     *            {@link Property#key()}
      */
     public static void process(Object object, Properties... properties) {
         Class<?> clazz;
@@ -76,9 +78,12 @@ public class ConfigurableProcessor {
      * This method uses recurcieve calls to launch search for {@link Property}
      * annotation on itself and parents\interfaces.
      *
-     * @param clazz Class of object
-     * @param obj   Object if any, null if parsing class (static fields only)
-     * @param props Properties with keys\values
+     * @param clazz
+     *            Class of object
+     * @param obj
+     *            Object if any, null if parsing class (static fields only)
+     * @param props
+     *            Properties with keys\values
      */
     private static void process(Class<?> clazz, Object obj, Properties[] props) {
         processFields(clazz, obj, props);
@@ -104,9 +109,12 @@ public class ConfigurableProcessor {
      * {@link java.lang.reflect.Modifier#STATIC} and
      * {@link java.lang.reflect.Modifier#FINAL}
      *
-     * @param clazz Class of object
-     * @param obj   Object if any, null if parsing class (static fields only)
-     * @param props Properties with keys\values
+     * @param clazz
+     *            Class of object
+     * @param obj
+     *            Object if any, null if parsing class (static fields only)
+     * @param props
+     *            Properties with keys\values
      */
     private static void processFields(Class<?> clazz, Object obj, Properties[] props) {
         for (Field f : clazz.getDeclaredFields()) {
@@ -141,9 +149,12 @@ public class ConfigurableProcessor {
      * Also this method is capturing and logging all {@link Exception} that are
      * thrown by underlying methods.
      *
-     * @param f     field that is going to be processed
-     * @param obj   Object if any, null if parsing class (static fields only)
-     * @param props Properties with kyes\values
+     * @param f
+     *            field that is going to be processed
+     * @param obj
+     *            Object if any, null if parsing class (static fields only)
+     * @param props
+     *            Properties with kyes\values
      */
     private static void processField(Field f, Object obj, Properties[] props) {
         boolean oldAccessible = f.isAccessible();
@@ -169,11 +180,14 @@ public class ConfigurableProcessor {
      * Transformation is done using
      * {@link com.aionemu.commons.configuration.PropertyTransformerFactory}
      *
-     * @param field field that has to be transformed
-     * @param props properties with key\values
+     * @param field
+     *            field that has to be transformed
+     * @param props
+     *            properties with key\values
      * @return transformed object that will be used as field value
-     * @throws TransformationException if something goes wrong during
-     *                                 transformation
+     * @throws TransformationException
+     *             if something goes wrong during
+     *             transformation
      */
     private static Object getFieldValue(Field field, Properties[] props) throws TransformationException {
         Property property = field.getAnnotation(Property.class);
@@ -190,21 +204,21 @@ public class ConfigurableProcessor {
         if (value == null || value.trim().equals("")) {
             value = defaultValue;
             if (log.isDebugEnabled()) {
-                log.debug("Using default value for field " + field.getName() + " of class "
-                        + field.getDeclaringClass().getName());
+                log.debug("Using default value for field " + field.getName() + " of class " + field.getDeclaringClass().getName());
             }
         }
 
-        PropertyTransformer<?> pt = PropertyTransformerFactory.newTransformer(field.getType(),
-                property.propertyTransformer());
+        PropertyTransformer<?> pt = PropertyTransformerFactory.newTransformer(field.getType(), property.propertyTransformer());
         return pt.transform(value, field);
     }
 
     /**
      * Finds value by key in properties
      *
-     * @param key   value key
-     * @param props properties to loook for the key
+     * @param key
+     *            value key
+     * @param props
+     *            properties to loook for the key
      * @return value if found, null otherwise
      */
     private static String findPropertyByKey(String key, Properties[] props) {
@@ -220,8 +234,10 @@ public class ConfigurableProcessor {
     /**
      * Checks if key is present in the given properties
      *
-     * @param key   key to check
-     * @param props prperties to look for key
+     * @param key
+     *            key to check
+     * @param props
+     *            prperties to look for key
      * @return true if key present, false in other case
      */
     private static boolean isKeyPresent(String key, Properties[] props) {

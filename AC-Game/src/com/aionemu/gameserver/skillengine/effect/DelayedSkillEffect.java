@@ -48,36 +48,38 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
  */
 public class DelayedSkillEffect extends EffectTemplate {
 
-	@XmlAttribute(name = "skill_id")
+    @XmlAttribute(name = "skill_id")
     protected int skilliD;
 
-
     @Override
-    public void applyEffect(Effect effect){
+    public void applyEffect(Effect effect) {
         effect.addToEffectedController();
     }
 
     @Override
-    public void startEffect(final Effect effect){
+    public void startEffect(final Effect effect) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 // apply effect
-                if(effect.getEffected().getEffectController().hasAbnormalEffect(effect.getSkill().getSkillId())){
+                if (effect.getEffected().getEffectController().hasAbnormalEffect(effect.getSkill().getSkillId())) {
                     final SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skilliD);
-                    if (template.getProperties().getTargetMaxCount() > 1){
+                    if (template.getProperties().getTargetMaxCount() > 1) {
                         final Effect e = new Effect(effect.getEffector(), effect.getEffected(), template, template.getLvl(), 0);
                         World.getInstance().doOnAllObjects(new Visitor<VisibleObject>() {
+
                             @Override
                             public void visit(VisibleObject object) {
-                                if (MathUtil.getDistance(effect.getEffected(), object) <= template.getProperties().getEffectiveRange()){
-                                    SkillEngine.getInstance().applyEffectDirectly(template.getSkillId(), effect.getEffected(), (Creature) object, template.getDuration());
+                                if (MathUtil.getDistance(effect.getEffected(), object) <= template.getProperties().getEffectiveRange()) {
+                                    SkillEngine.getInstance().applyEffectDirectly(template.getSkillId(), effect.getEffected(), (Creature) object,
+                                        template.getDuration());
                                     e.applyEffect();
                                     e.initialize();
                                 }
                             }
                         });
-                    }else{
+                    } else {
                         Effect e = new Effect(effect.getEffector(), effect.getEffected(), template, template.getLvl(), 0);
                         e.initialize();
                         e.applyEffect();
@@ -89,7 +91,7 @@ public class DelayedSkillEffect extends EffectTemplate {
     }
 
     @Override
-    public void endEffect(Effect effect){
+    public void endEffect(Effect effect) {
 
     }
 }

@@ -29,6 +29,16 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerPetsDAO;
@@ -36,15 +46,6 @@ import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.pet.PetDopingBag;
 import com.aionemu.gameserver.services.toypet.PetHungryLevel;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author M@xx, xTz, Rolandas
@@ -58,7 +59,8 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
-            PreparedStatement stmt = con.prepareStatement("UPDATE player_pets SET hungry_level = ?, feed_progress = ?, reuse_time = ? WHERE player_id = ? AND pet_id = ?");
+            PreparedStatement stmt = con
+                .prepareStatement("UPDATE player_pets SET hungry_level = ?, feed_progress = ?, reuse_time = ? WHERE player_id = ? AND pet_id = ?");
             stmt.setInt(1, hungryLevel);
             stmt.setInt(2, feedProgress);
             stmt.setLong(3, reuseTime);
@@ -78,8 +80,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
-            PreparedStatement stmt = con
-                    .prepareStatement("UPDATE player_pets SET dopings = ? WHERE player_id = ? AND pet_id = ?");
+            PreparedStatement stmt = con.prepareStatement("UPDATE player_pets SET dopings = ? WHERE player_id = ? AND pet_id = ?");
             String itemIds = bag.getFoodItem() + "," + bag.getDrinkItem();
             for (int itemId : bag.getScrollsUsed()) {
                 itemIds += "," + Integer.toString(itemId);
@@ -101,8 +102,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
-            PreparedStatement stmt = con
-                    .prepareStatement("UPDATE player_pets SET reuse_time = ? WHERE player_id = ? AND pet_id = ?");
+            PreparedStatement stmt = con.prepareStatement("UPDATE player_pets SET reuse_time = ? WHERE player_id = ? AND pet_id = ?");
             stmt.setLong(1, time);
             stmt.setInt(2, player.getObjectId());
             stmt.setInt(3, petId);
@@ -121,7 +121,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
         try {
             con = DatabaseFactory.getConnection();
             PreparedStatement stmt = con
-                    .prepareStatement("INSERT INTO player_pets(player_id, pet_id, decoration, name, despawn_time, expire_time) VALUES(?, ?, ?, ?, ?, ?)");
+                .prepareStatement("INSERT INTO player_pets(player_id, pet_id, decoration, name, despawn_time, expire_time) VALUES(?, ?, ?, ?, ?, ?)");
             stmt.setInt(1, petCommonData.getMasterObjectId());
             stmt.setInt(2, petCommonData.getPetId());
             stmt.setInt(3, petCommonData.getDecoration());
@@ -156,7 +156,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
 
     @Override
     public List<PetCommonData> getPlayerPets(Player player) {
-        List<PetCommonData> pets = new ArrayList<PetCommonData>();
+        List<PetCommonData> pets = new ArrayList<>();
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
@@ -217,8 +217,7 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
-            PreparedStatement stmt = con
-                    .prepareStatement("UPDATE player_pets SET name = ? WHERE player_id = ? AND pet_id = ?");
+            PreparedStatement stmt = con.prepareStatement("UPDATE player_pets SET name = ? WHERE player_id = ? AND pet_id = ?");
             stmt.setString(1, petCommonData.getName());
             stmt.setInt(2, petCommonData.getMasterObjectId());
             stmt.setInt(3, petCommonData.getPetId());
@@ -236,8 +235,8 @@ public class MySQL5PlayerPetsDAO extends PlayerPetsDAO {
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
-            PreparedStatement stmt = con
-                    .prepareStatement("UPDATE player_pets SET mood_started = ?, counter = ?, mood_cd_started = ?, gift_cd_started = ?, despawn_time = ? WHERE player_id = ? AND pet_id = ?");
+            PreparedStatement stmt = con.prepareStatement(
+                "UPDATE player_pets SET mood_started = ?, counter = ?, mood_cd_started = ?, gift_cd_started = ?, despawn_time = ? WHERE player_id = ? AND pet_id = ?");
             stmt.setLong(1, petCommonData.getMoodStartTime());
             stmt.setInt(2, petCommonData.getShuggleCounter());
             stmt.setLong(3, petCommonData.getMoodCdStarted());

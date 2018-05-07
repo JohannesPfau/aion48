@@ -198,9 +198,8 @@ public class CM_PET extends AionClientPacket {
                 }
                 break;
             case MOOD:
-                if (pet != null
-                        && (subType == 0 && pet.getCommonData().getMoodRemainingTime() == 0
-                        || (subType == 3 && pet.getCommonData().getGiftRemainingTime() == 0) || emotionId != 0)) {
+                if (pet != null && (subType == 0 && pet.getCommonData().getMoodRemainingTime() == 0
+                    || (subType == 3 && pet.getCommonData().getGiftRemainingTime() == 0) || emotionId != 0)) {
                     PetMoodService.checkMood(pet, subType, emotionId);
                 }
             default:

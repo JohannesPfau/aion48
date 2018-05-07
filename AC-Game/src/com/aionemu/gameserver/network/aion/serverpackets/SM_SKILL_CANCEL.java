@@ -52,7 +52,7 @@ public class SM_SKILL_CANCEL extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(creature.getObjectId());
         writeH(skillId);
     }

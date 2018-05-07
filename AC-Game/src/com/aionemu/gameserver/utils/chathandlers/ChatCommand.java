@@ -42,7 +42,7 @@ public abstract class ChatCommand {
 
     private String alias;
     private Byte level;
-    static final String[] EMPTY_PARAMS = new String[]{};
+    static final String[] EMPTY_PARAMS = new String[] {};
     static final Logger log = LoggerFactory.getLogger(ChatCommand.class);
 
     public ChatCommand(String alias) {

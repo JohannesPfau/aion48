@@ -29,7 +29,11 @@
  */
 package ai.instance.empyreanCrucible;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -41,10 +45,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Luzien
@@ -105,6 +106,7 @@ public class RM1337AI2 extends AggressiveNpcAI2 {
 
     private void startSkillTask1() {
         task1 = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -122,6 +124,7 @@ public class RM1337AI2 extends AggressiveNpcAI2 {
                                 final Player target = getTargetPlayer();
                                 SkillEngine.getInstance().getSkill(getOwner(), 19552, 10, target).useNoAnimationSkill();
                                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                     @Override
                                     public void run() {
                                         if (!isAlreadyDead()) {
@@ -140,6 +143,7 @@ public class RM1337AI2 extends AggressiveNpcAI2 {
 
     private void startSkillTask2() {
         task2 = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -156,6 +160,7 @@ public class RM1337AI2 extends AggressiveNpcAI2 {
 
     private void spawnSparks() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
@@ -170,7 +175,7 @@ public class RM1337AI2 extends AggressiveNpcAI2 {
     }
 
     private Player getTargetPlayer() {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (Player player : getKnownList().getKnownPlayers().values()) {
             if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 37)) {
                 players.add(player);

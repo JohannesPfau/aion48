@@ -80,24 +80,26 @@ public class InstanceTimeClear extends AbstractItemAction {
 
     @Override
     public void act(final Player player, final Item parentItem, Item targetItem) {
-        PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
-                parentItem.getItemId(), 1000, 0, 0));
+        PacketSendUtility.broadcastPacketAndReceive(player,
+            new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 1000, 0, 0));
 
         final ItemUseObserver observer = new ItemUseObserver() {
+
             @Override
             public void abort() {
                 // TODO: abort is invalid. Should we abort all or only the last syncid?
                 player.getController().cancelTask(TaskId.ITEM_USE);
                 player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
                 PacketSendUtility.sendPacket(player,
-                        SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentItem.getItemTemplate().getNameId())));
-                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
-                        .getItemTemplate().getTemplateId(), 0, 2, 0), true);
+                    SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentItem.getItemTemplate().getNameId())));
+                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
+                    parentItem.getItemTemplate().getTemplateId(), 0, 2, 0), true);
                 player.getObserveController().removeObserver(this);
             }
         };
         player.getObserveController().attach(observer);
         player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 player.getObserveController().removeObserver(observer);
@@ -120,8 +122,8 @@ public class InstanceTimeClear extends AbstractItemAction {
                         PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO(player, mapid));
                     }
                 }
-                PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
-                        parentItem.getItemId(), 0, 1, 0));
+                PacketSendUtility.broadcastPacketAndReceive(player,
+                    new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
             }
         }, 1000));
     }

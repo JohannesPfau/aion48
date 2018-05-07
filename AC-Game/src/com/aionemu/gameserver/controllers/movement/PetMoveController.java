@@ -100,9 +100,9 @@ public class PetMoveController extends CreatureMoveController<Pet> {
     public void setInMove(boolean value) {
     }
 
-	@Override
-	public void skillMovement() {
-		this.movementMask = MovementMask.IMMEDIATE;
-		
-	}
+    @Override
+    public void skillMovement() {
+        this.movementMask = MovementMask.IMMEDIATE;
+
+    }
 }

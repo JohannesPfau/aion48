@@ -36,7 +36,7 @@ import javolution.util.FastList;
  */
 public class AssembledNpc {
 
-    private FastList<AssembledNpcPart> assembledPatrs = new FastList<AssembledNpcPart>();
+    private FastList<AssembledNpcPart> assembledPatrs = new FastList<>();
     private long spawnTime = System.currentTimeMillis();
     private int routeId;
     private int mapId;

@@ -41,18 +41,18 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
 public class _23516ElyosHeads extends QuestHandler {
 
-	private final static int questId = 23516;
+    private final static int questId = 23516;
 
-	public _23516ElyosHeads() {
-		super(questId);
-	}
+    public _23516ElyosHeads() {
+        super(questId);
+    }
 
-	@Override
-	public void register() {
-		qe.registerQuestNpc(800529).addOnQuestStart(questId);
-		qe.registerQuestNpc(800529).addOnTalkEvent(questId);
-		qe.registerOnKillRanked(AbyssRankEnum.GENERAL, questId);
-	}
+    @Override
+    public void register() {
+        qe.registerQuestNpc(800529).addOnQuestStart(questId);
+        qe.registerQuestNpc(800529).addOnTalkEvent(questId);
+        qe.registerOnKillRanked(AbyssRankEnum.GENERAL, questId);
+    }
 
     @Override
     public boolean onKillRankedEvent(QuestEnv env) {
@@ -63,24 +63,23 @@ public class _23516ElyosHeads extends QuestHandler {
         return false;
     }
 
-	@Override
-	public boolean onDialogEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (env.getTargetId() == 800529) {
-			if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
-					return sendQuestDialog(env, 1011);
-				else
-					return sendQuestStartDialog(env);
-			}
-			else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT)
-					return sendQuestDialog(env, 1352);
-				else
-					return sendQuestEndDialog(env);
-			}
-		}
-		return false;
-	}
+    @Override
+    public boolean onDialogEvent(QuestEnv env) {
+        Player player = env.getPlayer();
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (env.getTargetId() == 800529) {
+            if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+                if (env.getDialog() == DialogAction.QUEST_SELECT)
+                    return sendQuestDialog(env, 1011);
+                else
+                    return sendQuestStartDialog(env);
+            } else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+                if (env.getDialog() == DialogAction.QUEST_SELECT)
+                    return sendQuestDialog(env, 1352);
+                else
+                    return sendQuestEndDialog(env);
+            }
+        }
+        return false;
+    }
 }

@@ -47,14 +47,14 @@ import com.aionemu.gameserver.model.Race;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"sysMailTemplates"})
+@XmlType(name = "", propOrder = { "sysMailTemplates" })
 @XmlRootElement(name = "mails")
 public class Mails {
 
     @XmlElement(name = "mail")
     private List<SysMail> sysMailTemplates;
     @XmlTransient
-    private Map<String, SysMail> sysMailByName = new HashMap<String, SysMail>();
+    private Map<String, SysMail> sysMailByName = new HashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (SysMail template : sysMailTemplates) {

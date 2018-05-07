@@ -29,19 +29,21 @@
  */
 package mysql5;
 
-import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.gameserver.dao.HouseObjectCooldownsDAO;
-import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import javolution.util.FastMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.database.DatabaseFactory;
+import com.aionemu.gameserver.dao.HouseObjectCooldownsDAO;
+import com.aionemu.gameserver.dao.MySQL5DAOUtils;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+
+import javolution.util.FastMap;
 
 /**
  * @author Rolandas
@@ -56,7 +58,7 @@ public class MySQL5HouseObjectCooldownsDAO extends HouseObjectCooldownsDAO {
     @Override
     public void loadHouseObjectCooldowns(final Player player) {
         Connection con = null;
-        FastMap<Integer, Long> houseObjectCoolDowns = new FastMap<Integer, Long>();
+        FastMap<Integer, Long> houseObjectCoolDowns = new FastMap<>();
         try {
             con = DatabaseFactory.getConnection();
             PreparedStatement stmt = con.prepareStatement(SELECT_QUERY);

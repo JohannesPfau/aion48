@@ -56,6 +56,7 @@ public class DelayedFpAtkInstantEffect extends EffectTemplate {
     @Override
     public void applyEffect(final Effect effect) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (effect.getEffector().isEnemy(effect.getEffected())) {

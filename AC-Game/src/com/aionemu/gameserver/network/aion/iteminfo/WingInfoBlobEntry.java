@@ -39,7 +39,6 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
  * This blob is sent for clothes. It keeps info about slots that cloth can be
  * equipped to.
  *
-
  * @modified Rolandas
  */
 public class WingInfoBlobEntry extends ItemBlobEntry {

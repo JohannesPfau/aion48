@@ -83,7 +83,8 @@ public class TitleAddAction extends AbstractItemAction {
     public void act(Player player, Item parentItem, Item targetItem) {
         ItemTemplate itemTemplate = parentItem.getItemTemplate();
         PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(new DescriptionId(itemTemplate.getNameId())));
-        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), itemTemplate.getTemplateId()), true);
+        PacketSendUtility.broadcastPacket(player,
+            new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), itemTemplate.getTemplateId()), true);
 
         if (player.getTitleList().addTitle(titleid, false, minutes == null ? 0 : ((int) (System.currentTimeMillis() / 1000)) + minutes * 60)) {
             Item item = player.getInventory().getItemByObjId(parentItem.getObjectId());

@@ -29,9 +29,9 @@
  */
 package quest.danuar_sanctuary;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -42,7 +42,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _16988AsmoSquadWipeout extends QuestHandler {
 
     private final static int questId = 16988;
-		int[] mobs = {233129, 233130, 233131};
+    int[] mobs = { 233129, 233130, 233131 };
 
     public _16988AsmoSquadWipeout() {
         super(questId);
@@ -52,8 +52,8 @@ public class _16988AsmoSquadWipeout extends QuestHandler {
     public void register() {
         qe.registerQuestNpc(801953).addOnQuestStart(questId);
         qe.registerQuestNpc(801953).addOnTalkEvent(questId);
-		qe.registerQuestNpc(804865).addOnTalkEvent(questId);
-		for (int mob : mobs) {
+        qe.registerQuestNpc(804865).addOnTalkEvent(questId);
+        for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
     }
@@ -70,8 +70,8 @@ public class _16988AsmoSquadWipeout extends QuestHandler {
                     return defaultOnKillEvent(env, mobs, var1, var1 + 1, 1);
                 } else if (var1 == 4) {
                     qs.setQuestVar(1);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
+                    qs.setStatus(QuestStatus.REWARD);
+                    updateQuestStatus(env);
                     return true;
                 }
             }

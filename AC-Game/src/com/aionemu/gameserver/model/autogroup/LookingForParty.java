@@ -32,17 +32,17 @@ package com.aionemu.gameserver.model.autogroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import javolution.util.FastList;
-
 import com.aionemu.commons.taskmanager.AbstractLockManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+
+import javolution.util.FastList;
 
 /**
  * @author xTz
  */
 public class LookingForParty extends AbstractLockManager {
 
-    private List<SearchInstance> searchInstances = new ArrayList<SearchInstance>();
+    private List<SearchInstance> searchInstances = new ArrayList<>();
     private Player player;
     private long startEnterTime;
     private long penaltyTime;
@@ -78,8 +78,7 @@ public class LookingForParty extends AbstractLockManager {
     public void addInstanceMaskId(int instanceMaskId, EntryRequestType ert) {
         super.writeLock();
         try {
-            searchInstances.add(new SearchInstance(instanceMaskId, ert, ert.isGroupEntry()
-                    ? player.getPlayerGroup2().getOnlineMembers() : null));
+            searchInstances.add(new SearchInstance(instanceMaskId, ert, ert.isGroupEntry() ? player.getPlayerGroup2().getOnlineMembers() : null));
         } finally {
             super.writeUnlock();
         }

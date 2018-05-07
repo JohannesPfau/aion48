@@ -38,8 +38,6 @@ import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * This packet is notify client what map should be loaded.
- *
-
  */
 public class SM_PLAYER_SPAWN extends AionServerPacket {
 
@@ -63,7 +61,7 @@ public class SM_PLAYER_SPAWN extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(player.getWorldId());
         writeD(player.getWorldId()); // world + chnl
         writeD(0x00); // unk

@@ -55,12 +55,12 @@ public class QuestNpc {
 
     public QuestNpc(int npcId) {
         this.npcId = npcId;
-        onQuestStart = new ArrayList<Integer>(0);
-        onKillEvent = new ArrayList<Integer>(0);
-        onTalkEvent = new ArrayList<Integer>(0);
-        onAttackEvent = new ArrayList<Integer>(0);
-        onAddAggroListEvent = new ArrayList<Integer>(0);
-        onAtDistanceEvent = new ArrayList<Integer>(0);
+        onQuestStart = new ArrayList<>(0);
+        onKillEvent = new ArrayList<>(0);
+        onTalkEvent = new ArrayList<>(0);
+        onAttackEvent = new ArrayList<>(0);
+        onAddAggroListEvent = new ArrayList<>(0);
+        onAtDistanceEvent = new ArrayList<>(0);
     }
 
     private void registerCanAct(int questId, int npcId) {

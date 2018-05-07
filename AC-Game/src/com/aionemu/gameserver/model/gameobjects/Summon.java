@@ -69,8 +69,8 @@ public class Summon extends Creature {
      * @param position
      * @param level
      */
-    public Summon(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate,
-                  NpcTemplate objectTemplate, byte level, int time) {
+    public Summon(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, byte level,
+        int time) {
         super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
         controller.setOwner(this);
         String ai = objectTemplate.getAi();
@@ -78,8 +78,7 @@ public class Summon extends Creature {
         moveController = ai.equals("siege_weapon") ? new SiegeWeaponMoveController(this) : new SummonMoveController(this);
         this.level = level;
         this.liveTime = time;
-        SummonStatsTemplate statsTemplate = DataManager.SUMMON_STATS_DATA.getSummonTemplate(objectTemplate.getTemplateId(),
-                level);
+        SummonStatsTemplate statsTemplate = DataManager.SUMMON_STATS_DATA.getSummonTemplate(objectTemplate.getTemplateId(), level);
         setGameStats(new SummonGameStats(this, statsTemplate));
         setLifeStats(new SummonLifeStats(this));
     }
@@ -100,7 +99,8 @@ public class Summon extends Creature {
     }
 
     /**
-     * @param master the master to set
+     * @param master
+     *            the master to set
      */
     public void setMaster(Player master) {
         this.master = master;
@@ -153,7 +153,8 @@ public class Summon extends Creature {
     }
 
     /**
-     * @param mode the mode to set
+     * @param mode
+     *            the mode to set
      */
     public void setMode(SummonMode mode) {
         this.mode = mode;
@@ -205,7 +206,8 @@ public class Summon extends Creature {
     }
 
     /**
-     * @param liveTime in sec.
+     * @param liveTime
+     *            in sec.
      */
     public void setLiveTime(int liveTime) {
         this.liveTime = liveTime;

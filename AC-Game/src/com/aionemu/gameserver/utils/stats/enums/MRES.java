@@ -51,6 +51,7 @@ public enum MRES {
     GUNNER(0),
     ARTIST(0),
     BARD(0);
+
     private int value;
 
     private MRES(int value) {

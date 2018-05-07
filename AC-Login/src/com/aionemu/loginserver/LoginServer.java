@@ -29,9 +29,20 @@
  */
 package com.aionemu.loginserver;
 
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FilenameFilter;
+import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.zip.Deflater;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
@@ -48,15 +59,10 @@ import com.aionemu.loginserver.taskmanager.TaskFromDBManager;
 import com.aionemu.loginserver.utils.DeadLockDetector;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
 import com.aionemu.loginserver.utils.cron.ThreadPoolManagerRunnableRunner;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.zip.Deflater;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
 
 /**
  * @author -Nemesiss-
@@ -71,6 +77,7 @@ public class LoginServer {
     private static void initalizeLoggger() {
         new File("./log/backup/").mkdirs();
         File[] files = new File("log").listFiles(new FilenameFilter() {
+
             @Override
             public boolean accept(File dir, String name) {
                 return name.endsWith(".log");

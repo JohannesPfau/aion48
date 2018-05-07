@@ -51,7 +51,7 @@ public class SM_FLY_TIME extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(currentFp); // current fly time
         writeD(maxFp); // max flytime
     }

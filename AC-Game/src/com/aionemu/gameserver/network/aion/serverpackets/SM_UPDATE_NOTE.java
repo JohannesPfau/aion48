@@ -51,7 +51,7 @@ public class SM_UPDATE_NOTE extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(targetObjId);
         writeS(note);
     }

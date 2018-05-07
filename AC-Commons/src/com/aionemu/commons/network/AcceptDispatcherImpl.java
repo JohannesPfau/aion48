@@ -77,7 +77,8 @@ public class AcceptDispatcherImpl extends Dispatcher {
      * This method should never be called on this implementation of
      * <code>Dispatcher</code>
      *
-     * @throws UnsupportedOperationException always!
+     * @throws UnsupportedOperationException
+     *             always!
      * @see com.aionemu.commons.network.Dispatcher#closeConnection(com.aionemu.commons.network.AConnection)
      */
     @Override

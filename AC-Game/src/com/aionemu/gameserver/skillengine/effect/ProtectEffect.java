@@ -50,14 +50,15 @@ public class ProtectEffect extends ShieldEffect {
 
     @Override
     public void startEffect(final Effect effect) {
-        AttackShieldObserver asObserver = new AttackShieldObserver(value, this.hitvalue,
-                radius, percent, effect, this.hitType, this.getType(), this.hitTypeProb);
+        AttackShieldObserver asObserver = new AttackShieldObserver(value, this.hitvalue, radius, percent, effect, this.hitType, this.getType(),
+            this.hitTypeProb);
 
         effect.getEffected().getObserveController().addAttackCalcObserver(asObserver);
         effect.setAttackShieldObserver(asObserver, position);
 
         if (effect.getEffector() instanceof Summon) {
             ActionObserver summonRelease = new ActionObserver(ObserverType.SUMMONRELEASE) {
+
                 @Override
                 public void summonrelease() {
                     effect.endEffect();
@@ -67,6 +68,7 @@ public class ProtectEffect extends ShieldEffect {
             effect.setActionObserver(summonRelease, position);
         } else {
             ActionObserver death = new ActionObserver(ObserverType.DEATH) {
+
                 @Override
                 public void died(Creature creature) {
                     effect.endEffect();

@@ -29,11 +29,6 @@
  */
 package com.aionemu.commons.scripting;
 
-import com.aionemu.commons.scripting.url.VirtualClassURLStreamHandler;
-import com.aionemu.commons.utils.ClassUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -43,6 +38,12 @@ import java.net.URLStreamHandlerFactory;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.scripting.url.VirtualClassURLStreamHandler;
+import com.aionemu.commons.utils.ClassUtils;
 
 /**
  * Abstract class loader that should be extended by child classloaders. If
@@ -68,18 +69,20 @@ public abstract class ScriptClassLoader extends URLClassLoader {
      * annotations, but they are needed by JavaCompiler to perform valid
      * compilation
      */
-    private Set<String> libraryClassNames = new HashSet<String>();
+    private Set<String> libraryClassNames = new HashSet<>();
 
     /**
      * List of jar files that were scanned by this classloader for classes
      */
-    private Set<File> loadedLibraries = new HashSet<File>();
+    private Set<File> loadedLibraries = new HashSet<>();
 
     /**
      * Just for compatibility with {@link URLClassLoader}
      *
-     * @param urls   list of urls
-     * @param parent parent classloader
+     * @param urls
+     *            list of urls
+     * @param parent
+     *            parent classloader
      */
     public ScriptClassLoader(URL[] urls, ClassLoader parent) {
         super(urls, parent);
@@ -88,7 +91,8 @@ public abstract class ScriptClassLoader extends URLClassLoader {
     /**
      * Just for compatibility with {@link URLClassLoader}
      *
-     * @param urls list of urls
+     * @param urls
+     *            list of urls
      */
     public ScriptClassLoader(URL[] urls) {
         super(urls);
@@ -97,9 +101,12 @@ public abstract class ScriptClassLoader extends URLClassLoader {
     /**
      * Just for compatibility with {@link URLClassLoader}
      *
-     * @param urls    list of urls
-     * @param parent  parent classloader
-     * @param factory {@link java.net.URLStreamHandlerFactory}
+     * @param urls
+     *            list of urls
+     * @param parent
+     *            parent classloader
+     * @param factory
+     *            {@link java.net.URLStreamHandlerFactory}
      */
     public ScriptClassLoader(URL[] urls, ClassLoader parent, URLStreamHandlerFactory factory) {
         super(urls, parent, factory);
@@ -108,8 +115,10 @@ public abstract class ScriptClassLoader extends URLClassLoader {
     /**
      * Adds library to this classloader, it shuould be jar file
      *
-     * @param file jar file
-     * @throws IOException if can't add library
+     * @param file
+     *            jar file
+     * @throws IOException
+     *             if can't add library
      */
     public void addJarFile(File file) throws IOException {
         if (!loadedLibraries.contains(file)) {
@@ -143,9 +152,11 @@ public abstract class ScriptClassLoader extends URLClassLoader {
     /**
      * Loads class from library, parent or compiled
      *
-     * @param name class to load
+     * @param name
+     *            class to load
      * @return loaded class
-     * @throws ClassNotFoundException if class not found
+     * @throws ClassNotFoundException
+     *             if class not found
      */
     @Override
     public Class<?> loadClass(String name) throws ClassNotFoundException {
@@ -178,7 +189,8 @@ public abstract class ScriptClassLoader extends URLClassLoader {
      * Returns bytecode for given className. Array is copy of actual bytecode,
      * so modifications will not harm.
      *
-     * @param className class name
+     * @param className
+     *            class name
      * @return bytecode
      */
     public abstract byte[] getByteCode(String className);
@@ -186,7 +198,8 @@ public abstract class ScriptClassLoader extends URLClassLoader {
     /**
      * Returns cached class instance for give name or null if is not cached yet
      *
-     * @param name class name
+     * @param name
+     *            class name
      * @return cached class instance or null
      */
     public abstract Class<?> getDefinedClass(String name);
@@ -194,10 +207,13 @@ public abstract class ScriptClassLoader extends URLClassLoader {
     /**
      * Sets defined class into cache
      *
-     * @param name  class name
-     * @param clazz class object
-     * @throws IllegalArgumentException if class was not loaded by this class
-     *                                  loader
+     * @param name
+     *            class name
+     * @param clazz
+     *            class object
+     * @throws IllegalArgumentException
+     *             if class was not loaded by this class
+     *             loader
      */
     public abstract void setDefinedClass(String name, Class<?> clazz) throws IllegalArgumentException;
 }

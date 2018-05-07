@@ -36,10 +36,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.KillSpawned;
+
+import javolution.util.FastMap;
 
 /**
  * @author vlog, modified Bobobear
@@ -53,7 +53,7 @@ public class KillSpawnedData extends MonsterHuntData {
 
     @Override
     public void register(QuestEngine questEngine) {
-        FastMap<List<Integer>, SpawnedMonster> spawnedMonsters = new FastMap<List<Integer>, SpawnedMonster>();
+        FastMap<List<Integer>, SpawnedMonster> spawnedMonsters = new FastMap<>();
         for (SpawnedMonster m : spawnedMonster) {
             spawnedMonsters.put(m.getNpcIds(), m);
         }

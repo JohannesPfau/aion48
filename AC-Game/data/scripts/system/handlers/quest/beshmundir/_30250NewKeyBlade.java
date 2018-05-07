@@ -50,7 +50,7 @@ public class _30250NewKeyBlade extends QuestHandler {
 
     @Override
     public void register() {
-        int[] debilkarims = {286904, 281419, 215795};
+        int[] debilkarims = { 286904, 281419, 215795 };
         qe.registerQuestNpc(799032).addOnQuestStart(questId);
         qe.registerQuestNpc(799032).addOnTalkEvent(questId);
         qe.registerGetingItem(182213559, questId);

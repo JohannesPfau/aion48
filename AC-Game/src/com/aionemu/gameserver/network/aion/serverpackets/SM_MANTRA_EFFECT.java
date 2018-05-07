@@ -52,7 +52,7 @@ public class SM_MANTRA_EFFECT extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(0x00);// unk
         writeD(player.getObjectId());
         writeH(subEffectId);

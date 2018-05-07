@@ -61,5 +61,5 @@ public class EnchantsConfig {
     @Property(key = "gameserver.manastone.clean", defaultValue = "false")
     public static boolean CLEAN_STONE;
     @Property(key = "gameserver.manastone.enchant_cast_delay", defaultValue = "5000")
-    public static int ENCHANT_CAST_DELAY;    
+    public static int ENCHANT_CAST_DELAY;
 }

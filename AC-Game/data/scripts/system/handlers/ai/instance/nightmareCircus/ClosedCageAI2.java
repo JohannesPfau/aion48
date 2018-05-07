@@ -29,12 +29,13 @@
  */
 package ai.instance.nightmareCircus;
 
-import ai.NoActionAI2;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+
+import ai.NoActionAI2;
 
 @AIName("closed_cage")
 public class ClosedCageAI2 extends NoActionAI2 {

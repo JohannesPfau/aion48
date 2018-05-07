@@ -77,7 +77,7 @@ public class Town {
         this.levelUpDate = levelUpDate;
         this.race = race;
         this.persistentState = PersistentState.UPDATED;
-        this.spawnedNpcs = new ArrayList<Npc>();
+        this.spawnedNpcs = new ArrayList<>();
         spawnNewObjects();
     }
 
@@ -139,10 +139,11 @@ public class Town {
     }
 
     private void broadcastUpdate() {
-        Map<Integer, Town> data = new HashMap<Integer, Town>(1);
+        Map<Integer, Town> data = new HashMap<>(1);
         data.put(this.id, this);
         final SM_TOWNS_LIST packet = new SM_TOWNS_LIST(data);
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 if (player.getRace() == race) {
@@ -157,8 +158,8 @@ public class Town {
         int worldId = DataManager.TOWN_SPAWNS_DATA.getWorldIdForTown(this.id);
         for (Spawn spawn : newSpawns) {
             for (SpawnSpotTemplate sst : spawn.getSpawnSpotTemplates()) {
-                SpawnTemplate spawnTemplate = SpawnEngine.addNewSpawn(worldId, spawn.getNpcId(), sst.getX(), sst.getY(), sst.getZ(),
-                        sst.getHeading(), spawn.getRespawnTime());
+                SpawnTemplate spawnTemplate = SpawnEngine.addNewSpawn(worldId, spawn.getNpcId(), sst.getX(), sst.getY(), sst.getZ(), sst.getHeading(),
+                    spawn.getRespawnTime());
                 spawnTemplate.setStaticId(sst.getStaticId());
                 spawnTemplate.setRandomWalk(0);
                 VisibleObject object = SpawnEngine.spawnObject(spawnTemplate, 1);

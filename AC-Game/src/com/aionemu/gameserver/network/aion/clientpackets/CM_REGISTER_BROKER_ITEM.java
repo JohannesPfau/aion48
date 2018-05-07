@@ -37,7 +37,6 @@ import com.aionemu.gameserver.services.BrokerService;
 
 /**
  * @author kosyak
-
  */
 public class CM_REGISTER_BROKER_ITEM extends AionClientPacket {
 
@@ -46,7 +45,7 @@ public class CM_REGISTER_BROKER_ITEM extends AionClientPacket {
     private int itemUniqueId;
     private long PricePerItem;
     private long itemCount; // since v4.7.5.2 it became 64-bit
-	private boolean isSplitSell;
+    private boolean isSplitSell;
 
     public CM_REGISTER_BROKER_ITEM(int opcode, State state, State... restStates) {
         super(opcode, state, restStates);
@@ -59,7 +58,7 @@ public class CM_REGISTER_BROKER_ITEM extends AionClientPacket {
         this.itemUniqueId = readD();
         this.PricePerItem = readQ();
         this.itemCount = readQ();
-		this.isSplitSell = (readC() == 1); // 1:SplitSell   0:Sell All
+        this.isSplitSell = (readC() == 1); // 1:SplitSell   0:Sell All
     }
 
     @Override

@@ -29,11 +29,11 @@
  */
 package quest.altgard;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,7 +45,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _24013PoisonIntheWaters extends QuestHandler {
 
     private final static int questId = 24013;
-    private final static int[] mobs = {210455, 210456, 214039, 210458, 214032};
+    private final static int[] mobs = { 210455, 210456, 214039, 210458, 214032 };
 
     public _24013PoisonIntheWaters() {
         super(questId);

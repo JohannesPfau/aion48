@@ -29,20 +29,21 @@
  */
 package mysql5;
 
-import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-import com.aionemu.gameserver.dao.PetitionDAO;
-import com.aionemu.gameserver.model.Petition;
-import com.aionemu.gameserver.model.PetitionStatus;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.database.DatabaseFactory;
+import com.aionemu.gameserver.dao.MySQL5DAOUtils;
+import com.aionemu.gameserver.dao.PetitionDAO;
+import com.aionemu.gameserver.model.Petition;
+import com.aionemu.gameserver.model.PetitionStatus;
 
 /**
  * @author zdead
@@ -96,7 +97,7 @@ public class MySQL5PetitionDAO extends PetitionDAO {
             }
 
             result = new Petition(rset.getInt("id"), rset.getInt("player_id"), rset.getInt("type"), rset.getString("title"),
-                    rset.getString("message"), rset.getString("add_data"), status.getElementId());
+                rset.getString("message"), rset.getString("add_data"), status.getElementId());
 
             stmt.close();
         } catch (Exception e) {
@@ -111,7 +112,7 @@ public class MySQL5PetitionDAO extends PetitionDAO {
     public Set<Petition> getPetitions() {
         String query = "SELECT * FROM petitions WHERE status = 'PENDING' OR status = 'IN_PROGRESS' ORDER BY id ASC";
         Connection con = null;
-        Set<Petition> results = new HashSet<Petition>();
+        Set<Petition> results = new HashSet<>();
         try {
             con = DatabaseFactory.getConnection();
             PreparedStatement stmt = con.prepareStatement(query);
@@ -127,8 +128,8 @@ public class MySQL5PetitionDAO extends PetitionDAO {
                     status = PetitionStatus.PENDING;
                 }
 
-                Petition p = new Petition(rset.getInt("id"), rset.getInt("player_id"), rset.getInt("type"),
-                        rset.getString("title"), rset.getString("message"), rset.getString("add_data"), status.getElementId());
+                Petition p = new Petition(rset.getInt("id"), rset.getInt("player_id"), rset.getInt("type"), rset.getString("title"),
+                    rset.getString("message"), rset.getString("add_data"), status.getElementId());
                 results.add(p);
             }
             stmt.close();
@@ -147,7 +148,7 @@ public class MySQL5PetitionDAO extends PetitionDAO {
         try {
             con = DatabaseFactory.getConnection();
             PreparedStatement stmt = con
-                    .prepareStatement("DELETE FROM petitions WHERE player_id = ? AND (status = 'PENDING' OR status='IN_PROGRESS')");
+                .prepareStatement("DELETE FROM petitions WHERE player_id = ? AND (status = 'PENDING' OR status='IN_PROGRESS')");
             stmt.setInt(1, playerObjId);
             stmt.execute();
             stmt.close();

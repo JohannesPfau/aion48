@@ -79,8 +79,8 @@ public class Appearance extends AdminCommand {
             PacketSendUtility.sendMessage(player, "An admin has resetted your appearance.");
 
             // Send update packets
-            TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(),
-                    player.getZ(), player.getHeading());
+            TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(), player.getZ(),
+                player.getHeading());
 
             return;
         }
@@ -243,8 +243,8 @@ public class Appearance extends AdminCommand {
         PacketSendUtility.sendMessage(player, "An admin has changed your appearance.");
 
         // Send update packets
-        TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(),
-                player.getZ(), player.getHeading());
+        TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(), player.getZ(),
+            player.getHeading());
     }
 
     @Override

@@ -72,8 +72,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * This class is for controlling Npc's
- *
-, ATracer (2009-09-29), Sarynth modified by Wakizashi
+ * , ATracer (2009-09-29), Sarynth modified by Wakizashi
  */
 public class NpcController extends CreatureController<Npc> {
 
@@ -150,8 +149,8 @@ public class NpcController extends CreatureController<Npc> {
         if (owner.getSpawn().hasPool()) {
             owner.getSpawn().setUse(owner.getInstanceId(), false);
         }
-        PacketSendUtility.broadcastPacket(owner, new SM_EMOTION(owner, EmotionType.DIE, 0,
-                owner.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()));
+        PacketSendUtility.broadcastPacket(owner,
+            new SM_EMOTION(owner, EmotionType.DIE, 0, owner.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()));
 
         try {
             if (owner.getAi2().poll(AIQuestion.SHOULD_REWARD)) {
@@ -164,7 +163,7 @@ public class NpcController extends CreatureController<Npc> {
                 addTask(TaskId.DECAY, RespawnService.scheduleDecayTask(owner));
             }
             if (owner.getAi2().poll(AIQuestion.SHOULD_RESPAWN) && !owner.isDeleteDelayed()
-                    && !SiegeService.getInstance().isSiegeNpcInActiveSiege(owner)) {
+                && !SiegeService.getInstance().isSiegeNpcInActiveSiege(owner)) {
                 Future<?> task = scheduleRespawn();
                 if (task != null) {
                     addTask(TaskId.RESPAWN, task);
@@ -194,7 +193,7 @@ public class NpcController extends CreatureController<Npc> {
                 addTask(TaskId.DECAY, RespawnService.scheduleDecayTask(owner));
             }
             if (owner.getAi2().poll(AIQuestion.SHOULD_RESPAWN) && !owner.isDeleteDelayed()
-                    && !SiegeService.getInstance().isSiegeNpcInActiveSiege(owner)) {
+                && !SiegeService.getInstance().isSiegeNpcInActiveSiege(owner)) {
                 Future<?> task = scheduleRespawn();
                 if (task != null) {
                     addTask(TaskId.RESPAWN, task);
@@ -237,9 +236,9 @@ public class NpcController extends CreatureController<Npc> {
 
             float percentage = info.getDamage() / totalDmg;
             if (percentage > 1) {
-                log.warn("WARN BIG REWARD PERCENTAGE: " + percentage + " damage: " + info.getDamage() + " total damage: "
-                        + totalDmg + " name: " + info.getAttacker().getName() + " obj: " + info.getAttacker().getObjectId()
-                        + " owner: " + getOwner().getName() + " player was skiped");
+                log.warn("WARN BIG REWARD PERCENTAGE: " + percentage + " damage: " + info.getDamage() + " total damage: " + totalDmg + " name: "
+                    + info.getAttacker().getName() + " obj: " + info.getAttacker().getObjectId() + " owner: " + getOwner().getName()
+                    + " player was skiped");
                 continue;
             }
             if (attacker instanceof TemporaryPlayerTeam<?>) {
@@ -252,7 +251,7 @@ public class NpcController extends CreatureController<Npc> {
                     // Reward init
                     long rewardXp = StatFunctions.calculateSoloExperienceReward(player, getOwner());
                     int rewardDp = StatFunctions.calculateSoloDPReward(player, getOwner());
-					int rewardGP = StatFunctions.calculateGPReward(player, getOwner());
+                    int rewardGP = StatFunctions.calculateGPReward(player, getOwner());
                     float rewardAp = 1;
 
                     // Dmg percent correction
@@ -271,12 +270,12 @@ public class NpcController extends CreatureController<Npc> {
                             AbyssPointsService.addAp(player, getOwner(), (int) rewardAp);
                         }
                     }
-					
-					if (getOwner().isRewardGP()) {
-						if (rewardGP >= 1) {
-							AbyssPointsService.addGp(player, getOwner(), rewardGP);
-						}
-					}
+
+                    if (getOwner().isRewardGP()) {
+                        if (rewardGP >= 1) {
+                            AbyssPointsService.addGp(player, getOwner(), rewardGP);
+                        }
+                    }
 
                     if (attacker.equals(winner)) {
                         DropRegistrationService.getInstance().registerDrop(getOwner(), player, player.getLevel(), null);
@@ -305,7 +304,8 @@ public class NpcController extends CreatureController<Npc> {
     @Override
     public void onDialogSelect(int dialogId, final Player player, int questId, int extendedRewardIndex) {
         QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogId);
-        if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 2) && !QuestEngine.getInstance().onDialog(env)) {
+        if (!MathUtil.isInRange(getOwner(), player, getOwner().getObjectTemplate().getTalkDistance() + 2)
+            && !QuestEngine.getInstance().onDialog(env)) {
             return;
         }
         if (!getOwner().getAi2().onDialogSelect(player, dialogId, questId, extendedRewardIndex)) {

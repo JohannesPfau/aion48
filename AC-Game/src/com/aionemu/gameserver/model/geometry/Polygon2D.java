@@ -92,8 +92,10 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * Constructs and initializes a
      * <code>Polygon2D</code> from the specified Rectangle2D.
      *
-     * @param rec the Rectangle2D
-     * @throws NullPointerException rec is <code>null</code>.
+     * @param rec
+     *            the Rectangle2D
+     * @throws NullPointerException
+     *             rec is <code>null</code>.
      */
     public Polygon2D(Rectangle2D rec) {
         if (rec == null) {
@@ -117,8 +119,10 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * Constructs and initializes a
      * <code>Polygon2D</code> from the specified Polygon.
      *
-     * @param pol the Polygon
-     * @throws NullPointerException pol is <code>null</code>.
+     * @param pol
+     *            the Polygon
+     * @throws NullPointerException
+     *             pol is <code>null</code>.
      */
     public Polygon2D(Polygon pol) {
         if (pol == null) {
@@ -138,16 +142,22 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * Constructs and initializes a
      * <code>Polygon2D</code> from the specified parameters.
      *
-     * @param xpoints an array of <i>x</i> coordinates
-     * @param ypoints an array of <i>y</i> coordinates
-     * @param npoints the total number of points in the <code>Polygon2D</code>
-     * @throws NegativeArraySizeException if the value * * * * * * * * * * *
-     *                                    of <code>npoints</code> is negative.
-     * @throws IndexOutOfBoundsException  if <code>npoints</code> is greater
-     *                                    than the length of <code>xpoints</code> or the length of
-     *                                    <code>ypoints</code>.
-     * @throws NullPointerException       if <code>xpoints</code> * * * * * * * *
-     *                                    or <code>ypoints</code> is <code>null</code>.
+     * @param xpoints
+     *            an array of <i>x</i> coordinates
+     * @param ypoints
+     *            an array of <i>y</i> coordinates
+     * @param npoints
+     *            the total number of points in the <code>Polygon2D</code>
+     * @throws NegativeArraySizeException
+     *             if the value * * * * * * * * * * *
+     *             of <code>npoints</code> is negative.
+     * @throws IndexOutOfBoundsException
+     *             if <code>npoints</code> is greater
+     *             than the length of <code>xpoints</code> or the length of
+     *             <code>ypoints</code>.
+     * @throws NullPointerException
+     *             if <code>xpoints</code> * * * * * * * *
+     *             or <code>ypoints</code> is <code>null</code>.
      */
     public Polygon2D(float[] xpoints, float[] ypoints, int npoints) {
         if (npoints > xpoints.length || npoints > ypoints.length) {
@@ -165,16 +175,22 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * Constructs and initializes a
      * <code>Polygon2D</code> from the specified parameters.
      *
-     * @param xpoints an array of <i>x</i> coordinates
-     * @param ypoints an array of <i>y</i> coordinates
-     * @param npoints the total number of points in the <code>Polygon2D</code>
-     * @throws NegativeArraySizeException if the value * * * * * * * * * * *
-     *                                    of <code>npoints</code> is negative.
-     * @throws IndexOutOfBoundsException  if <code>npoints</code> is greater
-     *                                    than the length of <code>xpoints</code> or the length of
-     *                                    <code>ypoints</code>.
-     * @throws NullPointerException       if <code>xpoints</code> * * * * * * * *
-     *                                    or <code>ypoints</code> is <code>null</code>.
+     * @param xpoints
+     *            an array of <i>x</i> coordinates
+     * @param ypoints
+     *            an array of <i>y</i> coordinates
+     * @param npoints
+     *            the total number of points in the <code>Polygon2D</code>
+     * @throws NegativeArraySizeException
+     *             if the value * * * * * * * * * * *
+     *             of <code>npoints</code> is negative.
+     * @throws IndexOutOfBoundsException
+     *             if <code>npoints</code> is greater
+     *             than the length of <code>xpoints</code> or the length of
+     *             <code>ypoints</code>.
+     * @throws NullPointerException
+     *             if <code>xpoints</code> * * * * * * * *
+     *             or <code>ypoints</code> is <code>null</code>.
      */
     public Polygon2D(int[] xpoints, int[] ypoints, int npoints) {
         if (npoints > xpoints.length || npoints > ypoints.length) {
@@ -202,7 +218,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
     }
 
     @Override
-	public Object clone() {
+    public Object clone() {
         Polygon2D pol = new Polygon2D();
         for (int i = 0; i < npoints; i++) {
             pol.addPoint(xpoints[i], ypoints[i]);
@@ -277,8 +293,10 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * Appends the specified coordinates to this
      * <code>Polygon2D</code>.
      *
-     * @param x the specified x coordinate
-     * @param y the specified y coordinate
+     * @param x
+     *            the specified x coordinate
+     * @param y
+     *            the specified y coordinate
      */
     public void addPoint(float x, float y) {
         if (npoints == xpoints.length) {
@@ -302,9 +320,10 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * Determines whether the specified {@link Point} is inside this
      * <code>Polygon</code>.
      *
-     * @param p the specified <code>Point</code> to be tested
+     * @param p
+     *            the specified <code>Point</code> to be tested
      * @return <code>true</code> if the <code>Polygon</code> contains * * * *
-     * the <code>Point</code>; <code>false</code> otherwise.
+     *         the <code>Point</code>; <code>false</code> otherwise.
      * @see #contains(double, double)
      */
     public boolean contains(Point p) {
@@ -316,11 +335,13 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * <code>Polygon</code>.
      * <p/>
      *
-     * @param x the specified x coordinate to be tested
-     * @param y the specified y coordinate to be tested
+     * @param x
+     *            the specified x coordinate to be tested
+     * @param y
+     *            the specified y coordinate to be tested
      * @return <code>true</code> if this <code>Polygon</code> contains the
-     * specified coordinates, (<i>x</i>,&amp;nbsp;<i>y</i>); <code>false</code>
-     * otherwise.
+     *         specified coordinates, (<i>x</i>,&amp;nbsp;<i>y</i>); <code>false</code>
+     *         otherwise.
      */
     public boolean contains(int x, int y) {
         return contains((double) x, (double) y);
@@ -330,15 +351,15 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * Returns the high precision bounding box of the {@link Shape}.
      *
      * @return a {@link Rectangle2D} that precisely bounds * * * * * * * * * *
-     * the <code>Shape</code>.
+     *         the <code>Shape</code>.
      */
     @Override
-	public Rectangle2D getBounds2D() {
+    public Rectangle2D getBounds2D() {
         return bounds;
     }
 
     @Override
-	public Rectangle getBounds() {
+    public Rectangle getBounds() {
         if (bounds == null) {
             return null;
         } else {
@@ -351,13 +372,15 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * <code>Polygon</code>. For the definition of
      * <i>insideness</i>, see the class comments of {@link Shape}.
      *
-     * @param x the specified x coordinate
-     * @param y the specified y coordinate
+     * @param x
+     *            the specified x coordinate
+     * @param y
+     *            the specified y coordinate
      * @return <code>true</code> if the <code>Polygon</code> contains the
-     * specified coordinates; <code>false</code> otherwise.
+     *         specified coordinates; <code>false</code> otherwise.
      */
     @Override
-	public boolean contains(double x, double y) {
+    public boolean contains(double x, double y) {
         if (npoints <= 2 || !bounds.contains(x, y)) {
             return false;
         }
@@ -379,13 +402,14 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * Tests if a specified {@link Point2D} is inside the boundary of this
      * <code>Polygon</code>.
      *
-     * @param p a specified <code>Point2D</code>
+     * @param p
+     *            a specified <code>Point2D</code>
      * @return <code>true</code> if this <code>Polygon</code> contains the
-     * specified <code>Point2D</code>; <code>false</code> otherwise.
+     *         specified <code>Point2D</code>; <code>false</code> otherwise.
      * @see #contains(double, double)
      */
     @Override
-	public boolean contains(Point2D p) {
+    public boolean contains(Point2D p) {
         return contains(p.getX(), p.getY());
     }
 
@@ -394,18 +418,22 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * <code>Polygon</code> intersects the interior of a specified set of
      * rectangular coordinates.
      *
-     * @param x the x coordinate of the specified rectangular shapes top-left
-     *          corner
-     * @param y the y coordinate of the specified rectangular shapes top-left
-     *          corner
-     * @param w the width of the specified rectangular shape
-     * @param h the height of the specified rectangular shape
+     * @param x
+     *            the x coordinate of the specified rectangular shapes top-left
+     *            corner
+     * @param y
+     *            the y coordinate of the specified rectangular shapes top-left
+     *            corner
+     * @param w
+     *            the width of the specified rectangular shape
+     * @param h
+     *            the height of the specified rectangular shape
      * @return <code>true</code> if the interior of this <code>Polygon</code>
-     * and the interior of the specified set of rectangular coordinates
-     * intersect each other; <code>false</code> otherwise.
+     *         and the interior of the specified set of rectangular coordinates
+     *         intersect each other; <code>false</code> otherwise.
      */
     @Override
-	public boolean intersects(double x, double y, double w, double h) {
+    public boolean intersects(double x, double y, double w, double h) {
         if (npoints <= 0 || !bounds.intersects(x, y, w, h)) {
             return false;
         }
@@ -418,13 +446,14 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * <code>Polygon</code> intersects the interior of a specified
      * <code>Rectangle2D</code>.
      *
-     * @param r a specified <code>Rectangle2D</code>
+     * @param r
+     *            a specified <code>Rectangle2D</code>
      * @return <code>true</code> if this <code>Polygon</code> and the interior
-     * of the specified <code>Rectangle2D</code> intersect each * * * * * *
-     * other; <code>false</code> otherwise.
+     *         of the specified <code>Rectangle2D</code> intersect each * * * * * *
+     *         other; <code>false</code> otherwise.
      */
     @Override
-	public boolean intersects(Rectangle2D r) {
+    public boolean intersects(Rectangle2D r) {
         return intersects(r.getX(), r.getY(), r.getWidth(), r.getHeight());
     }
 
@@ -433,18 +462,22 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * <code>Polygon</code> entirely contains the specified set of rectangular
      * coordinates.
      *
-     * @param x the x coordinate of the top-left corner of the specified set of
-     *          rectangular coordinates
-     * @param y the y coordinate of the top-left corner of the specified set of
-     *          rectangular coordinates
-     * @param w the width of the set of rectangular coordinates
-     * @param h the height of the set of rectangular coordinates
+     * @param x
+     *            the x coordinate of the top-left corner of the specified set of
+     *            rectangular coordinates
+     * @param y
+     *            the y coordinate of the top-left corner of the specified set of
+     *            rectangular coordinates
+     * @param w
+     *            the width of the set of rectangular coordinates
+     * @param h
+     *            the height of the set of rectangular coordinates
      * @return <code>true</code> if this <code>Polygon</code> entirely contains
-     * the specified set of rectangular coordinates; <code>false</code>
-     * otherwise.
+     *         the specified set of rectangular coordinates; <code>false</code>
+     *         otherwise.
      */
     @Override
-	public boolean contains(double x, double y, double w, double h) {
+    public boolean contains(double x, double y, double w, double h) {
         if (npoints <= 0 || !bounds.intersects(x, y, w, h)) {
             return false;
         }
@@ -458,13 +491,14 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * <code>Polygon</code> entirely contains the specified
      * <code>Rectangle2D</code>.
      *
-     * @param r the specified <code>Rectangle2D</code>
+     * @param r
+     *            the specified <code>Rectangle2D</code>
      * @return <code>true</code> if this <code>Polygon</code> entirely contains
-     * the specified <code>Rectangle2D</code>; <code>false</code> otherwise.
+     *         the specified <code>Rectangle2D</code>; <code>false</code> otherwise.
      * @see #contains(double, double, double, double)
      */
     @Override
-	public boolean contains(Rectangle2D r) {
+    public boolean contains(Rectangle2D r) {
         return contains(r.getX(), r.getY(), r.getWidth(), r.getHeight());
     }
 
@@ -476,14 +510,15 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * specified so that the coordinates returned in the iteration are
      * transformed accordingly.
      *
-     * @param at an optional <code>AffineTransform</code> to be applied to the
-     *           coordinates as they are returned in the iteration, or <code>null</code>
-     *           if untransformed coordinates are desired
+     * @param at
+     *            an optional <code>AffineTransform</code> to be applied to the
+     *            coordinates as they are returned in the iteration, or <code>null</code>
+     *            if untransformed coordinates are desired
      * @return a {@link PathIterator} object that provides access to the
-     * geometry of this <code>Polygon</code>.
+     *         geometry of this <code>Polygon</code>.
      */
     @Override
-	public PathIterator getPathIterator(AffineTransform at) {
+    public PathIterator getPathIterator(AffineTransform at) {
         updateComputingPath();
         if (closedPath == null) {
             return null;
@@ -500,18 +535,20 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
      * types are returned by the iterator. Since polygons are already flat, the
      * <code>flatness</code> parameter is ignored.
      *
-     * @param at       an optional <code>AffineTransform</code> to be applied to the
-     *                 coordinates as they are returned in the iteration, or <code>null</code>
-     *                 if untransformed coordinates are desired
-     * @param flatness the maximum amount that the control points for a given
-     *                 curve can vary from colinear before a subdivided curve is replaced by a
-     *                 straight line connecting the endpoints. Since polygons are already flat
-     *                 the <code>flatness</code> parameter is ignored.
+     * @param at
+     *            an optional <code>AffineTransform</code> to be applied to the
+     *            coordinates as they are returned in the iteration, or <code>null</code>
+     *            if untransformed coordinates are desired
+     * @param flatness
+     *            the maximum amount that the control points for a given
+     *            curve can vary from colinear before a subdivided curve is replaced by a
+     *            straight line connecting the endpoints. Since polygons are already flat
+     *            the <code>flatness</code> parameter is ignored.
      * @return a <code>PathIterator</code> object that provides access to * *
-     * the <code>Shape</code> objects geometry.
+     *         the <code>Shape</code> objects geometry.
      */
     @Override
-	public PathIterator getPathIterator(AffineTransform at, double flatness) {
+    public PathIterator getPathIterator(AffineTransform at, double flatness) {
         return getPathIterator(at);
     }
 }
@@ -577,16 +614,22 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * Constructs and initializes a
      * <code>Polyline2D</code> from the specified parameters.
      *
-     * @param xpoints an array of <i>x</i> coordinates
-     * @param ypoints an array of <i>y</i> coordinates
-     * @param npoints the total number of points in the <code>Polyline2D</code>
-     * @throws NegativeArraySizeException if the value * * * * * * * * * * *
-     *                                    of <code>npoints</code> is negative.
-     * @throws IndexOutOfBoundsException  if <code>npoints</code> is greater
-     *                                    than the length of <code>xpoints</code> or the length of
-     *                                    <code>ypoints</code>.
-     * @throws NullPointerException       if <code>xpoints</code> * * * * * * * *
-     *                                    or <code>ypoints</code> is <code>null</code>.
+     * @param xpoints
+     *            an array of <i>x</i> coordinates
+     * @param ypoints
+     *            an array of <i>y</i> coordinates
+     * @param npoints
+     *            the total number of points in the <code>Polyline2D</code>
+     * @throws NegativeArraySizeException
+     *             if the value * * * * * * * * * * *
+     *             of <code>npoints</code> is negative.
+     * @throws IndexOutOfBoundsException
+     *             if <code>npoints</code> is greater
+     *             than the length of <code>xpoints</code> or the length of
+     *             <code>ypoints</code>.
+     * @throws NullPointerException
+     *             if <code>xpoints</code> * * * * * * * *
+     *             or <code>ypoints</code> is <code>null</code>.
      */
     public Polyline2D(float[] xpoints, float[] ypoints, int npoints) {
         if (npoints > xpoints.length || npoints > ypoints.length) {
@@ -604,16 +647,22 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * Constructs and initializes a
      * <code>Polyline2D</code> from the specified parameters.
      *
-     * @param xpoints an array of <i>x</i> coordinates
-     * @param ypoints an array of <i>y</i> coordinates
-     * @param npoints the total number of points in the <code>Polyline2D</code>
-     * @throws NegativeArraySizeException if the value * * * * * * * * * * *
-     *                                    of <code>npoints</code> is negative.
-     * @throws IndexOutOfBoundsException  if <code>npoints</code> is greater
-     *                                    than the length of <code>xpoints</code> or the length of
-     *                                    <code>ypoints</code>.
-     * @throws NullPointerException       if <code>xpoints</code> * * * * * * * *
-     *                                    or <code>ypoints</code> is <code>null</code>.
+     * @param xpoints
+     *            an array of <i>x</i> coordinates
+     * @param ypoints
+     *            an array of <i>y</i> coordinates
+     * @param npoints
+     *            the total number of points in the <code>Polyline2D</code>
+     * @throws NegativeArraySizeException
+     *             if the value * * * * * * * * * * *
+     *             of <code>npoints</code> is negative.
+     * @throws IndexOutOfBoundsException
+     *             if <code>npoints</code> is greater
+     *             than the length of <code>xpoints</code> or the length of
+     *             <code>ypoints</code>.
+     * @throws NullPointerException
+     *             if <code>xpoints</code> * * * * * * * *
+     *             or <code>ypoints</code> is <code>null</code>.
      */
     public Polyline2D(int[] xpoints, int[] ypoints, int npoints) {
         if (npoints > xpoints.length || npoints > ypoints.length) {
@@ -661,7 +710,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
     }
 
     @Override
-	public Object clone() {
+    public Object clone() {
         Polyline2D pol = new Polyline2D();
         for (int i = 0; i < npoints; i++) {
             pol.addPoint(xpoints[i], ypoints[i]);
@@ -718,8 +767,10 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * <code>getBounds</code> or
      * <code>contains</code>, then this method updates the bounding box.
      *
-     * @param x the specified x coordinate
-     * @param y the specified y coordinate
+     * @param x
+     *            the specified x coordinate
+     * @param y
+     *            the specified y coordinate
      * @see java.awt.Polygon#getBounds
      * @see java.awt.Polygon#contains(double, double)
      */
@@ -749,10 +800,10 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * <code>Polyline2D</code>.
      *
      * @return a <code>Rectangle</code> that defines the bounds of * * * * *
-     * this <code>Polyline2D</code>.
+     *         this <code>Polyline2D</code>.
      */
     @Override
-	public Rectangle getBounds() {
+    public Rectangle getBounds() {
         if (bounds == null) {
             return null;
         } else {
@@ -786,7 +837,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * since a line contains no area.
      */
     @Override
-	public boolean contains(double x, double y) {
+    public boolean contains(double x, double y) {
         return false;
     }
 
@@ -804,10 +855,10 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * Returns the high precision bounding box of the {@link Shape}.
      *
      * @return a {@link Rectangle2D} that precisely bounds * * * * * * * * * *
-     * the <code>Shape</code>.
+     *         the <code>Shape</code>.
      */
     @Override
-	public Rectangle2D getBounds2D() {
+    public Rectangle2D getBounds2D() {
         return bounds;
     }
 
@@ -818,7 +869,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * since a line contains no area.
      */
     @Override
-	public boolean contains(Point2D p) {
+    public boolean contains(Point2D p) {
         return false;
     }
 
@@ -827,18 +878,22 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * <code>Polygon</code> intersects the interior of a specified set of
      * rectangular coordinates.
      *
-     * @param x the x coordinate of the specified rectangular shapes top-left
-     *          corner
-     * @param y the y coordinate of the specified rectangular shapes top-left
-     *          corner
-     * @param w the width of the specified rectangular shape
-     * @param h the height of the specified rectangular shape
+     * @param x
+     *            the x coordinate of the specified rectangular shapes top-left
+     *            corner
+     * @param y
+     *            the y coordinate of the specified rectangular shapes top-left
+     *            corner
+     * @param w
+     *            the width of the specified rectangular shape
+     * @param h
+     *            the height of the specified rectangular shape
      * @return <code>true</code> if the interior of this <code>Polygon</code>
-     * and the interior of the specified set of rectangular coordinates
-     * intersect each other; <code>false</code> otherwise.
+     *         and the interior of the specified set of rectangular coordinates
+     *         intersect each other; <code>false</code> otherwise.
      */
     @Override
-	public boolean intersects(double x, double y, double w, double h) {
+    public boolean intersects(double x, double y, double w, double h) {
         if (npoints <= 0 || !bounds.intersects(x, y, w, h)) {
             return false;
         }
@@ -851,13 +906,14 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * <code>Polygon</code> intersects the interior of a specified
      * <code>Rectangle2D</code>.
      *
-     * @param r a specified <code>Rectangle2D</code>
+     * @param r
+     *            a specified <code>Rectangle2D</code>
      * @return <code>true</code> if this <code>Polygon</code> and the interior
-     * of the specified <code>Rectangle2D</code> intersect each * * * * * *
-     * other; <code>false</code> otherwise.
+     *         of the specified <code>Rectangle2D</code> intersect each * * * * * *
+     *         other; <code>false</code> otherwise.
      */
     @Override
-	public boolean intersects(Rectangle2D r) {
+    public boolean intersects(Rectangle2D r) {
         return intersects(r.getX(), r.getY(), r.getWidth(), r.getHeight());
     }
 
@@ -869,7 +925,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * since a line contains no area.
      */
     @Override
-	public boolean contains(double x, double y, double w, double h) {
+    public boolean contains(double x, double y, double w, double h) {
         return false;
     }
 
@@ -881,7 +937,7 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * since a line contains no area.
      */
     @Override
-	public boolean contains(Rectangle2D r) {
+    public boolean contains(Rectangle2D r) {
         return false;
     }
 
@@ -893,14 +949,15 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * specified so that the coordinates returned in the iteration are
      * transformed accordingly.
      *
-     * @param at an optional <code>AffineTransform</code> to be applied to the
-     *           coordinates as they are returned in the iteration, or <code>null</code>
-     *           if untransformed coordinates are desired
+     * @param at
+     *            an optional <code>AffineTransform</code> to be applied to the
+     *            coordinates as they are returned in the iteration, or <code>null</code>
+     *            if untransformed coordinates are desired
      * @return a {@link PathIterator} object that provides access to the
-     * geometry of this <code>Polygon</code>.
+     *         geometry of this <code>Polygon</code>.
      */
     @Override
-	public PathIterator getPathIterator(AffineTransform at) {
+    public PathIterator getPathIterator(AffineTransform at) {
         if (path == null) {
             return null;
         } else {
@@ -935,18 +992,20 @@ class Polyline2D implements Shape, Cloneable, Serializable {
      * returned by the iterator. Since polylines are already flat, the
      * <code>flatness</code> parameter is ignored.
      *
-     * @param at       an optional <code>AffineTransform</code> to be applied to the
-     *                 coordinates as they are returned in the iteration, or <code>null</code>
-     *                 if untransformed coordinates are desired
-     * @param flatness the maximum amount that the control points for a given
-     *                 curve can vary from colinear before a subdivided curve is replaced by a
-     *                 straight line connecting the endpoints. Since polygons are already flat
-     *                 the <code>flatness</code> parameter is ignored.
+     * @param at
+     *            an optional <code>AffineTransform</code> to be applied to the
+     *            coordinates as they are returned in the iteration, or <code>null</code>
+     *            if untransformed coordinates are desired
+     * @param flatness
+     *            the maximum amount that the control points for a given
+     *            curve can vary from colinear before a subdivided curve is replaced by a
+     *            straight line connecting the endpoints. Since polygons are already flat
+     *            the <code>flatness</code> parameter is ignored.
      * @return a <code>PathIterator</code> object that provides access to * *
-     * the <code>Shape</code> objects geometry.
+     *         the <code>Shape</code> objects geometry.
      */
     @Override
-	public PathIterator getPathIterator(AffineTransform at, double flatness) {
+    public PathIterator getPathIterator(AffineTransform at, double flatness) {
         return path.getPathIterator(at);
     }
 }

@@ -35,8 +35,6 @@ import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 /**
  * In this packet GameServer is informing LoginServer that some account is no
  * longer on GameServer [ie was disconencted]
- *
-
  */
 public class SM_ACCOUNT_DISCONNECTED extends LsServerPacket {
 
@@ -48,7 +46,8 @@ public class SM_ACCOUNT_DISCONNECTED extends LsServerPacket {
     /**
      * Constructs new instance of <tt>SM_ACCOUNT_DISCONNECTED </tt> packet.
      *
-     * @param accountId account id
+     * @param accountId
+     *            account id
      */
     public SM_ACCOUNT_DISCONNECTED(int accountId) {
         super(0x03);

@@ -44,7 +44,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1056LepharistPoisonResearch extends QuestHandler {
 
     private final static int questId = 1056;
-    private final static int[] npc_ids = {204504, 204574, 203705, 203707};
+    private final static int[] npc_ids = { 204504, 204574, 203705, 203707 };
 
     public _1056LepharistPoisonResearch() {
         super(questId);

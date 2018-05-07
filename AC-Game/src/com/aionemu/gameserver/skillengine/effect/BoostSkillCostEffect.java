@@ -54,6 +54,7 @@ public class BoostSkillCostEffect extends BufEffect {
         super.startEffect(effect);
 
         ActionObserver observer = new ActionObserver(ObserverType.SKILLUSE) {
+
             @Override
             public void skilluse(Skill skill) {
                 skill.setBoostSkillCost(value);

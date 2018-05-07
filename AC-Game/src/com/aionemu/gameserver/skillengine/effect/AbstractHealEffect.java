@@ -111,11 +111,11 @@ public abstract class AbstractHealEffect extends EffectTemplate {
                 {
                     effected.getLifeStats().increaseHp(TYPE.HP, healValue, 0, LOG.REGULAR);
                 } else //TODO shouldnt send value, on retail sm_attack_status is send only to update hp bar
-                    if (healValue > 0) {
-                        effected.getLifeStats().increaseHp(TYPE.REGULAR, healValue, 0, LOG.REGULAR);
-                    } else {
-                        effected.getLifeStats().reduceHp(-healValue, effected);
-                    }
+                if (healValue > 0) {
+                    effected.getLifeStats().increaseHp(TYPE.REGULAR, healValue, 0, LOG.REGULAR);
+                } else {
+                    effected.getLifeStats().reduceHp(-healValue, effected);
+                }
                 break;
             case MP:
                 if (this instanceof ProcMPHealInstantEffect)//item heal, eg potions

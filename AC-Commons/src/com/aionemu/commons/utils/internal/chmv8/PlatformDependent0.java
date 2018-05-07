@@ -29,14 +29,15 @@
  */
 package com.aionemu.commons.utils.internal.chmv8;
 
-import com.aionemu.commons.utils.SystemPropertyUtil;
-import sun.misc.Cleaner;
-import sun.misc.Unsafe;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.nio.Buffer;
 import java.nio.ByteBuffer;
+
+import com.aionemu.commons.utils.SystemPropertyUtil;
+
+import sun.misc.Cleaner;
+import sun.misc.Unsafe;
 
 /**
  * The {@link PlatformDependent} operations which requires access to
@@ -51,8 +52,8 @@ final class PlatformDependent0 {
      * {@code true} if and only if the platform supports unaligned access.
      *
      * @see <a
-     * href="http://en.wikipedia.org/wiki/Segmentation_fault#Bus_error">Wikipedia
-     * on segfault</a>
+     *      href="http://en.wikipedia.org/wiki/Segmentation_fault#Bus_error">Wikipedia
+     *      on segfault</a>
      */
     private static final boolean UNALIGNED;
 
@@ -95,8 +96,7 @@ final class PlatformDependent0 {
 
                 // Ensure the unsafe supports all necessary methods to work around the mistake in the latest OpenJDK.
                 // http://www.mail-archive.com/jdk6-dev@openjdk.java.net/msg00698.html
-                unsafe.getClass().getDeclaredMethod(
-                        "copyMemory", new Class[]{Object.class, long.class, Object.class, long.class, long.class});
+                unsafe.getClass().getDeclaredMethod("copyMemory", new Class[] { Object.class, long.class, Object.class, long.class, long.class });
             } catch (Throwable cause) {
                 unsafe = null;
             }
@@ -192,10 +192,7 @@ final class PlatformDependent0 {
         if (UNALIGNED) {
             return UNSAFE.getInt(address);
         } else {
-            return getByte(address) << 24
-                    | (getByte(address + 1) & 0xff) << 16
-                    | (getByte(address + 2) & 0xff) << 8
-                    | getByte(address + 3) & 0xff;
+            return getByte(address) << 24 | (getByte(address + 1) & 0xff) << 16 | (getByte(address + 2) & 0xff) << 8 | getByte(address + 3) & 0xff;
         }
     }
 
@@ -203,14 +200,9 @@ final class PlatformDependent0 {
         if (UNALIGNED) {
             return UNSAFE.getLong(address);
         } else {
-            return (long) getByte(address) << 56
-                    | ((long) getByte(address + 1) & 0xff) << 48
-                    | ((long) getByte(address + 2) & 0xff) << 40
-                    | ((long) getByte(address + 3) & 0xff) << 32
-                    | ((long) getByte(address + 4) & 0xff) << 24
-                    | ((long) getByte(address + 5) & 0xff) << 16
-                    | ((long) getByte(address + 6) & 0xff) << 8
-                    | (long) getByte(address + 7) & 0xff;
+            return (long) getByte(address) << 56 | ((long) getByte(address + 1) & 0xff) << 48 | ((long) getByte(address + 2) & 0xff) << 40
+                | ((long) getByte(address + 3) & 0xff) << 32 | ((long) getByte(address + 4) & 0xff) << 24 | ((long) getByte(address + 5) & 0xff) << 16
+                | ((long) getByte(address + 6) & 0xff) << 8 | (long) getByte(address + 7) & 0xff;
         }
     }
 

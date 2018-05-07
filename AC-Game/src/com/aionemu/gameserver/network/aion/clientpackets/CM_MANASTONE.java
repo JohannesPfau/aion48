@@ -134,7 +134,7 @@ public class CM_MANASTONE extends AionClientPacket {
                 Item godStone = player.getInventory().getItemByObjId(stoneUniqueId);
                 Item targetItemGod = player.getEquipment().getEquippedItemByObjId(targetItemUniqueId);
                 if (targetItemGod == null) {
-                	targetItemGod = player.getInventory().getItemByObjId(targetItemUniqueId);
+                    targetItemGod = player.getInventory().getItemByObjId(targetItemUniqueId);
                 }
                 GodstoneAction godAction = new GodstoneAction();
                 if (godAction.canAct(player, godStone, targetItemGod)) {
@@ -142,15 +142,15 @@ public class CM_MANASTONE extends AionClientPacket {
                 }
                 break;
             case 8: // amplification
-            	Item amplyMaterial = player.getInventory().getItemByObjId(supplementUniqueId);
-            	Item targetItemAmply = player.getEquipment().getEquippedItemByObjId(targetItemUniqueId);
+                Item amplyMaterial = player.getInventory().getItemByObjId(supplementUniqueId);
+                Item targetItemAmply = player.getEquipment().getEquippedItemByObjId(targetItemUniqueId);
                 if (targetItemAmply == null) {
-                	targetItemAmply = player.getInventory().getItemByObjId(targetItemUniqueId);
+                    targetItemAmply = player.getInventory().getItemByObjId(targetItemUniqueId);
                 }
-            	Item tool = player.getInventory().getItemByObjId(stoneUniqueId);
-            	EnchantService.amplifyItem(player, targetItemAmply, amplyMaterial, tool);
-            	
-            	break;
+                Item tool = player.getInventory().getItemByObjId(stoneUniqueId);
+                EnchantService.amplifyItem(player, targetItemAmply, amplyMaterial, tool);
+
+                break;
         }
     }
 }

@@ -53,7 +53,7 @@ public class SM_SKILL_COOLDOWN extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(calculateSize());
         writeC(1); // unk 0 or 1
         long currentTime = System.currentTimeMillis();

@@ -38,6 +38,7 @@ public enum PlayerTransferResultStatus {
     OK(21),
     ERROR(22),
     PERFORM_ACTION(23);
+
     private int id;
 
     public int getId() {

@@ -29,10 +29,10 @@
  */
 package com.aionemu.loginserver.network.aion.serverpackets;
 
+import javax.crypto.SecretKey;
+
 import com.aionemu.loginserver.network.aion.AionServerPacket;
 import com.aionemu.loginserver.network.aion.LoginConnection;
-
-import javax.crypto.SecretKey;
 
 /**
  * Format: dd b dddd s d: session id d: protocol revision b: 0x90 bytes : 0x80
@@ -68,9 +68,12 @@ public final class SM_INIT extends AionServerPacket {
     /**
      * Creates new instance of <tt>SM_INIT</tt> packet.
      *
-     * @param publicRsaKey Public RSA key
-     * @param blowfishKey  Blowfish key
-     * @param sessionId    Session identifier
+     * @param publicRsaKey
+     *            Public RSA key
+     * @param blowfishKey
+     *            Blowfish key
+     * @param sessionId
+     *            Session identifier
      */
     private SM_INIT(byte[] publicRsaKey, byte[] blowfishKey, int sessionId) {
         super(0x00);

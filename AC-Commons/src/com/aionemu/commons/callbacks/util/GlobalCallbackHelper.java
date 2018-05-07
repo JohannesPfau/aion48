@@ -29,13 +29,14 @@
  */
 package com.aionemu.commons.callbacks.util;
 
-import com.aionemu.commons.callbacks.Callback;
-import com.aionemu.commons.callbacks.CallbackResult;
-import com.aionemu.commons.utils.ClassUtils;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.CopyOnWriteArrayList;
+import com.aionemu.commons.callbacks.Callback;
+import com.aionemu.commons.callbacks.CallbackResult;
+import com.aionemu.commons.utils.ClassUtils;
 
 /**
  * This class is used to manage global callbacks.<br>
@@ -48,7 +49,7 @@ public class GlobalCallbackHelper {
 
     private static final Logger log = LoggerFactory.getLogger(GlobalCallbackHelper.class);
 
-    private static final CopyOnWriteArrayList<Callback> globalCallbacks = new CopyOnWriteArrayList<Callback>();
+    private static final CopyOnWriteArrayList<Callback> globalCallbacks = new CopyOnWriteArrayList<>();
 
     /**
      * Private constructor to prevent initialization
@@ -63,7 +64,8 @@ public class GlobalCallbackHelper {
      * callbacks are not weak references. You should unregister callback
      * manually in case of global adding global callback.
      *
-     * @param callback callback to add
+     * @param callback
+     *            callback to add
      */
     public static void addCallback(Callback<?> callback) {
         synchronized (GlobalCallbackHelper.class) {
@@ -74,7 +76,8 @@ public class GlobalCallbackHelper {
     /**
      * Removes global callback from the list.<br>
      *
-     * @param callback callback to remove
+     * @param callback
+     *            callback to remove
      */
     public static void removeCallback(Callback<?> callback) {
         synchronized (GlobalCallbackHelper.class) {
@@ -85,12 +88,15 @@ public class GlobalCallbackHelper {
     /**
      * <b><font color="red">THIS METHOD SHOULD NOT BE CALLED MANUALLY</font></b>
      *
-     * @param obj           method on whom was invoked
-     * @param callbackClass what method was actually invoked
-     * @param args          method arguments
+     * @param obj
+     *            method on whom was invoked
+     * @param callbackClass
+     *            what method was actually invoked
+     * @param args
+     *            method arguments
      * @return result of invocation callbacks
      */
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({ "unchecked" })
     public static CallbackResult<?> beforeCall(Object obj, Class callbackClass, Object... args) {
 
         CallbackResult<?> cr = null;
@@ -116,13 +122,17 @@ public class GlobalCallbackHelper {
      * <b></><font color="red">THIS METHOD SHOULD NOT BE CALLED
      * MANUALLY</font></b>
      *
-     * @param obj           method on whom was invoked
-     * @param callbackClass what method was actually invoked
-     * @param args          method arguments
-     * @param result        original method result
+     * @param obj
+     *            method on whom was invoked
+     * @param callbackClass
+     *            what method was actually invoked
+     * @param args
+     *            method arguments
+     * @param result
+     *            original method result
      * @return global result, callback or method, doesn't matter
      */
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({ "unchecked" })
     public static CallbackResult<?> afterCall(Object obj, Class callbackClass, Object[] args, Object result) {
 
         CallbackResult<?> cr = null;

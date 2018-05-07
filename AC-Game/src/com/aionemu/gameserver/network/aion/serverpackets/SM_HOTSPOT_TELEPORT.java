@@ -34,7 +34,6 @@ import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
-
 /**
  * @author Alcapwnd, Ever, GiGatR00n, Kill3r (Aion-Core)
  */
@@ -45,7 +44,7 @@ public class SM_HOTSPOT_TELEPORT extends AionServerPacket {
     int id;
     int unk;
     int cooldown;
-    
+
     public SM_HOTSPOT_TELEPORT(Player player, int telegoal, int id) {
         this.playerObjectId = player.getObjectId();
         this.teleportGoal = telegoal;
@@ -62,8 +61,8 @@ public class SM_HOTSPOT_TELEPORT extends AionServerPacket {
     public SM_HOTSPOT_TELEPORT(Player player, int id) {
         this.playerObjectId = player.getObjectId();
         this.id = id;
-    }    
-    
+    }
+
     public SM_HOTSPOT_TELEPORT(int unk, int id) {
         this.unk = unk;
         this.id = id;

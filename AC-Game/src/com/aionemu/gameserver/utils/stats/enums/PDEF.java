@@ -51,6 +51,7 @@ public enum PDEF {
     GUNNER(100),
     ARTIST(100),
     BARD(100);
+
     private int value;
 
     private PDEF(int value) {

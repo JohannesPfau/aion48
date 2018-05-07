@@ -29,6 +29,11 @@
  */
 package admincommands;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.apache.commons.lang.StringUtils;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -42,10 +47,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import org.apache.commons.lang.StringUtils;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author xTz
@@ -188,10 +189,10 @@ public class SysMail extends AdminCommand {
 
         if (item != 0) {
             PacketSendUtility.sendMessage(admin, "You send to " + recipientType + (recipientType == RecipientType.PLAYER ? " " + recipient : "")
-                    + "\n" + "[item:" + item + "] Count:" + count + " Kinah:" + kinah + "\n" + "Letter send successfully.");
+                + "\n" + "[item:" + item + "] Count:" + count + " Kinah:" + kinah + "\n" + "Letter send successfully.");
         } else if (kinah > 0) {
             PacketSendUtility.sendMessage(admin, "You send to " + recipientType + (recipientType == RecipientType.PLAYER ? " " + recipient : "")
-                    + "\n" + " Kinah:" + kinah + "\n" + "Letter send successfully.");
+                + "\n" + " Kinah:" + kinah + "\n" + "Letter send successfully.");
         }
     }
 
@@ -210,7 +211,7 @@ public class SysMail extends AdminCommand {
         if (enclosedText.endsWith("|")) {
             outText[0] = enclosedText.substring(0, enclosedText.length() - 1);
         } else {
-            List<String> titleWords = new ArrayList<String>();
+            List<String> titleWords = new ArrayList<>();
             titleWords.add(enclosedText);
             for (; wordCount < words.length; wordCount++) {
                 String word = words[wordCount];
@@ -230,7 +231,8 @@ public class SysMail extends AdminCommand {
         return wordCount;
     }
 
-    private static Boolean checkExpress(Player admin, int item, int count, int kinah, String recipient, RecipientType recipientType, LetterType letterType) {
+    private static Boolean checkExpress(Player admin, int item, int count, int kinah, String recipient, RecipientType recipientType,
+        LetterType letterType) {
         Boolean shouldExpress = null;
 
         if (recipientType == null) {
@@ -297,12 +299,9 @@ public class SysMail extends AdminCommand {
     @Override
     public void onFail(Player player, String message) {
         PacketSendUtility.sendMessage(player, "No parameters detected.\n"
-                + "Please use //sysmail [%|$$<Sender>] <Recipient> <Regular|Blackcloud|Express> <Item> <Count> <Kinah> [|Title|] [|Message|]\n"
-                + "Sender name must start with % or $$. Can be ommitted.\n"
-                + "Regular mail type is 0, Express mail type is 1, Blackcloud type is 2.\n"
-                + "If parameters (Item, Count) = 0 than the item will not be send\n"
-                + "If parameters (Kinah) = 0 not send Kinah\n"
-                + "Recipient = Player name, @all, @elyos or @asmodians\n"
-                + "Optional Title and Message must be enclosed within pipe chars");
+            + "Please use //sysmail [%|$$<Sender>] <Recipient> <Regular|Blackcloud|Express> <Item> <Count> <Kinah> [|Title|] [|Message|]\n"
+            + "Sender name must start with % or $$. Can be ommitted.\n" + "Regular mail type is 0, Express mail type is 1, Blackcloud type is 2.\n"
+            + "If parameters (Item, Count) = 0 than the item will not be send\n" + "If parameters (Kinah) = 0 not send Kinah\n"
+            + "Recipient = Player name, @all, @elyos or @asmodians\n" + "Optional Title and Message must be enclosed within pipe chars");
     }
 }

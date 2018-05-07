@@ -29,7 +29,8 @@
  */
 package ai.instance.rentusBase;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.actions.NpcActions;
@@ -38,7 +39,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -62,6 +63,7 @@ public class VashartiAssassinAI2 extends AggressiveNpcAI2 {
     protected void handleSpawned() {
         super.handleSpawned();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {

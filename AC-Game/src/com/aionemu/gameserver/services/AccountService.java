@@ -66,7 +66,6 @@ import com.aionemu.gameserver.world.World;
  *
  * @author Luno
  * @modified cura
-
  */
 public class AccountService {
 
@@ -83,8 +82,7 @@ public class AccountService {
      * @param membership
      * @return Account
      */
-    public static Account getAccount(int accountId, String accountName, AccountTime accountTime, byte accessLevel,
-                                     byte membership, long toll) {
+    public static Account getAccount(int accountId, String accountName, AccountTime accountTime, byte accessLevel, byte membership, long toll) {
         log.debug("[AS] request for account: " + accountId);
 
         Account account = accountsMap.get(accountId);

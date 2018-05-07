@@ -29,10 +29,10 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -52,31 +52,31 @@ public class _25090TheyChosePoorly extends QuestHandler {
     public void register() {
         qe.registerQuestNpc(804928).addOnQuestStart(questId);
         qe.registerQuestNpc(804928).addOnTalkEvent(questId);
-		qe.registerQuestNpc(220042).addOnKillEvent(questId);
+        qe.registerQuestNpc(220042).addOnKillEvent(questId);
     }
-	
-	@Override
-	public boolean onKillEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() != QuestStatus.START) {
-			return false;
-		}		
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc) {
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-		}
-		switch (targetId) {
-			case 220042:
-				if (qs.getQuestVarById(0) == 0) {
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
+
+    @Override
+    public boolean onKillEvent(QuestEnv env) {
+        Player player = env.getPlayer();
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (qs == null || qs.getStatus() != QuestStatus.START) {
+            return false;
+        }
+        int targetId = 0;
+        if (env.getVisibleObject() instanceof Npc) {
+            targetId = ((Npc) env.getVisibleObject()).getNpcId();
+        }
+        switch (targetId) {
+            case 220042:
+                if (qs.getQuestVarById(0) == 0) {
+                    qs.setStatus(QuestStatus.REWARD);
+                    updateQuestStatus(env);
                     return true;
-				}
-		}
-		return false;
-	}
-	
+                }
+        }
+        return false;
+    }
+
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         Player player = env.getPlayer();
@@ -91,8 +91,7 @@ public class _25090TheyChosePoorly extends QuestHandler {
                     return sendQuestStartDialog(env);
                 }
             }
-        }
-		else if (qs.getStatus() == QuestStatus.REWARD) {
+        } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 804928) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 2034);

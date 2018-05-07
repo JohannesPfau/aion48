@@ -29,7 +29,11 @@
  */
 package ai.instance.darkPoeta;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -39,10 +43,7 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu
@@ -50,7 +51,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @AIName("calindiflamelord")
 public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 
-    private List<Integer> percents = new ArrayList<Integer>();
+    private List<Integer> percents = new ArrayList<>();
     private AtomicBoolean isStart = new AtomicBoolean(false);
 
     @Override
@@ -76,6 +77,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
                     EmoteManager.emoteStopAttacking(getOwner());
                     SkillEngine.getInstance().getSkill(getOwner(), 18233, 50, getOwner()).useSkill();
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             sp(281267);
@@ -85,6 +87,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
                     EmoteManager.emoteStopAttacking(getOwner());
                     SkillEngine.getInstance().getSkill(getOwner(), 18233, 50, getOwner()).useSkill();
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             sp(281268);
@@ -116,6 +119,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 
     private void checkTimer() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
@@ -123,6 +127,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
                     NpcShoutsService.getInstance().sendMsg(getOwner(), 1400259);
                     SkillEngine.getInstance().getSkill(getOwner(), 19679, 50, getTarget()).useSkill();
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             if (!isAlreadyDead()) {
@@ -138,7 +143,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{60, 30});
+        Collections.addAll(percents, new Integer[] { 60, 30 });
     }
 
     @Override

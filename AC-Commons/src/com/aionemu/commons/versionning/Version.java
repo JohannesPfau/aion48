@@ -29,9 +29,6 @@
  */
 package com.aionemu.commons.versionning;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -39,6 +36,9 @@ import java.io.OutputStream;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author lord_rex
@@ -70,8 +70,8 @@ public class Version {
             this.branch = getAttribute("Branch", attrs);
             this.commitTime = getAttribute("CommitTime", attrs);
         } catch (IOException e) {
-            log.error("Unable to get Soft information\nFile name '" + (jarName == null ? "null" : jarName.getAbsolutePath())
-                    + "' isn't a valid jar", e);
+            log.error("Unable to get Soft information\nFile name '" + (jarName == null ? "null" : jarName.getAbsolutePath()) + "' isn't a valid jar",
+                e);
         }
 
     }

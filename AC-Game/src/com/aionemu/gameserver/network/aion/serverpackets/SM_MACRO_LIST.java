@@ -38,8 +38,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * Packet with macro list.
- *
-
  */
 public class SM_MACRO_LIST extends AionServerPacket {
 
@@ -57,7 +55,7 @@ public class SM_MACRO_LIST extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(player.getObjectId());// player id
 
         int size = player.getMacroList().getSize();

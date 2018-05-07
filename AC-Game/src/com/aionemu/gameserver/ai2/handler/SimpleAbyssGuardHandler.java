@@ -66,8 +66,7 @@ public class SimpleAbyssGuardHandler {
         }
 
         Npc npc = ((Npc) creature);
-        if (!npc.isEnemy(creature)
-                || npc.getLevel() < 2) {
+        if (!npc.isEnemy(creature) || npc.getLevel() < 2) {
             return;
         }
 
@@ -80,8 +79,7 @@ public class SimpleAbyssGuardHandler {
             return;
         }
 
-        if (!ai.isInState(AIState.FIGHT)
-                && (MathUtil.isIn3dRange(owner, creature, owner.getAggroRange()))) {
+        if (!ai.isInState(AIState.FIGHT) && (MathUtil.isIn3dRange(owner, creature, owner.getAggroRange()))) {
             if (GeoService.getInstance().canSee(owner, creature)) {
                 if (!ai.isInState(AIState.RETURNING)) {
                     ai.getOwner().getMoveController().storeStep();

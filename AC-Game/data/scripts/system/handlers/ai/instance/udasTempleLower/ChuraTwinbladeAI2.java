@@ -29,7 +29,12 @@
  */
 package ai.instance.udasTempleLower;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -39,11 +44,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * Anvilface BossScript
@@ -54,7 +55,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class ChuraTwinbladeAI2 extends AggressiveNpcAI2 {
 
     private AtomicBoolean isHome = new AtomicBoolean(true);
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
     private boolean canThink = true;
 
     @Override
@@ -64,7 +65,7 @@ public class ChuraTwinbladeAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{50});
+        Collections.addAll(percents, new Integer[] { 50 });
     }
 
     private synchronized void checkPercentage(int hpPercentage) {
@@ -88,6 +89,7 @@ public class ChuraTwinbladeAI2 extends AggressiveNpcAI2 {
         AI2Actions.useSkill(ChuraTwinbladeAI2.this, 18624);
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 // normal continue
@@ -113,6 +115,7 @@ public class ChuraTwinbladeAI2 extends AggressiveNpcAI2 {
         }, 2500);
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 // normal weiter
@@ -127,7 +130,7 @@ public class ChuraTwinbladeAI2 extends AggressiveNpcAI2 {
                     return;
                 }
 
-                ArrayList<Creature> playerList = new ArrayList<Creature>();
+                ArrayList<Creature> playerList = new ArrayList<>();
                 for (AggroInfo ai : aggroList) {
                     if (ai.getAttacker() instanceof Creature) {
                         playerList.add((Creature) ai.getAttacker());

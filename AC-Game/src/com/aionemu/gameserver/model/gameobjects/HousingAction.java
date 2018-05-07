@@ -45,6 +45,7 @@ public enum HousingAction {
     ENTER_RENOVATION(14),
     EXIT_RENOVATION(15),
     CHANGE_APPEARANCE(16);
+
     private int id;
 
     private HousingAction(int id) {

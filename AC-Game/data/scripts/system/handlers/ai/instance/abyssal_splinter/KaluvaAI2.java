@@ -29,7 +29,6 @@
  */
 package ai.instance.abyssal_splinter;
 
-import ai.SummonerAI2;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -44,6 +43,8 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.SummonerAI2;
 
 /**
  * @author Luzien
@@ -74,6 +75,7 @@ public class KaluvaAI2 extends SummonerAI2 {
             }
 
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     canThink = true;

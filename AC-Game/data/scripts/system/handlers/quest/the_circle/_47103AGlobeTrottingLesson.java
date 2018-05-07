@@ -29,13 +29,14 @@
  */
 package quest.the_circle;
 
+import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_DailyQuest_Ask_Mentee;
+
 import com.aionemu.gameserver.configs.main.GroupConfig;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.group.PlayerGroup;
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,7 +46,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _47103AGlobeTrottingLesson extends QuestHandler {
 

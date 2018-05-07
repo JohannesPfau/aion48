@@ -88,6 +88,7 @@ public enum EmotionId {
     DISLIKE(34), // Q2323 (1012), Q2676 (1007)
 
     STAND(128); // All action NPCs having animation quest_actstanding
+
     private int id;
 
     private EmotionId(int id) {

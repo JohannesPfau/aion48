@@ -29,7 +29,10 @@
  */
 package ai.instance.rentusBase;
 
-import ai.AggressiveNpcAI2;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -43,9 +46,7 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -103,6 +104,7 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
 
     private void startBarrelEvent() {
         barrelEventTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -134,6 +136,7 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
 
     private void startBombEvent() {
         bombEventTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead() && !isHome.get() && phase.equals(Phase.ACTIVE)) {
@@ -146,6 +149,7 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
                     SkillEngine.getInstance().getSkill(getOwner(), 19703, 60, getOwner()).useNoAnimationSkill();
                     spawnBombEvent();
                     bombEventTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             if (!isAlreadyDead() && !isHome.get() && phase.equals(Phase.BOMBS)) {
@@ -211,6 +215,7 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
 
     private void startActivEvent() {
         activeEventTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -218,11 +223,13 @@ public class KuharaTheVolatileAI2 extends AggressiveNpcAI2 {
                 } else {
                     NpcShoutsService.getInstance().sendMsg(getOwner(), 1500395, getObjectId(), 0, 0);
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             if (!isAlreadyDead() && !isHome.get() && phase.equals(Phase.ACTIVE)) {
                                 SkillEngine.getInstance().getSkill(getOwner(), 19704, 60, getOwner()).useNoAnimationSkill();
                                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                     @Override
                                     public void run() {
                                         if (!isAlreadyDead() && !isHome.get() && phase.equals(Phase.ACTIVE)) {

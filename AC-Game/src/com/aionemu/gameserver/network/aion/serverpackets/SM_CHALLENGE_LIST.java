@@ -66,14 +66,14 @@ public class SM_CHALLENGE_LIST extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         Player player = con.getActivePlayer();
         writeC(action);
         writeD(ownerId); // legionId or townId
         writeC(ownerType.getId()); // 1 for legion, 2 for town
         writeD(player.getObjectId());
         switch (action) {
-            case 2:  //send challenge tasks list
+            case 2: //send challenge tasks list
                 writeD((int) (System.currentTimeMillis() / 1000));
                 writeH(tasks.size());
                 for (ChallengeTask task : tasks) {
@@ -85,7 +85,7 @@ public class SM_CHALLENGE_LIST extends AionServerPacket {
                     writeD((int) (task.getCompleteTime().getTime() / 1000));
                 }
                 break;
-            case 7:  //send individual challenge task info
+            case 7: //send individual challenge task info
                 writeD(32); //unk
                 writeD(task.getTaskId());
                 writeH(task.getQuestsCount());

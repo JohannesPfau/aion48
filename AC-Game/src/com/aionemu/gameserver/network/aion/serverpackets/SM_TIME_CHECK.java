@@ -37,8 +37,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * I have no idea wtf is this
- *
-
  */
 public class SM_TIME_CHECK extends AionServerPacket {
 
@@ -60,7 +58,7 @@ public class SM_TIME_CHECK extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(time);
         writeD(nanoTime);
 

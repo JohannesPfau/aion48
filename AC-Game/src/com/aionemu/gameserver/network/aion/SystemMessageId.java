@@ -377,6 +377,7 @@ public enum SystemMessageId {
     LEAVE_INSTANCE_NOT_PARTY(0x155CEA),
     // gathering
     YOU_HAVE_GATHERED_$1(1330016);
+
     private int _id;
 
     private SystemMessageId(int id) {

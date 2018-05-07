@@ -30,7 +30,10 @@
  */
 package ai.worlds;
 
-import ai.ActionItemNpcAI2;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -39,10 +42,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
 import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-
+import ai.ActionItemNpcAI2;
 
 /**
  * @author Kill3r
@@ -52,7 +52,7 @@ public class RechargerAI2 extends ActionItemNpcAI2 {
 
     @Override
     protected void handleUseItemFinish(Player player) {
-        switch (getNpcId()){
+        switch (getNpcId()) {
             case 730397:
                 reseter(player);
                 super.handleUseItemFinish(player);
@@ -65,18 +65,19 @@ public class RechargerAI2 extends ActionItemNpcAI2 {
         AI2Actions.deleteOwner(this);
     }
 
-    public void reseter(Player player){
+    public void reseter(Player player) {
         player.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, player.getLifeStats().getMaxHp() + 1);
         player.getLifeStats().increaseMp(SM_ATTACK_STATUS.TYPE.MP, player.getLifeStats().getMaxMp() + 1);
         player.getEffectController().removeAbnormalEffectsByTargetSlot(SkillTargetSlot.SPEC2);
 
-        List<Integer> delayIds = new ArrayList<Integer>();
+        List<Integer> delayIds = new ArrayList<>();
         if (player.getSkillCoolDowns() != null) {
             long currentTime = System.currentTimeMillis();
             for (Map.Entry<Integer, Long> en : player.getSkillCoolDowns().entrySet()) {
                 delayIds.add(en.getKey());
-                if(delayIds.contains(11885) || delayIds.contains(11886) || delayIds.contains(11887) || delayIds.contains(11888) || delayIds.contains(11889) ||
-                        delayIds.contains(11890) || delayIds.contains(11891) || delayIds.contains(11892) || delayIds.contains(11893) || delayIds.contains(11894)){
+                if (delayIds.contains(11885) || delayIds.contains(11886) || delayIds.contains(11887) || delayIds.contains(11888)
+                    || delayIds.contains(11889) || delayIds.contains(11890) || delayIds.contains(11891) || delayIds.contains(11892)
+                    || delayIds.contains(11893) || delayIds.contains(11894)) {
                     delayIds.remove(en.getKey());
                 }
             }

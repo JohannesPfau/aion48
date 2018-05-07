@@ -103,7 +103,8 @@ final public class FastMath {
      * number will have fewer bits, so ANDing the original number with anything
      * less than it will give 0.
      *
-     * @param number The number to test.
+     * @param number
+     *            The number to test.
      * @return True if it is a power of two.
      */
     public static boolean isPowerOfTwo(int number) {
@@ -118,10 +119,13 @@ final public class FastMath {
      * Linear interpolation from startValue to endValue by the given percent.
      * Basically: ((1 - percent) * startValue) + (percent * endValue)
      *
-     * @param scale      scale value to use. if 1, use endValue, if 0, use
-     *                   startValue.
-     * @param startValue Begining value. 0% of f
-     * @param endValue   ending value. 100% of f
+     * @param scale
+     *            scale value to use. if 1, use endValue, if 0, use
+     *            startValue.
+     * @param startValue
+     *            Begining value. 0% of f
+     * @param endValue
+     *            ending value. 100% of f
      * @return The interpolated value between startValue and endValue.
      */
     public static float interpolateLinear(float scale, float startValue, float endValue) {
@@ -141,10 +145,13 @@ final public class FastMath {
      * Linear interpolation from startValue to endValue by the given percent.
      * Basically: ((1 - percent) * startValue) + (percent * endValue)
      *
-     * @param scale      scale value to use. if 1, use endValue, if 0, use
-     *                   startValue.
-     * @param startValue Begining value. 0% of f
-     * @param endValue   ending value. 100% of f
+     * @param scale
+     *            scale value to use. if 1, use endValue, if 0, use
+     *            startValue.
+     * @param startValue
+     *            Begining value. 0% of f
+     * @param endValue
+     *            ending value. 100% of f
      * @return The interpolated value between startValue and endValue.
      */
     public static Vector3f interpolateLinear(float scale, Vector3f startValue, Vector3f endValue) {
@@ -162,12 +169,18 @@ final public class FastMath {
      * curve tension the result is a value between p1 and p2, t=0 for p1, t=1
      * for p2
      *
-     * @param u  value from 0 to 1
-     * @param T  The tension of the curve
-     * @param p0 control point 0
-     * @param p1 control point 1
-     * @param p2 control point 2
-     * @param p3 control point 3
+     * @param u
+     *            value from 0 to 1
+     * @param T
+     *            The tension of the curve
+     * @param p0
+     *            control point 0
+     * @param p1
+     *            control point 1
+     * @param p2
+     *            control point 2
+     * @param p3
+     *            control point 3
      * @return catmull-Rom interpolation
      */
     public static float interpolateCatmullRom(float u, float T, float p0, float p1, float p2, float p3) {
@@ -187,12 +200,18 @@ final public class FastMath {
      * tension of the curve the result is a value between p1 and p2, t=0 for p1,
      * t=1 for p2
      *
-     * @param u  value from 0 to 1
-     * @param T  The tension of the curve
-     * @param p0 control point 0
-     * @param p1 control point 1
-     * @param p2 control point 2
-     * @param p3 control point 3
+     * @param u
+     *            value from 0 to 1
+     * @param T
+     *            The tension of the curve
+     * @param p0
+     *            control point 0
+     * @param p1
+     *            control point 1
+     * @param p2
+     *            control point 2
+     * @param p3
+     *            control point 3
      * @return catmull-Rom interpolation
      */
     public static Vector3f interpolateCatmullRom(float u, float T, Vector3f p0, Vector3f p1, Vector3f p2, Vector3f p3) {
@@ -206,10 +225,13 @@ final public class FastMath {
     /**
      * Returns the arc cosine of an angle given in radians.<br>
      * Special cases:
-     * <ul><li>If fValue is smaller than -1, then the result is PI.
-     * <li>If the argument is greater than 1, then the result is 0.</ul>
+     * <ul>
+     * <li>If fValue is smaller than -1, then the result is PI.
+     * <li>If the argument is greater than 1, then the result is 0.
+     * </ul>
      *
-     * @param fValue The angle, in radians.
+     * @param fValue
+     *            The angle, in radians.
      * @return fValue's acos
      * @see java.lang.Math#acos(double)
      */
@@ -228,10 +250,13 @@ final public class FastMath {
     /**
      * Returns the arc sine of an angle given in radians.<br>
      * Special cases:
-     * <ul><li>If fValue is smaller than -1, then the result is -HALF_PI.
-     * <li>If the argument is greater than 1, then the result is HALF_PI.</ul>
+     * <ul>
+     * <li>If fValue is smaller than -1, then the result is -HALF_PI.
+     * <li>If the argument is greater than 1, then the result is HALF_PI.
+     * </ul>
      *
-     * @param fValue The angle, in radians.
+     * @param fValue
+     *            The angle, in radians.
      * @return fValue's asin
      * @see java.lang.Math#asin(double)
      */
@@ -250,7 +275,8 @@ final public class FastMath {
     /**
      * Returns the arc tangent of an angle given in radians.<br>
      *
-     * @param fValue The angle, in radians.
+     * @param fValue
+     *            The angle, in radians.
      * @return fValue's asin
      * @see java.lang.Math#atan(double)
      */
@@ -273,7 +299,8 @@ final public class FastMath {
     /**
      * Rounds a fValue up. A call to Math.ceil
      *
-     * @param fValue The value.
+     * @param fValue
+     *            The value.
      * @return The fValue rounded up
      * @see java.lang.Math#ceil(double)
      */
@@ -307,7 +334,8 @@ final public class FastMath {
      * <p/>
      * note: code from wiki posting on java.net by jeffpk
      *
-     * @param fValue The value to sine, in radians.
+     * @param fValue
+     *            The value to sine, in radians.
      * @return The sine of fValue.
      * @see java.lang.Math#sin(double)
      */
@@ -323,7 +351,8 @@ final public class FastMath {
     /**
      * Returns cos of a value.
      *
-     * @param fValue The value to cosine, in radians.
+     * @param fValue
+     *            The value to cosine, in radians.
      * @return The cosine of fValue.
      * @see java.lang.Math#cos(double)
      */
@@ -342,7 +371,8 @@ final public class FastMath {
     /**
      * Returns E^fValue
      *
-     * @param fValue Value to raise to a power.
+     * @param fValue
+     *            Value to raise to a power.
      * @return The value E^fValue
      * @see java.lang.Math#exp(double)
      */
@@ -353,7 +383,8 @@ final public class FastMath {
     /**
      * Returns Absolute value of a float.
      *
-     * @param fValue The value to abs.
+     * @param fValue
+     *            The value to abs.
      * @return The abs of the value.
      * @see java.lang.Math#abs(float)
      */
@@ -367,7 +398,8 @@ final public class FastMath {
     /**
      * Returns a number rounded down.
      *
-     * @param fValue The value to round
+     * @param fValue
+     *            The value to round
      * @return The given number rounded down
      * @see java.lang.Math#floor(double)
      */
@@ -378,7 +410,8 @@ final public class FastMath {
     /**
      * Returns 1/sqrt(fValue)
      *
-     * @param fValue The value to process.
+     * @param fValue
+     *            The value to process.
      * @return 1/sqrt(fValue)
      * @see java.lang.Math#sqrt(double)
      */
@@ -398,7 +431,8 @@ final public class FastMath {
     /**
      * Returns the log base E of a value.
      *
-     * @param fValue The value to log.
+     * @param fValue
+     *            The value to log.
      * @return The log of fValue base E
      * @see java.lang.Math#log(double)
      */
@@ -411,8 +445,10 @@ final public class FastMath {
      * log(value)/log(base), so that pow(base, return)==value (contributed by
      * vear)
      *
-     * @param value The value to log.
-     * @param base  Base of logarithm.
+     * @param value
+     *            The value to log.
+     * @param base
+     *            Base of logarithm.
      * @return The logarithm of value with given base
      */
     public static float log(float value, float base) {
@@ -422,8 +458,10 @@ final public class FastMath {
     /**
      * Returns a number raised to an exponent power. fBase^fExponent
      *
-     * @param fBase     The base value (IE 2)
-     * @param fExponent The exponent value (IE 3)
+     * @param fBase
+     *            The base value (IE 2)
+     * @param fExponent
+     *            The exponent value (IE 3)
      * @return base raised to exponent (IE 8)
      * @see java.lang.Math#pow(double, double)
      */
@@ -434,7 +472,8 @@ final public class FastMath {
     /**
      * Returns the value squared. fValue ^ 2
      *
-     * @param fValue The vaule to square.
+     * @param fValue
+     *            The vaule to square.
      * @return The square of the given value.
      */
     public static float sqr(float fValue) {
@@ -444,7 +483,8 @@ final public class FastMath {
     /**
      * Returns the square root of a given value.
      *
-     * @param fValue The value to sqrt.
+     * @param fValue
+     *            The value to sqrt.
      * @return The square root of the given value.
      * @see java.lang.Math#sqrt(double)
      */
@@ -456,7 +496,8 @@ final public class FastMath {
      * Returns the tangent of a value. If USE_FAST_TRIG is enabled, an
      * approximate value is returned. Otherwise, a direct value is used.
      *
-     * @param fValue The value to tangent, in radians.
+     * @param fValue
+     *            The value to tangent, in radians.
      * @return The tangent of fValue.
      * @see java.lang.Math#tan(double)
      */
@@ -468,7 +509,8 @@ final public class FastMath {
      * Returns 1 if the number is positive, -1 if the number is negative, and 0
      * otherwise
      *
-     * @param iValue The integer to examine.
+     * @param iValue
+     *            The integer to examine.
      * @return The integer's sign.
      */
     public static int sign(int iValue) {
@@ -485,7 +527,8 @@ final public class FastMath {
      * Returns 1 if the number is positive, -1 if the number is negative, and 0
      * otherwise
      *
-     * @param fValue The float to examine.
+     * @param fValue
+     *            The float to examine.
      * @return The float's sign.
      */
     public static float sign(float fValue) {
@@ -496,11 +539,14 @@ final public class FastMath {
      * Given 3 points in a 2d plane, this function computes if the points going
      * from A-B-C are moving counter clock wise.
      *
-     * @param p0 Point 0.
-     * @param p1 Point 1.
-     * @param p2 Point 2.
+     * @param p0
+     *            Point 0.
+     * @param p1
+     *            Point 1.
+     * @param p2
+     *            Point 2.
      * @return 1 If they are CCW, -1 if they are not CCW, 0 if p2 is between p0
-     * and p1.
+     *         and p1.
      */
     public static int counterClockwise(Vector2f p0, Vector2f p1, Vector2f p2) {
         float dx1, dx2, dy1, dy2;
@@ -527,10 +573,14 @@ final public class FastMath {
      * Test if a point is inside a triangle. 1 if the point is on the ccw side,
      * -1 if the point is on the cw side, and 0 if it is on neither.
      *
-     * @param t0 First point of the triangle.
-     * @param t1 Second point of the triangle.
-     * @param t2 Third point of the triangle.
-     * @param p  The point to test.
+     * @param t0
+     *            First point of the triangle.
+     * @param t1
+     *            Second point of the triangle.
+     * @param t2
+     *            Third point of the triangle.
+     * @param p
+     *            The point to test.
      * @return Value 1 or -1 if inside triangle, 0 otherwise.
      */
     public static int pointInsideTriangle(Vector2f t0, Vector2f t1, Vector2f t2, Vector2f p) {
@@ -558,10 +608,8 @@ final public class FastMath {
     /**
      * Returns the determinant of a 4x4 matrix.
      */
-    public static float determinant(double m00, double m01, double m02,
-                                    double m03, double m10, double m11, double m12, double m13,
-                                    double m20, double m21, double m22, double m23, double m30,
-                                    double m31, double m32, double m33) {
+    public static float determinant(double m00, double m01, double m02, double m03, double m10, double m11, double m12, double m13, double m20,
+        double m21, double m22, double m23, double m30, double m31, double m32, double m33) {
 
         double det01 = m20 * m31 - m21 * m30;
         double det02 = m20 * m32 - m22 * m30;
@@ -569,17 +617,15 @@ final public class FastMath {
         double det12 = m21 * m32 - m22 * m31;
         double det13 = m21 * m33 - m23 * m31;
         double det23 = m22 * m33 - m23 * m32;
-        return (float) (m00 * (m11 * det23 - m12 * det13 + m13 * det12) - m01
-                * (m10 * det23 - m12 * det03 + m13 * det02) + m02
-                * (m10 * det13 - m11 * det03 + m13 * det01) - m03
-                * (m10 * det12 - m11 * det02 + m12 * det01));
+        return (float) (m00 * (m11 * det23 - m12 * det13 + m13 * det12) - m01 * (m10 * det23 - m12 * det03 + m13 * det02)
+            + m02 * (m10 * det13 - m11 * det03 + m13 * det01) - m03 * (m10 * det12 - m11 * det02 + m12 * det01));
     }
 
     /**
      * Returns a random float between 0 and 1.
      *
      * @return A random float between <tt>0.0f</tt> (inclusive) to
-     * <tt>1.0f</tt> (exclusive).
+     *         <tt>1.0f</tt> (exclusive).
      */
     public static float nextRandomFloat() {
         return rand.nextFloat();
@@ -589,7 +635,7 @@ final public class FastMath {
      * Returns a random float between min and max.
      *
      * @return A random int between <tt>min</tt> (inclusive) to
-     * <tt>max</tt> (inclusive).
+     *         <tt>max</tt> (inclusive).
      */
     public static int nextRandomInt(int min, int max) {
         return (int) (nextRandomFloat() * (max - min + 1)) + min;
@@ -603,8 +649,7 @@ final public class FastMath {
      * Converts a point from Spherical coordinates to Cartesian (using positive
      * Y as up) and stores the results in the store var.
      */
-    public static Vector3f sphericalToCartesian(Vector3f sphereCoords,
-                                                Vector3f store) {
+    public static Vector3f sphericalToCartesian(Vector3f sphereCoords, Vector3f store) {
         store.y = sphereCoords.x * FastMath.sin(sphereCoords.z);
         float a = sphereCoords.x * FastMath.cos(sphereCoords.z);
         store.x = a * FastMath.cos(sphereCoords.y);
@@ -618,14 +663,11 @@ final public class FastMath {
      * Spherical and stores the results in the store var. (Radius, Azimuth,
      * Polar)
      */
-    public static Vector3f cartesianToSpherical(Vector3f cartCoords,
-                                                Vector3f store) {
+    public static Vector3f cartesianToSpherical(Vector3f cartCoords, Vector3f store) {
         if (cartCoords.x == 0) {
             cartCoords.x = FastMath.FLT_EPSILON;
         }
-        store.x = FastMath.sqrt((cartCoords.x * cartCoords.x)
-                + (cartCoords.y * cartCoords.y)
-                + (cartCoords.z * cartCoords.z));
+        store.x = FastMath.sqrt((cartCoords.x * cartCoords.x) + (cartCoords.y * cartCoords.y) + (cartCoords.z * cartCoords.z));
         store.y = FastMath.atan(cartCoords.z / cartCoords.x);
         if (cartCoords.x < 0) {
             store.y += FastMath.PI;
@@ -638,8 +680,7 @@ final public class FastMath {
      * Converts a point from Spherical coordinates to Cartesian (using positive
      * Z as up) and stores the results in the store var.
      */
-    public static Vector3f sphericalToCartesianZ(Vector3f sphereCoords,
-                                                 Vector3f store) {
+    public static Vector3f sphericalToCartesianZ(Vector3f sphereCoords, Vector3f store) {
         store.z = sphereCoords.x * FastMath.sin(sphereCoords.z);
         float a = sphereCoords.x * FastMath.cos(sphereCoords.z);
         store.x = a * FastMath.cos(sphereCoords.y);
@@ -653,14 +694,11 @@ final public class FastMath {
      * Spherical and stores the results in the store var. (Radius, Azimuth,
      * Polar)
      */
-    public static Vector3f cartesianZToSpherical(Vector3f cartCoords,
-                                                 Vector3f store) {
+    public static Vector3f cartesianZToSpherical(Vector3f cartCoords, Vector3f store) {
         if (cartCoords.x == 0) {
             cartCoords.x = FastMath.FLT_EPSILON;
         }
-        store.x = FastMath.sqrt((cartCoords.x * cartCoords.x)
-                + (cartCoords.y * cartCoords.y)
-                + (cartCoords.z * cartCoords.z));
+        store.x = FastMath.sqrt((cartCoords.x * cartCoords.x) + (cartCoords.y * cartCoords.y) + (cartCoords.z * cartCoords.z));
         store.z = FastMath.atan(cartCoords.z / cartCoords.x);
         if (cartCoords.x < 0) {
             store.z += FastMath.PI;
@@ -672,7 +710,8 @@ final public class FastMath {
     /**
      * Takes an value and expresses it in terms of min to max.
      *
-     * @param val - the angle to normalize (in radians)
+     * @param val
+     *            - the angle to normalize (in radians)
      * @return the normalized angle (also in radians)
      */
     public static float normalize(float val, float min, float max) {
@@ -690,8 +729,10 @@ final public class FastMath {
     }
 
     /**
-     * @param x the value whose sign is to be adjusted.
-     * @param y the value whose sign is to be used.
+     * @param x
+     *            the value whose sign is to be adjusted.
+     * @param y
+     *            the value whose sign is to be used.
      * @return x with its sign changed to match the sign of y.
      */
     public static float copysign(float x, float y) {
@@ -732,7 +773,8 @@ final public class FastMath {
      * <p/>
      * Source: http://www.fox-toolkit.org/ftp/fasthalffloatconversion.pdf
      *
-     * @param half The half floating point value as a short.
+     * @param half
+     *            The half floating point value as a short.
      * @return floating point value of the half.
      */
     public static float convertHalfToFloat(short half) {
@@ -747,9 +789,7 @@ final public class FastMath {
                 return Float.NEGATIVE_INFINITY;
             // TODO: Support for NaN?
             default:
-                return Float.intBitsToFloat(((half & 0x8000) << 16)
-                        | (((half & 0x7c00) + 0x1C000) << 13)
-                        | ((half & 0x03FF) << 13));
+                return Float.intBitsToFloat(((half & 0x8000) << 16) | (((half & 0x7c00) + 0x1C000) << 13) | ((half & 0x03FF) << 13));
         }
     }
 
@@ -776,8 +816,6 @@ final public class FastMath {
         }
 
         int f = Float.floatToIntBits(flt);
-        return (short) (((f >> 16) & 0x8000)
-                | ((((f & 0x7f800000) - 0x38000000) >> 13) & 0x7c00)
-                | ((f >> 13) & 0x03ff));
+        return (short) (((f >> 16) & 0x8000) | ((((f & 0x7f800000) - 0x38000000) >> 13) & 0x7c00) | ((f >> 13) & 0x03ff));
     }
 }

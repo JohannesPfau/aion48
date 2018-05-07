@@ -175,20 +175,21 @@ public class SkillLearnService {
             if (skillLevel == null) {
                 skillLevel = 1;
             }
-            PacketSendUtility.sendPacket(player, new SM_SKILL_REMOVE(skillId, skillLevel,
-                    player.getSkillList().getSkillEntry(skillId).isStigma()));
+            PacketSendUtility.sendPacket(player, new SM_SKILL_REMOVE(skillId, skillLevel, player.getSkillList().getSkillEntry(skillId).isStigma()));
             player.getSkillList().removeSkill(skillId);
         }
     }
-    
+
     public static void removeLinkedSkill(Player player, int skillId) {
         if (player.getSkillList().isSkillPresent(skillId)) {
             Integer skillLevel = player.getSkillList().getSkillLevel(skillId);
             if (skillLevel == null) {
                 skillLevel = 1;
             }
-            PacketSendUtility.sendPacket(player, new SM_SKILL_REMOVE(skillId, skillLevel, player.getSkillList().getSkillEntry(skillId).isStigma(), false));
-            PacketSendUtility.sendPacket(player, new SM_SKILL_REMOVE(skillId, skillLevel, false, player.getSkillList().getSkillEntry(skillId).isLinked()));
+            PacketSendUtility.sendPacket(player,
+                new SM_SKILL_REMOVE(skillId, skillLevel, player.getSkillList().getSkillEntry(skillId).isStigma(), false));
+            PacketSendUtility.sendPacket(player,
+                new SM_SKILL_REMOVE(skillId, skillLevel, false, player.getSkillList().getSkillEntry(skillId).isLinked()));
             player.getSkillList().removeSkill(skillId);
         }
     }

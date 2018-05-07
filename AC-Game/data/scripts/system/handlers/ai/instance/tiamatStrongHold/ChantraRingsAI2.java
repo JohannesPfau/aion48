@@ -61,8 +61,8 @@ public class ChantraRingsAI2 extends NpcAI2 {
         int debuff = getOwner().getNpcId() == 283172 ? 20735 : 20734;
         if (creature instanceof Player) {
             if (getOwner().getNpcId() == 283172 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 10, 18)
-                    || getOwner().getNpcId() == 283171 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 18, 25)
-                    || getOwner().getNpcId() == 283171 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 0, 10)) {
+                || getOwner().getNpcId() == 283171 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 18, 25)
+                || getOwner().getNpcId() == 283171 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 0, 10)) {
                 if (!creature.getEffectController().hasAbnormalEffect(debuff)) {
                     AI2Actions.useSkill(this, debuff);
                 }
@@ -78,6 +78,7 @@ public class ChantraRingsAI2 extends NpcAI2 {
 
     private void despawn() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 getOwner().getController().onDelete();

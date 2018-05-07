@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.controllers;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -52,6 +50,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
+import javolution.util.FastMap;
+
 /**
  * @author ATracer, Source
  */
@@ -59,7 +59,7 @@ public class RVController extends NpcController {
 
     private boolean isMaster = false;
     private boolean isVortex = false;
-    protected FastMap<Integer, Player> passedPlayers = new FastMap<Integer, Player>();
+    protected FastMap<Integer, Player> passedPlayers = new FastMap<>();
     private SpawnTemplate slaveSpawnTemplate;
     private Npc slave;
     private Integer maxEntries;
@@ -81,9 +81,8 @@ public class RVController extends NpcController {
         this.maxEntries = riftTemplate.getEntries();
         this.minLevel = riftTemplate.getMinLevel();
         this.maxLevel = riftTemplate.getMaxLevel();
-        this.deSpawnedTime = ((int) (System.currentTimeMillis() / 1000)) + (isVortex
-                ? VortexService.getInstance().getDuration() * 3600
-                : RiftService.getInstance().getDuration() * 3600);
+        this.deSpawnedTime = ((int) (System.currentTimeMillis() / 1000))
+            + (isVortex ? VortexService.getInstance().getDuration() * 3600 : RiftService.getInstance().getDuration() * 3600);
 
         if (slave != null)// master rift should be created
         {
@@ -100,10 +99,10 @@ public class RVController extends NpcController {
             return;
         }
 
-		if (SerialKillerService.getInstance().isRestrictPortal(player)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_DIRECT_PORTAL_BY_SLAYER);
-			return;
-		}
+        if (SerialKillerService.getInstance().isRestrictPortal(player)) {
+            PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_DIRECT_PORTAL_BY_SLAYER);
+            return;
+        }
 
         if (player.getSKInfo().getRank() > 0) {
             return;
@@ -115,6 +114,7 @@ public class RVController extends NpcController {
     private void onRequest(Player player) {
         if (isVortex) {
             RequestResponseHandler responseHandler = new RequestResponseHandler(getOwner()) {
+
                 @Override
                 public void acceptRequest(Creature requester, Player responder) {
                     if (onAccept(responder)) {
@@ -150,6 +150,7 @@ public class RVController extends NpcController {
             }
         } else {
             RequestResponseHandler responseHandler = new RequestResponseHandler(getOwner()) {
+
                 @Override
                 public void acceptRequest(Creature requester, Player responder) {
                     if (onAccept(responder)) {
@@ -275,8 +276,8 @@ public class RVController extends NpcController {
     private int[] getWorldsList(RVController controller) {
         int first = controller.getOwner().getWorldId();
         if (controller.isMaster()) {
-            return new int[]{first, controller.slaveSpawnTemplate.getWorldId()};
+            return new int[] { first, controller.slaveSpawnTemplate.getWorldId() };
         }
-        return new int[]{first};
+        return new int[] { first };
     }
 }

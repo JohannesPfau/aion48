@@ -36,7 +36,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author VladimirZ
- * modify pralinka
+ *         modify pralinka
  * @modified Lilith
  */
 public class _28600SuspiciousErrand extends QuestHandler {
@@ -49,7 +49,7 @@ public class _28600SuspiciousErrand extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {204702, 205233, 804607};
+        int[] npcs = { 204702, 205233, 804607 };
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }

@@ -29,15 +29,16 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerGameStatsDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 /**
  * @author Glass
@@ -145,7 +146,7 @@ public class MySQL5PlayerGameStatsDAO extends PlayerGameStatsDAO {
      * (non-Javadoc)
      *
      * @see com.aionemu.commons.database.dao.DAO#supports(java.lang.String, int,
-     * int)
+     *      int)
      */
     @Override
     public boolean supports(String databaseName, int majorVersion, int minorVersion) {

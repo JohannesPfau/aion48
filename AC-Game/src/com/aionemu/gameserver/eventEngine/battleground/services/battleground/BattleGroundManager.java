@@ -58,10 +58,10 @@ public class BattleGroundManager {
 
     private static final Logger log = LoggerFactory.getLogger(BattleGroundManager.class);
     public static boolean INITIALIZED = false;
-    private static Map<Integer, ArrayList<Player>> elyosWaitList = new HashMap<Integer, ArrayList<Player>>();
-    private static Map<Integer, ArrayList<Player>> asmodiansWaitList = new HashMap<Integer, ArrayList<Player>>();
-    private static Map<Integer, ArrayList<Player>> observersWaitList = new HashMap<Integer, ArrayList<Player>>();
-    public static List<BattleGround> currentBattleGrounds = new ArrayList<BattleGround>();
+    private static Map<Integer, ArrayList<Player>> elyosWaitList = new HashMap<>();
+    private static Map<Integer, ArrayList<Player>> asmodiansWaitList = new HashMap<>();
+    private static Map<Integer, ArrayList<Player>> observersWaitList = new HashMap<>();
+    public static List<BattleGround> currentBattleGrounds = new ArrayList<>();
     public static AtomicInteger compteurBG = new AtomicInteger(1);
     public static int id;
 
@@ -103,7 +103,7 @@ public class BattleGroundManager {
                 return false;
             }
 
-            ArrayList<Player> members = new ArrayList<Player>();
+            ArrayList<Player> members = new ArrayList<>();
             members.addAll(player.getPlayerGroup2().getMembers());
             Byte[] membersLvl = new Byte[members.size()];
             Integer[] memberBgPoints = new Integer[members.size()];
@@ -137,7 +137,8 @@ public class BattleGroundManager {
             if (player.getCommonData().getRace() == Race.ELYOS && MembersWaiting == 0) {
                 if (player.getPlayerGroup2().size() <= (template.getNbPlayers() - elyosWaitList.get(tplId).size())) {
                     if (highestLevel <= template.getJoinConditions().getMaxLevel() && lowestLevel >= template.getJoinConditions().getRequiredLevel()
-                            && highestBgPoints <= template.getJoinConditions().getMaxBgPoints() && lowestBgPoints <= template.getJoinConditions().getRequiredBgPoints()) {
+                        && highestBgPoints <= template.getJoinConditions().getMaxBgPoints()
+                        && lowestBgPoints <= template.getJoinConditions().getRequiredBgPoints()) {
                         elyosWaitList.get(tplId).addAll(members);
                         Player[] member = new Player[members.size()];
                         for (int i = 0; i < members.size(); i++) {
@@ -159,7 +160,8 @@ public class BattleGroundManager {
             if (player.getCommonData().getRace() == Race.ASMODIANS && MembersWaiting == 0) {
                 if (player.getPlayerGroup2().size() <= (template.getNbPlayers() - asmodiansWaitList.get(tplId).size())) {
                     if (highestLevel <= template.getJoinConditions().getMaxLevel() && lowestLevel >= template.getJoinConditions().getRequiredLevel()
-                            && highestBgPoints <= template.getJoinConditions().getMaxBgPoints() && lowestBgPoints <= template.getJoinConditions().getRequiredBgPoints()) {
+                        && highestBgPoints <= template.getJoinConditions().getMaxBgPoints()
+                        && lowestBgPoints <= template.getJoinConditions().getRequiredBgPoints()) {
                         asmodiansWaitList.get(tplId).addAll(members);
                         Player[] member = new Player[members.size()];
                         for (int i = 0; i < members.size(); i++) {
@@ -182,7 +184,7 @@ public class BattleGroundManager {
         }
         if (!player.isInGroup2()) {
             if ((player.getCommonData().getRace() == Race.ELYOS && !elyosWaitList.get(tplId).contains(player))
-                    || (player.getCommonData().getRace() == Race.ASMODIANS && !asmodiansWaitList.get(tplId).contains(player))) {
+                || (player.getCommonData().getRace() == Race.ASMODIANS && !asmodiansWaitList.get(tplId).contains(player))) {
                 if (player.getCommonData().getRace() == Race.ELYOS) {
                     elyosWaitList.get(tplId).add(player);
                 } else {
@@ -247,9 +249,9 @@ public class BattleGroundManager {
 
         // 6v6
         if (waitingElyos >= maxplayers && waitingAsmos >= maxplayers) {
-            List<Player> e = new ArrayList<Player>();
-            List<Player> a = new ArrayList<Player>();
-            List<Player> o = new ArrayList<Player>();
+            List<Player> e = new ArrayList<>();
+            List<Player> a = new ArrayList<>();
+            List<Player> o = new ArrayList<>();
             for (int i = 0; i < maxplayers; i++) {
                 e.add(elyos.get(0));
                 elyos.remove(0);
@@ -267,7 +269,8 @@ public class BattleGroundManager {
     public static void startBattleGround(int tplId, List<Player> elyos, List<Player> asmodians, List<Player> observers) {
         BattleGround bg;
         id = getInstanceId();
-        WorldMapInstance instance = InstanceService.createBattleGroundInstance(DataManager.BATTLEGROUND_DATA.getBattleGroundTemplate(tplId).getWorldId(), id);
+        WorldMapInstance instance = InstanceService
+            .createBattleGroundInstance(DataManager.BATTLEGROUND_DATA.getBattleGroundTemplate(tplId).getWorldId(), id);
         switch (DataManager.BATTLEGROUND_DATA.getBattleGroundTemplate(tplId).getType()) {
             case ASSAULT:
                 bg = new AssaultBattleGround(tplId, instance);
@@ -314,7 +317,7 @@ public class BattleGroundManager {
 
     // Registering form for players
     public static void sendRegistrationForm(Player player) {
-        List<BattleGroundTemplate> acceptedTemplates = new ArrayList<BattleGroundTemplate>();
+        List<BattleGroundTemplate> acceptedTemplates = new ArrayList<>();
         for (BattleGroundTemplate template : DataManager.BATTLEGROUND_DATA.getAllTemplates()) {
             if (player.getLevel() < template.getJoinConditions().getRequiredLevel()) {
                 continue;
@@ -339,18 +342,19 @@ public class BattleGroundManager {
         String[] acceptedLocations = new String[acceptedTemplates.size()];
         for (int i = 0; i < acceptedTemplates.size(); i++) {
             acceptedLocations[i] = acceptedTemplates.get(i).getName() + " (" + elyosWaitList.get(acceptedTemplates.get(i).getTplId()).size() + " - "
-                    + asmodiansWaitList.get(acceptedTemplates.get(i).getTplId()).size() + " / " + acceptedTemplates.get(i).getNbPlayers() + ")";
+                + asmodiansWaitList.get(acceptedTemplates.get(i).getTplId()).size() + " / " + acceptedTemplates.get(i).getNbPlayers() + ")";
         }
 
         // Registration form
-        String html = HTMLService.HTMLTemplate("Register to battlegrounds", "You can register for the following battlegrounds :", acceptedLocations, 0, 0);
+        String html = HTMLService.HTMLTemplate("Register to battlegrounds", "You can register for the following battlegrounds :", acceptedLocations,
+            0, 0);
         //String html = HTMLService.HTMLTemplate("Register to battlegrounds", "You can register for the following battlegrounds :", acceptedLocations, 0);
         HTMLService.showHTML(player, html, 150000001);
     }
 
     // Registering form for Observers
     public static void sendRegistrationFormObs(Player player) {
-        List<BattleGroundTemplate> acceptedBattlegrounds = new ArrayList<BattleGroundTemplate>();
+        List<BattleGroundTemplate> acceptedBattlegrounds = new ArrayList<>();
         for (BattleGroundTemplate template : DataManager.BATTLEGROUND_DATA.getAllTemplates()) {
             acceptedBattlegrounds.add(template);
         }
@@ -363,7 +367,7 @@ public class BattleGroundManager {
         String[] acceptedLoc = new String[acceptedBattlegrounds.size()];
         for (int i = 0; i < acceptedBattlegrounds.size(); i++) {
             acceptedLoc[i] = acceptedBattlegrounds.get(i).getName() + " (" + elyosWaitList.get(acceptedBattlegrounds.get(i).getTplId()).size() + " - "
-                    + asmodiansWaitList.get(acceptedBattlegrounds.get(i).getTplId()).size() + " / " + acceptedBattlegrounds.get(i).getNbPlayers() + ")";
+                + asmodiansWaitList.get(acceptedBattlegrounds.get(i).getTplId()).size() + " / " + acceptedBattlegrounds.get(i).getNbPlayers() + ")";
         }
 
         String html = HTMLService.HTMLTemplate("Register to battlegrounds", "You can register for the following battlegrounds :", acceptedLoc, 0, 0);
@@ -395,7 +399,7 @@ public class BattleGroundManager {
     }
 
     public static List<BattleGroundTemplate> getUnlockedBattleGrounds(int oldPoints, int newPoints) {
-        ArrayList<BattleGroundTemplate> templates = new ArrayList<BattleGroundTemplate>();
+        ArrayList<BattleGroundTemplate> templates = new ArrayList<>();
         for (BattleGroundTemplate tpl : DataManager.BATTLEGROUND_DATA.getAllTemplates()) {
             if (oldPoints >= tpl.getJoinConditions().getRequiredBgPoints()) {
                 continue;

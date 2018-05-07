@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -43,11 +41,13 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.world.WeatherTable;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"weatherData"})
+@XmlType(name = "", propOrder = { "weatherData" })
 @XmlRootElement(name = "weather")
 public class MapWeatherData {
 
@@ -57,7 +57,7 @@ public class MapWeatherData {
     private TIntObjectHashMap<WeatherTable> mapWeather;
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
-        mapWeather = new TIntObjectHashMap<WeatherTable>();
+        mapWeather = new TIntObjectHashMap<>();
 
         for (WeatherTable table : weatherData) {
             mapWeather.put(table.getMapId(), table);

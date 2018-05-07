@@ -39,7 +39,6 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
-
 /**
  * @author Alcapwnd
  */
@@ -59,7 +58,8 @@ public class CM_HOTSPOT_TELEPORT extends AionClientPacket {
         super(opcode, state, restStates);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.commons.network.packet.BaseClientPacket#readImpl()
      */
     @Override
@@ -72,23 +72,24 @@ public class CM_HOTSPOT_TELEPORT extends AionClientPacket {
 
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
      */
     @Override
     protected void runImpl() {
-    	Player player = getConnection().getActivePlayer();
+        Player player = getConnection().getActivePlayer();
         if (player == null)
             return;
-	        if (player.getLifeStats().isAlreadyDead()) {
-	            return;
-	        }
-	        HotspotTeleportTemplate teleport = DataManager.HOTSPOT_TELEPORTER_DATA.getHotspotTemplate(teleportGoal);
-	        if (teleport != null) {
-	            TeleportService2.teleport(teleport, teleportGoal, player, kinah, reqLevel);
-	        } else {
-	            LoggerFactory.getLogger(CM_HOTSPOT_TELEPORT.class).warn("teleportation id " + teleportGoal + " was not found!");
-	        }
+        if (player.getLifeStats().isAlreadyDead()) {
+            return;
+        }
+        HotspotTeleportTemplate teleport = DataManager.HOTSPOT_TELEPORTER_DATA.getHotspotTemplate(teleportGoal);
+        if (teleport != null) {
+            TeleportService2.teleport(teleport, teleportGoal, player, kinah, reqLevel);
+        } else {
+            LoggerFactory.getLogger(CM_HOTSPOT_TELEPORT.class).warn("teleportation id " + teleportGoal + " was not found!");
+        }
     }
 
 }

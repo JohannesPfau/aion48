@@ -39,8 +39,7 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * Packet about player flying teleport movement.
- *
-, Sweetkr, KID
+ * , Sweetkr, KID
  */
 public class CM_MOVE_IN_AIR extends AionClientPacket {
 

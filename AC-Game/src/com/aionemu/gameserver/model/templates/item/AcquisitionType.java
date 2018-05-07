@@ -43,6 +43,7 @@ public enum AcquisitionType {
     ABYSS(1),
     REWARD(2), // They are the same now
     COUPON(2);
+
     private int id;
 
     private AcquisitionType(int id) {

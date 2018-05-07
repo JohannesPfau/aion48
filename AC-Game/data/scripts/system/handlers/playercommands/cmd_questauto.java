@@ -29,13 +29,14 @@
  */
 package playercommands;
 
+import org.apache.commons.lang.ArrayUtils;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
-import org.apache.commons.lang.ArrayUtils;
 
 /**
  * @author ATracer
@@ -45,7 +46,7 @@ public class cmd_questauto extends PlayerCommand {
     /**
      * put quests for automation here (new int[]{1245,1345,7895})
      */
-    private final int[] questIds = new int[]{};
+    private final int[] questIds = new int[] {};
 
     public cmd_questauto() {
         super("questauto");
@@ -77,8 +78,7 @@ public class cmd_questauto extends PlayerCommand {
         }
 
         qs.setStatus(QuestStatus.REWARD);
-        PacketSendUtility
-                .sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars()));
+        PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(questId, qs.getStatus(), qs.getQuestVars().getQuestVars()));
     }
 
     @Override

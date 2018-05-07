@@ -29,13 +29,14 @@
  */
 package com.aionemu.loginserver.utils;
 
-import com.aionemu.commons.utils.Base64;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.utils.Base64;
 
 /**
  * Class with usefull methods to use with accounts
@@ -53,7 +54,8 @@ public class AccountUtils {
      * Encodes password. SHA-1 is used to encode password bytes, Base64 wraps
      * SHA1-hash to string.
      *
-     * @param password password to encode
+     * @param password
+     *            password to encode
      * @return retunrs encoded password.
      */
     public static String encodePassword(String password) {

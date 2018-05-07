@@ -73,6 +73,7 @@ public class EarthQuakeAI2 extends NpcAI2 {
 
     private void despawn() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 getOwner().getController().onDelete();

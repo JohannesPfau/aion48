@@ -29,11 +29,11 @@
  */
 package com.aionemu.commons.utils;
 
-import javolution.util.FastCollection.Record;
-import javolution.util.FastMap;
-
 import java.util.Iterator;
 import java.util.Set;
+
+import javolution.util.FastCollection.Record;
+import javolution.util.FastMap;
 
 /**
  * @author NB4L1
@@ -46,15 +46,15 @@ public class AEFastSet<E> extends AEFastCollection<E> implements Set<E> {
     private final FastMap<E, Object> map;
 
     public AEFastSet() {
-        map = new FastMap<E, Object>();
+        map = new FastMap<>();
     }
 
     public AEFastSet(int capacity) {
-        map = new FastMap<E, Object>(capacity);
+        map = new FastMap<>(capacity);
     }
 
     public AEFastSet(Set<? extends E> elements) {
-        map = new FastMap<E, Object>(elements.size());
+        map = new FastMap<>(elements.size());
 
         addAll(elements);
     }

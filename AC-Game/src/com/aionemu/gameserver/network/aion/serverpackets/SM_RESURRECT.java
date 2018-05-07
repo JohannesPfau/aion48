@@ -57,7 +57,7 @@ public class SM_RESURRECT extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeS(name);
         writeH(skillId); // unk
         writeD(0);

@@ -236,6 +236,7 @@ public enum StatEnum {
     PVP_MAGICAL_RESIST,
     PVP_MAGICAL_HIT_ACCURACY,
     BLOCK_PENETRATION;
+
     // If STAT id = 135 - Shrewd Cloth Set oOo
     // Checked up to 160 in 3.5
     private boolean replace;

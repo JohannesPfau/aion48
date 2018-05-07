@@ -44,7 +44,7 @@ public class _1964ASouvenirForNoris extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {203726, 203776};
+        int[] npcs = { 203726, 203776 };
         qe.registerQuestNpc(203726).addOnQuestStart(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);

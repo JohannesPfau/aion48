@@ -49,7 +49,10 @@ public enum ObserverType {
     EQUIP_UNEQUIP(EQUIP.observerMask | UNEQUIP.observerMask),
     ATTACK_DEFEND(ATTACK.observerMask | ATTACKED.observerMask),
     MOVE_OR_DIE(MOVE.observerMask | DEATH.observerMask),
-    ALL(MOVE.observerMask | ATTACK.observerMask | ATTACKED.observerMask | SKILLUSE.observerMask | DEATH.observerMask | DOT_ATTACKED.observerMask | ITEMUSE.observerMask | NPCDIALOGREQUEST.observerMask | ABNORMALSETTED.observerMask | SUMMONRELEASE.observerMask);
+    ALL(
+        MOVE.observerMask | ATTACK.observerMask | ATTACKED.observerMask | SKILLUSE.observerMask | DEATH.observerMask | DOT_ATTACKED.observerMask
+            | ITEMUSE.observerMask | NPCDIALOGREQUEST.observerMask | ABNORMALSETTED.observerMask | SUMMONRELEASE.observerMask);
+
     private int observerMask;
 
     private ObserverType(int observerMask) {

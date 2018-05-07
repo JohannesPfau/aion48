@@ -30,53 +30,56 @@
 
 package ai.instance.danuarReliquary;
 
+import java.util.concurrent.Future;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import java.util.concurrent.Future;
-
 /**
  * @Author Sayem
- */@AIName("vengefulorb")
+ */
+@AIName("vengefulorb")
 public class VengeFulOrbAI2 extends NpcAI2 {
 
-	private Future <? > task;
+    private Future<?> task;
 
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		final int skill;
-		switch (getNpcId()) {
-			case 284443:
-				skill = 21178;
-				break;
-			default:
-				skill = 0;
-		}
+    @Override
+    protected void handleSpawned() {
+        super.handleSpawned();
+        final int skill;
+        switch (getNpcId()) {
+            case 284443:
+                skill = 21178;
+                break;
+            default:
+                skill = 0;
+        }
 
-		if (skill == 0)
-			return;
+        if (skill == 0)
+            return;
 
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-			@Override
-			public void run() {
-				AI2Actions.useSkill(VengeFulOrbAI2.this, skill);
-			}
-		}, 0, 2000);
+        task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				AI2Actions.deleteOwner(VengeFulOrbAI2.this);
-			}
-		}, 1000);
-	}
+            @Override
+            public void run() {
+                AI2Actions.useSkill(VengeFulOrbAI2.this, skill);
+            }
+        }, 0, 2000);
 
-	@Override
-	public void handleDespawned() {
-		task.cancel(true);
-		super.handleDespawned();
-	}
+        ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+            @Override
+            public void run() {
+                AI2Actions.deleteOwner(VengeFulOrbAI2.this);
+            }
+        }, 1000);
+    }
+
+    @Override
+    public void handleDespawned() {
+        task.cancel(true);
+        super.handleDespawned();
+    }
 }

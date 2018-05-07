@@ -29,9 +29,9 @@
  */
 package com.aionl.slf4j.conversion;
 
-import ch.qos.logback.core.rolling.TriggeringPolicyBase;
-
 import java.io.File;
+
+import ch.qos.logback.core.rolling.TriggeringPolicyBase;
 
 /**
  * SimpleStartupTriggeringPolicy triggers a rollover once at startup only. This

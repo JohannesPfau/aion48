@@ -29,11 +29,12 @@
  */
 package ai.instance.aturamSkyFortress;
 
-import ai.GeneralNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Tibald :)

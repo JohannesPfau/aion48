@@ -29,9 +29,9 @@
  */
 package quest.fenris_fang;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -52,8 +52,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _4944LoyaltyAndAffableness extends QuestHandler {
 
     private static final int questId = 4944;
-    private static final int[] npcs = {204053, 204075};
-    private static final int[] mobs = {251002, 251021, 251018, 251039, 251033, 251036, 214823, 216850};
+    private static final int[] npcs = { 204053, 204075 };
+    private static final int[] mobs = { 251002, 251021, 251018, 251039, 251033, 251036, 214823, 216850 };
 
     public _4944LoyaltyAndAffableness() {
         super(questId);
@@ -160,7 +160,7 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVars().getQuestVars();
             if (var >= 6 && var < 306) {
-                int[] npcids = {251002, 251021, 251018, 251039, 251033, 251036};
+                int[] npcids = { 251002, 251021, 251018, 251039, 251033, 251036 };
                 for (int id : npcids) {
                     if (targetId == id) {
                         qs.setQuestVar(var + 1); // 6 - 306
@@ -169,7 +169,7 @@ public class _4944LoyaltyAndAffableness extends QuestHandler {
                     }
                 }
             } else if (var == 3) {
-                int[] npcids = {214823, 216850};
+                int[] npcids = { 214823, 216850 };
                 return defaultOnKillEvent(env, npcids, 3, 4); // 4
             }
         }

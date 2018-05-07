@@ -33,8 +33,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,10 +45,11 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.MapRegion;
 
+import javolution.util.FastMap;
+
 /**
  * KnownList.
  *
-
  * @modified kosyachok
  */
 public class KnownList {
@@ -219,7 +218,7 @@ public class KnownList {
         for (int i = 0; i < regions.length; i++) {
             MapRegion r = regions[i];
             FastMap<Integer, VisibleObject> objects = r.getObjects();
-            for (FastMap.Entry<Integer, VisibleObject> e = objects.head(), mapEnd = objects.tail(); (e = e.getNext()) != mapEnd; ) {
+            for (FastMap.Entry<Integer, VisibleObject> e = objects.head(), mapEnd = objects.tail(); (e = e.getNext()) != mapEnd;) {
                 VisibleObject newObject = e.getValue();
                 if (newObject == owner || newObject == null) {
                     continue;
@@ -284,7 +283,7 @@ public class KnownList {
     public int doOnAllNpcs(Visitor<Npc> visitor, int iterationLimit) {
         int counter = 0;
         try {
-            for (FastMap.Entry<Integer, VisibleObject> e = knownObjects.head(), mapEnd = knownObjects.tail(); (e = e.getNext()) != mapEnd; ) {
+            for (FastMap.Entry<Integer, VisibleObject> e = knownObjects.head(), mapEnd = knownObjects.tail(); (e = e.getNext()) != mapEnd;) {
                 VisibleObject newObject = e.getValue();
                 if (newObject instanceof Npc) {
                     if ((++counter) == iterationLimit) {
@@ -306,7 +305,7 @@ public class KnownList {
     public int doOnAllNpcsWithOwner(VisitorWithOwner<Npc, VisibleObject> visitor, int iterationLimit) {
         int counter = 0;
         try {
-            for (FastMap.Entry<Integer, VisibleObject> e = knownObjects.head(), mapEnd = knownObjects.tail(); (e = e.getNext()) != mapEnd; ) {
+            for (FastMap.Entry<Integer, VisibleObject> e = knownObjects.head(), mapEnd = knownObjects.tail(); (e = e.getNext()) != mapEnd;) {
                 VisibleObject newObject = e.getValue();
                 if (newObject instanceof Npc) {
                     if ((++counter) == iterationLimit) {
@@ -326,7 +325,7 @@ public class KnownList {
             return;
         }
         try {
-            for (FastMap.Entry<Integer, Player> e = knownPlayers.head(), mapEnd = knownPlayers.tail(); (e = e.getNext()) != mapEnd; ) {
+            for (FastMap.Entry<Integer, Player> e = knownPlayers.head(), mapEnd = knownPlayers.tail(); (e = e.getNext()) != mapEnd;) {
                 Player player = e.getValue();
                 if (player != null) {
                     visitor.visit(player);
@@ -339,7 +338,7 @@ public class KnownList {
 
     public void doOnAllObjects(Visitor<VisibleObject> visitor) {
         try {
-            for (FastMap.Entry<Integer, VisibleObject> e = knownObjects.head(), mapEnd = knownObjects.tail(); (e = e.getNext()) != mapEnd; ) {
+            for (FastMap.Entry<Integer, VisibleObject> e = knownObjects.head(), mapEnd = knownObjects.tail(); (e = e.getNext()) != mapEnd;) {
                 VisibleObject newObject = e.getValue();
                 if (newObject != null) {
                     visitor.visit(newObject);
@@ -359,11 +358,11 @@ public class KnownList {
     }
 
     public Map<Integer, Player> getKnownPlayers() {
-        return knownPlayers != null ? knownPlayers : Collections.<Integer, Player>emptyMap();
+        return knownPlayers != null ? knownPlayers : Collections.<Integer, Player> emptyMap();
     }
 
     public Map<Integer, Player> getVisiblePlayers() {
-        return visualPlayers != null ? visualPlayers : Collections.<Integer, Player>emptyMap();
+        return visualPlayers != null ? visualPlayers : Collections.<Integer, Player> emptyMap();
     }
 
     final void checkKnownPlayersInitialized() {

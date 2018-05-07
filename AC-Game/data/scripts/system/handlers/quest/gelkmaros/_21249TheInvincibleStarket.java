@@ -29,10 +29,10 @@
  */
 package quest.gelkmaros;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -40,7 +40,6 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _21249TheInvincibleStarket extends QuestHandler {
 
@@ -81,7 +80,8 @@ public class _21249TheInvincibleStarket extends QuestHandler {
                     Npc npc = (Npc) env.getVisibleObject();
                     npc.getController().scheduleRespawn();
                     npc.getController().onDelete();
-                    QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799529, player.getX(), player.getY(), player.getZ(), (byte) 0);
+                    QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799529, player.getX(), player.getY(), player.getZ(),
+                        (byte) 0);
                     return defaultCloseDialog(env, 0, 1);
                 }
             } else if (targetId == 799529) {

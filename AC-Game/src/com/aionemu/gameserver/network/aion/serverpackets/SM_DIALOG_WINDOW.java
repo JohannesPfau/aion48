@@ -68,7 +68,7 @@ public class SM_DIALOG_WINDOW extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         Player player = con.getActivePlayer();
 
         writeD(targetObjectId);

@@ -37,7 +37,8 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
-, xTz
+ * , xTz
+ * 
  * @modified -Enomine-
  */
 public class SM_TITLE_INFO extends AionServerPacket {
@@ -101,7 +102,7 @@ public class SM_TITLE_INFO extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(action);
         switch (action) {
             case 0:

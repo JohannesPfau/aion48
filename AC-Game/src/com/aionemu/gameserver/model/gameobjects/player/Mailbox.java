@@ -37,13 +37,13 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MAIL_SERVICE;
 import com.aionemu.gameserver.services.mail.MailService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import javolution.util.FastMap;
 
 /**
  * @author kosyachok
@@ -82,7 +82,8 @@ public class Mailbox {
      * @return
      */
     public Collection<Letter> getLetters() {
-        SortedSet<Letter> letters = new TreeSet<Letter>(new Comparator<Letter>() {
+        SortedSet<Letter> letters = new TreeSet<>(new Comparator<Letter>() {
+
             @Override
             public int compare(Letter o1, Letter o2) {
                 if (o1.getTimeStamp().getTime() > o2.getTimeStamp().getTime()) {
@@ -105,11 +106,12 @@ public class Mailbox {
      * Get system letters which senders start with the string specified and were
      * received since the last player login
      *
-     * @param substring must start with special characters: % or $$
+     * @param substring
+     *            must start with special characters: % or $$
      * @return new list of letters
      */
     public List<Letter> getNewSystemLetters(String substring) {
-        List<Letter> letters = new ArrayList<Letter>();
+        List<Letter> letters = new ArrayList<>();
         for (Letter letter : mails.values()) {
             if (letter.getSenderName() == null || !letter.isUnread()) {
                 continue;

@@ -45,7 +45,7 @@ public class SM_WINDSTREAM extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(unk1);
         writeC(unk2);
     }

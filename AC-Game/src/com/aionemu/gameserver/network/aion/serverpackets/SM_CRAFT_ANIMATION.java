@@ -61,8 +61,8 @@ public class SM_CRAFT_ANIMATION extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
-    	writeD(senderObjectId);
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        writeD(senderObjectId);
         writeD(targetObjectId);
         writeH(skillId);
         writeC(action);

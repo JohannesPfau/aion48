@@ -37,18 +37,14 @@ import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 
-
-
-
 /**
  * In this packet client is sending Mac Address - haha.
- *
-, KID
+ * , KID
  */
 public class CM_MAC_ADDRESS extends AionClientPacket {
 
-	private static final Logger log = LoggerFactory.getLogger(CM_MAC_ADDRESS.class);
-	
+    private static final Logger log = LoggerFactory.getLogger(CM_MAC_ADDRESS.class);
+
     /**
      * Mac Address send by client in the same format as:
      * ipconfig /all [ie:xx-xx-xx-xx-xx-xx]

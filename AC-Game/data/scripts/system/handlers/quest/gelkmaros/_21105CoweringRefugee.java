@@ -30,10 +30,10 @@
 package quest.gelkmaros;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -41,7 +41,6 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _21105CoweringRefugee extends QuestHandler {
 
@@ -85,8 +84,9 @@ public class _21105CoweringRefugee extends QuestHandler {
                 }
             } else if (targetId == 700812) {
                 Npc npc = (Npc) env.getVisibleObject();
-                int npcId[] = {799366, 216086};
-                QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), npcId[Rnd.get(0, npcId.length - 1)], npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
+                int npcId[] = { 799366, 216086 };
+                QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), npcId[Rnd.get(0, npcId.length - 1)], npc.getX(), npc.getY(),
+                    npc.getZ(), (byte) 0);
                 npc.getController().scheduleRespawn();
                 npc.getController().onDelete();
                 return true;

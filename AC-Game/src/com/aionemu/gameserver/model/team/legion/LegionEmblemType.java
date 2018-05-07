@@ -36,6 +36,7 @@ public enum LegionEmblemType {
 
     DEFAULT(0x00),
     CUSTOM(0x80);
+
     private byte value;
 
     private LegionEmblemType(int value) {

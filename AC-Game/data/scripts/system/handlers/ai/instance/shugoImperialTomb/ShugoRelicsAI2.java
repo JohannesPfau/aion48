@@ -29,7 +29,11 @@
  */
 package ai.instance.shugoImperialTomb;
 
-import ai.ActionItemNpcAI2;
+import static ch.lambdaj.Lambda.maxFrom;
+
+import java.util.Collection;
+import java.util.HashSet;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.configs.main.GroupConfig;
@@ -44,10 +48,7 @@ import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
-import java.util.Collection;
-import java.util.HashSet;
-
-import static ch.lambdaj.Lambda.maxFrom;
+import ai.ActionItemNpcAI2;
 
 /**
  * @author Swig
@@ -58,9 +59,11 @@ public class ShugoRelicsAI2 extends ActionItemNpcAI2 {
     @Override
     protected void handleUseItemFinish(Player player) {
         int npcId = getOwner().getNpcId();
-        if ((npcId == 831122 || npcId == 831123 || npcId == 831124) && (player.getInventory().decreaseByItemId(185000129, 1) || player.getInventory().decreaseByItemId(185000128, 1))) {
+        if ((npcId == 831122 || npcId == 831123 || npcId == 831124)
+            && (player.getInventory().decreaseByItemId(185000129, 1) || player.getInventory().decreaseByItemId(185000128, 1))) {
             analyzeOpening(player);
-        } else if (npcId == 831373 && (player.getInventory().decreaseByItemId(185000129, 3) || player.getInventory().decreaseByItemId(185000128, 3))) {
+        } else if (npcId == 831373
+            && (player.getInventory().decreaseByItemId(185000129, 3) || player.getInventory().decreaseByItemId(185000128, 3))) {
             analyzeOpening(player);
         } else {
             if (npcId == 831373) {
@@ -79,7 +82,7 @@ public class ShugoRelicsAI2 extends ActionItemNpcAI2 {
         }
 
         AI2Actions.dieSilently(this, player);
-        Collection<Player> players = new HashSet<Player>();
+        Collection<Player> players = new HashSet<>();
         if (player.isInGroup2()) {
             for (Player member : player.getPlayerGroup2().getOnlineMembers()) {
                 if (MathUtil.isIn3dRange(member, getOwner(), GroupConfig.GROUP_MAX_DISTANCE)) {

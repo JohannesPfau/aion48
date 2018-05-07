@@ -133,8 +133,7 @@ public class TeleportService2 {
         if (player.getWorldId() == mapId) {
             instanceId = player.getInstanceId();
         }
-        sendLoc(player, mapId, instanceId, template.getX(), template.getY(), template.getZ(),
-                (byte) template.getHeading(), teleportGoal, 1);
+        sendLoc(player, mapId, instanceId, template.getX(), template.getY(), template.getZ(), (byte) template.getHeading(), teleportGoal, 1);
     }
 
     /**
@@ -148,7 +147,7 @@ public class TeleportService2 {
         TribeClass tribe = npc.getTribe();
         Race race = player.getRace();
         if (tribe.equals(TribeClass.FIELD_OBJECT_LIGHT) && race.equals(Race.ASMODIANS)
-                || (tribe.equals(TribeClass.FIELD_OBJECT_DARK) && race.equals(Race.ELYOS))) {
+            || (tribe.equals(TribeClass.FIELD_OBJECT_DARK) && race.equals(Race.ELYOS))) {
             return;
         }
 
@@ -191,12 +190,14 @@ public class TeleportService2 {
 
         // TODO: remove teleportation route if it's enemy fortress (1221, 1231, 1241)
         // This function block some teleport, need to find why
-        /*int id = SiegeService.getInstance().getFortressId(locId);
-        if (id > 0 && !SiegeService.getInstance().getFortress(id).isCanTeleport(player)) {
-            PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
-            PacketSendUtility.sendMessage(player, "Teleporter is dead"); // TODO retail chk
-            return;
-        }*/
+        /*
+         * int id = SiegeService.getInstance().getFortressId(locId);
+         * if (id > 0 && !SiegeService.getInstance().getFortress(id).isCanTeleport(player)) {
+         * PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
+         * PacketSendUtility.sendMessage(player, "Teleporter is dead"); // TODO retail chk
+         * return;
+         * }
+         */
 
         if (!checkKinahForTransportation(location, player)) {
             return;
@@ -219,7 +220,8 @@ public class TeleportService2 {
                 }
 
                 if (player.getWorldId() != flypath.getStartWorldId()) {
-                    AuditLogger.info(player, "Try to use flyPath #" + location.getLocId() + " from not native start world " + player.getWorldId() + ". expected " + flypath.getStartWorldId());
+                    AuditLogger.info(player, "Try to use flyPath #" + location.getLocId() + " from not native start world " + player.getWorldId()
+                        + ". expected " + flypath.getStartWorldId());
                     PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE);
                     return;
                 }
@@ -238,7 +240,7 @@ public class TeleportService2 {
                 instanceId = player.getInstanceId();
             }
             sendLoc(player, mapId, instanceId, locationTemplate.getX(), locationTemplate.getY(), locationTemplate.getZ(),
-                    (byte) locationTemplate.getHeading(), animation);
+                (byte) locationTemplate.getHeading(), animation);
         }
     }
 
@@ -294,8 +296,8 @@ public class TeleportService2 {
         return true;
     }
 
-    private static void sendLoc(final Player player, final int mapId, final int instanceId, final float x, final float y, final float z,
-                                final byte h, final TeleportAnimation animation) {
+    private static void sendLoc(final Player player, final int mapId, final int instanceId, final float x, final float y, final float z, final byte h,
+        final TeleportAnimation animation) {
         boolean isInstance = DataManager.WORLD_MAPS_DATA.getTemplate(mapId).isInstance();
 
         int delay = TELEPORT_DEFAULT_DELAY;
@@ -310,6 +312,7 @@ public class TeleportService2 {
         PacketSendUtility.sendPacket(player, new SM_TELEPORT_LOC(isInstance, instanceId, mapId, x, y, z, h, animation.getStartAnimationId()));
         player.unsetPlayerMode(PlayerMode.RIDE);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (player.getLifeStats().isAlreadyDead() || !player.isSpawned()) {
@@ -327,6 +330,7 @@ public class TeleportService2 {
 
     /**
      * Hotspot teleport SendLoc
+     * 
      * @param player
      * @param mapId
      * @param instanceId
@@ -335,15 +339,16 @@ public class TeleportService2 {
      * @param z
      * @param h
      * @param teleGoal
-     * @param id 
+     * @param id
      */
-    private static void sendLoc(final Player player, final int mapId, final int instanceId, final float x, final float y, final float z,
-            					final byte h, final int teleGoal, int id) {
+    private static void sendLoc(final Player player, final int mapId, final int instanceId, final float x, final float y, final float z, final byte h,
+        final int teleGoal, int id) {
 
         int delay = CustomConfig.HOTSPOT_TELEPORT_DELAY;//10 Seconds = 10000 Milliseconds
         final int cooldown = CustomConfig.HOTSPOT_TELEPORT_COOLDOWN_DELAY;//10 Minutes = 600 Seconds
 
         final ItemUseObserver observer = new ItemUseObserver() {
+
             @Override
             public void abort() {
                 player.getController().cancelTask(TaskId.HOTSPOT_TELEPORT);
@@ -355,8 +360,9 @@ public class TeleportService2 {
 
         PacketSendUtility.sendPacket(player, new SM_HOTSPOT_TELEPORT(player, teleGoal, id));
         player.unsetPlayerMode(PlayerMode.RIDE);
-        
+
         player.getController().addTask(TaskId.HOTSPOT_TELEPORT, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (player.getLifeStats().isAlreadyDead() || !player.isSpawned()) {
@@ -375,8 +381,7 @@ public class TeleportService2 {
             player.getPosition().setXYZH(pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
             Pet pet = player.getPet();
             if (pet != null) {
-                World.getInstance().setPosition(pet, pos.getMapId(), player.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(),
-                        pos.getHeading());
+                World.getInstance().setPosition(pet, pos.getMapId(), player.getInstanceId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
             }
             PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
             PacketSendUtility.sendPacket(player, new SM_CHANNEL_INFO(player.getPosition()));
@@ -456,8 +461,8 @@ public class TeleportService2 {
      * @param animation
      * @return
      */
-    public static boolean teleportTo(final Player player, final int worldId, final int instanceId, final float x, final float y,
-                                     final float z, final byte heading, TeleportAnimation animation) {
+    public static boolean teleportTo(final Player player, final int worldId, final int instanceId, final float x, final float y, final float z,
+        final byte heading, TeleportAnimation animation) {
         if (player.getLifeStats().isAlreadyDead()) {
             return false;
         } else if (DuelService.getInstance().isDueling(player.getObjectId())) {
@@ -481,7 +486,7 @@ public class TeleportService2 {
      * @param heading
      */
     private static void changePosition(Player player, int worldId, int instanceId, float x, float y, float z, byte heading,
-                                       TeleportAnimation animation) {
+        TeleportAnimation animation) {
         if (player.hasStore()) {
             PrivateStoreService.closePrivateStore(player);
         }

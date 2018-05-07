@@ -33,8 +33,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Area;
@@ -45,6 +43,8 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.handler.AdvencedZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
 
+import javolution.util.FastMap;
+
 /**
  * @author ATracer
  */
@@ -52,8 +52,8 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 
     private ZoneInfo template;
     private int mapId;
-    private Map<Integer, Creature> creatures = new FastMap<Integer, Creature>();
-    protected List<ZoneHandler> handlers = new ArrayList<ZoneHandler>();
+    private Map<Integer, Creature> creatures = new FastMap<>();
+    protected List<ZoneHandler> handlers = new ArrayList<>();
 
     public ZoneInstance(int mapId, ZoneInfo template) {
         this.template = template;
@@ -184,7 +184,7 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 
     public boolean isPvpAllowed() {
         if (template.getZoneTemplate().getZoneType() != ZoneClassName.PVP
-                || World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.PVP_ENABLED)) {
+            || World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.PVP_ENABLED)) {
             return World.getInstance().getWorldMap(mapId).isPvpAllowed();
         }
         return (template.getZoneTemplate().getFlags() & ZoneAttributes.PVP_ENABLED.getId()) != 0;
@@ -192,7 +192,7 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 
     public boolean isSameRaceDuelsAllowed() {
         if (template.getZoneTemplate().getZoneType() != ZoneClassName.DUEL
-                || World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.DUEL_SAME_RACE_ENABLED)) {
+            || World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.DUEL_SAME_RACE_ENABLED)) {
             return World.getInstance().getWorldMap(mapId).isSameRaceDuelsAllowed();
         }
         return (template.getZoneTemplate().getFlags() & ZoneAttributes.DUEL_SAME_RACE_ENABLED.getId()) != 0;
@@ -200,7 +200,7 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 
     public boolean isOtherRaceDuelsAllowed() {
         if (template.getZoneTemplate().getZoneType() != ZoneClassName.DUEL
-                || World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.DUEL_OTHER_RACE_ENABLED)) {
+            || World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.DUEL_OTHER_RACE_ENABLED)) {
             return World.getInstance().getWorldMap(mapId).isOtherRaceDuelsAllowed();
         }
         return (template.getZoneTemplate().getFlags() & ZoneAttributes.DUEL_OTHER_RACE_ENABLED.getId()) != 0;

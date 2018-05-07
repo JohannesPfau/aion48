@@ -37,6 +37,7 @@ public enum InstanceScoreType {
     PREPARING(1 * 1024 * 1024), // 1048576
     START_PROGRESS(2 * 1024 * 1024), // 2097152
     END_PROGRESS(3 * 1024 * 1024); // 3145728
+
     private int id;
 
     private InstanceScoreType(int id) {

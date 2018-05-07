@@ -29,6 +29,8 @@
  */
 package ai.instance.tiamatStrongHold;
 
+import java.util.concurrent.Future;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -36,8 +38,6 @@ import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Luzien
@@ -51,6 +51,7 @@ public class TahabataAltarFinalAI2 extends NpcAI2 {
     protected void handleSpawned() {
         super.handleSpawned();
         task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 AI2Actions.useSkill(TahabataAltarFinalAI2.this, 20972);

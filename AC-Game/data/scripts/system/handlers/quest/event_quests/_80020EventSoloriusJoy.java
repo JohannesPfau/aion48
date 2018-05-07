@@ -33,12 +33,12 @@ package quest.event_quests;
  * @author Rolandas
  */
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -48,7 +48,7 @@ import com.aionemu.gameserver.services.QuestService;
 public class _80020EventSoloriusJoy extends QuestHandler {
 
     private final static int questId = 80020;
-    private final static int[] npcs = {799769, 799768, 203170, 203140};
+    private final static int[] npcs = { 799769, 799768, 203170, 203140 };
 
     public _80020EventSoloriusJoy() {
         super(questId);
@@ -74,8 +74,8 @@ public class _80020EventSoloriusJoy extends QuestHandler {
 
         QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
 
-        if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE
-                && qs.getCompleteCount() < template.getMaxRepeatCount()) {
+        if (qs == null || qs.getStatus() == QuestStatus.NONE
+            || qs.getStatus() == QuestStatus.COMPLETE && qs.getCompleteCount() < template.getMaxRepeatCount()) {
             if (env.getTargetId() == 799769) {
                 if (env.getDialog() == DialogAction.USE_OBJECT || env.getDialog() == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 1011);

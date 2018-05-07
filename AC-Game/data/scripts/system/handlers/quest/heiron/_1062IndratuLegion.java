@@ -29,6 +29,7 @@
  */
 package quest.heiron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,7 +37,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,7 +50,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class _1062IndratuLegion extends QuestHandler {
 
     private final static int questId = 1062;
-    private final static int[] npc_ids = {204500, 204600, 204610};
+    private final static int[] npc_ids = { 204500, 204600, 204610 };
 
     public _1062IndratuLegion() {
         super(questId);
@@ -181,10 +181,11 @@ public class _1062IndratuLegion extends QuestHandler {
             updateQuestStatus(env);
             final Npc npc = (Npc) env.getVisibleObject();
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
-                    QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 212588, npc.getX(), npc.getY(),
-                            npc.getZ(), npc.getHeading());
+                    QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 212588, npc.getX(), npc.getY(), npc.getZ(),
+                        npc.getHeading());
                 }
             }, 3000);
             return true;

@@ -29,9 +29,9 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,7 +49,7 @@ public class _25062OminousAdvice extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {804917, 804918};
+        int[] npcs = { 804917, 804918 };
         qe.registerQuestNpc(804917).addOnQuestStart(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -64,7 +64,7 @@ public class _25062OminousAdvice extends QuestHandler {
         int targetId = env.getTargetId();
 
         if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-            if (targetId == 804917) { 
+            if (targetId == 804917) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 4762);
                 } else {
@@ -74,7 +74,7 @@ public class _25062OminousAdvice extends QuestHandler {
         } else if (qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             switch (targetId) {
-				case 804917: { 
+                case 804917: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 0) {
@@ -89,10 +89,10 @@ public class _25062OminousAdvice extends QuestHandler {
                         }
                     }
                     break;
-                }                
+                }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-            if (targetId == 804918) { 
+            if (targetId == 804918) {
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
                 } else {

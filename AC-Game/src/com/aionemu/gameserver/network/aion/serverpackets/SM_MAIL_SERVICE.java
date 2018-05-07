@@ -142,7 +142,7 @@ public class SM_MAIL_SERVICE extends MailServicePacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         Mailbox mailbox = con.getActivePlayer().getMailbox();
         this.totalCount = mailbox.size();
         this.unreadCount = mailbox.getUnreadCount();
@@ -160,7 +160,7 @@ public class SM_MAIL_SERVICE extends MailServicePacket {
             case 2:
                 Collection<Letter> _letters;
                 if (!letters.isEmpty()) {
-                    ListSplitter<Letter> splittedLetters = new ListSplitter<Letter>(letters, 100);
+                    ListSplitter<Letter> splittedLetters = new ListSplitter<>(letters, 100);
                     _letters = splittedLetters.getNext();
                 } else {
                     _letters = letters;

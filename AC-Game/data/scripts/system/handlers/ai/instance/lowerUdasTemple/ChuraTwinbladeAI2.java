@@ -29,7 +29,6 @@
  */
 package ai.instance.lowerUdasTemple;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AttackIntention;
@@ -38,6 +37,8 @@ import com.aionemu.gameserver.ai2.manager.SkillAttackManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
+
+import ai.AggressiveNpcAI2;
 
 @AIName("churatwinblade")
 public class ChuraTwinbladeAI2 extends AggressiveNpcAI2 {

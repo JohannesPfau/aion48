@@ -48,19 +48,19 @@ public class SM_ABYSS_ARTIFACT_INFO extends AionServerPacket {
     }
 
     public SM_ABYSS_ARTIFACT_INFO(int loc) {
-        locations = new ArrayList<ArtifactLocation>();
+        locations = new ArrayList<>();
         locations.add(SiegeService.getInstance().getArtifact(loc));
     }
 
     public SM_ABYSS_ARTIFACT_INFO(int locationId, boolean teleportStatus) {
-        locations = new ArrayList<ArtifactLocation>();
+        locations = new ArrayList<>();
         locations.add(SiegeService.getInstance().getArtifact(locationId));
         this.teleportStatus = teleportStatus;
     }
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(locations.size());
         for (ArtifactLocation artifact : locations) {
             writeD(artifact.getLocationId() * 10 + 1);

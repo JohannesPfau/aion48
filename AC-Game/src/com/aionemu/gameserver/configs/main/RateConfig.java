@@ -33,16 +33,15 @@ import com.aionemu.commons.configuration.Property;
 
 /**
  * @author ATracer
-, Voidstar
+ *         , Voidstar
  */
 public class RateConfig {
-
 
     /**
      * Display server rates when player enter in world
      */
-	@Property(key="gameserver.rate.display.rates", defaultValue="false")
-	public static boolean DISPLAY_RATE;
+    @Property(key = "gameserver.rate.display.rates", defaultValue = "false")
+    public static boolean DISPLAY_RATE;
     /**
      * XP Rates - Regular (1), Premium (2), VIP (3)
      */
@@ -115,7 +114,7 @@ public class RateConfig {
     public static float PREMIUM_QUEST_AP_RATE;
     @Property(key = "gameserver.rate.vip.quest.ap", defaultValue = "3.0")
     public static float VIP_QUEST_AP_RATE;
-	/**
+    /**
      * Quest GP Rates - Regular (1), Premium (1.5), VIP (2)
      */
     @Property(key = "gameserver.rate.regular.quest.gp", defaultValue = "1.0")
@@ -272,5 +271,5 @@ public class RateConfig {
     public static int HOLIDAY_RATE_VIP;
     @Property(key = "gameserver.rate.holiday.days", defaultValue = "1,7")
     public static String HOLIDAY_RATE_DAYS;
-   
+
 }

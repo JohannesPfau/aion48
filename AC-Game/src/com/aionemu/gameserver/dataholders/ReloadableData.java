@@ -78,7 +78,7 @@ public abstract class ReloadableData {
 
     protected Collection<File> listFiles(File root, boolean recursive) {
         IOFileFilter dirFilter = recursive ? makeSVNAware(HiddenFileFilter.VISIBLE) : null;
-        return FileUtils.listFiles(root,
-                and(and(notFileFilter(prefixFileFilter("new")), suffixFileFilter(".xml")), HiddenFileFilter.VISIBLE), dirFilter);
+        return FileUtils.listFiles(root, and(and(notFileFilter(prefixFileFilter("new")), suffixFileFilter(".xml")), HiddenFileFilter.VISIBLE),
+            dirFilter);
     }
 }

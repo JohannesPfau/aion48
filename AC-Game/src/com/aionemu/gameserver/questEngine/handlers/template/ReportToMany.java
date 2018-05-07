@@ -34,8 +34,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -47,6 +45,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
+import javolution.util.FastMap;
+
 /**
  * @author Hilgert
  * @modified vlog
@@ -54,8 +54,8 @@ import com.aionemu.gameserver.services.QuestService;
 public class ReportToMany extends QuestHandler {
 
     private final int startItem;
-    private final Set<Integer> startNpcs = new HashSet<Integer>();
-    private final Set<Integer> endNpcs = new HashSet<Integer>();
+    private final Set<Integer> startNpcs = new HashSet<>();
+    private final Set<Integer> endNpcs = new HashSet<>();
     private final int startDialog;
     private final int endDialog;
     private final int maxVar;
@@ -71,7 +71,7 @@ public class ReportToMany extends QuestHandler {
      * @param maxVar
      */
     public ReportToMany(int questId, int startItem, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<Integer, NpcInfos> npcInfos,
-                        int startDialog, int endDialog, int maxVar, boolean mission) {
+        int startDialog, int endDialog, int maxVar, boolean mission) {
         super(questId);
         this.startItem = startItem;
         if (startNpcIds != null) {
@@ -158,7 +158,7 @@ public class ReportToMany extends QuestHandler {
                         return playQuestMovie(env, targetNpcInfo.getMovie());
                     } else if (dialog.id() == closeDialog) {
                         if ((dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM && dialog != DialogAction.CHECK_USER_HAS_QUEST_ITEM_SIMPLE)
-                                || QuestService.collectItemCheck(env, true)) {
+                            || QuestService.collectItemCheck(env, true)) {
                             if (var == maxVar) {
                                 qs.setStatus(QuestStatus.REWARD);
                                 if (closeDialog == 1009 || closeDialog == 20002 || closeDialog == 34) {

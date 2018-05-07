@@ -46,10 +46,9 @@ public class Enemy extends AdminCommand {
 
     @Override
     public void execute(Player player, String... params) {
-        String help = "Syntax: //enemy < players | npcs | all | cancel >\n"
-                + "Players - You're enemy to Players of both factions.\n" + "Npcs - You're enemy to all Npcs and Monsters.\n"
-                + "All - You're enemy to Players of both factions and all Npcs.\n"
-                + "Cancel - Cancel all. Players and Npcs have default enmity to you.";
+        String help = "Syntax: //enemy < players | npcs | all | cancel >\n" + "Players - You're enemy to Players of both factions.\n"
+            + "Npcs - You're enemy to all Npcs and Monsters.\n" + "All - You're enemy to Players of both factions and all Npcs.\n"
+            + "Cancel - Cancel all. Players and Npcs have default enmity to you.";
 
         if (params.length != 1) {
             onFail(player, null);

@@ -29,6 +29,8 @@
  */
 package admincommands;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.InGameShopDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -44,7 +46,6 @@ import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
-import org.apache.commons.lang.StringUtils;
 
 /**
  * @author xTz
@@ -91,7 +92,8 @@ public class Gameshop extends AdminCommand {
                 list = Integer.parseInt(params[8]);
                 titleDescription = Util.convertName(params[9]);
             } catch (NumberFormatException e) {
-                PacketSendUtility.sendMessage(admin, "<itemId, count, price, category, subCategory, itemType, gift, list, description> values must be int, long, long, byte, byte, byte, byte, int, string, Object... .");
+                PacketSendUtility.sendMessage(admin,
+                    "<itemId, count, price, category, subCategory, itemType, gift, list, description> values must be int, long, long, byte, byte, byte, byte, int, string, Object... .");
                 return;
             }
 
@@ -131,8 +133,8 @@ public class Gameshop extends AdminCommand {
             if (titleDescription.equals("empty")) {
                 titleDescription = StringUtils.EMPTY;
             }
-            DAOManager.getDAO(InGameShopDAO.class).saveIngameShopItem(IDFactory.getInstance().nextId(), itemId, count, price,
-                    category, subCategory, list - 1, 1, itemType, gift, titleDescription, description);
+            DAOManager.getDAO(InGameShopDAO.class).saveIngameShopItem(IDFactory.getInstance().nextId(), itemId, count, price, category, subCategory,
+                list - 1, 1, itemType, gift, titleDescription, description);
             PacketSendUtility.sendMessage(admin, "You add [item:" + itemId + "]");
         } else if ("deleteranking".startsWith(params[0])) {
             try {
@@ -151,7 +153,8 @@ public class Gameshop extends AdminCommand {
                 gift = Byte.parseByte(params[5]);
                 titleDescription = Util.convertName(params[6]);
             } catch (NumberFormatException e) {
-                PacketSendUtility.sendMessage(admin, "<itemId, count, price, itemType, gift, description> value must be int, long, long, byte, byte, string, Object... .");
+                PacketSendUtility.sendMessage(admin,
+                    "<itemId, count, price, itemType, gift, description> value must be int, long, long, byte, byte, string, Object... .");
                 return;
             }
             String description = "";
@@ -169,8 +172,8 @@ public class Gameshop extends AdminCommand {
             if (titleDescription.equals("empty")) {
                 titleDescription = StringUtils.EMPTY;
             }
-            DAOManager.getDAO(InGameShopDAO.class).saveIngameShopItem(IDFactory.getInstance().nextId(), itemId, count, price,
-                    (byte) -1, (byte) -1, -1, 0, itemType, gift, titleDescription, description);
+            DAOManager.getDAO(InGameShopDAO.class).saveIngameShopItem(IDFactory.getInstance().nextId(), itemId, count, price, (byte) -1, (byte) -1,
+                -1, 0, itemType, gift, titleDescription, description);
             PacketSendUtility.sendMessage(admin, "You remove from Ranking Sales [item:" + itemId + "]");
         } else if ("settoll".startsWith(params[0])) {
             if (params.length == 3) {
@@ -275,17 +278,16 @@ public class Gameshop extends AdminCommand {
                 InGameShopEn.getInstance().addToll(player, toll);
             }
         } else {
-            PacketSendUtility.sendMessage(admin,
-                    "You can use only, addtoll, settoll, deleteranking, addranking, delete or add.");
+            PacketSendUtility.sendMessage(admin, "You can use only, addtoll, settoll, deleteranking, addranking, delete or add.");
         }
     }
 
     @Override
     public void onFail(Player player, String message) {
         PacketSendUtility.sendMessage(player, "No parameters detected please use:\n"
-                + "//gameshop add <itemId> <count> <price> <category> <subCategory> <itemType> <gift> <list> <title description|empty> <item description|null>\n"
-                + "//gameshop delete <itemId> <category> <subCategory> <list>\n"
-                + "//gameshop addranking <itemId> <count> <price> <itemType> <gift> <title description|empty> <item description|null>\n" + "//gameshop deleteranking <itemId>\n"
-                + "//gameshop settoll <target|player> <toll>\n" + "//gameshop addtoll <target|player> <toll>");
+            + "//gameshop add <itemId> <count> <price> <category> <subCategory> <itemType> <gift> <list> <title description|empty> <item description|null>\n"
+            + "//gameshop delete <itemId> <category> <subCategory> <list>\n"
+            + "//gameshop addranking <itemId> <count> <price> <itemType> <gift> <title description|empty> <item description|null>\n"
+            + "//gameshop deleteranking <itemId>\n" + "//gameshop settoll <target|player> <toll>\n" + "//gameshop addtoll <target|player> <toll>");
     }
 }

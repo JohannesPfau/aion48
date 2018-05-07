@@ -46,7 +46,11 @@ public final class FloodManager {
 
     public static enum ErrorMode {
 
-        INVALID_OPCODE, BUFFER_UNDER_FLOW, BUFFER_OVER_FLOW, FAILED_READING, FAILED_RUNNING;
+        INVALID_OPCODE,
+        BUFFER_UNDER_FLOW,
+        BUFFER_OVER_FLOW,
+        FAILED_READING,
+        FAILED_RUNNING;
     }
 
     public static final class FloodFilter {
@@ -138,7 +142,9 @@ public final class FloodManager {
 
     public static enum Result {
 
-        ACCEPTED, WARNED, REJECTED;
+        ACCEPTED,
+        WARNED,
+        REJECTED;
 
         public static Result max(final Result r1, final Result r2) {
             if (r1.ordinal() > r2.ordinal()) {
@@ -151,7 +157,7 @@ public final class FloodManager {
 
     public final Logger log = LoggerFactory.getLogger(FloodManager.class);
     private static final long ZERO = System.currentTimeMillis() - TimeUnit.DAYS.toMillis(1);
-    private final Map<String, LogEntry> _entries = new HashMap<String, LogEntry>();
+    private final Map<String, LogEntry> _entries = new HashMap<>();
     private final ReentrantLock _lock = new ReentrantLock();
     private final int _tickLength;
     private final int _tickAmount;
@@ -170,6 +176,7 @@ public final class FloodManager {
         _tickAmount = max;
 
         NetFlusher.add(new Runnable() {
+
             @Override
             public void run() {
                 flush();
@@ -180,7 +187,7 @@ public final class FloodManager {
     private void flush() {
         _lock.lock();
         try {
-            for (Iterator<LogEntry> it = _entries.values().iterator(); it.hasNext(); ) {
+            for (Iterator<LogEntry> it = _entries.values().iterator(); it.hasNext();) {
                 if (it.next().isActive()) {
                     continue;
                 }

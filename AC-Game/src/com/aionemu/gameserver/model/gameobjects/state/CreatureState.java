@@ -49,6 +49,7 @@ public enum CreatureState {
     POWERSHARD(1 << 7), // 128
     TREATMENT(1 << 8), // 256
     GLIDING(1 << 9); // 512
+
     /**
      * Standing, path flying, free flying, riding, sitting, sitting on chair,
      * dead, fly dead, private shop, looting, fly looting, default

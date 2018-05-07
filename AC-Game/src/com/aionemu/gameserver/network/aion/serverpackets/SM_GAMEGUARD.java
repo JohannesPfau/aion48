@@ -32,22 +32,20 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
-
 /**
  * @author Alcapwnd
- *
  */
 public class SM_GAMEGUARD extends AionServerPacket {
 
-	private int size;
-	
-	public SM_GAMEGUARD(int size) {
+    private int size;
+
+    public SM_GAMEGUARD(int size) {
         this.size = size;
     }
-	
-	@Override
+
+    @Override
     protected void writeImpl(AionConnection con) {
-		writeD(size);
-		writeB(new byte[size]);
-	}
+        writeD(size);
+        writeB(new byte[size]);
+    }
 }

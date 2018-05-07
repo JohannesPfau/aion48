@@ -90,10 +90,12 @@ public class GodStone extends ItemStone {
         long equipmentSlot = equippedItem.getEquipmentSlot();
         final int handProbability = equipmentSlot == ItemSlot.MAIN_HAND.getSlotIdMask() ? probability : probabilityLeft;
         actionListener = new ActionObserver(ObserverType.ATTACK) {
+
             @Override
             public void attack(Creature creature) {
                 if (handProbability > Rnd.get(0, 1000)) {
-                    Skill skill = SkillEngine.getInstance().getSkill(player, godstoneInfo.getSkillid(), godstoneInfo.getSkilllvl(), player.getTarget(), godItem);
+                    Skill skill = SkillEngine.getInstance().getSkill(player, godstoneInfo.getSkillid(), godstoneInfo.getSkilllvl(),
+                        player.getTarget(), godItem);
                     PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getNameId()));
                     skill.setFirstTargetRangeCheck(false);
                     if (skill.canUseSkill()) {

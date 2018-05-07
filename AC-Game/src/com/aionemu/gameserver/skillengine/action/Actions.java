@@ -42,14 +42,11 @@ import javax.xml.bind.annotation.XmlType;
  * @author ATracer
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Actions", propOrder = {"actions"})
+@XmlType(name = "Actions", propOrder = { "actions" })
 public class Actions {
 
-    @XmlElements({
-            @XmlElement(name = "itemuse", type = ItemUseAction.class),
-            @XmlElement(name = "mpuse", type = MpUseAction.class),
-            @XmlElement(name = "hpuse", type = HpUseAction.class),
-            @XmlElement(name = "dpuse", type = DpUseAction.class)})
+    @XmlElements({ @XmlElement(name = "itemuse", type = ItemUseAction.class), @XmlElement(name = "mpuse", type = MpUseAction.class),
+        @XmlElement(name = "hpuse", type = HpUseAction.class), @XmlElement(name = "dpuse", type = DpUseAction.class) })
     protected List<Action> actions;
 
     /**
@@ -62,6 +59,7 @@ public class Actions {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getActions().add(newItem);
      * </pre>
@@ -71,7 +69,7 @@ public class Actions {
      */
     public List<Action> getActions() {
         if (actions == null) {
-            actions = new ArrayList<Action>();
+            actions = new ArrayList<>();
         }
         return this.actions;
     }

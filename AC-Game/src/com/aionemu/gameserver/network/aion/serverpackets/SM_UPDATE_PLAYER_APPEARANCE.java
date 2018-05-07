@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.GodStone;
@@ -40,6 +38,8 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.ecfunctions.ffa.FFaService;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastList;
 
 /**
  * @author Avol modified by ATracer
@@ -59,7 +59,7 @@ public class SM_UPDATE_PLAYER_APPEARANCE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(playerId);
 
         int mask = 0;
@@ -76,54 +76,54 @@ public class SM_UPDATE_PLAYER_APPEARANCE extends AionServerPacket {
 
         for (Item item : items) {
             Player player = World.getInstance().findPlayer(playerId);
-            if(player == null){
+            if (player == null) {
                 return;
             }
-            if(player.isInFFA() || player.isInDuoFFA() || player.isInArena()){
+            if (player.isInFFA() || player.isInDuoFFA() || player.isInArena()) {
                 writeD(FFaService.getDisplayTemplate(player, item));
                 GodStone godStone = item.getGodStone();
                 writeD(godStone != null ? 168000118 : 0);
                 writeD(item.getItemColor());
-                if (item.getAuthorize() > 0 && item.getItemTemplate().isAccessory()){
+                if (item.getAuthorize() > 0 && item.getItemTemplate().isAccessory()) {
                     if (item.getItemTemplate().isPlume()) {
                         float aLvl = item.getAuthorize() / 5;
-                        if (item.getAuthorize() >= 5){
+                        if (item.getAuthorize() >= 5) {
                             aLvl = aLvl > 2.0f ? 2.0f : aLvl;
                             writeD((int) aLvl << 3);
-                        }else{
+                        } else {
                             writeD(0);
                         }
-                    }else{
+                    } else {
                         writeD(item.getAuthorize() >= 5 ? 2 : 0);
                     }
-                }else{
-                    if (item.getItemTemplate().isWeapon() || item.getItemTemplate().isTwoHandWeapon()){
+                } else {
+                    if (item.getItemTemplate().isWeapon() || item.getItemTemplate().isTwoHandWeapon()) {
                         writeD(item.getEnchantLevel() == 15 ? 2 : item.getEnchantLevel() >= 20 ? 4 : 0);
-                    }else{
+                    } else {
                         writeD(0);
                     }
                 }
-            }else{
+            } else {
                 writeD(item.getItemSkinTemplate().getTemplateId());
                 GodStone godStone = item.getGodStone();
                 writeD(godStone != null ? godStone.getItemId() : 0);
                 writeD(item.getItemColor());
-                if (item.getAuthorize() > 0 && item.getItemTemplate().isAccessory()){
+                if (item.getAuthorize() > 0 && item.getItemTemplate().isAccessory()) {
                     if (item.getItemTemplate().isPlume()) {
                         float aLvl = item.getAuthorize() / 5;
-                        if (item.getAuthorize() >= 5){
+                        if (item.getAuthorize() >= 5) {
                             aLvl = aLvl > 2.0f ? 2.0f : aLvl;
                             writeD((int) aLvl << 3);
-                        }else{
+                        } else {
                             writeD(0);
                         }
-                    }else{
+                    } else {
                         writeD(item.getAuthorize() >= 5 ? 2 : 0);
                     }
-                }else{
-                    if (item.getItemTemplate().isWeapon() || item.getItemTemplate().isTwoHandWeapon()){
+                } else {
+                    if (item.getItemTemplate().isWeapon() || item.getItemTemplate().isTwoHandWeapon()) {
                         writeD(item.getEnchantLevel() == 15 ? 2 : item.getEnchantLevel() >= 20 ? 4 : 0);
-                    }else{
+                    } else {
                         writeD(0);
                     }
                 }

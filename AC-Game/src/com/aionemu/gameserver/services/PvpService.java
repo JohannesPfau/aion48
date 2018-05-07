@@ -32,8 +32,6 @@ package com.aionemu.gameserver.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,6 +60,8 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 
+import javolution.util.FastMap;
+
 /**
  * @author Sarynth
  * @Reworked Kill3r
@@ -77,7 +77,7 @@ public class PvpService {
     private FastMap<Integer, KillList> pvpKillLists;
 
     private PvpService() {
-        pvpKillLists = new FastMap<Integer, KillList>();
+        pvpKillLists = new FastMap<>();
     }
 
     /**
@@ -119,7 +119,7 @@ public class PvpService {
         if (totalDamage == 0 || winner == null || winner.getRace() == victim.getRace()) {
             return;
         }
-        
+
         if (victim.getBattleGround() != null) {
             return;
         }
@@ -132,33 +132,33 @@ public class PvpService {
             if (CustomConfig.ENABLE_KILL_REWARD) {
                 if (kills % CustomConfig.KILLS_NEEDED1 == 1) {
                     ItemService.addItem(winner, CustomConfig.REWARD1, 1);
-                    PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD1
-                            + "] for having killed " + CustomConfig.KILLS_NEEDED1 + " players !");
+                    PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD1 + "] for having killed "
+                        + CustomConfig.KILLS_NEEDED1 + " players !");
                     log.info("[REWARD] Player [" + winner.getName() + "] win 2 [" + CustomConfig.REWARD1 + "]");
                 }
                 if (kills % CustomConfig.KILLS_NEEDED2 == 3) {
                     ItemService.addItem(winner, CustomConfig.REWARD2, 1);
-                    PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD2
-                            + "] for having killed " + CustomConfig.KILLS_NEEDED2 + " players !");
+                    PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD2 + "] for having killed "
+                        + CustomConfig.KILLS_NEEDED2 + " players !");
                     log.info("[REWARD] Player [" + winner.getName() + "] win 4 [" + CustomConfig.REWARD2 + "]");
                 }
                 if (kills % CustomConfig.KILLS_NEEDED3 == 5) {
                     ItemService.addItem(winner, CustomConfig.REWARD3, 1);
-                    PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD3
-                            + "] for having killed " + CustomConfig.KILLS_NEEDED3 + " players !");
+                    PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD3 + "] for having killed "
+                        + CustomConfig.KILLS_NEEDED3 + " players !");
                     log.info("[REWARD] Player [" + winner.getName() + "] win 6 [" + CustomConfig.REWARD3 + "]");
                 }
             }
             // PvP Toll Reward
             if (CustomConfig.ENABLE_TOLL_REWARD) {
-                if (Rnd.get(0, 100) > CustomConfig.TOLL_CHANCE){
+                if (Rnd.get(0, 100) > CustomConfig.TOLL_CHANCE) {
                     InGameShopEn.getInstance().addToll(winner, CustomConfig.TOLL_QUANTITY);
                     PacketSendUtility.sendMessage(winner, "You've recived " + CustomConfig.TOLL_QUANTITY + " tolls from PvP!");
                 }
             }
         }
-        
-      //Crazy kill
+
+        //Crazy kill
         if (EventSystem.ENABLE_CRAZY) {
             if (winner.getRndCrazy() >= EventSystem.CRAZY_LOWEST_RND) {
                 AbyssPointsService.addAp(winner, 500);
@@ -190,20 +190,23 @@ public class PvpService {
             String mac2 = victim.getClientConnection().getMacAddress();
             if ((mac1 != null) && (mac2 != null)) {
                 if ((ip1.equalsIgnoreCase(ip2)) && (mac1.equalsIgnoreCase(mac2))) {
-                    AuditLogger.info(winner, "Power Leveling : " + winner.getName() + " with " + victim.getName() + ", They have the sames ip=" + ip1 + " and mac=" + mac1 + ".");
+                    AuditLogger.info(winner, "Power Leveling : " + winner.getName() + " with " + victim.getName() + ", They have the sames ip=" + ip1
+                        + " and mac=" + mac1 + ".");
                     if (reduceap > 0) {
                         int win_ap = winner.getAbyssRank().getAp() * reduceap / 100;
                         int vic_ap = victim.getAbyssRank().getAp() * reduceap / 100;
                         AbyssPointsService.addAp(winner, -win_ap);
                         AbyssPointsService.addAp(victim, -vic_ap);
-		        PacketSendUtility.sendMessage(winner, "[PL-AP] You lost " + reduceap + "% of your total ap");
-			    PacketSendUtility.sendMessage(victim, "[PL-AP] You lost " + reduceap + "% of your total ap");
+                        PacketSendUtility.sendMessage(winner, "[PL-AP] You lost " + reduceap + "% of your total ap");
+                        PacketSendUtility.sendMessage(victim, "[PL-AP] You lost " + reduceap + "% of your total ap");
                     }
                     return;
                 }
                 if (ip1.equalsIgnoreCase(ip2)) {
-                    AuditLogger.info(winner, "Possible Power Leveling : " + winner.getName() + " with " + victim.getName() + ", They have the sames ip=" + ip1 + ".");
-                    AuditLogger.info(winner, "Check if " + winner.getName() + " and " + victim.getName() + " are Brothers-Sisters-Lovers-dogs-cats...");
+                    AuditLogger.info(winner,
+                        "Possible Power Leveling : " + winner.getName() + " with " + victim.getName() + ", They have the sames ip=" + ip1 + ".");
+                    AuditLogger.info(winner,
+                        "Check if " + winner.getName() + " and " + victim.getName() + " are Brothers-Sisters-Lovers-dogs-cats...");
                 }
             }
         }
@@ -239,7 +242,6 @@ public class PvpService {
         final int gpLost = StatFunctions.calculatePvPGpLost(victim, winner);
         final int gpActuallyLost = gpLost * playerDamage / totalDamage;
 
-
         // Apply lost AP to defeated player
         final int apLost = StatFunctions.calculatePvPApLost(victim, winner);
         final int apActuallyLost = apLost * playerDamage / totalDamage;
@@ -248,10 +250,10 @@ public class PvpService {
             AbyssPointsService.addAp(victim, -apActuallyLost);
         }
 
-        if (CustomConfig.ENABLE_GP_LOSE){
-            if (CustomConfig.ENABLE_GP_FIXED_LOSE){
+        if (CustomConfig.ENABLE_GP_LOSE) {
+            if (CustomConfig.ENABLE_GP_FIXED_LOSE) {
                 AbyssPointsService.addGp(victim, -CustomConfig.GP_LOSE);
-            }else{
+            } else {
                 AbyssPointsService.addGp(victim, -gpActuallyLost);
             }
         }
@@ -273,7 +275,7 @@ public class PvpService {
         }
 
         // Find group members in range
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
 
         // Find highest rank and level in local group
         int maxRank = AbyssRankEnum.GRADE9_SOLDIER.getId();
@@ -318,14 +320,15 @@ public class PvpService {
                 if (apRewardPerMember > 0) {
                     memberApGain = Math.round(RewardType.AP_PLAYER.calcReward(member, apRewardPerMember));
                 }
-                if(gpRewardPerMember > 0){
+                if (gpRewardPerMember > 0) {
                     memberGpGain = gpRewardPerMember;
                 }
                 if (xpRewardPerMember > 0) {
                     memberXpGain = Math.round(xpRewardPerMember * member.getRates().getXpPlayerGainRate());
                 }
                 if (dpRewardPerMember > 0) {
-                    memberDpGain = Math.round(StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel()) * member.getRates().getDpPlayerRate());
+                    memberDpGain = Math.round(StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel())
+                        * member.getRates().getDpPlayerRate());
                 }
 
             }
@@ -335,7 +338,7 @@ public class PvpService {
             } else {
                 AbyssPointsService.addAp(member, victim, memberApGain);
             }
-            if (CustomConfig.ENABLE_GP_REWARD){
+            if (CustomConfig.ENABLE_GP_REWARD) {
                 AbyssPointsService.addGp(member, victim, memberGpGain);
             }
             member.getCommonData().addExp(memberXpGain, RewardType.PVP_KILL, victim.getName());
@@ -363,7 +366,7 @@ public class PvpService {
         }
 
         // Find group members in range
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
 
         // Find highest rank and level in local group
         int maxRank = AbyssRankEnum.GRADE9_SOLDIER.getId();
@@ -418,7 +421,8 @@ public class PvpService {
                     memberXpGain = Math.round(xpRewardPerMember * member.getRates().getXpPlayerGainRate());
                 }
                 if (dpRewardPerMember > 0) {
-                    memberDpGain = Math.round(StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel()) * member.getRates().getDpPlayerRate());
+                    memberDpGain = Math.round(StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel())
+                        * member.getRates().getDpPlayerRate());
                 }
             }
             AbyssPointsService.addAp(member, victim, memberApGain);
@@ -446,7 +450,8 @@ public class PvpService {
         Player winner = ((Player) aggro.getAttacker());
 
         // Don't Reward Player out of range/dead/same faction
-        if (winner.getRace() == victim.getRace() || !MathUtil.isIn3dRange(winner, victim, GroupConfig.GROUP_MAX_DISTANCE) || winner.getLifeStats().isAlreadyDead()) {
+        if (winner.getRace() == victim.getRace() || !MathUtil.isIn3dRange(winner, victim, GroupConfig.GROUP_MAX_DISTANCE)
+            || winner.getLifeStats().isAlreadyDead()) {
             return false;
         }
 
@@ -489,7 +494,7 @@ public class PvpService {
             return;
         }
 
-        List<Player> rewarded = new ArrayList<Player>();
+        List<Player> rewarded = new ArrayList<>();
         int worldId = victim.getWorldId();
 
         if (winner.isInGroup2()) {

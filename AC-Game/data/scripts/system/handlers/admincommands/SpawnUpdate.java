@@ -29,6 +29,16 @@
  */
 package admincommands;
 
+import static ch.lambdaj.Lambda.extractIterator;
+import static ch.lambdaj.Lambda.filter;
+import static ch.lambdaj.Lambda.flatten;
+import static ch.lambdaj.Lambda.having;
+import static ch.lambdaj.Lambda.on;
+import static org.hamcrest.Matchers.equalTo;
+
+import java.io.IOException;
+import java.util.List;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -39,12 +49,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.io.IOException;
-import java.util.List;
-
-import static ch.lambdaj.Lambda.*;
-import static org.hamcrest.Matchers.*;
 
 /**
  * @author KID
@@ -169,7 +173,8 @@ public class SpawnUpdate extends AdminCommand {
                     npc.getPosition().setXYZH(null, null, admin.getZ(), null);
                     DataManager.SPAWNS_DATA2.saveSpawn(admin, npc, false);
                     PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
-                    PacketSendUtility.sendMessage(admin, "updated npcs coordinates to " + admin.getX() + ", " + admin.getY() + ", " + admin.getZ() + ".");
+                    PacketSendUtility.sendMessage(admin,
+                        "updated npcs coordinates to " + admin.getX() + ", " + admin.getY() + ", " + admin.getZ() + ".");
                 } catch (IOException e) {
                     e.printStackTrace();
                     PacketSendUtility.sendMessage(admin, "Could not save spawn");
@@ -192,7 +197,8 @@ public class SpawnUpdate extends AdminCommand {
                     npc.getPosition().setXYZH(null, null, null, admin.getHeading());
                     DataManager.SPAWNS_DATA2.saveSpawn(admin, npc, false);
                     PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
-                    PacketSendUtility.sendMessage(admin, "updated npcs coordinates to " + admin.getX() + ", " + admin.getY() + ", " + admin.getZ() + "," + admin.getHeading() + ".");
+                    PacketSendUtility.sendMessage(admin,
+                        "updated npcs coordinates to " + admin.getX() + ", " + admin.getY() + ", " + admin.getZ() + "," + admin.getHeading() + ".");
                 } catch (IOException e) {
                     e.printStackTrace();
                     PacketSendUtility.sendMessage(admin, "Could not save spawn");

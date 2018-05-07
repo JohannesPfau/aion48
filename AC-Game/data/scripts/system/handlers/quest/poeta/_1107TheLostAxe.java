@@ -29,6 +29,7 @@
  */
 package quest.poeta;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,7 +37,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -57,36 +57,35 @@ public class _1107TheLostAxe extends QuestHandler {
 
     @Override
     public void register() {
-		qe.registerQuestItem(182200501, questId);
-        qe.registerQuestNpc(203075).addOnTalkEvent(questId);      
+        qe.registerQuestItem(182200501, questId);
+        qe.registerQuestNpc(203075).addOnTalkEvent(questId);
     }
 
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         final Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
-		DialogAction dialog = env.getDialog();
+        DialogAction dialog = env.getDialog();
         int targetId = env.getTargetId();
-		
-		
+
         if (env.getVisibleObject() instanceof Npc) {
             targetId = ((Npc) env.getVisibleObject()).getNpcId();
         }
-		
-		if (targetId == 0) {				
-				if (dialog == DialogAction.QUEST_ACCEPT_1) {
-					QuestService.startQuest(env);
-					return closeDialogWindow(env);
-	            } else if (dialog == DialogAction.QUEST_REFUSE_1) {
-	                PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
-	            }					
-			
+
+        if (targetId == 0) {
+            if (dialog == DialogAction.QUEST_ACCEPT_1) {
+                QuestService.startQuest(env);
+                return closeDialogWindow(env);
+            } else if (dialog == DialogAction.QUEST_REFUSE_1) {
+                PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
+            }
+
         } else if (targetId == 203075) {
             if (qs != null) {
                 if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
                     return sendQuestDialog(env, 2375);
                 } else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-                        && qs.getStatus() != QuestStatus.NONE) {
+                    && qs.getStatus() != QuestStatus.NONE) {
                     removeQuestItem(env, 182200501, 1);
                     qs.setQuestVar(1);
                     qs.setStatus(QuestStatus.REWARD);
@@ -110,9 +109,9 @@ public class _1107TheLostAxe extends QuestHandler {
         if (id != 182200501) {
             return HandlerResult.UNKNOWN;
         }
-        PacketSendUtility.broadcastPacket(player,new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
+        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
         if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-		     sendQuestDialog(env, 4);
+            sendQuestDialog(env, 4);
         }
         return HandlerResult.SUCCESS;
     }

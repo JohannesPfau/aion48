@@ -138,7 +138,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
     }
 
     @Override
-	@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     public T getObjectTemplate() {
         return (T) objectTemplate;
     }

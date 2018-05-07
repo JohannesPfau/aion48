@@ -29,10 +29,10 @@
  */
 package quest.reshanta;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,7 +50,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _2073CapturedComrades extends QuestHandler {
 
     private final static int questId = 2073;
-    private final static int[] npcs = {278002, 278019, 278088, 253626};
+    private final static int[] npcs = { 278002, 278019, 278088, 253626 };
 
     public _2073CapturedComrades() {
         super(questId);

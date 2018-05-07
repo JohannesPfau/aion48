@@ -55,47 +55,55 @@ public final class PacketBroadcaster extends AbstractFIFOPeriodicTaskManager<Cre
     public static enum BroadcastMode {
 
         UPDATE_STATS {
+
             @Override
             public void sendPacket(Creature creature) {
                 creature.getGameStats().updateStatInfo();
             }
         },
         UPDATE_SPEED {
+
             @Override
             public void sendPacket(Creature creature) {
                 creature.getGameStats().updateSpeedInfo();
             }
         },
         UPDATE_PLAYER_HP_STAT {
+
             @Override
             public void sendPacket(Creature creature) {
                 ((Player) creature).getLifeStats().sendHpPacketUpdateImpl();
             }
         },
         UPDATE_PLAYER_MP_STAT {
+
             @Override
             public void sendPacket(Creature creature) {
                 ((Player) creature).getLifeStats().sendMpPacketUpdateImpl();
             }
         },
         UPDATE_PLAYER_EFFECT_ICONS {
+
             @Override
             public void sendPacket(Creature creature) {
                 creature.getEffectController().updatePlayerEffectIconsImpl();
             }
         },
         UPDATE_PLAYER_FLY_TIME {
+
             @Override
             public void sendPacket(Creature creature) {
                 ((Player) creature).getLifeStats().sendFpPacketUpdateImpl();
             }
         },
         BROAD_CAST_EFFECTS {
+
             @Override
             public void sendPacket(Creature creature) {
                 creature.getEffectController().broadCastEffectsImp();
             }
         };
+
         private final byte MASK;
 
         private BroadcastMode() {
@@ -120,7 +128,7 @@ public final class PacketBroadcaster extends AbstractFIFOPeriodicTaskManager<Cre
 
     @Override
     protected void callTask(Creature creature) {
-        for (byte mask; (mask = creature.getPacketBroadcastMask()) != 0; ) {
+        for (byte mask; (mask = creature.getPacketBroadcastMask()) != 0;) {
             for (BroadcastMode mode : VALUES) {
                 mode.trySendPacket(creature, mask);
             }

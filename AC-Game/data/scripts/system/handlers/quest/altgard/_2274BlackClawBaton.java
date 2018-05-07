@@ -29,13 +29,13 @@
  */
 package quest.altgard;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,9 +49,9 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class _2274BlackClawBaton extends QuestHandler {
 
     private final static int questId = 2274;
-	private final static int questNpc1Id = 203668; // Jolk
-	private final static int questNpc2Id = 203560; // Morn
-	private final static int questStartItemId = 182203249; // Chieftain's Baton
+    private final static int questNpc1Id = 203668; // Jolk
+    private final static int questNpc2Id = 203560; // Morn
+    private final static int questStartItemId = 182203249; // Chieftain's Baton
 
     public _2274BlackClawBaton() {
         super(questId);
@@ -59,9 +59,9 @@ public class _2274BlackClawBaton extends QuestHandler {
 
     @Override
     public void register() {
-		qe.registerQuestNpc(questNpc1Id).addOnTalkEvent(questId); // Jolk
-		qe.registerQuestNpc(questNpc2Id).addOnTalkEvent(questId); // Morn
-		qe.registerQuestItem(questStartItemId, questId); // Chieftain's Baton
+        qe.registerQuestNpc(questNpc1Id).addOnTalkEvent(questId); // Jolk
+        qe.registerQuestNpc(questNpc2Id).addOnTalkEvent(questId); // Morn
+        qe.registerQuestItem(questStartItemId, questId); // Chieftain's Baton
     }
 
     @Override
@@ -74,15 +74,15 @@ public class _2274BlackClawBaton extends QuestHandler {
             targetId = ((Npc) env.getVisibleObject()).getNpcId();
         }
         if (targetId == 0) {
-			if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
+            if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) {
                 QuestService.startQuest(env);
-				closeDialogWindow(env);
+                closeDialogWindow(env);
             }
-			if (env.getDialog() == DialogAction.QUEST_REFUSE_1) {
-				closeDialogWindow(env);
-			}
-		} else if (targetId == questNpc1Id) {
-			if (qs != null && qs.getStatus() == QuestStatus.START) {
+            if (env.getDialog() == DialogAction.QUEST_REFUSE_1) {
+                closeDialogWindow(env);
+            }
+        } else if (targetId == questNpc1Id) {
+            if (qs != null && qs.getStatus() == QuestStatus.START) {
                 if (env.getDialog() == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 1352);
                 } else if (env.getDialog() == DialogAction.SETPRO1) {
@@ -91,18 +91,18 @@ public class _2274BlackClawBaton extends QuestHandler {
                     return sendQuestStartDialog(env);
                 }
             }
-		} else if (targetId == questNpc2Id) {
-			if (qs != null && qs.getStatus() == QuestStatus.START) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
+        } else if (targetId == questNpc2Id) {
+            if (qs != null && qs.getStatus() == QuestStatus.START) {
+                if (env.getDialog() == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 2375);
-				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
-					removeQuestItem(env, questStartItemId, 1);
+                } else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+                    removeQuestItem(env, questStartItemId, 1);
                     qs.setStatus(QuestStatus.REWARD);
                     updateQuestStatus(env);
                     return sendQuestEndDialog(env);
-				}
-			} else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-                    return sendQuestEndDialog(env);
+                }
+            } else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+                return sendQuestEndDialog(env);
             }
         }
         return false;
@@ -114,20 +114,21 @@ public class _2274BlackClawBaton extends QuestHandler {
         final int id = item.getItemTemplate().getTemplateId();
         final int itemObjId = item.getObjectId();
 
-		if (id != questStartItemId) {
+        if (id != questStartItemId) {
             return HandlerResult.UNKNOWN;
         }
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if(qs == null || qs.getStatus() == QuestStatus.NONE) {
-			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
-        ThreadPoolManager.getInstance().schedule(new Runnable() {
-            @Override
-            public void run() {
-					PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
-                sendQuestDialog(env, 4);
-            }
-        }, 3000);
-		}
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+            PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
+            ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+                @Override
+                public void run() {
+                    PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+                    sendQuestDialog(env, 4);
+                }
+            }, 3000);
+        }
         return HandlerResult.SUCCESS;
     }
 }

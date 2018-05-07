@@ -29,9 +29,14 @@
  */
 package com.aionemu.commons.scripting.scriptmanager;
 
-import javax.xml.bind.annotation.*;
 import java.io.File;
 import java.util.List;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Simple class that represents script info.<br>
@@ -81,7 +86,8 @@ public class ScriptInfo {
     /**
      * Sets root for script context
      *
-     * @param root root for script context
+     * @param root
+     *            root for script context
      */
     public void setRoot(File root) {
         this.root = root;
@@ -101,7 +107,8 @@ public class ScriptInfo {
      * Sets list of libraries that will be used by script context and it's
      * children
      *
-     * @param libraries sets list of libraries
+     * @param libraries
+     *            sets list of libraries
      */
     public void setLibraries(List<File> libraries) {
         this.libraries = libraries;
@@ -119,7 +126,8 @@ public class ScriptInfo {
     /**
      * Sets list of child context descriptors
      *
-     * @param scriptInfos list of child context descriptors
+     * @param scriptInfos
+     *            list of child context descriptors
      */
     public void setScriptInfos(List<ScriptInfo> scriptInfos) {
         this.scriptInfos = scriptInfos;
@@ -137,7 +145,8 @@ public class ScriptInfo {
     /**
      * Sets compiler class name
      *
-     * @param compilerClass name of compiler class
+     * @param compilerClass
+     *            name of compiler class
      */
     public void setCompilerClass(String compilerClass) {
         this.compilerClass = compilerClass;
@@ -146,7 +155,8 @@ public class ScriptInfo {
     /**
      * Returns true if roots are quals
      *
-     * @param o object to compare with
+     * @param o
+     *            object to compare with
      * @return true if this ScriptInfo and anothers ScriptInfo has same root
      */
     @Override

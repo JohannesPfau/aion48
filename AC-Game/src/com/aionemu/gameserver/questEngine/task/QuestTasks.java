@@ -52,8 +52,8 @@ public class QuestTasks {
      * @return
      */
     public static final Future<?> newFollowingToTargetCheckTask(final QuestEnv env, Npc npc, Npc target) {
-        return ThreadPoolManager.getInstance().scheduleAtFixedRate(
-                new FollowingNpcCheckTask(env, new TargetDestinationChecker(npc, target)), 1000, 1000);
+        return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FollowingNpcCheckTask(env, new TargetDestinationChecker(npc, target)), 1000,
+            1000);
     }
 
     /**
@@ -69,9 +69,10 @@ public class QuestTasks {
         if (searchResult == null) {
             throw new IllegalArgumentException("Supplied npc doesn't exist: " + npcTargetId);
         }
-        return ThreadPoolManager.getInstance().scheduleAtFixedRate(
-                new FollowingNpcCheckTask(env, new CoordinateDestinationChecker(npc, searchResult.getSpot().getX(), searchResult
-                        .getSpot().getY(), searchResult.getSpot().getZ())), 1000, 1000);
+        return ThreadPoolManager.getInstance()
+            .scheduleAtFixedRate(new FollowingNpcCheckTask(env,
+                new CoordinateDestinationChecker(npc, searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ())),
+                1000, 1000);
     }
 
     /**
@@ -84,12 +85,11 @@ public class QuestTasks {
      * @return
      */
     public static final Future<?> newFollowingToTargetCheckTask(final QuestEnv env, Npc npc, float x, float y, float z) {
-        return ThreadPoolManager.getInstance().scheduleAtFixedRate(
-                new FollowingNpcCheckTask(env, new CoordinateDestinationChecker(npc, x, y, z)), 1000, 1000);
+        return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FollowingNpcCheckTask(env, new CoordinateDestinationChecker(npc, x, y, z)),
+            1000, 1000);
     }
 
     public static final Future<?> newFollowingToTargetCheckTask(final QuestEnv env, Npc npc, ZoneName zoneName) {
-        return ThreadPoolManager.getInstance().scheduleAtFixedRate(
-                new FollowingNpcCheckTask(env, new ZoneChecker(npc, zoneName)), 1000, 1000);
+        return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FollowingNpcCheckTask(env, new ZoneChecker(npc, zoneName)), 1000, 1000);
     }
 }

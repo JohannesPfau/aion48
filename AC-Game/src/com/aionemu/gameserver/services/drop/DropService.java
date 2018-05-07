@@ -92,6 +92,7 @@ public class DropService {
      */
     public void scheduleFreeForAll(final int npcUniqueId) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcUniqueId);
@@ -220,6 +221,7 @@ public class DropService {
                 PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcId, 0));
             } else {
                 PacketSendUtility.broadcastPacket(player, new SM_LOOT_STATUS(npcId, 0), true, new ObjectFilter<Player>() {
+
                     @Override
                     public boolean acceptObject(Player object) {
                         return dropNpc.containsKey(object.getObjectId());
@@ -258,20 +260,21 @@ public class DropService {
                         Player finalPlayer = World.getInstance().findPlayer(member.getObjectId());
                         if (finalPlayer != null && finalPlayer.isOnline()) {
                             dropNpc.addPlayerStatus(finalPlayer);
-                            finalPlayer.setPlayerMode(PlayerMode.IN_ROLL, new InRoll(npcId, itemId, requestedItem.getIndex(), dropNpc.getDistributionId()));
-                            PacketSendUtility.sendPacket(finalPlayer, new SM_GROUP_LOOT(finalPlayer.getCurrentTeamId(), 0, itemId,
-                                    npcId, dropNpc.getDistributionId(), 1, requestedItem.getIndex()));
+                            finalPlayer.setPlayerMode(PlayerMode.IN_ROLL,
+                                new InRoll(npcId, itemId, requestedItem.getIndex(), dropNpc.getDistributionId()));
+                            PacketSendUtility.sendPacket(finalPlayer, new SM_GROUP_LOOT(finalPlayer.getCurrentTeamId(), 0, itemId, npcId,
+                                dropNpc.getDistributionId(), 1, requestedItem.getIndex()));
                         }
                     }
                     lootGrouRules.setPlayersInRoll(dropNpc.getInRangePlayers(), dropNpc.getDistributionId() == 2 ? 17000 : 32000,
-                            requestedItem.getIndex(), npcId);
+                        requestedItem.getIndex(), npcId);
                     if (!containDropItem) {
                         lootGrouRules.addItemToBeDistributed(requestedItem);
                     }
                     return false;
                 } else {
-                    PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE
-                            .STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(new DescriptionId(ItemInfoService.getNameId(itemId))));
+                    PacketSendUtility.sendPacket(player,
+                        SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(new DescriptionId(ItemInfoService.getNameId(itemId))));
                     if (!containDropItem) {
                         lootGrouRules.addItemToBeDistributed(requestedItem);
                     }
@@ -356,7 +359,7 @@ public class DropService {
         ItemTemplate item = DataManager.ITEM_DATA.getItemTemplate(itemId);
         if (requestedItem.getDropTemplate().getItemTemplate().hasLimitOne()) {
             if (player.getInventory().getFirstItemByItemId(itemId) != null
-                    || player.getStorage(StorageType.REGULAR_WAREHOUSE.getId()).getFirstItemByItemId(itemId) != null) {
+                || player.getStorage(StorageType.REGULAR_WAREHOUSE.getId()).getFirstItemByItemId(itemId) != null) {
                 PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CAN_NOT_GET_LORE_ITEM((new DescriptionId(item.getNameId()))));
                 return;
             }
@@ -386,7 +389,7 @@ public class DropService {
         if (itemId == 182400001) {
             // Kinah
             lootGrouRules = player.getLootGroupRules();
-            Collection<Player> pList = new ArrayList<Player>();
+            Collection<Player> pList = new ArrayList<>();
             for (Player member : dropNpc.getInRangePlayers()) {
                 Player finalPlayer = World.getInstance().findPlayer(member.getObjectId());
                 if (finalPlayer != null && finalPlayer.isOnline() && !finalPlayer.isMentor()) {
@@ -403,8 +406,7 @@ public class DropService {
             } else {
                 currentDropItemCount = ItemService.addItem(player, itemId, currentDropItemCount, ItemService.DEFAULT_UPDATE_PREDICATE);
             }
-        } else if (!player.isInGroup2() && !player.isInAlliance2() && !requestedItem.isItemWonNotCollected()
-                && dropNpc.getDistributionId() == 0) {
+        } else if (!player.isInGroup2() && !player.isInAlliance2() && !requestedItem.isItemWonNotCollected() && dropNpc.getDistributionId() == 0) {
             currentDropItemCount = ItemService.addItem(player, itemId, currentDropItemCount, ItemService.DEFAULT_UPDATE_PREDICATE);
             uniqueDropAnnounce(player, requestedItem);
         }
@@ -453,7 +455,7 @@ public class DropService {
 
             if (requestedItem.getWinningPlayer() != null) {
                 currentDropItemCount = ItemService.addItem(requestedItem.getWinningPlayer(), itemId, currentDropItemCount,
-                        new TempTradeDropPredicate(dropNpc));
+                    new TempTradeDropPredicate(dropNpc));
 
                 winningNormalActions(player, npcId, requestedItem);
                 uniqueDropAnnounce(player, requestedItem);
@@ -465,14 +467,15 @@ public class DropService {
             if (player != requestedItem.getWinningPlayer() && requestedItem.isItemWonNotCollected()) {
                 PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ANOTHER_OWNER_ITEM);
                 return;
-            } else if (requestedItem.getWinningPlayer().getInventory().isFull(requestedItem.getDropTemplate().getItemTemplate().getExtraInventoryId())) {
+            } else if (requestedItem.getWinningPlayer().getInventory()
+                .isFull(requestedItem.getDropTemplate().getItemTemplate().getExtraInventoryId())) {
                 PacketSendUtility.sendPacket(requestedItem.getWinningPlayer(), SM_SYSTEM_MESSAGE.STR_MSG_DICE_INVEN_ERROR);
                 requestedItem.isItemWonNotCollected(true);
                 return;
             }
 
             currentDropItemCount = ItemService.addItem(requestedItem.getWinningPlayer(), itemId, currentDropItemCount,
-                    new TempTradeDropPredicate(dropNpc));
+                new TempTradeDropPredicate(dropNpc));
 
             switch (dropNpc.getDistributionId()) {
                 case 2:
@@ -516,28 +519,26 @@ public class DropService {
     }
 
     /**
-     * @param Displays messages when item gained via ROLLED
+     * @param Displays
+     *            messages when item gained via ROLLED
      */
     private void winningRollActions(Player player, int itemId, int npcId) {
-        PacketSendUtility.sendPacket(player,
-                SM_SYSTEM_MESSAGE.STR_MSG_LOOT_GET_ITEM_ME(new DescriptionId(ItemInfoService.getNameId(itemId))));
+        PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_GET_ITEM_ME(new DescriptionId(ItemInfoService.getNameId(itemId))));
 
         if (player.isInGroup2() || player.isInAlliance2()) {
-            for (Player member : DropRegistrationService.getInstance().getDropRegistrationMap().get(npcId)
-                    .getInRangePlayers()) {
+            for (Player member : DropRegistrationService.getInstance().getDropRegistrationMap().get(npcId).getInRangePlayers()) {
                 if (member != null && !player.equals(member) && member.isOnline()) {
-                    PacketSendUtility.sendPacket(
-                            member,
-                            SM_SYSTEM_MESSAGE.STR_MSG_LOOT_GET_ITEM_OTHER(player.getName(),
-                                    new DescriptionId(ItemInfoService.getNameId(itemId))));
+                    PacketSendUtility.sendPacket(member,
+                        SM_SYSTEM_MESSAGE.STR_MSG_LOOT_GET_ITEM_OTHER(player.getName(), new DescriptionId(ItemInfoService.getNameId(itemId))));
                 }
             }
         }
     }
 
     /**
-     * @param Displays messages/removes and shares kinah when item gained via
-     *                 BID
+     * @param Displays
+     *            messages/removes and shares kinah when item gained via
+     *            BID
      */
     private void winningBidActions(Player player, int npcId, long highestValue) {
         DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcId);
@@ -551,12 +552,11 @@ public class DropService {
         if (player.isInGroup2() || player.isInAlliance2()) {
             for (Player member : dropNpc.getInRangePlayers()) {
                 if (member != null && !player.equals(member) && member.isOnline()) {
-                    PacketSendUtility.sendPacket(member,
-                            SM_SYSTEM_MESSAGE.STR_MSG_PAY_ACCOUNT_OTHER(player.getName(), highestValue));
+                    PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ACCOUNT_OTHER(player.getName(), highestValue));
                     long distributeKinah = highestValue / (dropNpc.getGroupSize() - 1);
                     member.getInventory().increaseKinah(distributeKinah);
                     PacketSendUtility.sendPacket(member,
-                            SM_SYSTEM_MESSAGE.STR_MSG_PAY_DISTRIBUTE(highestValue, dropNpc.getGroupSize() - 1, distributeKinah));
+                        SM_SYSTEM_MESSAGE.STR_MSG_PAY_DISTRIBUTE(highestValue, dropNpc.getGroupSize() - 1, distributeKinah));
                 }
             }
         }
@@ -572,8 +572,8 @@ public class DropService {
         if (player.isInGroup2() || player.isInAlliance2()) {
             for (Player member : dropNpc.getInRangePlayers()) {
                 if (member != null && !requestedItem.getWinningPlayer().equals(member) && member.isOnline()) {
-                    PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_GET_ITEM_PARTYNOTICE(requestedItem
-                            .getWinningPlayer().getName(), new DescriptionId(ItemInfoService.getNameId(itemId))));
+                    PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_GET_ITEM_PARTYNOTICE(requestedItem.getWinningPlayer().getName(),
+                        new DescriptionId(ItemInfoService.getNameId(itemId))));
                 }
             }
         }
@@ -589,6 +589,7 @@ public class DropService {
 
         if (dropNpc.containsKey(player.getObjectId()) || dropNpc.isFreeForAll()) {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(id, 0));
@@ -598,18 +599,19 @@ public class DropService {
     }
 
     private void uniqueDropAnnounce(final Player player, final DropItem requestedItem) {
-        if (DropConfig.ENABLE_UNIQUE_DROP_ANNOUNCE && !player.getInventory().isFull(requestedItem.getDropTemplate().getItemTemplate().getExtraInventoryId())) {
+        if (DropConfig.ENABLE_UNIQUE_DROP_ANNOUNCE
+            && !player.getInventory().isFull(requestedItem.getDropTemplate().getItemTemplate().getExtraInventoryId())) {
             final ItemTemplate itemTemplate = ItemInfoService.getItemTemplate(requestedItem.getDropTemplate().getItemId());
 
             if (itemTemplate.getItemQuality() == ItemQuality.UNIQUE || itemTemplate.getItemQuality() == ItemQuality.EPIC) {
-                final String lastGetName = requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer()
-                        .getName() : player.getName();
+                final String lastGetName = requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer().getName() : player.getName();
                 final int pObjectId = player.getObjectId();
                 final int pRaceId = player.getRace().getRaceId();
                 final int pMapId = player.getWorldId();
                 final int pInstance = player.isInInstance() ? player.getInstanceId() : 0;
 
                 World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
                     @Override
                     public void visit(Player other) {
 
@@ -618,10 +620,9 @@ public class DropService {
                         int oMapId = other.getWorldId();
                         int oInstance = other.isInInstance() ? other.getInstanceId() : 0;
 
-                        if (oObjectId != pObjectId && other.isSpawned() && oRaceId == pRaceId && oMapId == pMapId
-                                && oInstance == pInstance) {
-                            PacketSendUtility.sendPacket(other, new SM_SYSTEM_MESSAGE(1390003, lastGetName, "[item: "
-                                    + requestedItem.getDropTemplate().getItemId() + "]"));
+                        if (oObjectId != pObjectId && other.isSpawned() && oRaceId == pRaceId && oMapId == pMapId && oInstance == pInstance) {
+                            PacketSendUtility.sendPacket(other,
+                                new SM_SYSTEM_MESSAGE(1390003, lastGetName, "[item: " + requestedItem.getDropTemplate().getItemId() + "]"));
                         }
                     }
                 });
@@ -642,8 +643,7 @@ public class DropService {
             if (dropNpc.getPlayersObjectId().size() > 1) {
                 ItemTemplate template = input.getItemTemplate();
                 if (template.getTempExchangeTime() != 0) {
-                    input.setTemporaryExchangeTime((int) (System.currentTimeMillis() / 1000)
-                            + (template.getTempExchangeTime() * 60));
+                    input.setTemporaryExchangeTime((int) (System.currentTimeMillis() / 1000) + (template.getTempExchangeTime() * 60));
                     TemporaryTradeTimeTask.getInstance().addTask(input, dropNpc.getPlayersObjectId());
                 }
                 return true;

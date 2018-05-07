@@ -58,7 +58,7 @@ public class MacroList {
      * Creates an empty macro list
      */
     public MacroList() {
-        this.macrosses = new HashMap<Integer, String>(12);
+        this.macrosses = new HashMap<>(12);
     }
 
     /**
@@ -82,11 +82,13 @@ public class MacroList {
     /**
      * Add macro to the collection.
      *
-     * @param macroPosition Macro order.
-     * @param macroXML      Macro Xml contents.
+     * @param macroPosition
+     *            Macro order.
+     * @param macroXML
+     *            Macro Xml contents.
      * @return <tt>true</tt> if macro addition was successful, and it can be
-     * stored into database. Otherwise
-     * <tt>false</tt>.
+     *         stored into database. Otherwise
+     *         <tt>false</tt>.
      */
     public synchronized boolean addMacro(int macroPosition, String macroXML) {
         if (macrosses.containsKey(macroPosition)) {
@@ -104,8 +106,8 @@ public class MacroList {
      *
      * @param macroPosition
      * @return <tt>true</tt> if macro deletion was successful, and changes can
-     * be stored into database. Otherwise
-     * <tt>false</tt>.
+     *         be stored into database. Otherwise
+     *         <tt>false</tt>.
      */
     public synchronized boolean removeMacro(int macroPosition) {
         String m = macrosses.remove(macroPosition);
@@ -131,7 +133,7 @@ public class MacroList {
      * sends only 7 macros per packet, that's why we have to split macros
      */
     public Map<Integer, String> getMarcosPart(boolean secondPart) {
-        Map<Integer, String> macrosPart = new HashMap<Integer, String>();
+        Map<Integer, String> macrosPart = new HashMap<>();
         int currentIndex = secondPart ? 7 : 0;
         int endIndex = secondPart ? 11 : 6;
 

@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -52,9 +50,11 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.restriction.ItemCleanupTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author Luno
- (Aion-Core)
+ *         (Aion-Core)
  * @Reworked Kill3r (Aion-Core)
  */
 @XmlRootElement(name = "item_templates")
@@ -66,10 +66,10 @@ public class ItemData extends ReloadableData {
     @XmlTransient
     private TIntObjectHashMap<ItemTemplate> items;
     @XmlTransient
-    Map<Integer, List<ItemTemplate>> manastones = new HashMap<Integer, List<ItemTemplate>>();
+    Map<Integer, List<ItemTemplate>> manastones = new HashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
-        items = new TIntObjectHashMap<ItemTemplate>();
+        items = new TIntObjectHashMap<>();
         for (ItemTemplate it : its) {
             items.put(it.getTemplateId(), it);
             if (it.getCategory().equals(ItemCategory.MANASTONE) || it.getCategory().equals(ItemCategory.ANCIENT_MANASTONE)) {
@@ -79,7 +79,7 @@ public class ItemData extends ReloadableData {
                         manastones.put(level, new ArrayList<ItemTemplate>());
                     }
                     manastones.get(level).add(it);
-            	}
+                }
             }
         }
         its = null;
@@ -133,7 +133,7 @@ public class ItemData extends ReloadableData {
             JAXBContext jc = JAXBContext.newInstance(StaticData.class);
             Unmarshaller un = jc.createUnmarshaller();
             un.setSchema(getSchema("./data/static_data/static_data.xsd"));
-            List<ItemTemplate> newTemplates = new ArrayList<ItemTemplate>();
+            List<ItemTemplate> newTemplates = new ArrayList<>();
             ItemData data = (ItemData) un.unmarshal(new File("./data/static_data/items/item_templates.xml"));
             if (data != null && data.getData() != null) {
                 newTemplates.addAll(data.getData());

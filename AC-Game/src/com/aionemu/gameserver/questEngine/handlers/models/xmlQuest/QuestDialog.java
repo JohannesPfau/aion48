@@ -43,7 +43,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
  * @author Mr. Poke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "DialogAction", propOrder = {"conditions", "operations"})
+@XmlType(name = "DialogAction", propOrder = { "conditions", "operations" })
 public class QuestDialog {
 
     protected QuestConditions conditions;

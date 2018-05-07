@@ -50,16 +50,16 @@ import com.aionemu.gameserver.model.templates.housing.HousePart;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"houseParts"})
+@XmlType(name = "", propOrder = { "houseParts" })
 @XmlRootElement(name = "house_parts")
 public class HousePartsData {
 
     @XmlElement(name = "house_part")
     protected List<HousePart> houseParts;
     @XmlTransient
-    Map<String, List<HousePart>> partsByTags = new HashMap<String, List<HousePart>>(5);
+    Map<String, List<HousePart>> partsByTags = new HashMap<>(5);
     @XmlTransient
-    Map<Integer, HousePart> partsById = new HashMap<Integer, HousePart>();
+    Map<Integer, HousePart> partsById = new HashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (houseParts == null) {
@@ -73,7 +73,7 @@ public class HousePartsData {
                 String tag = iterator.next();
                 List<HousePart> parts = partsByTags.get(tag);
                 if (parts == null) {
-                    parts = new ArrayList<HousePart>();
+                    parts = new ArrayList<>();
                     partsByTags.put(tag, parts);
                 }
                 parts.add(part);

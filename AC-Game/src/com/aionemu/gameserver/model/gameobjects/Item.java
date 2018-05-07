@@ -67,7 +67,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author ATracer, Wakizashi, xTz
-
  * @reworked Blackfire
  */
 public class Item extends AionObject implements IExpirable, StatOwner {
@@ -107,7 +106,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     private boolean isPacked = false;
     private boolean isAmplified = false;
     private int buffSkill;
-    
+
     /**
      * Create simple item with minimum information
      */
@@ -140,9 +139,10 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     /**
      * This constructor should be called only from DAO while loading from DB
      */
-    public Item(int objId, int itemId, long itemCount, int itemColor, int colorExpires, String itemCreator, int expireTime,
-                int activationCount, boolean isEquipped, boolean isSoulBound, long equipmentSlot, int itemLocation, int enchant, int itemSkin,
-                int fusionedItem, int optionalSocket, int optionalFusionSocket, int charge, int randomBonus, int rndCount, int packCount, int authorize, boolean isPacked, boolean isAmplified, int buffSkill) {
+    public Item(int objId, int itemId, long itemCount, int itemColor, int colorExpires, String itemCreator, int expireTime, int activationCount,
+        boolean isEquipped, boolean isSoulBound, long equipmentSlot, int itemLocation, int enchant, int itemSkin, int fusionedItem,
+        int optionalSocket, int optionalFusionSocket, int charge, int randomBonus, int rndCount, int packCount, int authorize, boolean isPacked,
+        boolean isAmplified, int buffSkill) {
         super(objId);
 
         this.itemTemplate = DataManager.ITEM_DATA.getItemTemplate(itemId);
@@ -173,7 +173,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
         }
         if (fusionedItemTemplate != null) {
             if (!itemTemplate.isCanFuse() || !itemTemplate.isTwoHandWeapon() || !fusionedItemTemplate.isCanFuse()
-                    || !fusionedItemTemplate.isTwoHandWeapon()) {
+                || !fusionedItemTemplate.isTwoHandWeapon()) {
                 this.fusionedItemTemplate = null;
                 this.optionalFusionSocket = 0;
             }
@@ -206,18 +206,18 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     }
 
     public boolean hasTune() {
-    	// Way #1
+        // Way #1
         //if (!this.itemTemplate.isWeapon() || !this.itemTemplate.isArmor()) {
-            //return false;
+        //return false;
         //}
         //return getRandomCount() < this.itemTemplate.getRandomBonusCount() && !isEquipped();
-    	// Way #2    	
+        // Way #2    	
         if (getOptionalSocket() == -1) {
             return true;
         }
         return false;
     }
-    
+
     @Override
     public String getName() {
         // TODO
@@ -226,7 +226,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     }
 
     /**
-     * @param return itemCreator
+     * @param return
+     *            itemCreator
      */
     public String getItemCreator() {
         if (itemCreator == null) {
@@ -236,7 +237,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     }
 
     /**
-     * @param itemCreator the itemCreator to set
+     * @param itemCreator
+     *            the itemCreator to set
      */
     public void setItemCreator(String itemCreator) {
         this.itemCreator = itemCreator;
@@ -322,7 +324,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     }
 
     /**
-     * @param itemColor the itemColor to set (color value or coloring item id)
+     * @param itemColor
+     *            the itemColor to set (color value or coloring item id)
      */
     public void setItemColor(int coloringItemId) {
         this.itemColor = coloringItemId;
@@ -331,7 +334,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
     /**
      * @return positive values if not expired, 0 for not expirable, negative for
-     * expired
+     *         expired
      */
     public int getColorTimeLeft() {
         if (colorExpireTime == 0) {
@@ -351,7 +354,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
     /**
      * @return the itemCount Number of this item in stack. Should be not more
-     * than template maxstackcount ?
+     *         than template maxstackcount ?
      */
     public long getItemCount() {
         return itemCount;
@@ -362,7 +365,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     }
 
     /**
-     * @param itemCount the itemCount to set
+     * @param itemCount
+     *            the itemCount to set
      */
     public void setItemCount(long itemCount) {
         this.itemCount = itemCount;
@@ -376,7 +380,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
      * storage
      *
      * @param count
-     * @param left  count
+     * @param left
+     *            count
      */
     public long increaseItemCount(long count) {
         if (count <= 0) {
@@ -398,7 +403,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
      * storage
      *
      * @param count
-     * @param left  count
+     * @param left
+     *            count
      */
     public long decreaseItemCount(long count) {
         if (count <= 0) {
@@ -422,7 +428,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     }
 
     /**
-     * @param isEquipped the isEquipped to set
+     * @param isEquipped
+     *            the isEquipped to set
      */
     public void setEquipped(boolean isEquipped) {
         this.isEquipped = isEquipped;
@@ -431,16 +438,17 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
     /**
      * @return the equipmentSlot Equipment slot can be of 2 types - one is the
-     * ItemSlot enum type if equipped, second - is position in cube FIXME:
-     * That's the biggest nonsense!!! Slot value is Q, while position in Cube is
-     * H [RR]
+     *         ItemSlot enum type if equipped, second - is position in cube FIXME:
+     *         That's the biggest nonsense!!! Slot value is Q, while position in Cube is
+     *         H [RR]
      */
     public long getEquipmentSlot() {
         return equipmentSlot;
     }
 
     /**
-     * @param equipmentSlot the equipmentSlot to set
+     * @param equipmentSlot
+     *            the equipmentSlot to set
      */
     public void setEquipmentSlot(long equipmentSlot) {
         this.equipmentSlot = equipmentSlot;
@@ -486,7 +494,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     }
 
     private Set<ManaStone> itemStonesCollection() {
-        return new TreeSet<ManaStone>(new Comparator<ManaStone>() {
+        return new TreeSet<>(new Comparator<ManaStone>() {
+
             @Override
             public int compare(ManaStone o1, ManaStone o2) {
                 if (o1.getSlot() == o2.getSlot()) {
@@ -541,7 +550,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     }
 
     /**
-     * @param goodStone the goodStone to set
+     * @param goodStone
+     *            the goodStone to set
      */
     public void setGodStone(GodStone godStone) {
         this.godStone = godStone;
@@ -555,7 +565,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     }
 
     /**
-     * @param enchantLevel the echantLevel to set
+     * @param enchantLevel
+     *            the echantLevel to set
      */
     public void setEnchantLevel(int enchantLevel) {
         this.enchantLevel = enchantLevel;
@@ -574,7 +585,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
      * -> DELETED UPDATE_REQUIRED -> UPDATED UPDATED -> DELETED UPDATED ->
      * UPDATE_REQUIRED
      *
-     * @param persistentState the persistentState to set
+     * @param persistentState
+     *            the persistentState to set
      */
     public void setPersistentState(PersistentState persistentState) {
         switch (persistentState) {
@@ -638,8 +650,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     @Override
     public String toString() {
         return "Item [itemId=" + itemTemplate.getTemplateId() + " equipmentSlot=" + equipmentSlot + ", godStone=" + godStone + ", isEquipped="
-                + isEquipped + ", itemColor=" + itemColor + ", itemCount=" + itemCount + ", itemLocation=" + itemLocation + ", itemTemplate="
-                + itemTemplate + ", manaStones=" + manaStones + ", persistentState=" + persistentState + "]";
+            + isEquipped + ", itemColor=" + itemColor + ", itemCount=" + itemCount + ", itemLocation=" + itemLocation + ", itemTemplate="
+            + itemTemplate + ", manaStones=" + manaStones + ", persistentState=" + persistentState + "]";
     }
 
     public int getItemId() {
@@ -726,7 +738,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     /**
      * Compares two items on their object and item ids
      *
-     * @param Item object
+     * @param Item
+     *            object
      * @return true, if this item is equal to the object item
      * @author vlog
      */
@@ -775,9 +788,9 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     }
 
     public void setExpireTime(int expireTime) {
-    	this.expireTime = expireTime;
-    }    
-    
+        this.expireTime = expireTime;
+    }
+
     public int getExpireTimeRemaining() {
         if (expireTime == 0) {
             return 0;
@@ -800,7 +813,8 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     }
 
     /**
-     * @param temporaryExchangeTime The temporaryExchangeTime to set.
+     * @param temporaryExchangeTime
+     *            The temporaryExchangeTime to set.
      */
     public void setTemporaryExchangeTime(int temporaryExchangeTime) {
         this.temporaryExchangeTime = temporaryExchangeTime;
@@ -864,11 +878,11 @@ public class Item extends AionObject implements IExpirable, StatOwner {
     public ChargeInfo getConditioningInfo() {
         return conditioningInfo;
     }
-	
-	public void setConditioningInfo(ChargeInfo conditioning) {
+
+    public void setConditioningInfo(ChargeInfo conditioning) {
         this.conditioningInfo = conditioning;
     }
-	
+
     public int getChargePoints() {
         return conditioningInfo != null ? conditioningInfo.getChargePoints() : 0;
     }
@@ -917,7 +931,7 @@ public class Item extends AionObject implements IExpirable, StatOwner {
 
     public List<StatFunction> getCurrentModifiers() {
         if (currentModifiers == null) {
-            currentModifiers = new ArrayList<StatFunction>();
+            currentModifiers = new ArrayList<>();
         }
         return currentModifiers;
     }
@@ -981,19 +995,19 @@ public class Item extends AionObject implements IExpirable, StatOwner {
         setPersistentState(PersistentState.UPDATE_REQUIRED);
     }
 
-	public boolean isAmplified() {
-		return isAmplified;
-	}
+    public boolean isAmplified() {
+        return isAmplified;
+    }
 
-	public void setAmplified(boolean isAmplified) {
-		this.isAmplified = isAmplified;
-	}
+    public void setAmplified(boolean isAmplified) {
+        this.isAmplified = isAmplified;
+    }
 
-	public int getBuffSkill() {
-		return buffSkill;
-	}
+    public int getBuffSkill() {
+        return buffSkill;
+    }
 
-	public void setBuffSkill(int buffSkill) {
-		this.buffSkill = buffSkill;
-	}
+    public void setBuffSkill(int buffSkill) {
+        this.buffSkill = buffSkill;
+    }
 }

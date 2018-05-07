@@ -29,7 +29,6 @@
  */
 package ai.portals;
 
-import ai.ActionItemNpcAI2;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -41,6 +40,8 @@ import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
 import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
+
+import ai.ActionItemNpcAI2;
 
 /**
  * @author xTz

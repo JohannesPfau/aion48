@@ -72,7 +72,8 @@ public class BannedIP {
     /**
      * Sets ban id
      *
-     * @param id ban id
+     * @param id
+     *            ban id
      */
     public void setId(Integer id) {
         this.id = id;
@@ -90,7 +91,8 @@ public class BannedIP {
     /**
      * Sets ip mask
      *
-     * @param mask ip mask
+     * @param mask
+     *            ip mask
      */
     public void setMask(String mask) {
         this.mask = mask;
@@ -108,7 +110,8 @@ public class BannedIP {
     /**
      * Sets expiration time of ban
      *
-     * @param timeEnd expiration time of ban
+     * @param timeEnd
+     *            expiration time of ban
      */
     public void setTimeEnd(Timestamp timeEnd) {
         this.timeEnd = timeEnd;
@@ -117,7 +120,8 @@ public class BannedIP {
     /**
      * Returns true if this ip ban is equal to another. Based on {@link #mask}
      *
-     * @param o another ip ban
+     * @param o
+     *            another ip ban
      * @return true if ban's are equals
      */
     @Override

@@ -29,6 +29,8 @@
  */
 package playercommands;
 
+import org.apache.commons.lang.StringUtils;
+
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.model.ChatType;
@@ -41,16 +43,15 @@ import com.aionemu.gameserver.services.player.PlayerChatService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 import com.aionemu.gameserver.world.World;
-import org.apache.commons.lang.StringUtils;
 
 /**
  * @author Shepper, modified: bobobear
  */
 public class cmd_faction extends PlayerCommand {
 
-	public cmd_faction() {
-		super("f");
-	}
+    public cmd_faction() {
+        super("f");
+    }
 
     @Override
     public void execute(Player player, String... params) {
@@ -96,10 +97,9 @@ public class cmd_faction extends PlayerCommand {
             for (Player listener : World.getInstance().getAllPlayers()) {
                 if (listener.getAccessLevel() > 1) {
                     PacketSendUtility.sendPacket(listener, new SM_MESSAGE(player.getObjectId(),
-                            (player.getRace() == Race.ASMODIANS ? "(A) " : "(E) ") + player.getName(), message, channel));
+                        (player.getRace() == Race.ASMODIANS ? "(A) " : "(E) ") + player.getName(), message, channel));
                 } else if (listener.getRace() == player.getRace()) {
-                    PacketSendUtility.sendPacket(listener, new SM_MESSAGE(player.getObjectId(),
-                            player.getName(), message, channel));
+                    PacketSendUtility.sendPacket(listener, new SM_MESSAGE(player.getObjectId(), player.getName(), message, channel));
                 }
             }
         } else {
@@ -118,9 +118,9 @@ public class cmd_faction extends PlayerCommand {
         }
     }
 
-	@Override
-	public void onFail(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "Syntax: .f <message>");
-	}
+    @Override
+    public void onFail(Player player, String message) {
+        PacketSendUtility.sendMessage(player, "Syntax: .f <message>");
+    }
 
 }

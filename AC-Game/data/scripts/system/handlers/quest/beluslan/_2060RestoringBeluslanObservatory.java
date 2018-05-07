@@ -29,11 +29,11 @@
  */
 package quest.beluslan;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -64,7 +64,7 @@ public class _2060RestoringBeluslanObservatory extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {204701, 204785, 278003, 278088, 700293};
+        int[] npcs = { 204701, 204785, 278003, 278088, 700293 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.registerQuestItem(182204318, questId);

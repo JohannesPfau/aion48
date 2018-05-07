@@ -29,26 +29,33 @@
  */
 package playercommands;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.File;
-import java.util.*;
 
 /**
  * @author abaton
- * 
  */
 public class cmd_shop extends PlayerCommand {
 
     static class Shop {
+
         class ItemSetNotFoundException extends Exception {
 
             final List<String> suggestions;
@@ -59,9 +66,7 @@ public class cmd_shop extends PlayerCommand {
 
             @Override
             public String toString() {
-                return "ItemSetNotFoundException{" +
-                        "suggestions=" + suggestions +
-                        '}';
+                return "ItemSetNotFoundException{" + "suggestions=" + suggestions + '}';
             }
         }
 
@@ -74,7 +79,8 @@ public class cmd_shop extends PlayerCommand {
             int[] newcost = new int[len0];
 
             // initial cost of skipping prefix in String s0
-            for (int i = 0; i < len0; i++) cost[i] = i;
+            for (int i = 0; i < len0; i++)
+                cost[i] = i;
 
             // dynamically computing the array of distances
 
@@ -108,6 +114,7 @@ public class cmd_shop extends PlayerCommand {
         }
 
         static class Item {
+
             final int id;
             final int count;
 
@@ -118,14 +125,12 @@ public class cmd_shop extends PlayerCommand {
 
             @Override
             public String toString() {
-                return "Item{" +
-                        "id=" + id +
-                        ", count=" + count +
-                        '}';
+                return "Item{" + "id=" + id + ", count=" + count + '}';
             }
         }
 
         static class ItemSet {
+
             final List<Item> items;
             final List<Item> trades;
             final String name;
@@ -142,19 +147,14 @@ public class cmd_shop extends PlayerCommand {
 
             @Override
             public String toString() {
-                return "ItemSet{" +
-                        "items=" + items +
-                        ", trades=" + trades +
-                        ", name='" + name + '\'' +
-                        ", desc='" + desc + '\'' +
-                        ", cost=" + cost +
-                        '}';
+                return "ItemSet{" + "items=" + items + ", trades=" + trades + ", name='" + name + '\'' + ", desc='" + desc + '\'' + ", cost=" + cost
+                    + '}';
             }
         }
 
         private final String filename;
-        private final HashMap<String, ItemSet> itemSets = new HashMap<String, ItemSet>();
-        private final List<String> names = new ArrayList<String>();
+        private final HashMap<String, ItemSet> itemSets = new HashMap<>();
+        private final List<String> names = new ArrayList<>();
 
         public Shop(String filename) throws Exception {
             this.filename = filename;
@@ -163,15 +163,13 @@ public class cmd_shop extends PlayerCommand {
         }
 
         private static List<Item> getItems(NodeList list) {
-            ArrayList<Item> result = new ArrayList<Item>(list.getLength());
+            ArrayList<Item> result = new ArrayList<>(list.getLength());
 
             for (int i = 0; i < list.getLength(); i++) {
                 Node item = list.item(i);
 
-                result.add(new Item(
-                        Integer.parseInt(item.getTextContent()),
-                        Integer.parseInt(item.getAttributes().getNamedItem("count").getTextContent())
-                ));
+                result.add(
+                    new Item(Integer.parseInt(item.getTextContent()), Integer.parseInt(item.getAttributes().getNamedItem("count").getTextContent())));
 
             }
             return result;
@@ -206,17 +204,17 @@ public class cmd_shop extends PlayerCommand {
 
             if (set == null) {
 
-                TreeMap<Integer, String> lvs = new TreeMap<Integer, String>();
+                TreeMap<Integer, String> lvs = new TreeMap<>();
 
                 for (String id : names) {
                     lvs.put(levenshteinDistance(name, id, 2, 1, 1), id);
                 }
 
-                ArrayList<String> suggestions = new ArrayList<String>();
+                ArrayList<String> suggestions = new ArrayList<>();
 
                 Map.Entry<Integer, String> it;
                 while ((it = lvs.pollFirstEntry()) != null && suggestions.size() < 3) {
-                    if(it.getKey() < 8)
+                    if (it.getKey() < 8)
                         suggestions.add(it.getValue());
                 }
 
@@ -250,11 +248,11 @@ public class cmd_shop extends PlayerCommand {
             PacketSendUtility.sendMessage(player, itemSet.cost + "Kinah");
 
             for (Shop.Item item : itemSet.items) {
-                PacketSendUtility.sendMessage(player, "Item: "+ item.count +"x [item:" + item.id + ";ver6;;;;]");
+                PacketSendUtility.sendMessage(player, "Item: " + item.count + "x [item:" + item.id + ";ver6;;;;]");
             }
 
             for (Shop.Item item : itemSet.trades) {
-                PacketSendUtility.sendMessage(player, "Trade in: "+ item.count +"x [item:" + item.id + ";ver6;;;;]");
+                PacketSendUtility.sendMessage(player, "Trade in: " + item.count + "x [item:" + item.id + ";ver6;;;;]");
             }
         } catch (Shop.ItemSetNotFoundException e) {
             PacketSendUtility.sendMessage(player, "There aren't any set named: " + name + ". Did you mean one of: " + e.suggestions);
@@ -269,19 +267,19 @@ public class cmd_shop extends PlayerCommand {
 
             boolean fail = false;
 
-            if(i.getKinah() < itemSet.cost) {
+            if (i.getKinah() < itemSet.cost) {
                 fail = true;
                 PacketSendUtility.sendMessage(player, "You don't have enough Kinah, you need: " + itemSet.cost);
             }
 
             for (Shop.Item item : itemSet.trades) {
-                if(i.getItemCountByItemId(item.id) < item.count) {
+                if (i.getItemCountByItemId(item.id) < item.count) {
                     fail = true;
                     PacketSendUtility.sendMessage(player, "You don't have enough [item:" + item.id + ";ver6;;;;] you need: " + item.count);
                 }
             }
 
-            if(fail)
+            if (fail)
                 return;
 
             player.getInventory().decreaseKinah(itemSet.cost);
@@ -310,15 +308,15 @@ public class cmd_shop extends PlayerCommand {
             return;
         }
 
-        if("list".equals(cmd)) {
+        if ("list".equals(cmd)) {
             handleList(player, shop);
             return;
         }
-        if("buy".equals(cmd)) {
+        if ("buy".equals(cmd)) {
             handleBuy(player, shop, params[1]);
             return;
         }
-        if("show".equals(cmd)) {
+        if ("show".equals(cmd)) {
             handleShow(player, shop, params[1]);
             return;
         }

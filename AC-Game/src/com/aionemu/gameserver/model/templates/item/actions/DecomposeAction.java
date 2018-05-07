@@ -99,56 +99,54 @@ public class DecomposeAction extends AbstractItemAction {
     private static final Logger log = LoggerFactory.getLogger(DecomposeAction.class);
     private static final int USAGE_DELAY = 3000;
     private static Map<Integer, List<ItemTemplate>> manastones;
-    private static Map<Race, int[]> chunkEarth = new HashMap<Race, int[]>();
+    private static Map<Race, int[]> chunkEarth = new HashMap<>();
 
     static {
-        chunkEarth.put(Race.ASMODIANS, new int[]{152000051, 152000052, 152000053, 152000451, 152000453, 152000551, 152000651, 152000751,
-                152000752, 152000753, 152000851, 152000852, 152000853, 152001051, 152001052, 152000201, 152000102, 152000054, 152000055,
-                152000455, 152000457, 152000552, 152000652, 152000754, 152000755, 152000854, 152000855, 152000102, 152000202, 152000056,
-                152000057, 152000459, 152000461, 152000553, 152000653, 152000756, 152000757, 152000856, 152000857, 152000104, 152000204,
-                152000058, 152000059, 152000463, 152000465, 152000554, 152000654, 152000758, 152000759, 152000760, 152000858, 152001053,
-                152000107, 152000207, 152003004, 152003005, 152003006, 152000061, 152000062, 152000063, 152000468, 152000470, 152000556,
-                152000656, 152000657, 152000762, 152000763, 152000860, 152000861, 152000862, 152001055, 152001056, 152000113, 152000117,
-                152000214, 152000606, 152000713, 152000811});
+        chunkEarth.put(Race.ASMODIANS,
+            new int[] { 152000051, 152000052, 152000053, 152000451, 152000453, 152000551, 152000651, 152000751, 152000752, 152000753, 152000851,
+                152000852, 152000853, 152001051, 152001052, 152000201, 152000102, 152000054, 152000055, 152000455, 152000457, 152000552, 152000652,
+                152000754, 152000755, 152000854, 152000855, 152000102, 152000202, 152000056, 152000057, 152000459, 152000461, 152000553, 152000653,
+                152000756, 152000757, 152000856, 152000857, 152000104, 152000204, 152000058, 152000059, 152000463, 152000465, 152000554, 152000654,
+                152000758, 152000759, 152000760, 152000858, 152001053, 152000107, 152000207, 152003004, 152003005, 152003006, 152000061, 152000062,
+                152000063, 152000468, 152000470, 152000556, 152000656, 152000657, 152000762, 152000763, 152000860, 152000861, 152000862, 152001055,
+                152001056, 152000113, 152000117, 152000214, 152000606, 152000713, 152000811 });
 
-        chunkEarth.put(Race.ELYOS, new int[]{152000001, 152000002, 152000003, 152000401, 152000403, 152000501, 152000601, 152000701,
-                152000702, 152000703, 152000801, 152000802, 152000803, 152001001, 152001002, 152000101, 152000201, 152000004, 152000005,
-                152000405, 152000407, 152000502, 152000602, 152000704, 152000705, 152000804, 152000805, 152000102, 152000202, 152000006,
-                152000007, 152000409, 152000411, 152000503, 152000603, 152000706, 152000707, 152000806, 152000807, 152000104, 152000204,
-                152000008, 152000009, 152000413, 152000415, 152000504, 152000604, 152000708, 152000709, 152000710, 152000808, 152001003,
-                152000107, 152000207, 152003004, 152003005, 152003006, 152000010, 152000011, 152000012, 152000417, 152000419, 152000505,
-                152000605, 152000607, 152000711, 152000712, 152000809, 152000810, 152000812, 152001004, 152001005, 152000113, 152000117,
-                152000214, 152000606, 152000713, 152000811});
+        chunkEarth.put(Race.ELYOS,
+            new int[] { 152000001, 152000002, 152000003, 152000401, 152000403, 152000501, 152000601, 152000701, 152000702, 152000703, 152000801,
+                152000802, 152000803, 152001001, 152001002, 152000101, 152000201, 152000004, 152000005, 152000405, 152000407, 152000502, 152000602,
+                152000704, 152000705, 152000804, 152000805, 152000102, 152000202, 152000006, 152000007, 152000409, 152000411, 152000503, 152000603,
+                152000706, 152000707, 152000806, 152000807, 152000104, 152000204, 152000008, 152000009, 152000413, 152000415, 152000504, 152000604,
+                152000708, 152000709, 152000710, 152000808, 152001003, 152000107, 152000207, 152003004, 152003005, 152003006, 152000010, 152000011,
+                152000012, 152000417, 152000419, 152000505, 152000605, 152000607, 152000711, 152000712, 152000809, 152000810, 152000812, 152001004,
+                152001005, 152000113, 152000117, 152000214, 152000606, 152000713, 152000811 });
     }
 
-    private static Map<Race, int[]> chunkSand = new HashMap<Race, int[]>();
+    private static Map<Race, int[]> chunkSand = new HashMap<>();
 
     static {
 
-        chunkSand.put(Race.ASMODIANS, new int[]{152000452, 152000454, 152000301, 152000302, 152000303, 152000456, 152000458, 152000103,
-                152000203, 152000304, 152000305, 152000306, 152000460, 152000462, 152000105, 152000205, 152000307, 152000309, 152000311,
-                152000464, 152000466, 152000108, 152000208, 152000313, 152000315, 152000317, 152000469, 152000471, 152000114, 152000215,
-                152000320, 152000322, 152000324});
+        chunkSand.put(Race.ASMODIANS,
+            new int[] { 152000452, 152000454, 152000301, 152000302, 152000303, 152000456, 152000458, 152000103, 152000203, 152000304, 152000305,
+                152000306, 152000460, 152000462, 152000105, 152000205, 152000307, 152000309, 152000311, 152000464, 152000466, 152000108, 152000208,
+                152000313, 152000315, 152000317, 152000469, 152000471, 152000114, 152000215, 152000320, 152000322, 152000324 });
 
-        chunkSand.put(Race.ELYOS, new int[]{152000402, 152000404, 152000301, 152000302, 152000303, 152000406, 152000408, 152000103,
-                152000203, 152000304, 152000305, 152000306, 152000410, 152000412, 152000105, 152000205, 152000307, 152000309, 152000311,
-                152000414, 152000416, 152000108, 152000208, 152000313, 152000315, 152000317, 152000418, 152000420, 152000114, 152000215,
-                152000320, 152000322, 152000324});
+        chunkSand.put(Race.ELYOS,
+            new int[] { 152000402, 152000404, 152000301, 152000302, 152000303, 152000406, 152000408, 152000103, 152000203, 152000304, 152000305,
+                152000306, 152000410, 152000412, 152000105, 152000205, 152000307, 152000309, 152000311, 152000414, 152000416, 152000108, 152000208,
+                152000313, 152000315, 152000317, 152000418, 152000420, 152000114, 152000215, 152000320, 152000322, 152000324 });
     }
 
-    private static int[] chunkRock = {152000106, 152000206, 152000308, 152000310, 152000312, 152000109, 152000209, 152000314, 152000316,
-            						  152000318, 152000115, 152000216, 152000219, 152000321, 152000323, 152000325};
-            						  
-    private static int[] chunkGemstone = {152000112, 152000213, 152000116, 152000212, 152000217, 152000326, 152000327, 152000328};
-    
-    private static int[] scrolls = {164002002, 164002058, 164002010, 164002056, 164002057, 164002003, 164002059, 164002011, 164002004,
-            						164002012, 164002012, 164000122, 164000131, 164000118};
-            						
-    private static int[] potion = {162000045, 162000079, 162000016, 162000021, 162000015, 162000027, 162000020, 162000044, 162000043,
-            					   162000026, 162000019, 162000014, 162000023, 162000022};
-    
+    private static int[] chunkRock = { 152000106, 152000206, 152000308, 152000310, 152000312, 152000109, 152000209, 152000314, 152000316, 152000318,
+        152000115, 152000216, 152000219, 152000321, 152000323, 152000325 };
 
-    
+    private static int[] chunkGemstone = { 152000112, 152000213, 152000116, 152000212, 152000217, 152000326, 152000327, 152000328 };
+
+    private static int[] scrolls = { 164002002, 164002058, 164002010, 164002056, 164002057, 164002003, 164002059, 164002011, 164002004, 164002012,
+        164002012, 164000122, 164000131, 164000118 };
+
+    private static int[] potion = { 162000045, 162000079, 162000016, 162000021, 162000015, 162000027, 162000020, 162000044, 162000043, 162000026,
+        162000019, 162000014, 162000023, 162000022 };
+
     @Override
     public boolean canAct(Player player, Item parentItem, Item targetItem) {
         if (this.isSelect) {
@@ -182,69 +180,75 @@ public class DecomposeAction extends AbstractItemAction {
 
         // Filters only Items that are suitable for Player Level
         Collection<ExtractedItemsCollection> levelSuitableItems = filterItemsByLevel(player, itemsCollections);
-        
+
         //  Select only 1 Item based on Chance Attributes
         final ExtractedItemsCollection selectedCollection = selectItemByChance(levelSuitableItems);
         final ExtractedItemsCollection selectedCollections = selectItemByChance(levelSuitableItems);
 
-        PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), USAGE_DELAY, 0, 0));
+        PacketSendUtility.broadcastPacketAndReceive(player,
+            new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), USAGE_DELAY, 0, 0));
 
         final ItemUseObserver observer = new ItemUseObserver() {
+
             @Override
             public void abort() {
                 player.getController().cancelTask(TaskId.ITEM_USE);
                 player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
                 if (parentItem.getItemTemplate().getCategory() == ItemCategory.GATHERABLE) {
-                    PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_CANCELED(parentItem.getItemTemplate().getNameId()));
+                    PacketSendUtility.sendPacket(player,
+                        SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_CANCELED(parentItem.getItemTemplate().getNameId()));
                 } else if ((targetItem != null) && (targetItem.getItemTemplate().isArmor() || targetItem.getItemTemplate().isWeapon())) {
                     PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_CANCELED(targetItem.getNameId()));
                 } else {
-                    PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentItem.getItemTemplate().getNameId())));
+                    PacketSendUtility.sendPacket(player,
+                        SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentItem.getItemTemplate().getNameId())));
                 }
-                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0), true);
+                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
+                    parentItem.getItemTemplate().getTemplateId(), 0, 2, 0), true);
                 player.getObserveController().removeObserver(this);
             }
         };
 
         player.getObserveController().attach(observer);
         player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 player.getObserveController().removeObserver(observer);
                 boolean validAction = postValidate(player, parentItem);
-				int num = 1;
+                int num = 1;
                 if (validAction) {
                     if (selectedCollection.getItems().size() > 0) {
                         for (ResultedItem resultItem : selectedCollection.getItems()) {
                             if (canAcquire(player, resultItem)) {
                                 ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount());
-								uniqueDropAnnounce(player, resultItem, parentItem);
-                            	num++;
-								if (MembershipConfig.ADD_CHEST_DROP) {
-									if (num == 2) {
-									int rndA = Rnd.get(100);
-										if (player.getClientConnection().getAccount().getMembership() == 2) {
-											if (rndA > 30) {
-												for (ResultedItem resultItems : selectedCollections.getItems()) {
-													if (canAcquire(player, resultItems)) {
-														ItemService.addItem(player, resultItems.getItemId(), resultItems.getResultCount());
-														uniqueDropAnnounces(player, resultItems, parentItem);
-													}
-												}
-											}
-										} else if (player.getClientConnection().getAccount().getMembership() == 1) {
-											if (rndA > 60) {
-												for (ResultedItem resultItems : selectedCollections.getItems()) {
-												if (canAcquire(player, resultItems)) {
-													ItemService.addItem(player, resultItems.getItemId(), resultItems.getResultCount());
-													uniqueDropAnnounces(player, resultItems, parentItem);
-													}
-												}
-											}
-										}
-									}
-								}
-							}
+                                uniqueDropAnnounce(player, resultItem, parentItem);
+                                num++;
+                                if (MembershipConfig.ADD_CHEST_DROP) {
+                                    if (num == 2) {
+                                        int rndA = Rnd.get(100);
+                                        if (player.getClientConnection().getAccount().getMembership() == 2) {
+                                            if (rndA > 30) {
+                                                for (ResultedItem resultItems : selectedCollections.getItems()) {
+                                                    if (canAcquire(player, resultItems)) {
+                                                        ItemService.addItem(player, resultItems.getItemId(), resultItems.getResultCount());
+                                                        uniqueDropAnnounces(player, resultItems, parentItem);
+                                                    }
+                                                }
+                                            }
+                                        } else if (player.getClientConnection().getAccount().getMembership() == 1) {
+                                            if (rndA > 60) {
+                                                for (ResultedItem resultItems : selectedCollections.getItems()) {
+                                                    if (canAcquire(player, resultItems)) {
+                                                        ItemService.addItem(player, resultItems.getItemId(), resultItems.getResultCount());
+                                                        uniqueDropAnnounces(player, resultItems, parentItem);
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
                         }
                         if (parentItem.getItemTemplate().getCategory() == ItemCategory.GATHERABLE) {
                             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(parentItem.getNameId()));
@@ -253,258 +257,275 @@ public class DecomposeAction extends AbstractItemAction {
                         } else {
                             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_USE_ITEM(new DescriptionId(parentItem.getNameId())));
                         }
-                    } 
-                    
+                    }
+
                     if (selectedCollection.getRandomItems().size() > 0) {
                         for (RandomItem randomItem : selectedCollection.getRandomItems()) {
-                        	if (canAcquire(player, randomItem)) {
-	                            RandomType randomType = randomItem.getType();
-	                            if (randomType != null) {
-	                                int randomId = 0;
-	                                int i = 0;
-	                                int itemLvl = parentItem.getItemTemplate().getLevel();
-	                                
-	                                switch (randomItem.getType()) 
-	                                {
-	                                    case ENCHANTMENT: {
-	                                        do {
-	                                            randomId = 166000000 + itemLvl + Rnd.get(50);
-	                                            i++;
-	                                            if (i > 50) {
-	                                                randomId = 0;
-	                                                log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
-	                                                break;
-	                                            }
-	                                        } while (!ItemService.checkRandomTemplate(randomId));
-	                                        break;
-	                                    }
-	                                    case MANASTONE:
-	                                    case MANASTONE_COMMON_GRADE_10:
-	                                    case MANASTONE_COMMON_GRADE_20:
-	                                    case MANASTONE_COMMON_GRADE_30:
-	                                    case MANASTONE_COMMON_GRADE_40:
-	                                    case MANASTONE_COMMON_GRADE_50:
-	                                    case MANASTONE_COMMON_GRADE_60:
-	                                    case MANASTONE_COMMON_GRADE_70:
-	                                    case MANASTONE_RARE_GRADE_10:
-	                                    case MANASTONE_RARE_GRADE_20:
-	                                    case MANASTONE_RARE_GRADE_30:
-	                                    case MANASTONE_RARE_GRADE_40:
-	                                    case MANASTONE_RARE_GRADE_50:
-	                                    case MANASTONE_RARE_GRADE_60:
-	                                    case MANASTONE_RARE_GRADE_70:
-	                                    case MANASTONE_LEGEND_GRADE_10:
-	                                    case MANASTONE_LEGEND_GRADE_20:
-	                                    case MANASTONE_LEGEND_GRADE_30:
-	                                    case MANASTONE_LEGEND_GRADE_40:
-	                                    case MANASTONE_LEGEND_GRADE_50:
-	                                    case MANASTONE_LEGEND_GRADE_60:
-	                                    case MANASTONE_LEGEND_GRADE_70:
-										case MANASTONE_EPIC_GRADE_50:
-									    case MANASTONE_EPIC_GRADE_60:
-										case MANASTONE_EPIC_GRADE_70:
-	                                        if (manastones == null) {
-	                                            manastones = DataManager.ITEM_DATA.getManastones();
-	                                        }
-	                                        List<ItemTemplate> stones = manastones.get(randomType.equals(RandomType.MANASTONE) ? itemLvl : randomType.getLevel());
-	                                        if (stones == null) {
-	                                            log.warn("DecomposeAction random item id not found. " + parentItem.getItemTemplate().getTemplateId());
-	                                            continue;
-	                                        }
-	                                        if (!randomType.equals(RandomType.MANASTONE)) {
-	                                            ItemQuality itemQuality = ItemQuality.COMMON;
-	                                            if (randomType.name().contains("RARE")) {
-	                                                itemQuality = ItemQuality.RARE;
-	                                            } else if (randomType.name().contains("LEGEND")) {
-	                                                itemQuality = ItemQuality.LEGEND;
-	                                            } else if (randomType.name().contains("EPIC")) {
-	                                                itemQuality = ItemQuality.EPIC;
-	                                            }
-	                                            
-	                                            List<ItemTemplate> selectedStones = select(stones, having(on(ItemTemplate.class).getItemQuality(), equalTo(itemQuality)));
-	                                            if (selectedStones.size() == 0) {
-	                                            	randomId = 0;
-	                                            	break;
-	                                            }
-	                                            
-	                                            randomId = selectedStones.get(Rnd.get(selectedStones.size() - 1)).getTemplateId();
-	                                        } else {
-	                                            List<ItemTemplate> selectedStones = select(stones, having(on(ItemTemplate.class).getItemQuality(), not(equalTo(ItemQuality.LEGEND))));
-	                                            randomId = selectedStones.get(Rnd.get(selectedStones.size() - 1)).getTemplateId();
-	                                        }
-	                                        break;
-										case FINE_SUPERB_BETRAYER_CLOTHSET_65:
-	                                        randomId = ArmorSets.Fine_Superb_Betrayer_ClothSet_65[Rnd.get(ArmorSets.Fine_Superb_Betrayer_ClothSet_65.length)];
-	                                        break;											
-										case FINE_SUPERB_BETRAYER_LEATHERSET_65:
-	                                        randomId = ArmorSets.Fine_Superb_Betrayer_LeatherSet_65[Rnd.get(ArmorSets.Fine_Superb_Betrayer_LeatherSet_65.length)];
-	                                        break;												
-										case FINE_SUPERB_BETRAYER_CHAINSET_65:
-	                                        randomId = ArmorSets.Fine_Superb_Betrayer_ChainSet_65[Rnd.get(ArmorSets.Fine_Superb_Betrayer_ChainSet_65.length)];
-	                                        break;												
-										case FINE_SUPERB_BETRAYER_PLATESET_65:
-	                                        randomId = ArmorSets.Fine_Superb_Betrayer_PlateSet_65[Rnd.get(ArmorSets.Fine_Superb_Betrayer_PlateSet_65.length)];
-	                                        break;													
-										case FINE_SUPERB_BETRAYER_GLADIATOR_WEAPON_65:
-	                                        randomId = WeaponSets.Fine_Superb_Betrayer_Gladiator_Weapon_65[Rnd.get(WeaponSets.Fine_Superb_Betrayer_Gladiator_Weapon_65.length)];
-	                                        break;												
-										case FINE_SUPERB_BETRAYER_TEMPLAR_WEAPON_65:
-	                                        randomId = WeaponSets.Fine_Superb_Betrayer_Templar_Weapon_65[Rnd.get(WeaponSets.Fine_Superb_Betrayer_Templar_Weapon_65.length)];
-	                                        break;											
-										case FINE_SUPERB_BETRAYER_PRIEST_WEAPON_65:
-	                                        randomId = WeaponSets.Fine_Superb_Betrayer_Priest_Weapon_65[Rnd.get(WeaponSets.Fine_Superb_Betrayer_Priest_Weapon_65.length)];
-	                                        break;												
-										case FINE_SUPERB_BETRAYER_MAGE_WEAPON_65:
-	                                        randomId = WeaponSets.Fine_Superb_Betrayer_Mage_Weapon_65[Rnd.get(WeaponSets.Fine_Superb_Betrayer_Mage_Weapon_65.length)];
-	                                        break;												
-										case FINE_SUPERB_BETRAYER_SCOUT_WEAPON_65:
-	                                        randomId = WeaponSets.Fine_Superb_Betrayer_Scout_Weapon_65[Rnd.get(WeaponSets.Fine_Superb_Betrayer_Scout_Weapon_65.length)];
-	                                        break;												
-										case FINE_SUPERB_BETRAYER_BARD_WEAPON_65:
-	                                        randomId = WeaponSets.Fine_Superb_Betrayer_Bard_Weapon_65[Rnd.get(WeaponSets.Fine_Superb_Betrayer_Bard_Weapon_65.length)];
-	                                        break;												
-										case FINE_SUPERB_BETRAYER_RIDER_WEAPON_65:
-	                                        randomId = WeaponSets.Fine_Superb_Betrayer_Rider_Weapon_65[Rnd.get(WeaponSets.Fine_Superb_Betrayer_Rider_Weapon_65.length)];
-	                                        break;												
-										case FINE_SUPERB_BETRAYER_AETHERTECH_WEAPON_65:
-	                                        randomId = WeaponSets.Fine_Superb_Betrayer_Aethertech_Weapon_65[Rnd.get(WeaponSets.Fine_Superb_Betrayer_Aethertech_Weapon_65.length)];
-	                                        break; 
-										case KUNAX_GLADIATOR_WEAPON_65:
-	                                        randomId = WeaponSets.Kunax_Gladiator_Weapon_65[Rnd.get(WeaponSets.Kunax_Gladiator_Weapon_65.length)];
-	                                        break;		                                        
-										case KUNAX_TEMPLAR_WEAPON_65:
-	                                        randomId = WeaponSets.Kunax_Templar_Weapon_65[Rnd.get(WeaponSets.Kunax_Templar_Weapon_65.length)];
-	                                        break;
-										case KUNAX_PRIEST_WEAPON_65:
-	                                        randomId = WeaponSets.Kunax_Priest_Weapon_65[Rnd.get(WeaponSets.Kunax_Priest_Weapon_65.length)];
-	                                        break;
-										case KUNAX_MAGE_WEAPON_65:
-	                                        randomId = WeaponSets.Kunax_Mage_Weapon_65[Rnd.get(WeaponSets.Kunax_Mage_Weapon_65.length)];
-	                                        break;
-										case KUNAX_SCOUT_WEAPON_65:
-	                                        randomId = WeaponSets.Kunax_Scout_Weapon_65[Rnd.get(WeaponSets.Kunax_Scout_Weapon_65.length)];
-	                                        break;
-										case KUNAX_BARD_WEAPON_65:
-	                                        randomId = WeaponSets.Kunax_Bard_Weapon_65[Rnd.get(WeaponSets.Kunax_Bard_Weapon_65.length)];
-	                                        break;
-										case KUNAX_RIDER_WEAPON_65:
-	                                        randomId = WeaponSets.Kunax_Rider_Weapon_65[Rnd.get(WeaponSets.Kunax_Rider_Weapon_65.length)];
-	                                        break;
-										case KUNAX_AETHERTECH_WEAPON_65:
-	                                        randomId = WeaponSets.Kunax_Aethertech_Weapon_65[Rnd.get(WeaponSets.Kunax_Aethertech_Weapon_65.length)];
-	                                        break;
-										case KUNAX_CLOTHSET_65:
-	                                        randomId = ArmorSets.Kunax_ClothSet_65[Rnd.get(ArmorSets.Kunax_ClothSet_65.length)];
-	                                        break;
-										case KUNAX_LEATHERSET_65:
-	                                        randomId = ArmorSets.Kunax_LeatherSet_65[Rnd.get(ArmorSets.Kunax_LeatherSet_65.length)];
-	                                        break;
-										case KUNAX_CHAINSET_65:
-	                                        randomId = ArmorSets.Kunax_ChainSet_65[Rnd.get(ArmorSets.Kunax_ChainSet_65.length)];
-	                                        break;
-										case KUNAX_PLATESET_65:
-	                                        randomId = ArmorSets.Kunax_PlateSet_65[Rnd.get(ArmorSets.Kunax_PlateSet_65.length)];
-	                                        break;
-										case KUNAX_HELMET_CLOTH_65:
-	                                        randomId = ArmorSets.Kunax_Helmet_Cloth_65[Rnd.get(ArmorSets.Kunax_Helmet_Cloth_65.length)];
-	                                        break;
-										case KUNAX_HELMET_LEATHER_65:
-	                                        randomId = ArmorSets.Kunax_Helmet_Leather_65[Rnd.get(ArmorSets.Kunax_Helmet_Leather_65.length)];
-	                                        break;
-										case KUNAX_HELMET_CHAIN_65:
-	                                        randomId = ArmorSets.Kunax_Helmet_Chain_65[Rnd.get(ArmorSets.Kunax_Helmet_Chain_65.length)];
-	                                        break;
-										case KUNAX_HELMET_PLATE_65:
-	                                        randomId = ArmorSets.Kunax_Helmet_Plate_65[Rnd.get(ArmorSets.Kunax_Helmet_Plate_65.length)];
-	                                        break;
-										case KUNAX_ACCESSORY_MAGICAL_65:
-	                                        randomId = AccessoriesSets.Kunax_Accessory_Magical_65[Rnd.get(AccessoriesSets.Kunax_Accessory_Magical_65.length)];
-	                                        break;
-										case KUNAX_ACCESSORY_PHYSICAL_65:
-	                                        randomId = AccessoriesSets.Kunax_Accessory_Physical_65[Rnd.get(AccessoriesSets.Kunax_Accessory_Physical_65.length)];
-	                                        break;
-										case IDIAN_EPIC:
-	                                        randomId = IdianSets.Idian_EPIC[Rnd.get(IdianSets.Idian_EPIC.length)];
-	                                        break;	                                        
-										case IDIAN_ICY_LEGEND:
-	                                        randomId = IdianSets.Idian_ICY_LEGEND[Rnd.get(IdianSets.Idian_ICY_LEGEND.length)];
-	                                        break;	                                        
-										case IDIAN_CELESTIAL_EPIC:
-	                                        randomId = IdianSets.Idian_CELESTIAL_EPIC[Rnd.get(IdianSets.Idian_CELESTIAL_EPIC.length)];
-	                                        break;	                                        
-										case IDIAN_TRIUMPHAL_EPIC:
-	                                        randomId = IdianSets.Idian_TRIUMPHAL_EPIC[Rnd.get(IdianSets.Idian_TRIUMPHAL_EPIC.length)];
-	                                        break;	                                        
-										case IDIAN_GOLDEN_EPIC:
-	                                        randomId = IdianSets.Idian_GOLDEN_EPIC[Rnd.get(IdianSets.Idian_GOLDEN_EPIC.length)];
-	                                        break;	                                        
-										case IDIAN_HARLOCK_EPIC:
-	                                        randomId = IdianSets.Idian_HARLOCK_EPIC[Rnd.get(IdianSets.Idian_HARLOCK_EPIC.length)];
-	                                        break;	                                        
-										case IDIAN_INFUSED_EPIC:
-	                                        randomId = IdianSets.Idian_INFUSED_EPIC[Rnd.get(IdianSets.Idian_INFUSED_EPIC.length)];
-	                                        break;	                                        
-										case IDIAN_TIDAL_UNIQUE:
-	                                        randomId = IdianSets.Idian_TIDAL_UNIQUE[Rnd.get(IdianSets.Idian_TIDAL_UNIQUE.length)];
-	                                        break;	                                        
-										case IDIAN_NOBLE_TIDAL_EPIC:
-	                                        randomId = IdianSets.Idian_NOBLE_TIDAL_EPIC[Rnd.get(IdianSets.Idian_NOBLE_TIDAL_EPIC.length)];
-	                                        break;	                                        
-										case IDIAN_BLAZING_FIGHTER_EPIC:
-	                                        randomId = IdianSets.Idian_BLAZING_FIGHTER_EPIC[Rnd.get(IdianSets.Idian_BLAZING_FIGHTER_EPIC.length)];
-	                                        break;
-	                                    case CHUNK_EARTH: {
-	                                        int[] earth = chunkEarth.get(player.getRace());
-	                                        randomId = earth[Rnd.get(earth.length)];
-	                                        break;
-	                                    }
-	                                    case CHUNK_SAND: {
-	                                        int[] sand = chunkSand.get(player.getRace());
-	                                        randomId = sand[Rnd.get(sand.length)];
-	                                        break;
-	                                    }
-	                                    case CHUNK_ROCK: {
-	                                        randomId = chunkRock[Rnd.get(chunkRock.length)];
-	                                        break;
-	                                    }
-	                                    case CHUNK_GEMSTONE: {
-	                                        randomId = chunkGemstone[Rnd.get(chunkGemstone.length)];
-	                                        break;
-	                                    }
-	                                    case SCROLLS: {
-	                                        randomId = scrolls[Rnd.get(scrolls.length)];
-	                                        break;
-	                                    }
-	                                    case POTION: {
-	                                        randomId = potion[Rnd.get(potion.length)];
-	                                        break;
-	                                    }
-	                                    case ANCIENTITEMS: {
-	                                        do {
-	                                            randomId = Rnd.get(186000051, 186000066);
-	                                            i++;
-	                                            if (i > 50) {
-	                                                randomId = 0;
-	                                                log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
-	                                                break;
-	                                            }
-	                                        } while (!ItemService.checkRandomTemplate(randomId));
-	                                        break;
-	                                    }
-	                                }
-	                                
-	                                if (randomId <= 0  || !isItemExists(randomId)) {
-	                                	continue;
-	                                }
+                            if (canAcquire(player, randomItem)) {
+                                RandomType randomType = randomItem.getType();
+                                if (randomType != null) {
+                                    int randomId = 0;
+                                    int i = 0;
+                                    int itemLvl = parentItem.getItemTemplate().getLevel();
 
-	                                // Finally, Add the selected Decomposable Item to player inventory
-	                                ItemService.addItem(player, randomId, randomItem.getResultCount());
-	                            }
-                         }
-                      }
+                                    switch (randomItem.getType()) {
+                                        case ENCHANTMENT: {
+                                            do {
+                                                randomId = 166000000 + itemLvl + Rnd.get(50);
+                                                i++;
+                                                if (i > 50) {
+                                                    randomId = 0;
+                                                    log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
+                                                    break;
+                                                }
+                                            } while (!ItemService.checkRandomTemplate(randomId));
+                                            break;
+                                        }
+                                        case MANASTONE:
+                                        case MANASTONE_COMMON_GRADE_10:
+                                        case MANASTONE_COMMON_GRADE_20:
+                                        case MANASTONE_COMMON_GRADE_30:
+                                        case MANASTONE_COMMON_GRADE_40:
+                                        case MANASTONE_COMMON_GRADE_50:
+                                        case MANASTONE_COMMON_GRADE_60:
+                                        case MANASTONE_COMMON_GRADE_70:
+                                        case MANASTONE_RARE_GRADE_10:
+                                        case MANASTONE_RARE_GRADE_20:
+                                        case MANASTONE_RARE_GRADE_30:
+                                        case MANASTONE_RARE_GRADE_40:
+                                        case MANASTONE_RARE_GRADE_50:
+                                        case MANASTONE_RARE_GRADE_60:
+                                        case MANASTONE_RARE_GRADE_70:
+                                        case MANASTONE_LEGEND_GRADE_10:
+                                        case MANASTONE_LEGEND_GRADE_20:
+                                        case MANASTONE_LEGEND_GRADE_30:
+                                        case MANASTONE_LEGEND_GRADE_40:
+                                        case MANASTONE_LEGEND_GRADE_50:
+                                        case MANASTONE_LEGEND_GRADE_60:
+                                        case MANASTONE_LEGEND_GRADE_70:
+                                        case MANASTONE_EPIC_GRADE_50:
+                                        case MANASTONE_EPIC_GRADE_60:
+                                        case MANASTONE_EPIC_GRADE_70:
+                                            if (manastones == null) {
+                                                manastones = DataManager.ITEM_DATA.getManastones();
+                                            }
+                                            List<ItemTemplate> stones = manastones
+                                                .get(randomType.equals(RandomType.MANASTONE) ? itemLvl : randomType.getLevel());
+                                            if (stones == null) {
+                                                log.warn("DecomposeAction random item id not found. " + parentItem.getItemTemplate().getTemplateId());
+                                                continue;
+                                            }
+                                            if (!randomType.equals(RandomType.MANASTONE)) {
+                                                ItemQuality itemQuality = ItemQuality.COMMON;
+                                                if (randomType.name().contains("RARE")) {
+                                                    itemQuality = ItemQuality.RARE;
+                                                } else if (randomType.name().contains("LEGEND")) {
+                                                    itemQuality = ItemQuality.LEGEND;
+                                                } else if (randomType.name().contains("EPIC")) {
+                                                    itemQuality = ItemQuality.EPIC;
+                                                }
+
+                                                List<ItemTemplate> selectedStones = select(stones,
+                                                    having(on(ItemTemplate.class).getItemQuality(), equalTo(itemQuality)));
+                                                if (selectedStones.size() == 0) {
+                                                    randomId = 0;
+                                                    break;
+                                                }
+
+                                                randomId = selectedStones.get(Rnd.get(selectedStones.size() - 1)).getTemplateId();
+                                            } else {
+                                                List<ItemTemplate> selectedStones = select(stones,
+                                                    having(on(ItemTemplate.class).getItemQuality(), not(equalTo(ItemQuality.LEGEND))));
+                                                randomId = selectedStones.get(Rnd.get(selectedStones.size() - 1)).getTemplateId();
+                                            }
+                                            break;
+                                        case FINE_SUPERB_BETRAYER_CLOTHSET_65:
+                                            randomId = ArmorSets.Fine_Superb_Betrayer_ClothSet_65[Rnd
+                                                .get(ArmorSets.Fine_Superb_Betrayer_ClothSet_65.length)];
+                                            break;
+                                        case FINE_SUPERB_BETRAYER_LEATHERSET_65:
+                                            randomId = ArmorSets.Fine_Superb_Betrayer_LeatherSet_65[Rnd
+                                                .get(ArmorSets.Fine_Superb_Betrayer_LeatherSet_65.length)];
+                                            break;
+                                        case FINE_SUPERB_BETRAYER_CHAINSET_65:
+                                            randomId = ArmorSets.Fine_Superb_Betrayer_ChainSet_65[Rnd
+                                                .get(ArmorSets.Fine_Superb_Betrayer_ChainSet_65.length)];
+                                            break;
+                                        case FINE_SUPERB_BETRAYER_PLATESET_65:
+                                            randomId = ArmorSets.Fine_Superb_Betrayer_PlateSet_65[Rnd
+                                                .get(ArmorSets.Fine_Superb_Betrayer_PlateSet_65.length)];
+                                            break;
+                                        case FINE_SUPERB_BETRAYER_GLADIATOR_WEAPON_65:
+                                            randomId = WeaponSets.Fine_Superb_Betrayer_Gladiator_Weapon_65[Rnd
+                                                .get(WeaponSets.Fine_Superb_Betrayer_Gladiator_Weapon_65.length)];
+                                            break;
+                                        case FINE_SUPERB_BETRAYER_TEMPLAR_WEAPON_65:
+                                            randomId = WeaponSets.Fine_Superb_Betrayer_Templar_Weapon_65[Rnd
+                                                .get(WeaponSets.Fine_Superb_Betrayer_Templar_Weapon_65.length)];
+                                            break;
+                                        case FINE_SUPERB_BETRAYER_PRIEST_WEAPON_65:
+                                            randomId = WeaponSets.Fine_Superb_Betrayer_Priest_Weapon_65[Rnd
+                                                .get(WeaponSets.Fine_Superb_Betrayer_Priest_Weapon_65.length)];
+                                            break;
+                                        case FINE_SUPERB_BETRAYER_MAGE_WEAPON_65:
+                                            randomId = WeaponSets.Fine_Superb_Betrayer_Mage_Weapon_65[Rnd
+                                                .get(WeaponSets.Fine_Superb_Betrayer_Mage_Weapon_65.length)];
+                                            break;
+                                        case FINE_SUPERB_BETRAYER_SCOUT_WEAPON_65:
+                                            randomId = WeaponSets.Fine_Superb_Betrayer_Scout_Weapon_65[Rnd
+                                                .get(WeaponSets.Fine_Superb_Betrayer_Scout_Weapon_65.length)];
+                                            break;
+                                        case FINE_SUPERB_BETRAYER_BARD_WEAPON_65:
+                                            randomId = WeaponSets.Fine_Superb_Betrayer_Bard_Weapon_65[Rnd
+                                                .get(WeaponSets.Fine_Superb_Betrayer_Bard_Weapon_65.length)];
+                                            break;
+                                        case FINE_SUPERB_BETRAYER_RIDER_WEAPON_65:
+                                            randomId = WeaponSets.Fine_Superb_Betrayer_Rider_Weapon_65[Rnd
+                                                .get(WeaponSets.Fine_Superb_Betrayer_Rider_Weapon_65.length)];
+                                            break;
+                                        case FINE_SUPERB_BETRAYER_AETHERTECH_WEAPON_65:
+                                            randomId = WeaponSets.Fine_Superb_Betrayer_Aethertech_Weapon_65[Rnd
+                                                .get(WeaponSets.Fine_Superb_Betrayer_Aethertech_Weapon_65.length)];
+                                            break;
+                                        case KUNAX_GLADIATOR_WEAPON_65:
+                                            randomId = WeaponSets.Kunax_Gladiator_Weapon_65[Rnd.get(WeaponSets.Kunax_Gladiator_Weapon_65.length)];
+                                            break;
+                                        case KUNAX_TEMPLAR_WEAPON_65:
+                                            randomId = WeaponSets.Kunax_Templar_Weapon_65[Rnd.get(WeaponSets.Kunax_Templar_Weapon_65.length)];
+                                            break;
+                                        case KUNAX_PRIEST_WEAPON_65:
+                                            randomId = WeaponSets.Kunax_Priest_Weapon_65[Rnd.get(WeaponSets.Kunax_Priest_Weapon_65.length)];
+                                            break;
+                                        case KUNAX_MAGE_WEAPON_65:
+                                            randomId = WeaponSets.Kunax_Mage_Weapon_65[Rnd.get(WeaponSets.Kunax_Mage_Weapon_65.length)];
+                                            break;
+                                        case KUNAX_SCOUT_WEAPON_65:
+                                            randomId = WeaponSets.Kunax_Scout_Weapon_65[Rnd.get(WeaponSets.Kunax_Scout_Weapon_65.length)];
+                                            break;
+                                        case KUNAX_BARD_WEAPON_65:
+                                            randomId = WeaponSets.Kunax_Bard_Weapon_65[Rnd.get(WeaponSets.Kunax_Bard_Weapon_65.length)];
+                                            break;
+                                        case KUNAX_RIDER_WEAPON_65:
+                                            randomId = WeaponSets.Kunax_Rider_Weapon_65[Rnd.get(WeaponSets.Kunax_Rider_Weapon_65.length)];
+                                            break;
+                                        case KUNAX_AETHERTECH_WEAPON_65:
+                                            randomId = WeaponSets.Kunax_Aethertech_Weapon_65[Rnd.get(WeaponSets.Kunax_Aethertech_Weapon_65.length)];
+                                            break;
+                                        case KUNAX_CLOTHSET_65:
+                                            randomId = ArmorSets.Kunax_ClothSet_65[Rnd.get(ArmorSets.Kunax_ClothSet_65.length)];
+                                            break;
+                                        case KUNAX_LEATHERSET_65:
+                                            randomId = ArmorSets.Kunax_LeatherSet_65[Rnd.get(ArmorSets.Kunax_LeatherSet_65.length)];
+                                            break;
+                                        case KUNAX_CHAINSET_65:
+                                            randomId = ArmorSets.Kunax_ChainSet_65[Rnd.get(ArmorSets.Kunax_ChainSet_65.length)];
+                                            break;
+                                        case KUNAX_PLATESET_65:
+                                            randomId = ArmorSets.Kunax_PlateSet_65[Rnd.get(ArmorSets.Kunax_PlateSet_65.length)];
+                                            break;
+                                        case KUNAX_HELMET_CLOTH_65:
+                                            randomId = ArmorSets.Kunax_Helmet_Cloth_65[Rnd.get(ArmorSets.Kunax_Helmet_Cloth_65.length)];
+                                            break;
+                                        case KUNAX_HELMET_LEATHER_65:
+                                            randomId = ArmorSets.Kunax_Helmet_Leather_65[Rnd.get(ArmorSets.Kunax_Helmet_Leather_65.length)];
+                                            break;
+                                        case KUNAX_HELMET_CHAIN_65:
+                                            randomId = ArmorSets.Kunax_Helmet_Chain_65[Rnd.get(ArmorSets.Kunax_Helmet_Chain_65.length)];
+                                            break;
+                                        case KUNAX_HELMET_PLATE_65:
+                                            randomId = ArmorSets.Kunax_Helmet_Plate_65[Rnd.get(ArmorSets.Kunax_Helmet_Plate_65.length)];
+                                            break;
+                                        case KUNAX_ACCESSORY_MAGICAL_65:
+                                            randomId = AccessoriesSets.Kunax_Accessory_Magical_65[Rnd
+                                                .get(AccessoriesSets.Kunax_Accessory_Magical_65.length)];
+                                            break;
+                                        case KUNAX_ACCESSORY_PHYSICAL_65:
+                                            randomId = AccessoriesSets.Kunax_Accessory_Physical_65[Rnd
+                                                .get(AccessoriesSets.Kunax_Accessory_Physical_65.length)];
+                                            break;
+                                        case IDIAN_EPIC:
+                                            randomId = IdianSets.Idian_EPIC[Rnd.get(IdianSets.Idian_EPIC.length)];
+                                            break;
+                                        case IDIAN_ICY_LEGEND:
+                                            randomId = IdianSets.Idian_ICY_LEGEND[Rnd.get(IdianSets.Idian_ICY_LEGEND.length)];
+                                            break;
+                                        case IDIAN_CELESTIAL_EPIC:
+                                            randomId = IdianSets.Idian_CELESTIAL_EPIC[Rnd.get(IdianSets.Idian_CELESTIAL_EPIC.length)];
+                                            break;
+                                        case IDIAN_TRIUMPHAL_EPIC:
+                                            randomId = IdianSets.Idian_TRIUMPHAL_EPIC[Rnd.get(IdianSets.Idian_TRIUMPHAL_EPIC.length)];
+                                            break;
+                                        case IDIAN_GOLDEN_EPIC:
+                                            randomId = IdianSets.Idian_GOLDEN_EPIC[Rnd.get(IdianSets.Idian_GOLDEN_EPIC.length)];
+                                            break;
+                                        case IDIAN_HARLOCK_EPIC:
+                                            randomId = IdianSets.Idian_HARLOCK_EPIC[Rnd.get(IdianSets.Idian_HARLOCK_EPIC.length)];
+                                            break;
+                                        case IDIAN_INFUSED_EPIC:
+                                            randomId = IdianSets.Idian_INFUSED_EPIC[Rnd.get(IdianSets.Idian_INFUSED_EPIC.length)];
+                                            break;
+                                        case IDIAN_TIDAL_UNIQUE:
+                                            randomId = IdianSets.Idian_TIDAL_UNIQUE[Rnd.get(IdianSets.Idian_TIDAL_UNIQUE.length)];
+                                            break;
+                                        case IDIAN_NOBLE_TIDAL_EPIC:
+                                            randomId = IdianSets.Idian_NOBLE_TIDAL_EPIC[Rnd.get(IdianSets.Idian_NOBLE_TIDAL_EPIC.length)];
+                                            break;
+                                        case IDIAN_BLAZING_FIGHTER_EPIC:
+                                            randomId = IdianSets.Idian_BLAZING_FIGHTER_EPIC[Rnd.get(IdianSets.Idian_BLAZING_FIGHTER_EPIC.length)];
+                                            break;
+                                        case CHUNK_EARTH: {
+                                            int[] earth = chunkEarth.get(player.getRace());
+                                            randomId = earth[Rnd.get(earth.length)];
+                                            break;
+                                        }
+                                        case CHUNK_SAND: {
+                                            int[] sand = chunkSand.get(player.getRace());
+                                            randomId = sand[Rnd.get(sand.length)];
+                                            break;
+                                        }
+                                        case CHUNK_ROCK: {
+                                            randomId = chunkRock[Rnd.get(chunkRock.length)];
+                                            break;
+                                        }
+                                        case CHUNK_GEMSTONE: {
+                                            randomId = chunkGemstone[Rnd.get(chunkGemstone.length)];
+                                            break;
+                                        }
+                                        case SCROLLS: {
+                                            randomId = scrolls[Rnd.get(scrolls.length)];
+                                            break;
+                                        }
+                                        case POTION: {
+                                            randomId = potion[Rnd.get(potion.length)];
+                                            break;
+                                        }
+                                        case ANCIENTITEMS: {
+                                            do {
+                                                randomId = Rnd.get(186000051, 186000066);
+                                                i++;
+                                                if (i > 50) {
+                                                    randomId = 0;
+                                                    log.warn("DecomposeAction random item id not found. " + parentItem.getItemId());
+                                                    break;
+                                                }
+                                            } while (!ItemService.checkRandomTemplate(randomId));
+                                            break;
+                                        }
+                                    }
+
+                                    if (randomId <= 0 || !isItemExists(randomId)) {
+                                        continue;
+                                    }
+
+                                    // Finally, Add the selected Decomposable Item to player inventory
+                                    ItemService.addItem(player, randomId, randomItem.getResultCount());
+                                }
+                            }
+                        }
                     }
                 }
-                PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, validAction ? 1 : 2, 0));
+                PacketSendUtility.broadcastPacketAndReceive(player,
+                    new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, validAction ? 1 : 2, 0));
             }
 
             private boolean isItemExists(int randomId) {
@@ -514,7 +535,7 @@ public class DecomposeAction extends AbstractItemAction {
                 }
                 return true;
             }
-            
+
             private boolean canAcquire(Player player, ResultedItem resultItem) {
                 Race race = resultItem.getRace();
                 if (race != Race.PC_ALL && !race.equals(player.getRace())) {
@@ -527,7 +548,7 @@ public class DecomposeAction extends AbstractItemAction {
                 }
                 return true;
             }
-            
+
             private boolean canAcquire(Player player, RandomItem randomItem) {
                 Race race = randomItem.getRace();
                 if (race != Race.PC_ALL && !race.equals(player.getRace())) {
@@ -539,7 +560,7 @@ public class DecomposeAction extends AbstractItemAction {
                     return false;
                 }
                 return true;
-            }            
+            }
 
             boolean postValidate(Player player, Item parentItem) {
                 if (!canAct(player, parentItem, targetItem)) {
@@ -577,7 +598,7 @@ public class DecomposeAction extends AbstractItemAction {
      */
     private Collection<ExtractedItemsCollection> filterItemsByLevel(Player player, List<ExtractedItemsCollection> itemsCollections) {
         int playerLevel = player.getLevel();
-        Collection<ExtractedItemsCollection> result = new ArrayList<ExtractedItemsCollection>();
+        Collection<ExtractedItemsCollection> result = new ArrayList<>();
         for (ExtractedItemsCollection collection : itemsCollections) {
             if (collection.getMinLevel() > playerLevel) {
                 continue;
@@ -632,45 +653,48 @@ public class DecomposeAction extends AbstractItemAction {
         }
         return sum;
     }
-	
-	private void uniqueDropAnnounce(final Player player, final ResultedItem resultItem, final Item parentItem) {
-		if (DropConfig.ENABLE_UNIQUE_CHEST_DROP_ANNOUNCE) {
-			final ItemTemplate itemTemplate = ItemInfoService.getItemTemplate(resultItem.getItemId());
-			if (itemTemplate.getItemQuality() == ItemQuality.EPIC || itemTemplate.getItemQuality() == ItemQuality.MYTHIC) {
-				final String lastGetName = player.getName();
-				String parents = parentItem.getName();
-				String results = resultItem.getItemName();
-				Iterator<Player> iter = World.getInstance().getPlayersIterator();
-					while (iter.hasNext()) {
-						Player player2 = iter.next();
-						PacketSendUtility.sendYellowMessage(player2, LanguageHandler.translate(CustomMessageId.DECOMPOSE_SERVICE_MESSAGE1, lastGetName, results, parents));
-				}
-				
-			}
-		}
-	}
-	
-	private void uniqueDropAnnounces(final Player player, final ResultedItem resultItem, final Item parentItem) {
-		if (MembershipConfig.ADD_CHEST_DROP_ANNOUNCE) {
-			final ItemTemplate itemTemplate = ItemInfoService.getItemTemplate(resultItem.getItemId());
-			if (itemTemplate.getItemQuality() == ItemQuality.EPIC || itemTemplate.getItemQuality() == ItemQuality.MYTHIC) {
-				final String lastGetName = player.getName();
-				String parents = parentItem.getName();
-				String results = resultItem.getItemName();
-				if (player.getClientConnection().getAccount().getMembership() == 2) {
-					Iterator<Player> iter = World.getInstance().getPlayersIterator();
-					while (iter.hasNext()) {
-						Player player2 = iter.next();
-						PacketSendUtility.sendYellowMessage(player2, LanguageHandler.translate(CustomMessageId.DECOMPOSE_SERVICE_MESSAGE3, lastGetName, results, parents));
-					}
-				} else if (player.getClientConnection().getAccount().getMembership() == 1) {
-					Iterator<Player> iter = World.getInstance().getPlayersIterator();
-					while (iter.hasNext()) {
-						Player player2 = iter.next();
-						PacketSendUtility.sendYellowMessage(player2, LanguageHandler.translate(CustomMessageId.DECOMPOSE_SERVICE_MESSAGE2, lastGetName, results, parents));
-					}
-				}
-			}
-		}
-	}
+
+    private void uniqueDropAnnounce(final Player player, final ResultedItem resultItem, final Item parentItem) {
+        if (DropConfig.ENABLE_UNIQUE_CHEST_DROP_ANNOUNCE) {
+            final ItemTemplate itemTemplate = ItemInfoService.getItemTemplate(resultItem.getItemId());
+            if (itemTemplate.getItemQuality() == ItemQuality.EPIC || itemTemplate.getItemQuality() == ItemQuality.MYTHIC) {
+                final String lastGetName = player.getName();
+                String parents = parentItem.getName();
+                String results = resultItem.getItemName();
+                Iterator<Player> iter = World.getInstance().getPlayersIterator();
+                while (iter.hasNext()) {
+                    Player player2 = iter.next();
+                    PacketSendUtility.sendYellowMessage(player2,
+                        LanguageHandler.translate(CustomMessageId.DECOMPOSE_SERVICE_MESSAGE1, lastGetName, results, parents));
+                }
+
+            }
+        }
+    }
+
+    private void uniqueDropAnnounces(final Player player, final ResultedItem resultItem, final Item parentItem) {
+        if (MembershipConfig.ADD_CHEST_DROP_ANNOUNCE) {
+            final ItemTemplate itemTemplate = ItemInfoService.getItemTemplate(resultItem.getItemId());
+            if (itemTemplate.getItemQuality() == ItemQuality.EPIC || itemTemplate.getItemQuality() == ItemQuality.MYTHIC) {
+                final String lastGetName = player.getName();
+                String parents = parentItem.getName();
+                String results = resultItem.getItemName();
+                if (player.getClientConnection().getAccount().getMembership() == 2) {
+                    Iterator<Player> iter = World.getInstance().getPlayersIterator();
+                    while (iter.hasNext()) {
+                        Player player2 = iter.next();
+                        PacketSendUtility.sendYellowMessage(player2,
+                            LanguageHandler.translate(CustomMessageId.DECOMPOSE_SERVICE_MESSAGE3, lastGetName, results, parents));
+                    }
+                } else if (player.getClientConnection().getAccount().getMembership() == 1) {
+                    Iterator<Player> iter = World.getInstance().getPlayersIterator();
+                    while (iter.hasNext()) {
+                        Player player2 = iter.next();
+                        PacketSendUtility.sendYellowMessage(player2,
+                            LanguageHandler.translate(CustomMessageId.DECOMPOSE_SERVICE_MESSAGE2, lastGetName, results, parents));
+                    }
+                }
+            }
+        }
+    }
 }

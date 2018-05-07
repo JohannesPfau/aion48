@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,12 +40,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.templates.npcshout.NpcShout;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutEventType;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutGroup;
 import com.aionemu.gameserver.model.templates.npcshout.ShoutList;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastMap;
 
 /**
  * @author Rolandas
@@ -60,6 +59,7 @@ import com.aionemu.gameserver.model.templates.npcshout.ShoutList;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType>
  *   &lt;complexContent>
@@ -73,14 +73,14 @@ import com.aionemu.gameserver.model.templates.npcshout.ShoutList;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"shoutGroups"})
+@XmlType(name = "", propOrder = { "shoutGroups" })
 @XmlRootElement(name = "npc_shouts")
 public class NpcShoutData {
 
     @XmlElement(name = "shout_group")
     protected List<ShoutGroup> shoutGroups;
     @XmlTransient
-    private TIntObjectHashMap<FastMap<Integer, List<NpcShout>>> shoutsByWorldNpcs = new TIntObjectHashMap<FastMap<Integer, List<NpcShout>>>();
+    private TIntObjectHashMap<FastMap<Integer, List<NpcShout>>> shoutsByWorldNpcs = new TIntObjectHashMap<>();
     @XmlTransient
     private int count = 0;
 
@@ -99,7 +99,7 @@ public class NpcShoutData {
                 this.count += shoutList.getNpcShouts().size();
                 for (int j = shoutList.getNpcIds().size() - 1; j >= 0; j--) {
                     int npcId = shoutList.getNpcIds().get(j);
-                    List<NpcShout> shouts = new ArrayList<NpcShout>(shoutList.getNpcShouts());
+                    List<NpcShout> shouts = new ArrayList<>(shoutList.getNpcShouts());
                     if (worldShouts.get(npcId) == null) {
                         worldShouts.put(npcId, shouts);
                     } else {
@@ -135,10 +135,10 @@ public class NpcShoutData {
             if (worldShouts == null || worldShouts.get(npcId) == null) {
                 return null;
             }
-            return new ArrayList<NpcShout>(worldShouts.get(npcId));
+            return new ArrayList<>(worldShouts.get(npcId));
         }
 
-        List<NpcShout> npcShouts = new ArrayList<NpcShout>(worldShouts.get(npcId));
+        List<NpcShout> npcShouts = new ArrayList<>(worldShouts.get(npcId));
         worldShouts = shoutsByWorldNpcs.get(worldId);
         if (worldShouts == null || worldShouts.get(npcId) == null) {
             return npcShouts;
@@ -185,11 +185,16 @@ public class NpcShoutData {
     /**
      * Gets shouts for npc
      *
-     * @param worldId - npc World Id
-     * @param npcId   - npc Id
-     * @param type    - shout event type
-     * @param pattern - specific pattern; if null, returns all
-     * @param skillNo - specific skill number; if 0, returns all
+     * @param worldId
+     *            - npc World Id
+     * @param npcId
+     *            - npc Id
+     * @param type
+     *            - shout event type
+     * @param pattern
+     *            - specific pattern; if null, returns all
+     * @param skillNo
+     *            - specific skill number; if 0, returns all
      */
     public List<NpcShout> getNpcShouts(int worldId, int npcId, ShoutEventType type, String pattern, int skillNo) {
         List<NpcShout> shouts = getNpcShouts(worldId, npcId);
@@ -197,7 +202,7 @@ public class NpcShoutData {
             return null;
         }
 
-        List<NpcShout> result = new ArrayList<NpcShout>();
+        List<NpcShout> result = new ArrayList<>();
         for (NpcShout s : shouts) {
             if (s.getWhen() == type) {
                 if (pattern != null && !pattern.equals(s.getPattern())) {

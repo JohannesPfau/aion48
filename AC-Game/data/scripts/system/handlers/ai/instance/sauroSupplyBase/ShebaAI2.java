@@ -29,7 +29,8 @@
  */
 package ai.instance.sauroSupplyBase;
 
-import ai.AggressiveNpcAI2;
+import java.util.List;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -38,8 +39,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import java.util.List;
-
+import ai.AggressiveNpcAI2;
 
 @AIName("sheba")
 public class ShebaAI2 extends AggressiveNpcAI2 {

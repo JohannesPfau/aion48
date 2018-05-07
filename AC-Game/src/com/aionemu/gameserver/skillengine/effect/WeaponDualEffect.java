@@ -56,7 +56,7 @@ public class WeaponDualEffect extends BufEffect {
         }
 
         List<IStatFunction> modifiers = getModifiers(effect);
-        List<IStatFunction> masteryModifiers = new ArrayList<IStatFunction>(modifiers.size());
+        List<IStatFunction> masteryModifiers = new ArrayList<>(modifiers.size());
         for (IStatFunction modifier : modifiers) {
             masteryModifiers.add(new StatDualWeaponMasteryFunction(effect, modifier));
         }

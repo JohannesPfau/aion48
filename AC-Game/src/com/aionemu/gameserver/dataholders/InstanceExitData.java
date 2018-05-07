@@ -47,16 +47,14 @@ import com.aionemu.gameserver.model.templates.portal.InstanceExit;
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-        "instanceExit"
-})
+@XmlType(name = "", propOrder = { "instanceExit" })
 @XmlRootElement(name = "instance_exits")
 public class InstanceExitData {
 
     @XmlElement(name = "instance_exit")
     protected List<InstanceExit> instanceExit;
     @XmlTransient
-    protected List<InstanceExit> instanceExits = new ArrayList<InstanceExit>();
+    protected List<InstanceExit> instanceExits = new ArrayList<>();
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         for (InstanceExit exit : instanceExit) {

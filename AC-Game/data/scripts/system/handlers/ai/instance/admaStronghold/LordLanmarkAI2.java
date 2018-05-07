@@ -29,7 +29,6 @@
  */
 package ai.instance.admaStronghold;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
@@ -37,6 +36,8 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * Lord Lanmark Boss-Script
@@ -50,6 +51,7 @@ public class LordLanmarkAI2 extends AggressiveNpcAI2 {
     protected void handleSpawned() {
         super.handleSpawned();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {

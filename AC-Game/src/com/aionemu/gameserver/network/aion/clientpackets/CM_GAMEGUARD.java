@@ -38,7 +38,6 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.antihack.AntiHackService;
 
-
 /**
  * @author Alcapwnd
  */
@@ -46,7 +45,7 @@ public class CM_GAMEGUARD extends AionClientPacket {
 
     private int size;
     @SuppressWarnings("unused")
-	private static final Logger log = LoggerFactory.getLogger(CM_GAMEGUARD.class);
+    private static final Logger log = LoggerFactory.getLogger(CM_GAMEGUARD.class);
 
     /**
      * @param opcode
@@ -57,7 +56,8 @@ public class CM_GAMEGUARD extends AionClientPacket {
         super(opcode, state, restStates);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.commons.network.packet.BaseClientPacket#readImpl()
      */
     @Override
@@ -68,12 +68,13 @@ public class CM_GAMEGUARD extends AionClientPacket {
 
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
      */
     @Override
     protected void runImpl() {
-    	//log.info("AION Bin size from client: " + size);
+        //log.info("AION Bin size from client: " + size);
         Player player = getConnection().getActivePlayer();
         AntiHackService.checkAionBin(size, player);
     }

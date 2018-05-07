@@ -26,7 +26,6 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
  * @author Eloann
- *
  */
 public class GMMode extends AdminCommand {
 
@@ -47,7 +46,7 @@ public class GMMode extends AdminCommand {
         }
 
         if (params[0].toLowerCase().equals("on")) {
-            if (params[1].equals("y")){
+            if (params[1].equals("y")) {
                 GMService.getInstance().onPlayerAvailable(admin); //send available message
                 admin.setWispable();
             } else if (params[1].toLowerCase().equals("n")) {
@@ -71,7 +70,7 @@ public class GMMode extends AdminCommand {
             }
         }
         if (params[0].equals("off")) {
-            if (params[1].toLowerCase().equals("y")){
+            if (params[1].toLowerCase().equals("y")) {
                 GMService.getInstance().onPlayerUnavailable(admin); //send unavailable message
                 GMService.getInstance().onPlayerLogedOut(admin); //remove gm into gmlist
             } else if (params[1].toLowerCase().equals("n")) {
@@ -92,7 +91,7 @@ public class GMMode extends AdminCommand {
         }
         if (params[0].equalsIgnoreCase("detector")) {
             //if (params[1].equalsIgnoreCase("on")){
-                //admin.
+            //admin.
             //}
         }
     }
@@ -103,4 +102,3 @@ public class GMMode extends AdminCommand {
         PacketSendUtility.sendMessage(admin, syntax);
     }
 }
-

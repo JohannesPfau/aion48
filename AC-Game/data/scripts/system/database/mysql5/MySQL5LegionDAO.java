@@ -29,6 +29,16 @@
  */
 package mysql5;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Collection;
+import java.util.TreeMap;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
@@ -37,16 +47,12 @@ import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.model.team.legion.*;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Collection;
-import java.util.TreeMap;
+import com.aionemu.gameserver.model.team.legion.Legion;
+import com.aionemu.gameserver.model.team.legion.LegionEmblem;
+import com.aionemu.gameserver.model.team.legion.LegionEmblemType;
+import com.aionemu.gameserver.model.team.legion.LegionHistory;
+import com.aionemu.gameserver.model.team.legion.LegionHistoryType;
+import com.aionemu.gameserver.model.team.legion.LegionWarehouse;
 
 /**
  * @author Simple
@@ -114,6 +120,7 @@ public class MySQL5LegionDAO extends LegionDAO {
     @Override
     public boolean saveNewLegion(final Legion legion) {
         boolean success = DB.insertUpdate(INSERT_LEGION_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 log.debug("[DAO: MySQL5LegionDAO] saving new legion: " + legion.getLegionId() + " " + legion.getLegionName());
@@ -132,6 +139,7 @@ public class MySQL5LegionDAO extends LegionDAO {
     @Override
     public void storeLegion(final Legion legion) {
         DB.insertUpdate(UPDATE_LEGION_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 log.debug("[DAO: MySQL5LegionDAO] storing player " + legion.getLegionId() + " " + legion.getLegionName());
@@ -158,6 +166,7 @@ public class MySQL5LegionDAO extends LegionDAO {
         final Legion legion = new Legion();
 
         boolean success = DB.select(SELECT_LEGION_QUERY2, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setString(1, legionName);
@@ -171,11 +180,8 @@ public class MySQL5LegionDAO extends LegionDAO {
                     legion.setLegionLevel(resultSet.getInt("level"));
                     legion.addContributionPoints(resultSet.getLong("contribution_points"));
 
-                    legion.setLegionPermissions(
-                            resultSet.getShort("deputy_permission"),
-                            resultSet.getShort("centurion_permission"),
-                            resultSet.getShort("legionary_permission"),
-                            resultSet.getShort("volunteer_permission"));
+                    legion.setLegionPermissions(resultSet.getShort("deputy_permission"), resultSet.getShort("centurion_permission"),
+                        resultSet.getShort("legionary_permission"), resultSet.getShort("volunteer_permission"));
 
                     legion.setDisbandTime(resultSet.getInt("disband_time"));
                 }
@@ -195,6 +201,7 @@ public class MySQL5LegionDAO extends LegionDAO {
         final Legion legion = new Legion();
 
         boolean success = DB.select(SELECT_LEGION_QUERY1, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, legionId);
@@ -208,11 +215,8 @@ public class MySQL5LegionDAO extends LegionDAO {
                     legion.setLegionLevel(resultSet.getInt("level"));
                     legion.addContributionPoints(resultSet.getLong("contribution_points"));
 
-                    legion.setLegionPermissions(
-                            resultSet.getShort("deputy_permission"),
-                            resultSet.getShort("centurion_permission"),
-                            resultSet.getShort("legionary_permission"),
-                            resultSet.getShort("volunteer_permission"));
+                    legion.setLegionPermissions(resultSet.getShort("deputy_permission"), resultSet.getShort("centurion_permission"),
+                        resultSet.getShort("legionary_permission"), resultSet.getShort("volunteer_permission"));
 
                     legion.setDisbandTime(resultSet.getInt("disband_time"));
                 }
@@ -251,8 +255,7 @@ public class MySQL5LegionDAO extends LegionDAO {
      */
     @Override
     public int[] getUsedIDs() {
-        PreparedStatement statement = DB.prepareStatement("SELECT id FROM legions", ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement statement = DB.prepareStatement("SELECT id FROM legions", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
         try {
             ResultSet rs = statement.executeQuery();
@@ -287,9 +290,10 @@ public class MySQL5LegionDAO extends LegionDAO {
      */
     @Override
     public TreeMap<Timestamp, String> loadAnnouncementList(final int legionId) {
-        final TreeMap<Timestamp, String> announcementList = new TreeMap<Timestamp, String>();
+        final TreeMap<Timestamp, String> announcementList = new TreeMap<>();
 
         boolean success = DB.select(SELECT_ANNOUNCEMENTLIST_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, legionId);
@@ -317,6 +321,7 @@ public class MySQL5LegionDAO extends LegionDAO {
     @Override
     public boolean saveNewAnnouncement(final int legionId, final Timestamp currentTime, final String message) {
         boolean success = DB.insertUpdate(INSERT_ANNOUNCEMENT_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 log.debug("[DAO: MySQL5LegionDAO] saving new announcement.");
@@ -400,6 +405,7 @@ public class MySQL5LegionDAO extends LegionDAO {
      */
     private void createLegionEmblem(final int legionId, final LegionEmblem legionEmblem) {
         DB.insertUpdate(INSERT_EMBLEM_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setInt(1, legionId);
@@ -420,6 +426,7 @@ public class MySQL5LegionDAO extends LegionDAO {
      */
     private void updateLegionEmblem(final int legionId, final LegionEmblem legionEmblem) {
         DB.insertUpdate(UPDATE_EMBLEM_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, legionEmblem.getEmblemId());
@@ -442,6 +449,7 @@ public class MySQL5LegionDAO extends LegionDAO {
         final LegionEmblem legionEmblem = new LegionEmblem();
 
         DB.select(SELECT_EMBLEM_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, legionId);
@@ -450,9 +458,8 @@ public class MySQL5LegionDAO extends LegionDAO {
             @Override
             public void handleRead(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {
-                    legionEmblem.setEmblem(resultSet.getInt("emblem_id"), resultSet.getInt("color_r"),
-                            resultSet.getInt("color_g"), resultSet.getInt("color_b"),
-                            LegionEmblemType.valueOf(resultSet.getString("emblem_type")), resultSet.getBytes("emblem_data"));
+                    legionEmblem.setEmblem(resultSet.getInt("emblem_id"), resultSet.getInt("color_r"), resultSet.getInt("color_g"),
+                        resultSet.getInt("color_b"), LegionEmblemType.valueOf(resultSet.getString("emblem_type")), resultSet.getBytes("emblem_data"));
                 }
             }
         });
@@ -472,6 +479,7 @@ public class MySQL5LegionDAO extends LegionDAO {
         final int equipped = 0;
 
         DB.select(SELECT_STORAGE_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, legionId);
@@ -506,8 +514,8 @@ public class MySQL5LegionDAO extends LegionDAO {
                     int isAmplified = rset.getInt("is_amplified");
                     int buffSkill = rset.getInt("buff_skill");
                     Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount,
-                            isEquiped == 1, false, slot, storage, enchant, itemSkin, fusionedItem, optionalSocket,
-                            optionalFusionSocket, charge, randomBonus, rndCount, packCount, max_authorize, isPacked == 1, isAmplified == 1, buffSkill);
+                        isEquiped == 1, false, slot, storage, enchant, itemSkin, fusionedItem, optionalSocket, optionalFusionSocket, charge,
+                        randomBonus, rndCount, packCount, max_authorize, isPacked == 1, isAmplified == 1, buffSkill);
                     item.setPersistentState(PersistentState.UPDATED);
                     inventory.onLoadHandler(item);
                 }
@@ -525,6 +533,7 @@ public class MySQL5LegionDAO extends LegionDAO {
         final Collection<LegionHistory> history = legion.getLegionHistory();
 
         DB.select(SELECT_HISTORY_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, legion.getLegionId());
@@ -533,8 +542,8 @@ public class MySQL5LegionDAO extends LegionDAO {
             @Override
             public void handleRead(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {
-                    history.add(new LegionHistory(LegionHistoryType.valueOf(resultSet.getString("history_type")), resultSet
-                            .getString("name"), resultSet.getTimestamp("date"), resultSet.getInt("tab_id"), resultSet.getString("description")));
+                    history.add(new LegionHistory(LegionHistoryType.valueOf(resultSet.getString("history_type")), resultSet.getString("name"),
+                        resultSet.getTimestamp("date"), resultSet.getInt("tab_id"), resultSet.getString("description")));
                 }
             }
         });
@@ -546,6 +555,7 @@ public class MySQL5LegionDAO extends LegionDAO {
     @Override
     public boolean saveNewLegionHistory(final int legionId, final LegionHistory legionHistory) {
         boolean success = DB.insertUpdate(INSERT_HISTORY_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setInt(1, legionId);

@@ -29,7 +29,9 @@
  */
 package ai.instance.dragonLordsRefuge;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -40,8 +42,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -71,6 +72,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
 
     private void startSkillTask() {
         trapTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -89,8 +91,7 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
     }
 
     private void startHallucinatoryVictoryEvent() {
-        if (getPosition().getWorldMapInstance().getNpc(730695) == null
-                && getPosition().getWorldMapInstance().getNpc(730696) == null) {
+        if (getPosition().getWorldMapInstance().getNpc(730695) == null && getPosition().getWorldMapInstance().getNpc(730696) == null) {
             AI2Actions.useSkill(this, 20911);
             SkillEngine.getInstance().applyEffectDirectly(20590, getOwner(), getOwner(), 0);
             SkillEngine.getInstance().applyEffectDirectly(20591, getOwner(), getOwner(), 0);
@@ -123,8 +124,8 @@ public class CalindiFlamelordAI2 extends AggressiveNpcAI2 {
         int range = Rnd.get(5, 20);
         float x1 = (float) (Math.cos(Math.PI * direction) * range);
         float y1 = (float) (Math.sin(Math.PI * direction) * range);
-        return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY()
-                + y1, getPosition().getZ(), getPosition().getHeading());
+        return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1,
+            getPosition().getZ(), getPosition().getHeading());
     }
 
     @Override

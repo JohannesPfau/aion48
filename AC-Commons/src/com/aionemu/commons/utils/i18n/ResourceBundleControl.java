@@ -87,7 +87,8 @@ public class ResourceBundleControl extends ResourceBundle.Control {
      * This constructor allows to set encoding that will be used while reading
      * resource bundle
      *
-     * @param encoding encoding to use
+     * @param encoding
+     *            encoding to use
      */
     public ResourceBundleControl(String encoding) {
         this.encoding = encoding;
@@ -96,16 +97,17 @@ public class ResourceBundleControl extends ResourceBundle.Control {
     /**
      * This code is just copy-paste with usage {@link java.io.Reader} instead of
      * {@link java.io.InputStream} to read properties.<br>
-     * <br> {@inheritDoc}
+     * <br>
+     * {@inheritDoc}
      */
     @Override
     public ResourceBundle newBundle(String baseName, Locale locale, String format, ClassLoader loader, boolean reload)
-            throws IllegalAccessException, InstantiationException, IOException {
+        throws IllegalAccessException, InstantiationException, IOException {
         String bundleName = toBundleName(baseName, locale);
         ResourceBundle bundle = null;
         if (format.equals("java.class")) {
             try {
-                @SuppressWarnings({"unchecked"})
+                @SuppressWarnings({ "unchecked" })
                 Class<? extends ResourceBundle> bundleClass = (Class<? extends ResourceBundle>) loader.loadClass(bundleName);
 
                 // If the class isn't a ResourceBundle subclass, throw a
@@ -177,7 +179,8 @@ public class ResourceBundleControl extends ResourceBundle.Control {
     /**
      * Sets the encoding that will be used to read properties resource bundles
      *
-     * @param encoding encoding that will be used for properties
+     * @param encoding
+     *            encoding that will be used for properties
      */
     public void setEncoding(String encoding) {
         this.encoding = encoding;

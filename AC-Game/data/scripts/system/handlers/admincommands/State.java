@@ -29,6 +29,10 @@
  */
 package admincommands;
 
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.Map;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,10 +40,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author Rolandas
@@ -50,8 +50,8 @@ public class State extends AdminCommand {
         super("state");
     }
 
-    static final Map<Integer, CreatureState> creatureStateLookup = new HashMap<Integer, CreatureState>();
-    static final Map<Integer, TestState> testStateLookup = new HashMap<Integer, TestState>();
+    static final Map<Integer, CreatureState> creatureStateLookup = new HashMap<>();
+    static final Map<Integer, TestState> testStateLookup = new HashMap<>();
 
     static {
         for (CreatureState s : EnumSet.allOf(CreatureState.class)) {
@@ -90,11 +90,10 @@ public class State extends AdminCommand {
             }
 
             if (creature.equals(admin)) {
-                PacketSendUtility.sendMessage(admin, "Your state is : " + creature.getState() + "\n"
-                        + getStateDescription((short) admin.getState()));
+                PacketSendUtility.sendMessage(admin, "Your state is : " + creature.getState() + "\n" + getStateDescription((short) admin.getState()));
             } else {
-                PacketSendUtility.sendMessage(admin, "Creature state is : " + creature.getState() + "\n"
-                        + getStateDescription((short) creature.getState()));
+                PacketSendUtility.sendMessage(admin,
+                    "Creature state is : " + creature.getState() + "\n" + getStateDescription((short) creature.getState()));
             }
         } else if (params[0].equals("set") || params[0].equals("unset")) {
             if (params.length != 2) {
@@ -132,8 +131,8 @@ public class State extends AdminCommand {
             admin.clearKnownlist();
             admin.updateKnownlist();
 
-            PacketSendUtility.sendMessage(admin, "State changed to : " + creature.getState() + "\n"
-                    + getStateDescription((short) creature.getState()));
+            PacketSendUtility.sendMessage(admin,
+                "State changed to : " + creature.getState() + "\n" + getStateDescription((short) creature.getState()));
         } else {
             PacketSendUtility.sendMessage(admin, "syntax //state <show | set | unset>");
         }
@@ -192,6 +191,7 @@ public class State extends AdminCommand {
         BIT14(1 << 13, "bit 14"),
         BIT15(1 << 14, "bit 15"),
         BIT16(1 << 15, "bit 16");
+
         int id;
         String display;
 

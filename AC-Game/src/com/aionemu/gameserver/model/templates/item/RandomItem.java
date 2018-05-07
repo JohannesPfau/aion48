@@ -56,7 +56,7 @@ public class RandomItem {
     @XmlAttribute(name = "race")
     public Race race = Race.PC_ALL;
     @XmlAttribute(name = "player_class")
-    public PlayerClass playerClass = PlayerClass.ALL;    
+    public PlayerClass playerClass = PlayerClass.ALL;
 
     public int getCount() {
         return count;
@@ -80,8 +80,8 @@ public class RandomItem {
 
     public PlayerClass getPlayerClass() {
         return playerClass;
-    }    
-    
+    }
+
     public final int getResultCount() {
         if (count == 0 && rndMin == 0 && rndMax == 0) {
             return 1;

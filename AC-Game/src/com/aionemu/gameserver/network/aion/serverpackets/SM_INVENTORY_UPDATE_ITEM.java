@@ -41,7 +41,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 
 /**
  * @author ATracer
-
  */
 public class SM_INVENTORY_UPDATE_ITEM extends AionServerPacket {
 
@@ -61,7 +60,7 @@ public class SM_INVENTORY_UPDATE_ITEM extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         ItemTemplate itemTemplate = item.getItemTemplate();
 
         writeD(item.getObjectId());

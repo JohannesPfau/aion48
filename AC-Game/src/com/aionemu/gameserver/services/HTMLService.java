@@ -67,8 +67,7 @@ public class HTMLService {
         StringBuilder sb = new StringBuilder();
         sb.append("<reward_items multi_count='").append(template.getRewardCount()).append("'>\n");
         for (SurveyTemplate survey : template.getSurveys()) {
-            sb.append("<item_id count='").append(survey.getCount()).append("'>").append(survey.getItemId())
-                    .append("</item_id>\n");
+            sb.append("<item_id count='").append(survey.getCount()).append("'>").append(survey.getItemId()).append("</item_id>\n");
         }
         sb.append("</reward_items>\n");
         context = context.replace("%reward%", sb);
@@ -81,6 +80,7 @@ public class HTMLService {
     public static void pushSurvey(final String html) {
         final int messageId = IDFactory.getInstance().nextId();
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 sendData(player, messageId, html);
@@ -128,8 +128,8 @@ public class HTMLService {
     @SuppressWarnings("unused")
     public static void sendGuideHtml(Player player) {
         if (player.getLevel() > 1) {
-            GuideTemplate[] surveyTemplate = DataManager.GUIDE_HTML_DATA.getTemplatesFor(player.getPlayerClass(), player
-                    .getRace(), player.getLevel());
+            GuideTemplate[] surveyTemplate = DataManager.GUIDE_HTML_DATA.getTemplatesFor(player.getPlayerClass(), player.getRace(),
+                player.getLevel());
 
             for (GuideTemplate template : surveyTemplate) {
                 if (!template.isActivated()) {
@@ -210,7 +210,7 @@ public class HTMLService {
     }
 
     private static List<SurveyTemplate> getSurveyTemplates(List<SurveyTemplate> surveys, List<Integer> items) {
-        List<SurveyTemplate> templates = new ArrayList<SurveyTemplate>();
+        List<SurveyTemplate> templates = new ArrayList<>();
         for (SurveyTemplate survey : surveys) {
             if (items.contains(survey.getItemId())) {
                 templates.add(survey);

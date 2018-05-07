@@ -29,9 +29,10 @@
  */
 package com.aionemu.commons.scripting.impl.javacompiler;
 
+import java.net.URI;
+
 import javax.tools.JavaFileObject;
 import javax.tools.SimpleJavaFileObject;
-import java.net.URI;
 
 /**
  * This class allows us to compile sources that are located only in memory.
@@ -48,19 +49,21 @@ public class JavaSourceFromString extends SimpleJavaFileObject {
     /**
      * Creates new object that contains sources of java class
      *
-     * @param className class name of class
-     * @param code      source code of class
+     * @param className
+     *            class name of class
+     * @param code
+     *            source code of class
      */
     public JavaSourceFromString(String className, String code) {
-        super(URI.create("string:///" + className.replace('.', '/') + JavaFileObject.Kind.SOURCE.extension),
-                JavaFileObject.Kind.SOURCE);
+        super(URI.create("string:///" + className.replace('.', '/') + JavaFileObject.Kind.SOURCE.extension), JavaFileObject.Kind.SOURCE);
         this.code = code;
     }
 
     /**
      * Returns class source code
      *
-     * @param ignoreEncodingErrors not used
+     * @param ignoreEncodingErrors
+     *            not used
      * @return class source code
      */
     @Override

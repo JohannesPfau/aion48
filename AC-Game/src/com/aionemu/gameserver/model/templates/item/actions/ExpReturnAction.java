@@ -56,14 +56,16 @@ public class ExpReturnAction extends AbstractItemAction {
         //int restrictLevelMin = parentItem.getItemTemplate().getMinLevelRestrict(player);
         byte restrictLevelMax = parentItem.getItemTemplate().getMaxLevelRestrict(player);
 
-        if (restrictLevelMax != 0){
+        if (restrictLevelMax != 0) {
             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(restrictLevelMax, nameId));
             return false;
         }
-        /*if (restrictLevelMin != 0){
-            PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_TOO_HIGH_LEVEL(restrictLevelMin, nameId));
-            return false;
-        }*/
+        /*
+         * if (restrictLevelMin != 0){
+         * PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_TOO_HIGH_LEVEL(restrictLevelMin, nameId));
+         * return false;
+         * }
+         */
         return false;
     }
 
@@ -73,7 +75,7 @@ public class ExpReturnAction extends AbstractItemAction {
         long currentXp = player.getCommonData().getExp();
         long calcuatedXp = 0;
 
-        calcuatedXp = (int)(totalXp * 0.2);
+        calcuatedXp = (int) (totalXp * 0.2);
         player.getCommonData().setExp(currentXp + calcuatedXp);
     }
 }

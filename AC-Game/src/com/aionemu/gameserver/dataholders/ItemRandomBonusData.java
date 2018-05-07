@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -47,21 +45,23 @@ import com.aionemu.gameserver.model.templates.item.bonuses.RandomBonus;
 import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
 import com.aionemu.gameserver.model.templates.stats.ModifiersTemplate;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author Rolandas
  * @fixed Eloann
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"randomBonuses"})
+@XmlType(name = "", propOrder = { "randomBonuses" })
 @XmlRootElement(name = "random_bonuses")
 public class ItemRandomBonusData {
 
     @XmlElement(name = "random_bonus", required = true)
     protected List<RandomBonus> randomBonuses;
     @XmlTransient
-    private TIntObjectHashMap<RandomBonus> inventoryRandomBonusData = new TIntObjectHashMap<RandomBonus>();
+    private TIntObjectHashMap<RandomBonus> inventoryRandomBonusData = new TIntObjectHashMap<>();
     @XmlTransient
-    private TIntObjectHashMap<RandomBonus> polishRandomBonusData = new TIntObjectHashMap<RandomBonus>();
+    private TIntObjectHashMap<RandomBonus> polishRandomBonusData = new TIntObjectHashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (RandomBonus bonus : randomBonuses) {
@@ -81,7 +81,8 @@ public class ItemRandomBonusData {
     /**
      * Gets a randomly chosen modifiers from bonus list.
      *
-     * @param item rnd_bonus from the item template
+     * @param item
+     *            rnd_bonus from the item template
      * @return null if not a chance
      */
     public RandomBonusResult getRandomModifiers(StatBonusType bonusType, int rndOptionSet) {

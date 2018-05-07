@@ -73,7 +73,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author MrPoke
- (Aion-Core)
+ *         (Aion-Core)
  * @modified vlog
  */
 public abstract class QuestHandler extends AbstractQuestHandler implements ConstantSpawnHandler {
@@ -301,7 +301,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * Send completion dialog of the quest and finish it
      *
      * @param env
-     * @param reward The index of the List<Reward>.
+     * @param reward
+     *            The index of the List<Reward>.
      */
     public boolean sendQuestEndDialog(QuestEnv env, int reward) {
         Player player = env.getPlayer();
@@ -345,17 +346,17 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
     }
 
     public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, int giveItemId, int giveItemCount, int removeItemId,
-                                      int removeItemCount) {
+        int removeItemCount) {
         return defaultCloseDialog(env, step, nextStep, false, false, 0, giveItemId, giveItemCount, removeItemId, removeItemCount);
     }
 
-    public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc, int giveItemId,
-                                      int giveItemCount, int removeItemId, int removeItemCount) {
+    public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc, int giveItemId, int giveItemCount,
+        int removeItemId, int removeItemCount) {
         return defaultCloseDialog(env, step, nextStep, reward, sameNpc, 0, giveItemId, giveItemCount, removeItemId, removeItemCount);
     }
 
     public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc, int rewardId, int giveItemId,
-                                      int giveItemCount, int removeItemId, int removeItemCount) {
+        int giveItemCount, int removeItemId, int removeItemCount) {
         return defaultCloseDialog(env, step, nextStep, reward, sameNpc, rewardId, giveItemId, giveItemCount, removeItemId, removeItemCount, 0);
     }
 
@@ -364,7 +365,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * giving/removing quest items
      */
     public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc, int rewardId, int giveItemId,
-                                      int giveItemCount, int removeItemId, int removeItemCount, int varNum) {
+        int giveItemCount, int removeItemId, int removeItemCount, int varNum) {
         QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
         if (qs.getQuestVarById(0) == step) {
             if (giveItemId != 0 && giveItemCount != 0) {
@@ -396,7 +397,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * inventory
      */
     public boolean checkQuestItems(QuestEnv env, int step, int nextStep, boolean reward, int checkOkId, int checkFailId, int giveItemId,
-                                   int giveItemCount) {
+        int giveItemCount) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs.getQuestVarById(0) == step) {
@@ -419,8 +420,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * Check if the player has quest item (simple version), listed in the
      * quest_data.xml in his inventory
      */
-    public boolean checkQuestItemsSimple(QuestEnv env, int step, int nextStep, boolean reward, int checkOkId, int giveItemId,
-                                         int giveItemCount) {
+    public boolean checkQuestItemsSimple(QuestEnv env, int step, int nextStep, boolean reward, int checkOkId, int giveItemId, int giveItemCount) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs.getQuestVarById(0) == step) {
@@ -443,8 +443,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * To use for checking the items, not listed in the collect_items in the
      * quest_data.xml
      */
-    public boolean checkItemExistence(QuestEnv env, int step, int nextStep, boolean reward, int itemId, int itemCount, boolean remove,
-                                      int checkOkId, int checkFailId, int giveItemId, int giveItemCount) {
+    public boolean checkItemExistence(QuestEnv env, int step, int nextStep, boolean reward, int itemId, int itemCount, boolean remove, int checkOkId,
+        int checkFailId, int giveItemId, int giveItemCount) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs.getQuestVarById(0) == step) {
@@ -549,7 +549,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * For single kill
      */
     public boolean defaultOnKillEvent(QuestEnv env, int npcId, int startVar, int endVar) {
-        int[] mobids = {npcId};
+        int[] mobids = { npcId };
         return defaultOnKillEvent(env, mobids, startVar, endVar);
     }
 
@@ -564,7 +564,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * For single kill on another QuestVar
      */
     public boolean defaultOnKillEvent(QuestEnv env, int npcId, int startVar, int endVar, int varNum) {
-        int[] mobids = {npcId};
+        int[] mobids = { npcId };
         return defaultOnKillEvent(env, mobids, startVar, endVar, varNum);
     }
 
@@ -594,7 +594,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * For single kill and reward status after it
      */
     public boolean defaultOnKillEvent(QuestEnv env, int npcId, int startVar, boolean reward) {
-        int[] mobids = {npcId};
+        int[] mobids = { npcId };
         return (defaultOnKillEvent(env, mobids, startVar, reward, 0));
     }
 
@@ -602,7 +602,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * For single kill on another QuestVar and reward status after it
      */
     public boolean defaultOnKillEvent(QuestEnv env, int npcId, int startVar, boolean reward, int varNum) {
-        int[] mobids = {npcId};
+        int[] mobids = { npcId };
         return (defaultOnKillEvent(env, mobids, startVar, reward, varNum));
     }
 
@@ -783,8 +783,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
         return useQuestObject(env, step, nextStep, reward, varNum, addItemId, addItemCount, 0, 0, 0, false);
     }
 
-    public boolean useQuestObject(QuestEnv env, int step, int nextStep, boolean reward, int varNum, int addItemId, int addItemCount,
-                                  int removeItemId, int removeItemCount) {
+    public boolean useQuestObject(QuestEnv env, int step, int nextStep, boolean reward, int varNum, int addItemId, int addItemCount, int removeItemId,
+        int removeItemCount) {
         return useQuestObject(env, step, nextStep, reward, varNum, addItemId, addItemCount, removeItemId, removeItemCount, 0, false);
     }
 
@@ -795,8 +795,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
     /**
      * Handle use object event
      */
-    public boolean useQuestObject(QuestEnv env, int step, int nextStep, boolean reward, int varNum, int addItemId, int addItemCount,
-                                  int removeItemId, int removeItemCount, int movieId, boolean dieObject) {
+    public boolean useQuestObject(QuestEnv env, int step, int nextStep, boolean reward, int varNum, int addItemId, int addItemCount, int removeItemId,
+        int removeItemCount, int movieId, boolean dieObject) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs == null) {
@@ -839,16 +839,16 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
         return useQuestItem(env, item, step, nextStep, reward, 0, 0, movieId);
     }
 
-    public boolean useQuestItem(final QuestEnv env, final Item item, final int step, final int nextStep, final boolean reward,
-                                final int addItemId, final int addItemCount, final int movieId) {
+    public boolean useQuestItem(final QuestEnv env, final Item item, final int step, final int nextStep, final boolean reward, final int addItemId,
+        final int addItemCount, final int movieId) {
         return useQuestItem(env, item, step, nextStep, reward, addItemId, addItemCount, movieId, 0);
     }
 
     /**
      * Handle use item event
      */
-    public boolean useQuestItem(final QuestEnv env, final Item item, final int step, final int nextStep, final boolean reward,
-                                final int addItemId, final int addItemCount, final int movieId, final int varNum) {
+    public boolean useQuestItem(final QuestEnv env, final Item item, final int step, final int nextStep, final boolean reward, final int addItemId,
+        final int addItemCount, final int movieId, final int varNum) {
         final Player player = env.getPlayer();
         if (player == null) {
             return false;
@@ -863,6 +863,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
         if (qs.getQuestVarById(varNum) == step) {
             PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, itemId, 3000, 0, 0), true);
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, itemId, 0, 1, 0), true);
@@ -888,7 +889,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * For missions after on enter zone mission complete without preconditions
      */
     public boolean defaultOnZoneMissionEndEvent(QuestEnv env) {
-        int[] quests = {0};
+        int[] quests = { 0 };
         return defaultOnZoneMissionEndEvent(env, quests);
     }
 
@@ -896,7 +897,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * For missions after on enter zone mission complete with one precondition
      */
     public boolean defaultOnZoneMissionEndEvent(QuestEnv env, int quest) {
-        int[] quests = {quest};
+        int[] quests = { quest };
         return defaultOnZoneMissionEndEvent(env, quests);
     }
 
@@ -958,7 +959,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * For normal missions (not zone missions) without preconditions
      */
     public boolean defaultOnLvlUpEvent(QuestEnv env) {
-        int[] quests = {0};
+        int[] quests = { 0 };
         return defaultOnLvlUpEvent(env, quests, false);
     }
 
@@ -966,7 +967,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * For normal missions with one precondition
      */
     public boolean defaultOnLvlUpEvent(QuestEnv env, int quest) {
-        int[] quests = {quest};
+        int[] quests = { quest };
         return defaultOnLvlUpEvent(env, quests, false);
     }
 
@@ -974,7 +975,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * For zone missions with one precondition
      */
     public boolean defaultOnLvlUpEvent(QuestEnv env, int quest, boolean isZoneMission) {
-        int[] quests = {quest};
+        int[] quests = { quest };
         return defaultOnLvlUpEvent(env, quests, isZoneMission);
     }
 
@@ -982,7 +983,8 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
      * Check the mission starting conditions on the level up
      *
      * @param env
-     * @param quests The quests to be completed before starting this one
+     * @param quests
+     *            The quests to be completed before starting this one
      * @return true if successfully started
      */
     public boolean defaultOnLvlUpEvent(QuestEnv env, int[] quests, boolean isZoneMission) {
@@ -1160,7 +1162,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
     }
 
     @Override
-	public int getQuestId() {
+    public int getQuestId() {
         return questId;
     }
 
@@ -1205,7 +1207,7 @@ public abstract class QuestHandler extends AbstractQuestHandler implements Const
     public abstract void register();
 
     @Override
-	public HashSet<Integer> getNpcIds() {
+    public HashSet<Integer> getNpcIds() {
         return null;
     }
 }

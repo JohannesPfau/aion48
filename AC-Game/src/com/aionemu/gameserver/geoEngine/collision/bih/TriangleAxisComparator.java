@@ -42,7 +42,7 @@ public class TriangleAxisComparator implements Comparator<BIHTriangle> {
     }
 
     @Override
-	public int compare(BIHTriangle o1, BIHTriangle o2) {
+    public int compare(BIHTriangle o1, BIHTriangle o2) {
         float v1, v2;
         Vector3f c1 = o1.getCenter();
         Vector3f c2 = o2.getCenter();

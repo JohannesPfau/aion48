@@ -102,20 +102,22 @@ public class EnchantItemAction extends AbstractItemAction {
         if (supplementItem != null && !checkSupplementLevel(player, supplementItem.getItemTemplate(), targetItem.getItemTemplate())) {
             return;
         }
-		// Current enchant level
+        // Current enchant level
         final int currentEnchant = targetItem.getEnchantLevel();
         // Enchant Cap Level
         ItemTemplate itemTemplate = parentItem.getItemTemplate();
-        if (itemTemplate.getCategory() == ItemCategory.ENCHANTMENT) {        	
+        if (itemTemplate.getCategory() == ItemCategory.ENCHANTMENT) {
             if (currentEnchant >= 25) {
-            	PacketSendUtility.sendMessage(player, "[Error] You cannot enchant higher than level 25");		
-            	return;
+                PacketSendUtility.sendMessage(player, "[Error] You cannot enchant higher than level 25");
+                return;
             }
-        } 
+        }
         final boolean isSuccess = isSuccess(player, parentItem, targetItem, supplementItem, targetWeapon);
         //player.getController().cancelUseItem();
-        PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), EnchantsConfig.ENCHANT_CAST_DELAY, 0, 0));
+        PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
+            parentItem.getItemTemplate().getTemplateId(), EnchantsConfig.ENCHANT_CAST_DELAY, 0, 0));
         player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 // Item template
@@ -128,15 +130,16 @@ public class EnchantItemAction extends AbstractItemAction {
                     EnchantService.socketManastoneAct(player, parentItem, targetItem, targetWeapon, isSuccess);
                 }
 
-                PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(),
-                        parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, isSuccess ? 1 : 2, 384));
+                PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
+                    parentItem.getItemTemplate().getTemplateId(), 0, isSuccess ? 1 : 2, 384));
                 if (CustomConfig.ENABLE_ENCHANT_ANNOUNCE) {
                     if ((itemTemplate.getCategory() == ItemCategory.ENCHANTMENT) && targetItem.getEnchantLevel() == 15 && isSuccess) {
                         Iterator<Player> iter = World.getInstance().getPlayersIterator();
                         while (iter.hasNext()) {
                             Player player2 = iter.next();
                             if (player2.getRace() == player.getRace()) {
-                                PacketSendUtility.sendPacket(player2, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_15(player.getName(), targetItem.getItemTemplate().getNameId()));
+                                PacketSendUtility.sendPacket(player2,
+                                    SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_ITEM_SUCCEEDED_15(player.getName(), targetItem.getItemTemplate().getNameId()));
                             }
                         }
                     }
@@ -149,11 +152,16 @@ public class EnchantItemAction extends AbstractItemAction {
      * Check, if the item enchant will be successful
      *
      * @param player
-     * @param parentItem     the enchantment-/manastone to insert
-     * @param targetItem     the current item to enchant
-     * @param supplementItem the item to increase the enchant chance (if exists)
-     * @param targetWeapon   the fused weapon (if exists)
-     * @param currentEnchant current enchant level
+     * @param parentItem
+     *            the enchantment-/manastone to insert
+     * @param targetItem
+     *            the current item to enchant
+     * @param supplementItem
+     *            the item to increase the enchant chance (if exists)
+     * @param targetWeapon
+     *            the fused weapon (if exists)
+     * @param currentEnchant
+     *            current enchant level
      * @return true if successful
      */
     private boolean isSuccess(final Player player, final Item parentItem, final Item targetItem, final Item supplementItem, final int targetWeapon) {

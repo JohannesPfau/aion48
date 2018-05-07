@@ -44,11 +44,11 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.lambdaj.group.Group;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+
+import ch.lambdaj.group.Group;
 
 /**
  * @author Rolandas
@@ -76,7 +76,7 @@ public class InstanceWalkerFormations {
         String walkerId = npcWalker.getWalkTemplate().getRouteId();
         List<ClusteredNpc> candidateList = groupedSpawnObjects.get(walkerId);
         if (candidateList == null) {
-            candidateList = new ArrayList<ClusteredNpc>();
+            candidateList = new ArrayList<>();
             groupedSpawnObjects.put(walkerId, candidateList);
         }
         return candidateList.add(npcWalker);

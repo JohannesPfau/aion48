@@ -68,4 +68,3 @@ public class HolidayRates {
         return 0;
     }
 }
-

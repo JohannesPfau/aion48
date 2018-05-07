@@ -29,22 +29,21 @@
  */
 package quest.morheim;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _2436LookingForBuBuPat extends QuestHandler {
 
     private final static int questId = 2436;
-    private final static int[] npcs = {204390, 204401};
+    private final static int[] npcs = { 204390, 204401 };
 
     public _2436LookingForBuBuPat() {
         super(questId);

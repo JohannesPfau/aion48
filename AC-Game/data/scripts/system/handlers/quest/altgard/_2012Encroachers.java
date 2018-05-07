@@ -55,13 +55,13 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Pyro refix by Nephis Aller tuer 4 brutes et retourner voir Meiyer
- * Status locked de toutes les missions de Altgard
+ *         Status locked de toutes les missions de Altgard
  * @Fix Majka Ajural
  */
 public class _2012Encroachers extends QuestHandler {
 
     private final static int questId = 2012;
-    private final static int[] mob_ids = {210714, 210715}; // Secret Agent, Goon lvl 10
+    private final static int[] mob_ids = { 210714, 210715 }; // Secret Agent, Goon lvl 10
 
     public _2012Encroachers() {
         super(questId);

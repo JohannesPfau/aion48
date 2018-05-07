@@ -37,11 +37,10 @@ import com.aionemu.gameserver.services.BrokerService;
 
 /**
  * @author kosyak
-
  */
 public class CM_BROKER_REGISTERED extends AionClientPacket {
 
-	private int itemUniqueId;
+    private int itemUniqueId;
 
     /**
      *
@@ -53,14 +52,14 @@ public class CM_BROKER_REGISTERED extends AionClientPacket {
     @Override
     protected void readImpl() {
         PacketLoggerService.getInstance().logPacketCM(this.getPacketName());
-		itemUniqueId = readD();
+        itemUniqueId = readD();
     }
 
     @Override
     protected void runImpl() {
-    	Player player = getConnection().getActivePlayer();
+        Player player = getConnection().getActivePlayer();
         if (player == null)
             return;
-		BrokerService.getInstance().CalcItemAveLowHigh(player, itemUniqueId);
+        BrokerService.getInstance().CalcItemAveLowHigh(player, itemUniqueId);
     }
 }

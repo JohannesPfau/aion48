@@ -29,7 +29,11 @@
  */
 package ai.instance.empyreanCrucible;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -40,10 +44,7 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Luzien
@@ -85,6 +86,7 @@ public class WarriorPreceptorAI2 extends AggressiveNpcAI2 {
 
     private void startSkillTask() {
         task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -106,6 +108,7 @@ public class WarriorPreceptorAI2 extends AggressiveNpcAI2 {
         NpcShoutsService.getInstance().sendMsg(getOwner(), 1500207, getObjectId(), 0, 0);
         SkillEngine.getInstance().getSkill(getOwner(), 19595, 10, getTargetPlayer()).useNoAnimationSkill();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
@@ -116,7 +119,7 @@ public class WarriorPreceptorAI2 extends AggressiveNpcAI2 {
     }
 
     private Player getTargetPlayer() {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (Player player : getKnownList().getKnownPlayers().values()) {
             if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 15)) {
                 players.add(player);

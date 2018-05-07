@@ -29,11 +29,11 @@
  */
 package quest.beluslan;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -41,7 +41,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Ritsu
- *
  */
 public class _2538CurseoftheWereRibbit extends QuestHandler {
 
@@ -104,8 +103,7 @@ public class _2538CurseoftheWereRibbit extends QuestHandler {
                         if (var == 0) {
                             qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
                             updateQuestStatus(env);
-                            PacketSendUtility
-                                    .sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                             return true;
                         }
                     case SETPRO3:
@@ -116,8 +114,7 @@ public class _2538CurseoftheWereRibbit extends QuestHandler {
                             }
                             qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
                             updateQuestStatus(env);
-                            PacketSendUtility
-                                    .sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                             return true;
                         }
                 }
@@ -135,8 +132,7 @@ public class _2538CurseoftheWereRibbit extends QuestHandler {
                             }
                             qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
                             updateQuestStatus(env);
-                            PacketSendUtility
-                                    .sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                             return true;
                         }
                 }

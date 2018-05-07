@@ -63,8 +63,6 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * Utill class for connecting GameServer to LoginServer.
- *
-
  */
 public class LoginServer {
 
@@ -76,11 +74,11 @@ public class LoginServer {
      * Map<accountId,Connection> for waiting request. This request is send to
      * LoginServer and GameServer is waiting for response.
      */
-    private Map<Integer, AionConnection> loginRequests = new HashMap<Integer, AionConnection>();
+    private Map<Integer, AionConnection> loginRequests = new HashMap<>();
     /**
      * Map<accountId,Connection> for all logged in accounts.
      */
-    private Map<Integer, AionConnection> loggedInAccounts = new HashMap<Integer, AionConnection>();
+    private Map<Integer, AionConnection> loggedInAccounts = new HashMap<>();
     /**
      * Connection to LoginServer.
      */
@@ -107,7 +105,7 @@ public class LoginServer {
      */
     public LoginServerConnection connect() {
         SocketChannel sc;
-        for (; ; ) {
+        for (;;) {
             loginServer = null;
             log.info("Connecting to LoginServer: " + NetworkConfig.LOGIN_ADDRESS);
             try {
@@ -163,6 +161,7 @@ public class LoginServer {
          */
         if (!serverShutdown) {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     connect();
@@ -236,8 +235,8 @@ public class LoginServer {
      * @param result
      * @param accountTime
      */
-    public void accountAuthenticationResponse(int accountId, String accountName, boolean result, AccountTime accountTime,
-                                              byte accessLevel, byte membership, long toll) {
+    public void accountAuthenticationResponse(int accountId, String accountName, boolean result, AccountTime accountTime, byte accessLevel,
+        byte membership, long toll) {
         AionConnection client = loginRequests.remove(accountId);
 
         if (client == null) {
@@ -353,6 +352,7 @@ public class LoginServer {
         log.info("Closing client connection " + accountId);
         client.close(/* closePacket, */false);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 AionConnection client = loggedInAccounts.get(accountId);

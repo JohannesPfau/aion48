@@ -37,7 +37,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
  * @author paranaix
- * @Reworked GiGatR00n (Aion-Core) 
+ * @Reworked GiGatR00n (Aion-Core)
  */
 public class Ticket extends AdminCommand {
 
@@ -70,7 +70,8 @@ public class Ticket extends AdminCommand {
         }
 
         builder.append("=============================\n");
-        builder.append("From: " + support.getOwner().getName() + ":" + support.getOwner().getLevel() + ":" + support.getOwner().getRace().toString() + ":" + support.getOwner().getPlayerClass().toString().toLowerCase() + "\n");
+        builder.append("From: " + support.getOwner().getName() + ":" + support.getOwner().getLevel() + ":" + support.getOwner().getRace().toString()
+            + ":" + support.getOwner().getPlayerClass().toString().toLowerCase() + "\n");
         builder.append(support.getSummary() + "\n");
         builder.append("=============================");
 
@@ -87,7 +88,8 @@ public class Ticket extends AdminCommand {
         }
 
         builder.append("=============================\n");
-        builder.append("From: " + support.getOwner().getName() + ":" + support.getOwner().getLevel() + ":" + support.getOwner().getRace().toString() + ":" + support.getOwner().getPlayerClass().toString().toLowerCase() + "\n");
+        builder.append("From: " + support.getOwner().getName() + ":" + support.getOwner().getLevel() + ":" + support.getOwner().getRace().toString()
+            + ":" + support.getOwner().getPlayerClass().toString().toLowerCase() + "\n");
         builder.append(support.getSummary() + "\n");
         builder.append("=============================");
 

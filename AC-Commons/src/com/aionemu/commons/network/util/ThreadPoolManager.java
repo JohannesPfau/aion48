@@ -29,13 +29,23 @@
  */
 package com.aionemu.commons.network.util;
 
-import com.aionemu.commons.utils.concurrent.PriorityThreadFactory;
-import com.aionemu.commons.utils.concurrent.RunnableWrapper;
-import com.google.common.util.concurrent.*;
+import java.util.concurrent.Executor;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.SynchronousQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.*;
+import com.aionemu.commons.utils.concurrent.PriorityThreadFactory;
+import com.aionemu.commons.utils.concurrent.RunnableWrapper;
+import com.google.common.util.concurrent.JdkFutureAdapters;
+import com.google.common.util.concurrent.ListenableFuture;
+import com.google.common.util.concurrent.ListeningExecutorService;
+import com.google.common.util.concurrent.ListeningScheduledExecutorService;
+import com.google.common.util.concurrent.MoreExecutors;
 
 /**
  * @author -Nemesiss-, Rolandas
@@ -80,12 +90,10 @@ public class ThreadPoolManager implements Executor {
     private ThreadPoolManager() {
         new DeadLockDetector(60, DeadLockDetector.RESTART).start();
 
-        scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(4, new PriorityThreadFactory("ScheduledThreadPool",
-                Thread.NORM_PRIORITY));
+        scheduledThreadPoolExecutor = new ScheduledThreadPoolExecutor(4, new PriorityThreadFactory("ScheduledThreadPool", Thread.NORM_PRIORITY));
         scheduledThreadPool = MoreExecutors.listeningDecorator(scheduledThreadPoolExecutor);
 
-        generalPacketsThreadPoolExecutor = new ThreadPoolExecutor(1, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS,
-                new SynchronousQueue<Runnable>());
+        generalPacketsThreadPoolExecutor = new ThreadPoolExecutor(1, Integer.MAX_VALUE, 60L, TimeUnit.SECONDS, new SynchronousQueue<Runnable>());
         generalPacketsThreadPool = MoreExecutors.listeningDecorator(generalPacketsThreadPoolExecutor);
     }
 
@@ -120,8 +128,7 @@ public class ThreadPoolManager implements Executor {
             if (delay < 0) {
                 delay = 0;
             }
-            return (ListenableFuture<T>) JdkFutureAdapters.listenInPoolThread(scheduledThreadPool.schedule(r, delay,
-                    TimeUnit.MILLISECONDS));
+            return (ListenableFuture<T>) JdkFutureAdapters.listenInPoolThread(scheduledThreadPool.schedule(r, delay, TimeUnit.MILLISECONDS));
         } catch (RejectedExecutionException e) {
             return null; /* shutdown, ignore */
 
@@ -146,8 +153,8 @@ public class ThreadPoolManager implements Executor {
             if (initial < 0) {
                 initial = 0;
             }
-            return (ListenableFuture<T>) JdkFutureAdapters.listenInPoolThread(scheduledThreadPool.scheduleAtFixedRate(r,
-                    initial, delay, TimeUnit.MILLISECONDS));
+            return (ListenableFuture<T>) JdkFutureAdapters
+                .listenInPoolThread(scheduledThreadPool.scheduleAtFixedRate(r, initial, delay, TimeUnit.MILLISECONDS));
         } catch (RejectedExecutionException e) {
             return null;
         }

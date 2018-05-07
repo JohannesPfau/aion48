@@ -33,8 +33,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,6 +55,8 @@ import com.aionemu.gameserver.services.vortexservice.Invasion;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastMap;
 
 /**
  * @author Source
@@ -82,6 +82,7 @@ public class VortexService {
 
             // Brusthonin schedule
             CronService.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     startInvasion(1);
@@ -90,6 +91,7 @@ public class VortexService {
 
             // Theobomos schedule
             CronService.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     startInvasion(0);
@@ -115,6 +117,7 @@ public class VortexService {
 
         // Scheduled invasion end
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!invasion.isGeneratorDestroyed()) {
@@ -251,8 +254,7 @@ public class VortexService {
     public void validateLoginZone(Player player) {
         VortexLocation loc = getLocationByWorld(player.getWorldId());
         if (loc != null && player.getRace().equals(loc.getInvadersRace())) {
-            if (loc.isInsideLocation(player) && loc.isActive()
-                    && loc.getVortexController().getPassedPlayers().containsKey(player.getObjectId())) {
+            if (loc.isInsideLocation(player) && loc.isActive() && loc.getVortexController().getPassedPlayers().containsKey(player.getObjectId())) {
                 return;
             }
 

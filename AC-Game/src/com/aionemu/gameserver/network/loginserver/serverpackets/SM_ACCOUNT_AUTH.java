@@ -36,8 +36,6 @@ import com.aionemu.gameserver.network.loginserver.LsServerPacket;
  * In this packet Gameserver is asking if given account sessionKey is valid at
  * Loginserver side. [if user that is authenticating on Gameserver is already
  * authenticated on Loginserver]
- *
-
  */
 public class SM_ACCOUNT_AUTH extends LsServerPacket {
 
@@ -61,7 +59,8 @@ public class SM_ACCOUNT_AUTH extends LsServerPacket {
     /**
      * Constructs new instance of <tt>SM_ACCOUNT_AUTH </tt> packet.
      *
-     * @param accountId account identifier.
+     * @param accountId
+     *            account identifier.
      * @param loginOk
      * @param playOk1
      * @param playOk2

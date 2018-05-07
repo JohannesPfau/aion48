@@ -46,10 +46,11 @@ public enum PetAction {
     RENAME(10),
     MOOD(12),
     UNKNOWN(255);
+
     private static TIntObjectHashMap<PetAction> petActions;
 
     static {
-        petActions = new TIntObjectHashMap<PetAction>();
+        petActions = new TIntObjectHashMap<>();
         for (PetAction action : values()) {
             petActions.put(action.getActionId(), action);
         }

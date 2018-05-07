@@ -29,18 +29,16 @@
  */
 package playercommands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
-import com.aionemu.gameserver.utils.i18n.CustomMessageId;
-import com.aionemu.gameserver.utils.i18n.LanguageHandler;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Eloann
@@ -54,9 +52,10 @@ public class cmd_gmlist extends PlayerCommand {
 
     @Override
     public void execute(Player player, String... params) {
-        final List<Player> admins = new ArrayList<Player>();
-        final List<Player> helpers = new ArrayList<Player>();
+        final List<Player> admins = new ArrayList<>();
+        final List<Player> helpers = new ArrayList<>();
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player object) {
                 if (object.getAccessLevel() >= 2 && object.getFriendList().getStatus() != FriendList.Status.OFFLINE) {
@@ -65,9 +64,10 @@ public class cmd_gmlist extends PlayerCommand {
             }
         });
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
-                if (player.getAccessLevel() == 1){
+                if (player.getAccessLevel() == 1) {
                     helpers.add(player);
                 }
             }
@@ -75,22 +75,22 @@ public class cmd_gmlist extends PlayerCommand {
 
         if (helpers.size() > 0) {
             PacketSendUtility.sendMessage(player, "===== Helpers =====");
-            if (helpers.size() == 1){
+            if (helpers.size() == 1) {
                 PacketSendUtility.sendMessage(player, "There is only 1 Helper Online!");
             } else {
                 PacketSendUtility.sendMessage(player, "There are some Helper's Online!");
             }
 
-            for (Player helper : helpers){
+            for (Player helper : helpers) {
                 String tag = "";
-                if (helper.getAccessLevel() == 1){
+                if (helper.getAccessLevel() == 1) {
                     tag = AdminConfig.CUSTOMTAG_ACCESS1;
                 }
                 tag = tag.substring(0, tag.length() - 2);
                 PacketSendUtility.sendMessage(player, tag + helper.getName());
             }
             PacketSendUtility.sendMessage(player, "===================");
-        }else{
+        } else {
             PacketSendUtility.sendMessage(player, "====== Helpers =====");
             PacketSendUtility.sendMessage(player, "There are no Helpers Online!");
             PacketSendUtility.sendMessage(player, "====================");
@@ -107,25 +107,25 @@ public class cmd_gmlist extends PlayerCommand {
             for (Player admin : admins) {
                 String tag = "";
                 String tagEnd = "";
-                if (admin.getAccessLevel() == 2){ //trialGM
+                if (admin.getAccessLevel() == 2) { //trialGM
                     tag = AdminConfig.CUSTOMTAG_ACCESS2;
-                }else if (admin.getAccessLevel() == 3){ // GM
+                } else if (admin.getAccessLevel() == 3) { // GM
                     tag = AdminConfig.CUSTOMTAG_ACCESS3;
-                }else if (admin.getAccessLevel() == 4){ // HGM
+                } else if (admin.getAccessLevel() == 4) { // HGM
                     tag = AdminConfig.CUSTOMTAG_ACCESS4;
-                }else if (admin.getAccessLevel() == 5){ //Dev
+                } else if (admin.getAccessLevel() == 5) { //Dev
                     tag = AdminConfig.CUSTOMTAG_ACCESS5;
-                }else if (admin.getAccessLevel() == 6){ //Custom
+                } else if (admin.getAccessLevel() == 6) { //Custom
                     tag = AdminConfig.CUSTOMTAG_ACCESS6;
-                }else if (admin.getAccessLevel() == 7){ //Custom
+                } else if (admin.getAccessLevel() == 7) { //Custom
                     tag = AdminConfig.CUSTOMTAG_ACCESS7;
-                }else if (admin.getAccessLevel() == 8){ //Custom
+                } else if (admin.getAccessLevel() == 8) { //Custom
                     tag = AdminConfig.CUSTOMTAG_ACCESS8;
-                }else if (admin.getAccessLevel() == 9){ //Custom
+                } else if (admin.getAccessLevel() == 9) { //Custom
                     tag = AdminConfig.CUSTOMTAG_ACCESS9;
-                }else if (admin.getAccessLevel() == 10){ //Custom
+                } else if (admin.getAccessLevel() == 10) { //Custom
                     tag = AdminConfig.CUSTOMTAG_ACCESS10;
-                }// "\uE050 \uE042 Senior-GM \uE043 %s \uE050")
+                } // "\uE050 \uE042 Senior-GM \uE043 %s \uE050")
                 tagEnd = tag.substring(tag.length() - 2);
                 tag = tag.substring(0, tag.length() - 4);
                 PacketSendUtility.sendMessage(player, tag + admin.getName() + tagEnd);

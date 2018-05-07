@@ -37,10 +37,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.MentorMonsterHunt;
+
+import javolution.util.FastMap;
 
 /**
  * @author MrPoke reworked Bobobear
@@ -64,12 +64,11 @@ public class MentorMonsterHuntData extends MonsterHuntData {
 
     @Override
     public void register(QuestEngine questEngine) {
-        FastMap<Monster, Set<Integer>> monsterNpcs = new FastMap<Monster, Set<Integer>>();
+        FastMap<Monster, Set<Integer>> monsterNpcs = new FastMap<>();
         for (Monster m : monster) {
-            monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds()));
+            monsterNpcs.put(m, new HashSet<>(m.getNpcIds()));
         }
-        MentorMonsterHunt template = new MentorMonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, minMenteLevel,
-                maxMenteLevel);
+        MentorMonsterHunt template = new MentorMonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, minMenteLevel, maxMenteLevel);
         questEngine.addQuestHandler(template);
     }
 }

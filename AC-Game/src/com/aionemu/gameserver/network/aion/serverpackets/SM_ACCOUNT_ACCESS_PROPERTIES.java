@@ -47,7 +47,7 @@ public class SM_ACCOUNT_ACCESS_PROPERTIES extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(this.isGM ? 3 : 0); //unk
         writeH(0x00); //unk
         writeD(0x00); //unk        

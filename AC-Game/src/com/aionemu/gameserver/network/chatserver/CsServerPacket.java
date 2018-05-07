@@ -41,7 +41,8 @@ public abstract class CsServerPacket extends BaseServerPacket {
     /**
      * constructs new server packet with specified opcode.
      *
-     * @param opcode packet id
+     * @param opcode
+     *            packet id
      */
     protected CsServerPacket(int opcode) {
         super(opcode);

@@ -48,7 +48,7 @@ public class SM_RIDE_ROBOT extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(player);
         writeD(robotId);
     }

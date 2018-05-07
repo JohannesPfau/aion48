@@ -29,6 +29,8 @@
  */
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
+import java.sql.Timestamp;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.GameServerTable;
@@ -40,8 +42,6 @@ import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.model.AccountTime;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_BAN_RESPONSE;
-
-import java.sql.Timestamp;
 
 /**
  * The universal packet for account/IP bans

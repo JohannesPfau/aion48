@@ -57,6 +57,7 @@ public enum PlayerClass {
     ARTIST(15, true),
     BARD(16),
     ALL(17);
+
     /**
      * This id is used on client side
      */
@@ -93,10 +94,11 @@ public enum PlayerClass {
     /**
      * Returns <tt>PlayerClass</tt> object correlating with given classId.
      *
-     * @param classId - id of player class
+     * @param classId
+     *            - id of player class
      * @return PlayerClass objects that matches the given classId. If there
-     * isn't any objects that matches given id, then
-     * <b>IllegalArgumentException</b> is being thrown.
+     *         isn't any objects that matches given id, then
+     *         <b>IllegalArgumentException</b> is being thrown.
      */
     public static PlayerClass getPlayerClassById(byte classId) {
         for (PlayerClass pc : values()) {
@@ -110,7 +112,7 @@ public enum PlayerClass {
 
     /**
      * @return true if this is one of starting classes ( player can create char
-     * with this class )
+     *         with this class )
      */
     public boolean isStartingClass() {
         return startingClass;

@@ -85,7 +85,8 @@ public class ItemStone implements StatOwner {
     }
 
     /**
-     * @param slot the slot to set
+     * @param slot
+     *            the slot to set
      */
     public void setSlot(int slot) {
         this.slot = slot;

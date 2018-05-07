@@ -29,9 +29,9 @@
  */
 package quest.theobomos;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,7 +50,7 @@ public class _1094ProjectDrakanhammer extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npc_ids = {203834, 798155, 700411, 730153};
+        int[] npc_ids = { 203834, 798155, 700411, 730153 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         for (int npc_id : npc_ids) {
@@ -65,7 +65,7 @@ public class _1094ProjectDrakanhammer extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {1091, 1093};
+        int[] quests = { 1091, 1093 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 

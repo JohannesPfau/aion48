@@ -49,6 +49,7 @@ public class BattleGroundFlag extends Npc {
         ON_FIELD,
         AT_BASE
     }
+
     public BattleGroundFlagState state = BattleGroundFlagState.AT_BASE;
     private Player flagHolder = null;
 
@@ -85,10 +86,11 @@ public class BattleGroundFlag extends Npc {
     public NpcObjectType getNpcObjectType() {
         return NpcObjectType.NORMAL;
     }
+
     private Race race;
 
     @Override
-	public Race getRace() {
+    public Race getRace() {
         return race;
     }
 

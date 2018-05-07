@@ -66,7 +66,7 @@ public class SM_LEGION_EDIT extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(type);
         switch (type) {
             /**

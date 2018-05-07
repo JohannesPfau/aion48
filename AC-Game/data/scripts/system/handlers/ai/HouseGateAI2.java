@@ -80,6 +80,7 @@ public class HouseGateAI2 extends NpcAI2 {
         }
 
         AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_GROUP_GATE_DO_YOU_ACCEPT_MOVE, 0, 9, new AI2Request() {
+
             private boolean decided = false;
 
             @Override
@@ -137,10 +138,9 @@ public class HouseGateAI2 extends NpcAI2 {
                     responder.setBattleReturnCoords(0, null);
                 } else {
                     PacketSendUtility.sendPacket(responder, new SM_HOUSE_TELEPORT(house.getAddress().getId(), responder.getObjectId()));
-                    responder.setBattleReturnCoords(responder.getWorldId(), new float[]{responder.getX(), responder.getY(), responder.getZ()});
+                    responder.setBattleReturnCoords(responder.getWorldId(), new float[] { responder.getX(), responder.getY(), responder.getZ() });
                 }
-                TeleportService2.teleportTo(responder, exitMapId, instanceId, x, y, z, heading,
-                        TeleportAnimation.JUMP_AIMATION_3);
+                TeleportService2.teleportTo(responder, exitMapId, instanceId, x, y, z, heading, TeleportAnimation.JUMP_AIMATION_3);
                 decided = true;
             }
 

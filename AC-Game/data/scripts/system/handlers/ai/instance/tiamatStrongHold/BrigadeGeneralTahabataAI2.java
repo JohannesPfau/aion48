@@ -29,7 +29,12 @@
  */
 package ai.instance.tiamatStrongHold;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -48,11 +53,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -66,7 +67,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
     private Future<?> piercingStrikeTask;
     private AtomicBoolean isEndFireStorm = new AtomicBoolean(true);
     private Future<?> fireStormTask;
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
 
     @Override
     protected void handleAttack(Creature creature) {
@@ -79,6 +80,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 
     private void startPiercingStrikeTask() {
         piercingStrikeTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -92,6 +94,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 
     private void startFireStormTask() {
         fireStormTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -123,6 +126,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 
     private void useMultiSkill() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 AI2Actions.useSkill(BrigadeGeneralTahabataAI2.this, 20755);
@@ -131,7 +135,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
     }
 
     private void teleportRandomPlayer() {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (Player player : getKnownList().getKnownPlayers().values()) {
             if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 40)) {
                 players.add(player);
@@ -211,6 +215,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 
     private void spawnfloor(final int floor) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 spawn(floor, 679.88f, 1068.88f, 497.88f, (byte) 0);
@@ -230,8 +235,8 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
         float direction = Rnd.get(0, 199) / 100f;
         float x1 = (float) (Math.cos(Math.PI * direction) * dist);
         float y1 = (float) (Math.sin(Math.PI * direction) * dist);
-        return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY()
-                + y1, getPosition().getZ(), getPosition().getHeading());
+        return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1,
+            getPosition().getZ(), getPosition().getHeading());
     }
 
     private void deleteNpcs(List<Npc> npcs) {
@@ -244,7 +249,7 @@ public class BrigadeGeneralTahabataAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{96, 75, 60, 55, 40, 25, 20, 10, 7});
+        Collections.addAll(percents, new Integer[] { 96, 75, 60, 55, 40, 25, 20, 10, 7 });
     }
 
     @Override

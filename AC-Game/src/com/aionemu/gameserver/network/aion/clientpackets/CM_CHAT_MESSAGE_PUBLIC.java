@@ -48,8 +48,6 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
 /**
  * Packet that reads normal chat messages.<br>
- *
-
  */
 public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 
@@ -137,7 +135,8 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
                     }
                     break;
                 case COMMAND:
-                    if (player.getAbyssRank().getRank() == AbyssRankEnum.COMMANDER || player.getAbyssRank().getRank() == AbyssRankEnum.SUPREME_COMMANDER) {
+                    if (player.getAbyssRank().getRank() == AbyssRankEnum.COMMANDER
+                        || player.getAbyssRank().getRank() == AbyssRankEnum.SUPREME_COMMANDER) {
                         broadcastFromCommander(player);
                     }
                     break;
@@ -155,6 +154,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
     private void broadcastFromCommander(final Player player) {
         final int senderRace = player.getRace().getRaceId();
         PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true, new ObjectFilter<Player>() {
+
             @Override
             public boolean acceptObject(Player object) {
                 return (senderRace == object.getRace().getRaceId() || object.isGM());
@@ -178,6 +178,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
      */
     private void broadcastToNonBlockedPlayers(final Player player) {
         PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true, new ObjectFilter<Player>() {
+
             @Override
             public boolean acceptObject(Player object) {
                 return !object.getBlockList().contains(player.getObjectId());
@@ -194,12 +195,14 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
     private void broadcastToNonBlockedRacePlayers(final Player player) {
         final int senderRace = player.getRace().getRaceId();
         PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, message, type), true, new ObjectFilter<Player>() {
+
             @Override
             public boolean acceptObject(Player object) {
                 return ((senderRace == object.getRace().getRaceId() && !object.getBlockList().contains(player.getObjectId())) || object.isGM());
             }
         });
         PacketSendUtility.broadcastPacket(player, new SM_MESSAGE(player, "Unknow Message", type), false, new ObjectFilter<Player>() {
+
             @Override
             public boolean acceptObject(Player object) {
                 return senderRace != object.getRace().getRaceId() && !object.getBlockList().contains(player.getObjectId()) && !object.isGM();

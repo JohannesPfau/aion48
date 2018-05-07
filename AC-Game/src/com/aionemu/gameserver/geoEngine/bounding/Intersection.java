@@ -61,22 +61,22 @@ public class Intersection {
     }
 
     //    private boolean axisTest(float a, float b, float fa, float fb, Vector3f v0, Vector3f v1, )
-//    private boolean axisTestX01(float a, float b, float fa, float fb,
-//                             Vector3f center, Vector3f ext,
-//                             Vector3f v1, Vector3f v2, Vector3f v3){
-//	float p0 = a * v0.y - b * v0.z;
-//	float p2 = a * v2.y - b * v2.z;
-//        if(p0 < p2){
-//            min = p0;
-//            max = p2;
-//        } else {
-//            min = p2;
-//            max = p0;
-//        }
-//	float rad = fa * boxhalfsize.y + fb * boxhalfsize.z;
-//	if(min > rad || max < -rad)
-//            return false;
-//    }
+    //    private boolean axisTestX01(float a, float b, float fa, float fb,
+    //                             Vector3f center, Vector3f ext,
+    //                             Vector3f v1, Vector3f v2, Vector3f v3){
+    //	float p0 = a * v0.y - b * v0.z;
+    //	float p2 = a * v2.y - b * v2.z;
+    //        if(p0 < p2){
+    //            min = p0;
+    //            max = p2;
+    //        } else {
+    //            min = p2;
+    //            max = p0;
+    //        }
+    //	float rad = fa * boxhalfsize.y + fb * boxhalfsize.z;
+    //	if(min > rad || max < -rad)
+    //            return false;
+    //    }
     public static final boolean intersect(BoundingBox bbox, Vector3f v1, Vector3f v2, Vector3f v3) {
         //  use separating axis theorem to test overlap between triangle and box
         //  need to test for overlap in these directions:
@@ -86,19 +86,15 @@ public class Intersection {
         //  3) crossproduct(edge from tri, {x,y,z}-directin)
         //       this gives 3x3=9 more tests
 
-        Vector3f tmp0 = new Vector3f(),
-                tmp1 = new Vector3f(),
-                tmp2 = new Vector3f();
+        Vector3f tmp0 = new Vector3f(), tmp1 = new Vector3f(), tmp2 = new Vector3f();
 
-        Vector3f e0 = new Vector3f(),
-                e1 = new Vector3f(),
-                e2 = new Vector3f();
+        Vector3f e0 = new Vector3f(), e1 = new Vector3f(), e2 = new Vector3f();
 
         Vector3f center = bbox.getCenter();
         Vector3f extent = bbox.getExtent(null);
 
-//   float min,max,p0,p1,p2,rad,fex,fey,fez;
-//   float normal[3]
+        //   float min,max,p0,p1,p2,rad,fex,fey,fez;
+        //   float normal[3]
         // This is the fastest branch on Sun
         // move everything so that the boxcenter is in (0,0,0)
         v1.subtract(center, tmp0);
@@ -152,7 +148,7 @@ public class Intersection {
         fey = FastMath.abs(e1.y);
         fez = FastMath.abs(e1.z);
 
-//        AXISTEST_X01(e1[Z], e1[Y], fez, fey);
+        //        AXISTEST_X01(e1[Z], e1[Y], fez, fey);
         p0 = e1.z * tmp0.y - e1.y * tmp0.z;
         p2 = e1.z * tmp2.y - e1.y * tmp2.z;
         min = min(p0, p2);
@@ -181,7 +177,7 @@ public class Intersection {
         if (min > rad || max < -rad) {
             return false;
         }
-//
+        //
         fex = FastMath.abs(e2.x);
         fey = FastMath.abs(e2.y);
         fez = FastMath.abs(e2.z);
@@ -206,7 +202,7 @@ public class Intersection {
             return false;
         }
 
-//   AXISTEST_Z12(e2[Y], e2[X], fey, fex);
+        //   AXISTEST_Z12(e2[Y], e2[X], fey, fex);
         p1 = e2.y * tmp1.x - e2.x * tmp1.y;
         p2 = e2.y * tmp2.x - e2.x * tmp2.y;
         min = min(p1, p2);
@@ -241,20 +237,20 @@ public class Intersection {
             return false;
         }
 
-//       // Bullet 2:
-//       //  test if the box intersects the plane of the triangle
-//       //  compute plane equation of triangle: normal * x + d = 0
-//        Vector3f normal = new Vector3f();
-//        e0.cross(e1, normal);
+        //       // Bullet 2:
+        //       //  test if the box intersects the plane of the triangle
+        //       //  compute plane equation of triangle: normal * x + d = 0
+        //        Vector3f normal = new Vector3f();
+        //        e0.cross(e1, normal);
         Plane p = new Plane();
         p.setPlanePoints(v1, v2, v3);
         if (bbox.whichSide(p) == Plane.Side.Negative) {
             return false;
         }
-//
-//        if(!planeBoxOverlap(normal,v0,boxhalfsize)) return false;
+        //
+        //        if(!planeBoxOverlap(normal,v0,boxhalfsize)) return false;
 
-        return true;   /* box and triangle overlaps */
+        return true; /* box and triangle overlaps */
 
     }
 }

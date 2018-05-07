@@ -65,7 +65,7 @@ public class SM_WAREHOUSE_INFO extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(warehouseType);
         writeC(firstPacket ? 1 : 0);
         writeC(expandLvl); // warehouse expand (0 - 9)

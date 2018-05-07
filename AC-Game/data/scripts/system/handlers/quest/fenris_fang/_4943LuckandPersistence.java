@@ -29,9 +29,9 @@
  */
 package quest.fenris_fang;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,7 +51,7 @@ public class _4943LuckandPersistence extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {204096, 204097, 204075, 204053, 700538};
+        int[] npcs = { 204096, 204097, 204075, 204053, 700538 };
         qe.registerQuestNpc(204053).addOnQuestStart(questId); // Kvasir
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);

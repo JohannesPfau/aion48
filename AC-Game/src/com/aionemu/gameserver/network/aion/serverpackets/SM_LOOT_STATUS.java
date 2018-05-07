@@ -51,7 +51,7 @@ public class SM_LOOT_STATUS extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(targetObjectId);
         writeC(state);
     }

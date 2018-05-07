@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.model.instance.instancereward;
 
-import javolution.util.FastList;
-
 import org.apache.commons.lang.mutable.MutableInt;
 
 import com.aionemu.commons.utils.Rnd;
@@ -39,6 +37,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.instance.playerreward.DredgionPlayerReward;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
+
+import javolution.util.FastList;
 
 /**
  * @author xTz
@@ -52,7 +52,7 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
     private MutableInt asmodiansPoints = new MutableInt(0);
     private MutableInt elyosPoins = new MutableInt(0);
     private Race race;
-    private FastList<DredgionRooms> dredgionRooms = new FastList<DredgionRooms>();
+    private FastList<DredgionRooms> dredgionRooms = new FastList<>();
     private Point3D asmodiansStartPosition;
     private Point3D elyosStartPosition;
 
@@ -82,7 +82,8 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 
     public void portToPosition(Player player) {
         if (player.getRace() == Race.ASMODIANS) {
-            TeleportService2.teleportTo(player, mapId, instanceId, asmodiansStartPosition.getX(), asmodiansStartPosition.getY(), asmodiansStartPosition.getZ());
+            TeleportService2.teleportTo(player, mapId, instanceId, asmodiansStartPosition.getX(), asmodiansStartPosition.getY(),
+                asmodiansStartPosition.getZ());
         } else {
             TeleportService2.teleportTo(player, mapId, instanceId, elyosStartPosition.getX(), elyosStartPosition.getY(), elyosStartPosition.getZ());
         }
@@ -130,7 +131,7 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
     }
 
     public MutableInt getPointsByRace(Race race) {
-    	return (race == Race.ELYOS) ? elyosPoins : (race == Race.ASMODIANS) ? asmodiansPoints : null;
+        return (race == Race.ELYOS) ? elyosPoins : (race == Race.ASMODIANS) ? asmodiansPoints : null;
     }
 
     public void addPointsByRace(Race race, int points) {

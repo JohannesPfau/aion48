@@ -51,6 +51,7 @@ public enum MAGIC_BOOST {
     GUNNER(0),
     ARTIST(0),
     BARD(0);
+
     private int value;
 
     private MAGIC_BOOST(int value) {

@@ -29,11 +29,11 @@
  */
 package quest.heiron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,7 +45,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1057CreatingaMonster extends QuestHandler {
 
     private final static int questId = 1057;
-    private final static int[] npc_ids = {204502, 204619, 700218, 700279, 204500};
+    private final static int[] npc_ids = { 204502, 204619, 700218, 700279, 204500 };
 
     public _1057CreatingaMonster() {
         super(questId);
@@ -70,7 +70,7 @@ public class _1057CreatingaMonster extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {1500, 1056};
+        int[] quests = { 1500, 1056 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 
@@ -90,7 +90,7 @@ public class _1057CreatingaMonster extends QuestHandler {
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
                 } else {
-                    int[] questItems = {182201616};
+                    int[] questItems = { 182201616 };
                     return sendQuestEndDialog(env, questItems);
                 }
             }

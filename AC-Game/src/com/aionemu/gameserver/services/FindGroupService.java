@@ -33,8 +33,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 
-import javolution.util.FastMap;
-
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.objects.filter.ObjectFilter;
 import com.aionemu.gameserver.model.Race;
@@ -55,10 +53,11 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FIND_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
+import javolution.util.FastMap;
+
 /**
  * Find Group Service
- *
-, MrPoke
+ * , MrPoke
  */
 public class FindGroupService {
 
@@ -114,11 +113,10 @@ public class FindGroupService {
                 break;
         }
 
-        Collection<FindGroup> findGroupList = new ArrayList<FindGroup>();
+        Collection<FindGroup> findGroupList = new ArrayList<>();
         findGroupList.add(findGroup);
 
-        PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(action, ((int) (System.currentTimeMillis() / 1000)),
-                findGroupList));
+        PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(action, ((int) (System.currentTimeMillis() / 1000)), findGroupList));
     }
 
     public void updateFindGroupList(Player player, String message, int objectId) {
@@ -170,8 +168,8 @@ public class FindGroupService {
     }
 
     public void sendFindGroups(Player player, int action) {
-        PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(action, (int) (System.currentTimeMillis() / 1000),
-                getFindGroups(player.getRace(), action)));
+        PacketSendUtility.sendPacket(player,
+            new SM_FIND_GROUP(action, (int) (System.currentTimeMillis() / 1000), getFindGroups(player.getRace(), action)));
     }
 
     public FindGroup removeFindGroup(final Race race, int action, int playerObjId) {
@@ -199,13 +197,13 @@ public class FindGroupService {
                 break;
         }
         if (findGroup != null) {
-            PacketSendUtility.broadcastFilteredPacket(new SM_FIND_GROUP(action + 1, playerObjId, findGroup.getUnk()),
-                    new ObjectFilter<Player>() {
-                        @Override
-                        public boolean acceptObject(Player object) {
-                            return race == object.getRace();
-                        }
-                    });
+            PacketSendUtility.broadcastFilteredPacket(new SM_FIND_GROUP(action + 1, playerObjId, findGroup.getUnk()), new ObjectFilter<Player>() {
+
+                @Override
+                public boolean acceptObject(Player object) {
+                    return race == object.getRace();
+                }
+            });
         }
         return findGroup;
     }
@@ -271,14 +269,12 @@ public class FindGroupService {
 
         @Override
         public void onAfterGroupCreate(Player player) {
-            FindGroup inviterFindGroup = FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00,
-                    player.getObjectId());
+            FindGroup inviterFindGroup = FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
             if (inviterFindGroup == null) {
                 inviterFindGroup = FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());
             }
             if (inviterFindGroup != null) {
-                FindGroupService.getInstance().addFindGroupList(player, 0x02, inviterFindGroup.getMessage(),
-                        inviterFindGroup.getGroupType());
+                FindGroupService.getInstance().addFindGroupList(player, 0x02, inviterFindGroup.getMessage(), inviterFindGroup.getGroupType());
             }
         }
     }
@@ -303,14 +299,12 @@ public class FindGroupService {
 
         @Override
         public void onAfterAllianceCreate(Player player) {
-            FindGroup inviterFindGroup = FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00,
-                    player.getObjectId());
+            FindGroup inviterFindGroup = FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
             if (inviterFindGroup == null) {
                 inviterFindGroup = FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());
             }
             if (inviterFindGroup != null) {
-                FindGroupService.getInstance().addFindGroupList(player, 0x02, inviterFindGroup.getMessage(),
-                        inviterFindGroup.getGroupType());
+                FindGroupService.getInstance().addFindGroupList(player, 0x02, inviterFindGroup.getMessage(), inviterFindGroup.getGroupType());
             }
         }
     }

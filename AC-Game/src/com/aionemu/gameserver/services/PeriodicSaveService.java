@@ -32,8 +32,6 @@ package com.aionemu.gameserver.services;
 import java.util.Iterator;
 import java.util.concurrent.Future;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,6 +42,8 @@ import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import javolution.util.FastList;
 
 /**
  * @author ATracer
@@ -61,8 +61,7 @@ public class PeriodicSaveService {
         log.info("Init Periodic Save...");
         int DELAY_LEGION_ITEM = PeriodicSaveConfig.LEGION_ITEMS * 1000;
 
-        legionWhUpdateTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new LegionWhUpdateTask(),
-                DELAY_LEGION_ITEM, DELAY_LEGION_ITEM);
+        legionWhUpdateTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new LegionWhUpdateTask(), DELAY_LEGION_ITEM, DELAY_LEGION_ITEM);
     }
 
     private class LegionWhUpdateTask implements Runnable {

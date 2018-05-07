@@ -35,8 +35,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * dunno wtf this packet is doing. Not sure about id/name
- *
-
  */
 public class SM_ENTER_WORLD_CHECK extends AionServerPacket {
 
@@ -54,7 +52,7 @@ public class SM_ENTER_WORLD_CHECK extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(msg);
         writeC(0x00);
         writeC(0x00);

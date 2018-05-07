@@ -29,10 +29,10 @@
  */
 package com.aionemu.commons.configuration.transformers;
 
+import java.lang.reflect.Field;
+
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
-
-import java.lang.reflect.Field;
 
 /**
  * Transforms enum string representation to enum. String must match case
@@ -58,10 +58,13 @@ public class EnumTransformer implements PropertyTransformer<Enum<?>> {
     /**
      * Trnasforms string to enum
      *
-     * @param value value that will be transformed
-     * @param field value will be assigned to this field
+     * @param value
+     *            value that will be transformed
+     * @param field
+     *            value will be assigned to this field
      * @return Enum object representing the value
-     * @throws TransformationException if somehting went wrong
+     * @throws TransformationException
+     *             if somehting went wrong
      */
     @Override
     @SuppressWarnings("unchecked")

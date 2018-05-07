@@ -51,56 +51,56 @@ public class _14122OasisWasted extends QuestHandler {
     public void register() {
         qe.registerQuestNpc(203917).addOnQuestStart(questId);
         qe.registerQuestNpc(203917).addOnTalkEvent(questId); // Gaia
-		qe.registerQuestNpc(203992).addOnTalkEvent(questId); // Ophelos
-		qe.registerQuestNpc(203987).addOnTalkEvent(questId); // Heratos
-		qe.registerQuestNpc(203934).addOnTalkEvent(questId); // Sirink
+        qe.registerQuestNpc(203992).addOnTalkEvent(questId); // Ophelos
+        qe.registerQuestNpc(203987).addOnTalkEvent(questId); // Heratos
+        qe.registerQuestNpc(203934).addOnTalkEvent(questId); // Sirink
     }
-	
-	@Override
+
+    @Override
     public boolean onDialogEvent(final QuestEnv env) {
         final Player player = env.getPlayer();
         int targetId = env.getTargetId();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         @SuppressWarnings("unused")
-		DialogAction dialog = env.getDialog();
+        DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 203917) { // Gaia
-			   if (env.getDialog() == DialogAction.QUEST_SELECT) {
-				   return sendQuestDialog(env, 1011);
-			   } else {
-				   return sendQuestStartDialog(env, 182215480, 1);
-			   }
-			}
-		} else if (qs.getStatus() == QuestStatus.START) {
-			@SuppressWarnings("unused")
-			int var = qs.getQuestVarById(0);
-			if (targetId == 203992) { // Ophelos
-			    if (env.getDialog() == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, 1352);
-				} else if (env.getDialog() == DialogAction.SETPRO1) {
-					return defaultCloseDialog(env, 0, 1); // 1
-				}
-			} else if (targetId == 203987) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, 1693);
-				} else if (env.getDialog() == DialogAction.SETPRO2) {
-					return defaultCloseDialog(env, 1, 2); // 2
-				}
-			} else if (targetId == 203934) { // Sirink
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, 2375);
-				} else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
-					return checkQuestItems(env, 2, 2, true, 5, 2716); // reward
-				} else if (env.getDialog() == DialogAction.FINISH_DIALOG) {
-					return sendQuestEndDialog(env);
-				}
-			}
+        if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+            if (targetId == 203917) { // Gaia
+                if (env.getDialog() == DialogAction.QUEST_SELECT) {
+                    return sendQuestDialog(env, 1011);
+                } else {
+                    return sendQuestStartDialog(env, 182215480, 1);
+                }
+            }
+        } else if (qs.getStatus() == QuestStatus.START) {
+            @SuppressWarnings("unused")
+            int var = qs.getQuestVarById(0);
+            if (targetId == 203992) { // Ophelos
+                if (env.getDialog() == DialogAction.QUEST_SELECT) {
+                    return sendQuestDialog(env, 1352);
+                } else if (env.getDialog() == DialogAction.SETPRO1) {
+                    return defaultCloseDialog(env, 0, 1); // 1
+                }
+            } else if (targetId == 203987) {
+                if (env.getDialog() == DialogAction.QUEST_SELECT) {
+                    return sendQuestDialog(env, 1693);
+                } else if (env.getDialog() == DialogAction.SETPRO2) {
+                    return defaultCloseDialog(env, 1, 2); // 2
+                }
+            } else if (targetId == 203934) { // Sirink
+                if (env.getDialog() == DialogAction.QUEST_SELECT) {
+                    return sendQuestDialog(env, 2375);
+                } else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
+                    return checkQuestItems(env, 2, 2, true, 5, 2716); // reward
+                } else if (env.getDialog() == DialogAction.FINISH_DIALOG) {
+                    return sendQuestEndDialog(env);
+                }
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203934) { // Sirink
+            if (targetId == 203934) { // Sirink
                 return sendQuestEndDialog(env);
-			}
-		}
+            }
+        }
         return false;
     }
 }

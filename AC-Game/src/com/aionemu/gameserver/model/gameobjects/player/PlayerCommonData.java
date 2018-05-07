@@ -54,6 +54,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.XPLossEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
+
 /**
  * This class is holding base information about player, that may be used even
  * when player itself is not online.
@@ -144,7 +145,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
     }
 
     /**
-     * @param AdvancedStigmaSlotSize the AdvancedStigmaSlotSize to set
+     * @param AdvancedStigmaSlotSize
+     *            the AdvancedStigmaSlotSize to set
      */
     public void setAdvancedStigmaSlotSize(int AdvancedStigmaSlotSize) {
         this.AdvancedStigmaSlotSize = AdvancedStigmaSlotSize;
@@ -159,7 +161,7 @@ public class PlayerCommonData extends VisibleObjectTemplate {
             return 0;
         }
         return DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level + 1)
-                - DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level);
+            - DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level);
     }
 
     /**
@@ -190,7 +192,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
             this.expRecoverable = Math.round(getExpNeed() * 0.25);
         }
         if (this.getPlayer() != null) {
-            PacketSendUtility.sendPacket(getPlayer(), new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), this.getCurrentReposteEnergy(), this.getMaxReposteEnergy(), this.getCurrentEventExp()));
+            PacketSendUtility.sendPacket(getPlayer(), new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(),
+                this.getCurrentReposteEnergy(), this.getMaxReposteEnergy(), this.getCurrentEventExp()));
         }
     }
 
@@ -267,22 +270,27 @@ public class PlayerCommonData extends VisibleObjectTemplate {
                             PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP2(reward));
                         } else if (repose > 0 && salvation > 0) //You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
                         {
-                            PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose, salvation));
+                            PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE
+                                .STR_GET_EXP_VITAL_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose, salvation));
                         } else if (repose > 0 && salvation == 0) //You have gained %num1 XP from %0 (Energy of Repose %num2).
                         {
-                            PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose));
+                            PacketSendUtility.sendPacket(getPlayer(),
+                                SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, repose));
                         } else if (repose == 0 && salvation > 0) //You have gained %num1 XP from %0 (Energy of Salvation %num2).
                         {
-                            PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, salvation));
+                            PacketSendUtility.sendPacket(getPlayer(),
+                                SM_SYSTEM_MESSAGE.STR_GET_EXP_MAKEUP_BONUS_DESC(new DescriptionId(npcNameId * 2 + 1), reward, salvation));
                         } else //You have gained %num1 XP from %0.
                         {
-                            PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_DESC(new DescriptionId(npcNameId * 2 + 1), reward));
+                            PacketSendUtility.sendPacket(getPlayer(),
+                                SM_SYSTEM_MESSAGE.STR_GET_EXP_DESC(new DescriptionId(npcNameId * 2 + 1), reward));
                         }
                         break;
                     case PVP_KILL:
                         if (repose > 0 && salvation > 0) //You have gained %num1 XP from %0 (Energy of Repose %num2, Energy of Salvation %num3).
                         {
-                            PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS(name, reward, repose, salvation));
+                            PacketSendUtility.sendPacket(getPlayer(),
+                                SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_MAKEUP_BONUS(name, reward, repose, salvation));
                         } else if (repose > 0 && salvation == 0) //You have gained %num1 XP from %0 (Energy of Repose %num2).
                         {
                             PacketSendUtility.sendPacket(getPlayer(), SM_SYSTEM_MESSAGE.STR_GET_EXP_VITAL_BONUS(name, reward, repose));
@@ -431,9 +439,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
         this.exp = exp;
         // make sure level is never larger than maxLevel-1
         boolean up = false;
-        while ((this.level + 1) < maxLevel
-                && (up = exp >= DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level + 1)) || (this.level - 1) >= 0
-                && exp < DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level)) {
+        while ((this.level + 1) < maxLevel && (up = exp >= DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level + 1))
+            || (this.level - 1) >= 0 && exp < DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(this.level)) {
             if (up) {
                 this.level++;
             } else {
@@ -448,7 +455,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
                 updateMaxReposte();
             }
 
-            PacketSendUtility.sendPacket(this.getPlayer(), new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(), this.getCurrentReposteEnergy(), this.getMaxReposteEnergy(), this.getCurrentEventExp()));
+            PacketSendUtility.sendPacket(this.getPlayer(), new SM_STATUPDATE_EXP(getExpShown(), getExpRecoverable(), getExpNeed(),
+                this.getCurrentReposteEnergy(), this.getMaxReposteEnergy(), this.getCurrentEventExp()));
         }
     }
 
@@ -491,7 +499,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
     }
 
     /**
-     * @param mentorFlagTime the mentorFlagTime to set
+     * @param mentorFlagTime
+     *            the mentorFlagTime to set
      */
     public void setMentorFlagTime(int mentorFlagTime) {
         this.mentorFlagTime = mentorFlagTime;
@@ -571,14 +580,14 @@ public class PlayerCommonData extends VisibleObjectTemplate {
     public void setTitleId(int titleId) {
         this.titleId = titleId;
     }
-	
-	public int getBonusTitleId(){
-		return bonusTitleId;
-	}
-	
-	public void setBonusTitleId(int bonusTitleId){
-		this.bonusTitleId = bonusTitleId;
-	}
+
+    public int getBonusTitleId() {
+        return bonusTitleId;
+    }
+
+    public void setBonusTitleId(int bonusTitleId) {
+        this.bonusTitleId = bonusTitleId;
+    }
 
     /**
      * This method should be called exactly once after creating object of this
@@ -644,7 +653,8 @@ public class PlayerCommonData extends VisibleObjectTemplate {
     }
 
     /**
-     * @param warehouseSize the warehouseSize to set
+     * @param warehouseSize
+     *            the warehouseSize to set
      */
     public void setWarehouseSize(int warehouseSize) {
         this.warehouseSize = warehouseSize;
@@ -735,12 +745,12 @@ public class PlayerCommonData extends VisibleObjectTemplate {
     }
 
     /**
-     * @param battleGroundPoints the battleGroundPoints to set
+     * @param battleGroundPoints
+     *            the battleGroundPoints to set
      */
     public void setBattleGroundPoints(int battleGroundPoints) {
         this.battleGroundPoints = battleGroundPoints;
     }
-
 
     public int isInitialGameStats() {
         return initialGameStatsDatabase;

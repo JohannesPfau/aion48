@@ -51,6 +51,7 @@ public enum FIRE_RESIST {
     GUNNER(0),
     ARTIST(0),
     BARD(0);
+
     private int value;
 
     private FIRE_RESIST(int value) {

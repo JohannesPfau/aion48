@@ -35,8 +35,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.TreeMap;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,6 +60,8 @@ import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
+import javolution.util.FastMap;
+
 /**
  * @author ViAl
  */
@@ -78,7 +78,7 @@ public class ChallengeTaskService {
     }
 
     public void onChallengeQuestFinish(Player player, int questId) {
-    
+
         ChallengeTaskTemplate taskTemplate = DataManager.CHALLENGE_DATA.getTaskByQuestId(questId);
         switch (taskTemplate.getType()) {
             case TOWN:
@@ -87,8 +87,8 @@ public class ChallengeTaskService {
             case LEGION:
                 onLegionTaskFinish(player, taskTemplate, questId);
                 break;
-        
-    	}
+
+        }
     }
 
     private void onCityTaskFinish(Player player, ChallengeTaskTemplate taskTemplate, int questId) {
@@ -103,7 +103,8 @@ public class ChallengeTaskService {
         }
         ChallengeTask task = cityTasks.get(townId).get(taskTemplate.getId());
         if (task == null || task.getQuests().get(questId) == null) {
-            log.warn("Player " + player.getName() + " trying to finish city task in the city which haven't task with this id. Town id:" + townId + ", task id:" + taskTemplate.getId() + ", quest id:" + questId);
+            log.warn("Player " + player.getName() + " trying to finish city task in the city which haven't task with this id. Town id:" + townId
+                + ", task id:" + taskTemplate.getId() + ", quest id:" + questId);
             return;
         }
         ChallengeQuest quest = task.getQuests().get(questId);
@@ -126,8 +127,8 @@ public class ChallengeTaskService {
                         case SPAWN:
                             // TODO
                             break;
-					default:
-						break;
+                        default:
+                            break;
                     }
                     // PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401519, new DescriptionId(804307), 601));
                 }
@@ -137,7 +138,7 @@ public class ChallengeTaskService {
                 DAOManager.getDAO(TownDAO.class).store(town);
             }
         }
-    	
+
     }
 
     private void onLegionTaskFinish(Player player, ChallengeTaskTemplate taskTemplate, int questId) {
@@ -173,7 +174,7 @@ public class ChallengeTaskService {
             quest.increaseCompleteCount();
             DAOManager.getDAO(ChallengeTasksDAO.class).storeTask(task);
             if (task.isCompleted()) {
-                TreeMap<Integer, List<Integer>> winnersByPoints = new TreeMap<Integer, List<Integer>>();
+                TreeMap<Integer, List<Integer>> winnersByPoints = new TreeMap<>();
                 for (Integer memberObjId : player.getLegion().getLegionMembers()) {
                     Player member = World.getInstance().findPlayer(memberObjId);
                     if (member != null) {
@@ -204,7 +205,8 @@ public class ChallengeTaskService {
                                 itemId = reward.getRewardId();
                                 itemCount = reward.getItemCount();
                                 String recipientName = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(objectId).getName();
-                                SystemMailService.getInstance().sendMail("Legion reward", recipientName, "", "", itemId, itemCount, 0, LetterType.NORMAL);
+                                SystemMailService.getInstance().sendMail("Legion reward", recipientName, "", "", itemId, itemCount, 0,
+                                    LetterType.NORMAL);
                                 break;
                             }
                         }
@@ -215,10 +217,10 @@ public class ChallengeTaskService {
                 winnersByPoints = null;
             }
         }
-    }    
-    
+    }
+
     public void showTaskList(Player player, ChallengeType challengeType, int ownerId) {
-    
+
         if (CustomConfig.CHALLENGE_TASKS_ENABLED) {
             int ownerLevel = 0;
             switch (challengeType) {
@@ -236,7 +238,7 @@ public class ChallengeTaskService {
                 PacketSendUtility.sendPacket(player, new SM_CHALLENGE_LIST(7, ownerId, challengeType, task));
             }
         }
-    	
+
     }
 
     private List<ChallengeTask> buildTaskList(Player player, ChallengeType challengeType, int ownerId, int ownerLevel) {
@@ -248,7 +250,7 @@ public class ChallengeTaskService {
         }
         int playerTownId = TownService.getInstance().getTownResidence(player);
 
-        List<ChallengeTask> availableTasks = new ArrayList<ChallengeTask>();
+        List<ChallengeTask> availableTasks = new ArrayList<>();
         if (!taskMap.containsKey(ownerId)) {
             Map<Integer, ChallengeTask> tasks = DAOManager.getDAO(ChallengeTasksDAO.class).load(ownerId, challengeType);
             taskMap.put(ownerId, tasks);
@@ -289,7 +291,7 @@ public class ChallengeTaskService {
                 }
             }
         }
-        
+
         return availableTasks;
     }
 
@@ -308,12 +310,13 @@ public class ChallengeTaskService {
         }
         return false;
     }
-    
+
     private static class SingletonHolder {
+
         protected static final ChallengeTaskService instance = new ChallengeTaskService();
     }
 
     public static final ChallengeTaskService getInstance() {
         return SingletonHolder.instance;
-    }    
+    }
 }

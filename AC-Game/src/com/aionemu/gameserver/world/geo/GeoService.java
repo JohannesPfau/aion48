@@ -100,10 +100,11 @@ public class GeoService {
         float newZ = geoData.getMap(worldId).getZ(x, y, z, instanceId);
         if (!GeoDataConfig.GEO_ENABLE) {
             newZ += defaultUp;
-        }/*
-         else {
-         newZ += 0.5f;			
-         }*/
+        } /*
+           * else {
+           * newZ += 0.5f;
+           * }
+           */
 
         return newZ;
     }
@@ -123,7 +124,8 @@ public class GeoService {
     }
 
     public CollisionResults getCollisions(VisibleObject object, float x, float y, float z, boolean changeDirection, byte intentions) {
-        return geoData.getMap(object.getWorldId()).getCollisions(object.getX(), object.getY(), object.getZ(), x, y, z, changeDirection, false, object.getInstanceId(), intentions);
+        return geoData.getMap(object.getWorldId()).getCollisions(object.getX(), object.getY(), object.getZ(), x, y, z, changeDirection, false,
+            object.getInstanceId(), intentions);
     }
 
     /**
@@ -140,8 +142,8 @@ public class GeoService {
             return true;
         }
         return geoData.getMap(object.getWorldId()).canSee(object.getX(), object.getY(),
-                object.getZ() + object.getObjectTemplate().getBoundRadius().getUpper() / 2, target.getX(), target.getY(),
-                target.getZ() + target.getObjectTemplate().getBoundRadius().getUpper() / 2, limit, object.getInstanceId());
+            object.getZ() + object.getObjectTemplate().getBoundRadius().getUpper() / 2, target.getX(), target.getY(),
+            target.getZ() + target.getObjectTemplate().getBoundRadius().getUpper() / 2, limit, object.getInstanceId());
     }
 
     public boolean canSee(int worldId, float x, float y, float z, float x1, float y1, float z1, float limit, int instanceId) {
@@ -154,7 +156,7 @@ public class GeoService {
 
     public Vector3f getClosestCollision(Creature object, float x, float y, float z, boolean changeDirection, byte intentions) {
         return geoData.getMap(object.getWorldId()).getClosestCollision(object.getX(), object.getY(), object.getZ(), x, y, z, changeDirection,
-                object.isInFlyingState(), object.getInstanceId(), intentions);
+            object.isInFlyingState(), object.getInstanceId(), intentions);
     }
 
     public GeoType getConfiguredGeoType() {

@@ -29,10 +29,10 @@
  */
 package quest.beluslan;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -43,7 +43,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _24054CrisisInBeluslan extends QuestHandler {
 
     private final static int questId = 24054;
-    private final static int[] npcs = {204702, 802053, 204701};
+    private final static int[] npcs = { 204702, 802053, 204701 };
 
     public _24054CrisisInBeluslan() {
         super(questId);
@@ -112,17 +112,19 @@ public class _24054CrisisInBeluslan extends QuestHandler {
                 case 204702: { // nerita
                     if (dialog == DialogAction.QUEST_SELECT && var == 0) {
                         return sendQuestDialog(env, 1011);
-                    }/* else if (dialog == DialogAction.QUEST_SELECT && var == 6) {
-                        return sendQuestDialog(env, 2375);
-                    }*/
+                    } /*
+                       * else if (dialog == DialogAction.QUEST_SELECT && var == 6) {
+                       * return sendQuestDialog(env, 2375);
+                       * }
+                       */
 
                     if (dialog == DialogAction.SETPRO1) {
-						playQuestMovie(env, 258);
+                        playQuestMovie(env, 258);
                         return defaultCloseDialog(env, 0, 1);
                     }
                     //if (dialog == DialogAction.SET_SUCCEED) {
                     //    return defaultCloseDialog(env, 6, 6, true, false);
-                   // }
+                    // }
                     break;
                 }
                 case 802053: { // fafner
@@ -134,7 +136,7 @@ public class _24054CrisisInBeluslan extends QuestHandler {
                     }
                     break;
                 }
-				case 204701: { // hod
+                case 204701: { // hod
                     if (dialog == DialogAction.USE_OBJECT && var == 6) {
                         return sendQuestDialog(env, 2375);
                     }

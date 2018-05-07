@@ -58,12 +58,10 @@ public class UseSkill extends AdminCommand {
         }
 
         if (params[0].equalsIgnoreCase("help")) {
-            PacketSendUtility.sendMessage(admin, syntax + " \n"
-                    + "TARGET - targetted creature will use skill on its target.\n"
-                    + "TRUE - effect of skill is applied without any checks.\n"
-                    + "If you want to add duration, you have to use TRUE!\n"
-                    + "Example: //useskill 1968 1 or //useskill 1968 1 true 1\n"
-                    + "Duration is in seconds, 0 means its taken from skill_template.");
+            PacketSendUtility.sendMessage(admin,
+                syntax + " \n" + "TARGET - targetted creature will use skill on its target.\n"
+                    + "TRUE - effect of skill is applied without any checks.\n" + "If you want to add duration, you have to use TRUE!\n"
+                    + "Example: //useskill 1968 1 or //useskill 1968 1 true 1\n" + "Duration is in seconds, 0 means its taken from skill_template.");
             return;
         }
 
@@ -118,7 +116,8 @@ public class UseSkill extends AdminCommand {
                 }
 
                 this.useSkill(admin, (Creature) target, (Creature) target.getTarget(), skillId, skillLevel);
-                PacketSendUtility.sendMessage(admin, "Target: " + target.getName() + " used skillId:" + skillId + " on target " + target.getTarget().getName());
+                PacketSendUtility.sendMessage(admin,
+                    "Target: " + target.getName() + " used skillId:" + skillId + " on target " + target.getTarget().getName());
             } else {
                 onFail(admin, null);
                 return;

@@ -29,7 +29,12 @@
  */
 package ai.instance.beshmundirTemple;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -37,24 +42,20 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 @AIName("stormwing")
 public class StormwingAI2 extends AggressiveNpcAI2 {
 
     private AtomicBoolean isHome = new AtomicBoolean(true);
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
     private Future<?> taskVoltaicStorm;
     private Future<?> taskSharpTwister;
     private Future<?> taskRootTwister;
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{90, 80, 75, 50, 10});
+        Collections.addAll(percents, new Integer[] { 90, 80, 75, 50, 10 });
     }
 
     private synchronized void checkPercentage(int hpPercentage) {
@@ -187,18 +188,21 @@ public class StormwingAI2 extends AggressiveNpcAI2 {
 
     private void scheduleRespawn() {
         taskVoltaicStorm = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 spawnvoltaicStorm();
             }
         }, 150000); // Voltaic Storm are spawned every 2 Minutes.
         taskSharpTwister = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 spawnsharpTwister();
             }
         }, 300000); // Sharp Twister are spawned every 5 Minutes.
         taskRootTwister = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 spawnrootTwister();

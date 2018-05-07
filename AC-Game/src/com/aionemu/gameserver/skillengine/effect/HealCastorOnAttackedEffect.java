@@ -71,6 +71,7 @@ public class HealCastorOnAttackedEffect extends EffectTemplate {
         final int valueWithDelta = value + delta * effect.getSkillLevel();
 
         ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
+
             @Override
             public void attacked(Creature creature) {
                 if (player.getPlayerGroup2() != null) {

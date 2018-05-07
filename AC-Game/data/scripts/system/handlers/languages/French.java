@@ -78,7 +78,8 @@ public class French extends Language {
         addTranslatedMessage(CustomMessageId.COMMAND_SEND_SYNTAX, "Syntaxe: //send <nom de fichier>");
         addTranslatedMessage(CustomMessageId.COMMAND_SEND_MAPPING_NOT_FOUND, "Fichier %s introuvable.");
         addTranslatedMessage(CustomMessageId.COMMAND_SEND_NO_PACKET, "Pas de paquet a envoyer.");
-        addTranslatedMessage(CustomMessageId.CHANNEL_WORLD_DISABLED, "Le canal %s est desactive, merci d'utiliser les canaux %s ou %s selon votre faction.");
+        addTranslatedMessage(CustomMessageId.CHANNEL_WORLD_DISABLED,
+            "Le canal %s est desactive, merci d'utiliser les canaux %s ou %s selon votre faction.");
         addTranslatedMessage(CustomMessageId.CHANNEL_ALL_DISABLED, "Les canaux sont desactives.");
         addTranslatedMessage(CustomMessageId.CHANNEL_ALREADY_FIXED, "Vous etes deja fixe sur le canal %s.");
         addTranslatedMessage(CustomMessageId.CHANNEL_FIXED, "Votre chat est maintenant fixe sur le canal %s.");
@@ -91,8 +92,10 @@ public class French extends Language {
         addTranslatedMessage(CustomMessageId.CHANNEL_RELEASED_BOTH, "Votre chat a ete libere des canaux %s et %s.");
         addTranslatedMessage(CustomMessageId.CHANNEL_BAN_ENDED, "Vous n'etes plus banni des canaux de discussion.");
         addTranslatedMessage(CustomMessageId.CHANNEL_BAN_ENDED_FOR, "Le joueur %s n'est plus banni des canaux de discussion.");
-        addTranslatedMessage(CustomMessageId.CHANNEL_BANNED, "Vous ne pouvez pas utiliser les canaux de discussion car %s vous a banni pour la raison suivante: %s, temps restant: %s.");
-        addTranslatedMessage(CustomMessageId.COMMAND_MISSING_SKILLS_STIGMAS_ADDED, "%d competences basiques et %d competences stigmas vous ont ete ajoutees.");
+        addTranslatedMessage(CustomMessageId.CHANNEL_BANNED,
+            "Vous ne pouvez pas utiliser les canaux de discussion car %s vous a banni pour la raison suivante: %s, temps restant: %s.");
+        addTranslatedMessage(CustomMessageId.COMMAND_MISSING_SKILLS_STIGMAS_ADDED,
+            "%d competences basiques et %d competences stigmas vous ont ete ajoutees.");
         addTranslatedMessage(CustomMessageId.COMMAND_MISSING_SKILLS_ADDED, "%d competences basiques vous ont ete ajoutees.");
         addTranslatedMessage(CustomMessageId.USER_COMMAND_DOES_NOT_EXIST, "Cette commande joueur n'existe pas.");
         addTranslatedMessage(CustomMessageId.COMMAND_XP_DISABLED, "Votre gain d'XP a ete desactive. Tapez .xpon pour le reactiver.");
@@ -105,8 +108,10 @@ public class French extends Language {
         /**
          * Asmo and Ely Channel
          */
-        addTranslatedMessage(CustomMessageId.ASMO_FAIL, "Vous etes Elyseens! Vous ne pouvez pas utiliser ce chat. .ely <message> pour discuter avec votre faction!");
-        addTranslatedMessage(CustomMessageId.ELY_FAIL, "Vous etes Asmodiens! Vous ne pouvez pas utiliser ce chat. .asmo <message> pour discuter avec votre faction!");
+        addTranslatedMessage(CustomMessageId.ASMO_FAIL,
+            "Vous etes Elyseens! Vous ne pouvez pas utiliser ce chat. .ely <message> pour discuter avec votre faction!");
+        addTranslatedMessage(CustomMessageId.ELY_FAIL,
+            "Vous etes Asmodiens! Vous ne pouvez pas utiliser ce chat. .asmo <message> pour discuter avec votre faction!");
 
         /**
          * PvP Service
@@ -229,7 +234,8 @@ public class French extends Language {
         addTranslatedMessage(CustomMessageId.FFA_IS_ALREADY_IN, "Vous etes deja dans la map FFA");
         addTranslatedMessage(CustomMessageId.FFA_FROZEN_MESSAGE, "Vous etes paralyse pour un moment...");
         addTranslatedMessage(CustomMessageId.FFA_CURRENT_PLAYERS, "Nombre de joueurs actuels :");
-        addTranslatedMessage(CustomMessageId.FFA_USAGE, "Utliser: .FFA enter, pour entrer dans l'arene .FFA leave, pour quitter l'arene.\n.FFA info, pour voir le nombre de joueurs actuels dans la map FFA ");
+        addTranslatedMessage(CustomMessageId.FFA_USAGE,
+            "Utliser: .FFA enter, pour entrer dans l'arene .FFA leave, pour quitter l'arene.\n.FFA info, pour voir le nombre de joueurs actuels dans la map FFA ");
         addTranslatedMessage(CustomMessageId.FFA_YOU_KICKED_OUT, "Vous n'etes plus dans la map FFA!");
         addTranslatedMessage(CustomMessageId.FFA_YOUR_NOT_IN, " Vous n'etes pas membre de l'arene FFA.");
         addTranslatedMessage(CustomMessageId.FFA_ANNOUNCE_1, "Rejoindre la map FFA en utilisant .ffa enter ! ");

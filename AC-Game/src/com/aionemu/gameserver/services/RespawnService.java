@@ -32,8 +32,6 @@ package com.aionemu.gameserver.services;
 import java.util.Set;
 import java.util.concurrent.Future;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.Npc;

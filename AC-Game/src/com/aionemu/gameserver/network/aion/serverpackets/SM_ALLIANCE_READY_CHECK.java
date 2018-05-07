@@ -48,7 +48,7 @@ public class SM_ALLIANCE_READY_CHECK extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(playerObjectId);
         writeC(statusCode);
     }

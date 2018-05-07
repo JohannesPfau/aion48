@@ -52,7 +52,7 @@ public class SM_ITEM_COOLDOWN extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(cooldowns.size());
         long currentTime = System.currentTimeMillis();
         for (Map.Entry<Integer, ItemCooldown> entry : cooldowns.entrySet()) {

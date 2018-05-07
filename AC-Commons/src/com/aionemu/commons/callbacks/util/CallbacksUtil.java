@@ -29,12 +29,13 @@
  */
 package com.aionemu.commons.callbacks.util;
 
+import java.util.List;
+
 import com.aionemu.commons.callbacks.Callback;
 import com.aionemu.commons.callbacks.CallbackPriority;
+
 import javassist.CtMethod;
 import javassist.bytecode.AnnotationsAttribute;
-
-import java.util.List;
 
 @SuppressWarnings("rawtypes")
 public class CallbacksUtil {
@@ -42,8 +43,10 @@ public class CallbacksUtil {
     /**
      * Checks if annotation is present on method
      *
-     * @param method     Method to check
-     * @param annotation Annotation to look for
+     * @param method
+     *            Method to check
+     * @param annotation
+     *            Annotation to look for
      * @return result
      */
     public static boolean isAnnotationPresent(CtMethod method, Class<? extends java.lang.annotation.Annotation> annotation) {
@@ -73,7 +76,8 @@ public class CallbacksUtil {
      * If callback is not instance of CallbackPriority then it returns
      * {@link com.aionemu.commons.callbacks.CallbackPriority#DEFAULT_PRIORITY}
      *
-     * @param callback priority to get from
+     * @param callback
+     *            priority to get from
      * @return priority of callback
      */
     public static int getCallbackPriority(Callback callback) {

@@ -52,7 +52,7 @@ public class SM_LEGION_UPDATE_TITLE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(objectId);
         writeD(legionId);
         writeS(legionName);

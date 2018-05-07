@@ -42,7 +42,6 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
  * as implemented, it contains sequence of blobs. Just blame Nemesiss for deep
  * recursion to get the right size [RR] :P
  *
-
  * @modified Rolandas
  */
 public abstract class ItemBlobEntry extends PacketWriteHelper {

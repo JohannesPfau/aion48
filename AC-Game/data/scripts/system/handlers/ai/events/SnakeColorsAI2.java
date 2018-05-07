@@ -29,7 +29,6 @@
  */
 package ai.events;
 
-import ai.GeneralNpcAI2;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
@@ -39,6 +38,8 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Romanz
@@ -51,10 +52,10 @@ public class SnakeColorsAI2 extends GeneralNpcAI2 {
     @Override
     protected void handleDialogStart(Player player) {
         switch (getNpcId()) {
-            case 832974: 
-            case 832975: 
-			case 832963: 
-			case 832964: 
+            case 832974:
+            case 832975:
+            case 832963:
+            case 832964:
                 super.handleDialogStart(player);
                 break;
             default:
@@ -72,33 +73,33 @@ public class SnakeColorsAI2 extends GeneralNpcAI2 {
         }
         if (dialogId == DialogAction.SETPRO1.id()) {
             switch (getNpcId()) {
-                case 832974:   
-				case 832963:  
+                case 832974:
+                case 832963:
                     switch (Rnd.get(1, 2)) {
                         case 1:
-                            SkillEngine.getInstance().getSkill(getOwner(), 10976, 1, player).useWithoutPropSkill();  
+                            SkillEngine.getInstance().getSkill(getOwner(), 10976, 1, player).useWithoutPropSkill();
                             break;
                         case 2:
-                            SkillEngine.getInstance().getSkill(getOwner(), 10977, 1, player).useWithoutPropSkill(); 
+                            SkillEngine.getInstance().getSkill(getOwner(), 10977, 1, player).useWithoutPropSkill();
                             break;
                     }
-					break;
-				case 832975:  
-				case 832964: 
+                    break;
+                case 832975:
+                case 832964:
                     switch (Rnd.get(1, 2)) {
                         case 1:
-                            SkillEngine.getInstance().getSkill(getOwner(), 10979, 1, player).useWithoutPropSkill();  
+                            SkillEngine.getInstance().getSkill(getOwner(), 10979, 1, player).useWithoutPropSkill();
                             break;
                         case 2:
                             SkillEngine.getInstance().getSkill(getOwner(), 10978, 1, player).useWithoutPropSkill();
                             break;
                     }
-					
+
                     break;
-            }	
+            }
         }
-		
-		else if (dialogId == DialogAction.QUEST_SELECT.id() && questId != 0) {
+
+        else if (dialogId == DialogAction.QUEST_SELECT.id() && questId != 0) {
             PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), dialogId, questId));
         }
         return true;

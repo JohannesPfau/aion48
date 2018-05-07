@@ -52,7 +52,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class FountainRewards extends QuestHandler {
 
     private final int questId;
-    private final Set<Integer> startNpcs = new HashSet<Integer>();
+    private final Set<Integer> startNpcs = new HashSet<>();
 
     public FountainRewards(int questId, List<Integer> startNpcIds) {
         super(questId);
@@ -79,7 +79,7 @@ public class FountainRewards extends QuestHandler {
         DialogAction dialog = env.getDialog();
 
         if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-            if (startNpcs.contains(targetId)) {  // Coin Fountain
+            if (startNpcs.contains(targetId)) { // Coin Fountain
                 switch (dialog) {
                     case USE_OBJECT: {
                         if (!QuestService.inventoryItemCheck(env, true)) {
@@ -111,7 +111,7 @@ public class FountainRewards extends QuestHandler {
             }
         } else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
             // Coin Fountain
-            if (startNpcs.contains(targetId)) {  // Coin Fountain
+            if (startNpcs.contains(targetId)) { // Coin Fountain
                 if (dialog == DialogAction.SELECTED_QUEST_NOREWARD) {
                     if (QuestService.collectItemCheck(env, true)) {
                         return sendQuestEndDialog(env);
@@ -126,7 +126,7 @@ public class FountainRewards extends QuestHandler {
 
     @Override
     public boolean onCanAct(QuestEnv env, QuestActionType questEventType, Object... objects) {
-        if (startNpcs.contains(env.getTargetId())) {  // Coin Fountain
+        if (startNpcs.contains(env.getTargetId())) { // Coin Fountain
             return true;
         }
         return false;

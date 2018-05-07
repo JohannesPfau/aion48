@@ -51,6 +51,7 @@ public enum EARTH_RESIST {
     GUNNER(0),
     ARTIST(0),
     BARD(0);
+
     private int value;
 
     private EARTH_RESIST(int value) {

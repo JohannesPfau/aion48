@@ -29,7 +29,6 @@
  */
 package ai.events;
 
-import ai.GeneralNpcAI2;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
@@ -39,6 +38,8 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Romanz

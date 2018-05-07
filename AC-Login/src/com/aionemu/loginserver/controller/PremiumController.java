@@ -29,13 +29,14 @@
  */
 package com.aionemu.loginserver.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.dao.PremiumDAO;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_PREMIUM_RESPONSE;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author KID
@@ -88,7 +89,8 @@ public class PremiumController {
             log.info("Acount " + accountId + " succed in purchasing lot #" + requestId + " for " + cost + " from server #" + serverId);
         } else {
             server.getConnection().sendPacket(new SM_PREMIUM_RESPONSE(requestId, RESULT_FAIL, points));
-            log.info("Acount " + accountId + " failed in purchasing lot #" + requestId + " for " + cost + " from server #" + serverId + ". !updatePoints");
+            log.info(
+                "Acount " + accountId + " failed in purchasing lot #" + requestId + " for " + cost + " from server #" + serverId + ". !updatePoints");
         }
     }
 }

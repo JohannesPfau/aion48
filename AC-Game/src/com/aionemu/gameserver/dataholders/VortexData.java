@@ -38,10 +38,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.templates.vortex.VortexTemplate;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
+
+import javolution.util.FastMap;
 
 /**
  * @author Source
@@ -53,7 +53,7 @@ public class VortexData {
     @XmlElement(name = "vortex_location")
     private List<VortexTemplate> vortexTemplates;
     @XmlTransient
-    private FastMap<Integer, VortexLocation> vortex = new FastMap<Integer, VortexLocation>();
+    private FastMap<Integer, VortexLocation> vortex = new FastMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (VortexTemplate template : vortexTemplates) {

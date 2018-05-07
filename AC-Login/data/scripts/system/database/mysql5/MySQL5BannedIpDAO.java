@@ -29,16 +29,20 @@
  */
 package mysql5;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.sql.Types;
+import java.util.HashSet;
+import java.util.Set;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
 import com.aionemu.commons.database.ReadStH;
 import com.aionemu.loginserver.dao.BannedIpDAO;
 import com.aionemu.loginserver.model.BannedIP;
-
-import java.sql.*;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * BannedIP DAO implementation for MySQL5
@@ -67,6 +71,7 @@ public class MySQL5BannedIpDAO extends BannedIpDAO {
     @Override
     public boolean insert(final BannedIP bannedIP) {
         boolean insert = DB.insertUpdate("INSERT INTO banned_ip(mask, time_end) VALUES (?, ?)", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setString(1, bannedIP.getMask());
@@ -85,6 +90,7 @@ public class MySQL5BannedIpDAO extends BannedIpDAO {
 
         final BannedIP result = new BannedIP();
         DB.select("SELECT * FROM banned_ip WHERE mask = ?", new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setString(1, bannedIP.getMask());
@@ -104,6 +110,7 @@ public class MySQL5BannedIpDAO extends BannedIpDAO {
     @Override
     public boolean update(final BannedIP bannedIP) {
         return DB.insertUpdate("UPDATE banned_ip SET mask = ?, time_end = ? WHERE id = ?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setString(1, bannedIP.getMask());
@@ -121,6 +128,7 @@ public class MySQL5BannedIpDAO extends BannedIpDAO {
     @Override
     public boolean remove(final String mask) {
         return DB.insertUpdate("DELETE FROM banned_ip WHERE mask = ?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setString(1, mask);
@@ -132,6 +140,7 @@ public class MySQL5BannedIpDAO extends BannedIpDAO {
     @Override
     public boolean remove(final BannedIP bannedIP) {
         return DB.insertUpdate("DELETE FROM banned_ip WHERE mask = ?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 // Changed from id to mask because we don't get id of last inserted ban
@@ -144,8 +153,9 @@ public class MySQL5BannedIpDAO extends BannedIpDAO {
     @Override
     public Set<BannedIP> getAllBans() {
 
-        final Set<BannedIP> result = new HashSet<BannedIP>();
+        final Set<BannedIP> result = new HashSet<>();
         DB.select("SELECT * FROM banned_ip", new ReadStH() {
+
             @Override
             public void handleRead(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {

@@ -33,8 +33,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.rift.RiftLocation;
@@ -48,6 +46,8 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.RiftService;
 import com.aionemu.gameserver.services.VortexService;
 
+import javolution.util.FastMap;
+
 /**
  * @author MrPoke
  * @reworked vlog, Bobobear
@@ -55,16 +55,16 @@ import com.aionemu.gameserver.services.VortexService;
 public class MonsterHunt extends QuestHandler {
 
     private final int questId;
-    private final Set<Integer> startNpcs = new HashSet<Integer>();
-    private final Set<Integer> endNpcs = new HashSet<Integer>();
+    private final Set<Integer> startNpcs = new HashSet<>();
+    private final Set<Integer> endNpcs = new HashSet<>();
     private final FastMap<Monster, Set<Integer>> monsters;
     private final int startDialog;
     private final int endDialog;
-    private final Set<Integer> aggroNpcs = new HashSet<Integer>();
+    private final Set<Integer> aggroNpcs = new HashSet<>();
     private final int invasionWorldId;
 
-    public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<Monster, Set<Integer>> monsters,
-                       int startDialog, int endDialog, List<Integer> aggroNpcs, int invasionWorld) {
+    public MonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<Monster, Set<Integer>> monsters, int startDialog,
+        int endDialog, List<Integer> aggroNpcs, int invasionWorld) {
         super(questId);
         this.questId = questId;
         this.startNpcs.addAll(startNpcIds);

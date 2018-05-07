@@ -29,9 +29,9 @@
  */
 package quest.sanctum;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -81,7 +81,7 @@ public class _13832StiGreat extends QuestHandler {
                 }
             }
         } else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-            if (targetId == 203711) { 
+            if (targetId == 203711) {
                 return sendQuestEndDialog(env);
             }
         }

@@ -41,7 +41,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 
 /**
  * @author kosyachok
-
  */
 public class SM_WAREHOUSE_UPDATE_ITEM extends AionServerPacket {
 
@@ -59,7 +58,7 @@ public class SM_WAREHOUSE_UPDATE_ITEM extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         ItemTemplate itemTemplate = item.getItemTemplate();
 
         writeD(item.getObjectId());

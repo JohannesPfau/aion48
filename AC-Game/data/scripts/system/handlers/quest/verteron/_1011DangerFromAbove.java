@@ -29,10 +29,10 @@
  */
 package quest.verteron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,7 +50,7 @@ public class _1011DangerFromAbove extends QuestHandler {
 
     @Override
     public void register() {
-        int[] talkNpcs = {203109, 203122};
+        int[] talkNpcs = { 203109, 203122 };
         qe.registerQuestNpc(700091).addOnKillEvent(questId);
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);

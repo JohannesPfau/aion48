@@ -29,14 +29,10 @@
  */
 package com.aionemu.gameserver.questEngine.handlers.template;
 
-import gnu.trove.list.array.TIntArrayList;
-
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
-
-import javolution.util.FastMap;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
@@ -50,14 +46,17 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
+import gnu.trove.list.array.TIntArrayList;
+import javolution.util.FastMap;
+
 /**
  * @author vlog
  */
 public class KillSpawned extends QuestHandler {
 
     private final int questId;
-    private final Set<Integer> startNpcs = new HashSet<Integer>();
-    private final Set<Integer> endNpcs = new HashSet<Integer>();
+    private final Set<Integer> startNpcs = new HashSet<>();
+    private final Set<Integer> endNpcs = new HashSet<>();
     private final FastMap<List<Integer>, SpawnedMonster> spawnedMonsters;
     private TIntArrayList spawnerObjects;
 
@@ -129,8 +128,8 @@ public class KillSpawned extends QuestHandler {
                     }
 
                     SpawnSearchResult searchResult = DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(player.getWorldId(), targetId);
-                    QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), monsterId, searchResult.getSpot().getX(), searchResult.getSpot().getY(),
-                            searchResult.getSpot().getZ(), searchResult.getSpot().getHeading());
+                    QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), monsterId, searchResult.getSpot().getX(),
+                        searchResult.getSpot().getY(), searchResult.getSpot().getZ(), searchResult.getSpot().getHeading());
                     return true;
                 }
             } else {

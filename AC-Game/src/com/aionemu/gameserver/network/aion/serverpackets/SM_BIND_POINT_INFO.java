@@ -59,7 +59,7 @@ public class SM_BIND_POINT_INFO extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         // Appears 0x04 if bound to a kisk. 0x00 if not.
         writeC((kisk == null ? 0x00 : 0x04));
 

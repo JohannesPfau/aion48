@@ -55,7 +55,7 @@ import com.google.common.base.Preconditions;
 public class LeagueService {
 
     private static final Logger log = LoggerFactory.getLogger(LeagueService.class);
-    private static final Map<Integer, League> leagues = new ConcurrentHashMap<Integer, League>();
+    private static final Map<Integer, League> leagues = new ConcurrentHashMap<>();
 
     static {
         GlobalCallbackHelper.addCallback(new AllianceDisbandListener());
@@ -65,10 +65,8 @@ public class LeagueService {
         if (canInvite(inviter, invited)) {
             LeagueInvite invite = new LeagueInvite(inviter, invited);
             if (invited.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_MSGBOX_UNION_INVITE_ME, invite)) {
-                PacketSendUtility.sendPacket(inviter,
-                        SM_SYSTEM_MESSAGE.STR_UNION_INVITE_HIM(invited.getName(), invited.getPlayerAlliance2().size()));
-                PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_MSGBOX_UNION_INVITE_ME, 0, 0,
-                        inviter.getName()));
+                PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_INVITE_HIM(invited.getName(), invited.getPlayerAlliance2().size()));
+                PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_MSGBOX_UNION_INVITE_ME, 0, 0, inviter.getName()));
             }
         }
     }
@@ -118,9 +116,8 @@ public class LeagueService {
         Preconditions.checkArgument(expelGiver.isInLeague(), "Expelled player should be in league");
         Preconditions.checkArgument(expelledPlayer.isInLeague(), "ExpelGiver should be in league");
         Preconditions.checkArgument(expelGiver.getPlayerAlliance2().getLeague().isLeader(expelGiver.getPlayerAlliance2()),
-                "ExpelGiver alliance should be the leader of league");
-        Preconditions.checkArgument(expelGiver.getPlayerAlliance2().isLeader(expelGiver),
-                "ExpelGiver should be the leader of alliance");
+            "ExpelGiver alliance should be the leader of league");
+        Preconditions.checkArgument(expelGiver.getPlayerAlliance2().isLeader(expelGiver), "ExpelGiver should be the leader of alliance");
         PlayerAlliance alliance = expelGiver.getPlayerAlliance2();
         League league = alliance.getLeague();
         league.onEvent(new LeagueLeftEvent(league, expelledPlayer.getPlayerAlliance2(), LeaveReson.EXPEL));

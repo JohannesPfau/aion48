@@ -34,6 +34,7 @@ import java.util.List;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.TeleportAnimation;
@@ -48,7 +49,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -86,8 +86,8 @@ public class _1006Ascension extends QuestHandler {
         if (CustomConfig.ENABLE_SIMPLE_2NDCLASS) {
             return;
         }
-        int[] mobs = {211042, 211043};
-        int[] npcs = {790001, 730008, 205000};
+        int[] mobs = { 211042, 211043 };
+        int[] npcs = { 790001, 730008, 205000 };
         qe.registerOnLevelUp(questId);
         for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
@@ -234,19 +234,20 @@ public class _1006Ascension extends QuestHandler {
                                 updateQuestStatus(env);
                                 final int instanceId = player.getInstanceId();
                                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                     @Override
                                     public void run() {
                                         qs.setQuestVar(51);
                                         updateQuestStatus(env);
-                                        List<Npc> mobs = new ArrayList<Npc>();
-                                        mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, (float) 224.073,
-                                                (float) 239.1, (float) 206.7, (byte) 0));
-                                        mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, (float) 233.5,
-                                                (float) 241.04, (float) 206.365, (byte) 0));
-                                        mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, (float) 229.6,
-                                                (float) 265.7, (float) 205.7, (byte) 0));
-                                        mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, (float) 222.8,
-                                                (float) 262.5, (float) 205.7, (byte) 0));
+                                        List<Npc> mobs = new ArrayList<>();
+                                        mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, (float) 224.073, (float) 239.1,
+                                            (float) 206.7, (byte) 0));
+                                        mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, (float) 233.5, (float) 241.04,
+                                            (float) 206.365, (byte) 0));
+                                        mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, (float) 229.6, (float) 265.7,
+                                            (float) 205.7, (byte) 0));
+                                        mobs.add((Npc) QuestService.spawnQuestNpc(310020000, instanceId, 211042, (float) 222.8, (float) 262.5,
+                                            (float) 205.7, (byte) 0));
                                         for (Npc mob : mobs) {
                                             mob.getAggroList().addDamage(player, 1000);
                                         }
@@ -263,7 +264,8 @@ public class _1006Ascension extends QuestHandler {
                 switch (env.getDialog()) {
                     case SELECTED_QUEST_NOREWARD:
                         if (player.getWorldId() == 310020000) {
-                            TeleportService2.teleportTo(player, 210010000, 245.14868f, 1639.1372f, 100.35713f, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, 210010000, 245.14868f, 1639.1372f, 100.35713f, (byte) 60,
+                                TeleportAnimation.BEAM_ANIMATION);
                         }
                         break;
                 }
@@ -303,8 +305,8 @@ public class _1006Ascension extends QuestHandler {
                 } else if (var == 54) {
                     qs.setQuestVar(4); // 4
                     updateQuestStatus(env);
-                    Npc mob = (Npc) QuestService.spawnQuestNpc(310020000, player.getInstanceId(), 211043, (float) 226.7,
-                            (float) 251.5, (float) 205.5, (byte) 0);
+                    Npc mob = (Npc) QuestService.spawnQuestNpc(310020000, player.getInstanceId(), 211043, (float) 226.7, (float) 251.5, (float) 205.5,
+                        (byte) 0);
                     mob.getAggroList().addDamage(player, 1000);
                     return true;
                 }
@@ -341,8 +343,8 @@ public class _1006Ascension extends QuestHandler {
             if (var == 4 || (var == 5 && player.getPlayerClass().isStartingClass()) || (var >= 50 && var <= 55)) {
                 qs.setQuestVar(3);
                 updateQuestStatus(env);
-                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                        DataManager.QUEST_DATA.getQuestById(questId).getName()));
+                PacketSendUtility.sendPacket(player,
+                    new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
             }
         }
         return false;
@@ -358,8 +360,8 @@ public class _1006Ascension extends QuestHandler {
                 if (player.getWorldId() != 310020000) {
                     qs.setQuestVar(3);
                     updateQuestStatus(env);
-                    PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                            DataManager.QUEST_DATA.getQuestById(questId).getName()));
+                    PacketSendUtility.sendPacket(player,
+                        new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
                 } else {
                     PacketSendUtility.sendPacket(player, new SM_ASCENSION_MORPH(1));
                     return true;

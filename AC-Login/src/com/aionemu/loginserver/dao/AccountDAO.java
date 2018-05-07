@@ -42,7 +42,8 @@ public abstract class AccountDAO implements DAO {
     /**
      * Returns account by name or null
      *
-     * @param name account name
+     * @param name
+     *            account name
      * @return account object or null
      */
     public abstract Account getAccount(String name);
@@ -52,7 +53,8 @@ public abstract class AccountDAO implements DAO {
     /**
      * Retuns account id or -1 in case of error
      *
-     * @param name name of account
+     * @param name
+     *            name of account
      * @return id or -1 in case of error
      */
     public abstract int getAccountId(String name);
@@ -68,7 +70,8 @@ public abstract class AccountDAO implements DAO {
      * Inserts new account to database. Sets account ID to id that was generated
      * by DB.
      *
-     * @param account account to insert
+     * @param account
+     *            account to insert
      * @return true if was inserted, false in other case
      */
     public abstract boolean insertAccount(Account account);
@@ -76,7 +79,8 @@ public abstract class AccountDAO implements DAO {
     /**
      * Updates account in database
      *
-     * @param account account to update
+     * @param account
+     *            account to update
      * @return true if was updated, false in other case
      */
     public abstract boolean updateAccount(Account account);
@@ -84,8 +88,10 @@ public abstract class AccountDAO implements DAO {
     /**
      * Updates lastServer field of account
      *
-     * @param accountId  account id
-     * @param lastServer last accessed server
+     * @param accountId
+     *            account id
+     * @param lastServer
+     *            last accessed server
      * @return was updated successful or not
      */
     public abstract boolean updateLastServer(int accountId, byte lastServer);
@@ -93,8 +99,10 @@ public abstract class AccountDAO implements DAO {
     /**
      * Updates last ip that was used to access an account
      *
-     * @param accountId account id
-     * @param ip        ip address
+     * @param accountId
+     *            account id
+     * @param ip
+     *            ip address
      * @return was update successful or not
      */
     public abstract boolean updateLastIp(int accountId, String ip);
@@ -102,7 +110,8 @@ public abstract class AccountDAO implements DAO {
     /**
      * Get last ip that was used to access an account
      *
-     * @param accountId account id
+     * @param accountId
+     *            account id
      * @return ip address
      */
     public abstract String getLastIp(int accountId);
@@ -110,8 +119,10 @@ public abstract class AccountDAO implements DAO {
     /**
      * Updates last mac that was used to access an account
      *
-     * @param accountId account id
-     * @param mac       mac address
+     * @param accountId
+     *            account id
+     * @param mac
+     *            mac address
      * @return was update successful or not
      */
     public abstract boolean updateLastMac(int accountId, String mac);
@@ -119,7 +130,8 @@ public abstract class AccountDAO implements DAO {
     /**
      * Updates account membership
      *
-     * @param accountId account id
+     * @param accountId
+     *            account id
      * @return was update successful or not
      */
     public abstract boolean updateMembership(int accountId);

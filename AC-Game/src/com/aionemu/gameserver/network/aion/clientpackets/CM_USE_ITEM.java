@@ -55,7 +55,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Avol
-
  */
 public class CM_USE_ITEM extends AionClientPacket {
 
@@ -114,7 +113,6 @@ public class CM_USE_ITEM extends AionClientPacket {
             return;
         }
 
-
         // check use item multicast delay exploit cast (spam)
         if (player.isCasting()) {
             // PacketSendUtility.sendMessage(this.getOwner(),
@@ -141,7 +139,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 
         if (requiredLevel > player.getLevel()) {
             PacketSendUtility.sendPacket(player,
-                    SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getNameId(), requiredLevel));
+                SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getNameId(), requiredLevel));
             return;
         }
 
@@ -150,7 +148,7 @@ public class CM_USE_ITEM extends AionClientPacket {
             return; // don't remove item
         }
         ItemActions itemActions = item.getItemTemplate().getActions();
-        ArrayList<AbstractItemAction> actions = new ArrayList<AbstractItemAction>();
+        ArrayList<AbstractItemAction> actions = new ArrayList<>();
 
         if (itemActions == null) {
             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE);
@@ -196,14 +194,14 @@ public class CM_USE_ITEM extends AionClientPacket {
             } else if (type == 6) {
 
                 // Multi Returns Items (Scroll Teleporter)
-            	if (itemAction instanceof MultiReturnAction){
-            		MultiReturnAction action = (MultiReturnAction) itemAction;
-            		int SelectedMapIndex = returnId;
-            		action.act(player, item, SelectedMapIndex);
-            	}
+                if (itemAction instanceof MultiReturnAction) {
+                    MultiReturnAction action = (MultiReturnAction) itemAction;
+                    int SelectedMapIndex = returnId;
+                    action.act(player, item, SelectedMapIndex);
+                }
             } else {
-	            // 166030005 = Tempering Solution
-	            //if (item.getItemTemplate().getTemplateId() == 166030005) return;      	
+                // 166030005 = Tempering Solution
+                //if (item.getItemTemplate().getTemplateId() == 166030005) return;      	
                 itemAction.act(player, item, targetItem);
             }
         }

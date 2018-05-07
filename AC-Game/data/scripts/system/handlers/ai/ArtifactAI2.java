@@ -29,6 +29,13 @@
  */
 package ai;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.concurrent.ScheduledFuture;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AI2Request;
 import com.aionemu.gameserver.ai2.AIName;
@@ -57,12 +64,6 @@ import com.aionemu.gameserver.skillengine.properties.TargetSpeciesAttribute;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.knownlist.Visitor;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ScheduledFuture;
 
 /**
  * @author ATracer, Source
@@ -71,7 +72,7 @@ import java.util.concurrent.ScheduledFuture;
 public class ArtifactAI2 extends NpcAI2 {
 
     private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
-    private Map<Integer, ItemUseObserver> observers = new HashMap<Integer, ItemUseObserver>();
+    private Map<Integer, ItemUseObserver> observers = new HashMap<>();
 
     @Override
     protected SiegeSpawnTemplate getSpawnTemplate() {
@@ -82,15 +83,18 @@ public class ArtifactAI2 extends NpcAI2 {
     protected void handleDialogStart(final Player player) {
         final ArtifactLocation loc = SiegeService.getInstance().getArtifact(getSpawnTemplate().getSiegeId());
         AI2Actions.addRequest(this, player, 160028, new AI2Request() {
+
             @Override
             public void acceptRequest(Creature requester, Player responder) {
 
                 AI2Actions.addRequest(ArtifactAI2.this, player, 160016, new AI2Request() {
+
                     @Override
                     public void acceptRequest(Creature requester, Player responder) {
                         onActivate(responder);
                     }
-                }, new DescriptionId(2 * 716570 + 1), SiegeService.getInstance().getArtifact(getSpawnTemplate().getSiegeId()).getTemplate().getActivation().getCount());
+                }, new DescriptionId(2 * 716570 + 1),
+                    SiegeService.getInstance().getArtifact(getSpawnTemplate().getSiegeId()).getTemplate().getActivation().getCount());
 
             }
         }, loc);
@@ -122,7 +126,7 @@ public class ArtifactAI2 extends NpcAI2 {
 
         if (loc.getLegionId() != 0) {
             if (!player.isLegionMember() || player.getLegion().getLegionId() != loc.getLegionId()
-                    || !player.getLegionMember().hasRights(LegionPermissionsMask.ARTIFACT)) {
+                || !player.getLegionMember().hasRights(LegionPermissionsMask.ARTIFACT)) {
                 PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ARTIFACT_HAVE_NO_AUTHORITY);
                 return;
             }
@@ -133,18 +137,20 @@ public class ArtifactAI2 extends NpcAI2 {
         }
 
         if (LoggingConfig.LOG_SIEGE) {
-            log.info("Artifact " + getSpawnTemplate().getSiegeId() + " activated by " + player.getName() + ". Activator race: " + player.getRace().toString());
+            log.info("Artifact " + getSpawnTemplate().getSiegeId() + " activated by " + player.getName() + ". Activator race: "
+                + player.getRace().toString());
         }
 
         if (!loc.getStatus().equals(ArtifactStatus.IDLE)) {
             return;
         }
         // Brodcast start activation.
-        final SM_SYSTEM_MESSAGE startMessage = SM_SYSTEM_MESSAGE.STR_ARTIFACT_CASTING(player.getRace().getRaceDescriptionId(),
-                player.getName(), new DescriptionId(skillTemplate.getNameId()));
+        final SM_SYSTEM_MESSAGE startMessage = SM_SYSTEM_MESSAGE.STR_ARTIFACT_CASTING(player.getRace().getRaceDescriptionId(), player.getName(),
+            new DescriptionId(skillTemplate.getNameId()));
         loc.setStatus(ArtifactStatus.ACTIVATION);
         final SM_ABYSS_ARTIFACT_INFO artifactInfo = new SM_ABYSS_ARTIFACT_INFO(loc.getLocationId());
         player.getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendPacket(player, startMessage);
@@ -153,21 +159,21 @@ public class ArtifactAI2 extends NpcAI2 {
         });
 
         PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 10000, 1));
-        PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()),
-                true);
+        PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
 
         ItemUseObserver observer = new ItemUseObserver() {
+
             @Override
             public void abort() {
                 player.getController().cancelTask(TaskId.ACTION_ITEM_NPC);
-                PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()),
-                        true);
+                PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
                 PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 10000, 0));
                 final SM_SYSTEM_MESSAGE message = SM_SYSTEM_MESSAGE.STR_ARTIFACT_CANCELED(loc.getRace().getDescriptionId(),
-                        new DescriptionId(skillTemplate.getNameId()));
+                    new DescriptionId(skillTemplate.getNameId()));
                 loc.setStatus(ArtifactStatus.IDLE);
                 final SM_ABYSS_ARTIFACT_INFO artifactInfo = new SM_ABYSS_ARTIFACT_INFO(loc.getLocationId());
                 getOwner().getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
                     @Override
                     public void visit(Player player) {
                         PacketSendUtility.sendPacket(player, message);
@@ -179,6 +185,7 @@ public class ArtifactAI2 extends NpcAI2 {
         observers.put(player.getObjectId(), observer);
         player.getObserveController().attach(observer);
         player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 ItemUseObserver observer = observers.remove(player.getObjectId());
@@ -187,17 +194,17 @@ public class ArtifactAI2 extends NpcAI2 {
                 }
 
                 PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 10000, 0));
-                PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()),
-                        true);
+                PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
                 if (!player.getInventory().decreaseByItemId(itemId, count)) {
                     return;
                 }
                 final SM_SYSTEM_MESSAGE message = SM_SYSTEM_MESSAGE.STR_ARTIFACT_CORE_CASTING(loc.getRace().getDescriptionId(),
-                        new DescriptionId(skillTemplate.getNameId()));
+                    new DescriptionId(skillTemplate.getNameId()));
                 loc.setStatus(ArtifactStatus.CASTING);
                 final SM_ABYSS_ARTIFACT_INFO artifactInfo = new SM_ABYSS_ARTIFACT_INFO(loc.getLocationId());
 
                 player.getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
                     @Override
                     public void visit(Player player) {
                         PacketSendUtility.sendPacket(player, message);
@@ -209,9 +216,10 @@ public class ArtifactAI2 extends NpcAI2 {
                 if (loc.getTemplate().getRepeatCount() == 1) {
                     ThreadPoolManager.getInstance().schedule(new ArtifactUseSkill(loc, player, skillTemplate), 13000);
                 } else {
-                    final ScheduledFuture<?> s = ThreadPoolManager.getInstance().scheduleAtFixedRate(
-                            new ArtifactUseSkill(loc, player, skillTemplate), 13000, loc.getTemplate().getRepeatInterval() * 1000);
+                    final ScheduledFuture<?> s = ThreadPoolManager.getInstance().scheduleAtFixedRate(new ArtifactUseSkill(loc, player, skillTemplate),
+                        13000, loc.getTemplate().getRepeatInterval() * 1000);
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             s.cancel(true);
@@ -243,7 +251,7 @@ public class ArtifactAI2 extends NpcAI2 {
             this.skill = skill;
             this.pkt = new SM_ABYSS_ARTIFACT_INFO(artifact.getLocationId());
             this.message = SM_SYSTEM_MESSAGE.STR_ARTIFACT_FIRE(activator.getRace().getRaceDescriptionId(), player.getName(),
-                    new DescriptionId(skill.getNameId()));
+                new DescriptionId(skill.getNameId()));
         }
 
         @Override
@@ -257,6 +265,7 @@ public class ArtifactAI2 extends NpcAI2 {
 
             runCount++;
             player.getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player player) {
                     if (start) {

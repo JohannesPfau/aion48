@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,11 +43,13 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.templates.spawns.HouseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.HouseSpawns;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"houseSpawnsData"})
+@XmlType(name = "", propOrder = { "houseSpawnsData" })
 @XmlRootElement(name = "house_npcs")
 public class HouseNpcsData {
 
@@ -58,13 +58,13 @@ public class HouseNpcsData {
 
     public List<HouseSpawns> getHouseSpawns() {
         if (houseSpawnsData == null) {
-            houseSpawnsData = new ArrayList<HouseSpawns>();
+            houseSpawnsData = new ArrayList<>();
         }
         return this.houseSpawnsData;
     }
 
     @XmlTransient
-    private TIntObjectHashMap<List<HouseSpawn>> houseSpawnsByAddressId = new TIntObjectHashMap<List<HouseSpawn>>();
+    private TIntObjectHashMap<List<HouseSpawn>> houseSpawnsByAddressId = new TIntObjectHashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (HouseSpawns houseSpawns : getHouseSpawns()) {

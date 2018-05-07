@@ -29,6 +29,12 @@
  */
 package com.aionemu.loginserver.service;
 
+import java.util.Map;
+import java.util.concurrent.Future;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.GameServerTable;
@@ -42,13 +48,9 @@ import com.aionemu.loginserver.service.ptransfer.PlayerTransferResultStatus;
 import com.aionemu.loginserver.service.ptransfer.PlayerTransferStatus;
 import com.aionemu.loginserver.service.ptransfer.PlayerTransferTask;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
+
 import javolution.util.FastList;
 import javolution.util.FastMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.Map;
-import java.util.concurrent.Future;
 
 /**
  * @author KID
@@ -69,6 +71,7 @@ public class PlayerTransferService {
 
     public PlayerTransferService() {
         veryfyTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 verifyNewTasks();
@@ -137,14 +140,17 @@ public class PlayerTransferService {
         }
 
         if (targetServer.isAccountOnGameServer(task.targetAccountId)) {
-            log.error("Player transfer cant be performed while target account is online at server #" + task.targetServerId + ". " + task.targetAccountId);
-            server.getConnection().sendPacket(new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.ERROR, taskId, "transfer cant be performed while target account is online at server"));
+            log.error(
+                "Player transfer cant be performed while target account is online at server #" + task.targetServerId + ". " + task.targetAccountId);
+            server.getConnection().sendPacket(new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.ERROR, taskId,
+                "transfer cant be performed while target account is online at server"));
             return;
         }
 
         if (transfers.containsKey(taskId)) {
             log.error("Player transfer cant be performed while it is already active #" + task.targetServerId + ". " + task.targetAccountId);
-            server.getConnection().sendPacket(new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.ERROR, taskId, "transfer cant be performed while it is already active"));
+            server.getConnection().sendPacket(
+                new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.ERROR, taskId, "transfer cant be performed while it is already active"));
             return;
         }
 

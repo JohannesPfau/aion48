@@ -29,9 +29,9 @@
  */
 package quest.cygnea;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,10 +49,10 @@ public class _18970TheCorridorLore extends QuestHandler {
 
     @Override
     public void register() {
-		qe.registerQuestNpc(804709).addOnQuestStart(questId);
-		qe.registerQuestNpc(805213).addOnTalkEvent(questId);
-		qe.registerQuestNpc(805214).addOnTalkEvent(questId);
-		qe.registerQuestNpc(805215).addOnTalkEvent(questId);
+        qe.registerQuestNpc(804709).addOnQuestStart(questId);
+        qe.registerQuestNpc(805213).addOnTalkEvent(questId);
+        qe.registerQuestNpc(805214).addOnTalkEvent(questId);
+        qe.registerQuestNpc(805215).addOnTalkEvent(questId);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class _18970TheCorridorLore extends QuestHandler {
             if ((targetId == 805213) || (targetId == 805214) || (targetId == 805215)) {
                 return sendQuestEndDialog(env);
             }
-        } 
+        }
         return false;
     }
 }

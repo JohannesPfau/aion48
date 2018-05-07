@@ -72,20 +72,21 @@ public class cometome extends WeddingCommand {
         }
 
         if (!player.isCommandInUse()) {
-            TeleportService2.teleportTo(partner, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(), player.getZ(), player.getHeading(), TeleportAnimation.BEAM_ANIMATION);
+            TeleportService2.teleportTo(partner, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(), player.getZ(),
+                player.getHeading(), TeleportAnimation.BEAM_ANIMATION);
             PacketSendUtility.sendMessage(player, partner.getName() + " teleported to you.");
             player.setCommandUsed(true);
 
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
-					player.setCommandUsed(false);
-				}
-			}, 60 * 60 * 1000);
-		}
-		else
-			PacketSendUtility.sendMessage(player, "Only 1 TP per hour.");
-	}
+                    player.setCommandUsed(false);
+                }
+            }, 60 * 60 * 1000);
+        } else
+            PacketSendUtility.sendMessage(player, "Only 1 TP per hour.");
+    }
 
     @Override
     public void onFail(Player player, String message) {

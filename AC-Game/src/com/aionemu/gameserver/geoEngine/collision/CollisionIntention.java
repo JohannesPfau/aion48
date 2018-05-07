@@ -48,6 +48,7 @@ public enum CollisionIntention {
     // Nodes which do not specify it won't let their children enumerated for collisions,
     // to speed up processing
     ALL(PHYSICAL.getId() | MATERIAL.getId() | SKILL.getId() | WALK.getId() | DOOR.getId() | EVENT.getId() | MOVEABLE.getId());
+
     private byte id;
 
     private CollisionIntention(int id) {

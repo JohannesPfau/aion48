@@ -29,8 +29,6 @@
  */
 package ai.worlds.liveParty;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AISubState;
@@ -39,69 +37,69 @@ import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 
+import ai.GeneralNpcAI2;
 
 /**
  * @author Alcapwnd
- *
  */
 @AIName("dancer")
 public class DancerAI2 extends GeneralNpcAI2 {
-	
-	@Override
-	protected void handleSpawned() {
-		switch(getNpcId()) {
-			case 831633:
-			case 831634:
-			case 831635:
-			case 831637:
-			case 831638:
-			case 831639:
-				this.setStateIfNot(AIState.IDLE);
-				this.setSubStateIfNot(AISubState.NONE);
-				EmoteManager.emoteStartDancing1(this.getOwner());
-				break;
-			case 831640:
-			case 831641:
-			case 831642:
-			case 831643:
-			case 831644:
-			case 831645:
-			case 831646:
-			case 831647:
-				this.setStateIfNot(AIState.IDLE);
-				this.setSubStateIfNot(AISubState.NONE);
-				EmoteManager.emoteStartDancing2(this.getOwner());
-				break;
-			case 831648:
-			case 831649:
-			case 831650:
-			case 831651:
-			case 831652:
-			case 831653:
-				this.setStateIfNot(AIState.IDLE);
-				this.setSubStateIfNot(AISubState.NONE);
-				EmoteManager.emoteStartDancing3(this.getOwner());
-				break;
-			case 831617:
-			case 831618:
-				this.setStateIfNot(AIState.IDLE);
-				this.setSubStateIfNot(AISubState.NONE);
-				EmoteManager.emoteStartDancing4(this.getOwner());
-				break;
-		}
-	}
-	
-	@Override
-	protected AIAnswer pollInstance(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-				return AIAnswers.NEGATIVE;
-			case SHOULD_RESPAWN:
-				return AIAnswers.NEGATIVE;
-			case SHOULD_REWARD:
-				return AIAnswers.NEGATIVE;
-			default:
-				return null;
-		}
-	}
+
+    @Override
+    protected void handleSpawned() {
+        switch (getNpcId()) {
+            case 831633:
+            case 831634:
+            case 831635:
+            case 831637:
+            case 831638:
+            case 831639:
+                this.setStateIfNot(AIState.IDLE);
+                this.setSubStateIfNot(AISubState.NONE);
+                EmoteManager.emoteStartDancing1(this.getOwner());
+                break;
+            case 831640:
+            case 831641:
+            case 831642:
+            case 831643:
+            case 831644:
+            case 831645:
+            case 831646:
+            case 831647:
+                this.setStateIfNot(AIState.IDLE);
+                this.setSubStateIfNot(AISubState.NONE);
+                EmoteManager.emoteStartDancing2(this.getOwner());
+                break;
+            case 831648:
+            case 831649:
+            case 831650:
+            case 831651:
+            case 831652:
+            case 831653:
+                this.setStateIfNot(AIState.IDLE);
+                this.setSubStateIfNot(AISubState.NONE);
+                EmoteManager.emoteStartDancing3(this.getOwner());
+                break;
+            case 831617:
+            case 831618:
+                this.setStateIfNot(AIState.IDLE);
+                this.setSubStateIfNot(AISubState.NONE);
+                EmoteManager.emoteStartDancing4(this.getOwner());
+                break;
+        }
+    }
+
+    @Override
+    protected AIAnswer pollInstance(AIQuestion question) {
+        switch (question) {
+            case SHOULD_DECAY:
+                return AIAnswers.NEGATIVE;
+            case SHOULD_RESPAWN:
+                return AIAnswers.NEGATIVE;
+            case SHOULD_REWARD:
+                return AIAnswers.NEGATIVE;
+            default:
+                return null;
+        }
+    }
 }

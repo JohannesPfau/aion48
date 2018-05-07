@@ -40,9 +40,10 @@ import com.aionemu.gameserver.model.Webshop;
 public abstract class WebshopDAO implements DAO {
 
     public abstract Set<Webshop> getWebshop();
-	public abstract void setWebshop(String send, int id);
 
-   @Override
+    public abstract void setWebshop(String send, int id);
+
+    @Override
     public final String getClassName() {
         return WebshopDAO.class.getName();
     }

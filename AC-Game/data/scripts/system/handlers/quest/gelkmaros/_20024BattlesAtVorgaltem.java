@@ -29,11 +29,11 @@
  */
 package quest.gelkmaros;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -46,8 +46,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _20024BattlesAtVorgaltem extends QuestHandler {
 
     private final static int questId = 20024;
-    private final static int[] mobs = {216104, 216101, 216109, 216112, 216107, 216033, 216034, 216448, 216450, 216451,
-        216108, 216449, 700811};
+    private final static int[] mobs = { 216104, 216101, 216109, 216112, 216107, 216033, 216034, 216448, 216450, 216451, 216108, 216449, 700811 };
 
     public _20024BattlesAtVorgaltem() {
         super(questId);
@@ -55,7 +54,7 @@ public class _20024BattlesAtVorgaltem extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {799226, 799308, 799298, 798713, 700707};
+        int[] npcs = { 799226, 799308, 799298, 798713, 700707 };
         qe.registerOnLevelUp(questId);
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerQuestItem(182207615, questId);
@@ -193,8 +192,8 @@ public class _20024BattlesAtVorgaltem extends QuestHandler {
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             if (var == 2) {
-                int[] nadukas = {216034, 216033};
-                int[] balaurs = {216448, 216450, 216451, 216108, 216449, 216107, 216112, 216109, 216104, 216101};
+                int[] nadukas = { 216034, 216033 };
+                int[] balaurs = { 216448, 216450, 216451, 216108, 216449, 216107, 216112, 216109, 216104, 216101 };
                 int targetId = env.getTargetId();
                 int var1 = qs.getQuestVarById(1);
                 int var2 = qs.getQuestVarById(2);
@@ -260,7 +259,7 @@ public class _20024BattlesAtVorgaltem extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {20022, 20023};
+        int[] quests = { 20022, 20023 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 }

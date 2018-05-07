@@ -29,6 +29,11 @@
  */
 package ai;
 
+import java.util.concurrent.Future;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.poll.AIAnswer;
@@ -38,10 +43,6 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.NpcObjectType;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.Future;
 
 /**
  * @author ATracer
@@ -51,6 +52,7 @@ import java.util.concurrent.Future;
 public class ServantNpcAI2 extends GeneralNpcAI2 {
 
     private static final Logger log = LoggerFactory.getLogger(ServantNpcAI2.class);
+
     public void think() {
         // servants are not thinking
     }
@@ -60,6 +62,7 @@ public class ServantNpcAI2 extends GeneralNpcAI2 {
         super.handleSpawned();
         if (getCreator() != null) {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     if (getOwner().getNpcObjectType() != NpcObjectType.TOTEM) {
@@ -77,7 +80,7 @@ public class ServantNpcAI2 extends GeneralNpcAI2 {
         }
         int duration = getOwner().getNpcObjectType() == NpcObjectType.TOTEM ? 3000 : 5000;
         final int delay;
-        switch (skillId){
+        switch (skillId) {
             case 21954: //battle Banner Effect Skill_Ids
             case 22654:
             case 22655:
@@ -89,6 +92,7 @@ public class ServantNpcAI2 extends GeneralNpcAI2 {
                 break;
         }
         Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 getOwner().getController().useSkill(skillId, 1);

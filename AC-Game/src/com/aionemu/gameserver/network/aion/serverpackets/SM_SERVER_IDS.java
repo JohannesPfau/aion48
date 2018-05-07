@@ -47,7 +47,7 @@ public class SM_SERVER_IDS extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(settings.getServerId());
         writeH(0);//unk
         writeH(settings.getIconSet()); //257 or 513 the icon available

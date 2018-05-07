@@ -29,6 +29,9 @@
  */
 package admincommands;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.WalkerData;
@@ -39,9 +42,6 @@ import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.util.ArrayList;
-import java.util.HashMap;
 
 /**
  * @author Rolandas
@@ -102,13 +102,14 @@ public class FixPath extends AdminCommand {
         final float height = jumpHeight;
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 boolean wasInvul = admin.isInvul();
                 admin.setInvul(true);
 
                 float zDelta = 0;
-                HashMap<Integer, Float> corrections = new HashMap<Integer, Float>();
+                HashMap<Integer, Float> corrections = new HashMap<>();
 
                 try {
                     int i = 1;
@@ -140,10 +141,9 @@ public class FixPath extends AdminCommand {
                     WalkerTemplate newTemplate = new WalkerTemplate(template.getRouteId());
 
                     i = 1;
-                    ArrayList<RouteStep> newSteps = new ArrayList<RouteStep>();
+                    ArrayList<RouteStep> newSteps = new ArrayList<>();
 
-                    int lastStep = template.isReversed() ? (template.getRouteSteps().size() + 2) / 2
-                            : template.getRouteSteps().size();
+                    int lastStep = template.isReversed() ? (template.getRouteSteps().size() + 2) / 2 : template.getRouteSteps().size();
                     for (int s = 0; s < lastStep; s++) {
                         RouteStep step = template.getRouteSteps().get(s);
                         RouteStep fixedStep = new RouteStep(step.getX(), step.getY(), corrections.get(i), 0);

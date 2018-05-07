@@ -70,9 +70,8 @@ public class RenameService {
             PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400155));
             return false;
         }
-        if ((player.getInventory().getItemByObjId(item).getItemId() != 169670000 && player.getInventory()
-                .getItemByObjId(item).getItemId() != 169670001)
-                || (!player.getInventory().decreaseByObjectId(item, 1))) {
+        if ((player.getInventory().getItemByObjId(item).getItemId() != 169670000
+            && player.getInventory().getItemByObjId(item).getItemId() != 169670001) || (!player.getInventory().decreaseByObjectId(item, 1))) {
             AuditLogger.info(player, "Try rename youself without coupon.");
             return false;
         }
@@ -113,9 +112,8 @@ public class RenameService {
             PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400154));
             return false;
         }
-        if ((player.getInventory().getItemByObjId(item).getItemId() != 169680000 && player.getInventory()
-                .getItemByObjId(item).getItemId() != 169680001)
-                || (!player.getInventory().decreaseByObjectId(item, 1))) {
+        if ((player.getInventory().getItemByObjId(item).getItemId() != 169680000
+            && player.getInventory().getItemByObjId(item).getItemId() != 169680001) || (!player.getInventory().decreaseByObjectId(item, 1))) {
             AuditLogger.info(player, "Try rename legion without coupon.");
             return false;
         }

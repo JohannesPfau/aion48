@@ -29,21 +29,22 @@
  */
 package mysql5;
 
-import com.aionemu.commons.database.DB;
-import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.gameserver.dao.GuideDAO;
-import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.guide.Guide;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.database.DB;
+import com.aionemu.commons.database.DatabaseFactory;
+import com.aionemu.gameserver.dao.GuideDAO;
+import com.aionemu.gameserver.dao.MySQL5DAOUtils;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.guide.Guide;
 
 /**
  * @author xTz
@@ -80,7 +81,7 @@ public class MySQL5GuideDAO extends GuideDAO {
 
     @Override
     public List<Guide> loadGuides(int playerId) {
-        final List<Guide> guides = new ArrayList<Guide>();
+        final List<Guide> guides = new ArrayList<>();
 
         Connection con = null;
         try {
@@ -137,9 +138,7 @@ public class MySQL5GuideDAO extends GuideDAO {
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
-            PreparedStatement stmt = con
-                    .prepareStatement("INSERT INTO guides(guide_id, title, player_id)"
-                            + "VALUES (?, ?, ?)");
+            PreparedStatement stmt = con.prepareStatement("INSERT INTO guides(guide_id, title, player_id)" + "VALUES (?, ?, ?)");
 
             stmt.setInt(1, guide_id);
             stmt.setString(2, title);
@@ -156,7 +155,7 @@ public class MySQL5GuideDAO extends GuideDAO {
     @Override
     public int[] getUsedIDs() {
         PreparedStatement statement = DB.prepareStatement("SELECT guide_id FROM guides", ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY);
+            ResultSet.CONCUR_READ_ONLY);
 
         try {
             ResultSet rs = statement.executeQuery();

@@ -35,7 +35,7 @@ package com.aionemu.gameserver.taskmanager.fromdb.handler;
 public abstract class TaskFromDBHandler {
 
     protected int taskId;
-    protected String[] params = {""};
+    protected String[] params = { "" };
 
     /**
      * Task's id
@@ -67,7 +67,8 @@ public abstract class TaskFromDBHandler {
     /**
      * Task's execution param(s)
      *
-     * @param params String[]
+     * @param params
+     *            String[]
      */
     public void setParams(String params[]) {
         this.params = params;

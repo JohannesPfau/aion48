@@ -29,16 +29,15 @@
  */
 package admincommands;
 
+import java.util.List;
+
 import com.aionemu.commons.utils.AEInfos;
 import com.aionemu.gameserver.ShutdownHook;
 import com.aionemu.gameserver.ShutdownHook.ShutdownMode;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.AEVersions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.util.List;
 
 /**
  * @author lord_rex //sys info - System Informations //sys memory - Memory
@@ -55,7 +54,8 @@ public class Sys extends AdminCommand {
     @Override
     public void execute(Player player, String... params) {
         if (params == null || params.length < 1) {
-            PacketSendUtility.sendMessage(player, "Usage: //sys info | //sys memory | //sys gc | //sys restart <countdown time> <announce delay> | //sys shutdown <countdown time> <announce delay>");
+            PacketSendUtility.sendMessage(player,
+                "Usage: //sys info | //sys memory | //sys gc | //sys restart <countdown time> <announce delay> | //sys shutdown <countdown time> <announce delay>");
             return;
         }
 
@@ -63,9 +63,8 @@ public class Sys extends AdminCommand {
             // Time
             PacketSendUtility.sendMessage(player, "System Informations at: " + AEInfos.getRealTime());
 
-
-	        // OS Infos
-            for (String line : AEInfos.getOSInfo()){
+            // OS Infos
+            for (String line : AEInfos.getOSInfo()) {
                 PacketSendUtility.sendMessage(player, line);
             }
 
@@ -91,12 +90,16 @@ public class Sys extends AdminCommand {
             }
         } else if (params[0].equals("gc")) {
             long time = System.currentTimeMillis();
-            PacketSendUtility.sendMessage(player, "RAM Used (Before): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));
+            PacketSendUtility.sendMessage(player,
+                "RAM Used (Before): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));
             System.gc();
-            PacketSendUtility.sendMessage(player, "RAM Used (After): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));
+            PacketSendUtility.sendMessage(player,
+                "RAM Used (After): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));
             System.runFinalization();
-            PacketSendUtility.sendMessage(player, "RAM Used (Final): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));
-            PacketSendUtility.sendMessage(player, "Garbage Collection and Finalization finished in: " + (System.currentTimeMillis() - time) + " milliseconds...");
+            PacketSendUtility.sendMessage(player,
+                "RAM Used (Final): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576));
+            PacketSendUtility.sendMessage(player,
+                "Garbage Collection and Finalization finished in: " + (System.currentTimeMillis() - time) + " milliseconds...");
         } else if (params[0].equals("shutdown")) {
             try {
                 int val = Integer.parseInt(params[1]);
@@ -129,6 +132,7 @@ public class Sys extends AdminCommand {
 
     @Override
     public void onFail(Player player, String message) {
-        PacketSendUtility.sendMessage(player, "Usage: //sys info | //sys memory | //sys gc | //sys restart <countdown time> <announce delay> | //sys shutdown <countdown time> <announce delay>");
+        PacketSendUtility.sendMessage(player,
+            "Usage: //sys info | //sys memory | //sys gc | //sys restart <countdown time> <announce delay> | //sys shutdown <countdown time> <announce delay>");
     }
 }

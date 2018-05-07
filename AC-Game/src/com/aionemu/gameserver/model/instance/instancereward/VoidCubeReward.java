@@ -82,7 +82,7 @@ public class VoidCubeReward extends InstanceReward<VoidCubePlayerReward> {
     }
 
     @Override
-	public boolean isRewarded() {
+    public boolean isRewarded() {
         return isRewarded;
     }
 

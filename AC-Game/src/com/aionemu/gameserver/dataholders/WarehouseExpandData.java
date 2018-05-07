@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -40,6 +38,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.WarehouseExpandTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * This is for the Warehouse Expanders.
@@ -52,7 +52,7 @@ public class WarehouseExpandData {
 
     @XmlElement(name = "warehouse_npc")
     private List<WarehouseExpandTemplate> clist;
-    private TIntObjectHashMap<WarehouseExpandTemplate> npctlistData = new TIntObjectHashMap<WarehouseExpandTemplate>();
+    private TIntObjectHashMap<WarehouseExpandTemplate> npctlistData = new TIntObjectHashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (WarehouseExpandTemplate npc : clist) {

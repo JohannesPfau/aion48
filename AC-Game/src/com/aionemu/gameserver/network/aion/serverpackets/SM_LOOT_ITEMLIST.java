@@ -31,8 +31,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Set;
 
-import javolution.util.FastList;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -45,6 +43,8 @@ import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
+import javolution.util.FastList;
+
 /**
  * @author alexa026, Avol, Corrected by Metos modified by ATracer, KID
  */
@@ -55,7 +55,7 @@ public class SM_LOOT_ITEMLIST extends AionServerPacket {
 
     public SM_LOOT_ITEMLIST(int targetObjectId, Set<DropItem> setItems, Player player) {
         this.targetObjectId = targetObjectId;
-        this.dropItems = new FastList<DropItem>();
+        this.dropItems = new FastList<>();
         if (setItems == null) {
             LoggerFactory.getLogger(SM_LOOT_ITEMLIST.class).warn("null Set<DropItem>, skip");
             return;
@@ -75,7 +75,7 @@ public class SM_LOOT_ITEMLIST extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(targetObjectId);
         writeC(dropItems.size());
 

@@ -36,8 +36,6 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.Future;
 
-import javolution.util.FastSet;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -51,6 +49,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
+import javolution.util.FastSet;
+
 /**
  * Automatic Announcement System
  *
@@ -63,7 +63,7 @@ public class AnnouncementService {
      */
     private static final Logger log = LoggerFactory.getLogger(AnnouncementService.class);
     private Collection<Announcement> announcements;
-    private List<Future<?>> delays = new ArrayList<Future<?>>();
+    private List<Future<?>> delays = new ArrayList<>();
 
     private AnnouncementService() {
         this.load();
@@ -95,10 +95,11 @@ public class AnnouncementService {
      * Load the announcements system
      */
     private void load() {
-        announcements = new FastSet<Announcement>(getDAO().getAnnouncements()).shared();
+        announcements = new FastSet<>(getDAO().getAnnouncements()).shared();
 
         for (final Announcement announce : announcements) {
             delays.add(ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
                 @Override
                 public void run() {
                     final Iterator<Player> iter = World.getInstance().getPlayersIterator();
@@ -107,22 +108,23 @@ public class AnnouncementService {
 
                         if (announce.getFaction().equalsIgnoreCase("ALL")) {
                             if (announce.getChatType() == ChatType.SHOUT || announce.getChatType() == ChatType.GROUP_LEADER) {
-                                PacketSendUtility.sendPacket(player, new SM_MESSAGE(1, "Announcement", announce.getAnnounce(),
-                                        announce.getChatType()));
+                                PacketSendUtility.sendPacket(player,
+                                    new SM_MESSAGE(1, "Announcement", announce.getAnnounce(), announce.getChatType()));
                             } else {
-                                PacketSendUtility.sendPacket(player, new SM_MESSAGE(1, "Announcement", "Announcement: "
-                                        + announce.getAnnounce(), announce.getChatType()));
+                                PacketSendUtility.sendPacket(player,
+                                    new SM_MESSAGE(1, "Announcement", "Announcement: " + announce.getAnnounce(), announce.getChatType()));
                             }
                         } else if (announce.getFactionEnum() == player.getRace()) {
                             if (announce.getChatType() == ChatType.SHOUT || announce.getChatType() == ChatType.GROUP_LEADER) {
-                                PacketSendUtility.sendPacket(player, new SM_MESSAGE(1,
-                                        (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement",
+                                PacketSendUtility.sendPacket(player,
+                                    new SM_MESSAGE(1, (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement",
                                         announce.getAnnounce(), announce.getChatType()));
                             } else {
-                                PacketSendUtility.sendPacket(player, new SM_MESSAGE(1,
-                                        (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement",
+                                PacketSendUtility.sendPacket(player,
+                                    new SM_MESSAGE(1, (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement",
                                         (announce.getFaction().equalsIgnoreCase("ELYOS") ? "Elyos" : "Asmodian") + " Announcement: "
-                                                + announce.getAnnounce(), announce.getChatType()));
+                                            + announce.getAnnounce(),
+                                        announce.getChatType()));
                             }
                         }
                     }

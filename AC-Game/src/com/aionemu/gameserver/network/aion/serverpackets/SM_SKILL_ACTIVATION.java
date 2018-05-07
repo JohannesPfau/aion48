@@ -70,10 +70,10 @@ public class SM_SKILL_ACTIVATION extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(skillId);
         writeD(unk);
         writeC(isActive ? 1 : 0);
-		writeC(0); // 4.8
+        writeC(0); // 4.8
     }
 }

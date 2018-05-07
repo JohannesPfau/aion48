@@ -41,6 +41,7 @@ public enum PetitionType {
     UNACCEPTABLE_BEHAVIOR(1280),
     SUGGESTION(1536),
     INQUIRY(65280);
+
     private int element;
 
     private PetitionType(int id) {

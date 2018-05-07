@@ -77,8 +77,8 @@ import java.util.Iterator;
  * @see #eval(CharSequence)
  * @see #approximately(CharSequence)
  * @see <a
- * href="http://johannburkard.de/blog/programming/java/date-formatting-parsing-humans-humantime.html">Date
- * Formatting and Parsing for Humans in Java with HumanTime</a>
+ *      href="http://johannburkard.de/blog/programming/java/date-formatting-parsing-humans-humantime.html">Date
+ *      Formatting and Parsing for Humans in Java with HumanTime</a>
  */
 public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneable {
 
@@ -116,7 +116,9 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
      */
     static enum State {
 
-        NUMBER, IGNORED, UNIT
+        NUMBER,
+        IGNORED,
+        UNIT
     }
 
     static State getState(char c) {
@@ -156,7 +158,8 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
      * Parses a {@link CharSequence} argument and returns a {@link HumanTime}
      * instance.
      *
-     * @param s the char sequence, may not be <code>null</code>
+     * @param s
+     *            the char sequence, may not be <code>null</code>
      * @return an instance, never <code>null</code>
      */
     public static HumanTime eval(final CharSequence s) {
@@ -170,19 +173,21 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
         State oldState = State.IGNORED;
 
         for (char c : new Iterable<Character>() {
+
             /**
              * @see java.lang.Iterable#iterator()
              */
             @Override
-			public Iterator<Character> iterator() {
+            public Iterator<Character> iterator() {
                 return new Iterator<Character>() {
+
                     private int p = 0;
 
                     /**
                      * @see java.util.Iterator#hasNext()
                      */
                     @Override
-					public boolean hasNext() {
+                    public boolean hasNext() {
                         return p < s.length();
                     }
 
@@ -190,7 +195,7 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
                      * @see java.util.Iterator#next()
                      */
                     @Override
-					public Character next() {
+                    public Character next() {
                         return s.charAt(p++);
                     }
 
@@ -198,7 +203,7 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
                      * @see java.util.Iterator#remove()
                      */
                     @Override
-					public void remove() {
+                    public void remove() {
                         throw new UnsupportedOperationException();
                     }
                 };
@@ -230,7 +235,8 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
      * Equivalent to
      * <code>eval(in).getExactly()</code>
      *
-     * @param in the char sequence, may not be <code>null</code>
+     * @param in
+     *            the char sequence, may not be <code>null</code>
      * @return a formatted String, never <code>null</code>
      */
     public static String exactly(CharSequence in) {
@@ -243,7 +249,8 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
      * Equivalent to
      * <code>new HumanTime(in).getExactly()</code>
      *
-     * @param l the time delta
+     * @param l
+     *            the time delta
      * @return a formatted String, never <code>null</code>
      */
     public static String exactly(long l) {
@@ -257,7 +264,8 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
      * Equivalent to
      * <code>eval(in).getApproximately()</code>
      *
-     * @param in the char sequence, may not be <code>null</code>
+     * @param in
+     *            the char sequence, may not be <code>null</code>
      * @return a formatted String, never <code>null</code>
      */
     public static String approximately(CharSequence in) {
@@ -270,7 +278,8 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
      * Equivalent to
      * <code>new HumanTime(l).getApproximately()</code>
      *
-     * @param l the time delta
+     * @param l
+     *            the time delta
      * @return a formatted String, never <code>null</code>
      */
     public static String approximately(long l) {
@@ -295,7 +304,8 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
     /**
      * Constructor for HumanTime.
      *
-     * @param delta the initial time delta, interpreted as a positive number
+     * @param delta
+     *            the initial time delta, interpreted as a positive number
      */
     public HumanTime(long delta) {
         super();
@@ -346,7 +356,8 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
     /**
      * Adds n years to the time delta.
      *
-     * @param n n
+     * @param n
+     *            n
      * @return this HumanTime object
      */
     public HumanTime y(int n) {
@@ -366,7 +377,8 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
     /**
      * Adds n days to the time delta.
      *
-     * @param n n
+     * @param n
+     *            n
      * @return this HumanTime object
      */
     public HumanTime d(int n) {
@@ -386,7 +398,8 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
     /**
      * Adds n hours to the time delta.
      *
-     * @param n n
+     * @param n
+     *            n
      * @return this HumanTime object
      */
     public HumanTime h(int n) {
@@ -406,7 +419,8 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
     /**
      * Adds n months to the time delta.
      *
-     * @param n n
+     * @param n
+     *            n
      * @return this HumanTime object
      */
     public HumanTime m(int n) {
@@ -426,7 +440,8 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
     /**
      * Adds n seconds to the time delta.
      *
-     * @param n seconds
+     * @param n
+     *            seconds
      * @return this HumanTime object
      */
     public HumanTime s(int n) {
@@ -446,7 +461,8 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
     /**
      * Adds n milliseconds to the time delta.
      *
-     * @param n n
+     * @param n
+     *            n
      * @return this HumanTime object
      */
     public HumanTime ms(int n) {
@@ -458,7 +474,7 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
      * Returns a human-formatted representation of the time delta.
      *
      * @return a formatted representation of the time delta, * * * * * * * *
-     * never <code>null</code>
+     *         never <code>null</code>
      */
     public String getExactly() {
         return getExactly(new StringBuilder()).toString();
@@ -468,8 +484,10 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
      * Appends a human-formatted representation of the time delta to the given
      * {@link Appendable} object.
      *
-     * @param <T> the return type
-     * @param a   the Appendable object, may not be <code>null</code>
+     * @param <T>
+     *            the return type
+     * @param a
+     *            the Appendable object, may not be <code>null</code>
      * @return the given Appendable object, never <code>null</code>
      */
     public <T extends Appendable> T getExactly(T a) {
@@ -542,7 +560,7 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
      * Returns an approximate, human-formatted representation of the time delta.
      *
      * @return a formatted representation of the time delta, * * * * * * * *
-     * never <code>null</code>
+     *         never <code>null</code>
      */
     public String getApproximately() {
         return getApproximately(new StringBuilder()).toString();
@@ -552,8 +570,10 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
      * Appends an approximate, human-formatted representation of the time delta
      * to the given {@link Appendable} object.
      *
-     * @param <T> the return type
-     * @param a   the Appendable object, may not be <code>null</code>
+     * @param <T>
+     *            the return type
+     * @param a
+     *            the Appendable object, may not be <code>null</code>
      * @return the given Appendable object, never <code>null</code>
      */
     public <T extends Appendable> T getApproximately(T a) {
@@ -762,11 +782,12 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
     /**
      * Compares this HumanTime to another HumanTime.
      *
-     * @param t the other instance, may not be <code>null</code>
+     * @param t
+     *            the other instance, may not be <code>null</code>
      * @return which one is greater
      */
     @Override
-	public int compareTo(HumanTime t) {
+    public int compareTo(HumanTime t) {
         return delta == t.delta ? 0 : (delta < t.delta ? -1 : 1);
     }
 
@@ -785,7 +806,7 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
      * @see java.io.Externalizable#readExternal(java.io.ObjectInput)
      */
     @Override
-	public void readExternal(ObjectInput in) throws IOException {
+    public void readExternal(ObjectInput in) throws IOException {
         delta = in.readLong();
     }
 
@@ -793,7 +814,7 @@ public class HumanTime implements Externalizable, Comparable<HumanTime>, Cloneab
      * @see java.io.Externalizable#writeExternal(java.io.ObjectOutput)
      */
     @Override
-	public void writeExternal(ObjectOutput out) throws IOException {
+    public void writeExternal(ObjectOutput out) throws IOException {
         out.writeLong(delta);
     }
 }

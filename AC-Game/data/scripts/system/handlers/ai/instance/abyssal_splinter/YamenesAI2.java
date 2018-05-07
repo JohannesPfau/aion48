@@ -29,7 +29,12 @@
  */
 package ai.instance.abyssal_splinter;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
@@ -39,11 +44,7 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu, Luzien
@@ -52,7 +53,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class YamenesAI2 extends AggressiveNpcAI2 {
 
     private boolean top;
-    private List<Integer> percents = new ArrayList<Integer>();
+    private List<Integer> percents = new ArrayList<>();
     private Future<?> portalTask = null;
     private AtomicBoolean isStart = new AtomicBoolean(false);
 
@@ -74,6 +75,7 @@ public class YamenesAI2 extends AggressiveNpcAI2 {
 
     private void startTasks() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
@@ -84,6 +86,7 @@ public class YamenesAI2 extends AggressiveNpcAI2 {
         }, 600000);
 
         portalTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -91,6 +94,7 @@ public class YamenesAI2 extends AggressiveNpcAI2 {
                 } else {
                     spawnPortal();
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             WorldMapInstance instance = getPosition().getWorldMapInstance();
@@ -141,7 +145,7 @@ public class YamenesAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{100});
+        Collections.addAll(percents, new Integer[] { 100 });
     }
 
     private void cancelTask() {

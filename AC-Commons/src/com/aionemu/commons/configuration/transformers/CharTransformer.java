@@ -29,10 +29,10 @@
  */
 package com.aionemu.commons.configuration.transformers;
 
+import java.lang.reflect.Field;
+
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
-
-import java.lang.reflect.Field;
 
 /**
  * Transformes string representation of character to character. Character may be
@@ -49,10 +49,13 @@ public class CharTransformer implements PropertyTransformer<Character> {
     /**
      * Transforms string to character
      *
-     * @param value value that will be transformed
-     * @param field value will be assigned to this field
+     * @param value
+     *            value that will be transformed
+     * @param field
+     *            value will be assigned to this field
      * @return Character object that represents transformed string
-     * @throws TransformationException if something went wrong
+     * @throws TransformationException
+     *             if something went wrong
      */
     @Override
     public Character transform(String value, Field field) throws TransformationException {

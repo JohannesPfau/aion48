@@ -29,7 +29,11 @@
  */
 package ai.instance.darkPoeta;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
@@ -37,10 +41,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu
@@ -48,7 +49,7 @@ import java.util.concurrent.Future;
 @AIName("tahabatapyrelord")
 public class TahabataPyrelordAI2 extends AggressiveNpcAI2 {
 
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
     private boolean lock1 = false;
     private boolean lock2 = false;
     private Future<?> useSkillTask;
@@ -96,6 +97,7 @@ public class TahabataPyrelordAI2 extends AggressiveNpcAI2 {
 
     private void useFirstSkillTree() {
         useSkillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 firstSkill();
@@ -124,6 +126,7 @@ public class TahabataPyrelordAI2 extends AggressiveNpcAI2 {
     private void skillTwo() {
         if (!lock2) {
             firstTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     int hpPercent = getLifeStats().getHpPercentage();
@@ -146,6 +149,7 @@ public class TahabataPyrelordAI2 extends AggressiveNpcAI2 {
     private void skillThree() {
         if (!lock2) {
             secondTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     int hpPercent = getLifeStats().getHpPercentage();
@@ -157,6 +161,7 @@ public class TahabataPyrelordAI2 extends AggressiveNpcAI2 {
                         useSkill(18231);//Mighty Thrust
                     }
                     thirdTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             firstSkill();
@@ -173,11 +178,13 @@ public class TahabataPyrelordAI2 extends AggressiveNpcAI2 {
             getOwner().clearAttackedCount();
             useSkill(18239);//Soul Petrify
             firstTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     EmoteManager.emoteStopAttacking(getOwner());
                     useSkill(18243);//Destroy Frozen Soul
                     lastTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             useSkill(18243);//Destroy Frozen Soul
@@ -192,6 +199,7 @@ public class TahabataPyrelordAI2 extends AggressiveNpcAI2 {
     private void lastSkillTree2() {
         if (!lock2) {
             secondTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     useSkill(18232);//Explosion of Wrath
@@ -204,12 +212,14 @@ public class TahabataPyrelordAI2 extends AggressiveNpcAI2 {
             }, 10000);
             if (lock1) {
                 thirdTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         EmoteManager.emoteStopAttacking(getOwner());
                         useSkill(18241);//Powerful Flame
                         sp(281259);//Faithful Subordinate(Dragon)
                         lastTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                             @Override
                             public void run() {
                                 lock1 = false;
@@ -258,7 +268,7 @@ public class TahabataPyrelordAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{100, 80, 60, 30});
+        Collections.addAll(percents, new Integer[] { 100, 80, 60, 30 });
     }
 
     private void despawn(int npcId) {

@@ -59,8 +59,9 @@ public class CM_REQUEST_BEGINNER_SERVER extends AionClientPacket {
     @Override
     protected void runImpl() {
         Player requested = getConnection().getActivePlayer();
-        if (requested == null) return;
-                    
+        if (requested == null)
+            return;
+
         switch (action) {
             case 1:
                 FastTrackService.getInstance().handleMoveThere(requested);
@@ -68,7 +69,7 @@ public class CM_REQUEST_BEGINNER_SERVER extends AionClientPacket {
             case 2:
                 FastTrackService.getInstance().handleMoveBack(requested);
                 break;
-        
-    	}
+
+        }
     }
 }

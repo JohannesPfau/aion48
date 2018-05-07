@@ -29,11 +29,11 @@
  */
 package quest.morheim;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -46,7 +46,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _2036ACaptiveFlame extends QuestHandler {
 
     private final static int questId = 2036;
-    private final static int[] npc_ids = {204407, 204408, 700236, 204317};
+    private final static int[] npc_ids = { 204407, 204408, 700236, 204317 };
 
     public _2036ACaptiveFlame() {
         super(questId);
@@ -114,7 +114,7 @@ public class _2036ACaptiveFlame extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 204408: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -133,7 +133,7 @@ public class _2036ACaptiveFlame extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 700236:
                     switch (env.getDialog()) {
                         case USE_OBJECT:

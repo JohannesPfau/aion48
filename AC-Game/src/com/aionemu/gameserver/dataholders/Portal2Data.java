@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,15 +47,13 @@ import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.model.templates.portal.PortalScroll;
 import com.aionemu.gameserver.model.templates.portal.PortalUse;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-        "portalUse",
-        "portalDialog",
-        "portalScroll"
-})
+@XmlType(name = "", propOrder = { "portalUse", "portalDialog", "portalScroll" })
 @XmlRootElement(name = "portal_templates2")
 public class Portal2Data {
 
@@ -68,11 +64,11 @@ public class Portal2Data {
     @XmlElement(name = "portal_scroll")
     protected List<PortalScroll> portalScroll;
     @XmlTransient
-    private TIntObjectHashMap<PortalUse> portalUses = new TIntObjectHashMap<PortalUse>();
+    private TIntObjectHashMap<PortalUse> portalUses = new TIntObjectHashMap<>();
     @XmlTransient
-    private TIntObjectHashMap<PortalDialog> portalDialogs = new TIntObjectHashMap<PortalDialog>();
+    private TIntObjectHashMap<PortalDialog> portalDialogs = new TIntObjectHashMap<>();
     @XmlTransient
-    private Map<String, PortalScroll> portalScrolls = new HashMap<String, PortalScroll>();
+    private Map<String, PortalScroll> portalScrolls = new HashMap<>();
 
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         if (portalUse != null) {
@@ -100,8 +96,7 @@ public class Portal2Data {
         PortalDialog portal = portalDialogs.get(npcId);
         if (portal != null) {
             for (PortalPath path : portal.getPortalPath()) {
-                if (path.getDialog() == dialogId && (race.equals(path.getRace())
-                        || path.getRace().equals(Race.PC_ALL))) {
+                if (path.getDialog() == dialogId && (race.equals(path.getRace()) || path.getRace().equals(Race.PC_ALL))) {
                     return path;
                 }
             }

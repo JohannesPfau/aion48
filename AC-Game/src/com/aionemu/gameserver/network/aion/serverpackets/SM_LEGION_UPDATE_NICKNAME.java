@@ -48,7 +48,7 @@ public class SM_LEGION_UPDATE_NICKNAME extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(playerObjId);
         writeS(newNickname);
     }

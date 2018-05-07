@@ -79,7 +79,7 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
 /**
  * @author VladimirZ
- (Aion-Core)
+ *         (Aion-Core)
  * @Reworked Kill3r
  */
 public class DialogService {
@@ -121,8 +121,8 @@ public class DialogService {
                         break;
                     }
                     int tradeModifier = tradeListTemplate.getSellPriceRate();
-                    PacketSendUtility.sendPacket(player, new SM_TRADELIST(player, npc, tradeListTemplate, PricesService.getVendorBuyModifier()
-                            * tradeModifier / 100));
+                    PacketSendUtility.sendPacket(player,
+                        new SM_TRADELIST(player, npc, tradeListTemplate, PricesService.getVendorBuyModifier() * tradeModifier / 100));
                     break;
                 }
                 case SELL: {
@@ -179,6 +179,7 @@ public class DialogService {
                     final int price = (int) (expLost * factor);
 
                     RequestResponseHandler responseHandler = new RequestResponseHandler(npc) {
+
                         @Override
                         public void acceptRequest(Creature requester, Player responder) {
                             if (player.getInventory().getKinah() >= price) {
@@ -201,7 +202,8 @@ public class DialogService {
                     if (player.getCommonData().getExpRecoverable() > 0) {
                         boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_ASK_RECOVER_EXPERIENCE, responseHandler);
                         if (result) {
-                            PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_RECOVER_EXPERIENCE, 0, 0, String.valueOf(price)));
+                            PacketSendUtility.sendPacket(player,
+                                new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_RECOVER_EXPERIENCE, 0, 0, String.valueOf(price)));
                         }
                     } else {
                         PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DONOT_HAVE_RECOVER_EXPERIENCE);
@@ -324,25 +326,25 @@ public class DialogService {
                     if (dialogId == DialogAction.EDIT_GENDER.id()) {
                         // Gender Switch
                         changesex = 1;
-					if (player.getInventory().getItemCountByItemId(169660000) > 0 || //Gender Switch Ticket
-					    player.getInventory().getItemCountByItemId(169660001) > 0 || //[Event] Gender Switch Ticket
-						player.getInventory().getItemCountByItemId(169660002) > 0 || //Gender Switch Ticket (60 min)
-						player.getInventory().getItemCountByItemId(169660003) > 0 || //[Event] Gender Switch Ticket
-						player.getInventory().getItemCountByItemId(169660004) > 0) { //[Event] Gender Switch Ticket
+                        if (player.getInventory().getItemCountByItemId(169660000) > 0 || //Gender Switch Ticket
+                            player.getInventory().getItemCountByItemId(169660001) > 0 || //[Event] Gender Switch Ticket
+                            player.getInventory().getItemCountByItemId(169660002) > 0 || //Gender Switch Ticket (60 min)
+                            player.getInventory().getItemCountByItemId(169660003) > 0 || //[Event] Gender Switch Ticket
+                            player.getInventory().getItemCountByItemId(169660004) > 0) { //[Event] Gender Switch Ticket
                             check_ticket = 1;
                         }
                     } else {
                         // Plastic Surgery
-					if (player.getInventory().getItemCountByItemId(169650000) > 0 || //Plastic Surgery Ticket
-					    player.getInventory().getItemCountByItemId(169650001) > 0 || //[Event] Plastic Surgery Ticket
-				        player.getInventory().getItemCountByItemId(169650002) > 0 || //[Special] Plastic Surgery Ticket
-				        player.getInventory().getItemCountByItemId(169650003) > 0 || //[Special] Plastic Surgery Ticket
-			            player.getInventory().getItemCountByItemId(169650004) > 0 || //Plastic Surgery Ticket (60 mins)
-				        player.getInventory().getItemCountByItemId(169650005) > 0 || //Plastic Surgery Ticket (60 mins)
-						player.getInventory().getItemCountByItemId(169650006) > 0 || //[Event] Plastic Surgery Ticket
-						player.getInventory().getItemCountByItemId(169650007) > 0 || //[Event] Plastic Surgery Ticket
-						player.getInventory().getItemCountByItemId(169650008) > 0 || //Plastic Surgery Ticket
-						player.getInventory().getItemCountByItemId(169691000) > 0) { //Plastic Surgery Ticket
+                        if (player.getInventory().getItemCountByItemId(169650000) > 0 || //Plastic Surgery Ticket
+                            player.getInventory().getItemCountByItemId(169650001) > 0 || //[Event] Plastic Surgery Ticket
+                            player.getInventory().getItemCountByItemId(169650002) > 0 || //[Special] Plastic Surgery Ticket
+                            player.getInventory().getItemCountByItemId(169650003) > 0 || //[Special] Plastic Surgery Ticket
+                            player.getInventory().getItemCountByItemId(169650004) > 0 || //Plastic Surgery Ticket (60 mins)
+                            player.getInventory().getItemCountByItemId(169650005) > 0 || //Plastic Surgery Ticket (60 mins)
+                            player.getInventory().getItemCountByItemId(169650006) > 0 || //[Event] Plastic Surgery Ticket
+                            player.getInventory().getItemCountByItemId(169650007) > 0 || //[Event] Plastic Surgery Ticket
+                            player.getInventory().getItemCountByItemId(169650008) > 0 || //Plastic Surgery Ticket
+                            player.getInventory().getItemCountByItemId(169691000) > 0) { //Plastic Surgery Ticket
                             check_ticket = 1;
                         }
                     }
@@ -541,7 +543,7 @@ public class DialogService {
                         TeleportLocation loc = template.getTeleLocIdData().getTelelocations().get(0);
                         if (loc != null) {
                             TeleportService2.teleport(template, loc.getLocId(), player, npc,
-                                    npc.getAi2().getName().equals("general") ? TeleportAnimation.JUMP_AIMATION : TeleportAnimation.BEAM_ANIMATION);
+                                npc.getAi2().getName().equals("general") ? TeleportAnimation.JUMP_AIMATION : TeleportAnimation.BEAM_ANIMATION);
                         }
                     }
                     break;

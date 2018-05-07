@@ -29,6 +29,8 @@
  */
 package admincommands;
 
+import java.util.Arrays;
+
 import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -39,8 +41,6 @@ import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.player.FatigueService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.util.Arrays;
 
 /**
  * @author Nemiroff, ATracer, IceReaper Date: 11.12.2009

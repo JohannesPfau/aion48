@@ -38,7 +38,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author antness
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "FinishedQuest", propOrder = {"questId", "reward"})
+@XmlType(name = "FinishedQuest", propOrder = { "questId", "reward" })
 public class FinishedQuestCond {
 
     @XmlAttribute(name = "quest_id", required = true)

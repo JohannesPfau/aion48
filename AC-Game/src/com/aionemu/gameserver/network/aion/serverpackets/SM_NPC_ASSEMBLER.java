@@ -52,7 +52,7 @@ public class SM_NPC_ASSEMBLER extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(assembledNpc.getAssembledParts().size()); // size
         for (AssembledNpcPart npc : assembledNpc.getAssembledParts()) {
             writeD(routeId); // routeId

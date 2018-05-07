@@ -41,7 +41,6 @@ import com.aionemu.gameserver.utils.gametime.GameTimeManager;
 /**
  * In this packet Server is sending User Info?
  *
-
  * @author Luno
  * @author ginho1
  */
@@ -156,7 +155,7 @@ public class SM_STATS_INFO extends AionServerPacket {
         writeH(pgs.getPCR().getCurrent()); // [current strike resist]
         writeH(pgs.getMCR().getCurrent());// [current spell resist]
         writeH(pgs.getStat(StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, 0).getCurrent());// [current strike fortitude]
-		writeH(pgs.getStat(StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, 0).getCurrent());// [current spell fortitude]
+        writeH(pgs.getStat(StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, 0).getCurrent());// [current spell fortitude]
         writeD(player.getInventory().getLimit());
         writeD(player.getInventory().size());
         writeD(0);// [unk]
@@ -224,10 +223,12 @@ public class SM_STATS_INFO extends AionServerPacket {
         writeH(pgs.getMCR().getBase());//[base spell resist]
         writeH(pgs.getStat(StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, 0).getBase());// [base strike fortitude]
         writeH(pgs.getStat(StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, 0).getBase());// [base spell fortitude]
-        /*writeH(pgs.getStat(StatEnum.PVP_MAGICAL_RESIST, 0).getBase());// [base spell fortitude]   
-         writeH(pgs.getStat(StatEnum.PVP_DODGE, 0).getBase());// 
-         writeH(pgs.getStat(StatEnum.PVP_BLOCK, 0).getBase());//
-         writeH(pgs.getStat(StatEnum.PVP_PARRY, 0).getBase());//
-         writeH(pgs.getStat(StatEnum.PVP_HIT_ACCURACY, 0).getBase());//*/
+        /*
+         * writeH(pgs.getStat(StatEnum.PVP_MAGICAL_RESIST, 0).getBase());// [base spell fortitude]
+         * writeH(pgs.getStat(StatEnum.PVP_DODGE, 0).getBase());//
+         * writeH(pgs.getStat(StatEnum.PVP_BLOCK, 0).getBase());//
+         * writeH(pgs.getStat(StatEnum.PVP_PARRY, 0).getBase());//
+         * writeH(pgs.getStat(StatEnum.PVP_HIT_ACCURACY, 0).getBase());//
+         */
     }
 }

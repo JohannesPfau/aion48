@@ -233,7 +233,7 @@ public class CustomConfig {
     @Property(key = "gameserver.kill.reward.enable", defaultValue = "false")
     public static boolean ENABLE_KILL_REWARD;
 
-	/**
+    /**
      * Enable Toll Reward for PvP
      */
     @Property(key = "gameserver.pvp.toll.rewarding.enable", defaultValue = "false")
@@ -250,7 +250,7 @@ public class CustomConfig {
      */
     @Property(key = "gameserver.pvp.toll.reward.quantity", defaultValue = "5")
     public static int TOLL_QUANTITY;
-	
+
     /**
      * Kills needed for item reward
      */
@@ -385,43 +385,43 @@ public class CustomConfig {
     //PvE Mode
     @Property(key = "gameserver.pve.tag", defaultValue = "\u26E8 %s")
     public static String TAG_PVE;
-	/**
-	 * Custom Webshop
-	 */
-	@Property(key = "gameserver.webshop.enable", defaultValue = "false")
+    /**
+     * Custom Webshop
+     */
+    @Property(key = "gameserver.webshop.enable", defaultValue = "false")
     public static boolean WEBSHOP_ENABLED;
-	/**
+    /**
      * Custom Delay for Hotspot Teleportation in Milliseconds
      */
     @Property(key = "gameserver.hotspot.teleport.delay", defaultValue = "10000")
     public static int HOTSPOT_TELEPORT_DELAY;
-	/**
+    /**
      * Custom Delay for Hotspot Teleportation Cooldown Time
-	 * Default: 600 seconds
+     * Default: 600 seconds
      */
-	 @Property(key = "gameserver.hotspot.teleport.cooldown.delay", defaultValue = "600")
-	 public static int HOTSPOT_TELEPORT_COOLDOWN_DELAY;
-	 
-	 /**
-	 * Stats Caps
-	 */
-	@Property(key = "gameserver.stats.maxspeed", defaultValue="12000")
-	public static int MAX_SPEED;
+    @Property(key = "gameserver.hotspot.teleport.cooldown.delay", defaultValue = "600")
+    public static int HOTSPOT_TELEPORT_COOLDOWN_DELAY;
 
-	@Property(key = "gameserver.stats.maxflyspeed", defaultValue="16000")
+    /**
+     * Stats Caps
+     */
+    @Property(key = "gameserver.stats.maxspeed", defaultValue = "12000")
+    public static int MAX_SPEED;
+
+    @Property(key = "gameserver.stats.maxflyspeed", defaultValue = "16000")
     public static int MAX_FLY_SPEED;
-	
-	@Property(key = "gameserver.stats.maxboostmagicalskill", defaultValue="4500")
-	public static int MAX_BOOST_MAGICAL_SKILL;
-	
-	@Property(key = "gameserver.stats.maxmagicalaccuracy", defaultValue="3600")
-	public static int MAX_MAGICAL_ACCURACY;
 
-	@Property(key = "gameserver.stats.maxphysicalaccuracy", defaultValue="3600")
-	public static int MAX_PHYSICAL_ACCURACY;
+    @Property(key = "gameserver.stats.maxboostmagicalskill", defaultValue = "4500")
+    public static int MAX_BOOST_MAGICAL_SKILL;
 
-	@Property(key = "gameserver.stats.maxphysicalcritical", defaultValue="2500")
-	public static int MAX_PHYSICAL_CRITICAL;
+    @Property(key = "gameserver.stats.maxmagicalaccuracy", defaultValue = "3600")
+    public static int MAX_MAGICAL_ACCURACY;
+
+    @Property(key = "gameserver.stats.maxphysicalaccuracy", defaultValue = "3600")
+    public static int MAX_PHYSICAL_ACCURACY;
+
+    @Property(key = "gameserver.stats.maxphysicalcritical", defaultValue = "2500")
+    public static int MAX_PHYSICAL_CRITICAL;
 
     /**
      * PvP GP Config
@@ -439,7 +439,7 @@ public class CustomConfig {
     public static int GP_LOSE;
 
     /*
-    Rank Rewards
+     * Rank Rewards
      */
     @Property(key = "gameserver.gp.reward.rank9", defaultValue = "100")
     public static int GP_REWARD_RANK9;
@@ -496,10 +496,10 @@ public class CustomConfig {
     public static int GP_REWARD_GOV;
 
     //Custom Feature (Xform, buff)
-    @Property(key="gameserver.abyss.transform", defaultValue="true")
+    @Property(key = "gameserver.abyss.transform", defaultValue = "true")
     public static boolean ABYSS_TRANSFORM;
-    @Property(key="gameserver.weapon.buff", defaultValue="true")
+    @Property(key = "gameserver.weapon.buff", defaultValue = "true")
     public static boolean WEAPON_BUFF;
-    @Property(key="gameserver.armor.buff", defaultValue="true")
+    @Property(key = "gameserver.armor.buff", defaultValue = "true")
     public static boolean ARMOR_BUFF;
 }

@@ -29,9 +29,9 @@
  */
 package quest.verteron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,7 +49,7 @@ public class _14012DukakiMischief extends QuestHandler {
 
     @Override
     public void register() {
-        int[] mobs = {210145, 210146, 210157};
+        int[] mobs = { 210145, 210146, 210157 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.registerQuestNpc(203129).addOnTalkEvent(questId);
@@ -122,8 +122,8 @@ public class _14012DukakiMischief extends QuestHandler {
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             if (var == 1) {
-                int[] dukaki = {210145, 210146};
-                int[] tursin = {210157};
+                int[] dukaki = { 210145, 210146 };
+                int[] tursin = { 210157 };
                 switch (targetId) {
                     case 210145:
                     case 210146: {

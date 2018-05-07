@@ -63,6 +63,7 @@ public class MorphingTask extends CraftingTask {
     public void start() {
         onInteractionStart();
         task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (!validateParticipants()) {
@@ -82,7 +83,8 @@ public class MorphingTask extends CraftingTask {
 
     @Override
     protected void onFailureFinish() {
-        PacketSendUtility.sendPacket(requestor, new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, currentSuccessValue, currentFailureValue, 6));
+        PacketSendUtility.sendPacket(requestor,
+            new SM_CRAFT_UPDATE(recipeTemplate.getSkillid(), itemTemplate, currentSuccessValue, currentFailureValue, 6));
         PacketSendUtility.broadcastPacket(requestor, new SM_CRAFT_ANIMATION(requestor.getObjectId(), 0, 0, 3), true);
     }
 

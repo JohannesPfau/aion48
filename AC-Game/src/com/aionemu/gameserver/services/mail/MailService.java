@@ -79,7 +79,7 @@ public class MailService {
     }
 
     private MailService() {
-        newPlayers = new ConcurrentLinkedQueue<Player>();
+        newPlayers = new ConcurrentLinkedQueue<>();
     }
 
     /**
@@ -95,7 +95,7 @@ public class MailService {
      * @param express
      */
     public void sendMail(Player sender, String recipientName, String title, String message, int attachedItemObjId, int attachedItemCount,
-                         int attachedKinahCount, LetterType letterType) {
+        int attachedKinahCount, LetterType letterType) {
 
         if (letterType == LetterType.BLACKCLOUD || recipientName.length() > 16) {
             return;
@@ -245,8 +245,8 @@ public class MailService {
 
         Timestamp time = new Timestamp(Calendar.getInstance().getTimeInMillis());
 
-        Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(), attachedItem,
-                finalAttachedKinahCount, title, message, sender.getName(), time, true, letterType);
+        Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(), attachedItem, finalAttachedKinahCount,
+            title, message, sender.getName(), time, true, letterType);
 
         // first save attached item for FK consistency
         if (attachedItem != null) {
@@ -287,8 +287,8 @@ public class MailService {
         if (attachedItem != null) {
             if (LoggingConfig.LOG_MAIL) {
                 log.info("[MAILSERVICE] [Player: " + sender.getName() + "] send [Item: " + attachedItem.getItemId()
-                        + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "] [Item Name: " + attachedItem.getItemName() + "]" : "]") + " [Count: "
-                        + attachedItem.getItemCount() + "] to [Reciever: " + recipientName + "]");
+                    + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "] [Item Name: " + attachedItem.getItemName() + "]" : "]") + " [Count: "
+                    + attachedItem.getItemCount() + "] to [Reciever: " + recipientName + "]");
             }
         }
 

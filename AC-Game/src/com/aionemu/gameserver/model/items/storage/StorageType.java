@@ -67,6 +67,7 @@ public enum StorageType {
     HOUSE_STORAGE_20(79, 0, 0),
     BROKER(126),
     MAILBOX(127);
+
     public static final int PET_BAG_MIN = 32;
     public static final int PET_BAG_MAX = 42;
     public static final int HOUSE_WH_MIN = 60;

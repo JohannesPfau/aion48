@@ -45,10 +45,10 @@ import com.aionemu.gameserver.network.aion.serverpackets.*;
  */
 public class ServerPacketsOpcodes {
 
-    private static Map<Class<? extends AionServerPacket>, Integer> opcodes = new HashMap<Class<? extends AionServerPacket>, Integer>();
+    private static Map<Class<? extends AionServerPacket>, Integer> opcodes = new HashMap<>();
 
     static {
-        Set<Integer> idSet = new HashSet<Integer>();
+        Set<Integer> idSet = new HashSet<>();
 
         addPacketOpcode(SM_VERSION_CHECK.class, 0x00, idSet);
         addPacketOpcode(SM_STATS_INFO.class, 0x01, idSet);
@@ -171,7 +171,7 @@ public class ServerPacketsOpcodes {
         addPacketOpcode(SM_LEGION_MEMBERLIST.class, 0x9D, idSet);
         addPacketOpcode(SM_LEGION_EDIT.class, 0x9E, idSet);
         addPacketOpcode(SM_TOLL_INFO.class, 0x9F, idSet); // ingameshop
-	    addPacketOpcode(SM_DRAWING_TOOL.class, 0xA0, idSet); // 4.7 ?
+        addPacketOpcode(SM_DRAWING_TOOL.class, 0xA0, idSet); // 4.7 ?
         addPacketOpcode(SM_MAIL_SERVICE.class, 0xA1, idSet);
         addPacketOpcode(SM_SUMMON_USESKILL.class, 0xA2, idSet);
         addPacketOpcode(SM_WINDSTREAM.class, 0xA3, idSet);
@@ -256,7 +256,7 @@ public class ServerPacketsOpcodes {
         addPacketOpcode(SM_INSTANCE_STAGE_INFO.class, 0x8C, idSet);
         addPacketOpcode(SM_HOUSE_BIDS.class, 0x100, idSet);
         addPacketOpcode(SM_RECEIVE_BIDS.class, 0x103, idSet);
-	addPacketOpcode(SM_HOUSE_PAY_RENT.class, 0x106, idSet); // 4.7 ?
+        addPacketOpcode(SM_HOUSE_PAY_RENT.class, 0x106, idSet); // 4.7 ?
         addPacketOpcode(SM_HOUSE_OWNER_INFO.class, 0x107, idSet);
         addPacketOpcode(SM_OBJECT_USE_UPDATE.class, 0x108, idSet);
         addPacketOpcode(SM_PACKAGE_INFO_NOTIFY.class, 0x10A, idSet);
@@ -281,7 +281,7 @@ public class ServerPacketsOpcodes {
         addPacketOpcode(SM_SELECT_ITEM_LIST.class, 0x11C, idSet);
         addPacketOpcode(SM_FATIGUE.class, 0xB3, idSet);
         addPacketOpcode(SM_HOTSPOT_TELEPORT.class, 0x128, idSet);
-    	addPacketOpcode(SM_UPGRADE_ARCADE.class, 0x12A, idSet);
+        addPacketOpcode(SM_UPGRADE_ARCADE.class, 0x12A, idSet);
         addPacketOpcode(SM_LOGIN_REWARD.class, 0x12B, idSet);
         addPacketOpcode(SM_GAMEGUARD.class, 0x7D, idSet);
         addPacketOpcode(SM_CUSTOM_PACKET.class, 99999, idSet); // fake packet

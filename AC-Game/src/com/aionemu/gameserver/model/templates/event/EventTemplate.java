@@ -116,14 +116,14 @@ public class EventTemplate {
 
     public List<Integer> getStartableQuests() {
         if (quests == null) {
-            return new ArrayList<Integer>();
+            return new ArrayList<>();
         }
         return quests.getStartableQuests();
     }
 
     public List<Integer> getMaintainableQuests() {
         if (quests == null) {
-            return new ArrayList<Integer>();
+            return new ArrayList<>();
         }
         return quests.getMaintainQuests();
     }
@@ -154,7 +154,7 @@ public class EventTemplate {
 
         if (spawns != null && spawns.size() > 0) {
             if (spawnedObjects == null) {
-                spawnedObjects = new ArrayList<VisibleObject>();
+                spawnedObjects = new ArrayList<>();
             }
             for (SpawnMap map : spawns.getTemplates()) {
                 DataManager.SPAWNS_DATA2.addNewSpawnMap(map);
@@ -164,8 +164,8 @@ public class EventTemplate {
                     for (Spawn spawn : map.getSpawns()) {
                         spawn.setEventTemplate(this);
                         for (SpawnSpotTemplate spot : spawn.getSpawnSpotTemplates()) {
-                            SpawnTemplate t = SpawnEngine.addNewSpawn(map.getMapId(), spawn.getNpcId(), spot.getX(), spot.getY(),
-                                    spot.getZ(), spot.getHeading(), spawn.getRespawnTime());
+                            SpawnTemplate t = SpawnEngine.addNewSpawn(map.getMapId(), spawn.getNpcId(), spot.getX(), spot.getY(), spot.getZ(),
+                                spot.getHeading(), spawn.getRespawnTime());
                             t.setEventTemplate(this);
                             SpawnEngine.spawnObject(t, instanceId);
                             spawnCount++;
@@ -180,9 +180,11 @@ public class EventTemplate {
 
         if (inventoryDrop != null) {
             invDropTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
                 @Override
                 public void run() {
                     World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
                         @Override
                         public void visit(Player player) {
                             if (player.getCommonData().getLevel() >= inventoryDrop.getStartLevel()) {
@@ -242,7 +244,7 @@ public class EventTemplate {
 
     public void addSpawnedObject(VisibleObject object) {
         if (spawnedObjects == null) {
-            spawnedObjects = new ArrayList<VisibleObject>();
+            spawnedObjects = new ArrayList<>();
         }
         spawnedObjects.add(object);
     }

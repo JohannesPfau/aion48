@@ -113,7 +113,8 @@ public class ClusteredNpc {
     }
 
     /**
-     * @param x the x to set
+     * @param x
+     *            the x to set
      */
     public void setX(float x) {
         this.x = x;
@@ -132,7 +133,8 @@ public class ClusteredNpc {
     }
 
     /**
-     * @param y the y to set
+     * @param y
+     *            the y to set
      */
     public void setY(float y) {
         this.y = y;

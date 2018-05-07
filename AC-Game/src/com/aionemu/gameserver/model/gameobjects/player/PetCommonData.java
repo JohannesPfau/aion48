@@ -153,6 +153,7 @@ public class PetCommonData extends VisibleObjectTemplate implements IExpirable {
     public void scheduleRefeed(final long reFoodTime) {
         setIsFeedingTime(false);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 feedingTime = true;
@@ -248,7 +249,8 @@ public class PetCommonData extends VisibleObjectTemplate implements IExpirable {
     }
 
     /**
-     * @param moodCdStarted the moodCdStarted to set
+     * @param moodCdStarted
+     *            the moodCdStarted to set
      */
     public void setMoodCdStarted(long moodCdStarted) {
         this.moodCdStarted = moodCdStarted;
@@ -272,7 +274,8 @@ public class PetCommonData extends VisibleObjectTemplate implements IExpirable {
     }
 
     /**
-     * @param giftCdStarted the giftCdStarted to set
+     * @param giftCdStarted
+     *            the giftCdStarted to set
      */
     public void setGiftCdStarted(long giftCdStarted) {
         this.giftCdStarted = giftCdStarted;
@@ -296,7 +299,8 @@ public class PetCommonData extends VisibleObjectTemplate implements IExpirable {
     }
 
     /**
-     * @param despawnTime the despawnTime to set
+     * @param despawnTime
+     *            the despawnTime to set
      */
     public void setDespawnTime(Timestamp despawnTime) {
         this.despawnTime = despawnTime;

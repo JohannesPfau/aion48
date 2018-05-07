@@ -45,8 +45,6 @@ import com.aionemu.gameserver.services.player.PlayerService;
  * Client sends request to delete macro #3.<br>
  * And macro #4 becomes macro #3.<br>
  * So we have to use a list to store macros properly.
- *
-
  */
 public class CM_MACRO_DELETE extends AionClientPacket {
 

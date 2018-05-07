@@ -38,10 +38,10 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.templates.base.BaseTemplate;
+
+import javolution.util.FastMap;
 
 /**
  * @author Source
@@ -53,7 +53,7 @@ public class BaseData {
     @XmlElement(name = "base_location")
     private List<BaseTemplate> baseTemplates;
     @XmlTransient
-    private FastMap<Integer, BaseLocation> base = new FastMap<Integer, BaseLocation>();
+    private FastMap<Integer, BaseLocation> base = new FastMap<>();
 
     /**
      * @param u

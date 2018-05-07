@@ -29,6 +29,14 @@
  */
 package mysql5;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
@@ -39,13 +47,6 @@ import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
 import com.aionemu.gameserver.model.team.legion.LegionRank;
 import com.aionemu.gameserver.services.LegionService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 
 /**
  * @author Simple
@@ -75,8 +76,7 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
      */
     @Override
     public boolean isIdUsed(final int playerObjId) {
-        PreparedStatement s = DB
-                .prepareStatement("SELECT count(player_id) as cnt FROM legion_members WHERE ? = legion_members.player_id");
+        PreparedStatement s = DB.prepareStatement("SELECT count(player_id) as cnt FROM legion_members WHERE ? = legion_members.player_id");
         try {
             s.setInt(1, playerObjId);
             ResultSet rs = s.executeQuery();
@@ -96,6 +96,7 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
     @Override
     public boolean saveNewLegionMember(final LegionMember legionMember) {
         boolean success = DB.insertUpdate(INSERT_LEGIONMEMBER_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setInt(1, legionMember.getLegion().getLegionId());
@@ -113,6 +114,7 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
     @Override
     public void storeLegionMember(final int playerId, final LegionMember legionMember) {
         DB.insertUpdate(UPDATE_LEGIONMEMBER_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setString(1, legionMember.getNickname());
@@ -137,6 +139,7 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
         final LegionMember legionMember = new LegionMember(playerObjId);
 
         boolean success = DB.select(SELECT_LEGIONMEMBER_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, playerObjId);
@@ -172,6 +175,7 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
         final LegionMemberEx legionMemberEx = new LegionMemberEx(playerObjId);
 
         boolean success = DB.select(SELECT_LEGIONMEMBEREX_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, playerObjId);
@@ -213,6 +217,7 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
         final LegionMemberEx legionMember = new LegionMemberEx(playerName);
 
         boolean success = DB.select(SELECT_LEGIONMEMBEREX2_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setString(1, playerName);
@@ -251,9 +256,10 @@ public class MySQL5LegionMemberDAO extends LegionMemberDAO {
      */
     @Override
     public ArrayList<Integer> loadLegionMembers(final int legionId) {
-        final ArrayList<Integer> legionMembers = new ArrayList<Integer>();
+        final ArrayList<Integer> legionMembers = new ArrayList<>();
 
         boolean success = DB.select(SELECT_LEGIONMEMBERS_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, legionId);

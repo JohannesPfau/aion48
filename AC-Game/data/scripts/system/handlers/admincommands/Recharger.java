@@ -29,6 +29,8 @@
  */
 package admincommands;
 
+import java.util.Collection;
+
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -38,44 +40,42 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
-import java.util.Collection;
-
 /**
  * Created by Kill3r
  */
 public class Recharger extends AdminCommand {
 
-    public Recharger(){
+    public Recharger() {
         super("recharger");
     }
 
     private static boolean isOpened = false;
 
-    public void execute(Player player, String...params){
+    public void execute(Player player, String... params) {
         int RechargerID = 730397;
-        if(params[0].equals("off")){
-            if(isOpened){
+        if (params[0].equals("off")) {
+            if (isOpened) {
                 Collection<Npc> recharger = World.getInstance().getNpcs();
-                for(Npc n : recharger){
-                    if(n.getNpcId() == RechargerID){
+                for (Npc n : recharger) {
+                    if (n.getNpcId() == RechargerID) {
                         n.getController().delete();
                     }
                 }
                 PacketSendUtility.sendMessage(player, "Recharger Closing!");
                 isOpened = false;
             }
-        }else if(params[0].equals("on")){
+        } else if (params[0].equals("on")) {
             float x = player.getX();
             float y = player.getY();
             float z = player.getZ();
             byte heading = player.getHeading();
             int worldId = player.getWorldId();
-            if(!isOpened){
+            if (!isOpened) {
                 SpawnTemplate spawn = SpawnEngine.addNewSpawn(worldId, RechargerID, x, y, z, heading, 0);
                 VisibleObject visibleObject = SpawnEngine.spawnObject(spawn, player.getInstanceId());
                 PacketSendUtility.sendMessage(player, visibleObject.getName() + " has been Summoned!");
                 isOpened = true;
-            }else{
+            } else {
                 PacketSendUtility.sendMessage(player, "Already Open");
             }
         }

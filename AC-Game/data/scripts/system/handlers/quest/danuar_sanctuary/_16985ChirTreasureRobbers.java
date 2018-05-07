@@ -29,9 +29,9 @@
  */
 package quest.danuar_sanctuary;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -52,7 +52,7 @@ public class _16985ChirTreasureRobbers extends QuestHandler {
     public void register() {
         qe.registerQuestNpc(804864).addOnQuestStart(questId);
         qe.registerQuestNpc(804864).addOnTalkEvent(questId);
-		qe.registerQuestNpc(804862).addOnTalkEvent(questId);
+        qe.registerQuestNpc(804862).addOnTalkEvent(questId);
     }
 
     @Override
@@ -81,11 +81,11 @@ public class _16985ChirTreasureRobbers extends QuestHandler {
                             }
                         }
                         case SETPRO1:
-                        changeQuestStep(env, 0, 1, false); 
-						return closeDialogWindow(env);
+                            changeQuestStep(env, 0, 1, false);
+                            return closeDialogWindow(env);
                     }
                 }
-				case 804864: {
+                case 804864: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 1) {

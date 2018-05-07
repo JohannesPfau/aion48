@@ -29,10 +29,10 @@
  */
 package com.aionemu.commons.configuration.transformers;
 
+import java.lang.reflect.Field;
+
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
-
-import java.lang.reflect.Field;
 
 /**
  * Returns the <code>Class</code> object associated with the class or interface

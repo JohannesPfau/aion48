@@ -31,9 +31,9 @@ package quest.daevation;
 
 import java.util.Arrays;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,9 +45,9 @@ import com.aionemu.gameserver.services.QuestService;
 public class _1994ANewChoice extends QuestHandler {
 
     private final static int questId = 1994;
-    private final static int dialogs[] = {1013, 1034, 1055, 1076, 5103, 1098, 1119, 1140, 1161, 1183, 1204, 1225, 1246};
-    private final static int items[] = {100000723, 100900554, 101300538, 100200673, 101700594, 100100568, 101500566, 100600608, 100500572,
-        115000826, 101800569, 101900562, 102000592};
+    private final static int dialogs[] = { 1013, 1034, 1055, 1076, 5103, 1098, 1119, 1140, 1161, 1183, 1204, 1225, 1246 };
+    private final static int items[] = { 100000723, 100900554, 101300538, 100200673, 101700594, 100100568, 101500566, 100600608, 100500572, 115000826,
+        101800569, 101900562, 102000592 };
 
     public _1994ANewChoice() {
         super(questId);

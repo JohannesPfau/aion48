@@ -33,7 +33,7 @@ import com.aionemu.commons.configuration.Property;
 
 /**
  * @author xTz
- (Aion-Core)
+ *         (Aion-Core)
  */
 public class AutoGroupConfig {
 
@@ -85,5 +85,5 @@ public class AutoGroupConfig {
     @Property(key = "gameserver.idgeldome.timer", defaultValue = "60")
     public static long IDGELDOME_TIMER;
     @Property(key = "gameserver.idgeldome.time", defaultValue = "0 0 23 1/1 * ? *")
-    public static String IDGELDOME_TIMES;    
+    public static String IDGELDOME_TIMES;
 }

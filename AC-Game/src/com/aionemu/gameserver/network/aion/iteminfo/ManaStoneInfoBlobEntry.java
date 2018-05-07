@@ -42,10 +42,8 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 /**
  * This blob sends info about mana stones.
  *
-
  * @modified Rolandas
  * @modified Alcapwnd
-
  */
 public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 
@@ -70,7 +68,7 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
         int dyeExpiration = item.getColorTimeLeft();
         // expired dyed items
         if ((dyeExpiration > 0 && item.getColorExpireTime() > 0 || dyeExpiration == 0 && item.getColorExpireTime() == 0)
-                && item.getItemTemplate().isItemDyePermitted()) {
+            && item.getItemTemplate().isItemDyePermitted()) {
             writeC(buf, itemColor == 0 ? 0 : 1);
             writeD(buf, itemColor);
             writeD(buf, 0); // unk 1.5.1.9
@@ -92,41 +90,43 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
         }
         writeC(buf, item.getAuthorize());
 
-        writeH(buf, 0);    
-        
+        writeH(buf, 0);
+
         writePlumeStats(buf); // 64-bytes
-        
+
         writeD(buf, 0);
-        
+
         writeAmplification(buf); // 13-bytes
     }
-    
+
     /**
      * Writes amplification data
+     * 
      * @param item
      */
     private void writeAmplification(ByteBuffer buf) {
-    	Item item = ownerItem;
-    	
-    	writeC(buf, item.isAmplified() ? 1 : 0);
-    	
+        Item item = ownerItem;
+
+        writeC(buf, item.isAmplified() ? 1 : 0);
+
         writeD(buf, item.getBuffSkill());
-        
+
         writeD(buf, 0);//skillId
-        
+
         writeD(buf, 0);//skillId
     }
-    
+
     /**
      * Writes plume stats
+     * 
      * @param item
      */
     private void writePlumeStats(ByteBuffer buf) {
-    	Item item = ownerItem;
-    	if (item.getItemTemplate().isPlume()) {
-    		writeD(buf, 0);//unk plume stat
+        Item item = ownerItem;
+        if (item.getItemTemplate().isPlume()) {
+            writeD(buf, 0);//unk plume stat
             writeD(buf, 0);//value    		
-    		writeD(buf, 0);//unk plume stat
+            writeD(buf, 0);//unk plume stat
             writeD(buf, 0);//value
             writeD(buf, 42);
             writeD(buf, item.getAuthorize() * 150);//HP Boost for Tempering Solution
@@ -136,8 +136,8 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
                 writeD(buf, 0);//New Plume Stat 4.7.5.6 (NcSoft will implement it at future)
                 writeD(buf, 0);//it's Value                
             } else {
-            	writeD(buf, 0);//New Plume Stat 4.7.5.6 (NcSoft will implement it at future)
-            	writeD(buf, 0);//it's Value  
+                writeD(buf, 0);//New Plume Stat 4.7.5.6 (NcSoft will implement it at future)
+                writeD(buf, 0);//it's Value  
                 writeD(buf, 35);
                 writeD(buf, item.getAuthorize() * 20);//Magic Boost
             }
@@ -152,6 +152,7 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
             writeB(buf, new byte[64]);
         }
     }
+
     /**
      * Writes manastones
      *
@@ -163,8 +164,8 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
 
         if (item.hasManaStones()) {
             Set<ManaStone> itemStones = item.getItemStones();
-            ArrayList<ManaStone> basicStones = new ArrayList<ManaStone>();
-            ArrayList<ManaStone> ancientStones = new ArrayList<ManaStone>();
+            ArrayList<ManaStone> basicStones = new ArrayList<>();
+            ArrayList<ManaStone> ancientStones = new ArrayList<>();
 
             for (ManaStone itemStone : itemStones) {
                 if (itemStone.isBasic()) {
@@ -208,7 +209,7 @@ public class ManaStoneInfoBlobEntry extends ItemBlobEntry {
     public int getSize() {
         //return 12 * 2 + 24 + 1 + 5 + 5 + 14 + 48;
         //return 24 + 48 + 43;
-    	//return 121;
+        //return 121;
         return 138;
     }
 }

@@ -63,6 +63,7 @@ public class KharunAI2 extends NpcAI2 {
 
     private void startKharunEvent() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 Npc aethericField = getPosition().getWorldMapInstance().getNpc(730613);

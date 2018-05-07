@@ -64,7 +64,8 @@ public class CuringTemplate {
     /**
      * Sets the value of the mapId property.
      *
-     * @param value allowed object is {@link Integer }
+     * @param value
+     *            allowed object is {@link Integer }
      */
     public void setMapId(int value) {
         this.mapId = value;
@@ -82,7 +83,8 @@ public class CuringTemplate {
     /**
      * Sets the value of the x property.
      *
-     * @param value allowed object is {@link Float }
+     * @param value
+     *            allowed object is {@link Float }
      */
     public void setX(float value) {
         this.x = value;
@@ -100,7 +102,8 @@ public class CuringTemplate {
     /**
      * Sets the value of the y property.
      *
-     * @param value allowed object is {@link Float }
+     * @param value
+     *            allowed object is {@link Float }
      */
     public void setY(float value) {
         this.y = value;
@@ -118,7 +121,8 @@ public class CuringTemplate {
     /**
      * Sets the value of the z property.
      *
-     * @param value allowed object is {@link Float }
+     * @param value
+     *            allowed object is {@link Float }
      */
     public void setZ(float value) {
         this.z = value;

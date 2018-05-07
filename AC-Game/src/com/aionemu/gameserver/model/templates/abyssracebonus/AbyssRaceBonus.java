@@ -44,7 +44,7 @@ import com.aionemu.gameserver.model.Race;
  * @author Eloann
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "AbyssRaceBonus", propOrder = {"bonus"})
+@XmlType(name = "AbyssRaceBonus", propOrder = { "bonus" })
 public class AbyssRaceBonus {
 
     @XmlElement(name = "bonus")
@@ -58,7 +58,7 @@ public class AbyssRaceBonus {
 
     public List<AbyssRacePenalty> getPenalty() {
         if (bonus == null) {
-            bonus = new ArrayList<AbyssRacePenalty>();
+            bonus = new ArrayList<>();
         }
         return bonus;
     }

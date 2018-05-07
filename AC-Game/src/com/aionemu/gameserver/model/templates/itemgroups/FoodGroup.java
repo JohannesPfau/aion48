@@ -51,6 +51,7 @@ import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="FoodGroup">
  *   &lt;complexContent>
@@ -80,6 +81,7 @@ public class FoodGroup extends BonusItemGroup {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getItems().add(newItem);
      * </pre>
@@ -89,12 +91,13 @@ public class FoodGroup extends BonusItemGroup {
      */
     public List<IdLevelReward> getItems() {
         if (items == null) {
-            items = new ArrayList<IdLevelReward>();
+            items = new ArrayList<>();
         }
         return this.items;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.gameserver.model.templates.itemgroups.ItemGroup#getRewards()
      */
     @Override

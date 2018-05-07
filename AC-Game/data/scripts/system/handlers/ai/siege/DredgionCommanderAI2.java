@@ -49,22 +49,22 @@ public class DredgionCommanderAI2 extends SiegeNpcAI2 {
 
     private int getSkill() {
         switch (getNpcId()) {
-			case 258236:
-				return 18428;
-			case 272291:
-			case 272292:
-			case 272293:
-			case 272294:
-			case 272295:
-				return 21312;	
+            case 258236:
+                return 18428;
+            case 272291:
+            case 272292:
+            case 272293:
+            case 272294:
+            case 272295:
+                return 21312;
             case 276649:
-			case 276650:
-			case 276651:
+            case 276650:
+            case 276651:
                 return 17572;
             case 276871:
             case 276872:
-			case 276873:
-				return 18411;
+            case 276873:
+                return 18411;
             default:
                 return 0;
         }
@@ -72,6 +72,7 @@ public class DredgionCommanderAI2 extends SiegeNpcAI2 {
 
     private void scheduleOneShot() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (getSkill() != 0) {

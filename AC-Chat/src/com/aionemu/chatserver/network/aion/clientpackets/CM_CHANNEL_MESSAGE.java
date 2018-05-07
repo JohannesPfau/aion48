@@ -32,9 +32,8 @@ package com.aionemu.chatserver.network.aion.clientpackets;
 import java.util.Arrays;
 
 import org.jboss.netty.buffer.ChannelBuffer;
-import org.slf4j.LoggerFactory;
-
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.Config;
 import com.aionemu.chatserver.model.channel.Channel;
@@ -98,7 +97,8 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
         broadcastService.broadcastMessage(message);
 
         if (Config.LOG_CHAT) {
-            LoggerFactory.getLogger("CHAT_LOG").info(String.format("[MESSAGE] <%s>: [%s]> %s", message.getChannelString(), message.getSenderString(), message.getTextString()));
+            LoggerFactory.getLogger("CHAT_LOG")
+                .info(String.format("[MESSAGE] <%s>: [%s]> %s", message.getChannelString(), message.getSenderString(), message.getTextString()));
         }
     }
 

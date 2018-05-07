@@ -38,8 +38,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_CHARACTER_LIST;
 
 /**
  * In this packets aion client is requesting character list.
- *
-
  */
 public class CM_CHARACTER_LIST extends AionClientPacket {
 

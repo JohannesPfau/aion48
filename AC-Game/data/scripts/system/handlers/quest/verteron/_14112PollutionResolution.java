@@ -28,7 +28,7 @@
  * @Aion-Core Dev.
  */
 package quest.verteron;
- 
+
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -36,30 +36,29 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
- 
+
 /**
  * @author FrozenKiller
  */
- 
+
 public class _14112PollutionResolution extends QuestHandler {
 
     private final static int questId = 14112;
 
     public _14112PollutionResolution() {
         super(questId);
-    }    
-	
+    }
+
     @Override
     public void register() {
         qe.registerQuestNpc(203149).addOnQuestStart(questId);
         qe.registerQuestNpc(203149).addOnTalkEvent(questId); // Geolus
-		qe.registerQuestNpc(203148).addOnTalkEvent(questId); // Lepios
-		qe.registerQuestNpc(210318).addOnKillEvent(questId); // Poisonus Bubblegut
-		qe.registerQuestNpc(203195).addOnKillEvent(questId); // Kato
+        qe.registerQuestNpc(203148).addOnTalkEvent(questId); // Lepios
+        qe.registerQuestNpc(210318).addOnKillEvent(questId); // Poisonus Bubblegut
+        qe.registerQuestNpc(203195).addOnKillEvent(questId); // Kato
     }
-	
-	
-	@Override
+
+    @Override
     public boolean onDialogEvent(final QuestEnv env) {
         final Player player = env.getPlayer();
         int targetId = env.getTargetId();
@@ -74,45 +73,45 @@ public class _14112PollutionResolution extends QuestHandler {
                     return sendQuestStartDialog(env, -1);
                 }
             }
-		} else if (qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (targetId == 203148) { // Lepios
-				switch (dialog) {
-					case USE_OBJECT: {
-						if (var == 0) {
-							return sendQuestDialog(env, 1352);
-						}
-					}
-					case SETPRO1: {
-						qs.setQuestVar(0);
-						updateQuestStatus(env);
-						giveQuestItem(env, 182215455, 1);
-						return closeDialogWindow(env);
-					}
-				default:
-					break;
-				}
-			} else if (targetId == 203195) { // Kato
-				switch (dialog) {
-					case QUEST_SELECT: {
-						if (var == 1) {
-							return sendQuestDialog(env, 2375);
-						}
-					}
-					case SELECT_QUEST_REWARD: {
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						return sendQuestDialog(env, 5);
-					}
-					case FINISH_DIALOG: {
+        } else if (qs.getStatus() == QuestStatus.START) {
+            int var = qs.getQuestVarById(0);
+            if (targetId == 203148) { // Lepios
+                switch (dialog) {
+                    case USE_OBJECT: {
+                        if (var == 0) {
+                            return sendQuestDialog(env, 1352);
+                        }
+                    }
+                    case SETPRO1: {
+                        qs.setQuestVar(0);
+                        updateQuestStatus(env);
+                        giveQuestItem(env, 182215455, 1);
+                        return closeDialogWindow(env);
+                    }
+                    default:
+                        break;
+                }
+            } else if (targetId == 203195) { // Kato
+                switch (dialog) {
+                    case QUEST_SELECT: {
+                        if (var == 1) {
+                            return sendQuestDialog(env, 2375);
+                        }
+                    }
+                    case SELECT_QUEST_REWARD: {
+                        qs.setStatus(QuestStatus.REWARD);
+                        updateQuestStatus(env);
+                        return sendQuestDialog(env, 5);
+                    }
+                    case FINISH_DIALOG: {
                         return sendQuestSelectionDialog(env);
                     }
-				default:
-					break;
-				}
-			}
+                    default:
+                        break;
+                }
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203195) { // Kato
+            if (targetId == 203195) { // Kato
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
                     removeQuestItem(env, 182215455, 1);
                     return sendQuestDialog(env, 4080);
@@ -124,7 +123,6 @@ public class _14112PollutionResolution extends QuestHandler {
         return false;
     }
 
-	
     @Override
     public boolean onKillEvent(QuestEnv env) {
         Player player = env.getPlayer();
@@ -134,7 +132,7 @@ public class _14112PollutionResolution extends QuestHandler {
             if (var == 0) {
                 int targetId = env.getTargetId();
                 if (targetId == 210318) {
-                	QuestService.addNewSpawn(210030000, player.getInstanceId(), 203195, player.getX()+2, player.getY()+2, player.getZ()+1,
+                    QuestService.addNewSpawn(210030000, player.getInstanceId(), 203195, player.getX() + 2, player.getY() + 2, player.getZ() + 1,
                         (byte) 0);
                     return defaultOnKillEvent(env, 210318, 0, 1); // 1
                 }

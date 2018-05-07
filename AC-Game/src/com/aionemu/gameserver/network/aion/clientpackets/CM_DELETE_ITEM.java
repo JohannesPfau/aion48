@@ -66,8 +66,7 @@ public class CM_DELETE_ITEM extends AionClientPacket {
 
         if (item != null) {
             if (!item.getItemTemplate().isBreakable()) {
-                PacketSendUtility.sendPacket(player,
-                        SM_SYSTEM_MESSAGE.STR_UNBREAKABLE_ITEM(new DescriptionId(item.getNameId())));
+                PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNBREAKABLE_ITEM(new DescriptionId(item.getNameId())));
             } else {
                 inventory.delete(item, ItemDeleteType.DISCARD);
             }

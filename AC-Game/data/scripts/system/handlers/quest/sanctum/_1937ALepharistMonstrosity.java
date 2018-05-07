@@ -29,11 +29,11 @@
  */
 package quest.sanctum;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -94,7 +94,7 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
                         }
                     }
                 }
-                break;
+                    break;
                 case 203761: {
                     if (qs.getQuestVarById(0) == 1) {
                         if (env.getDialog() == DialogAction.QUEST_SELECT) {
@@ -107,7 +107,7 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
                         }
                     }
                 }
-                break;
+                    break;
                 case 203833: {
                     if (qs.getQuestVarById(0) == 2) {
                         if (env.getDialog() == DialogAction.QUEST_SELECT) {
@@ -120,7 +120,7 @@ public class _1937ALepharistMonstrosity extends QuestHandler {
                         }
                     }
                 }
-                break;
+                    break;
                 case 204573: {
                     if (qs.getQuestVarById(0) == 3) {
                         if (env.getDialog() == DialogAction.QUEST_SELECT) {

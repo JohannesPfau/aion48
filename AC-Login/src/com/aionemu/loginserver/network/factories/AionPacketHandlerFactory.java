@@ -29,14 +29,19 @@
  */
 package com.aionemu.loginserver.network.factories;
 
-import com.aionemu.loginserver.network.aion.AionClientPacket;
-import com.aionemu.loginserver.network.aion.LoginConnection;
-import com.aionemu.loginserver.network.aion.LoginConnection.State;
-import com.aionemu.loginserver.network.aion.clientpackets.*;
+import java.nio.ByteBuffer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.ByteBuffer;
+import com.aionemu.loginserver.network.aion.AionClientPacket;
+import com.aionemu.loginserver.network.aion.LoginConnection;
+import com.aionemu.loginserver.network.aion.LoginConnection.State;
+import com.aionemu.loginserver.network.aion.clientpackets.CM_AUTH_GG;
+import com.aionemu.loginserver.network.aion.clientpackets.CM_LOGIN;
+import com.aionemu.loginserver.network.aion.clientpackets.CM_PLAY;
+import com.aionemu.loginserver.network.aion.clientpackets.CM_SERVER_LIST;
+import com.aionemu.loginserver.network.aion.clientpackets.CM_UPDATE_SESSION;
 
 /**
  * @author -Nemesiss-

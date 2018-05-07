@@ -111,7 +111,8 @@ public class CM_WINDSTREAM extends AionClientPacket {
                     player.setState(CreatureState.GLIDING);
                     player.getLifeStats().triggerFpReduce();
                 }
-                PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, state == 2 ? EmotionType.WINDSTREAM_END : EmotionType.WINDSTREAM_EXIT, 0, 0), true);
+                PacketSendUtility.broadcastPacket(player,
+                    new SM_EMOTION(player, state == 2 ? EmotionType.WINDSTREAM_END : EmotionType.WINDSTREAM_EXIT, 0, 0), true);
                 player.getGameStats().updateStatsAndSpeedVisually();
                 PacketSendUtility.sendPacket(player, new SM_WINDSTREAM(state, 1));
                 player.unsetPlayerMode(PlayerMode.WINDSTREAM);

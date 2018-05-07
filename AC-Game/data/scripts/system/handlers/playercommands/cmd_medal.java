@@ -50,10 +50,9 @@ public class cmd_medal extends PlayerCommand {
     @Override
     public void execute(Player player, String... params) {
         if (params.length < 1) {
-            PacketSendUtility.sendMessage(player, "Syntax: .medal <silver | gold | platinum | mithril>"
-                    + LanguageHandler.translate(CustomMessageId.EX_SILVER_INFO)
-                    + LanguageHandler.translate(CustomMessageId.EX_GOLD_INFO)
-                    + LanguageHandler.translate(CustomMessageId.EX_PLATIN_INFO)
+            PacketSendUtility.sendMessage(player,
+                "Syntax: .medal <silver | gold | platinum | mithril>" + LanguageHandler.translate(CustomMessageId.EX_SILVER_INFO)
+                    + LanguageHandler.translate(CustomMessageId.EX_GOLD_INFO) + LanguageHandler.translate(CustomMessageId.EX_PLATIN_INFO)
                     + LanguageHandler.translate(CustomMessageId.EX_MITHRIL_INFO));
             return;
         }

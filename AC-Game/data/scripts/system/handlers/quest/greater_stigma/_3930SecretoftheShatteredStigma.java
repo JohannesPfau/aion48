@@ -29,11 +29,11 @@
  */
 package quest.greater_stigma;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -113,7 +113,7 @@ public class _3930SecretoftheShatteredStigma extends QuestHandler {
                                 return true;
                         }
                     }
-                // 2 / 4- Talk with Koruchinerk
+                    // 2 / 4- Talk with Koruchinerk
                 case 798321:
                     if (var == 1) {
                         switch (env.getDialog()) {
@@ -151,6 +151,7 @@ public class _3930SecretoftheShatteredStigma extends QuestHandler {
                 case 700562:
                     if (var == 2) {
                         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                             @Override
                             public void run() {
                                 updateQuestStatus(env);

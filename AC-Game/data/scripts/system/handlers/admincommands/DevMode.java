@@ -12,7 +12,7 @@ public class DevMode extends AdminCommand {
         super("dev");
     }
 
-    public void execute(Player admin, String...params){
+    public void execute(Player admin, String... params) {
 
     }
 }

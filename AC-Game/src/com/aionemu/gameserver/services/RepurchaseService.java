@@ -70,7 +70,7 @@ public class RepurchaseService {
 
     public Collection<Item> getRepurchaseItems(int playerObjectId) {
         Collection<Item> items = repurchaseItems.get(playerObjectId);
-        return items != null ? items : Collections.<Item>emptyList();
+        return items != null ? items : Collections.<Item> emptyList();
     }
 
     public Item getRepurchaseItem(Player player, int itemObjectId) {
@@ -99,12 +99,12 @@ public class RepurchaseService {
                     ItemService.addItem(player, repurchaseItem);
                     removeRepurchaseItem(player, repurchaseItem);
                 } else {
-                    AuditLogger.info(player, "Player try repurchase item: " + repurchaseItem.getItemId() + " count: " + repurchaseItem.getItemCount()
-                            + " whithout kinah");
+                    AuditLogger.info(player,
+                        "Player try repurchase item: " + repurchaseItem.getItemId() + " count: " + repurchaseItem.getItemCount() + " whithout kinah");
                 }
             } else {
-                AuditLogger.info(player, "Player might be abusing CM_BUY_ITEM try dupe item: " + repurchaseItem.getItemId() + " count: "
-                        + repurchaseItem.getItemCount());
+                AuditLogger.info(player,
+                    "Player might be abusing CM_BUY_ITEM try dupe item: " + repurchaseItem.getItemId() + " count: " + repurchaseItem.getItemCount());
             }
         }
     }

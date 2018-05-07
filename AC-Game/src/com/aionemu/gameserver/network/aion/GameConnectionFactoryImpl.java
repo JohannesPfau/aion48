@@ -44,8 +44,6 @@ import com.aionemu.gameserver.network.sequrity.FloodManager.Result;
 
 /**
  * ConnectionFactory implementation that will be creating AionConnections
- *
-
  */
 public class GameConnectionFactoryImpl implements ConnectionFactory {
 
@@ -56,12 +54,14 @@ public class GameConnectionFactoryImpl implements ConnectionFactory {
      * Create a new {@link com.aionemu.commons.network.AConnection AConnection}
      * instance.<br>
      *
-     * @param socket     that new
-     *                   {@link com.aionemu.commons.network.AConnection AConnection} instance will
-     *                   represent.<br>
-     * @param dispatcher to witch new connection will be registered.<br>
+     * @param socket
+     *            that new
+     *            {@link com.aionemu.commons.network.AConnection AConnection} instance will
+     *            represent.<br>
+     * @param dispatcher
+     *            to witch new connection will be registered.<br>
      * @return a new instance of
-     * {@link com.aionemu.commons.network.AConnection AConnection}<br>
+     *         {@link com.aionemu.commons.network.AConnection AConnection}<br>
      * @throws IOException
      * @see com.aionemu.commons.network.AConnection
      * @see com.aionemu.commons.network.Dispatcher
@@ -69,8 +69,8 @@ public class GameConnectionFactoryImpl implements ConnectionFactory {
     public GameConnectionFactoryImpl() {
         if (NetworkConfig.ENABLE_FLOOD_CONNECTIONS) {
             floodAcceptor = new FloodManager(NetworkConfig.Flood_Tick,
-                    new FloodManager.FloodFilter(NetworkConfig.Flood_SWARN, NetworkConfig.Flood_SReject, NetworkConfig.Flood_STick), // short period
-                    new FloodManager.FloodFilter(NetworkConfig.Flood_LWARN, NetworkConfig.Flood_LReject, NetworkConfig.Flood_LTick)); // long period
+                new FloodManager.FloodFilter(NetworkConfig.Flood_SWARN, NetworkConfig.Flood_SReject, NetworkConfig.Flood_STick), // short period
+                new FloodManager.FloodFilter(NetworkConfig.Flood_LWARN, NetworkConfig.Flood_LReject, NetworkConfig.Flood_LTick)); // long period
         }
     }
 

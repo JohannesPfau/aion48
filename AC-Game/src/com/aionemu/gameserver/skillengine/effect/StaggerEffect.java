@@ -67,10 +67,9 @@ public class StaggerEffect extends EffectTemplate {
             effected.getController().cancelCurrentSkill();
             effected.getEffectController().removeParalyzeEffects();
             effected.getMoveController().abortMove();
-            PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(),
-                    new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
-            World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(),
-                    effected.getHeading());
+            PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_FORCED_MOVE(effect.getEffector(),
+                effect.getEffected().getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
+            World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
         }
     }
 
@@ -101,8 +100,8 @@ public class StaggerEffect extends EffectTemplate {
 
         float z = effected.getZ();
         byte intentions = (byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId());
-        Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1,
-                effected.getY() + y1, effected.getZ(), false, intentions);
+        Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1,
+            effected.getZ(), false, intentions);
         x1 = closestCollision.x;
         y1 = closestCollision.y;
         z = closestCollision.z;

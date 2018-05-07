@@ -50,7 +50,7 @@ public class SM_TARGET_UPDATE extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(player.getObjectId());
         writeD(player.getTarget() == null ? 0 : player.getTarget().getObjectId());
     }

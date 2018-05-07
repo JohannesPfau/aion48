@@ -40,8 +40,6 @@ import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 
 /**
  * In this packets aion client is asking if may quit.
- *
-
  */
 public class CM_QUIT extends AionClientPacket {
 

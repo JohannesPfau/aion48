@@ -55,15 +55,15 @@ public class CmdTeleportTo extends AbstractGMHandler {
         }
         if (destination.equalsIgnoreCase("Sanctum"))
             goTo(admin, WorldMapType.SANCTUM.getId(), 1322, 1511, 568);
-            // Kaisinel
+        // Kaisinel
         else if (destination.equalsIgnoreCase("Kaisinel"))
             goTo(admin, WorldMapType.KAISINEL.getId(), 2155, 1567, 1205);
-            // Poeta
+        // Poeta
         else if (destination.equalsIgnoreCase("Poeta"))
             goTo(admin, WorldMapType.POETA.getId(), 806, 1242, 119);
         else if (destination.equalsIgnoreCase("Melponeh"))
             goTo(admin, WorldMapType.POETA.getId(), 426, 1740, 119);
-            // Verteron
+        // Verteron
         else if (destination.equalsIgnoreCase("Verteron"))
             goTo(admin, WorldMapType.VERTERON.getId(), 1643, 1500, 119);
         else if (destination.equalsIgnoreCase("Cantas") || destination.equalsIgnoreCase("Cantas Coast"))
@@ -74,7 +74,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, WorldMapType.VERTERON.getId(), 2063, 2412, 274);
         else if (destination.equalsIgnoreCase("Tolbas") || destination.equalsIgnoreCase("Tolbas Village"))
             goTo(admin, WorldMapType.VERTERON.getId(), 1291, 2206, 142);
-            // Eltnen
+        // Eltnen
         else if (destination.equalsIgnoreCase("Eltnen"))
             goTo(admin, WorldMapType.ELTNEN.getId(), 343, 2724, 264);
         else if (destination.equalsIgnoreCase("Golden") || destination.equalsIgnoreCase("Golden Bough Garrison"))
@@ -87,7 +87,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, WorldMapType.ELTNEN.getId(), 1921, 2045, 361);
         else if (destination.equalsIgnoreCase("Kuriullu"))
             goTo(admin, WorldMapType.ELTNEN.getId(), 2411, 2724, 361);
-            // Theobomos
+        // Theobomos
         else if (destination.equalsIgnoreCase("Theobomos"))
             goTo(admin, WorldMapType.THEOBOMOS.getId(), 1398, 1557, 31);
         else if (destination.equalsIgnoreCase("Jamanok") || destination.equalsIgnoreCase("Jamanok Inn"))
@@ -100,7 +100,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, WorldMapType.THEOBOMOS.getId(), 901, 2774, 62);
         else if (destination.equalsIgnoreCase("Anangke"))
             goTo(admin, WorldMapType.THEOBOMOS.getId(), 2681, 847, 138);
-            // Heiron
+        // Heiron
         else if (destination.equalsIgnoreCase("Heiron"))
             goTo(admin, WorldMapType.HEIRON.getId(), 2540, 343, 411);
         else if (destination.equalsIgnoreCase("Heiron Observatory"))
@@ -119,18 +119,18 @@ public class CmdTeleportTo extends AbstractGMHandler {
         /**
          * Asmodae
          */
-            // Pandaemonium
+        // Pandaemonium
         else if (destination.equalsIgnoreCase("Pandaemonium"))
             goTo(admin, WorldMapType.PANDAEMONIUM.getId(), 1679, 1400, 195);
-            // Marchutran
+        // Marchutran
         else if (destination.equalsIgnoreCase("Marchutan"))
             goTo(admin, WorldMapType.MARCHUTAN.getId(), 1557, 1429, 266);
-            // Ishalgen
+        // Ishalgen
         else if (destination.equalsIgnoreCase("Ishalgen"))
             goTo(admin, WorldMapType.ISHALGEN.getId(), 529, 2449, 281);
         else if (destination.equalsIgnoreCase("Anturoon"))
             goTo(admin, WorldMapType.ISHALGEN.getId(), 940, 1707, 259);
-            // Altgard
+        // Altgard
         else if (destination.equalsIgnoreCase("Altgard"))
             goTo(admin, WorldMapType.ALTGARD.getId(), 1748, 1807, 254);
         else if (destination.equalsIgnoreCase("Basfelt"))
@@ -141,7 +141,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, WorldMapType.ALTGARD.getId(), 2643, 1658, 324);
         else if (destination.equalsIgnoreCase("Altgard Observatory"))
             goTo(admin, WorldMapType.ALTGARD.getId(), 1468, 2560, 299);
-            // Morheim
+        // Morheim
         else if (destination.equalsIgnoreCase("Morheim"))
             goTo(admin, WorldMapType.MORHEIM.getId(), 308, 2274, 449);
         else if (destination.equalsIgnoreCase("Desert"))
@@ -156,7 +156,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, WorldMapType.MORHEIM.getId(), 2794, 1122, 171);
         else if (destination.equalsIgnoreCase("Halabana"))
             goTo(admin, WorldMapType.MORHEIM.getId(), 2346, 2219, 127);
-            // Brusthonin
+        // Brusthonin
         else if (destination.equalsIgnoreCase("Brusthonin"))
             goTo(admin, WorldMapType.BRUSTHONIN.getId(), 2917, 2421, 15);
         else if (destination.equalsIgnoreCase("Baltasar"))
@@ -169,7 +169,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, WorldMapType.BRUSTHONIN.getId(), 526, 848, 76);
         else if (destination.equalsIgnoreCase("Settlers"))
             goTo(admin, WorldMapType.BRUSTHONIN.getId(), 2917, 2417, 15);
-            // Beluslan
+        // Beluslan
         else if (destination.equalsIgnoreCase("Beluslan"))
             goTo(admin, WorldMapType.BELUSLAN.getId(), 398, 400, 222);
         else if (destination.equalsIgnoreCase("Besfer"))
@@ -186,7 +186,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
         /**
          * Balaurea
          */
-            // Inggison
+        // Inggison
         else if (destination.equalsIgnoreCase("Inggison"))
             goTo(admin, WorldMapType.INGGISON.getId(), 1335, 276, 590);
         else if (destination.equalsIgnoreCase("Ufob"))
@@ -195,14 +195,14 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, WorldMapType.INGGISON.getId(), 2713, 1477, 382);
         else if (destination.equalsIgnoreCase("Hanarkand"))
             goTo(admin, WorldMapType.INGGISON.getId(), 1892, 1748, 327);
-            // Gelkmaros
+        // Gelkmaros
         else if (destination.equalsIgnoreCase("Gelkmaros"))
             goTo(admin, WorldMapType.GELKMAROS.getId(), 1763, 2911, 554);
         else if (destination.equalsIgnoreCase("Subterranea"))
             goTo(admin, WorldMapType.GELKMAROS.getId(), 2503, 2147, 464);
         else if (destination.equalsIgnoreCase("Rhonnam"))
             goTo(admin, WorldMapType.GELKMAROS.getId(), 845, 1737, 354);
-            // Silentera
+        // Silentera
         else if (destination.equalsIgnoreCase("Silentera"))
             goTo(admin, 600010000, 583, 767, 300);
 
@@ -237,7 +237,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, 320100000, 144, 312, 123);
         else if (destination.equalsIgnoreCase("Kromede") || destination.equalsIgnoreCase("Kromede Trial"))
             goTo(admin, 300230000, 248, 244, 189);
-            // Steel Rake
+        // Steel Rake
         else if (destination.equalsIgnoreCase("Steel Rake") || destination.equalsIgnoreCase("SR"))
             goTo(admin, 300100000, 237, 506, 948);
         else if (destination.equalsIgnoreCase("Steel Rake Lower") || destination.equalsIgnoreCase("SR Low"))
@@ -260,14 +260,14 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, 310110000, 477, 201, 170);
         else if (destination.equalsIgnoreCase("Dark Poeta") || destination.equalsIgnoreCase("DP"))
             goTo(admin, 300040000, 1214, 412, 140);
-            // Lower Abyss
+        // Lower Abyss
         else if (destination.equalsIgnoreCase("Sulfur") || destination.equalsIgnoreCase("Sulfur Tree Nest"))
             goTo(admin, 300060000, 462, 345, 163);
         else if (destination.equalsIgnoreCase("Right Wing") || destination.equalsIgnoreCase("Right Wing Chamber"))
             goTo(admin, 300090000, 263, 386, 103);
         else if (destination.equalsIgnoreCase("Left Wing") || destination.equalsIgnoreCase("Left Wing Chamber"))
             goTo(admin, 300080000, 672, 606, 321);
-            // Upper Abyss
+        // Upper Abyss
         else if (destination.equalsIgnoreCase("Asteria Chamber"))
             goTo(admin, 300050000, 469, 568, 202);
         else if (destination.equalsIgnoreCase("Miren Chamber"))
@@ -278,7 +278,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, 300140000, 528, 109, 176);
         else if (destination.equalsIgnoreCase("Roah Chamber"))
             goTo(admin, 300070000, 504, 396, 94);
-            // Divine
+        // Divine
         else if (destination.equalsIgnoreCase("Abyssal Splinter") || destination.equalsIgnoreCase("Core"))
             goTo(admin, 300220000, 704, 153, 453);
         else if (destination.equalsIgnoreCase("Dredgion"))
@@ -287,21 +287,22 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, 300210000, 414, 193, 431);
         else if (destination.equalsIgnoreCase("Taloc") || destination.equalsIgnoreCase("Taloc's Hollow"))
             goTo(admin, 300190000, 200, 214, 1099);
-            // Udas
+        // Udas
         else if (destination.equalsIgnoreCase("Udas") || destination.equalsIgnoreCase("Udas Temple"))
             goTo(admin, 300150000, 637, 657, 134);
         else if (destination.equalsIgnoreCase("Udas Lower") || destination.equalsIgnoreCase("Udas Lower Temple"))
             goTo(admin, 300160000, 1146, 277, 116);
-        else if (destination.equalsIgnoreCase("Beshmundir") || destination.equalsIgnoreCase("BT") || destination.equalsIgnoreCase("Beshmundir Temple"))
+        else if (destination.equalsIgnoreCase("Beshmundir") || destination.equalsIgnoreCase("BT")
+            || destination.equalsIgnoreCase("Beshmundir Temple"))
             goTo(admin, 300170000, 1477, 237, 243);
-            // Padmaraska Cave
+        // Padmaraska Cave
         else if (destination.equalsIgnoreCase("Padmaraska Cave"))
             goTo(admin, 320150000, 385, 506, 66);
 
         /**
          * Quest Instance Maps
          */
-            // TODO : Changer id maps
+        // TODO : Changer id maps
         else if (destination.equalsIgnoreCase("Karamatis 0"))
             goTo(admin, 310010000, 221, 250, 206);
         else if (destination.equalsIgnoreCase("Karamatis 1"))
@@ -312,7 +313,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, 310030000, 275, 168, 205);
         else if (destination.equalsIgnoreCase("Gerania"))
             goTo(admin, 310040000, 275, 168, 205);
-            // Stigma quest
+        // Stigma quest
         else if (destination.equalsIgnoreCase("Sliver") || destination.equalsIgnoreCase("Sliver of Darkness"))
             goTo(admin, 310070000, 247, 249, 1392);
         else if (destination.equalsIgnoreCase("Space") || destination.equalsIgnoreCase("Space of Destiny"))
@@ -333,7 +334,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, 310080000, 275, 242, 159);
         else if (destination.equalsIgnoreCase("Triniel Arena"))
             goTo(admin, 320090000, 275, 239, 159);
-            // Empyrean Crucible
+        // Empyrean Crucible
         else if (destination.equalsIgnoreCase("Crucible 1-0"))
             goTo(admin, 300300000, 380, 350, 95);
         else if (destination.equalsIgnoreCase("Crucible 1-1"))
@@ -362,7 +363,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, 300300000, 1750, 1255, 395);
         else if (destination.equalsIgnoreCase("Crucible 10-1"))
             goTo(admin, 300300000, 1761, 1280, 395);
-            // Arena Of Chaos
+        // Arena Of Chaos
         else if (destination.equalsIgnoreCase("Arena Of Chaos - 1"))
             goTo(admin, 300350000, 1332, 1078, 340);
         else if (destination.equalsIgnoreCase("Arena Of Chaos - 2"))
@@ -379,12 +380,12 @@ public class CmdTeleportTo extends AbstractGMHandler {
         /**
          * Miscellaneous
          */
-            // Prison
+        // Prison
         else if (destination.equalsIgnoreCase("Prison LF") || destination.equalsIgnoreCase("Prison Elyos"))
             goTo(admin, 510010000, 256, 256, 49);
         else if (destination.equalsIgnoreCase("Prison DF") || destination.equalsIgnoreCase("Prison Asmos"))
             goTo(admin, 520010000, 256, 256, 49);
-            // Test
+        // Test
         else if (destination.equalsIgnoreCase("Test Dungeon"))
             goTo(admin, 300020000, 104, 66, 25);
         else if (destination.equalsIgnoreCase("Test Basic"))
@@ -393,10 +394,10 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, 900030000, 228, 171, 49);
         else if (destination.equalsIgnoreCase("Test GiantMonster"))
             goTo(admin, 900100000, 196, 187, 20);
-            // Unknown
+        // Unknown
         else if (destination.equalsIgnoreCase("IDAbPro"))
             goTo(admin, 300010000, 270, 200, 206);
-            // GamezNetwork GM zone
+        // GamezNetwork GM zone
         else if (destination.equalsIgnoreCase("gm"))
             goTo(admin, 120020000, 1442, 1133, 302);
 
@@ -410,7 +411,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
         else if (destination.equalsIgnoreCase("Esoterrace"))
             goTo(admin, 300250000, 333, 437, 326);
 
-            // 3.0 zone
+        // 3.0 zone
         else if (destination.equalsIgnoreCase("Sarpan"))
             goTo(admin, 600020000, 1368, 1463, 600);
         else if (destination.equalsIgnoreCase("Tiamaranta"))
@@ -419,7 +420,7 @@ public class CmdTeleportTo extends AbstractGMHandler {
             goTo(admin, 700010000, 1214, 1910, 95);
         else if (destination.equalsIgnoreCase("Pernon"))
             goTo(admin, 710010000, 1067, 1452, 95);
-            // 3.0 instance
+        // 3.0 instance
         else if (destination.equalsIgnoreCase("Aturam"))
             goTo(admin, 300240000, 558, 536, 601);
         else if (destination.equalsIgnoreCase("Elementis"))
@@ -435,18 +436,18 @@ public class CmdTeleportTo extends AbstractGMHandler {
         else if (destination.equalsIgnoreCase("TiamatDown"))
             goTo(admin, 600040000, 754, 99, 1197);
 
-            //TOTO
-            //300330000
-            //300390000
-            //300400000
-            //300410000
-            //300440000
-            //300460000
-            //300470000
-            //700020000
-            //710020000
-            //720010000
-            //730010000
+        //TOTO
+        //300330000
+        //300390000
+        //300400000
+        //300410000
+        //300440000
+        //300460000
+        //300470000
+        //700020000
+        //710020000
+        //720010000
+        //730010000
 
         else
             PacketSendUtility.sendMessage(admin, "Could not find the specified destination !");

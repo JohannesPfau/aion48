@@ -40,8 +40,6 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 
 /**
  * Base class for every Aion -> LS Client Packet
- *
-
  */
 public abstract class AionClientPacket extends BaseClientPacket<AionConnection> implements Cloneable {
 
@@ -55,10 +53,13 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
      * Constructs new client packet instance. ByBuffer and ClientConnection
      * should be later set manually, after using this constructor.
      *
-     * @param opcode     packet id
-     * @param state      connection valid state
-     * @param restStates rest of connection valid state (optional - if there are
-     *                   more than one)
+     * @param opcode
+     *            packet id
+     * @param state
+     *            connection valid state
+     * @param restStates
+     *            rest of connection valid state (optional - if there are
+     *            more than one)
      */
     protected AionClientPacket(int opcode, State state, State... restStates) {
         super(opcode);
@@ -78,8 +79,8 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
             log.info(this + " wont be processed cuz its valid state don't match current connection state: " + state);
         }
         return valid;
-    }       
-    
+    }
+
     /**
      * run runImpl catching and logging Throwable.
      */
@@ -100,7 +101,7 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
             log.error("Error handling client (" + name + ") message :" + this, e);
         }
     }
-    
+
     protected final String readS(int size) {
         String string = readS();
         if (string != null) {
@@ -109,8 +110,8 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
             readB(size);
         }
         return string;
-    }    
-    
+    }
+
     /**
      * Clones this packet object.
      *
@@ -122,8 +123,8 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
         } catch (CloneNotSupportedException e) {
             return null;
         }
-    }    
-    
+    }
+
     /**
      * Send new AionServerPacket to connection that is owner of this packet.
      * This method is equvalent to: getConnection().sendPacket(msg);

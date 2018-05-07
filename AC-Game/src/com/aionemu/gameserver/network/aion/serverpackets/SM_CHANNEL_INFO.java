@@ -69,7 +69,7 @@ public class SM_CHANNEL_INFO extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(currentChannel);
         writeD(instanceCount);
     }

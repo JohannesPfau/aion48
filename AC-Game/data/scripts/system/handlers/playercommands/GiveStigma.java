@@ -14,67 +14,70 @@ import com.aionemu.gameserver.services.ClassChangeService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
+
 import javolution.util.FastList;
 
 /**
  * Created by K1ll3r
  */
 public class GiveStigma extends PlayerCommand {
-    public GiveStigma(){
+
+    public GiveStigma() {
         super("givestigma");
     }
 
-    private static int[] elyosStigmaQuests = {1929, 3930, 3931, 3932, 11049, 11276, 11550, 30217};
-    private static int[] asmodianStigmaQuests = {2900, 4934, 4935, 4936, 21049, 21278, 21550, 30317};
+    private static int[] elyosStigmaQuests = { 1929, 3930, 3931, 3932, 11049, 11276, 11550, 30217 };
+    private static int[] asmodianStigmaQuests = { 2900, 4934, 4935, 4936, 21049, 21278, 21550, 30317 };
 
-
-    public void execute(final Player player, String...param){
-        if(param.length < 1){
-            PacketSendUtility.sendMessage(player, " You can always remove the remaining items:\n .givestigma clean\n .givestigma add\n .givestigma unlock\n .givestigma class");
+    public void execute(final Player player, String... param) {
+        if (param.length < 1) {
+            PacketSendUtility.sendMessage(player,
+                " You can always remove the remaining items:\n .givestigma clean\n .givestigma add\n .givestigma unlock\n .givestigma class");
             return;
         }
 
-        if(param[0].equals("unlock")){
-            if (!(player.getPlayerAccount().getMembership() >= MembershipConfig.STIGMA_SLOT_QUEST)){
+        if (param[0].equals("unlock")) {
+            if (!(player.getPlayerAccount().getMembership() >= MembershipConfig.STIGMA_SLOT_QUEST)) {
                 PacketSendUtility.sendMessage(player, "Sorry! Stigma slot unlock is disabled!");
                 return;
             }
             int stig = player.getCommonData().getAdvancedStigmaSlotSize();
-            if(player.getRace() == Race.ELYOS){
+            if (player.getRace() == Race.ELYOS) {
                 for (int quest_id : elyosStigmaQuests) {
                     completeQuest(player, quest_id);
                 }
-                if(stig < 12){
+                if (stig < 12) {
                     player.getCommonData().setAdvancedStigmaSlotSize(12);
                 }
                 PacketSendUtility.sendMessage(player, "You have unlocked all the stigma Slots, Try Relog Now");
 
-            }else if(player.getRace() == Race.ASMODIANS){
+            } else if (player.getRace() == Race.ASMODIANS) {
                 for (int quest_id : asmodianStigmaQuests) {
                     completeQuest(player, quest_id);
                 }
-                if(stig < 12){
+                if (stig < 12) {
                     player.getCommonData().setAdvancedStigmaSlotSize(12);
                 }
                 PacketSendUtility.sendMessage(player, "You have unlocked all the stigma Slots, Try Relog Now");
             }
         }
 
-        if(param[0].equals("class")){
+        if (param[0].equals("class")) {
             ClassChangeService.showClassChangeDialog(player);
             return;
         }
 
-        if(param[0].equals("clean")){
+        if (param[0].equals("clean")) {
             clean(player);
             return;
         }
 
-        if(param[0].equals("add")){
+        if (param[0].equals("add")) {
             RequestResponseHandler RequestHim = new RequestResponseHandler(player) {
+
                 @Override
                 public void acceptRequest(Creature requester, Player responder) {
-                    switch (player.getPlayerClass()){
+                    switch (player.getPlayerClass()) {
                         case GLADIATOR:
                             glad(player, false);
                             PacketSendUtility.sendMessage(player, "You have successfully added 'GLADIATOR' stigma list!!");
@@ -124,14 +127,16 @@ public class GiveStigma extends PlayerCommand {
                             break;
                     }
                 }
+
                 @Override
                 public void denyRequest(Creature requester, Player responder) {
 
                 }
             };
             boolean areyousure = player.getResponseRequester().putRequest(1300564, RequestHim);
-            if (areyousure){
-                PacketSendUtility.sendPacket(player,new SM_QUESTION_WINDOW(1300564, 0, 0, "You are about to add 30 to 35 items to your inventory ( All the stigma skills to your class ) . Would you like to add them all?\n Be sure to have atleast free 1 cube : ) !"));
+            if (areyousure) {
+                PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(1300564, 0, 0,
+                    "You are about to add 30 to 35 items to your inventory ( All the stigma skills to your class ) . Would you like to add them all?\n Be sure to have atleast free 1 cube : ) !"));
             }
         }
     }
@@ -153,20 +158,20 @@ public class GiveStigma extends PlayerCommand {
         PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(player.getQuestStateList().getAllFinishedQuests()));
     }
 
-    private void getStigmaStones(Player player, FastList<Integer> stoneList){
-        for (FastList.Node<Integer> n = stoneList.head(), end = stoneList.tail(); (n = n.getNext()) != end; ) {
+    private void getStigmaStones(Player player, FastList<Integer> stoneList) {
+        for (FastList.Node<Integer> n = stoneList.head(), end = stoneList.tail(); (n = n.getNext()) != end;) {
             ItemService.addItem(player, n.getValue(), 1);
         }
     }
 
-    private void getRidOfStigmaStones(Player player, FastList<Integer> stoneList){
-        for (FastList.Node<Integer> n = stoneList.head(), end = stoneList.tail(); (n = n.getNext()) != end; ){
+    private void getRidOfStigmaStones(Player player, FastList<Integer> stoneList) {
+        for (FastList.Node<Integer> n = stoneList.head(), end = stoneList.tail(); (n = n.getNext()) != end;) {
             player.getInventory().decreaseByItemId(n.getValue(), 1);
         }
     }
 
-    private FastList<Integer> glad(Player player, boolean getStoneIds){
-        FastList<Integer> stones = new FastList<Integer>();
+    private FastList<Integer> glad(Player player, boolean getStoneIds) {
+        FastList<Integer> stones = new FastList<>();
         stones.add(140001119);
         stones.add(140001118);
         stones.add(140001117);
@@ -185,15 +190,16 @@ public class GiveStigma extends PlayerCommand {
         stones.add(140001104);
         stones.add(140001103);
 
-        if (getStoneIds){
+        if (getStoneIds) {
             return stones;
         }
 
         getStigmaStones(player, stones);
         return null;
     }
-    private FastList<Integer> temp(Player player, boolean getStoneIds){
-        FastList<Integer> stones = new FastList<Integer>();
+
+    private FastList<Integer> temp(Player player, boolean getStoneIds) {
+        FastList<Integer> stones = new FastList<>();
 
         stones.add(140001135);
         stones.add(140001134);
@@ -213,15 +219,16 @@ public class GiveStigma extends PlayerCommand {
         stones.add(140001120);
         stones.add(140001114);
 
-        if (getStoneIds){
+        if (getStoneIds) {
             return stones;
         }
 
         getStigmaStones(player, stones);
         return null;
     }
-    private FastList<Integer> sin(Player player, boolean getStoneIds){
-        FastList<Integer> stones = new FastList<Integer>();
+
+    private FastList<Integer> sin(Player player, boolean getStoneIds) {
+        FastList<Integer> stones = new FastList<>();
 
         stones.add(140001152);
         stones.add(140001151);
@@ -241,22 +248,23 @@ public class GiveStigma extends PlayerCommand {
         stones.add(140001137);
         stones.add(140001136);
 
-        if (getStoneIds){
+        if (getStoneIds) {
             return stones;
         }
 
         getStigmaStones(player, stones);
         return null;
     }
-    private FastList<Integer> ranger(Player player, boolean getStoneIds){
-        FastList<Integer> stones = new FastList<Integer>();
 
-        if(player.getRace() == Race.ELYOS){
+    private FastList<Integer> ranger(Player player, boolean getStoneIds) {
+        FastList<Integer> stones = new FastList<>();
+
+        if (player.getRace() == Race.ELYOS) {
             stones.add(140001169);
             stones.add(140001165);
             stones.add(140001163);
             stones.add(140001160);
-        }else{
+        } else {
             stones.add(140001170);
             stones.add(140001166);
             stones.add(140001164);
@@ -277,20 +285,21 @@ public class GiveStigma extends PlayerCommand {
         stones.add(140001154);
         stones.add(140001153);
 
-        if (getStoneIds){
+        if (getStoneIds) {
             return stones;
         }
 
         getStigmaStones(player, stones);
         return null;
     }
-    private FastList<Integer> sorc(Player player, boolean getStoneIds){
-        FastList<Integer> stones = new FastList<Integer>();
 
-        if(player.getRace() == Race.ELYOS){
+    private FastList<Integer> sorc(Player player, boolean getStoneIds) {
+        FastList<Integer> stones = new FastList<>();
+
+        if (player.getRace() == Race.ELYOS) {
             stones.add(140001184);
             stones.add(140001182);
-        }else{
+        } else {
             stones.add(140001185);
             stones.add(140001183);
 
@@ -312,20 +321,21 @@ public class GiveStigma extends PlayerCommand {
         stones.add(140001175);
         stones.add(140001174);
 
-        if (getStoneIds){
+        if (getStoneIds) {
             return stones;
         }
 
         getStigmaStones(player, stones);
         return null;
     }
-    private FastList<Integer> sm(Player player, boolean getStoneIds){
-        FastList<Integer> stones = new FastList<Integer>();
 
-        if(player.getRace() == Race.ELYOS){
+    private FastList<Integer> sm(Player player, boolean getStoneIds) {
+        FastList<Integer> stones = new FastList<>();
+
+        if (player.getRace() == Race.ELYOS) {
             stones.add(140001197);
             stones.add(140001183);
-        }else{
+        } else {
             stones.add(140001198);
             stones.add(140001182);
         }
@@ -347,20 +357,21 @@ public class GiveStigma extends PlayerCommand {
         stones.add(140001194);
         stones.add(140001193);
 
-        if (getStoneIds){
+        if (getStoneIds) {
             return stones;
         }
 
         getStigmaStones(player, stones);
         return null;
     }
-    private FastList<Integer> cleric(Player player, boolean getStoneIds){
-        FastList<Integer> stones = new FastList<Integer>();
 
-        if(player.getRace() == Race.ELYOS){
+    private FastList<Integer> cleric(Player player, boolean getStoneIds) {
+        FastList<Integer> stones = new FastList<>();
+
+        if (player.getRace() == Race.ELYOS) {
             stones.add(140001234);
             stones.add(140001230);
-        }else{
+        } else {
             stones.add(140001235);
             stones.add(140001231);
         }
@@ -381,15 +392,16 @@ public class GiveStigma extends PlayerCommand {
         stones.add(140001229);
         stones.add(140001228);
 
-        if (getStoneIds){
+        if (getStoneIds) {
             return stones;
         }
 
         getStigmaStones(player, stones);
         return null;
     }
-    private FastList<Integer> chanter(Player player, boolean getStoneIds){
-        FastList<Integer> stones = new FastList<Integer>();
+
+    private FastList<Integer> chanter(Player player, boolean getStoneIds) {
+        FastList<Integer> stones = new FastList<>();
 
         stones.add(140001227);
         stones.add(140001226);
@@ -409,15 +421,16 @@ public class GiveStigma extends PlayerCommand {
         stones.add(140001212);
         stones.add(140001211);
 
-        if (getStoneIds){
+        if (getStoneIds) {
             return stones;
         }
 
         getStigmaStones(player, stones);
         return null;
     }
-    private FastList<Integer> gunner(Player player, boolean getStoneIds){
-        FastList<Integer> stones = new FastList<Integer>();
+
+    private FastList<Integer> gunner(Player player, boolean getStoneIds) {
+        FastList<Integer> stones = new FastList<>();
 
         stones.add(140001263);
         stones.add(140001262);
@@ -437,15 +450,16 @@ public class GiveStigma extends PlayerCommand {
         stones.add(140001248);
         stones.add(140001247);
 
-        if (getStoneIds){
+        if (getStoneIds) {
             return stones;
         }
 
         getStigmaStones(player, stones);
         return null;
     }
-    private FastList<Integer> at(Player player, boolean getStoneIds){
-        FastList<Integer> stones = new FastList<Integer>();
+
+    private FastList<Integer> at(Player player, boolean getStoneIds) {
+        FastList<Integer> stones = new FastList<>();
 
         stones.add(140001280);
         stones.add(140001279);
@@ -465,15 +479,16 @@ public class GiveStigma extends PlayerCommand {
         stones.add(140001265);
         stones.add(140001264);
 
-        if (getStoneIds){
+        if (getStoneIds) {
             return stones;
         }
 
         getStigmaStones(player, stones);
         return null;
     }
-    private FastList<Integer> bard(Player player, boolean getStoneIds){
-        FastList<Integer> stones = new FastList<Integer>();
+
+    private FastList<Integer> bard(Player player, boolean getStoneIds) {
+        FastList<Integer> stones = new FastList<>();
 
         stones.add(140001297);
         stones.add(140001296);
@@ -493,7 +508,7 @@ public class GiveStigma extends PlayerCommand {
         stones.add(140001282);
         stones.add(140001281);
 
-        if (getStoneIds){
+        if (getStoneIds) {
             return stones;
         }
 
@@ -501,8 +516,8 @@ public class GiveStigma extends PlayerCommand {
         return null;
     }
 
-    private void clean(Player player){
-        switch (player.getPlayerClass()){
+    private void clean(Player player) {
+        switch (player.getPlayerClass()) {
             case GLADIATOR:
                 getRidOfStigmaStones(player, glad(player, true));
                 break;
@@ -540,11 +555,11 @@ public class GiveStigma extends PlayerCommand {
         PacketSendUtility.sendMessage(player, "All the junk stigma stones has been removed!");
     }
 
-    public void onFail(Player player, String msg){
-        PacketSendUtility.sendMessage(player, " " +
-                "synax : .givestigma add  -- Adds Set of Stigma for you're Class\n    " +
-                ".givestigma clean  -- Cleans the added Stigma's from .givestigma add\n  " +
-                ".givestigma unlock  --  Unlocks the stigma slots (Might Require Relog)\n" +
-                ".givestigma class  -- Pops up the Class Choose Dialog, if you didn't got the Class Choose Dialog");
+    public void onFail(Player player, String msg) {
+        PacketSendUtility.sendMessage(player,
+            " " + "synax : .givestigma add  -- Adds Set of Stigma for you're Class\n    "
+                + ".givestigma clean  -- Cleans the added Stigma's from .givestigma add\n  "
+                + ".givestigma unlock  --  Unlocks the stigma slots (Might Require Relog)\n"
+                + ".givestigma class  -- Pops up the Class Choose Dialog, if you didn't got the Class Choose Dialog");
     }
 }

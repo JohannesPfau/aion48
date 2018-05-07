@@ -44,6 +44,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author alexa026, ATracer, Sarynth, xTz
  */
 public class SM_TRADELIST extends AionServerPacket {
+
     private Integer playerObj;
     private int npcObj;
     private int npcId;
@@ -60,7 +61,7 @@ public class SM_TRADELIST extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         if ((tlist != null) && (tlist.getNpcId() != 0) && (tlist.getCount() != 0)) {
             writeD(this.npcObj);
             writeC(this.tlist.getTradeNpcType().index());

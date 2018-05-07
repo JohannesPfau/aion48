@@ -29,13 +29,14 @@
  */
 package com.aionemu.loginserver;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.loginserver.network.NetConnector;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author -Nemesiss-, nrg
@@ -58,8 +59,9 @@ public class Shutdown extends Thread {
     /**
      * Set's restartOnly attribute
      *
-     * @param restartOnly Indicates wether the loginserver should shut dpwn or
-     *                    only restart
+     * @param restartOnly
+     *            Indicates wether the loginserver should shut dpwn or
+     *            only restart
      */
     public void setRestartOnly(boolean restartOnly) {
         Shutdown.restartOnly = restartOnly;

@@ -34,9 +34,6 @@ import java.nio.ByteOrder;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,6 +52,9 @@ import com.aionemu.gameserver.services.BrokerService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 /**
  * @author KID
@@ -91,7 +91,8 @@ public class PlayerTransferService {
             if (!player.hasVar(ptsnameitem)) {
                 long count = ItemService.addItem(player, 169670001, 1);
                 if (count == 1) {
-                    PacketSendUtility.sendMessage(player, "Please empty your inventory and relogin again. After that you'll be able to receive item that allows you to change your name.");
+                    PacketSendUtility.sendMessage(player,
+                        "Please empty your inventory and relogin again. After that you'll be able to receive item that allows you to change your name.");
                 } else {
                     player.setVar(ptsnameitem, 1, true);
                 }
@@ -113,26 +114,31 @@ public class PlayerTransferService {
 
         if (!exist) {
             log.warn("transfer #" + taskId + " player " + playerId + " is not present on account " + accountId + ".");
-            LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "player " + playerId + " is not present on account " + accountId));
+            LoginServer.getInstance().sendPacket(
+                new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "player " + playerId + " is not present on account " + accountId));
             return;
         }
 
         if (DAOManager.getDAO(LegionMemberDAO.class).isIdUsed(playerId)) {
             log.warn("cannot transfer #" + taskId + " player with existing legion " + playerId + ".");
-            LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer player with existing legion " + playerId));
+            LoginServer.getInstance().sendPacket(
+                new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer player with existing legion " + playerId));
             return;
         }
 
         PlayerCommonData common = dao.loadPlayerCommonData(playerId);
         if (common.isOnline()) {
             log.warn("cannot transfer #" + taskId + " online players " + playerId + ".");
-            LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer online players " + playerId));
+            LoginServer.getInstance()
+                .sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer online players " + playerId));
             return;
         }
 
-        if (PlayerTransferConfig.REUSE_HOURS > 0 && common.getLastTransferTime() + PlayerTransferConfig.REUSE_HOURS * 3600000 > System.currentTimeMillis()) {
+        if (PlayerTransferConfig.REUSE_HOURS > 0
+            && common.getLastTransferTime() + PlayerTransferConfig.REUSE_HOURS * 3600000 > System.currentTimeMillis()) {
             log.warn("cannot transfer #" + taskId + " that player so often " + playerId + ".");
-            LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer that player so often " + playerId));
+            LoginServer.getInstance()
+                .sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer that player so often " + playerId));
             return;
         }
 
@@ -140,13 +146,15 @@ public class PlayerTransferService {
         long kinah = player.getInventory().getKinah() + player.getWarehouse().getKinah();
         if (PlayerTransferConfig.MAX_KINAH > 0 && kinah >= PlayerTransferConfig.MAX_KINAH) {
             log.warn("cannot transfer #" + taskId + " players with " + kinah + " kinah in inventory/wh.");
-            LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer players with " + kinah + " kinah in inventory/wh."));
+            LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId,
+                "cannot transfer players with " + kinah + " kinah in inventory/wh."));
             return;
         }
 
         if (BrokerService.getInstance().hasRegisteredItems(player)) {
             log.warn("cannot transfer #" + taskId + " player while he own some items in broker.");
-            LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer player while he own some items in broker."));
+            LoginServer.getInstance().sendPacket(
+                new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer player while he own some items in broker."));
             return;
         }
 
@@ -194,7 +202,8 @@ public class PlayerTransferService {
 
         if (cha == null) { //something went wrong!
             log.error("clone failed #" + taskId + " `" + name + "`");
-            LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.ERROR, taskId, "unexpected sql error while creating a clone"));
+            LoginServer.getInstance()
+                .sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.ERROR, taskId, "unexpected sql error while creating a clone"));
         } else {
             DAOManager.getDAO(PlayerDAO.class).setPlayerLastTransferTime(cha.getObjectId(), System.currentTimeMillis());
             LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.OK, taskId));

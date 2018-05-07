@@ -77,7 +77,7 @@ public class DanuarMysticariumReward extends InstanceReward<DanuarPlayerReward> 
     }
 
     @Override
-	public boolean isRewarded() {
+    public boolean isRewarded() {
         return isRewarded;
     }
 

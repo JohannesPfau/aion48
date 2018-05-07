@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.network.aion.gmhandler;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
@@ -38,6 +36,8 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.world.World;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author Alcapwnd
@@ -67,12 +67,12 @@ public class CmdWish extends AbstractGMHandler {
 
         String itemName = itemN[0];
         Integer itemcount = Integer.parseInt(itemN[1]);
-        if(itemcount == 0){
+        if (itemcount == 0) {
             itemcount = 1;
         }
 
-        for(ItemTemplate tt : item.valueCollection()){
-            if(tt.getNamedesc().equalsIgnoreCase(itemName)){
+        for (ItemTemplate tt : item.valueCollection()) {
+            if (tt.getNamedesc().equalsIgnoreCase(itemName)) {
                 ItemService.addItem(t, tt.getTemplateId(), itemcount);
             }
         }

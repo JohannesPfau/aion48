@@ -39,7 +39,6 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
  * This blob is sent for shields. It keeps info about slots that shield can be
  * equipped to.
  *
-
  * @modified Rolandas
  */
 public class ShieldInfoBlobEntry extends ItemBlobEntry {

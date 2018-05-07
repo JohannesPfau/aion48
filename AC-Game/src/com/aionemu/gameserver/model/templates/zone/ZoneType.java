@@ -39,6 +39,7 @@ public enum ZoneType {
     WATER(2),
     SIEGE(3),
     PVP(4);
+
     private byte value;
 
     /**

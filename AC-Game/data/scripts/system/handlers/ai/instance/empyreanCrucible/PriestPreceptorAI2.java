@@ -29,7 +29,10 @@
  */
 package ai.instance.empyreanCrucible;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -41,9 +44,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Luzien
@@ -59,6 +60,7 @@ public class PriestPreceptorAI2 extends AggressiveNpcAI2 {
         super.handleSpawned();
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 SkillEngine.getInstance().getSkill(getOwner(), 19612, 15, getOwner()).useNoAnimationSkill();
@@ -96,11 +98,13 @@ public class PriestPreceptorAI2 extends AggressiveNpcAI2 {
     private void startEvent() {
         SkillEngine.getInstance().getSkill(getOwner(), 19610, 10, getOwner()).useNoAnimationSkill();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 SkillEngine.getInstance().getSkill(getOwner(), 19614, 10, getOwner()).useNoAnimationSkill();
 
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         WorldPosition p = getPosition();
@@ -114,7 +118,7 @@ public class PriestPreceptorAI2 extends AggressiveNpcAI2 {
     }
 
     private Player getTargetPlayer() {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (Player player : getKnownList().getKnownPlayers().values()) {
             if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 25)) {
                 players.add(player);
@@ -125,6 +129,7 @@ public class PriestPreceptorAI2 extends AggressiveNpcAI2 {
 
     private void applySoulSickness(final Npc npc) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 npc.getLifeStats().setCurrentHpPercent(50); //TODO: remove this, fix max hp debuffs not reducing current hp properly

@@ -36,6 +36,7 @@ public enum Gender {
 
     MALE(0),
     FEMALE(1);
+
     private int genderId;
 
     private Gender(int genderId) {

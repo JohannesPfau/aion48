@@ -34,7 +34,7 @@ import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 
 /**
-, Source
+ * , Source
  */
 public class AbyssPointsListener extends AbyssPointsService.AddAPGlobalCallback {
 

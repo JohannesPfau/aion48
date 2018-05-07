@@ -69,7 +69,7 @@ public class SM_LEGION_UPDATE_MEMBER extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         if (player != null) {
             writeD(player.getObjectId());
             writeC(player.getLegionMember().getRank().getRankId());

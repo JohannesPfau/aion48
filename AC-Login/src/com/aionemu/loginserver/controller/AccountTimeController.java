@@ -29,13 +29,13 @@
  */
 package com.aionemu.loginserver.controller;
 
+import java.sql.Timestamp;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.dao.AccountPlayTimeDAO;
 import com.aionemu.loginserver.dao.AccountTimeDAO;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.model.AccountTime;
-
-import java.sql.Timestamp;
 
 /**
  * This class is for account time controlling. When character logins any server,
@@ -76,8 +76,7 @@ public class AccountTimeController {
             accountTime.setAccumulatedOnlineTime(0);
             accountTime.setAccumulatedRestTime(0);
         } else {
-            long restTime = System.currentTimeMillis() - accountTime.getLastLoginTime().getTime()
-                    - accountTime.getSessionDuration();
+            long restTime = System.currentTimeMillis() - accountTime.getLastLoginTime().getTime() - accountTime.getSessionDuration();
 
             accountTime.setAccumulatedRestTime(accountTime.getAccumulatedRestTime() + restTime);
 
@@ -115,7 +114,7 @@ public class AccountTimeController {
         AccountTime accountTime = account.getAccountTime();
 
         return accountTime != null && accountTime.getExpirationTime() != null
-                && accountTime.getExpirationTime().getTime() < System.currentTimeMillis();
+            && accountTime.getExpirationTime().getTime() < System.currentTimeMillis();
     }
 
     /**
@@ -128,16 +127,15 @@ public class AccountTimeController {
         AccountTime accountTime = account.getAccountTime();
 
         // 1000 is 'infinity' value
-        return accountTime != null
-                && accountTime.getPenaltyEnd() != null
-                && (accountTime.getPenaltyEnd().getTime() == 1000 || accountTime.getPenaltyEnd().getTime() >= System
-                .currentTimeMillis());
+        return accountTime != null && accountTime.getPenaltyEnd() != null
+            && (accountTime.getPenaltyEnd().getTime() == 1000 || accountTime.getPenaltyEnd().getTime() >= System.currentTimeMillis());
     }
 
     /**
      * Get days from time presented in milliseconds
      *
-     * @param millis time in ms
+     * @param millis
+     *            time in ms
      * @return days
      */
     public static int getDays(long millis) {

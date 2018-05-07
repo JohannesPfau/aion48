@@ -29,7 +29,11 @@
  */
 package ai.instance.nightmareCircus;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
@@ -40,17 +44,14 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
-import javolution.util.FastList;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
+import ai.AggressiveNpcAI2;
+import javolution.util.FastList;
 
 @AIName("jolly_makekike")
 public class JollyMakekikeAI2 extends AggressiveNpcAI2 {
 
-    private final List<Integer> percents = new ArrayList<Integer>();
+    private final List<Integer> percents = new ArrayList<>();
     private boolean canThink = true;
     private Future<?> thinkTask;
     private final FastList<Npc> helpers = FastList.newInstance();
@@ -82,6 +83,7 @@ public class JollyMakekikeAI2 extends AggressiveNpcAI2 {
                 percents.remove(percent);
                 canThink = false;
                 thinkTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         sp(Rnd.get(831348, 831349));
@@ -128,6 +130,7 @@ public class JollyMakekikeAI2 extends AggressiveNpcAI2 {
         }
 
         thinkTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 removeHelpers();
@@ -155,7 +158,7 @@ public class JollyMakekikeAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{65, 45, 30});
+        Collections.addAll(percents, new Integer[] { 65, 45, 30 });
     }
 
     private void cancelThinkTask() {
@@ -171,7 +174,7 @@ public class JollyMakekikeAI2 extends AggressiveNpcAI2 {
     }
 
     private void removeHelpers() {
-        for (FastList.Node<Npc> n = helpers.head(), end = helpers.tail(); (n = n.getNext()) != end; ) {
+        for (FastList.Node<Npc> n = helpers.head(), end = helpers.tail(); (n = n.getNext()) != end;) {
             Npc obj = n.getValue();
             if (obj == null) {
                 continue;
@@ -202,7 +205,7 @@ public class JollyMakekikeAI2 extends AggressiveNpcAI2 {
     }
 
     private void removeServant() {
-        for (FastList.Node<Npc> n = servant.head(), end = servant.tail(); (n = n.getNext()) != end; ) {
+        for (FastList.Node<Npc> n = servant.head(), end = servant.tail(); (n = n.getNext()) != end;) {
             Npc obj = n.getValue();
             if (obj == null) {
                 continue;

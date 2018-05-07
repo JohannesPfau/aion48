@@ -54,11 +54,13 @@ public class StaticDoor extends StaticObject {
      * @param spawnTemplate
      * @param objectTemplate
      */
-    public StaticDoor(int objectId, StaticObjectController controller, SpawnTemplate spawnTemplate, StaticDoorTemplate objectTemplate, int instanceId) {
+    public StaticDoor(int objectId, StaticObjectController controller, SpawnTemplate spawnTemplate, StaticDoorTemplate objectTemplate,
+        int instanceId) {
         super(objectId, controller, spawnTemplate, objectTemplate);
         states = EnumSet.copyOf(getObjectTemplate().getInitialStates());
         if (objectTemplate.getMeshFile() != null) {
-            doorName = GeoService.getInstance().getDoorName(spawnTemplate.getWorldId(), objectTemplate.getMeshFile(), objectTemplate.getX(), objectTemplate.getY(), objectTemplate.getZ());
+            doorName = GeoService.getInstance().getDoorName(spawnTemplate.getWorldId(), objectTemplate.getMeshFile(), objectTemplate.getX(),
+                objectTemplate.getY(), objectTemplate.getZ());
         }
     }
 
@@ -74,7 +76,8 @@ public class StaticDoor extends StaticObject {
     }
 
     /**
-     * @param open the open state to set
+     * @param open
+     *            the open state to set
      */
     public void setOpen(boolean open) {
         EmotionType emotion;

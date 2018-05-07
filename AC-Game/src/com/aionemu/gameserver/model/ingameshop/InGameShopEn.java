@@ -37,9 +37,6 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.TreeMap;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -62,6 +59,9 @@ import com.aionemu.gameserver.network.loginserver.serverpackets.SM_PREMIUM_CONTR
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 /**
  * @author KID
@@ -196,7 +196,8 @@ public class InGameShopEn {
             activeRequests.add(request);
         }
         if (LoggingConfig.LOG_INGAMESHOP) {
-            log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " is watching item:" + item.getItemId() + " cost " + item.getItemPrice() + " toll.");
+            log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " is watching item:"
+                + item.getItemId() + " cost " + item.getItemPrice() + " toll.");
         }
     }
 
@@ -247,11 +248,12 @@ public class InGameShopEn {
     }
 
     /**
-     *
-     * @param player The player you want to delete the toll from
-     * @param cnt The quantity of tolls you want to delete
+     * @param player
+     *            The player you want to delete the toll from
+     * @param cnt
+     *            The quantity of tolls you want to delete
      */
-    public void removeToll(Player player, int cnt){
+    public void removeToll(Player player, int cnt) {
         // You need to give positive value on remove toll to remove,
         // ex : removetoll(player, 5000)
         if (cnt < 0) {
@@ -264,11 +266,12 @@ public class InGameShopEn {
     }
 
     /**
-     *
-     * @param player The player
-     * @param toll the Toll
+     * @param player
+     *            The player
+     * @param toll
+     *            the Toll
      */
-    protected void rToll(Player player, int toll){
+    protected void rToll(Player player, int toll) {
         long currentToll = player.getPlayerAccount().getToll();
         long newToll = currentToll - toll;
         player.getPlayerAccount().setToll(newToll);
@@ -292,8 +295,7 @@ public class InGameShopEn {
                         PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(toll));
                         if (LoggingConfig.LOG_INGAMESHOP) {
                             log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName()
-                                    + " has not bought item: " + item.getItemId() + " count: " + item.getItemCount()
-                                    + " Cause: NOT ENOUGH TOLLS");
+                                + " has not bought item: " + item.getItemId() + " count: " + item.getItemCount() + " Cause: NOT ENOUGH TOLLS");
                         }
                     } else if (result == 3) {
                         IGItem item = getIGItem(request.itemObjId);
@@ -314,24 +316,22 @@ public class InGameShopEn {
                             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INGAMESHOP_GIFT_SUCCESS);
                             if (LoggingConfig.LOG_INGAMESHOP) {
                                 log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName()
-                                        + " BUY ITEM: " + item.getItemId() + " COUNT: " + item.getItemCount() + " FOR PlayerName: "
-                                        + request.receiver);
+                                    + " BUY ITEM: " + item.getItemId() + " COUNT: " + item.getItemCount() + " FOR PlayerName: " + request.receiver);
                             }
                             if (LoggingConfig.LOG_INGAMESHOP_SQL) {
-                                DAOManager.getDAO(InGameShopLogDAO.class).log("GIFT", new Timestamp(System.currentTimeMillis()),
-                                        player.getName(), player.getAcountName(), request.receiver, item.getItemId(), item.getItemCount(),
-                                        item.getItemPrice());
+                                DAOManager.getDAO(InGameShopLogDAO.class).log("GIFT", new Timestamp(System.currentTimeMillis()), player.getName(),
+                                    player.getAcountName(), request.receiver, item.getItemId(), item.getItemCount(), item.getItemPrice());
                             }
                         } else {
                             sendShopItem(player, item);
                             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_POSTMAN_NOTIFY_CASH);
                             if (LoggingConfig.LOG_INGAMESHOP) {
-                                log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " BUY ITEM: " + item.getItemId() + " COUNT: " + item.getItemCount());
+                                log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName()
+                                    + " BUY ITEM: " + item.getItemId() + " COUNT: " + item.getItemCount());
                             }
                             if (LoggingConfig.LOG_INGAMESHOP_SQL) {
-                                DAOManager.getDAO(InGameShopLogDAO.class).log("BUY", new Timestamp(System.currentTimeMillis()),
-                                        player.getName(), player.getAcountName(), player.getName(), item.getItemId(), item.getItemCount(),
-                                        item.getItemPrice());
+                                DAOManager.getDAO(InGameShopLogDAO.class).log("BUY", new Timestamp(System.currentTimeMillis()), player.getName(),
+                                    player.getAcountName(), player.getName(), item.getItemId(), item.getItemCount(), item.getItemPrice());
                             }
                             DAOManager.getDAO(InventoryDAO.class).store(player);
                         }
@@ -355,11 +355,13 @@ public class InGameShopEn {
         String mailSubject = shopItem.getItemId() + ", " + shopItem.getItemCount();
         String mailMessage = "0," + iTimestamp;
         try {
-            SystemMailService.getInstance().sendMail("$$CASH_ITEM_MAIL", player.getName(), mailSubject, mailMessage, shopItem.getItemId(), shopItem.getItemCount(), 0, LetterType.BLACKCLOUD);
+            SystemMailService.getInstance().sendMail("$$CASH_ITEM_MAIL", player.getName(), mailSubject, mailMessage, shopItem.getItemId(),
+                shopItem.getItemCount(), 0, LetterType.BLACKCLOUD);
             return true;
         } catch (Exception e) {
             if (LoggingConfig.LOG_INGAMESHOP) {
-                log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " error while sending mail");
+                log.info(
+                    "[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " error while sending mail");
             }
         }
         return false;
@@ -369,11 +371,13 @@ public class InGameShopEn {
         String mailSubject = shopItem.getItemId() + ", " + shopItem.getItemCount();
         String mailMessage = "1," + NetworkConfig.GAMESERVER_ID + "," + player.getName();
         try {
-            SystemMailService.getInstance().sendMail("$$CASH_ITEM_MAIL", reciverName, mailSubject, mailMessage, shopItem.getItemId(), shopItem.getItemCount(), 0, LetterType.BLACKCLOUD);
+            SystemMailService.getInstance().sendMail("$$CASH_ITEM_MAIL", reciverName, mailSubject, mailMessage, shopItem.getItemId(),
+                shopItem.getItemCount(), 0, LetterType.BLACKCLOUD);
             return true;
         } catch (Exception e) {
             if (LoggingConfig.LOG_INGAMESHOP) {
-                log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " error while sending gift");
+                log.info(
+                    "[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " error while sending gift");
             }
         }
         return false;

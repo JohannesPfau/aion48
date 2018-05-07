@@ -43,21 +43,21 @@ import com.aionemu.gameserver.utils.MathUtil;
 @AIName("damagecircle")
 public class DamageCircleAI2 extends NpcAI2 {
 
-	@Override
-	protected void handleCreatureSee(Creature creature) {
-		checkDistance(this, creature);
-	}
+    @Override
+    protected void handleCreatureSee(Creature creature) {
+        checkDistance(this, creature);
+    }
 
-	@Override
-	protected void handleCreatureMoved(Creature creature) {
-		checkDistance(this, creature);
-	}
+    @Override
+    protected void handleCreatureMoved(Creature creature) {
+        checkDistance(this, creature);
+    }
 
-	private void checkDistance(NpcAI2 ai, Creature creature) {
-		if (creature instanceof Player) {
-			if (getOwner().getNpcId() == 284447 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 16, 50)) {
-				creature.getController().die();
-			}
-		}
-	}
+    private void checkDistance(NpcAI2 ai, Creature creature) {
+        if (creature instanceof Player) {
+            if (getOwner().getNpcId() == 284447 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 16, 50)) {
+                creature.getController().die();
+            }
+        }
+    }
 }

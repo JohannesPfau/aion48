@@ -43,11 +43,13 @@ import com.aionemu.gameserver.services.QuestService;
 public class _80296ANewChallenge extends QuestHandler {
 
     private static final int questId = 80296;
-    private final static int dialogs[] = { 1013, 1034, 1055, 1076, 5103, 1098, 1119, 1140, 1161, 5104, 1183, 1204, 1225, 1246, 5105, 1268, 1289, 1310, 1331, 5106, 2376, 2461, 2546, 2631, 2632};
-    private final static int items[] = { 110601357, 113601309, 114601306, 112601300, 111601320,  110301410, 113301375, 114301410, 112301294, 111301351, 110101514, 113101376, 114101404, 112101313, 111101359,  110501383, 113501356, 114501364, 112501281, 111501341,  110301670, 113301639, 114301674, 112301547, 111301608};
+    private final static int dialogs[] = { 1013, 1034, 1055, 1076, 5103, 1098, 1119, 1140, 1161, 5104, 1183, 1204, 1225, 1246, 5105, 1268, 1289, 1310,
+        1331, 5106, 2376, 2461, 2546, 2631, 2632 };
+    private final static int items[] = { 110601357, 113601309, 114601306, 112601300, 111601320, 110301410, 113301375, 114301410, 112301294, 111301351,
+        110101514, 113101376, 114101404, 112101313, 111101359, 110501383, 113501356, 114501364, 112501281, 111501341, 110301670, 113301639, 114301674,
+        112301547, 111301608 };
     private int choice = 0;
     private int item;
-
 
     public _80296ANewChallenge() {
         super(questId);
@@ -71,13 +73,11 @@ public class _80296ANewChallenge extends QuestHandler {
                 if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
                     QuestService.startQuest(env);
                     return sendQuestDialog(env, 1011);
-                }
-                else {
+                } else {
                     return sendQuestStartDialog(env);
                 }
             }
-        }
-        else if (qs != null && qs.getStatus() == QuestStatus.START) {
+        } else if (qs != null && qs.getStatus() == QuestStatus.START) {
             if (targetId == 831388) {
                 if (dialogId == DialogAction.EXCHANGE_COIN.id()) {
                     return sendQuestDialog(env, 1011);
@@ -113,7 +113,7 @@ public class _80296ANewChallenge extends QuestHandler {
                     case 2461:
                     case 2546:
                     case 2631:
-                    case 2632:{
+                    case 2632: {
                         item = getItem(dialogId);
                         if (player.getInventory().getItemCountByItemId(item) > 0)
                             return sendQuestDialog(env, 1013);
@@ -138,8 +138,7 @@ public class _80296ANewChallenge extends QuestHandler {
                         return sendQuestDialog(env, 45);
                 }
             }
-        }
-        else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+        } else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 831388) {
                 removeQuestItem(env, item, 1);
                 removeQuestItem(env, 186000041, 10);

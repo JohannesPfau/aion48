@@ -30,7 +30,7 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
 /**
-, srx47, alexa026
+ * , srx47, alexa026
  */
 public class PlayerAppearance implements Cloneable {
 
@@ -103,7 +103,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets character's face
      *
-     * @param face characters face
+     * @param face
+     *            characters face
      */
     public void setFace(int face) {
         this.face = face;
@@ -121,7 +122,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets charaxcters hair
      *
-     * @param hair characters hair
+     * @param hair
+     *            characters hair
      */
     public void setHair(int hair) {
         this.hair = hair;
@@ -139,7 +141,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets some crap, ask Neme what it is
      *
-     * @param deco crap
+     * @param deco
+     *            crap
      */
     public void setDeco(int deco) {
         this.deco = deco;
@@ -158,7 +161,8 @@ public class PlayerAppearance implements Cloneable {
      * Set's sexy tattoo.<br>
      * Not sexy will throw NotSexyTattooException. Just kidding ;)
      *
-     * @param tattoo some tattoo
+     * @param tattoo
+     *            some tattoo
      */
     public void setTattoo(int tattoo) {
         this.tattoo = tattoo;
@@ -172,7 +176,8 @@ public class PlayerAppearance implements Cloneable {
     }
 
     /**
-     * @param faceContour the faceContour to set
+     * @param faceContour
+     *            the faceContour to set
      */
     public void setFaceContour(int faceContour) {
         this.faceContour = faceContour;
@@ -186,7 +191,8 @@ public class PlayerAppearance implements Cloneable {
     }
 
     /**
-     * @param expression the expression to set
+     * @param expression
+     *            the expression to set
      */
     public void setExpression(int expression) {
         this.expression = expression;
@@ -200,7 +206,8 @@ public class PlayerAppearance implements Cloneable {
     }
 
     /**
-     * @param jawLine the jawLine to set
+     * @param jawLine
+     *            the jawLine to set
      */
     public void setJawLine(int jawLine) {
         this.jawLine = jawLine;
@@ -218,7 +225,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Here is the valid place to make lesbians skin pink
      *
-     * @param skinRGB skin color
+     * @param skinRGB
+     *            skin color
      */
     public void setSkinRGB(int skinRGB) {
         this.skinRGB = skinRGB;
@@ -236,7 +244,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets hair colors. Blonds must pass IQ test ;)
      *
-     * @param hairRGB Hair color
+     * @param hairRGB
+     *            Hair color
      */
     public void setHairRGB(int hairRGB) {
         this.hairRGB = hairRGB;
@@ -268,7 +277,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets lips color
      *
-     * @param lipRGB face shape
+     * @param lipRGB
+     *            face shape
      */
     public void setLipRGB(int lipRGB) {
         this.lipRGB = lipRGB;
@@ -286,7 +296,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets face shape
      *
-     * @param faceShape face shape
+     * @param faceShape
+     *            face shape
      */
     public void setFaceShape(int faceShape) {
         this.faceShape = faceShape;
@@ -304,7 +315,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets forehead
      *
-     * @param forehead size
+     * @param forehead
+     *            size
      */
     public void setForehead(int forehead) {
         this.forehead = forehead;
@@ -322,7 +334,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets eye heigth
      *
-     * @param eyeHeight eye heigth
+     * @param eyeHeight
+     *            eye heigth
      */
     public void setEyeHeight(int eyeHeight) {
         this.eyeHeight = eyeHeight;
@@ -340,7 +353,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Eye space
      *
-     * @param eyeSpace someting connected to eyes
+     * @param eyeSpace
+     *            someting connected to eyes
      */
     public void setEyeSpace(int eyeSpace) {
         this.eyeSpace = eyeSpace;
@@ -358,7 +372,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets eye width
      *
-     * @param eyeWidth eye width
+     * @param eyeWidth
+     *            eye width
      */
     public void setEyeWidth(int eyeWidth) {
         this.eyeWidth = eyeWidth;
@@ -377,7 +392,8 @@ public class PlayerAppearance implements Cloneable {
      * Set's eye size.<br>
      * Can be . o O ;)
      *
-     * @param eyeSize eye size,
+     * @param eyeSize
+     *            eye size,
      */
     public void setEyeSize(int eyeSize) {
         this.eyeSize = eyeSize;
@@ -396,7 +412,8 @@ public class PlayerAppearance implements Cloneable {
      * Sets Eye shape.<br>
      * Can be . _ | 0 o O etc :)
      *
-     * @param eyeShape eye shape
+     * @param eyeShape
+     *            eye shape
      */
     public void setEyeShape(int eyeShape) {
         this.eyeShape = eyeShape;
@@ -414,7 +431,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets eye angle, / | \.
      *
-     * @param eyeAngle eye angle
+     * @param eyeAngle
+     *            eye angle
      */
     public void setEyeAngle(int eyeAngle) {
         this.eyeAngle = eyeAngle;
@@ -432,7 +450,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Brow heigth
      *
-     * @param browHeight brow heigth
+     * @param browHeight
+     *            brow heigth
      */
     public void setBrowHeight(int browHeight) {
         this.browHeight = browHeight;
@@ -450,7 +469,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets brow angle
      *
-     * @param browAngle brow angle
+     * @param browAngle
+     *            brow angle
      */
     public void setBrowAngle(int browAngle) {
         this.browAngle = browAngle;
@@ -469,7 +489,8 @@ public class PlayerAppearance implements Cloneable {
      * *****************************************************************************************************************
      * Sets brow shape
      *
-     * @param browShape brow shape
+     * @param browShape
+     *            brow shape
      */
     public void setBrowShape(int browShape) {
         this.browShape = browShape;
@@ -487,7 +508,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets nose
      *
-     * @param nose nose
+     * @param nose
+     *            nose
      */
     public void setNose(int nose) {
         this.nose = nose;
@@ -505,7 +527,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets nose bridge
      *
-     * @param noseBridge nose bridge
+     * @param noseBridge
+     *            nose bridge
      */
     public void setNoseBridge(int noseBridge) {
         this.noseBridge = noseBridge;
@@ -523,7 +546,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets nose width
      *
-     * @param noseWidth nose width
+     * @param noseWidth
+     *            nose width
      */
     public void setNoseWidth(int noseWidth) {
         this.noseWidth = noseWidth;
@@ -541,7 +565,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets noce tip
      *
-     * @param noseTip noce tip
+     * @param noseTip
+     *            noce tip
      */
     public void setNoseTip(int noseTip) {
         this.noseTip = noseTip;
@@ -559,7 +584,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets cheeks
      *
-     * @param cheek checks
+     * @param cheek
+     *            checks
      */
     public void setCheek(int cheek) {
         this.cheek = cheek;
@@ -577,7 +603,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets lip heigth
      *
-     * @param lipHeight lip heith
+     * @param lipHeight
+     *            lip heith
      */
     public void setLipHeight(int lipHeight) {
         this.lipHeight = lipHeight;
@@ -595,7 +622,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets mouth size
      *
-     * @param mouthSize mouth size
+     * @param mouthSize
+     *            mouth size
      */
     public void setMouthSize(int mouthSize) {
         this.mouthSize = mouthSize;
@@ -613,7 +641,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets lips size
      *
-     * @param lipSize lips size
+     * @param lipSize
+     *            lips size
      */
     public void setLipSize(int lipSize) {
         this.lipSize = lipSize;
@@ -631,7 +660,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets smile
      *
-     * @param smile smile
+     * @param smile
+     *            smile
      */
     public void setSmile(int smile) {
         this.smile = smile;
@@ -649,7 +679,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets lips shape
      *
-     * @param lipShape lips shape
+     * @param lipShape
+     *            lips shape
      */
     public void setLipShape(int lipShape) {
         this.lipShape = lipShape;
@@ -667,7 +698,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets jaws height
      *
-     * @param jawHeigh jaws height
+     * @param jawHeigh
+     *            jaws height
      */
     public void setJawHeigh(int jawHeigh) {
         this.jawHeigh = jawHeigh;
@@ -685,7 +717,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets chin jut
      *
-     * @param chinJut chin jut
+     * @param chinJut
+     *            chin jut
      */
     public void setChinJut(int chinJut) {
         this.chinJut = chinJut;
@@ -703,7 +736,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets ear shape
      *
-     * @param earShape ear shape
+     * @param earShape
+     *            ear shape
      */
     public void setEarShape(int earShape) {
         this.earShape = earShape;
@@ -721,7 +755,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets head size
      *
-     * @param headSize head size
+     * @param headSize
+     *            head size
      */
     public void setHeadSize(int headSize) {
         this.headSize = headSize;
@@ -739,7 +774,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets neck
      *
-     * @param neck neck
+     * @param neck
+     *            neck
      */
     public void setNeck(int neck) {
         this.neck = neck;
@@ -757,7 +793,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets neck length, just curious, is it possible to create a giraffe?
      *
-     * @param neckLength neck length
+     * @param neckLength
+     *            neck length
      */
     public void setNeckLength(int neckLength) {
         this.neckLength = neckLength;
@@ -775,7 +812,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Shoulders
      *
-     * @param shoulders shoulders
+     * @param shoulders
+     *            shoulders
      */
     public void setShoulders(int shoulders) {
         this.shoulders = shoulders;
@@ -793,7 +831,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Shoulder Size
      *
-     * @param shoulderSize shoulderSize
+     * @param shoulderSize
+     *            shoulderSize
      */
     public void setShoulderSize(int shoulderSize) {
         this.shoulderSize = shoulderSize;
@@ -811,7 +850,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets torso
      *
-     * @param torso torso
+     * @param torso
+     *            torso
      */
     public void setTorso(int torso) {
         this.torso = torso;
@@ -829,7 +869,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets tits
      *
-     * @param chest tits
+     * @param chest
+     *            tits
      */
     public void setChest(int chest) {
         this.chest = chest;
@@ -847,7 +888,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * sets waist
      *
-     * @param waist waist
+     * @param waist
+     *            waist
      */
     public void setWaist(int waist) {
         this.waist = waist;
@@ -865,7 +907,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets hips
      *
-     * @param hips hips
+     * @param hips
+     *            hips
      */
     public void setHips(int hips) {
         this.hips = hips;
@@ -883,7 +926,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets arm thickness
      *
-     * @param armThickness arm thickness
+     * @param armThickness
+     *            arm thickness
      */
     public void setArmThickness(int armThickness) {
         this.armThickness = armThickness;
@@ -901,7 +945,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets arm length
      *
-     * @param armLength arm length
+     * @param armLength
+     *            arm length
      */
     public void setArmLength(int armLength) {
         this.armLength = armLength;
@@ -919,7 +964,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets hand size
      *
-     * @param handSize hand size
+     * @param handSize
+     *            hand size
      */
     public void setHandSize(int handSize) {
         this.handSize = handSize;
@@ -937,7 +983,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets leg thickness
      *
-     * @param legThicnkess leg thickness
+     * @param legThicnkess
+     *            leg thickness
      */
     public void setLegThicnkess(int legThicnkess) {
         this.legThicnkess = legThicnkess;
@@ -955,7 +1002,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets leg length
      *
-     * @param legLength leg length
+     * @param legLength
+     *            leg length
      */
     public void setLegLength(int legLength) {
         this.legLength = legLength;
@@ -973,7 +1021,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets foot size
      *
-     * @param footSize foot size
+     * @param footSize
+     *            foot size
      */
     public void setFootSize(int footSize) {
         this.footSize = footSize;
@@ -991,7 +1040,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets facial rate
      *
-     * @param facialRate facial rate
+     * @param facialRate
+     *            facial rate
      */
     public void setFacialRate(int facialRate) {
         this.facialRate = facialRate;
@@ -1009,7 +1059,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets sexy voice
      *
-     * @param voice sexy voice
+     * @param voice
+     *            sexy voice
      */
     public void setVoice(int voice) {
         this.voice = voice;
@@ -1027,7 +1078,8 @@ public class PlayerAppearance implements Cloneable {
     /**
      * Sets height
      *
-     * @param height height
+     * @param height
+     *            height
      */
     public void setHeight(float height) {
         this.height = height;
@@ -1039,7 +1091,7 @@ public class PlayerAppearance implements Cloneable {
      * @author Divinity
      */
     @Override
-	public Object clone() {
+    public Object clone() {
         Object newObject = null;
 
         try {

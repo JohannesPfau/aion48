@@ -50,7 +50,7 @@ public class MpAttackEffect extends AbstractOverTimeEffect {
         int newValue = value;
         // Support for values in percentage
         if (this.hitType == HitType.FEAR) {
-        	//TODO
+            //TODO
         }
         if (percent) {
             newValue = (maxMP * value) / 100;

@@ -29,18 +29,19 @@
  */
 package com.aionemu.commons.scripting.classlistener;
 
+import java.lang.reflect.Modifier;
+import java.util.Map;
+
+import org.quartz.JobDetail;
+
 import com.aionemu.commons.scripting.metadata.Scheduled;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.ClassUtils;
-import org.quartz.JobDetail;
-
-import java.lang.reflect.Modifier;
-import java.util.Map;
 
 public class ScheduledTaskClassListener implements ClassListener {
 
     @Override
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({ "unchecked" })
     public void postLoad(Class<?>[] classes) {
         for (Class<?> clazz : classes) {
             if (isValidClass(clazz)) {
@@ -50,7 +51,7 @@ public class ScheduledTaskClassListener implements ClassListener {
     }
 
     @Override
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({ "unchecked" })
     public void preUnload(Class<?>[] classes) {
         for (Class<?> clazz : classes) {
             if (isValidClass(clazz)) {

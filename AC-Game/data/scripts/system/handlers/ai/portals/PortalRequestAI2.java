@@ -56,6 +56,7 @@ public class PortalRequestAI2 extends PortalAI2 {
             if (loc != null) {
                 TelelocationTemplate locationTemplate = DataManager.TELELOCATION_DATA.getTelelocationTemplate(loc.getLocId());
                 RequestResponseHandler portal = new RequestResponseHandler(player) {
+
                     @Override
                     public void acceptRequest(Creature requester, Player responder) {
                         TeleportService2.teleport(teleportTemplate, loc.getLocId(), player, getOwner(), TeleportAnimation.JUMP_AIMATION);
@@ -69,7 +70,7 @@ public class PortalRequestAI2 extends PortalAI2 {
                 long transportationPrice = PricesService.getPriceForService(loc.getPrice(), player.getRace());
                 if (player.getResponseRequester().putRequest(160013, portal)) {
                     PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(160013, getObjectId(), 0,
-                            new DescriptionId(locationTemplate.getNameId() * 2 + 1), transportationPrice));
+                        new DescriptionId(locationTemplate.getNameId() * 2 + 1), transportationPrice));
                 }
             }
         }

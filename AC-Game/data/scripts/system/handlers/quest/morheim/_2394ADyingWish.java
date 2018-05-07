@@ -32,6 +32,7 @@ package quest.morheim;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -40,7 +41,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,7 +51,6 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _2394ADyingWish extends QuestHandler {
 
@@ -93,11 +92,13 @@ public class _2394ADyingWish extends QuestHandler {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 1011);
                 } else if (dialog == DialogAction.SETPRO1) {
-                    Npc orlan = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 790021, player.getX(), player.getY(), player.getZ(), (byte) 8);
+                    Npc orlan = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 790021, player.getX(), player.getY(),
+                        player.getZ(), (byte) 8);
                     WalkManager.startWalking((NpcAI2) orlan.getAi2());
                     orlan.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
                     PacketSendUtility.broadcastPacket(orlan, new SM_EMOTION(orlan, EmotionType.START_EMOTE2, 0, orlan.getObjectId()));
-                    player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, orlan, ZoneName.get("HALABANA_HOT_SPRINGS_220020000")));
+                    player.getController().addTask(TaskId.QUEST_FOLLOW,
+                        QuestTasks.newFollowingToTargetCheckTask(env, orlan, ZoneName.get("HALABANA_HOT_SPRINGS_220020000")));
                     return defaultCloseDialog(env, 0, 1);
                 }
             }

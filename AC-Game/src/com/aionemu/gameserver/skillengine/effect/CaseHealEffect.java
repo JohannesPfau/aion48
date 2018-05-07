@@ -88,6 +88,7 @@ public class CaseHealEffect extends AbstractHealEffect {
     @Override
     public void startEffect(final Effect effect) {
         ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
+
             @Override
             public void attacked(Creature creature) {
                 calculateHeal(effect);
@@ -110,8 +111,7 @@ public class CaseHealEffect extends AbstractHealEffect {
                 possibleHealValue = valueWithDelta;
             }
 
-            int finalHeal = effect.getEffected().getGameStats().getStat(StatEnum.HEAL_SKILL_BOOST, possibleHealValue)
-                    .getCurrent();
+            int finalHeal = effect.getEffected().getGameStats().getStat(StatEnum.HEAL_SKILL_BOOST, possibleHealValue).getCurrent();
             finalHeal = effect.getEffected().getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, finalHeal).getCurrent();
             finalHeal = maxValue - currentValue < finalHeal ? (maxValue - currentValue) : finalHeal;
 

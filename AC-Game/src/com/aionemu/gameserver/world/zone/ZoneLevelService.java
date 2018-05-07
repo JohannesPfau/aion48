@@ -98,6 +98,7 @@ public class ZoneLevelService {
      */
     private static void scheduleDrowningTask(final Player player) {
         player.getController().addTask(TaskId.DROWN, ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 int value = Math.round(player.getLifeStats().getMaxHp() / 10);

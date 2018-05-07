@@ -9,18 +9,16 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
  * Created by Kill3r
  */
 public class Showtoll extends AdminCommand {
-    public  Showtoll() {
+
+    public Showtoll() {
         super("showtoll");
     }
 
-
-    public void execute(Player admin, String... params){
-
+    public void execute(Player admin, String... params) {
 
         VisibleObject visibleObject = admin.getTarget();
 
-
-        if (visibleObject == null || !(visibleObject instanceof Player)){
+        if (visibleObject == null || !(visibleObject instanceof Player)) {
             PacketSendUtility.sendMessage(admin, "Wrong Target Selected");
             return;
         }
@@ -31,13 +29,12 @@ public class Showtoll extends AdminCommand {
 
         TargetedTolls = target.getClientConnection().getAccount().getToll();
 
-        PacketSendUtility.sendWhiteMessage(admin, target.getName() +" has " + TargetedTolls + " tolls in account '"+ target.getClientConnection().getAccount().getName() + "'");
+        PacketSendUtility.sendWhiteMessage(admin,
+            target.getName() + " has " + TargetedTolls + " tolls in account '" + target.getClientConnection().getAccount().getName() + "'");
 
+    }
 
-        }
-
-
-    public void onFail(Player player, String msg){
+    public void onFail(Player player, String msg) {
         PacketSendUtility.sendMessage(player, "You can only use it on Players");
 
     }

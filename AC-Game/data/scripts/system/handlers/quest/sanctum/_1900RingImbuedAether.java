@@ -29,9 +29,9 @@
  */
 package quest.sanctum;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -115,7 +115,7 @@ public class _1900RingImbuedAether extends QuestHandler {
             if (env.getDialog() == DialogAction.USE_OBJECT && qs.getStatus() == QuestStatus.REWARD) {
                 return sendQuestDialog(env, 2716);
             } else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-                    && qs.getStatus() != QuestStatus.NONE) {
+                && qs.getStatus() != QuestStatus.NONE) {
                 removeQuestItem(env, 182206003, 1);
                 return sendQuestDialog(env, 5);
             } else {

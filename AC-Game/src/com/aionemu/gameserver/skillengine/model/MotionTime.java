@@ -38,7 +38,7 @@ import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.Race;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "motion_time", propOrder = {"am", "af", "em", "ef"})
+@XmlType(name = "motion_time", propOrder = { "am", "af", "em", "ef" })
 public class MotionTime {
 
     protected Times am;
@@ -60,7 +60,8 @@ public class MotionTime {
     }
 
     /**
-     * @param am the am to set
+     * @param am
+     *            the am to set
      */
     public void setAm(Times am) {
         this.am = am;
@@ -74,7 +75,8 @@ public class MotionTime {
     }
 
     /**
-     * @param af the af to set
+     * @param af
+     *            the af to set
      */
     public void setAf(Times af) {
         this.af = af;
@@ -88,7 +90,8 @@ public class MotionTime {
     }
 
     /**
-     * @param em the em to set
+     * @param em
+     *            the em to set
      */
     public void setEm(Times em) {
         this.em = em;
@@ -102,14 +105,16 @@ public class MotionTime {
     }
 
     /**
-     * @param ef the ef to set
+     * @param ef
+     *            the ef to set
      */
     public void setEf(Times ef) {
         this.ef = ef;
     }
 
     /**
-     * @param name the name to set
+     * @param name
+     *            the name to set
      */
     public void setName(String name) {
         this.name = name;

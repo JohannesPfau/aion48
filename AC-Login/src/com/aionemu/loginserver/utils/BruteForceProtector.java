@@ -30,6 +30,7 @@
 package com.aionemu.loginserver.utils;
 
 import com.aionemu.loginserver.configs.Config;
+
 import javolution.util.FastMap;
 
 /**
@@ -37,7 +38,7 @@ import javolution.util.FastMap;
  */
 public class BruteForceProtector {
 
-    private FastMap<String, FailedLoginInfo> failedConnections = new FastMap<String, FailedLoginInfo>();
+    private FastMap<String, FailedLoginInfo> failedConnections = new FastMap<>();
 
     class FailedLoginInfo {
 

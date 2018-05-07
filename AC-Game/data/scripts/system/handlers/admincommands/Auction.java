@@ -29,6 +29,9 @@
  */
 package admincommands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -41,10 +44,8 @@ import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.zone.ZoneName;
-import javolution.util.FastList;
 
-import java.util.ArrayList;
-import java.util.List;
+import javolution.util.FastList;
 
 /**
  * @author Rolandas
@@ -69,7 +70,7 @@ public class Auction extends AdminCommand {
                 return;
             }
             String param = params[1].toUpperCase();
-            List<House> housesToRemove = new ArrayList<House>();
+            List<House> housesToRemove = new ArrayList<>();
 
             if ("HOUSE".equals(param.split("_")[0])) {
                 House house = HousingService.getInstance().getHouseByName(params[1].toUpperCase());
@@ -300,12 +301,9 @@ public class Auction extends AdminCommand {
 
     @Override
     public void onFail(Player player, String message) {
-        PacketSendUtility.sendMessage(player, "syntax:\n"
-                + " //auction add <zone_name> <house_type> [initial_bid]\n"
-                + " //auction remove <HOUSE_id|zone_name> [nosale]\n"
-                + " //auction addrandom <race> <house_type> <count> [initial_bid]\n"
-                + "   zone_name = from zones xml files\n"
-                + "   house_type = house, mansion, estate, palace\n"
-                + "   initial_bid = initial bid price (if omitted, default is used)");
+        PacketSendUtility.sendMessage(player,
+            "syntax:\n" + " //auction add <zone_name> <house_type> [initial_bid]\n" + " //auction remove <HOUSE_id|zone_name> [nosale]\n"
+                + " //auction addrandom <race> <house_type> <count> [initial_bid]\n" + "   zone_name = from zones xml files\n"
+                + "   house_type = house, mansion, estate, palace\n" + "   initial_bid = initial bid price (if omitted, default is used)");
     }
 }

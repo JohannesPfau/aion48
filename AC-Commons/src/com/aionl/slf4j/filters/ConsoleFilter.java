@@ -40,8 +40,8 @@ public class ConsoleFilter extends Filter<ILoggingEvent> {
 
     @Override
     public FilterReply decide(ILoggingEvent event) {
-        if (event.getMessage().startsWith("[MESSAGE]") || event.getMessage().startsWith("[ITEM]")
-                || event.getMessage().startsWith("[ADMIN COMMAND]") || event.getMessage().startsWith("[AUDIT]")) {
+        if (event.getMessage().startsWith("[MESSAGE]") || event.getMessage().startsWith("[ITEM]") || event.getMessage().startsWith("[ADMIN COMMAND]")
+            || event.getMessage().startsWith("[AUDIT]")) {
             return FilterReply.DENY;
         } else {
             return FilterReply.ACCEPT;

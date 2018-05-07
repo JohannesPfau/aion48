@@ -71,7 +71,7 @@ public class StatEnchantFunction extends StatAddFunction {
             return;
         }
         if ((item.getEquipmentSlot() & ItemSlot.MAIN_OFF_HAND.getSlotIdMask()) != 0
-                || (item.getEquipmentSlot() & ItemSlot.SUB_OFF_HAND.getSlotIdMask()) != 0) {
+            || (item.getEquipmentSlot() & ItemSlot.SUB_OFF_HAND.getSlotIdMask()) != 0) {
             return;
         }
         stat.addToBase(getEnchantAdditionModifier(enchantLvl, stat));
@@ -194,7 +194,7 @@ public class StatEnchantFunction extends StatAddFunction {
         ArmorType armorType = item.getItemTemplate().getArmorType();
         if (armorType == null) {
             log.warn("Missing item ArmorType itemId: " + item.getItemId() + " EquipmentSlot: " + item.getEquipmentSlot() + " playerObjectId: "
-                    + applyStat.getOwner().getObjectId());
+                + applyStat.getOwner().getObjectId());
             return 0;
         }
 

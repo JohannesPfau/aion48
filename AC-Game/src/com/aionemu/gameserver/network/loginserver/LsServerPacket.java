@@ -35,15 +35,14 @@ import com.aionemu.commons.network.packet.BaseServerPacket;
 
 /**
  * Base class for every GameServer -> Login Server Packet.
- *
-
  */
 public abstract class LsServerPacket extends BaseServerPacket {
 
     /**
      * constructs new server packet with specified opcode.
      *
-     * @param opcode packet id
+     * @param opcode
+     *            packet id
      */
     protected LsServerPacket(int opcode) {
         super(opcode);

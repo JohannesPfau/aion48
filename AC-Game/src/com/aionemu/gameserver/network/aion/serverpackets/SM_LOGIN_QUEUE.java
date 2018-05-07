@@ -50,7 +50,7 @@ public class SM_LOGIN_QUEUE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(waitingPosition);
         writeD(waitingTime);
         writeD(waitingCount);

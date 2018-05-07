@@ -62,71 +62,78 @@ public class GroupGateAI2 extends NpcAI2 {
 
         if (isMember && player.getLevel() >= 10) {
 
-            AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_GROUP_GATE_DO_YOU_ACCEPT_MOVE, getOwner().getObjectId(), CANCEL_DIALOG_METERS,
-                    new AI2Request() {
-                        private boolean decisionTaken = false;
+            AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_GROUP_GATE_DO_YOU_ACCEPT_MOVE, getOwner().getObjectId(),
+                CANCEL_DIALOG_METERS, new AI2Request() {
 
-                        @Override
-                        public void acceptRequest(Creature requester, Player responder) {
-                            if (!decisionTaken) {
-                                switch (getNpcId()) {
-                                    // Group Gates
-                                    case 749017:
-                                        TeleportService2.teleportTo(responder, 110010000, 1444.9f, 1577.2f, 572.9f, (byte) 0, TeleportAnimation.JUMP_AIMATION);
-                                        break;
-                                    case 749083:
-                                        TeleportService2.teleportTo(responder, 120010000, 1657.5f, 1398.7f, 194.7f, (byte) 0, TeleportAnimation.JUMP_AIMATION);
-                                        break;
-                                    // Binding Group Gates
-                                    case 749131:
-                                    case 749132:
-                                        TeleportService2.moveToBindLocation(responder, true);
-                                        break;
-                                }
-                                decisionTaken = true;
+                    private boolean decisionTaken = false;
+
+                    @Override
+                    public void acceptRequest(Creature requester, Player responder) {
+                        if (!decisionTaken) {
+                            switch (getNpcId()) {
+                                // Group Gates
+                                case 749017:
+                                    TeleportService2.teleportTo(responder, 110010000, 1444.9f, 1577.2f, 572.9f, (byte) 0,
+                                        TeleportAnimation.JUMP_AIMATION);
+                                    break;
+                                case 749083:
+                                    TeleportService2.teleportTo(responder, 120010000, 1657.5f, 1398.7f, 194.7f, (byte) 0,
+                                        TeleportAnimation.JUMP_AIMATION);
+                                    break;
+                                // Binding Group Gates
+                                case 749131:
+                                case 749132:
+                                    TeleportService2.moveToBindLocation(responder, true);
+                                    break;
                             }
-                        }
-
-                        @Override
-                        public void denyRequest(Creature requester, Player responder) {
                             decisionTaken = true;
                         }
-                    });
+                    }
+
+                    @Override
+                    public void denyRequest(Creature requester, Player responder) {
+                        decisionTaken = true;
+                    }
+                });
 
         } else if (player.getLevel() >= 50) {
 
-            AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_GROUP_GATE_DO_YOU_ACCEPT_MOVE, getOwner().getObjectId(), CANCEL_DIALOG_METERS, new AI2Request() {
-                private boolean decisionTaken = false;
+            AI2Actions.addRequest(this, player, SM_QUESTION_WINDOW.STR_ASK_GROUP_GATE_DO_YOU_ACCEPT_MOVE, getOwner().getObjectId(),
+                CANCEL_DIALOG_METERS, new AI2Request() {
 
-                @Override
-                public void acceptRequest(Creature requester, Player responder) {
-                    if (!decisionTaken) {
-                        switch (getNpcId()) {
-                            // Group Gates Invasion Rift
-                            case 296534:
-                                if (responder.getWorldId() == 210050000 || responder.getWorldId() == 220070000) {
-                                    switch (responder.getRace()) {
-                                        case ASMODIANS:
-                                            TeleportService2.teleportTo(responder, 110010000, 1768.2721f, 1513.0216f, 585.5641f, (byte) 0, TeleportAnimation.JUMP_AIMATION);
-                                        case ELYOS:
-                                            TeleportService2.teleportTo(responder, 120010000, 1096.4459f, 1463.9629f, 210.61098f, (byte) 0, TeleportAnimation.JUMP_AIMATION);
-                                            break;
-                                        default:
-                                            break;
+                    private boolean decisionTaken = false;
+
+                    @Override
+                    public void acceptRequest(Creature requester, Player responder) {
+                        if (!decisionTaken) {
+                            switch (getNpcId()) {
+                                // Group Gates Invasion Rift
+                                case 296534:
+                                    if (responder.getWorldId() == 210050000 || responder.getWorldId() == 220070000) {
+                                        switch (responder.getRace()) {
+                                            case ASMODIANS:
+                                                TeleportService2.teleportTo(responder, 110010000, 1768.2721f, 1513.0216f, 585.5641f, (byte) 0,
+                                                    TeleportAnimation.JUMP_AIMATION);
+                                            case ELYOS:
+                                                TeleportService2.teleportTo(responder, 120010000, 1096.4459f, 1463.9629f, 210.61098f, (byte) 0,
+                                                    TeleportAnimation.JUMP_AIMATION);
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    } else {
+                                        PacketSendUtility.sendMessage(responder, "You cannot use this portal here.");
                                     }
-                                } else {
-                                    PacketSendUtility.sendMessage(responder, "You cannot use this portal here.");
-                                }
+                            }
+                            decisionTaken = true;
                         }
+                    }
+
+                    @Override
+                    public void denyRequest(Creature requester, Player responder) {
                         decisionTaken = true;
                     }
-                }
-
-                @Override
-                public void denyRequest(Creature requester, Player responder) {
-                    decisionTaken = true;
-                }
-            });
+                });
 
         } else {
             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_USE_GROUPGATE_NO_RIGHT);

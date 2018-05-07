@@ -65,7 +65,8 @@ import java.util.NoSuchElementException;
  * <p/>
  * This <code>it</code> iterator will return only 2 values ( 1 and 2 )
  *
- * @param <V> Type of the values over which this iterator iterates
+ * @param <V>
+ *            Type of the values over which this iterator iterates
  * @author Luno
  */
 public class IteratorIterator<V> implements Iterator<V> {
@@ -83,7 +84,8 @@ public class IteratorIterator<V> implements Iterator<V> {
     /**
      * Constructor of <tt>IteratorIterator</tt>
      *
-     * @param itit an Iterator that iterate over Iterable<Value>
+     * @param itit
+     *            an Iterator that iterate over Iterable<Value>
      */
     public IteratorIterator(Iterable<? extends Iterable<V>> itit) {
         this.firstLevelIterator = itit.iterator();

@@ -29,7 +29,12 @@
  */
 package ai.instance.empyreanCrucible;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
@@ -38,11 +43,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Luzien
@@ -50,7 +51,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @AIName("king_consierd")
 public class KingConsierdAI2 extends AggressiveNpcAI2 {
 
-    private List<Integer> percents = new ArrayList<Integer>();
+    private List<Integer> percents = new ArrayList<>();
     private AtomicBoolean isHome = new AtomicBoolean(true);
     private Future<?> eventTask;
     private Future<?> skillTask;
@@ -91,10 +92,12 @@ public class KingConsierdAI2 extends AggressiveNpcAI2 {
             startBloodThirstTask();
 
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     SkillEngine.getInstance().getSkill(getOwner(), 19691, 1, getTarget()).useNoAnimationSkill();
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             SkillEngine.getInstance().getSkill(getOwner(), 17954, 29, getTarget()).useNoAnimationSkill();
@@ -108,6 +111,7 @@ public class KingConsierdAI2 extends AggressiveNpcAI2 {
 
     private void startBloodThirstTask() {
         eventTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 SkillEngine.getInstance().getSkill(getOwner(), 19624, 10, getOwner()).useNoAnimationSkill();
@@ -118,6 +122,7 @@ public class KingConsierdAI2 extends AggressiveNpcAI2 {
 
     private void startSkillTask() {
         skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -125,6 +130,7 @@ public class KingConsierdAI2 extends AggressiveNpcAI2 {
                 } else {
                     SkillEngine.getInstance().getSkill(getOwner(), 17951, 29, getTarget()).useNoAnimationSkill();
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             dropAggro();
@@ -135,6 +141,7 @@ public class KingConsierdAI2 extends AggressiveNpcAI2 {
                                 spawn(282378, p.getX(), p.getY(), p.getZ(), p.getHeading());
                             }
                             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                 @Override
                                 public void run() {
                                     SkillEngine.getInstance().getSkill(getOwner(), 17952, 29, getTarget()).useNoAnimationSkill();
@@ -183,7 +190,7 @@ public class KingConsierdAI2 extends AggressiveNpcAI2 {
 
     private void addPercents() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{75, 25});
+        Collections.addAll(percents, new Integer[] { 75, 25 });
     }
 
     private void despawnNpcs(List<Npc> npcs) {

@@ -29,11 +29,12 @@
  */
 package com.aionemu.commons.scripting.scriptmanager;
 
+import java.util.Set;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Set;
 
 /**
  * Root element for script descriptors
@@ -62,7 +63,8 @@ public class ScriptList {
     /**
      * Sets list of script descriptors
      *
-     * @param scriptInfos lisft of script descriptors
+     * @param scriptInfos
+     *            lisft of script descriptors
      */
     public void setScriptInfos(Set<ScriptInfo> scriptInfos) {
         this.scriptInfos = scriptInfos;

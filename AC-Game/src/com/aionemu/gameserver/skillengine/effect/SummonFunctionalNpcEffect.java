@@ -56,6 +56,7 @@ public class SummonFunctionalNpcEffect extends SummonEffect {
         final Npc functionalNpc = VisibleObjectSpawner.spawnFunctionalNpc(effected, npcId, owner);
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (functionalNpc != null && functionalNpc.isSpawned()) {

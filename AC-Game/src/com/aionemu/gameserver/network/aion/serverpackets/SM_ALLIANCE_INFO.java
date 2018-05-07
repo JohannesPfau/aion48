@@ -74,7 +74,7 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         Player player = con.getActivePlayer();
         writeH(alliance.groupSize());
         writeD(groupid);

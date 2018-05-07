@@ -74,7 +74,7 @@ public enum ShoutEventType {
     BEFORE_DESPAWN, // NPC despawns
     ATTACK_DEADLY,
     WIN,
-    ENEMY_DIED;                // NPC's enemy died
+    ENEMY_DIED; // NPC's enemy died
 
     public String value() {
         return name();

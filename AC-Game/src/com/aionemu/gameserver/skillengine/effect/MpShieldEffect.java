@@ -60,47 +60,42 @@ public class MpShieldEffect extends EffectTemplate {
     protected Race condrace = null;
 
     @Override
-	public void applyEffect(Effect effect)
-    {
-      if ((this.condrace != null) && (effect.getEffected().getRace() != this.condrace)) {
-        return;
-      }
-      effect.addToEffectedController();
+    public void applyEffect(Effect effect) {
+        if ((this.condrace != null) && (effect.getEffected().getRace() != this.condrace)) {
+            return;
+        }
+        effect.addToEffectedController();
     }
-    
-    @Override
-	public void calculate(Effect effect)
-    {
-      effect.addSucessEffect(this);
-    }
-    
-    @Override
-	public void startEffect(Effect effect)
-    {
-      int skillLvl = effect.getSkillLevel();
-      int valueWithDelta = this.value + this.delta * skillLvl;
-      int hitValueWithDelta = this.hitvalue + this.hitdelta * skillLvl;
-      
-      AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, this.percent, effect, this.hitType, getType(), this.hitTypeProb);
-      
 
-      effect.getEffected().getObserveController().addAttackCalcObserver(asObserver);
-      effect.setAttackShieldObserver(asObserver, this.position);
-      effect.getEffected().getEffectController().setUnderShield(true);
-    }
-    
     @Override
-	public void endEffect(Effect effect)
-    {
-      AttackCalcObserver acObserver = effect.getAttackShieldObserver(this.position);
-      if (acObserver != null) {
-        effect.getEffected().getObserveController().removeAttackCalcObserver(acObserver);
-      }
-      effect.getEffected().getEffectController().setUnderShield(false);
+    public void calculate(Effect effect) {
+        effect.addSucessEffect(this);
     }
-    
-    public int getType()
-    {
-      return 16;
+
+    @Override
+    public void startEffect(Effect effect) {
+        int skillLvl = effect.getSkillLevel();
+        int valueWithDelta = this.value + this.delta * skillLvl;
+        int hitValueWithDelta = this.hitvalue + this.hitdelta * skillLvl;
+
+        AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, this.percent, effect, this.hitType, getType(),
+            this.hitTypeProb);
+
+        effect.getEffected().getObserveController().addAttackCalcObserver(asObserver);
+        effect.setAttackShieldObserver(asObserver, this.position);
+        effect.getEffected().getEffectController().setUnderShield(true);
+    }
+
+    @Override
+    public void endEffect(Effect effect) {
+        AttackCalcObserver acObserver = effect.getAttackShieldObserver(this.position);
+        if (acObserver != null) {
+            effect.getEffected().getObserveController().removeAttackCalcObserver(acObserver);
+        }
+        effect.getEffected().getEffectController().setUnderShield(false);
+    }
+
+    public int getType() {
+        return 16;
     }
 }

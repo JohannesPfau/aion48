@@ -39,6 +39,7 @@ public enum TeleportAnimation {
     JUMP_AIMATION(3, 10),
     JUMP_AIMATION_2(4, 10),
     JUMP_AIMATION_3(8, 3);
+
     private int startAnimation;
     private int endAnimation;
 

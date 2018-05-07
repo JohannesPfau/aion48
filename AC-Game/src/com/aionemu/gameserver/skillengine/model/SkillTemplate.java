@@ -59,8 +59,8 @@ import com.aionemu.gameserver.skillengine.properties.Properties;
  * @author ATracer modified by Wakizashi
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "skillTemplate", propOrder = {"properties", "startconditions", "useconditions", "endconditions", "useequipmentconditions", "effects", "actions",
-        "periodicActions", "motion"})
+@XmlType(name = "skillTemplate", propOrder = { "properties", "startconditions", "useconditions", "endconditions", "useequipmentconditions", "effects",
+    "actions", "periodicActions", "motion" })
 public class SkillTemplate {
 
     protected Properties properties;
@@ -415,9 +415,10 @@ public class SkillTemplate {
     public boolean hasRecallInstant() {
         return getEffects() != null && getEffects().isEffectTypePresent(EffectType.RECALLINSTANT);
     }
-    
+
     public boolean hasHealEffect() {
-        return getEffects() != null && (getEffects().isEffectTypePresent(EffectType.HEAL) || getEffects().isEffectTypePresent(EffectType.HEALINSTANT));
+        return getEffects() != null
+            && (getEffects().isEffectTypePresent(EffectType.HEAL) || getEffects().isEffectTypePresent(EffectType.HEALINSTANT));
     }
 
     public boolean hasRandomMoveEffect() {
@@ -505,7 +506,7 @@ public class SkillTemplate {
             for (EffectTemplate et : this.getEffects().getEffects()) {
                 if (et.getEffectid() != 0) {
                     if (effectIds == null) {
-                        effectIds = new HashMap<Integer, Integer>();
+                        effectIds = new HashMap<>();
                     }
 
                     effectIds.put(et.getEffectid(), et.getBasicLvl());

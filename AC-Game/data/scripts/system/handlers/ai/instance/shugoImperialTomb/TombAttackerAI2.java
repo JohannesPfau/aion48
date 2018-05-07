@@ -29,13 +29,14 @@
  */
 package ai.instance.shugoImperialTomb;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Swig
@@ -45,7 +46,7 @@ public class TombAttackerAI2 extends AggressiveNpcAI2 {
 
     private WalkerTemplate template;
     private boolean canThink = true;
-    private final static int[] npc_ids = {831251, 831250, 831304, 831305, 831130};
+    private final static int[] npc_ids = { 831251, 831250, 831304, 831305, 831130 };
 
     private void addHate() {
         EmoteManager.emoteStopAttacking(getOwner());

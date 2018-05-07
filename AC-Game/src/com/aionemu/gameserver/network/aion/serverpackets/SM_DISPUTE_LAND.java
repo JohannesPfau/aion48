@@ -29,11 +29,11 @@
  */
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+
+import javolution.util.FastList;
 
 /**
  * @author Source
@@ -50,7 +50,7 @@ public class SM_DISPUTE_LAND extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(worlds.size());
         for (int world : worlds) {
             writeD(active ? 0x02 : 0x01);

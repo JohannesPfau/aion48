@@ -29,7 +29,10 @@
  */
 package ai.instance.rentusBase;
 
-import ai.AggressiveNpcAI2;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -48,9 +51,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -88,6 +89,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 
     private void startPhaseTask(final NpcAI2 ai) {
         phaseTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -116,6 +118,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 
     private void startPhase2Task() {
         phaseTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -130,6 +133,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
 
     private void startSanctuaryEvent() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
@@ -165,6 +169,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
     @SuppressWarnings("unused")
     private void spawnHelpers(final NpcAI2 ai) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
@@ -218,6 +223,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
                 if (ariana != null) {
                     ariana.getEffectController().removeEffect(19921);
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             ariana.getSpawn().setWalkerId("30028000016");
@@ -227,6 +233,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
                     NpcShoutsService.getInstance().sendMsg(ariana, 1500415, ariana.getObjectId(), 0, 4000);
                     NpcShoutsService.getInstance().sendMsg(ariana, 1500416, ariana.getObjectId(), 0, 13000);
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             if (instance != null) {
@@ -234,6 +241,7 @@ public class CaptainXastaAI2 extends AggressiveNpcAI2 {
                                 instance.getDoors().get(145).setOpen(true);
                                 deleteNpcs(instance.getNpcs(701156));
                                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                     @Override
                                     public void run() {
                                         if (ariana != null && !NpcActions.isAlreadyDead(ariana)) {

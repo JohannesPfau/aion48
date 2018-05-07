@@ -29,7 +29,10 @@
  */
 package ai.instance.danuarReliquaryHero;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -40,17 +43,15 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import ai.AggressiveNpcAI2;
 
 /**
- *  @author Alcapwnd
+ * @author Alcapwnd
  */
 @AIName("damn_witch_graendal2_hero")
 public class DamnWitchGraendal2Hero extends AggressiveNpcAI2 {
 
-    private List<Integer> percents = new ArrayList<Integer>();
+    private List<Integer> percents = new ArrayList<>();
     private boolean isIllusionsSpawned;
 
     @Override
@@ -106,7 +107,7 @@ public class DamnWitchGraendal2Hero extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{60, 57, 54, 50});
+        Collections.addAll(percents, new Integer[] { 60, 57, 54, 50 });
     }
 
     private void skill2() {
@@ -148,32 +149,32 @@ public class DamnWitchGraendal2Hero extends AggressiveNpcAI2 {
         if (!isIllusionsSpawned) {
             if (IllusionReal == null && IllusionFake == null) {
                 isIllusionsSpawned = true;
-		switch ((int)Rnd.get(1, 4)) {
-			case 1:
-                spawn(855244, 284.4135f, 262.8083f, 248.6746f, (byte) 63);
-                spawn(855247, 232.5143f, 263.8524f, 248.5539f, (byte) 113);
-                spawn(855248, 271.1393f, 230.5098f, 250.8564f, (byte) 44);
-                spawn(855249, 240.2434f, 235.1515f, 251.0607f, (byte) 18);
-				break;
-			case 2:
-                spawn(855247, 284.4135f, 262.8083f, 248.6746f, (byte) 63);
-                spawn(855244, 232.5143f, 263.8524f, 248.5539f, (byte) 113);
-                spawn(855248, 271.1393f, 230.5098f, 250.8564f, (byte) 44);
-                spawn(855249, 240.2434f, 235.1515f, 251.0607f, (byte) 18);
-				break;
-			case 3:
-                spawn(855247, 284.4135f, 262.8083f, 248.6746f, (byte) 63);
-                spawn(855248, 232.5143f, 263.8524f, 248.5539f, (byte) 113);
-                spawn(855244, 271.1393f, 230.5098f, 250.8564f, (byte) 44);
-                spawn(855249, 240.2434f, 235.1515f, 251.0607f, (byte) 18);
-				break;
-			case 4:
-                spawn(855247, 284.4135f, 262.8083f, 248.6746f, (byte) 63);
-                spawn(855248, 232.5143f, 263.8524f, 248.5539f, (byte) 113);
-                spawn(855249, 271.1393f, 230.5098f, 250.8564f, (byte) 44);
-                spawn(855244, 240.2434f, 235.1515f, 251.0607f, (byte) 18);
-				break;
-				}
+                switch ((int) Rnd.get(1, 4)) {
+                    case 1:
+                        spawn(855244, 284.4135f, 262.8083f, 248.6746f, (byte) 63);
+                        spawn(855247, 232.5143f, 263.8524f, 248.5539f, (byte) 113);
+                        spawn(855248, 271.1393f, 230.5098f, 250.8564f, (byte) 44);
+                        spawn(855249, 240.2434f, 235.1515f, 251.0607f, (byte) 18);
+                        break;
+                    case 2:
+                        spawn(855247, 284.4135f, 262.8083f, 248.6746f, (byte) 63);
+                        spawn(855244, 232.5143f, 263.8524f, 248.5539f, (byte) 113);
+                        spawn(855248, 271.1393f, 230.5098f, 250.8564f, (byte) 44);
+                        spawn(855249, 240.2434f, 235.1515f, 251.0607f, (byte) 18);
+                        break;
+                    case 3:
+                        spawn(855247, 284.4135f, 262.8083f, 248.6746f, (byte) 63);
+                        spawn(855248, 232.5143f, 263.8524f, 248.5539f, (byte) 113);
+                        spawn(855244, 271.1393f, 230.5098f, 250.8564f, (byte) 44);
+                        spawn(855249, 240.2434f, 235.1515f, 251.0607f, (byte) 18);
+                        break;
+                    case 4:
+                        spawn(855247, 284.4135f, 262.8083f, 248.6746f, (byte) 63);
+                        spawn(855248, 232.5143f, 263.8524f, 248.5539f, (byte) 113);
+                        spawn(855249, 271.1393f, 230.5098f, 250.8564f, (byte) 44);
+                        spawn(855244, 240.2434f, 235.1515f, 251.0607f, (byte) 18);
+                        break;
+                }
             }
         }
     }

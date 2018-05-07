@@ -29,17 +29,18 @@
  */
 package mysql5;
 
-import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-import com.aionemu.gameserver.dao.WeddingDAO;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.database.DatabaseFactory;
+import com.aionemu.gameserver.dao.MySQL5DAOUtils;
+import com.aionemu.gameserver.dao.WeddingDAO;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
  * @author synchro2

@@ -114,7 +114,7 @@ public class _1033SatalocasHeart extends QuestHandler {
                         }
                         case SELECT_ACTION_2035: {
                             if (drakeFangs < 5) {
-		        	removeQuestItem(env, 182201019, drakeFangs);
+                                removeQuestItem(env, 182201019, drakeFangs);
                                 QuestService.questTimerEnd(env);
                                 changeQuestStep(env, 11, 1, false);
                                 return sendQuestDialog(env, 2035);
@@ -165,25 +165,25 @@ public class _1033SatalocasHeart extends QuestHandler {
     }
 
     @Override
-	public boolean onQuestTimerEndEvent(QuestEnv env) {
-		changeQuestStep(env, 10, 11, false);
-		return true;
-	}
+    public boolean onQuestTimerEndEvent(QuestEnv env) {
+        changeQuestStep(env, 10, 11, false);
+        return true;
+    }
 
-	@Override
-	public boolean onLogOutEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		long drakeFangs = player.getInventory().getItemCountByItemId(182201019);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (var == 10) {
-				removeQuestItem(env, 182201019, drakeFangs);
-				changeQuestStep(env, 10, 1, false);
-				return true;
-			}
-		}
-		return false;
+    @Override
+    public boolean onLogOutEvent(QuestEnv env) {
+        Player player = env.getPlayer();
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        long drakeFangs = player.getInventory().getItemCountByItemId(182201019);
+        if (qs != null && qs.getStatus() == QuestStatus.START) {
+            int var = qs.getQuestVarById(0);
+            if (var == 10) {
+                removeQuestItem(env, 182201019, drakeFangs);
+                changeQuestStep(env, 10, 1, false);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override

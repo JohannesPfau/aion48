@@ -29,6 +29,8 @@
  */
 package admincommands;
 
+import java.util.List;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
@@ -36,8 +38,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
-
-import java.util.List;
 
 /**
  * @author ATracer
@@ -83,7 +83,8 @@ public class Zone extends AdminCommand {
                     PacketSendUtility.sendMessage(admin, "Fly: " + zone.canFly() + "; Glide: " + zone.canGlide());
                     PacketSendUtility.sendMessage(admin, "Ride: " + zone.canRide() + "; Fly-ride: " + zone.canFlyRide());
                     PacketSendUtility.sendMessage(admin, "Kisk: " + zone.canPutKisk() + "; Racall: " + zone.canRecall());
-                    PacketSendUtility.sendMessage(admin, "Same race duels: " + zone.isSameRaceDuelsAllowed() + "; Other race duels: " + zone.isOtherRaceDuelsAllowed());
+                    PacketSendUtility.sendMessage(admin,
+                        "Same race duels: " + zone.isSameRaceDuelsAllowed() + "; Other race duels: " + zone.isOtherRaceDuelsAllowed());
                     PacketSendUtility.sendMessage(admin, "PvP: " + zone.isPvpAllowed());
                 }
             }

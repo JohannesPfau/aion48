@@ -29,21 +29,20 @@
  */
 package quest.fort_tiamat;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _30751DeathToTheDragonLordTiamat extends QuestHandler {
 
     private final static int questId = 30751;
-    private final static int npcs[] = {205864, 800430, 800350};
+    private final static int npcs[] = { 205864, 800430, 800350 };
 
     public _30751DeathToTheDragonLordTiamat() {
         super(questId);

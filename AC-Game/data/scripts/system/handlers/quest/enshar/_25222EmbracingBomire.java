@@ -29,9 +29,9 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -42,32 +42,33 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _25222EmbracingBomire extends QuestHandler {
 
-	private final static int questId = 25222;
+    private final static int questId = 25222;
 
-	public _25222EmbracingBomire() {
-		super(questId);
-	}
+    public _25222EmbracingBomire() {
+        super(questId);
+    }
 
-	@Override
-	public void register() {
-		qe.registerQuestNpc(804732).addOnQuestStart(questId);
-		qe.registerQuestNpc(804732).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("SCALEFANG_DALE_220080000"), questId);
-		qe.registerOnKillInWorld(220080000, questId);
-	}
-	
-	@Override
-	public boolean onKillInWorldEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		if (env.getVisibleObject() instanceof Player && player != null && player.isInsideZone(ZoneName.get("SCALEFANG_DALE_220080000"))) {
-			if ((env.getPlayer().getLevel() >= (((Player)env.getVisibleObject()).getLevel() - 5)) && (env.getPlayer().getLevel() <= (((Player)env.getVisibleObject()).getLevel() + 9))) {
-				return defaultOnKillRankedEvent(env, 0, 2, true);
-			}
-		}
-		return false;
-	}
+    @Override
+    public void register() {
+        qe.registerQuestNpc(804732).addOnQuestStart(questId);
+        qe.registerQuestNpc(804732).addOnTalkEvent(questId);
+        qe.registerOnEnterZone(ZoneName.get("SCALEFANG_DALE_220080000"), questId);
+        qe.registerOnKillInWorld(220080000, questId);
+    }
 
-	@Override
+    @Override
+    public boolean onKillInWorldEvent(QuestEnv env) {
+        Player player = env.getPlayer();
+        if (env.getVisibleObject() instanceof Player && player != null && player.isInsideZone(ZoneName.get("SCALEFANG_DALE_220080000"))) {
+            if ((env.getPlayer().getLevel() >= (((Player) env.getVisibleObject()).getLevel() - 5))
+                && (env.getPlayer().getLevel() <= (((Player) env.getVisibleObject()).getLevel() + 9))) {
+                return defaultOnKillRankedEvent(env, 0, 2, true);
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean onDialogEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);

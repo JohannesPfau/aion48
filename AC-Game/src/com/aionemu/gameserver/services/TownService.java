@@ -80,9 +80,9 @@ public class TownService {
                         continue;
                     } else {
                         Race townRace = DataManager.NPC_DATA.getNpcTemplate(land.getManagerNpcId()).getTribe() == TribeClass.GENERAL ? Race.ELYOS
-                                : Race.ASMODIANS;
+                            : Race.ASMODIANS;
                         if ((townRace == Race.ELYOS && !elyosTowns.containsKey(address.getTownId()))
-                                || (townRace == Race.ASMODIANS && !asmosTowns.containsKey(address.getTownId()))) {
+                            || (townRace == Race.ASMODIANS && !asmosTowns.containsKey(address.getTownId()))) {
                             Town town = new Town(address.getTownId(), townRace);
                             if (townRace == Race.ELYOS) {
                                 elyosTowns.put(town.getId(), town);

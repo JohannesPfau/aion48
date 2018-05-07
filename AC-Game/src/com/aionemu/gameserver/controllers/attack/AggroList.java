@@ -33,8 +33,6 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import com.aionemu.commons.callbacks.Callback;
 import com.aionemu.commons.callbacks.CallbackResult;
 import com.aionemu.commons.callbacks.metadata.ObjectCallback;
@@ -50,6 +48,8 @@ import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.utils.MathUtil;
+
+import javolution.util.FastMap;
 
 /**
  * @author ATracer, KKnD
@@ -223,7 +223,7 @@ public class AggroList {
         Creature mostHated = null;
         int maxHate = 0;
 
-        for (FastMap.Entry<Integer, AggroInfo> e = aggroList.head(), mapEnd = aggroList.tail(); (e = e.getNext()) != mapEnd; ) {
+        for (FastMap.Entry<Integer, AggroInfo> e = aggroList.head(), mapEnd = aggroList.tail(); (e = e.getNext()) != mapEnd;) {
             AggroInfo ai = e.getValue();
             if (ai == null) {
                 continue;
@@ -341,7 +341,7 @@ public class AggroList {
      * @return finalDamageList
      */
     public Collection<AggroInfo> getFinalDamageList(boolean mergeGroupDamage) {
-        Map<Integer, AggroInfo> list = new HashMap<Integer, AggroInfo>();
+        Map<Integer, AggroInfo> list = new HashMap<>();
 
         for (AggroInfo ai : aggroList.values()) {
             // Get master only to control damage.
@@ -383,10 +383,8 @@ public class AggroList {
     }
 
     protected boolean isAware(Creature creature) {
-        return creature != null
-                && !creature.getObjectId().equals(owner.getObjectId())
-                && (creature.isEnemy(owner) || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(owner.getTribe(),
-                creature.getTribe()));
+        return creature != null && !creature.getObjectId().equals(owner.getObjectId())
+            && (creature.isEnemy(owner) || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(owner.getTribe(), creature.getTribe()));
     }
 
     public static abstract class AddDamageValueCallback implements Callback<AggroList> {

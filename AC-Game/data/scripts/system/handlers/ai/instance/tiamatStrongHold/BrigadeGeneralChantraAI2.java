@@ -29,7 +29,9 @@
  */
 package ai.instance.tiamatStrongHold;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -37,8 +39,7 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -64,6 +65,7 @@ public class BrigadeGeneralChantraAI2 extends AggressiveNpcAI2 {
 
     private void startSkillTask() {
         trapTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -82,11 +84,12 @@ public class BrigadeGeneralChantraAI2 extends AggressiveNpcAI2 {
     }
 
     private void startTrapEvent() {
-        int[] trapNpc = {283092, 283094};
+        int[] trapNpc = { 283092, 283094 };
         final int trap = trapNpc[Rnd.get(0, trapNpc.length - 1)];
         if (getPosition().getWorldMapInstance().getNpc(trap) == null) {
             spawn(trap, 1031.1f, 466.38f, 445.45f, (byte) 0);
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     Npc ring = getPosition().getWorldMapInstance().getNpc(trap);

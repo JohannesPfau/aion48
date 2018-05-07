@@ -35,7 +35,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Random;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,6 +58,7 @@ public class ChatService {
     public static ChatService getInstance() {
         return instance;
     }
+
     private static final Logger log = LoggerFactory.getLogger(ChatService.class);
     private Map<Integer, ChatClient> players = PlatformDependent.newConcurrentHashMap();
     private BroadcastService broadcastService;
@@ -117,7 +117,8 @@ public class ChatService {
      * @param clientChannelHandler
      * @throws UnsupportedEncodingException
      */
-    public void registerPlayerConnection(int playerId, byte[] token, byte[] identifier, ClientChannelHandler channelHandler, String realName) throws UnsupportedEncodingException {
+    public void registerPlayerConnection(int playerId, byte[] token, byte[] identifier, ClientChannelHandler channelHandler, String realName)
+        throws UnsupportedEncodingException {
         ChatClient chatClient = players.get(playerId);
         if (chatClient != null) {
             byte[] regToken = chatClient.getToken();
@@ -145,7 +146,7 @@ public class ChatService {
         Channel channel = ChatChannels.getChannelByIdentifier(channelIdentifier);
         if (channel != null) {
             ChannelType channelType = channel.getChannelType();
-            if (channelType == ChannelType.GROUP /*|| channelType == ChannelType.JOB*/) {
+            if (channelType == ChannelType.GROUP /* || channelType == ChannelType.JOB */) {
                 if (chatClient.isInChannel(channel)) {
                     return null;
                 }
@@ -172,7 +173,6 @@ public class ChatService {
     }
 
     /**
-     *
      * @param playerId
      * @param gagTime
      */

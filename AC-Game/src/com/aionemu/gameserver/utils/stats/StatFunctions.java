@@ -29,7 +29,6 @@
  */
 package com.aionemu.gameserver.utils.stats;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -69,7 +68,7 @@ import com.google.common.base.Preconditions;
 public class StatFunctions {
 
     private static final Logger log = LoggerFactory.getLogger(StatFunctions.class);
-	private static SkillElement elements = null;
+    private static SkillElement elements = null;
 
     /**
      * Temp method until the maxXp will be corrected in npc_template
@@ -92,7 +91,7 @@ public class StatFunctions {
         int targetLevel = target.getLevel();
         //int baseXP = ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp();
         int baseXP = getBaseXp(((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp(),
-                ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxHp());
+            ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxHp());
         int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - playerLevel);
         long rewardXP = Math.round(baseXP * (xpPercentage / 100d));
         return rewardXP;
@@ -107,16 +106,16 @@ public class StatFunctions {
         int targetLevel = target.getLevel();
         //int baseXP = ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp();
         int baseXP = getBaseXp(((Npc) target).getObjectTemplate().getStatsTemplate().getMaxXp(),
-                ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxHp());
+            ((Npc) target).getObjectTemplate().getStatsTemplate().getMaxHp());
         int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - maxLevelInRange);
         long rewardXP = Math.round(baseXP * (xpPercentage / 100d));
         return rewardXP;
     }
-	
-	public static int calculateGPReward(Player player, Creature target) {
-		int rewardGP = ((Npc) target).getObjectTemplate().getStatsTemplate().getRewardGP();
-		return rewardGP;
-	}
+
+    public static int calculateGPReward(Player player, Creature target) {
+        int rewardGP = ((Npc) target).getObjectTemplate().getStatsTemplate().getRewardGP();
+        return rewardGP;
+    }
 
     /**
      * ref:
@@ -164,14 +163,14 @@ public class StatFunctions {
 
         return (int) (lvlDiff ? 1 : RewardType.AP_NPC.calcReward(player, (int) Math.floor(15 * apPercentage * apNpcRate / 100)));
     }
-    
+
     /**
      * @param player
      * @param target
      * @return AP reward
      */
     public static int calculatePvEGpGained(Player player, Creature target) {
-    	float gpPercentage = target.isRaidMonster() ? 100f : APRewardEnum.apReward(player.getAbyssRank().getRank().getId());
+        float gpPercentage = target.isRaidMonster() ? 100f : APRewardEnum.apReward(player.getAbyssRank().getRank().getId());
         boolean lvlDiff = player.getCommonData().getLevel() - target.getLevel() > 10;
         float gpNpcRate = GpNpcRating(((Npc) target).getObjectTemplate().getRating());
 
@@ -184,8 +183,7 @@ public class StatFunctions {
      * @return Points Lost in PvP Death
      */
     public static int calculatePvPApLost(Player defeated, Player winner) {
-        int pointsLost = Math.round(defeated.getAbyssRank().getRank().getPointsLost()
-                * defeated.getRates().getApPlayerLossRate());
+        int pointsLost = Math.round(defeated.getAbyssRank().getRank().getPointsLost() * defeated.getRates().getApPlayerLossRate());
 
         // Level penalty calculation
         int difference = winner.getLevel() - defeated.getLevel();
@@ -210,22 +208,22 @@ public class StatFunctions {
      * @param winner
      * @return Glory Points Lost in PvP Death
      */
-    public static int calculatePvPGpLost(Player defeated, Player winner){
+    public static int calculatePvPGpLost(Player defeated, Player winner) {
         int pointsLost = Math.round(defeated.getAbyssRank().getRank().getPointsLost());
 
         // Level Penalty Calculation
 
         int difference = winner.getLevel() - defeated.getLevel();
 
-        if(difference == 0){
+        if (difference == 0) {
             pointsLost = Math.round(pointsLost / 2);
 
-        }else{
-            if(difference > 4){
+        } else {
+            if (difference > 4) {
                 pointsLost = Math.round(pointsLost * 0.00001f);
 
-            }else{
-                switch (difference){
+            } else {
+                switch (difference) {
                     case 3:
                         pointsLost = Math.round(pointsLost * 0.000085f);
                         break;
@@ -284,53 +282,52 @@ public class StatFunctions {
         return pointsGained;
     }
 
-    public static int calculatePvpGpGained(Player defeated, int maxRank, int maxLevel){
+    public static int calculatePvpGpGained(Player defeated, int maxRank, int maxLevel) {
         int pointsGained = defeated.getAbyssRank().getRank().getPointsGained();
 
         int winnerAbyssRank = maxRank;
         int defeatedAbyssRank = defeated.getAbyssRank().getRank().getId();
         int AbyssRankDifference = winnerAbyssRank - defeatedAbyssRank;
 
-        if(defeatedAbyssRank == 1) {
+        if (defeatedAbyssRank == 1) {
             pointsGained = CustomConfig.GP_REWARD_RANK1;
-        }else if(defeatedAbyssRank == 2){
+        } else if (defeatedAbyssRank == 2) {
             pointsGained = CustomConfig.GP_REWARD_RANK2;
-        }else if(defeatedAbyssRank == 3){
+        } else if (defeatedAbyssRank == 3) {
             pointsGained = CustomConfig.GP_REWARD_RANK3;
-        }else if(defeatedAbyssRank == 4){
+        } else if (defeatedAbyssRank == 4) {
             pointsGained = CustomConfig.GP_REWARD_RANK4;
-        }else if(defeatedAbyssRank == 5){
+        } else if (defeatedAbyssRank == 5) {
             pointsGained = CustomConfig.GP_REWARD_RANK5;
-        }else if(defeatedAbyssRank == 6){
+        } else if (defeatedAbyssRank == 6) {
             pointsGained = CustomConfig.GP_REWARD_RANK6;
-        }else if(defeatedAbyssRank == 7){
+        } else if (defeatedAbyssRank == 7) {
             pointsGained = CustomConfig.GP_REWARD_RANK7;
-        }else if(defeatedAbyssRank == 8){
+        } else if (defeatedAbyssRank == 8) {
             pointsGained = CustomConfig.GP_REWARD_RANK8;
-        }else if(defeatedAbyssRank == 9){
+        } else if (defeatedAbyssRank == 9) {
             pointsGained = CustomConfig.GP_REWARD_RANK9;
-        }else if(defeatedAbyssRank == 10){
+        } else if (defeatedAbyssRank == 10) {
             pointsGained = CustomConfig.GP_REWARD_OFF1;
-        }else if(defeatedAbyssRank == 11){
+        } else if (defeatedAbyssRank == 11) {
             pointsGained = CustomConfig.GP_REWARD_OFF2;
-        }else if(defeatedAbyssRank == 12){
+        } else if (defeatedAbyssRank == 12) {
             pointsGained = CustomConfig.GP_REWARD_OFF3;
-        }else if(defeatedAbyssRank == 13){
+        } else if (defeatedAbyssRank == 13) {
             pointsGained = CustomConfig.GP_REWARD_OFF4;
-        }else if(defeatedAbyssRank == 14){
+        } else if (defeatedAbyssRank == 14) {
             pointsGained = CustomConfig.GP_REWARD_OFF5;
-        }else if(defeatedAbyssRank == 15){
+        } else if (defeatedAbyssRank == 15) {
             pointsGained = CustomConfig.GP_REWARD_GEN;
-        }else if(defeatedAbyssRank == 16){
+        } else if (defeatedAbyssRank == 16) {
             pointsGained = CustomConfig.GP_REWARD_G_GEN;
-        }else if(defeatedAbyssRank == 17){
+        } else if (defeatedAbyssRank == 17) {
             pointsGained = CustomConfig.GP_REWARD_COMM;
-        }else if(defeatedAbyssRank == 18){
+        } else if (defeatedAbyssRank == 18) {
             pointsGained = CustomConfig.GP_REWARD_GOV;
         }
 
-
-        if(winnerAbyssRank <=7 && AbyssRankDifference > 0){
+        if (winnerAbyssRank <= 7 && AbyssRankDifference > 0) {
             float penaltyPercent = AbyssRankDifference * 0.005f;
 
             pointsGained -= Math.round(pointsGained * penaltyPercent);
@@ -454,7 +451,7 @@ public class StatFunctions {
      * @param target
      * @param isMainHand
      * @return Damage made to target (-hp value)
-     * @param    element
+     * @param element
      */
     public static int calculateAttackDamage(Creature attacker, Creature target, boolean isMainHand, SkillElement element) {
         int resultDamage = 0;
@@ -467,12 +464,14 @@ public class StatFunctions {
         }
 
         // adjusting baseDamages according to attacker and target level
-		elements = element;
+        elements = element;
         resultDamage = (int) adjustDamages(attacker, target, resultDamage, 0, true);
 
         //magical defense
-        /*if (element != SkillElement.NONE)
-         resultDamage -= target.getGameStats().getStat(StatEnum.MAGICAL_DEFEND, 0).getCurrent();*/
+        /*
+         * if (element != SkillElement.NONE)
+         * resultDamage -= target.getGameStats().getStat(StatEnum.MAGICAL_DEFEND, 0).getCurrent();
+         */
         if (target instanceof Npc) {
             return target.getAi2().modifyDamage(resultDamage);
         }
@@ -572,7 +571,8 @@ public class StatFunctions {
         }
 
         //subtract defense
-        float pDef = target.getGameStats().getPDef().getBonus() + getMovementModifier(target, StatEnum.PHYSICAL_DEFENSE, target.getGameStats().getPDef().getBase());
+        float pDef = target.getGameStats().getPDef().getBonus()
+            + getMovementModifier(target, StatEnum.PHYSICAL_DEFENSE, target.getGameStats().getPDef().getBase());
         resultDamage -= (pDef * 0.10f);
 
         if (resultDamage <= 0) {
@@ -633,7 +633,8 @@ public class StatFunctions {
         }
 
         if (element != SkillElement.NONE) {
-            float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element), target.getGameStats().getMagicalDefenseFor(element));
+            float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element),
+                target.getGameStats().getMagicalDefenseFor(element));
             resultDamage = Math.round(resultDamage * (1 - elementalDef / 1300f));
         }
 
@@ -644,8 +645,8 @@ public class StatFunctions {
         return Math.round(resultDamage);
     }
 
-    public static int calculateMagicalSkillDamage(Creature speller, Creature target, int baseDamages,
-                                                  int bonus, SkillElement element, boolean useMagicBoost, boolean useKnowledge, boolean noReduce, int pvpDamage) {
+    public static int calculateMagicalSkillDamage(Creature speller, Creature target, int baseDamages, int bonus, SkillElement element,
+        boolean useMagicBoost, boolean useKnowledge, boolean noReduce, int pvpDamage) {
         CreatureGameStats<?> sgs = speller.getGameStats();
         CreatureGameStats<?> tgs = target.getGameStats();
 
@@ -668,14 +669,15 @@ public class StatFunctions {
         //add bonus damage
         damages += bonus;
 
-        /* element resist: fire, wind, water, eath
+        /*
+         * element resist: fire, wind, water, eath
          * 10 elemental resist ~ 1% reduce of magical baseDamages
          */
         if (!noReduce && element != SkillElement.NONE) {
             float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element), tgs.getMagicalDefenseFor(element));
             damages = Math.round(damages * (1 - (elementalDef / 1250f)));
         }
-		elements = element;
+        elements = element;
         damages = adjustDamages(speller, target, damages, pvpDamage, useKnowledge);
 
         //magical defense
@@ -707,7 +709,8 @@ public class StatFunctions {
 
         int critical = attacker.getGameStats().getMCritical().getCurrent();
         if (attacked instanceof Player) {
-            critical = attacked.getGameStats().getPositiveReverseStat(StatEnum.MAGICAL_CRITICAL_RESIST, critical) + attacked.getGameStats().getPositiveReverseStat(StatEnum.PVP_MAGICAL_RESIST, critical);
+            critical = attacked.getGameStats().getPositiveReverseStat(StatEnum.MAGICAL_CRITICAL_RESIST, critical)
+                + attacked.getGameStats().getPositiveReverseStat(StatEnum.PVP_MAGICAL_RESIST, critical);
         } else {
             critical = attacked.getGameStats().getPositiveReverseStat(StatEnum.MAGICAL_CRITICAL_RESIST, critical);
         }
@@ -737,8 +740,8 @@ public class StatFunctions {
         int multipler;
         switch (npcRating) {
             case JUNK:
-			    multipler = 1;
-				break;
+                multipler = 1;
+                break;
             case NORMAL:
                 multipler = 2;
                 break;
@@ -775,7 +778,7 @@ public class StatFunctions {
                 multipler = 4;
                 break;
             case HERO:
-				multipler = 5;
+                multipler = 5;
                 break;
             case LEGENDARY:
                 multipler = 6;
@@ -786,7 +789,7 @@ public class StatFunctions {
 
         return multipler;
     }
-    
+
     /**
      * @param GpNpcRating
      * @return
@@ -819,8 +822,10 @@ public class StatFunctions {
     /**
      * adjust baseDamages according to their level || is PVP?
      *
-     * @param attacker    lvl
-     * @param target      lvl
+     * @param attacker
+     *            lvl
+     * @param target
+     *            lvl
      * @param baseDamages
      * @ref:
      */
@@ -845,28 +850,28 @@ public class StatFunctions {
             // PVP damages is capped of 50% of the actual baseDamage
             damages = Math.round(damages * 0.50f);
             float pvpAttackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent();
-			float pvpDefenceBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent();
-			switch (elements) {
-				case NONE:
-					pvpAttackBonus += attacker.getGameStats().getStat(StatEnum.PVP_PHYSICAL_ATTACK, 0).getCurrent();
-					pvpDefenceBonus += target.getGameStats().getStat(StatEnum.PVP_PHYSICAL_DEFEND, 0).getCurrent();
-					break;
-				case FIRE:
-				case WATER:
-				case WIND:
-				case EARTH:
-				case LIGHT:
-				case DARK:
-						pvpAttackBonus += attacker.getGameStats().getStat(StatEnum.PVP_MAGICAL_ATTACK, 0).getCurrent();
-						pvpDefenceBonus += target.getGameStats().getStat(StatEnum.PVP_MAGICAL_DEFEND, 0).getCurrent();
-						break;
-				default:
-						break;					
-			}
-			pvpAttackBonus = pvpAttackBonus * 0.001f;
-			pvpDefenceBonus = pvpDefenceBonus * 0.001f;
-			damages = Math.round(damages + (damages * pvpAttackBonus) - (damages * pvpDefenceBonus));
-			//Apply Race modifier
+            float pvpDefenceBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent();
+            switch (elements) {
+                case NONE:
+                    pvpAttackBonus += attacker.getGameStats().getStat(StatEnum.PVP_PHYSICAL_ATTACK, 0).getCurrent();
+                    pvpDefenceBonus += target.getGameStats().getStat(StatEnum.PVP_PHYSICAL_DEFEND, 0).getCurrent();
+                    break;
+                case FIRE:
+                case WATER:
+                case WIND:
+                case EARTH:
+                case LIGHT:
+                case DARK:
+                    pvpAttackBonus += attacker.getGameStats().getStat(StatEnum.PVP_MAGICAL_ATTACK, 0).getCurrent();
+                    pvpDefenceBonus += target.getGameStats().getStat(StatEnum.PVP_MAGICAL_DEFEND, 0).getCurrent();
+                    break;
+                default:
+                    break;
+            }
+            pvpAttackBonus = pvpAttackBonus * 0.001f;
+            pvpDefenceBonus = pvpDefenceBonus * 0.001f;
+            damages = Math.round(damages + (damages * pvpAttackBonus) - (damages * pvpDefenceBonus));
+            //Apply Race modifier
             if (attacker.getRace() != target.getRace() && !attacker.isInInstance()) {
                 damages *= Influence.getInstance().getPvpRaceBonus(attacker.getRace());
             }
@@ -901,9 +906,12 @@ public class StatFunctions {
         float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent() + accMod;
         float dodge = 0;
         if (attacked instanceof Player) {
-            dodge = attacked.getGameStats().getEvasion().getBonus() + getMovementModifier(attacked, StatEnum.EVASION, attacked.getGameStats().getEvasion().getBase()) + attacked.getGameStats().getStat(StatEnum.PVP_DODGE, 0).getCurrent();
+            dodge = attacked.getGameStats().getEvasion().getBonus()
+                + getMovementModifier(attacked, StatEnum.EVASION, attacked.getGameStats().getEvasion().getBase())
+                + attacked.getGameStats().getStat(StatEnum.PVP_DODGE, 0).getCurrent();
         } else {
-            dodge = attacked.getGameStats().getEvasion().getBonus() + getMovementModifier(attacked, StatEnum.EVASION, attacked.getGameStats().getEvasion().getBase());
+            dodge = attacked.getGameStats().getEvasion().getBonus()
+                + getMovementModifier(attacked, StatEnum.EVASION, attacked.getGameStats().getEvasion().getBase());
         }
         float dodgeRate = dodge - accuracy;
         if (attacked instanceof Npc) {
@@ -935,9 +943,12 @@ public class StatFunctions {
         float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent();
         float parry = 0;
         if (attacked instanceof Player) {
-            parry = attacked.getGameStats().getParry().getBonus() + getMovementModifier(attacked, StatEnum.PARRY, attacked.getGameStats().getParry().getBase()) + attacked.getGameStats().getStat(StatEnum.PVP_PARRY, 0).getCurrent();
+            parry = attacked.getGameStats().getParry().getBonus()
+                + getMovementModifier(attacked, StatEnum.PARRY, attacked.getGameStats().getParry().getBase())
+                + attacked.getGameStats().getStat(StatEnum.PVP_PARRY, 0).getCurrent();
         } else {
-            parry = attacked.getGameStats().getParry().getBonus() + getMovementModifier(attacked, StatEnum.PARRY, attacked.getGameStats().getParry().getBase());
+            parry = attacked.getGameStats().getParry().getBonus()
+                + getMovementModifier(attacked, StatEnum.PARRY, attacked.getGameStats().getParry().getBase());
         }
         float parryRate = parry - accuracy;
         return calculatePhysicalEvasion(parryRate, 400);
@@ -959,9 +970,12 @@ public class StatFunctions {
         float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent();
         float block = 0;
         if (attacked instanceof Player) {
-            block = attacked.getGameStats().getBlock().getBonus() + getMovementModifier(attacked, StatEnum.BLOCK, attacked.getGameStats().getBlock().getBase()) + attacked.getGameStats().getStat(StatEnum.PVP_BLOCK, 0).getCurrent();
+            block = attacked.getGameStats().getBlock().getBonus()
+                + getMovementModifier(attacked, StatEnum.BLOCK, attacked.getGameStats().getBlock().getBase())
+                + attacked.getGameStats().getStat(StatEnum.PVP_BLOCK, 0).getCurrent();
         } else {
-            block = attacked.getGameStats().getBlock().getBonus() + getMovementModifier(attacked, StatEnum.BLOCK, attacked.getGameStats().getBlock().getBase());
+            block = attacked.getGameStats().getBlock().getBonus()
+                + getMovementModifier(attacked, StatEnum.BLOCK, attacked.getGameStats().getBlock().getBase());
         }
         float blockRate = block - accuracy;
         //blockRate = blockRate*0.6f+50;
@@ -1017,7 +1031,8 @@ public class StatFunctions {
             }
         }
 
-        critical = attacked.getGameStats().getPositiveReverseStat(StatEnum.PHYSICAL_CRITICAL_RESIST, critical) - attacker.getGameStats().getStat(StatEnum.PVP_HIT_ACCURACY, 0).getCurrent();
+        critical = attacked.getGameStats().getPositiveReverseStat(StatEnum.PHYSICAL_CRITICAL_RESIST, critical)
+            - attacker.getGameStats().getStat(StatEnum.PVP_HIT_ACCURACY, 0).getCurrent();
 
         //add critical Prob
         critical *= criticalProb / 100f;
@@ -1050,8 +1065,8 @@ public class StatFunctions {
         int attackerLevel = attacker.getLevel();
         int targetLevel = attacked.getLevel();
 
-        int resistRate = attacked.getGameStats().getMResist().getCurrent()
-                - attacker.getGameStats().getMainHandMAccuracy().getCurrent() - attacker.getGameStats().getStat(StatEnum.PVP_MAGICAL_HIT_ACCURACY, 0).getCurrent() - accMod;
+        int resistRate = attacked.getGameStats().getMResist().getCurrent() - attacker.getGameStats().getMainHandMAccuracy().getCurrent()
+            - attacker.getGameStats().getStat(StatEnum.PVP_MAGICAL_HIT_ACCURACY, 0).getCurrent() - accMod;
 
         if ((targetLevel - attackerLevel) > 2) {
             resistRate += (targetLevel - attackerLevel - 2) * 100;

@@ -43,7 +43,7 @@ public abstract class AbstractTriangle implements Collidable {
     public abstract void set(Vector3f v1, Vector3f v2, Vector3f v3);
 
     @Override
-	public int collideWith(Collidable other, CollisionResults results) {
+    public int collideWith(Collidable other, CollisionResults results) {
         return other.collideWith(this, results);
     }
 }

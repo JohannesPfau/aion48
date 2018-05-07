@@ -36,8 +36,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,6 +69,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 
+import javolution.util.FastList;
+
 /**
  * @author Rolandas
  */
@@ -78,7 +78,7 @@ public class HousingService {
 
     private static final Logger log = LoggerFactory.getLogger(HousingService.class);
     // Contains non-instance houses initially (which are spawned)
-    private static final Map<Integer, List<House>> housesByMapId = new HashMap<Integer, List<House>>();
+    private static final Map<Integer, List<House>> housesByMapId = new HashMap<>();
     // Contains all houses by their addresses
     private final Map<Integer, House> customHouses;
     private final Map<Integer, House> studios;
@@ -95,7 +95,8 @@ public class HousingService {
 
     private HousingService() {
         log.info("Loading housing data...");
-        customHouses = PlatformDependent.newConcurrentHashMap(DAOManager.getDAO(HousesDAO.class).loadHouses(DataManager.HOUSE_DATA.getLands(), false));
+        customHouses = PlatformDependent
+            .newConcurrentHashMap(DAOManager.getDAO(HousesDAO.class).loadHouses(DataManager.HOUSE_DATA.getLands(), false));
         studios = PlatformDependent.newConcurrentHashMap(DAOManager.getDAO(HousesDAO.class).loadHouses(DataManager.HOUSE_DATA.getLands(), true));
         log.info("Housing Service loaded.");
     }
@@ -166,7 +167,7 @@ public class HousingService {
 
                 List<House> housesForMap = housesByMapId.get(worldId);
                 if (housesForMap == null) {
-                    housesForMap = new ArrayList<House>();
+                    housesForMap = new ArrayList<>();
                     housesByMapId.put(worldId, housesForMap);
                 }
                 housesForMap.add(customHouse);
@@ -178,7 +179,7 @@ public class HousingService {
     }
 
     public List<House> searchPlayerHouses(int playerObjId) {
-        List<House> houses = new ArrayList<House>();
+        List<House> houses = new ArrayList<>();
         synchronized (studios) {
             if (studios.containsKey(playerObjId)) {
                 houses.add(studios.get(playerObjId));
@@ -204,8 +205,7 @@ public class HousingService {
             if (house.getStatus() == HouseStatus.INACTIVE) {
                 continue;
             }
-            if (house.getOwnerId() == playerId
-                    && (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT)) {
+            if (house.getOwnerId() == playerId && (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT)) {
                 return house.getAddress().getId();
             }
         }

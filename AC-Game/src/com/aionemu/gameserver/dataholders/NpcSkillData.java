@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -42,6 +40,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -55,7 +55,7 @@ public class NpcSkillData {
     /**
      * A map containing all npc skill templates
      */
-    private TIntObjectHashMap<NpcSkillTemplates> npcSkillData = new TIntObjectHashMap<NpcSkillTemplates>();
+    private TIntObjectHashMap<NpcSkillTemplates> npcSkillData = new TIntObjectHashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (NpcSkillTemplates npcSkill : npcSkills) {

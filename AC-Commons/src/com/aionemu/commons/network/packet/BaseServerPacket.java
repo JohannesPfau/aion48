@@ -46,7 +46,8 @@ public abstract class BaseServerPacket extends BasePacket {
     /**
      * Constructs a new server packet with specified id.
      *
-     * @param opcode packet opcode.
+     * @param opcode
+     *            packet opcode.
      */
     protected BaseServerPacket(int opcode) {
         super(PacketType.SERVER, opcode);
@@ -61,7 +62,8 @@ public abstract class BaseServerPacket extends BasePacket {
     }
 
     /**
-     * @param buf the buf to set
+     * @param buf
+     *            the buf to set
      */
     public void setBuf(ByteBuffer buf) {
         this.buf = buf;

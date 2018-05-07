@@ -59,8 +59,7 @@ public class SM_LEGION_UPDATE_EMBLEM extends AionServerPacket {
      * @param color_b
      * @param emblemType
      */
-    public SM_LEGION_UPDATE_EMBLEM(int legionId, int emblemId, int color_r, int color_g, int color_b,
-                                   LegionEmblemType emblemType) {
+    public SM_LEGION_UPDATE_EMBLEM(int legionId, int emblemId, int color_r, int color_g, int color_b, LegionEmblemType emblemType) {
         this.legionId = legionId;
         this.emblemId = emblemId;
         this.color_r = color_r;
@@ -71,7 +70,7 @@ public class SM_LEGION_UPDATE_EMBLEM extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(legionId);
         writeC(emblemId);
         writeC(emblemType.getValue());

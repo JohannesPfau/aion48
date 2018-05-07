@@ -59,6 +59,7 @@ public enum ReviveType {
      * Revive to Obelisk
      */
     OBELISK_REVIVE(8);
+
     private int typeId;
 
     /**

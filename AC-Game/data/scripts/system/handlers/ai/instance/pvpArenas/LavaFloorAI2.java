@@ -29,12 +29,13 @@
  */
 package ai.instance.pvpArenas;
 
-import ai.GeneralNpcAI2;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import java.util.concurrent.Future;
+import ai.GeneralNpcAI2;
 
 /**
  * @author wasacacax
@@ -70,6 +71,7 @@ public class LavaFloorAI2 extends GeneralNpcAI2 {
 
     private void startEventTask() {
         eventTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {

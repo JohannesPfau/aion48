@@ -46,9 +46,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import sun.misc.Cleaner;
-import sun.nio.ch.DirectBuffer;
-
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.bounding.BoundingVolume;
@@ -66,6 +63,9 @@ import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
+import sun.misc.Cleaner;
+import sun.nio.ch.DirectBuffer;
+
 /**
  * @author Mr. Poke
  */
@@ -82,7 +82,7 @@ public class GeoWorldLoader {
 
     @SuppressWarnings("resource")
     public static Map<String, Spatial> loadMeshs(String fileName) throws IOException {
-        Map<String, Spatial> geoms = new HashMap<String, Spatial>();
+        Map<String, Spatial> geoms = new HashMap<>();
         File geoFile = new File(fileName);
         FileChannel roChannel = null;
         MappedByteBuffer geo = null;
@@ -168,7 +168,7 @@ public class GeoWorldLoader {
         geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, (int) roChannel.size()).load();
         geo.order(ByteOrder.LITTLE_ENDIAN);
         if (geo.get() == 0) {
-            map.setTerrainData(new short[]{geo.getShort()});
+            map.setTerrainData(new short[] { geo.getShort() });
         } else {
             int size = geo.getInt();
             short[] terrainData = new short[size];

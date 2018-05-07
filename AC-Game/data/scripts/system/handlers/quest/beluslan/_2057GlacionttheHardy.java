@@ -29,12 +29,12 @@
  */
 package quest.beluslan;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -52,8 +52,8 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _2057GlacionttheHardy extends QuestHandler {
 
     private final static int questId = 2057;
-    private final static int[] npc_ids = {204787, 204784};
-    private final static int[] mob_ids = {213730, 213788, 213789, 213790, 213791};
+    private final static int[] npc_ids = { 204787, 204784 };
+    private final static int[] mob_ids = { 213730, 213788, 213789, 213790, 213791 };
 
     public _2057GlacionttheHardy() {
         super(questId);
@@ -79,7 +79,7 @@ public class _2057GlacionttheHardy extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {2500, 2056};
+        int[] quests = { 2500, 2056 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 
@@ -152,7 +152,7 @@ public class _2057GlacionttheHardy extends QuestHandler {
                 int var3 = qs.getQuestVarById(3);
                 int var4 = qs.getQuestVarById(4);
                 int var5 = qs.getQuestVarById(5);
-                int vars[] = {var1, var2, var3, var4, var5};
+                int vars[] = { var1, var2, var3, var4, var5 };
                 int allDead = 0;
 
                 if (targetId == 213730 && var1 == 0) { // Glaciont the Hardy

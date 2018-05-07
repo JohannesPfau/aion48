@@ -114,13 +114,13 @@ public class CM_DISTRIBUTION_SETTINGS extends AionClientPacket {
 
         PlayerGroup group = leader.getPlayerGroup2();
         if (group != null) {
-            PlayerGroupService.changeGroupRules(group, new LootGroupRules(lootrules, autodistribution, common_item_above,
-                    superior_item_above, heroic_item_above, fabled_item_above, ethernal_item_above, misc));
+            PlayerGroupService.changeGroupRules(group, new LootGroupRules(lootrules, autodistribution, common_item_above, superior_item_above,
+                heroic_item_above, fabled_item_above, ethernal_item_above, misc));
         }
         com.aionemu.gameserver.model.team2.alliance.PlayerAlliance alliance = leader.getPlayerAlliance2();
         if (alliance != null) {
-            PlayerAllianceService.changeGroupRules(alliance, new LootGroupRules(lootrules, autodistribution,
-                    common_item_above, superior_item_above, heroic_item_above, fabled_item_above, ethernal_item_above, misc));
+            PlayerAllianceService.changeGroupRules(alliance, new LootGroupRules(lootrules, autodistribution, common_item_above, superior_item_above,
+                heroic_item_above, fabled_item_above, ethernal_item_above, misc));
         }
     }
 }

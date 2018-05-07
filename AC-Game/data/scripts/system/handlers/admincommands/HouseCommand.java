@@ -29,6 +29,8 @@
  */
 package admincommands;
 
+import java.sql.Timestamp;
+
 import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -43,8 +45,6 @@ import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.sql.Timestamp;
 
 /**
  * @author Rolandas
@@ -139,8 +139,7 @@ public class HouseCommand extends AdminCommand {
             target.setBuildingOwnerState(PlayerHouseOwnerFlags.HOUSE_OWNER.getId());
             PacketSendUtility.sendMessage(admin, "House " + house.getName() + " acquired");
             PacketSendUtility.sendPacket(target, new SM_HOUSE_OWNER_INFO(target, house));
-            PacketSendUtility
-                    .sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(), house.getAddress().getId(), true));
+            PacketSendUtility.sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(), house.getAddress().getId(), true));
         } else {
             if (target.getHouses().size() == 0) {
                 PacketSendUtility.sendMessage(admin, "Nothing to revoke!");
@@ -171,8 +170,7 @@ public class HouseCommand extends AdminCommand {
             target.setHouseRegistry(oldHouse == null ? null : oldHouse.getRegistry());
             PacketSendUtility.sendMessage(admin, "House " + revokedHouse.getName() + " revoked");
             PacketSendUtility.sendPacket(target, new SM_HOUSE_OWNER_INFO(target, oldHouse));
-            PacketSendUtility.sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(),
-                    revokedHouse.getAddress().getId(), false));
+            PacketSendUtility.sendPacket(target, new SM_HOUSE_ACQUIRE(target.getObjectId(), revokedHouse.getAddress().getId(), false));
             ((HouseController) revokedHouse.getController()).updateAppearance();
         }
     }

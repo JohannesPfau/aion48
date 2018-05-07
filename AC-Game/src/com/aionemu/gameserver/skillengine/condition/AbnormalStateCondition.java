@@ -42,7 +42,8 @@ public class AbnormalStateCondition extends Condition {
 
     @XmlAttribute(required = true)
     protected AbnormalState value;
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.gameserver.skillengine.condition.Condition#validate(com.aionemu.gameserver.skillengine.model.Skill)
      */
 

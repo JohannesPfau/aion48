@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -44,23 +42,25 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.templates.stats.AbsoluteStatsTemplate;
 import com.aionemu.gameserver.model.templates.stats.ModifiersTemplate;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"absoluteStats"})
+@XmlType(name = "", propOrder = { "absoluteStats" })
 @XmlRootElement(name = "absolute_stats")
 public class AbsoluteStatsData {
 
     @XmlElement(name = "stats_set", required = true)
     protected List<AbsoluteStatsTemplate> absoluteStats;
     @XmlTransient
-    private TIntObjectHashMap<ModifiersTemplate> absoluteStatsData = new TIntObjectHashMap<ModifiersTemplate>();
+    private TIntObjectHashMap<ModifiersTemplate> absoluteStatsData = new TIntObjectHashMap<>();
 
     /**
-	 * @param u  
-     * @param parent 
-	 */
+     * @param u
+     * @param parent
+     */
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (AbsoluteStatsTemplate stats : absoluteStats) {
             absoluteStatsData.put(stats.getId(), stats.getModifiers());

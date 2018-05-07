@@ -29,11 +29,12 @@
  */
 package ai.siege;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author ATracer

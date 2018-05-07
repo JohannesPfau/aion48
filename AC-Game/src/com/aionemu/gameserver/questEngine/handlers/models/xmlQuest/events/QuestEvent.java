@@ -46,8 +46,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
  * @author Mr. Poke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "QuestEvent", propOrder = {"conditions", "operations"})
-@XmlSeeAlso({OnKillEvent.class, OnTalkEvent.class})
+@XmlType(name = "QuestEvent", propOrder = { "conditions", "operations" })
+@XmlSeeAlso({ OnKillEvent.class, OnTalkEvent.class })
 public abstract class QuestEvent {
 
     protected QuestConditions conditions;
@@ -72,6 +72,7 @@ public abstract class QuestEvent {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getIds().add(newItem);
      * </pre>
@@ -80,7 +81,7 @@ public abstract class QuestEvent {
      */
     public List<Integer> getIds() {
         if (ids == null) {
-            ids = new ArrayList<Integer>();
+            ids = new ArrayList<>();
         }
         return this.ids;
     }

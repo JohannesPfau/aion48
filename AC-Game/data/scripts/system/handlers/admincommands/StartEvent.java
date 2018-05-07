@@ -46,7 +46,8 @@ public class StartEvent extends AdminCommand {
     public void execute(Player admin, String... params) {
 
         if (params.length < 3) {
-            PacketSendUtility.sendMessage(admin, "syntax : //startevent <Check isLookingforevent 0:False|1:True> <0:Elyos|1:Asmos|3:All> <0:Start|1:End>");
+            PacketSendUtility.sendMessage(admin,
+                "syntax : //startevent <Check isLookingforevent 0:False|1:True> <0:Elyos|1:Asmos|3:All> <0:Start|1:End>");
             return;
         }
 
@@ -86,7 +87,8 @@ public class StartEvent extends AdminCommand {
                             if (Integer.parseInt(params[2]) == 0) {
                                 if (!p.equals(admin)) {
                                     if (p.getCommonData().getRace().getRaceId() == Integer.parseInt(params[1])) {
-                                        TeleportService2.teleportTo(p, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(), admin.getZ(), admin.getHeading());
+                                        TeleportService2.teleportTo(p, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(),
+                                            admin.getZ(), admin.getHeading());
                                         playerscount++;
                                         PacketSendUtility.sendPacket(p, new SM_PLAYER_SPAWN(p));
                                         PacketSendUtility.sendMessage(p, "Vous venez d'être téléporté pour l'event de " + admin.getName() + ".");
@@ -98,7 +100,8 @@ public class StartEvent extends AdminCommand {
                                         if (p.getCommonData().getRace().getRaceId() == Integer.parseInt(params[1])) {
                                             TeleportService2.moveToBindLocation(p, true);
                                             playerscount++;
-                                            PacketSendUtility.sendMessage(p, "Vous venez d'être téléporté pour l'event de " + admin.getName() + ".");
+                                            PacketSendUtility.sendMessage(p,
+                                                "Vous venez d'être téléporté pour l'event de " + admin.getName() + ".");
                                             p.setLookingForEvent(false);
                                             PacketSendUtility.sendMessage(p, "Vous n'attendez plus pour un event.");
                                         }
@@ -114,10 +117,12 @@ public class StartEvent extends AdminCommand {
                                 if (p.isLookingForEvent()) {
                                     if (!p.equals(admin)) {
                                         if (p.getCommonData().getRace().getRaceId() == Integer.parseInt(params[1])) {
-                                            TeleportService2.teleportTo(p, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(), admin.getZ(), admin.getHeading());
+                                            TeleportService2.teleportTo(p, admin.getWorldId(), admin.getInstanceId(), admin.getX(), admin.getY(),
+                                                admin.getZ(), admin.getHeading());
                                             playerscount++;
                                             PacketSendUtility.sendPacket(p, new SM_PLAYER_SPAWN(p));
-                                            PacketSendUtility.sendMessage(p, "Vous venez d'être téléporté pour l'event de " + admin.getName() + ".");
+                                            PacketSendUtility.sendMessage(p,
+                                                "Vous venez d'être téléporté pour l'event de " + admin.getName() + ".");
                                         }
                                     }
                                 }
@@ -127,7 +132,8 @@ public class StartEvent extends AdminCommand {
                                         if (p.getCommonData().getRace().getRaceId() == Integer.parseInt(params[0])) {
                                             TeleportService2.moveToBindLocation(p, true);
                                             playerscount++;
-                                            PacketSendUtility.sendMessage(p, "Vous venez d'être téléporté pour l'event de " + admin.getName() + ".");
+                                            PacketSendUtility.sendMessage(p,
+                                                "Vous venez d'être téléporté pour l'event de " + admin.getName() + ".");
                                             p.setLookingForEvent(false);
                                             PacketSendUtility.sendMessage(p, "Vous n'attendez plus pour un event.");
                                         }

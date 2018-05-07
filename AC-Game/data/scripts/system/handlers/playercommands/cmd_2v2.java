@@ -31,35 +31,36 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
  * @author Goong ADM
  */
 public class cmd_2v2 extends PlayerCommand {
-    
+
     public cmd_2v2() {
         super("2v2");
     }
 
     @Override
     public void execute(final Player player, String... params) {
-       if (player.isInDuoFFA()) {
-        	if (player.getLifeStats().isAlreadyDead()) {
-        		PacketSendUtility.sendMessage(player, "2v2v2: You cannot use this command while dead.");
-        		return;
-        	}
-        	PacketSendUtility.sendMessage(player, "2v2v2: Please wait 5 seconds.");
-        	PVPManager.getInstance().paralizePlayer(player, true);
-        	PlayerGroupService.removePlayer(player); //remove player from group in 2v2v2
+        if (player.isInDuoFFA()) {
+            if (player.getLifeStats().isAlreadyDead()) {
+                PacketSendUtility.sendMessage(player, "2v2v2: You cannot use this command while dead.");
+                return;
+            }
+            PacketSendUtility.sendMessage(player, "2v2v2: Please wait 5 seconds.");
+            PVPManager.getInstance().paralizePlayer(player, true);
+            PlayerGroupService.removePlayer(player); //remove player from group in 2v2v2
             PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), 0, 0, (int) TimeUnit.SECONDS.toMillis(5), 0, 0));
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
-                	PVPManager.getInstance().paralizePlayer(player, false);
+                    PVPManager.getInstance().paralizePlayer(player, false);
                     PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), 0, 0, 0, 1, 0));
-                    DFFAService.getInstance().TeleOut(player);  
+                    DFFAService.getInstance().TeleOut(player);
                 }
             }, (int) TimeUnit.SECONDS.toMillis(5));
-       }
+        }
     }
+
     @Override
     public void onFail(Player player, String message) {
         PacketSendUtility.sendMessage(player, "Syntax: Type '.2v2' to enter or exit.");
     }
 }
-

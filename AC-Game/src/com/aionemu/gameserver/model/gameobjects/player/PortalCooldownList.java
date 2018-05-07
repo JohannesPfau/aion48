@@ -29,10 +29,10 @@
  */
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import javolution.util.FastMap;
 
 /**
  * @author ATracer
@@ -50,7 +50,8 @@ public class PortalCooldownList {
     }
 
     /**
-     * @param worldId * @return
+     * @param worldId
+     *            * @return
      */
     public boolean isPortalUseDisabled(int worldId) {
         if (portalCooldowns == null || !portalCooldowns.containsKey(worldId)) {
@@ -96,7 +97,7 @@ public class PortalCooldownList {
      */
     public void addPortalCooldown(int worldId, long useDelay) {
         if (portalCooldowns == null) {
-            portalCooldowns = new FastMap<Integer, Long>();
+            portalCooldowns = new FastMap<>();
         }
         portalCooldowns.put(worldId, useDelay);
 

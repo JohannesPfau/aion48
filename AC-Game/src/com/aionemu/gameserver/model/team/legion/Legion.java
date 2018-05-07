@@ -64,14 +64,14 @@ public class Legion {
     private int legionLevel = 1;
     private int legionRank = 0;
     private long contributionPoints = 0;
-    private List<Integer> legionMembers = new ArrayList<Integer>();
+    private List<Integer> legionMembers = new ArrayList<>();
     private int onlineMembersCount = 0;
     private short deputyPermission = 0x1E0C;
     private short centurionPermission = 0x1C08;
     private short legionaryPermission = 0x1800;
     private short volunteerPermission = 0x800;
     private int disbandTime;
-    private TreeMap<Timestamp, String> announcementList = new TreeMap<Timestamp, String>();
+    private TreeMap<Timestamp, String> announcementList = new TreeMap<>();
     private LegionEmblem legionEmblem = new LegionEmblem();
     private LegionWarehouse legionWarehouse;
     private SortedSet<LegionHistory> legionHistory;
@@ -94,7 +94,8 @@ public class Legion {
      */
     public Legion() {
         this.legionWarehouse = new LegionWarehouse(this);
-        this.legionHistory = new TreeSet<LegionHistory>(new Comparator<LegionHistory>() {
+        this.legionHistory = new TreeSet<>(new Comparator<LegionHistory>() {
+
             @Override
             public int compare(LegionHistory o1, LegionHistory o2) {
                 return o1.getTime().getTime() < o2.getTime().getTime() ? 1 : -1;
@@ -103,7 +104,8 @@ public class Legion {
     }
 
     /**
-     * @param legionId the legionId to set
+     * @param legionId
+     *            the legionId to set
      */
     public void setLegionId(int legionId) {
         this.legionId = legionId;
@@ -117,7 +119,8 @@ public class Legion {
     }
 
     /**
-     * @param legionName the legionName to set
+     * @param legionName
+     *            the legionName to set
      */
     public void setLegionName(String legionName) {
         this.legionName = legionName;
@@ -131,7 +134,8 @@ public class Legion {
     }
 
     /**
-     * @param legionMembers the legionMembers to set
+     * @param legionMembers
+     *            the legionMembers to set
      */
     public void setLegionMembers(ArrayList<Integer> legionMembers) {
         this.legionMembers = legionMembers;
@@ -148,7 +152,7 @@ public class Legion {
      * @return the online legionMembers
      */
     public ArrayList<Player> getOnlineLegionMembers() {
-        ArrayList<Player> onlineLegionMembers = new ArrayList<Player>();
+        ArrayList<Player> onlineLegionMembers = new ArrayList<>();
         for (int legionMemberObjId : legionMembers) {
             Player onlineLegionMember = World.getInstance().findPlayer(legionMemberObjId);
             if (onlineLegionMember != null) {
@@ -251,7 +255,8 @@ public class Legion {
     }
 
     /**
-     * @param legionRank the legionRank to set
+     * @param legionRank
+     *            the legionRank to set
      */
     public void setLegionRank(int legionRank) {
         this.legionRank = legionRank;
@@ -265,7 +270,8 @@ public class Legion {
     }
 
     /**
-     * @param contributionPoints the contributionPoints to set
+     * @param contributionPoints
+     *            the contributionPoints to set
      */
     public void addContributionPoints(long contributionPoints) {
         this.contributionPoints += contributionPoints;
@@ -390,7 +396,8 @@ public class Legion {
     }
 
     /**
-     * @param announcementList the announcementList to set
+     * @param announcementList
+     *            the announcementList to set
      */
     public void setAnnouncementList(TreeMap<Timestamp, String> announcementList) {
         this.announcementList = announcementList;
@@ -428,7 +435,8 @@ public class Legion {
     }
 
     /**
-     * @param disbandTime the disbandTime to set
+     * @param disbandTime
+     *            the disbandTime to set
      */
     public void setDisbandTime(int disbandTime) {
         this.disbandTime = disbandTime;
@@ -459,7 +467,8 @@ public class Legion {
     }
 
     /**
-     * @param legionEmblem the legionEmblem to set
+     * @param legionEmblem
+     *            the legionEmblem to set
      */
     public void setLegionEmblem(LegionEmblem legionEmblem) {
         this.legionEmblem = legionEmblem;
@@ -473,7 +482,8 @@ public class Legion {
     }
 
     /**
-     * @param legionWarehouse the legionWarehouse to set
+     * @param legionWarehouse
+     *            the legionWarehouse to set
      */
     public void setLegionWarehouse(LegionWarehouse legionWarehouse) {
         this.legionWarehouse = legionWarehouse;

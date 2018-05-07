@@ -29,6 +29,9 @@
  */
 package admincommands;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -39,9 +42,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_EXP;
 import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author Mrakobes, Loxo
@@ -85,9 +85,8 @@ public class Heal extends AdminCommand {
             PlayerCommonData pcd = targetPlayer.getCommonData();
             pcd.setCurrentReposteEnergy(pcd.getMaxReposteEnergy());
             PacketSendUtility.sendMessage(player, targetPlayer.getName() + " Reposte Energy has been fully refreshed !");
-            PacketSendUtility.sendPacket(targetPlayer,
-                    new SM_STATUPDATE_EXP(pcd.getExpShown(), pcd.getExpRecoverable(), pcd.getExpNeed(), pcd
-                            .getCurrentReposteEnergy(), pcd.getMaxReposteEnergy(), pcd.getCurrentEventExp()));
+            PacketSendUtility.sendPacket(targetPlayer, new SM_STATUPDATE_EXP(pcd.getExpShown(), pcd.getExpRecoverable(), pcd.getExpNeed(),
+                pcd.getCurrentReposteEnergy(), pcd.getMaxReposteEnergy(), pcd.getCurrentEventExp()));
         } else {
             int hp;
             try {
@@ -118,11 +117,9 @@ public class Heal extends AdminCommand {
 
     @Override
     public void onFail(Player player, String message) {
-        String syntax = "//heal : Full HP and MP\n"
-                + "//heal dp : Full DP, must be used on a player !\n"
-                + "//heal fp : Full FP, must be used on a player\n"
-                + "//heal repose : Full repose energy, must be used on a player\n"
-                + "//heal <hp | hp%> : Heal given amount/percentage of HP";
+        String syntax = "//heal : Full HP and MP\n" + "//heal dp : Full DP, must be used on a player !\n"
+            + "//heal fp : Full FP, must be used on a player\n" + "//heal repose : Full repose energy, must be used on a player\n"
+            + "//heal <hp | hp%> : Heal given amount/percentage of HP";
         PacketSendUtility.sendMessage(player, syntax);
     }
 }

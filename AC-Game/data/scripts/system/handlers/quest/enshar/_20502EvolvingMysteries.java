@@ -29,10 +29,10 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,15 +51,15 @@ public class _20502EvolvingMysteries extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {804723, 804724, 804725, 804726};
+        int[] npcs = { 804723, 804724, 804725, 804726 };
         qe.registerOnEnterWorld(questId);
-		qe.registerOnLevelUp(questId);
+        qe.registerOnLevelUp(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }
     }
 
-	@Override
+    @Override
     public boolean onLvlUpEvent(QuestEnv env) {
         return defaultOnLvlUpEvent(env, 20501, true);
     }
@@ -68,7 +68,7 @@ public class _20502EvolvingMysteries extends QuestHandler {
     public boolean onDialogEvent(QuestEnv env) {
         final Player player = env.getPlayer();
         final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		final Npc npc = (Npc) env.getVisibleObject();
+        final Npc npc = (Npc) env.getVisibleObject();
         if (qs == null) {
             return false;
         }
@@ -86,58 +86,56 @@ public class _20502EvolvingMysteries extends QuestHandler {
                             return sendQuestDialog(env, 1011);
                         }
                     case SETPRO1:
-                        changeQuestStep(env, 0, 1, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 0, 1, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804724) {
+            if (targetId == 804724) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 1) {
                             return sendQuestDialog(env, 1352);
                         }
                     case SETPRO2:
-                        changeQuestStep(env, 1, 2, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 1, 2, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804725) {
+            if (targetId == 804725) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 2) {
                             return sendQuestDialog(env, 1693);
-                        }
-						else if (var == 3) {
+                        } else if (var == 3) {
                             return sendQuestDialog(env, 2034);
-                        }
-						else if (var == 4) {
+                        } else if (var == 4) {
                             return sendQuestDialog(env, 2375);
                         }
                     case SETPRO3:
-                        changeQuestStep(env, 2, 3, false); 
-						return closeDialogWindow(env);
-					case CHECK_USER_HAS_QUEST_ITEM:
-                    if (QuestService.collectItemCheck(env, true)) {
-                        qs.setQuestVarById(0, var + 1);
-                        updateQuestStatus(env);
-                        return sendQuestDialog(env, 10000);
-                    } else {
-                        return sendQuestDialog(env, 10001);
-                    }
-					case SETPRO5:
-                        changeQuestStep(env, 4, 5, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 2, 3, false);
+                        return closeDialogWindow(env);
+                    case CHECK_USER_HAS_QUEST_ITEM:
+                        if (QuestService.collectItemCheck(env, true)) {
+                            qs.setQuestVarById(0, var + 1);
+                            updateQuestStatus(env);
+                            return sendQuestDialog(env, 10000);
+                        } else {
+                            return sendQuestDialog(env, 10001);
+                        }
+                    case SETPRO5:
+                        changeQuestStep(env, 4, 5, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804726) {
+            if (targetId == 804726) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 5) {
                             return sendQuestDialog(env, 3057);
                         }
                     case SET_SUCCEED:
-                        changeQuestStep(env, 5, 5, true); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 5, 5, true);
+                        return closeDialogWindow(env);
                 }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {

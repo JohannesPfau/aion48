@@ -29,17 +29,17 @@
  */
 package com.aionemu.gameserver.model.instance.instancereward;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
+
+import javolution.util.FastList;
 
 /**
  * @author xTz
  */
 public class InstanceReward<T extends InstancePlayerReward> {
 
-    protected FastList<T> instanceRewards = new FastList<T>();
+    protected FastList<T> instanceRewards = new FastList<>();
     private InstanceScoreType instanceScoreType = InstanceScoreType.START_PROGRESS;
     protected Integer mapId;
     protected int instanceId;

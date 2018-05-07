@@ -35,17 +35,17 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author  Cx3
+ * @author Cx3
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Beritra")
-public class BeritraTemplate
-{
-	@XmlAttribute(name = "id")
-	protected int id;
-	
-	public int getId() {
-		return this.id;
-	}
+public class BeritraTemplate {
+
+    @XmlAttribute(name = "id")
+    protected int id;
+
+    public int getId() {
+        return this.id;
+    }
 }

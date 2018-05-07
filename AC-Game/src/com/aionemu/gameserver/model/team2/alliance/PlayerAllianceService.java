@@ -79,7 +79,7 @@ import com.google.common.base.Predicate;
 public class PlayerAllianceService {
 
     private static final Logger log = LoggerFactory.getLogger(PlayerAllianceService.class);
-    private static final Map<Integer, PlayerAlliance> alliances = new ConcurrentHashMap<Integer, PlayerAlliance>();
+    private static final Map<Integer, PlayerAlliance> alliances = new ConcurrentHashMap<>();
     private static final AtomicBoolean offlineCheckStarted = new AtomicBoolean();
 
     public static final void inviteToAlliance(final Player inviter, final Player invited) {
@@ -87,13 +87,12 @@ public class PlayerAllianceService {
             PlayerAllianceInvite invite = new PlayerAllianceInvite(inviter, invited);
             if (invited.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_PARTY_ALLIANCE_DO_YOU_ACCEPT_HIS_INVITATION, invite)) {
                 if (invited.isInGroup2()) {
-                    PacketSendUtility.sendPacket(inviter,
-                            SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_INVITED_HIS_PARTY(invited.getName()));
+                    PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_INVITED_HIS_PARTY(invited.getName()));
                 } else {
                     PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_FORCE_INVITED_HIM(invited.getName()));
                 }
-                PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_ALLIANCE_DO_YOU_ACCEPT_HIS_INVITATION, 0,
-                        0, inviter.getName()));
+                PacketSendUtility.sendPacket(invited,
+                    new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_ALLIANCE_DO_YOU_ACCEPT_HIS_INVITATION, 0, 0, inviter.getName()));
             }
         }
     }
@@ -121,7 +120,8 @@ public class PlayerAllianceService {
                         return false;
                     } else if (!VortexService.getInstance().isInsideVortexZone(tm)) {
                         // TODO: chk on retail
-                        PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_CANT_INVITE_WHEN_HE_IS_ASKED_QUESTION(tm.getName()));
+                        PacketSendUtility.sendPacket(inviter,
+                            SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_CANT_INVITE_WHEN_HE_IS_ASKED_QUESTION(tm.getName()));
                         return false;
                     }
                 }
@@ -231,8 +231,7 @@ public class PlayerAllianceService {
             }
             PlayerAllianceMember bannedMember = alliance.getMember(bannedPlayer.getObjectId());
             if (bannedMember != null) {
-                alliance.onEvent(new PlayerAllianceLeavedEvent(alliance, bannedMember.getObject(), LeaveReson.BAN, banGiver
-                        .getName()));
+                alliance.onEvent(new PlayerAllianceLeavedEvent(alliance, bannedMember.getObject(), LeaveReson.BAN, banGiver.getName()));
             } else {
                 log.warn("TEAM2: banning player not in alliance {}", alliance.onlineMembers());
             }
@@ -304,14 +303,14 @@ public class PlayerAllianceService {
     public static void distributeKinah(Player player, long amount) {
         PlayerAlliance alliance = player.getPlayerAlliance2();
         if (alliance != null) {
-            alliance.onEvent(new TeamKinahDistributionEvent<PlayerAlliance>(alliance, player, amount));
+            alliance.onEvent(new TeamKinahDistributionEvent<>(alliance, player, amount));
         }
     }
 
     public static void distributeKinahInGroup(Player player, long amount) {
         PlayerAllianceGroup allianceGroup = player.getPlayerAllianceGroup2();
         if (allianceGroup != null) {
-            allianceGroup.onEvent(new TeamKinahDistributionEvent<PlayerAllianceGroup>(allianceGroup, player, amount));
+            allianceGroup.onEvent(new TeamKinahDistributionEvent<>(allianceGroup, player, amount));
         }
     }
 
@@ -321,7 +320,7 @@ public class PlayerAllianceService {
     public static void showBrand(Player player, int targetObjId, int brandId) {
         PlayerAlliance alliance = player.getPlayerAlliance2();
         if (alliance != null) {
-            alliance.onEvent(new ShowBrandEvent<PlayerAlliance>(alliance, targetObjId, brandId));
+            alliance.onEvent(new ShowBrandEvent<>(alliance, targetObjId, brandId));
         }
     }
 
@@ -349,8 +348,7 @@ public class PlayerAllianceService {
                 if (currentAlliance.getTeamType().isOffence()) {
                     VortexService.getInstance().removeInvaderPlayer(member.getObject());
                 }
-                currentAlliance.onEvent(new PlayerAllianceLeavedEvent(currentAlliance, member.getObject(),
-                        LeaveReson.LEAVE_TIMEOUT));
+                currentAlliance.onEvent(new PlayerAllianceLeavedEvent(currentAlliance, member.getObject(), LeaveReson.LEAVE_TIMEOUT));
             }
             return true;
         }

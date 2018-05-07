@@ -93,10 +93,10 @@ public class SummonServantEffect extends SummonEffect {
         }
 
         SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, x, y, z, heading);
-        final Servant servant = VisibleObjectSpawner.spawnServant(spawn, instanceId, effector, skillId,
-                effect.getSkillLevel(), npcObjectType);
+        final Servant servant = VisibleObjectSpawner.spawnServant(spawn, instanceId, effector, skillId, effect.getSkillLevel(), npcObjectType);
 
         Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 servant.getController().onDelete();

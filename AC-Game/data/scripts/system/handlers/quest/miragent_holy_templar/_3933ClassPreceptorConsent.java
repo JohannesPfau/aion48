@@ -29,9 +29,9 @@
  */
 package quest.miragent_holy_templar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,7 +50,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {203704, 203705, 203706, 203707, 203752, 203701, 801214, 801215};
+        int[] npcs = { 203704, 203705, 203706, 203707, 203752, 203701, 801214, 801215 };
         qe.registerQuestNpc(203701).addOnQuestStart(questId);// Lavirintos
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -91,7 +91,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
                         case SETPRO1:
                             return defaultCloseDialog(env, 0, 1);
                     }
-                // 2 - Receive the signature of Jumentis on the recommendation letter.
+                    // 2 - Receive the signature of Jumentis on the recommendation letter.
                 case 203705:
                     if (var == 1) {
                         switch (dialog) {
@@ -101,7 +101,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
                                 return defaultCloseDialog(env, 1, 2);
                         }
                     }
-                // 3 - Receive the signature of Charna on the recommendation letter.
+                    // 3 - Receive the signature of Charna on the recommendation letter.
                 case 203706:
                     if (var == 2) {
                         switch (dialog) {
@@ -111,7 +111,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
                                 return defaultCloseDialog(env, 2, 3);
                         }
                     }
-                // 4 - Receive the signature of Thrasymedes on the recommendation letter.
+                    // 4 - Receive the signature of Thrasymedes on the recommendation letter.
                 case 203707:
                     if (var == 3) {
                         switch (dialog) {
@@ -139,7 +139,7 @@ public class _3933ClassPreceptorConsent extends QuestHandler {
                                 return defaultCloseDialog(env, 5, 6);
                         }
                     }
-                // 5 - Report the result to Lavirintos with the Oath Stone
+                    // 5 - Report the result to Lavirintos with the Oath Stone
                 case 203752:
                     switch (dialog) {
                         case QUEST_SELECT: {

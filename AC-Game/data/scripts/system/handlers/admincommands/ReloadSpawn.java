@@ -162,6 +162,7 @@ public class ReloadSpawn extends AdminCommand {
 
         if (IdWorld != 0) {
             World.getInstance().doOnAllObjects(new Visitor<VisibleObject>() {
+
                 @Override
                 public void visit(VisibleObject object) {
                     if (object.getWorldId() != IdWorld) {

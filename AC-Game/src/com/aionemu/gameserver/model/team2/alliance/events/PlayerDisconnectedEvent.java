@@ -82,8 +82,7 @@ public class PlayerDisconnectedEvent implements TeamEvent, Predicate<PlayerAllia
         Player player = member.getObject();
         if (!disconnected.getObjectId().equals(player.getObjectId())) {
             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_HE_BECOME_OFFLINE(disconnected.getName()));
-            PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(disconnectedMember,
-                    PlayerAllianceEvent.DISCONNECTED));
+            PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(disconnectedMember, PlayerAllianceEvent.DISCONNECTED));
         }
         return true;
     }

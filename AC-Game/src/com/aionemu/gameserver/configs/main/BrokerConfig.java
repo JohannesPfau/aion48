@@ -54,8 +54,8 @@ public class BrokerConfig {
     public static int CHECK_EXPIREDITEMS_INTERVAL;
     /**
      * Punishment
-	 * 0 - add log record
-	 * 1 - log and kick player from game
+     * 0 - add log record
+     * 1 - log and kick player from game
      */
     @Property(key = "gameserver.broker.antihack.punishment", defaultValue = "0")
     public static int ANTIHACK_PUNISHMENT;

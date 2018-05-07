@@ -29,6 +29,7 @@
  */
 package quest.gelkmaros;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,7 +37,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,7 +49,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _20022SpreadingAsmodaesReach extends QuestHandler {
 
     private final static int questId = 20022;
-    private final static int[] npcs = {799226, 799282, 700704, 700703, 700701, 700702};
+    private final static int[] npcs = { 799226, 799282, 700704, 700703, 700701, 700702 };
 
     public _20022SpreadingAsmodaesReach() {
         super(questId);

@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.THashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -42,9 +40,11 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.templates.tribe.Tribe;
 
+import gnu.trove.map.hash.THashMap;
+
 /**
  * @author ATracer
- (Aion-Core)
+ *         (Aion-Core)
  */
 @XmlRootElement(name = "tribe_relations")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -52,7 +52,7 @@ public class TribeRelationsData {
 
     @XmlElement(name = "tribe", required = true)
     protected List<Tribe> tribeList;
-    protected THashMap<TribeClass, Tribe> tribeNameMap = new THashMap<TribeClass, Tribe>();
+    protected THashMap<TribeClass, Tribe> tribeNameMap = new THashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (Tribe tribe : tribeList) {
@@ -138,8 +138,8 @@ public class TribeRelationsData {
         if (tribe1 == null || tribe2 == null) {
             return false;
         }
-        return (tribe1.getAggro().contains(tribe2.getBase()) || tribe1.getAggro().contains(tribeName2)
-               || tribe2.getAggro().contains(tribe1.getBase()) || tribe2.getAggro().contains(tribeName1)) && (!tribe1.getNeutral().contains(tribeName2) && !tribe2.getNeutral().contains(tribeName1));
+        return (tribe1.getAggro().contains(tribe2.getBase()) || tribe1.getAggro().contains(tribeName2) || tribe2.getAggro().contains(tribe1.getBase())
+            || tribe2.getAggro().contains(tribeName1)) && (!tribe1.getNeutral().contains(tribeName2) && !tribe2.getNeutral().contains(tribeName1));
     }
 
     /**
@@ -154,7 +154,7 @@ public class TribeRelationsData {
             return false;
         }
         return tribe1.getSupport().contains(tribe2.getBase()) || tribe1.getSupport().contains(tribeName2)
-                || tribe2.getSupport().contains(tribe1.getBase()) || tribe2.getSupport().contains(tribeName1);
+            || tribe2.getSupport().contains(tribe1.getBase()) || tribe2.getSupport().contains(tribeName1);
     }
 
     /**
@@ -169,7 +169,7 @@ public class TribeRelationsData {
             return false;
         }
         return tribe1.getFriend().contains(tribe2.getBase()) || tribe1.getFriend().contains(tribeName2)
-                || tribe2.getFriend().contains(tribe1.getBase()) || tribe2.getFriend().contains(tribeName1);
+            || tribe2.getFriend().contains(tribe1.getBase()) || tribe2.getFriend().contains(tribeName1);
     }
 
     /**
@@ -184,7 +184,7 @@ public class TribeRelationsData {
             return false;
         }
         return tribe1.getNeutral().contains(tribe2.getBase()) || tribe1.getNeutral().contains(tribeName2)
-                || tribe2.getNeutral().contains(tribe1.getBase()) || tribe2.getNeutral().contains(tribeName1);
+            || tribe2.getNeutral().contains(tribe1.getBase()) || tribe2.getNeutral().contains(tribeName1);
     }
 
     /**
@@ -198,8 +198,8 @@ public class TribeRelationsData {
         if (tribe1 == null || tribe2 == null) {
             return false;
         }
-        return tribe1.getNone().contains(tribe2.getBase()) || tribe1.getNone().contains(tribeName2)
-                || tribe2.getNone().contains(tribe1.getBase()) || tribe2.getNone().contains(tribeName1);
+        return tribe1.getNone().contains(tribe2.getBase()) || tribe1.getNone().contains(tribeName2) || tribe2.getNone().contains(tribe1.getBase())
+            || tribe2.getNone().contains(tribeName1);
     }
 
     /**
@@ -214,7 +214,7 @@ public class TribeRelationsData {
             return false;
         }
         return tribe1.getHostile().contains(tribe2.getBase()) || tribe1.getHostile().contains(tribeName2)
-                || tribe2.getHostile().contains(tribe1.getBase()) || tribe2.getHostile().contains(tribeName1);
+            || tribe2.getHostile().contains(tribe1.getBase()) || tribe2.getHostile().contains(tribeName1);
     }
 
     /**
@@ -233,7 +233,7 @@ public class TribeRelationsData {
         }
         return false;
     }
-    
+
     public Tribe getTribeData(TribeClass tribeName) {
         return tribeNameMap.get(tribeName);
     }

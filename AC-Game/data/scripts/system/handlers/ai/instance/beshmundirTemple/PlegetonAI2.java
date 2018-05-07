@@ -63,6 +63,7 @@ public class PlegetonAI2 extends NpcAI2 {
                         isStartTimer = true;
                         sendTimer();
                         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                             @Override
                             public void run() {
                                 Npc npc = getPosition().getWorldMapInstance().getNpc(216586);
@@ -96,6 +97,7 @@ public class PlegetonAI2 extends NpcAI2 {
 
     private void sendTimer() {
         getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 420));

@@ -70,6 +70,7 @@ public class CondSkillLauncherEffect extends EffectTemplate {
     @Override
     public void startEffect(final Effect effect) {
         ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
+
             @Override
             public void attacked(Creature creature) {
                 if (!effect.getEffected().getEffectController().hasAbnormalEffect(skillId)) {

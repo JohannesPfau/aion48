@@ -32,14 +32,14 @@ package com.aionemu.gameserver.model.gameobjects.player.motion;
 import java.util.Collections;
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.MotionDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import javolution.util.FastMap;
 
 /**
  * @author MrPoke
@@ -79,7 +79,7 @@ public class MotionList {
 
     public void add(Motion motion, boolean persist) {
         if (motions == null) {
-            motions = new FastMap<Integer, Motion>();
+            motions = new FastMap<>();
         }
         if (motions.containsKey(motion.getId()) && motion.getExpireTime() == 0) {
             remove(motion.getId());
@@ -87,7 +87,7 @@ public class MotionList {
         motions.put(motion.getId(), motion);
         if (motion.isActive()) {
             if (activeMotions == null) {
-                activeMotions = new FastMap<Integer, Motion>();
+                activeMotions = new FastMap<>();
             }
             Motion old = activeMotions.put(Motion.motionType.get(motion.getId()), motion);
             if (old != null) {
@@ -123,7 +123,7 @@ public class MotionList {
                 return;
             }
             if (activeMotions == null) {
-                activeMotions = new FastMap<Integer, Motion>();
+                activeMotions = new FastMap<>();
             }
             Motion old = activeMotions.put(motionType, motion);
             if (old != null) {

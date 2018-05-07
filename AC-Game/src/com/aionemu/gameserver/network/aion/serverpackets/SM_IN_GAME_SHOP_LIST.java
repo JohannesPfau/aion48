@@ -29,12 +29,8 @@
  */
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.Collection;
 import java.util.List;
-
-import javolution.util.FastList;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.ingameshop.IGItem;
@@ -42,6 +38,9 @@ import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
 import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastList;
 
 /**
  * @author xTz, KID
@@ -51,7 +50,7 @@ public class SM_IN_GAME_SHOP_LIST extends AionServerPacket {
     private Player player;
     private int nrList;
     private int salesRanking;
-    private TIntObjectHashMap<FastList<IGItem>> allItems = new TIntObjectHashMap<FastList<IGItem>>();
+    private TIntObjectHashMap<FastList<IGItem>> allItems = new TIntObjectHashMap<>();
 
     public SM_IN_GAME_SHOP_LIST(Player player, int nrList, int salesRanking) {
         this.player = player;
@@ -61,7 +60,7 @@ public class SM_IN_GAME_SHOP_LIST extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         List<IGItem> inAllItems;
         Collection<IGItem> items;
         byte category = player.inGameShop.getCategory();

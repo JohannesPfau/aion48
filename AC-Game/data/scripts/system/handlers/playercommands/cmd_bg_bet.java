@@ -77,12 +77,14 @@ public class cmd_bg_bet extends PlayerCommand {
                 if (params[0].equals("e")) {
                     player.battlegroundBetE = amount;
                     inventory.decreaseKinah(amount);
-                    LoggerFactory.getLogger(PlayerCommand.class).info(String.format("[BET] - Player : " + player.getName() + " | Bet : " + params[1] + " | Faction : e"));
+                    LoggerFactory.getLogger(PlayerCommand.class)
+                        .info(String.format("[BET] - Player : " + player.getName() + " | Bet : " + params[1] + " | Faction : e"));
                     PacketSendUtility.sendMessage(player, "You have bet : " + player.battlegroundBetE + " for the elyos");
                 } else if (params[0].equals("a")) {
                     player.battlegroundBetA = amount;
                     inventory.decreaseKinah(amount);
-                    LoggerFactory.getLogger(PlayerCommand.class).info(String.format("[BET] - Player : " + player.getName() + " | Bet : " + params[1] + " | Faction : a"));
+                    LoggerFactory.getLogger(PlayerCommand.class)
+                        .info(String.format("[BET] - Player : " + player.getName() + " | Bet : " + params[1] + " | Faction : a"));
                     PacketSendUtility.sendMessage(player, "You have bet : " + player.battlegroundBetA + " for the asmodians");
                 } else {
                     PacketSendUtility.sendMessage(player, "Use : .bet <e | a> <amount>");
@@ -91,7 +93,8 @@ public class cmd_bg_bet extends PlayerCommand {
                 if (params[0].equals("e")) {
                     player.battlegroundBetE += amount;
                     inventory.decreaseKinah(amount);
-                    LoggerFactory.getLogger(PlayerCommand.class).info(String.format("[BET] - Player : " + player.getName() + " | Bet : " + params[1] + " | Faction : e"));
+                    LoggerFactory.getLogger(PlayerCommand.class)
+                        .info(String.format("[BET] - Player : " + player.getName() + " | Bet : " + params[1] + " | Faction : e"));
                     PacketSendUtility.sendMessage(player, "You have bet : " + player.battlegroundBetE + " for the elyos");
                 } else if (params[0].equals("a")) {
                     PacketSendUtility.sendMessage(player, "You have already bet for the elyos");
@@ -102,7 +105,8 @@ public class cmd_bg_bet extends PlayerCommand {
                 if (params[0].equals("a")) {
                     player.battlegroundBetA += amount;
                     inventory.decreaseKinah(amount);
-                    LoggerFactory.getLogger(PlayerCommand.class).info(String.format("[BET] - Player : " + player.getName() + " | Bet : " + params[1] + " | Faction : a"));
+                    LoggerFactory.getLogger(PlayerCommand.class)
+                        .info(String.format("[BET] - Player : " + player.getName() + " | Bet : " + params[1] + " | Faction : a"));
                     PacketSendUtility.sendMessage(player, "You have bet : " + player.battlegroundBetA + " for the asmodians");
                 } else if (params[0].equals("e")) {
                     PacketSendUtility.sendMessage(player, "You have already bet for the asmodians");

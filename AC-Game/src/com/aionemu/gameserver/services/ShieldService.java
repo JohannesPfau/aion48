@@ -32,8 +32,6 @@ package com.aionemu.gameserver.services;
 import java.util.ArrayList;
 import java.util.List;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +48,8 @@ import com.aionemu.gameserver.model.siege.SiegeShield;
 import com.aionemu.gameserver.model.templates.shield.ShieldTemplate;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
+import javolution.util.FastMap;
+
 /**
  * @author xavier
  * @modified Rolandas
@@ -64,8 +64,8 @@ public class ShieldService {
         protected static final ShieldService instance = new ShieldService();
     }
 
-    private final FastMap<Integer, Shield> sphereShields = new FastMap<Integer, Shield>();
-    private final FastMap<Integer, List<SiegeShield>> registeredShields = new FastMap<Integer, List<SiegeShield>>(0);
+    private final FastMap<Integer, Shield> sphereShields = new FastMap<>();
+    private final FastMap<Integer, List<SiegeShield>> registeredShields = new FastMap<>(0);
 
     public static final ShieldService getInstance() {
         return SingletonHolder.instance;
@@ -87,8 +87,8 @@ public class ShieldService {
     public void spawnAll() {
         for (Shield shield : sphereShields.values()) {
             shield.spawn();
-            log.debug("Added " + shield.getName() + " at m=" + shield.getWorldId() + ",x=" + shield.getX() + ",y=" + shield.getY() + ",z="
-                    + shield.getZ());
+            log.debug(
+                "Added " + shield.getName() + " at m=" + shield.getWorldId() + ",x=" + shield.getX() + ",y=" + shield.getY() + ",z=" + shield.getZ());
         }
         // TODO: check this list of not bound meshes (would remain inactive)
         for (List<SiegeShield> otherShields : registeredShields.values()) {
@@ -117,12 +117,13 @@ public class ShieldService {
     /**
      * Registers geo shield for zone lookup
      *
-     * @param shield - shield to be registered
+     * @param shield
+     *            - shield to be registered
      */
     public void registerShield(int worldId, SiegeShield shield) {
         List<SiegeShield> mapShields = registeredShields.get(worldId);
         if (mapShields == null) {
-            mapShields = new ArrayList<SiegeShield>();
+            mapShields = new ArrayList<>();
             registeredShields.put(worldId, mapShields);
         }
         mapShields.add(shield);
@@ -132,7 +133,8 @@ public class ShieldService {
      * Attaches geo shield and removes obsolete sphere shield if such exists.
      * Should be called when geo shields and SiegeZoneInstance were created.
      *
-     * @param location - siege location id
+     * @param location
+     *            - siege location id
      */
     public void attachShield(SiegeLocation location) {
         List<SiegeShield> mapShields = registeredShields.get(location.getTemplate().getWorldId());
@@ -141,7 +143,7 @@ public class ShieldService {
         }
 
         ZoneInstance zone = location.getZone().get(0);
-        List<SiegeShield> shields = new ArrayList<SiegeShield>();
+        List<SiegeShield> shields = new ArrayList<>();
 
         for (int index = mapShields.size() - 1; index >= 0; index--) {
             SiegeShield shield = mapShields.get(index);

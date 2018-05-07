@@ -40,8 +40,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
@@ -49,12 +47,14 @@ import com.aionemu.gameserver.model.templates.quest.QuestKill;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.MonsterHunt;
 
+import javolution.util.FastMap;
+
 /**
  * @author MrPoke, modified Bobobear
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "MonsterHuntData", propOrder = {"monster"})
-@XmlSeeAlso({KillSpawnedData.class, MentorMonsterHuntData.class})
+@XmlType(name = "MonsterHuntData", propOrder = { "monster" })
+@XmlSeeAlso({ KillSpawnedData.class, MentorMonsterHuntData.class })
 public class MonsterHuntData extends XMLQuest {
 
     @XmlElement(name = "monster", required = true)
@@ -74,7 +74,7 @@ public class MonsterHuntData extends XMLQuest {
 
     @Override
     public void register(QuestEngine questEngine) {
-        FastMap<Monster, Set<Integer>> monsterNpcs = new FastMap<Monster, Set<Integer>>();
+        FastMap<Monster, Set<Integer>> monsterNpcs = new FastMap<>();
         QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(id);
         for (Monster m : monster) {
             if (CustomConfig.QUESTDATA_MONSTER_KILLS) {
@@ -92,7 +92,7 @@ public class MonsterHuntData extends XMLQuest {
                     }
                 } // if no sequence was specified, check all npc ids to match quest data
                 else if (m.getNpcSequence() == null && questTemplate.getQuestKill() != null) {
-                    Set<Integer> npcSet = new HashSet<Integer>(m.getNpcIds());
+                    Set<Integer> npcSet = new HashSet<>(m.getNpcIds());
                     QuestKill matchedKillNpcs = null;
                     int maxMatchCount = 0;
                     for (int index = 0; index < questTemplate.getQuestKill().size(); index++) {
@@ -115,10 +115,10 @@ public class MonsterHuntData extends XMLQuest {
                         monsterNpcs.put(m, npcSet);
                     }
                 } else {
-                    monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds()));
+                    monsterNpcs.put(m, new HashSet<>(m.getNpcIds()));
                 }
             } else {
-                monsterNpcs.put(m, new HashSet<Integer>(m.getNpcIds()));
+                monsterNpcs.put(m, new HashSet<>(m.getNpcIds()));
             }
         }
         MonsterHunt template = new MonsterHunt(id, startNpcIds, endNpcIds, monsterNpcs, startDialog, endDialog, aggroNpcs, invasionWorld);

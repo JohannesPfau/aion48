@@ -70,7 +70,7 @@ public abstract class TransformEffect extends EffectTemplate {
     }
 
     @Override
-	public void endEffect(Effect effect) {
+    public void endEffect(Effect effect) {
         final Creature effected = effect.getEffected();
 
         if (state != null) {
@@ -94,7 +94,7 @@ public abstract class TransformEffect extends EffectTemplate {
             }
             effected.getTransformModel().setModelId(newModel);
             effected.getTransformModel().setTransformType(transformType);
-            if (model == 202635){ // Makes the effected unAttackable for all
+            if (model == 202635) { // Makes the effected unAttackable for all
                 PacketSendUtility.broadcastPacket(effected, new SM_PLAYER_INFO((Player) effected, false), 100);
             }
         } else if (effected instanceof Summon) {
@@ -111,14 +111,14 @@ public abstract class TransformEffect extends EffectTemplate {
     }
 
     @Override
-	public void startEffect(Effect effect) {
+    public void startEffect(Effect effect) {
         final Creature effected = effect.getEffected();
         effected.getTransformModel().setModelId(model);
         effected.getTransformModel().setPanelId(panelid);
         effected.getTransformModel().setTransformType(effect.getTransformType());
         PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TRANSFORM(effected, panelid, true));
-        if (model == 202635){ // Makes the effected Attackable for all
-            if (effected instanceof Player){
+        if (model == 202635) { // Makes the effected Attackable for all
+            if (effected instanceof Player) {
                 PacketSendUtility.broadcastPacket(effected, new SM_PLAYER_INFO((Player) effected, true), 100);
             }
         }

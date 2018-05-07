@@ -36,9 +36,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.configs.main.DropConfig;
@@ -62,6 +59,9 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.DropRewardEnum;
 
+import javolution.util.FastList;
+import javolution.util.FastMap;
+
 /**
  * @author xTz
  */
@@ -77,7 +77,7 @@ public class DropRegistrationService {
 
     private DropRegistrationService() {
         init();
-        noReductionMaps = new FastList<Integer>();
+        noReductionMaps = new FastList<>();
         for (String zone : DropConfig.DISABLE_DROP_REDUCTION_IN_ZONES.split(",")) {
             noReductionMaps.add(Integer.parseInt(zone));
         }
@@ -98,7 +98,7 @@ public class DropRegistrationService {
 
         // Getting all possible drops for this Npc
         NpcDrop npcDrop = npc.getNpcDrop();
-        Set<DropItem> droppedItems = new HashSet<DropItem>();
+        Set<DropItem> droppedItems = new HashSet<>();
         int index = 1;
         int dropChance = 100;
         int npcLevel = npc.getLevel();
@@ -112,10 +112,10 @@ public class DropRegistrationService {
         Integer winnerObj = 0;
 
         // Distributing drops to players
-        Collection<Player> dropPlayers = new ArrayList<Player>();
-        Collection<Player> winningPlayers = new ArrayList<Player>();
+        Collection<Player> dropPlayers = new ArrayList<>();
+        Collection<Player> winningPlayers = new ArrayList<>();
         if (player.isInGroup2() || player.isInAlliance2()) {
-            List<Integer> dropMembers = new ArrayList<Integer>();
+            List<Integer> dropMembers = new ArrayList<>();
             LootGroupRules lootGrouRules = player.getLootGroupRules();
 
             switch (lootGrouRules.getLootRule()) {
@@ -143,8 +143,7 @@ public class DropRegistrationService {
                     winningPlayers = groupMembers;
                     break;
                 case LEADER:
-                    Player leader = player.isInGroup2() ? player.getPlayerGroup2().getLeaderObject() : player
-                            .getPlayerAlliance2().getLeaderObject();
+                    Player leader = player.isInGroup2() ? player.getPlayerGroup2().getLeaderObject() : player.getPlayerAlliance2().getLeaderObject();
                     winningPlayers.add(leader);
                     winnerObj = leader.getObjectId();
                     setItemsToWinner(droppedItems, winnerObj);
@@ -163,7 +162,7 @@ public class DropRegistrationService {
             dropNpc.setInRangePlayers(groupMembers);
             dropNpc.setGroupSize(groupMembers.size());
         } else {
-            List<Integer> singlePlayer = new ArrayList<Integer>();
+            List<Integer> singlePlayer = new ArrayList<>();
             singlePlayer.add(player.getObjectId());
             dropPlayers.add(player);
             dropRegistrationMap.put(npcObjId, new DropNpc(npcObjId));
@@ -240,7 +239,7 @@ public class DropRegistrationService {
         }
 
         if (player.getPet() != null && player.getPet().getPetTemplate().getPetFunction(PetFunctionType.LOOT) != null
-                && player.getPet().getCommonData().isLooting()) {
+            && player.getPet().getCommonData().isLooting()) {
             PacketSendUtility.sendPacket(player, new SM_PET(true, npcObjId));
             Set<DropItem> drops = getCurrentDropMap().get(npcObjId);
             if (drops == null || drops.size() == 0) {

@@ -29,13 +29,13 @@
  */
 package ai;
 
+import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author boscar
@@ -57,7 +57,9 @@ public class BlessedTotemAI2 extends GeneralNpcAI2 {
 
     @Override
     public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-        long badgeCount = ((Item) player.getInventory().getFirstItemByItemId(186000343) != null ? ((Item) player.getInventory().getFirstItemByItemId(186000343)).getItemCount() : 0);
+        long badgeCount = ((Item) player.getInventory().getFirstItemByItemId(186000343) != null
+            ? ((Item) player.getInventory().getFirstItemByItemId(186000343)).getItemCount()
+            : 0);
         boolean blessedbuff = false;
         DialogAction finalAction = DialogAction.getActionByDialogId(dialogId);
 

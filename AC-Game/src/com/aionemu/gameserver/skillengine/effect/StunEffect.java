@@ -48,7 +48,8 @@ public class StunEffect extends EffectTemplate {
 
     @Override
     public void applyEffect(Effect effect) {
-        if (!effect.getEffected().getEffectController().hasMagicalStateEffect() && !effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.CANNOT_MOVE)) {
+        if (!effect.getEffected().getEffectController().hasMagicalStateEffect()
+            && !effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.CANNOT_MOVE)) {
             effect.addToEffectedController();
             effect.setIsMagicalState(true);
         }

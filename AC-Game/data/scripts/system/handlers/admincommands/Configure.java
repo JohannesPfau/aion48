@@ -29,9 +29,40 @@
  */
 package admincommands;
 
+import java.lang.reflect.Field;
+
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.administration.DeveloperConfig;
-import com.aionemu.gameserver.configs.main.*;
+import com.aionemu.gameserver.configs.main.AIConfig;
+import com.aionemu.gameserver.configs.main.AutoGroupConfig;
+import com.aionemu.gameserver.configs.main.CacheConfig;
+import com.aionemu.gameserver.configs.main.CraftConfig;
+import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.configs.main.DropConfig;
+import com.aionemu.gameserver.configs.main.EnchantsConfig;
+import com.aionemu.gameserver.configs.main.EventsConfig;
+import com.aionemu.gameserver.configs.main.FallDamageConfig;
+import com.aionemu.gameserver.configs.main.GSConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.configs.main.GroupConfig;
+import com.aionemu.gameserver.configs.main.HTMLConfig;
+import com.aionemu.gameserver.configs.main.HousingConfig;
+import com.aionemu.gameserver.configs.main.InGameShopConfig;
+import com.aionemu.gameserver.configs.main.LegionConfig;
+import com.aionemu.gameserver.configs.main.LoggingConfig;
+import com.aionemu.gameserver.configs.main.MembershipConfig;
+import com.aionemu.gameserver.configs.main.NameConfig;
+import com.aionemu.gameserver.configs.main.PeriodicSaveConfig;
+import com.aionemu.gameserver.configs.main.PricesConfig;
+import com.aionemu.gameserver.configs.main.PunishmentConfig;
+import com.aionemu.gameserver.configs.main.RankingConfig;
+import com.aionemu.gameserver.configs.main.RateConfig;
+import com.aionemu.gameserver.configs.main.SecurityConfig;
+import com.aionemu.gameserver.configs.main.ShutdownConfig;
+import com.aionemu.gameserver.configs.main.SiegeConfig;
+import com.aionemu.gameserver.configs.main.ThreadConfig;
+import com.aionemu.gameserver.configs.main.WeddingsConfig;
+import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.configs.network.IPConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -39,50 +70,23 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.google.common.collect.ImmutableMap;
 
-import java.lang.reflect.Field;
-
 /**
  * @author ATracer
  * @modified Rolandas
  */
 public class Configure extends AdminCommand {
 
-    private static final ImmutableMap<String, Class<?>> commands = new ImmutableMap.Builder<String, Class<?>>()
-            .put("admin", AdminConfig.class)
-            .put("ai", AIConfig.class)
-            .put("autogroup", AutoGroupConfig.class)
-            .put("cache", CacheConfig.class)
-            .put("craft", CraftConfig.class)
-            .put("custom", CustomConfig.class)
-            .put("developer", DeveloperConfig.class)
-            .put("drop", DropConfig.class)
-            .put("enchants", EnchantsConfig.class)
-            .put("events", EventsConfig.class)
-            .put("falldamage", FallDamageConfig.class)
-            .put("gameserver", GSConfig.class)
-            .put("geodata", GeoDataConfig.class)
-            .put("group", GroupConfig.class)
-            .put("html", HTMLConfig.class)
-            .put("housing", HousingConfig.class)
-            .put("ingameshop", InGameShopConfig.class)
-            .put("legions", LegionConfig.class)
-            .put("logging", LoggingConfig.class)
-            .put("membership", MembershipConfig.class)
-            .put("name", NameConfig.class)
-            .put("periodicsave", PeriodicSaveConfig.class)
-            .put("prices", PricesConfig.class)
-            .put("punishment", PunishmentConfig.class)
-            .put("ranking", RankingConfig.class)
-            .put("rates", RateConfig.class)
-            .put("security", SecurityConfig.class)
-            .put("shutdown", ShutdownConfig.class)
-            .put("siege", SiegeConfig.class)
-            .put("thread", ThreadConfig.class)
-            .put("weddings", WeddingsConfig.class)
-            .put("world", WorldConfig.class)
-            .put("ipconfig", IPConfig.class)
-            .put("network", NetworkConfig.class)
-            .build();
+    private static final ImmutableMap<String, Class<?>> commands = new ImmutableMap.Builder<String, Class<?>>().put("admin", AdminConfig.class)
+        .put("ai", AIConfig.class).put("autogroup", AutoGroupConfig.class).put("cache", CacheConfig.class).put("craft", CraftConfig.class)
+        .put("custom", CustomConfig.class).put("developer", DeveloperConfig.class).put("drop", DropConfig.class).put("enchants", EnchantsConfig.class)
+        .put("events", EventsConfig.class).put("falldamage", FallDamageConfig.class).put("gameserver", GSConfig.class)
+        .put("geodata", GeoDataConfig.class).put("group", GroupConfig.class).put("html", HTMLConfig.class).put("housing", HousingConfig.class)
+        .put("ingameshop", InGameShopConfig.class).put("legions", LegionConfig.class).put("logging", LoggingConfig.class)
+        .put("membership", MembershipConfig.class).put("name", NameConfig.class).put("periodicsave", PeriodicSaveConfig.class)
+        .put("prices", PricesConfig.class).put("punishment", PunishmentConfig.class).put("ranking", RankingConfig.class)
+        .put("rates", RateConfig.class).put("security", SecurityConfig.class).put("shutdown", ShutdownConfig.class).put("siege", SiegeConfig.class)
+        .put("thread", ThreadConfig.class).put("weddings", WeddingsConfig.class).put("world", WorldConfig.class).put("ipconfig", IPConfig.class)
+        .put("network", NetworkConfig.class).build();
 
     public Configure() {
         super("configure");

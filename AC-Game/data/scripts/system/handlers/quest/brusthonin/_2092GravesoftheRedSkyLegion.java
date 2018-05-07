@@ -29,11 +29,11 @@
  */
 package quest.brusthonin;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -47,7 +47,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _2092GravesoftheRedSkyLegion extends QuestHandler {
 
     private final static int questId = 2092;
-    private final static int[] npc_ids = {205150, 205188, 700394, 205190, 205208, 205214, 205213, 205212, 205210, 205209};
+    private final static int[] npc_ids = { 205150, 205188, 700394, 205190, 205208, 205214, 205213, 205212, 205210, 205209 };
 
     public _2092GravesoftheRedSkyLegion() {
         super(questId);

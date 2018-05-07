@@ -65,12 +65,8 @@ public class ProcVPHealInstantEffect extends EffectTemplate {
                 }
 
                 pcd.addReposteEnergy(addEnergy);
-                PacketSendUtility.sendPacket(player, new SM_STATUPDATE_EXP(
-                        pcd.getExpShown(),
-                        pcd.getExpRecoverable(),
-                        pcd.getExpNeed(),
-                        pcd.getCurrentReposteEnergy(),
-                        pcd.getMaxReposteEnergy(), pcd.getCurrentEventExp()));
+                PacketSendUtility.sendPacket(player, new SM_STATUPDATE_EXP(pcd.getExpShown(), pcd.getExpRecoverable(), pcd.getExpNeed(),
+                    pcd.getCurrentReposteEnergy(), pcd.getMaxReposteEnergy(), pcd.getCurrentEventExp()));
             }
         }
     }

@@ -29,11 +29,11 @@
  */
 package com.aionemu.gameserver.world.container;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
+
+import javolution.util.FastMap;
 
 /**
  * Container for storing Legion members by Id and name.
@@ -72,8 +72,7 @@ public class LegionMemberContainer {
      * @param legionMember
      */
     public void addMemberEx(LegionMemberEx legionMember) {
-        if (legionMemberExById.containsKey(legionMember.getObjectId())
-                || legionMemberExByName.containsKey(legionMember.getName())) {
+        if (legionMemberExById.containsKey(legionMember.getObjectId()) || legionMemberExByName.containsKey(legionMember.getName())) {
             throw new DuplicateAionObjectException();
         }
         legionMemberExById.put(legionMember.getObjectId(), legionMember);

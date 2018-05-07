@@ -29,13 +29,13 @@
  */
 package admincommands;
 
+import java.util.Set;
+
 import com.aionemu.gameserver.model.Announcement;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.AnnouncementService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.util.Set;
 
 /**
  * @author Divinity
@@ -57,10 +57,8 @@ public class Announcements extends AdminCommand {
             PacketSendUtility.sendMessage(player, "-------------------------------------------------------------------");
 
             for (Announcement announce : announces) {
-                PacketSendUtility.sendMessage(
-                        player,
-                        announce.getId() + "  |  " + announce.getFaction() + "  |  " + announce.getType() + "  |  "
-                                + announce.getDelay() + "  |  " + announce.getAnnounce());
+                PacketSendUtility.sendMessage(player, announce.getId() + "  |  " + announce.getFaction() + "  |  " + announce.getType() + "  |  "
+                    + announce.getDelay() + "  |  " + announce.getAnnounce());
             }
         } else if (params[0].equals("add")) {
             if ((params.length < 5)) {

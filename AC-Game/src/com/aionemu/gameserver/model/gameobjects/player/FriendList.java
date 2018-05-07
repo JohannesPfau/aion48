@@ -58,7 +58,8 @@ public class FriendList implements Iterable<Friend> {
     /**
      * Constructs an empty friend list for the given player
      *
-     * @param player Player who has this friendlist
+     * @param player
+     *            Player who has this friendlist
      */
     public FriendList(Player player) {
         this(player, new ConcurrentLinkedQueue<Friend>());
@@ -67,11 +68,13 @@ public class FriendList implements Iterable<Friend> {
     /**
      * Constructs a friend list for the given player, with the given friends
      *
-     * @param player  Player who has this friend list
-     * @param friends Friends on the list
+     * @param player
+     *            Player who has this friend list
+     * @param friends
+     *            Friends on the list
      */
     public FriendList(Player owner, Collection<Friend> newFriends) {
-        this.friends = new ConcurrentLinkedQueue<Friend>(newFriends);
+        this.friends = new ConcurrentLinkedQueue<>(newFriends);
         this.player = owner;
     }
 
@@ -79,7 +82,8 @@ public class FriendList implements Iterable<Friend> {
      * Gets the friend with this objId<br />
      * Returns null if it is not our friend
      *
-     * @param objId objId of friend
+     * @param objId
+     *            objId of friend
      * @return Friend
      */
     public Friend getFriend(int objId) {
@@ -113,7 +117,8 @@ public class FriendList implements Iterable<Friend> {
     /**
      * Gets the Friend by this name
      *
-     * @param name Name of friend
+     * @param name
+     *            Name of friend
      * @return Friend matching name
      */
     public Friend getFriend(String name) {
@@ -146,7 +151,7 @@ public class FriendList implements Iterable<Friend> {
 
     public boolean isFull() {
         int MAX_FRIENDS = player.havePermission(MembershipConfig.ADVANCED_FRIENDLIST_ENABLE) ? MembershipConfig.ADVANCED_FRIENDLIST_SIZE
-                : CustomConfig.FRIENDLIST_SIZE;
+            : CustomConfig.FRIENDLIST_SIZE;
         return getSize() >= MAX_FRIENDS;
     }
 
@@ -229,6 +234,7 @@ public class FriendList implements Iterable<Friend> {
          * User is away or busy
          */
         AWAY((byte) 3);
+
         byte value;
 
         private Status(byte value) {
@@ -243,7 +249,8 @@ public class FriendList implements Iterable<Friend> {
          * Gets the Status from its int value<br />
          * Returns null if out of range
          *
-         * @param value range 0-3
+         * @param value
+         *            range 0-3
          * @return Status
          */
         public static Status getByValue(byte value) {

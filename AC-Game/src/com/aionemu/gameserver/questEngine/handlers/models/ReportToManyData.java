@@ -37,10 +37,10 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.ReportToMany;
+
+import javolution.util.FastMap;
 
 /**
  * @author Hilgert
@@ -66,7 +66,7 @@ public class ReportToManyData extends XMLQuest {
     @Override
     public void register(QuestEngine questEngine) {
         int maxVar = 0;
-        FastMap<Integer, NpcInfos> NpcInfo = new FastMap<Integer, NpcInfos>();
+        FastMap<Integer, NpcInfos> NpcInfo = new FastMap<>();
         for (NpcInfos mi : npcInfos) {
             NpcInfo.put(mi.getNpcId(), mi);
             if (mi.getVar() > maxVar) {

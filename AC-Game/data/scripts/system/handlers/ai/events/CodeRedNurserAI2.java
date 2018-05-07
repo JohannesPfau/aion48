@@ -29,7 +29,8 @@
  */
 package ai.events;
 
-import ai.GeneralNpcAI2;
+import org.joda.time.DateTime;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -38,7 +39,8 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import org.joda.time.DateTime;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz, modified bobobear
@@ -78,7 +80,7 @@ public class CodeRedNurserAI2 extends GeneralNpcAI2 {
             int skillId = 0;
             int RemoveSkillId = 0;
             switch (getNpcId()) {
-                case 831435:  //Jorpine (MON-THU)
+                case 831435: //Jorpine (MON-THU)
                 case 831441: {//Hylian (MON-THU)
                     RemoveSkillId = 21281;
                     skillId = 21280;

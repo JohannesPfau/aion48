@@ -43,7 +43,7 @@ import org.apache.commons.io.FileUtils;
 import com.aionemu.commons.utils.xml.JAXBUtil;
 
 /**
-, Source
+ * , Source
  */
 @XmlRootElement(name = "siege_schedule")
 @XmlAccessorType(XmlAccessType.FIELD)

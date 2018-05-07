@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -43,23 +41,25 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.abyssracebonus.AbyssRaceBonus;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author Eloann
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"abyssRaceBonus"})
+@XmlType(name = "", propOrder = { "abyssRaceBonus" })
 @XmlRootElement(name = "abyss_race_bonuses")
 public class AbyssRaceBonusData {
 
     @XmlElement(name = "abyss_race_bonus")
     protected List<AbyssRaceBonus> abyssRaceBonus;
     @XmlTransient
-    private TIntObjectHashMap<AbyssRaceBonus> templates = new TIntObjectHashMap<AbyssRaceBonus>();
+    private TIntObjectHashMap<AbyssRaceBonus> templates = new TIntObjectHashMap<>();
 
     /**
-	 * @param u  
-     * @param parent 
-	 */
+     * @param u
+     * @param parent
+     */
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (AbyssRaceBonus template : abyssRaceBonus) {
             templates.put(template.getId(), template);

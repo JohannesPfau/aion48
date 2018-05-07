@@ -29,9 +29,9 @@
  */
 package quest.brusthonin;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -43,7 +43,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _4078ALightThroughtheTrees extends QuestHandler {
 
     private final static int questId = 4078;
-    private final static int[] npc_ids = {205157, 700427, 700428, 700429};
+    private final static int[] npc_ids = { 205157, 700427, 700428, 700429 };
 
     public _4078ALightThroughtheTrees() {
         super(questId);

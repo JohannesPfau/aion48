@@ -53,7 +53,8 @@ public class SM_PLAY_OK extends AionServerPacket {
     /**
      * Constructs new instance of <tt>SM_PLAY_OK </tt> packet.
      *
-     * @param key session key
+     * @param key
+     *            session key
      */
     public SM_PLAY_OK(SessionKey key, byte serverId) {
         super(0x07);

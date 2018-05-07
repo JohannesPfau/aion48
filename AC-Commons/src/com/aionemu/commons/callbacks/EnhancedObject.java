@@ -36,7 +36,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
 /**
  * Generic interface for all enhanced object.<br>
  * <font color="red">NEVER IMPLEMENT THIS CLASS MANUALLY!!!</font>
- * <br><br>
+ * <br>
+ * <br>
  * <b>Thread safety, concurrency, deadlocks:</b><br>
  * It's allowed to remove/add listeners from listeners.<br>
  * Listeners are stored in the
@@ -45,7 +46,8 @@ import java.util.concurrent.locks.ReentrantReadWriteLock;
  * Briefly speaking, if you will try to remove/add a listener from another
  * listener - the current invocation won't be affected, current implementation
  * allocates all listeners that are going to be invoked before execution.<br>
- * <br> {@link Callback#beforeCall(Object, Object[])} and
+ * <br>
+ * {@link Callback#beforeCall(Object, Object[])} and
  * {@link Callback#afterCall(Object, Object[], Object)} are treated as separate
  * invocations, so adding/removing listener in beforeCall will affect afterCall.
  *
@@ -58,9 +60,10 @@ public interface EnhancedObject {
      * Adds callback to this object.<br>
      * {@link com.aionemu.commons.callbacks.EnhancedObject concurrency description}
      *
-     * @param callback instance of callback to add
+     * @param callback
+     *            instance of callback to add
      * @see com.aionemu.commons.callbacks.util.ObjectCallbackHelper#addCallback(Callback,
-     * EnhancedObject)
+     *      EnhancedObject)
      */
     public void addCallback(Callback callback);
 
@@ -68,14 +71,16 @@ public interface EnhancedObject {
      * Removes callback from this object.<br>
      * {@link com.aionemu.commons.callbacks.EnhancedObject concurrency description}
      *
-     * @param callback instance of callback to remove
+     * @param callback
+     *            instance of callback to remove
      * @see com.aionemu.commons.callbacks.util.ObjectCallbackHelper#removeCallback(Callback,
-     * EnhancedObject)
+     *      EnhancedObject)
      */
     public void removeCallback(Callback callback);
 
     /**
-     * Returns all callbacks associated with this.<br><br>
+     * Returns all callbacks associated with this.<br>
+     * <br>
      * <b><font color="red">
      * Iteration over this map is not thread-safe, please make sure that
      * {@link #getCallbackLock()} is locked in read mode to read.<br>
@@ -85,18 +90,20 @@ public interface EnhancedObject {
      * </b></font>
      *
      * @return map with callbacks associated with this object or null if there
-     * is no callbacks
+     *         is no callbacks
      */
     public Map<Class<? extends Callback>, List<Callback>> getCallbacks();
 
     /**
-     * Associates callback map with this object.<br><br>
+     * Associates callback map with this object.<br>
+     * <br>
      * <b><font color="red">
      * Please make sure that {@link #getCallbackLock()} is in write-mode lock
      * when calling this method
      * </b></font>
      *
-     * @param callbacks callbackMap or null
+     * @param callbacks
+     *            callbackMap or null
      */
     public void setCallbacks(Map<Class<? extends Callback>, List<Callback>> callbacks);
 

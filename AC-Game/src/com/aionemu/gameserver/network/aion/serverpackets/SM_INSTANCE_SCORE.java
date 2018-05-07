@@ -31,8 +31,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.List;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -60,6 +58,8 @@ import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+
+import javolution.util.FastList;
 
 /**
  * @author Dns, ginho1, nrg, xTz
@@ -91,7 +91,7 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
         this.PlayerRaceId = PlayerRaceId;
         instanceScoreType = instanceReward.getInstanceScoreType();
     }
-    
+
     // Type: 5, 8, 10, 11
     public SM_INSTANCE_SCORE(int type, int instanceTime, InstanceReward instanceReward, Integer object) {
         this.mapId = instanceReward.getMapId();
@@ -109,7 +109,7 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
         this.players = players;
         instanceScoreType = instanceReward.getInstanceScoreType();
     }
-    
+
     // Type: 6, 7
     public SM_INSTANCE_SCORE(int type, int instanceTime, InstanceReward instanceReward, List<Player> players) {
         this.mapId = instanceReward.getMapId();
@@ -132,10 +132,10 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
         this.instanceScoreType = instanceReward.getInstanceScoreType();
     }
 
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({ "unchecked" })
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         int playerCount = 0;
         Player owner = con.getActivePlayer();
         Integer ownerObject = owner.getObjectId();
@@ -266,8 +266,8 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
                         writeD(kbr.getTime());
                         break;
                     case 3:
-                    	writeD(10);
-                    	writeD(PlayerStatus);
+                        writeD(10);
+                        writeD(PlayerStatus);
                         writeD(object);
                         writeD(PlayerRaceId);
                         break;
@@ -292,32 +292,32 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
                         writeD(kbpr.getRewardCount());
                         break;
                     case 6:
-                    	int counter = 0;
-                    	writeD(100);//unk
-                    	for (Player player : players) {
-                    		writeD(10);
-                    		writeD(0);
-                    		writeD(player.getObjectId());
-                    		counter++;
-                    	}
-                    	if (counter < 48) {
+                        int counter = 0;
+                        writeD(100);//unk
+                        for (Player player : players) {
+                            writeD(10);
+                            writeD(0);
+                            writeD(player.getObjectId());
+                            counter++;
+                        }
+                        if (counter < 48) {
                             writeB(new byte[12 * (48 - counter)]);
                         }
-                    	writeC(0);
-                		writeD(0);
-                		writeD(kbr.getPointsByRace(Race.ELYOS).intValue());
-                		writeD(0);
-                		writeD(65535);
-                		writeC(0);
-                		writeD(0);
-                		writeD(kbr.getPointsByRace(Race.ASMODIANS).intValue());
-                		writeD(1);
-                		writeD(65535);
-                		break;
+                        writeC(0);
+                        writeD(0);
+                        writeD(kbr.getPointsByRace(Race.ELYOS).intValue());
+                        writeD(0);
+                        writeD(65535);
+                        writeC(0);
+                        writeD(0);
+                        writeD(kbr.getPointsByRace(Race.ASMODIANS).intValue());
+                        writeD(1);
+                        writeD(65535);
+                        break;
                     case 7:
-                    	kamarTable(Race.ELYOS);
-                    	kamarTable(Race.ASMODIANS);
-                    	break;
+                        kamarTable(Race.ELYOS);
+                        kamarTable(Race.ASMODIANS);
+                        break;
                     case 10:
                         writeC(0);
                         writeD(kbr.getPvpKillsByRace(kbpr.getRace()).intValue());
@@ -326,8 +326,8 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
                         writeD(object);
                         break;
                     case 11:
-                    	writeC(0);
-                    	writeD(kbr.getPvpKillsByRace(kbpr.getRace()).intValue());
+                        writeC(0);
+                        writeD(kbr.getPvpKillsByRace(kbpr.getRace()).intValue());
                         writeD(kbr.getPointsByRace(kbpr.getRace()).intValue());
                         writeD(kbpr.getRace().getRaceId());
                         writeD(object);
@@ -343,12 +343,12 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
                 writeC(type);
                 switch (type) {
                     case 2: // Send 1-Time when "Start_Progress" and "End_Progress"
-                    	InstanceScoreType isc = idr.getInstanceScoreType();
+                        InstanceScoreType isc = idr.getInstanceScoreType();
                         writeD(isc == InstanceScoreType.START_PROGRESS ? 0 : (isc == InstanceScoreType.END_PROGRESS) ? 2 : 0);
                         break;
                     case 3:
-                    	writeD(15);
-                    	writeD(PlayerStatus);//Spawn(0) - Dead(60)
+                        writeD(15);
+                        writeD(PlayerStatus);//Spawn(0) - Dead(60)
                         writeD(object);//PlayerObjectId
                         writeD(PlayerRaceId); //0=Elyos : 1=Asmo
                         break;
@@ -376,49 +376,49 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
                         writeC(1);
                         break;
                     case 6: // Preparing Time & Starting Score/PvPKill (BothTeam)
-                    	int counter = 0;
-                    	writeD(100);//unk
-                    	for (Player player : players) {
-                    		if (player.getRace() != Race.ELYOS) {
-                    			continue;
-                    		}
-                    		writeD(15);
-                    		writeD(player.getLifeStats().isAlreadyDead() ? 60 : 0);
-                    		writeD(player.getObjectId());
-                    		counter++;
-                    	}
-                    	if (counter < 24) {
+                        int counter = 0;
+                        writeD(100);//unk
+                        for (Player player : players) {
+                            if (player.getRace() != Race.ELYOS) {
+                                continue;
+                            }
+                            writeD(15);
+                            writeD(player.getLifeStats().isAlreadyDead() ? 60 : 0);
+                            writeD(player.getObjectId());
+                            counter++;
+                        }
+                        if (counter < 24) {
                             writeB(new byte[12 * (24 - counter)]);
                         }
-                    	
-                    	counter = 0;
-                    	for (Player player : players) {
-                    		if (player.getRace() != Race.ASMODIANS) {
-                    			continue;
-                    		}
-                    		writeD(15);
-                    		writeD(player.getLifeStats().isAlreadyDead() ? 60 : 0);
-                    		writeD(player.getObjectId());
-                    		counter++;
-                    	}
-                    	if (counter < 24) {
+
+                        counter = 0;
+                        for (Player player : players) {
+                            if (player.getRace() != Race.ASMODIANS) {
+                                continue;
+                            }
+                            writeD(15);
+                            writeD(player.getLifeStats().isAlreadyDead() ? 60 : 0);
+                            writeD(player.getObjectId());
+                            counter++;
+                        }
+                        if (counter < 24) {
                             writeB(new byte[12 * (24 - counter)]);
                         }
-                    	writeC(0);
-                		writeD(idr.getPvpKillsByRace(Race.ELYOS).intValue());//......Elyos PvP Kills
-                		writeD(idr.getPointsByRace(Race.ELYOS).intValue());//........Elyos Score
-                		writeD(0);
-                		writeD((idr.getInstanceScoreType() == InstanceScoreType.PREPARING ? 65535:1));
-                		writeC(0);
-                		writeD(idr.getPvpKillsByRace(Race.ASMODIANS).intValue());//...Asmo PvP Kills
-                		writeD(idr.getPointsByRace(Race.ASMODIANS).intValue());//.....Asmo Score
-                		writeD(1);
-                		writeD((idr.getInstanceScoreType() == InstanceScoreType.PREPARING ? 65535:1));
-                		break;
+                        writeC(0);
+                        writeD(idr.getPvpKillsByRace(Race.ELYOS).intValue());//......Elyos PvP Kills
+                        writeD(idr.getPointsByRace(Race.ELYOS).intValue());//........Elyos Score
+                        writeD(0);
+                        writeD((idr.getInstanceScoreType() == InstanceScoreType.PREPARING ? 65535 : 1));
+                        writeC(0);
+                        writeD(idr.getPvpKillsByRace(Race.ASMODIANS).intValue());//...Asmo PvP Kills
+                        writeD(idr.getPointsByRace(Race.ASMODIANS).intValue());//.....Asmo Score
+                        writeD(1);
+                        writeD((idr.getInstanceScoreType() == InstanceScoreType.PREPARING ? 65535 : 1));
+                        break;
                     case 7: //Instance Players Info (PlayersName, ClassId, AbyssRank, PvPKills, Score, ...) (Who still in Instance)
-                    	DomeTable(Race.ELYOS);
-                    	DomeTable(Race.ASMODIANS);
-                    	break;
+                        DomeTable(Race.ELYOS);
+                        DomeTable(Race.ASMODIANS);
+                        break;
                     case 8://if Player Disconnects or Leave Instance
                         writeD(object); //PlayerObjectId
                         break;
@@ -430,16 +430,16 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
                         writeD(object);
                         break;
                     case 11: //Send when a NPC/Player has been dead (Send 2-times with different RaceId)
-                    	int TeamScore = idr.getPointsByRace(idpr.getRace()).intValue();
-                    	int OppositeTeamScore = idr.getPointsByRace(getOppositeRace(idpr.getRace())).intValue();
-                    	writeC(0);
-                    	writeD(idr.getPvpKillsByRace(idpr.getRace()).intValue());
+                        int TeamScore = idr.getPointsByRace(idpr.getRace()).intValue();
+                        int OppositeTeamScore = idr.getPointsByRace(getOppositeRace(idpr.getRace())).intValue();
+                        writeC(0);
+                        writeD(idr.getPvpKillsByRace(idpr.getRace()).intValue());
                         writeD(TeamScore);
                         writeD(idpr.getRace().getRaceId());
                         writeD(TeamScore == OppositeTeamScore ? 65535 : 0);
                         break;
                 }
-                break;                
+                break;
             case 301210000: //Ophidan Bridge War
                 // TODO
                 break;
@@ -489,7 +489,7 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
                 } else if (hok.getPoints() >= 15394) { //B
                     writeD(186000239);
                     writeD(hok.getSillusCrest());
-                    writeD(186000147);  // Mithril Medal
+                    writeD(186000147); // Mithril Medal
                     writeD(hok.getMithrilMedal());
                     writeD(0);
                 } else if (hok.getPoints() >= 9908) { //C
@@ -754,60 +754,60 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
             writeB(new byte[88 * (6 - count)]);
         }
     }
-    
+
     private Race getOppositeRace(Race race) {
-    	return (race.getRaceId() ^ 1) == 0 ? Race.ELYOS : Race.ASMODIANS;
+        return (race.getRaceId() ^ 1) == 0 ? Race.ELYOS : Race.ASMODIANS;
     }
-    
+
     private void kamarTable(Race race) {
-    	int count = 0;
-    	KamarBattlefieldReward kbr = (KamarBattlefieldReward) instanceReward;
+        int count = 0;
+        KamarBattlefieldReward kbr = (KamarBattlefieldReward) instanceReward;
 
-    	for (Player player : players) {
-    		if (!race.equals(player.getRace())) {
-    			continue;
-    		}
-    		KamarBattlefieldPlayerReward kbpr = kbr.getPlayerReward(player.getObjectId());
-    		writeD(player.getObjectId());
-    		writeC(player.getPlayerClass().getClassId());
-    		writeC(player.getAbyssRank().getRank().getId());
-    		writeC(0);//unk
-    		writeH(0);//unk?
-			writeD(kbpr.getPvPKills());
-			log.info("Player Points: " + kbpr.getPoints());
-			writeD(kbpr.getPoints());
-			writeS(player.getName(), 52);
-			count++;
-    	}    	
-    	if (count < 12) {
+        for (Player player : players) {
+            if (!race.equals(player.getRace())) {
+                continue;
+            }
+            KamarBattlefieldPlayerReward kbpr = kbr.getPlayerReward(player.getObjectId());
+            writeD(player.getObjectId());
+            writeC(player.getPlayerClass().getClassId());
+            writeC(player.getAbyssRank().getRank().getId());
+            writeC(0);//unk
+            writeH(0);//unk?
+            writeD(kbpr.getPvPKills());
+            log.info("Player Points: " + kbpr.getPoints());
+            writeD(kbpr.getPoints());
+            writeS(player.getName(), 52);
+            count++;
+        }
+        if (count < 12) {
             writeB(new byte[69 * (12 - count)]);
         }
-    	writeB(new byte[828]);
+        writeB(new byte[828]);
     }
-    
-    private void DomeTable(Race race) {
-    	int count = 0;
-    	IdgelDomeReward idr = (IdgelDomeReward) instanceReward;
 
-    	for (Player player : players) {
-    		if (!race.equals(player.getRace())) {
-    			continue;
-    		}
-    		IdgelDomePlayerReward idpr = idr.getPlayerReward(player.getObjectId());
-    		writeD(player.getObjectId());
-    		writeC(player.getPlayerClass().getClassId());
-    		writeC(player.getAbyssRank().getRank().getId());
-    		writeC(0);//unk
-    		writeH(0);//unk?
-			writeD(idpr.getPvPKills());
-			log.info("Player Points: " + idpr.getPoints());
-			writeD(idpr.getPoints());
-			writeS(player.getName(), 52);
-			count++;
-    	}    	
-    	if (count < 12) {
+    private void DomeTable(Race race) {
+        int count = 0;
+        IdgelDomeReward idr = (IdgelDomeReward) instanceReward;
+
+        for (Player player : players) {
+            if (!race.equals(player.getRace())) {
+                continue;
+            }
+            IdgelDomePlayerReward idpr = idr.getPlayerReward(player.getObjectId());
+            writeD(player.getObjectId());
+            writeC(player.getPlayerClass().getClassId());
+            writeC(player.getAbyssRank().getRank().getId());
+            writeC(0);//unk
+            writeH(0);//unk?
+            writeD(idpr.getPvPKills());
+            log.info("Player Points: " + idpr.getPoints());
+            writeD(idpr.getPoints());
+            writeS(player.getName(), 52);
+            count++;
+        }
+        if (count < 12) {
             writeB(new byte[69 * (12 - count)]);
         }
-    	writeB(new byte[897]);
-    }    
+        writeB(new byte[897]);
+    }
 }

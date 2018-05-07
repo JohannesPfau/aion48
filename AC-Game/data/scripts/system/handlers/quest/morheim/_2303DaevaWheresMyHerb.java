@@ -29,9 +29,9 @@
  */
 package quest.morheim;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -52,7 +52,7 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
 
     @Override
     public void register() {
-        int[] mobs = {211298, 211305, 211304, 211297};
+        int[] mobs = { 211298, 211305, 211304, 211297 };
         qe.registerQuestNpc(798082).addOnQuestStart(questId);
         qe.registerQuestNpc(798082).addOnTalkEvent(questId);
         qe.registerQuestNpc(204378).addOnTalkEvent(questId);
@@ -157,8 +157,8 @@ public class _2303DaevaWheresMyHerb extends QuestHandler {
         int targetId = env.getTargetId();
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVars().getQuestVars();
-            int[] daru = {211298, 211305};
-            int[] ettins = {211304, 211297};
+            int[] daru = { 211298, 211305 };
+            int[] ettins = { 211304, 211297 };
             if (var >= 11 && var < 15) {
                 return defaultOnKillEvent(env, daru, 10, 15); // 15
             } else if (var == 15) {

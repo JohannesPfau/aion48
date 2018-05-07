@@ -53,7 +53,8 @@ public abstract class PlayerSkillListDAO implements DAO {
     /**
      * Returns a list of skilllist for player
      *
-     * @param playerId Player object id.
+     * @param playerId
+     *            Player object id.
      * @return a list of skilllist for player
      */
     public abstract PlayerSkillList loadSkillList(int playerId);

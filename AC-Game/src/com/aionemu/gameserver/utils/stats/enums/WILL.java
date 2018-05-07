@@ -51,6 +51,7 @@ public enum WILL {
     GUNNER(90),
     ARTIST(110),
     BARD(110);
+
     private int value;
 
     private WILL(int value) {

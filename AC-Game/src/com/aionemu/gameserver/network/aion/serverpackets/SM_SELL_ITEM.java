@@ -64,8 +64,8 @@ public class SM_SELL_ITEM extends AionServerPacket {
      * {@inheritDoc}
      */
     @Override
-	protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+    protected void writeImpl(AionConnection con) {
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         if ((this.plist != null) && (this.plist.getNpcId() != 0) && (this.plist.getCount() != 0)) {
             writeD(this.targetObjectId);
             writeC(this.plist.getTradeNpcType().index());

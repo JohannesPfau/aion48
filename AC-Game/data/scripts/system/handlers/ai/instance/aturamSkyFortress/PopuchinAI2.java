@@ -29,7 +29,8 @@
  */
 package ai.instance.aturamSkyFortress;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -42,7 +43,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.concurrent.Future;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -56,6 +57,7 @@ public class PopuchinAI2 extends AggressiveNpcAI2 {
     private void startBombTask() {
         if (!isAlreadyDead() && !isHome) {
             bombTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     if (!isAlreadyDead() && !isHome) {
@@ -64,11 +66,13 @@ public class PopuchinAI2 extends AggressiveNpcAI2 {
                             SkillEngine.getInstance().getSkill(getOwner(), 19413, 49, target).useNoAnimationSkill();
                         }
                         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                             @Override
                             public void run() {
                                 if (!isAlreadyDead() && !isHome) {
                                     SkillEngine.getInstance().getSkill(getOwner(), 19412, 49, getOwner()).useNoAnimationSkill();
                                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                         @Override
                                         public void run() {
                                             if (!isAlreadyDead() && !isHome && getOwner().isSpawned()) {
@@ -124,6 +128,7 @@ public class PopuchinAI2 extends AggressiveNpcAI2 {
 
     private void spawnRndBombs() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead() && !isHome) {

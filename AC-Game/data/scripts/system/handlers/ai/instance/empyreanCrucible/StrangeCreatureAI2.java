@@ -29,12 +29,13 @@
  */
 package ai.instance.empyreanCrucible;
 
-import ai.GeneralNpcAI2;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Luzien
@@ -51,6 +52,7 @@ public class StrangeCreatureAI2 extends GeneralNpcAI2 {
 
     private void startEventTask() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
@@ -63,6 +65,7 @@ public class StrangeCreatureAI2 extends GeneralNpcAI2 {
 
     private void startLifeTask() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 AI2Actions.deleteOwner(StrangeCreatureAI2.this);

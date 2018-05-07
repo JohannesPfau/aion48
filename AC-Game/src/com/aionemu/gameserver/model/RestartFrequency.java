@@ -17,25 +17,21 @@
 package com.aionemu.gameserver.model;
 
 /**
- *
  * @author nrg
  */
-public enum RestartFrequency
-{
+public enum RestartFrequency {
     NEVER(0),
     DAILY(1),
     WEEKLY(2),
     MONTHLY(3);
-    
+
     private int id;
-    
-    private RestartFrequency(int id)
-    {
+
+    private RestartFrequency(int id) {
         this.id = id;
     }
-    
-    public int getID()
-    {
+
+    public int getID() {
         return id;
     }
 }

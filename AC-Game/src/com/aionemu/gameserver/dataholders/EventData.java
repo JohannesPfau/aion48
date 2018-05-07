@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.THashMap;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -48,6 +46,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 
+import gnu.trove.map.hash.THashMap;
+
 /**
  * <p/>
  * Java class for EventData complex type.
@@ -55,6 +55,7 @@ import com.aionemu.gameserver.model.templates.event.EventTemplate;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="EventData">
  *   &lt;complexContent>
@@ -76,7 +77,7 @@ import com.aionemu.gameserver.model.templates.event.EventTemplate;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "EventData", propOrder = {"active", "events"})
+@XmlType(name = "EventData", propOrder = { "active", "events" })
 @XmlRootElement(name = "events_config")
 public class EventData {
 
@@ -86,9 +87,9 @@ public class EventData {
     @XmlElement(name = "event")
     protected List<EventTemplate> events;
     @XmlTransient
-    private THashMap<String, EventTemplate> activeEvents = new THashMap<String, EventTemplate>();
+    private THashMap<String, EventTemplate> activeEvents = new THashMap<>();
     @XmlTransient
-    private THashMap<String, EventTemplate> allEvents = new THashMap<String, EventTemplate>();
+    private THashMap<String, EventTemplate> allEvents = new THashMap<>();
     @XmlTransient
     private int counter = 0;
 
@@ -101,7 +102,7 @@ public class EventData {
         allEvents.clear();
         activeEvents.clear();
 
-        Set<String> ae = new HashSet<String>();
+        Set<String> ae = new HashSet<>();
         Collections.addAll(ae, active.split(";"));
 
         for (EventTemplate ev : events) {
@@ -126,7 +127,7 @@ public class EventData {
     }
 
     public List<EventTemplate> getAllEvents() {
-        List<EventTemplate> result = new ArrayList<EventTemplate>();
+        List<EventTemplate> result = new ArrayList<>();
         synchronized (allEvents) {
             result.addAll(allEvents.values());
         }
@@ -136,7 +137,7 @@ public class EventData {
 
     public void setAllEvents(List<EventTemplate> events, String active) {
         if (events == null) {
-            events = new ArrayList<EventTemplate>();
+            events = new ArrayList<>();
         }
         this.events = events;
         this.active = active;
@@ -153,7 +154,7 @@ public class EventData {
     }
 
     public List<EventTemplate> getActiveEvents() {
-        List<EventTemplate> result = new ArrayList<EventTemplate>();
+        List<EventTemplate> result = new ArrayList<>();
         synchronized (activeEvents) {
             result.addAll(activeEvents.values());
         }

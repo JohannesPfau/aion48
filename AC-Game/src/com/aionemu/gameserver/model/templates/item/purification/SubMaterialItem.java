@@ -55,7 +55,8 @@ public class SubMaterialItem {
     }
 
     /**
-     * @param id the id to set
+     * @param id
+     *            the id to set
      */
     public void setId(int id) {
         this.id = id;
@@ -69,7 +70,8 @@ public class SubMaterialItem {
     }
 
     /**
-     * @param count the count to set
+     * @param count
+     *            the count to set
      */
     public void setCount(int count) {
         this.count = count;

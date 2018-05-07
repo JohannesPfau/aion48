@@ -29,11 +29,11 @@
  */
 package quest.morheim;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -46,7 +46,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _2037TheProtectorofNepra extends QuestHandler {
 
     private final static int questId = 2037;
-    private final static int[] npc_ids = {204369, 204361, 278004};
+    private final static int[] npc_ids = { 204369, 204361, 278004 };
 
     public _2037TheProtectorofNepra() {
         super(questId);

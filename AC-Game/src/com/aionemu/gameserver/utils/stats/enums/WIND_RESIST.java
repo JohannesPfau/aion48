@@ -51,6 +51,7 @@ public enum WIND_RESIST {
     GUNNER(0),
     ARTIST(0),
     BARD(0);
+
     private int value;
 
     private WIND_RESIST(int value) {

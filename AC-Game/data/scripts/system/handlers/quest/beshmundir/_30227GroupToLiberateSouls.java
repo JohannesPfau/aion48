@@ -29,10 +29,10 @@
  */
 package quest.beshmundir;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,7 +51,7 @@ public class _30227GroupToLiberateSouls extends QuestHandler {
 
     @Override
     public void register() {
-        int[] mobs = {216586, 216590, 216733, 216734, 216735, 216736, 216737, 216738, 216245};
+        int[] mobs = { 216586, 216590, 216733, 216734, 216735, 216736, 216737, 216738, 216245 };
         qe.registerQuestNpc(798946).addOnQuestStart(questId);
         qe.registerQuestNpc(798946).addOnTalkEvent(questId);
         qe.registerQuestNpc(799521).addOnTalkEvent(questId);

@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.world.zone.handler;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.IActor;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
@@ -40,12 +38,14 @@ import com.aionemu.gameserver.model.templates.materials.MaterialSkill;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
+import javolution.util.FastMap;
+
 /**
  * @author Rolandas
  */
 public class MaterialZoneHandler implements ZoneHandler {
 
-    FastMap<Integer, IActor> observed = new FastMap<Integer, IActor>();
+    FastMap<Integer, IActor> observed = new FastMap<>();
     private MaterialTemplate template;
     private Race ownerRace = Race.NONE;
 
@@ -53,7 +53,7 @@ public class MaterialZoneHandler implements ZoneHandler {
         this.template = template;
         String name = geometry.getName();
         if (name.indexOf("FIRE_BOX") != -1 || name.indexOf("FIRE_SEMISPHERE") != -1 || name.indexOf("FIREPOT") != -1
-                || name.indexOf("FIRE_CYLINDER") != -1 || name.indexOf("FIRE_CONE") != -1 || name.startsWith("BU_H_CENTERHALL")) {
+            || name.indexOf("FIRE_CYLINDER") != -1 || name.indexOf("FIRE_CONE") != -1 || name.startsWith("BU_H_CENTERHALL")) {
         }
         if (name.startsWith("BU_AB_DARKSP")) {
             ownerRace = Race.ASMODIANS;
@@ -77,11 +77,13 @@ public class MaterialZoneHandler implements ZoneHandler {
         if (foundSkill == null) {
             return;
         }
-        /*CollisionMaterialActor actor = new CollisionMaterialActor(creature, geometry, template);
-         creature.getObserveController().addObserver(actor);
-         observed.put(creature.getObjectId(), actor);
-         if (actOnEnter)
-         actor.act();*/
+        /*
+         * CollisionMaterialActor actor = new CollisionMaterialActor(creature, geometry, template);
+         * creature.getObserveController().addObserver(actor);
+         * observed.put(creature.getObjectId(), actor);
+         * if (actOnEnter)
+         * actor.act();
+         */
     }
 
     @Override

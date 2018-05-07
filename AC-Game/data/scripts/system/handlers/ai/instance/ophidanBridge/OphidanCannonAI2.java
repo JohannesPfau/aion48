@@ -29,7 +29,8 @@
  */
 package ai.instance.ophidanBridge;
 
-import ai.ActionItemNpcAI2;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.poll.AIAnswer;
@@ -38,7 +39,7 @@ import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.ActionItemNpcAI2;
 
 /**
  * @author Eloann

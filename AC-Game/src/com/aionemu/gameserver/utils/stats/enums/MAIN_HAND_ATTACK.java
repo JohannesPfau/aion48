@@ -51,6 +51,7 @@ public enum MAIN_HAND_ATTACK {
     GUNNER(18),
     ARTIST(16),
     BARD(16);
+
     private int value;
 
     private MAIN_HAND_ATTACK(int value) {

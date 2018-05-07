@@ -29,8 +29,6 @@
  */
 package ai.instance.IdgelDome;
 
-import ai.GeneralNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.Race;
@@ -42,60 +40,54 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
+import ai.GeneralNpcAI2;
+
 /**
  * @author GiGatR00n (Aion-Core)
  */
 @AIName("idgedome_quest_movie")
 public class IdgelDomeMovieAI2 extends GeneralNpcAI2 {
-	
-	@Override
-	protected void handleDialogStart(Player player) 
-	{
-		final QuestState qs1 = player.getQuestStateList().getQuestState(player.getRace().equals(Race.ELYOS) ? 18941 : 28941);
-		final QuestState qs2 = player.getQuestStateList().getQuestState(player.getRace().equals(Race.ELYOS) ? 18940 : 28940);
-		if ((qs1 == null || qs1.getStatus() == QuestStatus.NONE) || !(qs2 == null || qs2.getStatus() == QuestStatus.NONE)) {
-			//super.handleDialogStart(player);
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10));
-            
-		} else {
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
-		}
-	}
-	
-	@SuppressWarnings("incomplete-switch")
-	@Override
-	public boolean onDialogSelect(final Player player, 
-								  int dialogId, 
-								  int questId, 
-								  int extendedRewardIndex) 
-	{
+
+    @Override
+    protected void handleDialogStart(Player player) {
+        final QuestState qs1 = player.getQuestStateList().getQuestState(player.getRace().equals(Race.ELYOS) ? 18941 : 28941);
+        final QuestState qs2 = player.getQuestStateList().getQuestState(player.getRace().equals(Race.ELYOS) ? 18940 : 28940);
+        if ((qs1 == null || qs1.getStatus() == QuestStatus.NONE) || !(qs2 == null || qs2.getStatus() == QuestStatus.NONE)) {
+            //super.handleDialogStart(player);
+            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10));
+
+        } else {
+            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
+        }
+    }
+
+    @SuppressWarnings("incomplete-switch")
+    @Override
+    public boolean onDialogSelect(final Player player, int dialogId, int questId, int extendedRewardIndex) {
         QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogId);
         env.setExtendedRewardIndex(extendedRewardIndex);
         DialogAction dialog = env.getDialog();
-		final QuestState qs = player.getQuestStateList().getQuestState(player.getRace().equals(Race.ELYOS) ? 18941 : 28941);
-		
+        final QuestState qs = player.getQuestStateList().getQuestState(player.getRace().equals(Race.ELYOS) ? 18941 : 28941);
+
         if (qs != null && qs.getStatus() == QuestStatus.START && isRightQuest(questId)) {
-        	
-        	switch (dialog) 
-        	{
-	            case SELECT_ACTION_1012:
-	    			switch (getNpcId())
-	    			{
-	    				case 802383: //Talle (Elyos Quest Giver)
-	    				case 802384: //Salade (Asmo Quest Qiver)
-	    					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 901));
-	    					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012, 0));
-	    					break;
-	    			}
-        	}
+
+            switch (dialog) {
+                case SELECT_ACTION_1012:
+                    switch (getNpcId()) {
+                        case 802383: //Talle (Elyos Quest Giver)
+                        case 802384: //Salade (Asmo Quest Qiver)
+                            PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 901));
+                            PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1012, 0));
+                            break;
+                    }
+            }
         }
         return false;
-	}
-	
-	private boolean isRightQuest(int QuestId) {
-		// QuestId:18941(Elyos) = [Group] Destroying the Destroyer
-		// QuestId:28941(Asmo)  = [Group] Destroying the Destroyer
-		return (QuestId == 18941 || QuestId == 28941);
-	}	
-}
+    }
 
+    private boolean isRightQuest(int QuestId) {
+        // QuestId:18941(Elyos) = [Group] Destroying the Destroyer
+        // QuestId:28941(Asmo)  = [Group] Destroying the Destroyer
+        return (QuestId == 18941 || QuestId == 28941);
+    }
+}

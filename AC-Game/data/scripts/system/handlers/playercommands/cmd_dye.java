@@ -198,8 +198,8 @@ public class cmd_dye extends PlayerCommand {
             }
             ItemPacketService.updateItemAfterInfoChange(target, targetItem);
         }
-        PacketSendUtility.broadcastPacket(target, new SM_UPDATE_PLAYER_APPEARANCE(target.getObjectId(), target
-                .getEquipment().getEquippedForApparence()), true);
+        PacketSendUtility.broadcastPacket(target,
+            new SM_UPDATE_PLAYER_APPEARANCE(target.getObjectId(), target.getEquipment().getEquippedForApparence()), true);
         target.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
         if (target.getObjectId() != player.getObjectId()) {
             PacketSendUtility.sendMessage(target, "You have been dyed by " + player.getName() + "!");

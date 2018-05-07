@@ -45,7 +45,7 @@ public class SM_INFLUENCE_RATIO extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         Influence inf = Influence.getInstance();
 
         writeD(SiegeService.getInstance().getSecondsBeforeHourEnd());
@@ -66,8 +66,8 @@ public class SM_INFLUENCE_RATIO extends AionServerPacket {
         writeF(inf.getAbyssAsmodiansInfluence());
         writeF(inf.getAbyssBalaursInfluence());
         writeD(600090000);
-	    writeF(inf.getKaldorElyosInfluence());
-	    writeF(inf.getKaldorAsmodiansInfluence());
-	    writeF(inf.getKaldorBalaursInfluence());
+        writeF(inf.getKaldorElyosInfluence());
+        writeF(inf.getKaldorAsmodiansInfluence());
+        writeF(inf.getKaldorBalaursInfluence());
     }
 }

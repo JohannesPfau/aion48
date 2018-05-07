@@ -125,12 +125,12 @@ public class NpcStatsTemplate extends StatsTemplate {
     public int getMaxXp() {
         return maxXp;
     }
-	
+
     /**
      * @return the RewardGP
      */
     public int getRewardGP() {
         return rewardGP;
-    }	
-	
+    }
+
 }

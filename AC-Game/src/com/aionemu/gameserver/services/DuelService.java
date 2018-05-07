@@ -31,8 +31,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.concurrent.Future;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -55,6 +53,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
+
+import javolution.util.FastMap;
 
 /**
  * @author Simple, Sphinx, xTz
@@ -82,8 +82,10 @@ public class DuelService {
     /**
      * Send the duel request to the owner
      *
-     * @param requester the player who requested the duel
-     * @param responder the player who respond to duel request
+     * @param requester
+     *            the player who requested the duel
+     * @param responder
+     *            the player who respond to duel request
      */
     public void onDuelRequest(Player requester, Player responder) {
         /**
@@ -100,13 +102,14 @@ public class DuelService {
 
         for (ZoneInstance zone : responder.getPosition().getMapRegion().getZones(responder)) {
             if (!zone.isOtherRaceDuelsAllowed() && !responder.getRace().equals(requester.getRace())
-                    || (!zone.isSameRaceDuelsAllowed() && responder.getRace().equals(requester.getRace()))) {
+                || (!zone.isSameRaceDuelsAllowed() && responder.getRace().equals(requester.getRace()))) {
                 PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_MSG_DUEL_CANT_IN_THIS_ZONE);
                 return;
             }
         }
 
         RequestResponseHandler rrh = new RequestResponseHandler(requester) {
+
             @Override
             public void denyRequest(Creature requester, Player responder) {
                 rejectDuelRequest((Player) requester, responder);
@@ -114,7 +117,7 @@ public class DuelService {
 
             @Override
             public void acceptRequest(Creature requester, Player responder) {
-                if(!isDueling(requester.getObjectId())){
+                if (!isDueling(requester.getObjectId())) {
                     startDuel((Player) requester, responder);
                 }
             }
@@ -127,8 +130,10 @@ public class DuelService {
     /**
      * Asks confirmation for the duel request
      *
-     * @param requester the player whose the duel was requested
-     * @param responder the player whose the duel was responded
+     * @param requester
+     *            the player whose the duel was requested
+     * @param responder
+     *            the player whose the duel was responded
      */
     public void confirmDuelWith(Player requester, Player responder) {
         /**
@@ -139,6 +144,7 @@ public class DuelService {
         }
 
         RequestResponseHandler rrh = new RequestResponseHandler(responder) {
+
             @Override
             public void denyRequest(Creature requester, Player responder) {
                 log.debug("[Duel] Player " + responder.getName() + " confirmed his duel with " + requester.getName());
@@ -150,15 +156,18 @@ public class DuelService {
             }
         };
         requester.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST, rrh);
-        PacketSendUtility.sendPacket(requester, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST, 0, 0, responder.getName()));
+        PacketSendUtility.sendPacket(requester,
+            new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST, 0, 0, responder.getName()));
         PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_REQUEST_TO_PARTNER(responder.getName()));
     }
 
     /**
      * Rejects the duel request
      *
-     * @param requester the duel requester
-     * @param responder the duel responder
+     * @param requester
+     *            the duel requester
+     * @param responder
+     *            the duel responder
      */
     private void rejectDuelRequest(Player requester, Player responder) {
         log.debug("[Duel] Player " + responder.getName() + " rejected duel request from " + requester.getName());
@@ -169,7 +178,8 @@ public class DuelService {
     /**
      * Cancels the duel request
      *
-     * @param target    the duel target
+     * @param target
+     *            the duel target
      * @param requester
      */
     private void cancelDuelRequest(Player owner, Player target) {
@@ -181,8 +191,10 @@ public class DuelService {
     /**
      * Starts the duel
      *
-     * @param requester the player to start duel with
-     * @param responder the other player
+     * @param requester
+     *            the player to start duel with
+     * @param responder
+     *            the other player
      */
     private void startDuel(Player requester, Player responder) {
         PacketSendUtility.sendPacket(requester, SM_DUEL.SM_DUEL_STARTED(responder.getObjectId()));
@@ -192,8 +204,9 @@ public class DuelService {
         createTask(requester, responder);
     }
 
-    private void sendDuelStartMessage(final Player player1, final Player player2){
+    private void sendDuelStartMessage(final Player player1, final Player player2) {
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player object) {
                 if (MathUtil.isInRange(player1, object, 100)) {
@@ -203,11 +216,12 @@ public class DuelService {
         });
     }
 
-    private void sendDuelEndMessage(final Player player1, final Player player2){
+    private void sendDuelEndMessage(final Player player1, final Player player2) {
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player object) {
-                if(MathUtil.isInRange(player1, object, 100)){
+                if (MathUtil.isInRange(player1, object, 100)) {
                     PacketSendUtility.sendPacket(object, SM_SYSTEM_MESSAGE.STR_DUEL_STOP_BROADCAST(player1.getName(), player2.getName()));
                 }
             }
@@ -311,6 +325,7 @@ public class DuelService {
     private void createTask(final Player requester, final Player responder) {
         // Schedule for draw
         Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (isDueling(requester.getObjectId(), responder.getObjectId())) {

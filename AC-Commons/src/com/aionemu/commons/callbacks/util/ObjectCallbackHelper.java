@@ -29,17 +29,18 @@
  */
 package com.aionemu.commons.callbacks.util;
 
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.CopyOnWriteArrayList;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.callbacks.Callback;
 import com.aionemu.commons.callbacks.CallbackResult;
 import com.aionemu.commons.callbacks.EnhancedObject;
 import com.aionemu.commons.utils.GenericValidator;
 import com.google.common.collect.Maps;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Class that implements helper methods for callbacks.<br>
@@ -66,10 +67,12 @@ public class ObjectCallbackHelper {
      * Adds callback to the list.<br>
      * Sorting is done while adding to avoid extra calls.
      *
-     * @param callback what to add
-     * @param object   add callback to which objec
+     * @param callback
+     *            what to add
+     * @param object
+     *            add callback to which objec
      */
-    @SuppressWarnings({"unchecked"})
+    @SuppressWarnings({ "unchecked" })
     public static void addCallback(Callback callback, EnhancedObject object) {
         try {
             object.getCallbackLock().writeLock().lock();
@@ -82,7 +85,7 @@ public class ObjectCallbackHelper {
 
             List<Callback> list = cbMap.get(callback.getBaseClass());
             if (list == null) {
-                list = new CopyOnWriteArrayList<Callback>();
+                list = new CopyOnWriteArrayList<>();
                 cbMap.put(callback.getBaseClass(), list);
             }
 
@@ -95,8 +98,10 @@ public class ObjectCallbackHelper {
     /**
      * Removes callback from the list
      *
-     * @param callback what to remove
-     * @param object   remove callback from which object
+     * @param callback
+     *            what to remove
+     * @param object
+     *            remove callback from which object
      */
     public static void removeCallback(Callback callback, EnhancedObject object) {
         try {
@@ -130,9 +135,12 @@ public class ObjectCallbackHelper {
     /**
      * This method call callbacks before actual method invocation takes place
      *
-     * @param obj           object that callbacks are invoked for
-     * @param callbackClass base callback class
-     * @param args          args of method
+     * @param obj
+     *            object that callbacks are invoked for
+     * @param callbackClass
+     *            base callback class
+     * @param args
+     *            args of method
      * @return {@link Callback#beforeCall(Object, Object[])}
      */
     @SuppressWarnings("unchecked")
@@ -173,10 +181,14 @@ public class ObjectCallbackHelper {
     /**
      * This method invokes callbacks after method invocation
      *
-     * @param obj           object that invokes this method
-     * @param callbackClass superclass of callback
-     * @param args          method args
-     * @param result        method invokation result
+     * @param obj
+     *            object that invokes this method
+     * @param callbackClass
+     *            superclass of callback
+     * @param args
+     *            method args
+     * @param result
+     *            method invokation result
      * @return {@link Callback#afterCall(Object, Object[], Object)}
      */
     @SuppressWarnings("unchecked")

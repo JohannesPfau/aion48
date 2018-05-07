@@ -32,8 +32,6 @@ package com.aionemu.gameserver.questEngine.handlers.template;
 import java.util.List;
 import java.util.Set;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -44,6 +42,8 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.MathUtil;
+
+import javolution.util.FastMap;
 
 /**
  * @author MrPoke reworked Bobobear
@@ -60,7 +60,8 @@ public class MentorMonsterHunt extends MonsterHunt {
      * @param endNpc
      * @param monsters
      */
-    public MentorMonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<Monster, Set<Integer>> monsters, int menteMinLevel, int menteMaxLevel) {
+    public MentorMonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, FastMap<Monster, Set<Integer>> monsters,
+        int menteMinLevel, int menteMaxLevel) {
         super(questId, startNpcIds, endNpcIds, monsters, 0, 0, null, 0);
         this.menteMinLevel = menteMinLevel;
         this.menteMaxLevel = menteMaxLevel;
@@ -78,7 +79,7 @@ public class MentorMonsterHunt extends MonsterHunt {
                         PlayerGroup group = player.getPlayerGroup2();
                         for (Player member : group.getMembers()) {
                             if (member.getLevel() >= menteMinLevel && member.getLevel() <= menteMaxLevel
-                                    && MathUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE) {
+                                && MathUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE) {
                                 return super.onKillEvent(env);
                             }
                         }

@@ -46,6 +46,7 @@ public class FlameSmashAI2 extends NpcAI2 {
         super.handleSpawned();
         starLifeTask();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
@@ -57,6 +58,7 @@ public class FlameSmashAI2 extends NpcAI2 {
 
     private void starLifeTask() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 despawn();

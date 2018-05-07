@@ -29,10 +29,10 @@
  */
 package quest.aturam_sky_fortress;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -43,7 +43,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _28302DocumentSaved extends QuestHandler {
 
     private final static int questId = 28302;
-    private int[] mobIds = new int[]{700981, 700982, 700983, 700984, 700985};
+    private int[] mobIds = new int[] { 700981, 700982, 700983, 700984, 700985 };
 
     public _28302DocumentSaved() {
         super(questId);

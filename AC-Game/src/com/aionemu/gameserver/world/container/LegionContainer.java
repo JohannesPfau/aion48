@@ -32,10 +32,10 @@ package com.aionemu.gameserver.world.container;
 import java.util.Iterator;
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
+
+import javolution.util.FastMap;
 
 /**
  * Container for storing Legions by legionId and name.
@@ -84,9 +84,10 @@ public class LegionContainer implements Iterable<Legion> {
     /**
      * Get Legion object by objectId.
      *
-     * @param legionId - legionId of legion.
+     * @param legionId
+     *            - legionId of legion.
      * @return Legion with given ojectId or null if Legion with given legionId
-     * is not logged.
+     *         is not logged.
      */
     public Legion get(int legionId) {
         return legionsById.get(legionId);
@@ -95,9 +96,10 @@ public class LegionContainer implements Iterable<Legion> {
     /**
      * Get Legion object by name.
      *
-     * @param name - name of legion
+     * @param name
+     *            - name of legion
      * @return Legion with given name or null if Legion with given name is not
-     * logged.
+     *         logged.
      */
     public Legion get(String name) {
         return legionsByName.get(name.toLowerCase());

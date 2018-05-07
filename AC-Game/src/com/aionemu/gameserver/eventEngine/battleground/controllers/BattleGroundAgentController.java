@@ -53,6 +53,7 @@ public class BattleGroundAgentController extends NpcController {
         } else {
             String message = "Do you want to register in a battleground ?";
             RequestResponseHandler responseHandler = new RequestResponseHandler(player) {
+
                 @Override
                 public void acceptRequest(Creature requester, Player responder) {
                     BattleGroundManager.sendRegistrationForm(player);

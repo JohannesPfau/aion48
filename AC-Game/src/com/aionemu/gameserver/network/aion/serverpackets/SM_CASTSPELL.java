@@ -62,8 +62,7 @@ public class SM_CASTSPELL extends AionServerPacket {
         this.isCharge = isCharge;
     }
 
-    public SM_CASTSPELL(int attackerObjectId, int spellId, int level, int targetType, float x, float y, float z,
-                        int duration) {
+    public SM_CASTSPELL(int attackerObjectId, int spellId, int level, int targetType, float x, float y, float z, int duration) {
         this(attackerObjectId, spellId, level, targetType, 0, duration, false);
         this.x = x;
         this.y = y;
@@ -75,7 +74,7 @@ public class SM_CASTSPELL extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(attackerObjectId);
         writeH(spellId);
         writeC(level);

@@ -48,7 +48,7 @@ public class PlayerTeamCommandService {
         Player teamSubjective = getTeamSubjective(player, playerObjId);
         // if playerObjId is not 0 - subjective should not be active player
         Preconditions.checkArgument(playerObjId == 0 || teamSubjective.getObjectId().equals(playerObjId) || command == TeamCommand.LEAGUE_EXPEL,
-                "Wrong command detected " + command);
+            "Wrong command detected " + command);
         execute(player, command, teamSubjective);
     }
 

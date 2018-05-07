@@ -49,14 +49,14 @@ public class ResultedItemsCollection {
     protected ArrayList<RandomItem> randomItems;
 
     public Collection<ResultedItem> getItems() {
-        return items != null ? items : Collections.<ResultedItem>emptyList();
+        return items != null ? items : Collections.<ResultedItem> emptyList();
     }
 
     public List<RandomItem> getRandomItems() {
         if (randomItems != null) {
             return randomItems;
         } else {
-            return new ArrayList<RandomItem>();
+            return new ArrayList<>();
         }
     }
 }

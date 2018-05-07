@@ -43,6 +43,7 @@ public enum HousingFlags {
     SELLING_HOUSE(IS_OWNER.getId() | BUY_STUDIO_ALLOWED.getId()),
     // Player status
     SOLD_HOUSE(BIDDING_ALLOWED.getId() | BUY_STUDIO_ALLOWED.getId());
+
     private byte id;
 
     private HousingFlags(int id) {

@@ -96,7 +96,8 @@ public class RelinquishCraftStatus {
         deleteCraftStatusQuests(skillId, player, false);
     }
 
-    private static boolean canRelinquishCraftStatus(Player player, PlayerSkillEntry skill, CraftLearnTemplate craftLearnTemplate, int minValue, int maxValue) {
+    private static boolean canRelinquishCraftStatus(Player player, PlayerSkillEntry skill, CraftLearnTemplate craftLearnTemplate, int minValue,
+        int maxValue) {
         if (craftLearnTemplate == null || !craftLearnTemplate.isCraftSkill()) {
             return false;
         }
@@ -156,9 +157,9 @@ public class RelinquishCraftStatus {
         int maxCraftStatus = isExpert ? CraftConfig.MAX_EXPERT_CRAFTING_SKILLS : CraftConfig.MAX_MASTER_CRAFTING_SKILLS;
         int countCraftStatus;
         for (PlayerSkillEntry skill : player.getSkillList().getBasicSkills()) {
-            countCraftStatus = isExpert ? CraftSkillUpdateService.getTotalMasterCraftingSkills(player)
-                    + CraftSkillUpdateService.getTotalExpertCraftingSkills(player)
-                    : CraftSkillUpdateService.getTotalMasterCraftingSkills(player);
+            countCraftStatus = isExpert
+                ? CraftSkillUpdateService.getTotalMasterCraftingSkills(player) + CraftSkillUpdateService.getTotalExpertCraftingSkills(player)
+                : CraftSkillUpdateService.getTotalMasterCraftingSkills(player);
             if (countCraftStatus > maxCraftStatus) {
                 skillId = skill.getSkillId();
                 skillLevel = skill.getSkillLevel();

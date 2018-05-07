@@ -108,8 +108,7 @@ public class ItemOrders extends QuestHandler {
             if (qs != null) {
                 if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
                     return sendQuestDialog(env, 2375);
-                } else if (env.getDialogId() == 1009 && qs.getStatus() != QuestStatus.COMPLETE
-                        && qs.getStatus() != QuestStatus.NONE) {
+                } else if (env.getDialogId() == 1009 && qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE) {
                     removeQuestItem(env, startItemId, 1);
                     qs.setQuestVar(1);
                     qs.setStatus(QuestStatus.REWARD);
@@ -132,13 +131,12 @@ public class ItemOrders extends QuestHandler {
         if (id != startItemId) {
             return HandlerResult.UNKNOWN;
         }
-        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0,
-                0), true);
+        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
-                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-                        1, 0), true);
+                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
                 sendQuestDialog(env, 4);
             }
         }, 3000);

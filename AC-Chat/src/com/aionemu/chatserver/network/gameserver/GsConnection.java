@@ -56,7 +56,8 @@ public class GsConnection extends AConnection {
         CONNECTED,
         AUTHED
     }
-    private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<GsServerPacket>();
+
+    private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<>();
     private State state;
 
     public GsConnection(SocketChannel sc, Dispatcher d) throws IOException {

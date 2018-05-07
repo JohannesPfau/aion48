@@ -35,8 +35,6 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * This class implements cylinder area
- *
-
  */
 public class CylinderArea extends AbstractArea {
 
@@ -56,10 +54,14 @@ public class CylinderArea extends AbstractArea {
     /**
      * Creates new cylinder with given radius
      *
-     * @param center center of the circle
-     * @param radius radius of the circle
-     * @param minZ   min z
-     * @param maxZ   max z
+     * @param center
+     *            center of the circle
+     * @param radius
+     *            radius of the circle
+     * @param minZ
+     *            min z
+     * @param maxZ
+     *            max z
      */
     public CylinderArea(ZoneName zoneName, int worldId, Point2D center, float radius, float minZ, float maxZ) {
         this(zoneName, worldId, center.getX(), center.getY(), radius, minZ, maxZ);
@@ -68,11 +70,16 @@ public class CylinderArea extends AbstractArea {
     /**
      * Creates new cylider with given radius
      *
-     * @param x      center coord
-     * @param y      center coord
-     * @param radius radius of the circle
-     * @param minZ   min z
-     * @param maxZ   max z
+     * @param x
+     *            center coord
+     * @param y
+     *            center coord
+     * @param radius
+     *            radius of the circle
+     * @param minZ
+     *            min z
+     * @param maxZ
+     *            max z
      */
     public CylinderArea(ZoneName zoneName, int worldId, float x, float y, float radius, float minZ, float maxZ) {
         super(zoneName, worldId, minZ, maxZ);

@@ -37,19 +37,19 @@ import com.aionemu.commons.configuration.Property;
  */
 public class ShutdownConfig {
 
-	/**
+    /**
      * Specifies the server restart frequency.
      */
-	@Property(key = "gameserver.shutdown.frequency", defaultValue = "NEVER")
-     public static String GAMESERVER_SHUTDOWN_FREQUENCY;
-        
+    @Property(key = "gameserver.shutdown.frequency", defaultValue = "NEVER")
+    public static String GAMESERVER_SHUTDOWN_FREQUENCY;
+
     /**
      * Specifies the exact time of day the server should be restarted (of course respecting the frequency)
      */
-	 @Property(key = "gameserver.shutdown.time", defaultValue = "5:00")
+    @Property(key = "gameserver.shutdown.time", defaultValue = "5:00")
     public static String GAMESERVER_SHUTDOWN_TIME;
-	
-	/**
+
+    /**
      * AutoShutdown Hook Mode for automatic system.
      */
     @Property(key = "gameserver.shutdownauto.mode", defaultValue = "1")

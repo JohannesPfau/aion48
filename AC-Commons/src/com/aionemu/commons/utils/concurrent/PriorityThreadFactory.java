@@ -29,11 +29,11 @@
  */
 package com.aionemu.commons.utils.concurrent;
 
-import com.aionemu.commons.network.util.ThreadUncaughtExceptionHandler;
-
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import com.aionemu.commons.network.util.ThreadUncaughtExceptionHandler;
 
 /**
  * @author -Nemesiss-

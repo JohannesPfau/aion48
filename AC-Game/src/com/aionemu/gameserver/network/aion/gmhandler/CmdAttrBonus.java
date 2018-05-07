@@ -88,7 +88,7 @@ public class CmdAttrBonus extends AbstractGMHandler implements StatOwner {
             return;
         }
 
-        List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        List<IStatFunction> functions = new ArrayList<>();
         functions.add(new StatChangeFunction(StatEnum.SPEED, value));
         tgtPlayer.getGameStats().addEffect(this, functions);
         PacketSendUtility.broadcastPacket(tgtPlayer, new SM_EMOTION(tgtPlayer, EmotionType.START_EMOTE2, 0, 0), true);
@@ -210,6 +210,7 @@ public class CmdAttrBonus extends AbstractGMHandler implements StatOwner {
     }
 
     class StatChangeFunction extends StatFunction {
+
         static final int speed = 6000;
         static final int flyspeed = 9000;
         static final int maxDp = 4000;

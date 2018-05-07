@@ -29,9 +29,9 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -54,7 +54,7 @@ public class _25030CluesFromTheUndead extends QuestHandler {
         qe.registerQuestNpc(804729).addOnTalkEvent(questId);
         qe.registerQuestNpc(804913).addOnTalkEvent(questId);
         qe.registerQuestNpc(804728).addOnTalkEvent(questId);
-		qe.registerQuestNpc(804911).addOnTalkEvent(questId);
+        qe.registerQuestNpc(804911).addOnTalkEvent(questId);
     }
 
     @Override
@@ -76,48 +76,48 @@ public class _25030CluesFromTheUndead extends QuestHandler {
             int var = qs.getQuestVarById(0);
             if (targetId == 804729) {
                 switch (dialog) {
-                case QUEST_SELECT: {
-                    if (var == 0) 
-                        return sendQuestDialog(env, 1011);
-                    if (var == 1) 
-                        return sendQuestDialog(env, 1352);
-                }    
-                case CHECK_USER_HAS_QUEST_ITEM:
-                    if (QuestService.collectItemCheck(env, true)) {
-                        qs.setQuestVarById(0, var + 1);
-                        updateQuestStatus(env);
-                        return sendQuestDialog(env, 10000);
-                    } else {
-                        return sendQuestDialog(env, 10001);
+                    case QUEST_SELECT: {
+                        if (var == 0)
+                            return sendQuestDialog(env, 1011);
+                        if (var == 1)
+                            return sendQuestDialog(env, 1352);
                     }
-                case SETPRO2:
-                    if (var == 1) {
-                        qs.setQuestVarById(0, var + 1);
-                        updateQuestStatus(env);
-						giveQuestItem(env, 182215713, 1);
-                        return true;
-                    }
-                    return false;
-				}
-            } 
-			if (targetId == 804913) { 
+                    case CHECK_USER_HAS_QUEST_ITEM:
+                        if (QuestService.collectItemCheck(env, true)) {
+                            qs.setQuestVarById(0, var + 1);
+                            updateQuestStatus(env);
+                            return sendQuestDialog(env, 10000);
+                        } else {
+                            return sendQuestDialog(env, 10001);
+                        }
+                    case SETPRO2:
+                        if (var == 1) {
+                            qs.setQuestVarById(0, var + 1);
+                            updateQuestStatus(env);
+                            giveQuestItem(env, 182215713, 1);
+                            return true;
+                        }
+                        return false;
+                }
+            }
+            if (targetId == 804913) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     if (var == 2) {
                         return sendQuestDialog(env, 1693);
                     }
                 } else if (dialog == DialogAction.SETPRO3) {
-					changeQuestStep(env, 2, 3, false); 
+                    changeQuestStep(env, 2, 3, false);
                     return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804728) { 
+            if (targetId == 804728) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     if (var == 3) {
                         return sendQuestDialog(env, 2034);
                     }
                 } else if (dialog == DialogAction.SET_SUCCEED) {
-					removeQuestItem(env, 182215713, 1);
-                    changeQuestStep(env, 3, 4, true); 
+                    removeQuestItem(env, 182215713, 1);
+                    changeQuestStep(env, 3, 4, true);
                     return closeDialogWindow(env);
                 }
             }

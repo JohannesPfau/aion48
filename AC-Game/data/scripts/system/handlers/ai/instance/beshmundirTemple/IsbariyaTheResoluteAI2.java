@@ -29,7 +29,11 @@
  */
 package ai.instance.beshmundirTemple;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -44,10 +48,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Luzien
@@ -58,7 +59,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 
     private int stage = 0;
     private AtomicBoolean isHome = new AtomicBoolean(true);
-    private List<Point3D> soulLocations = new ArrayList<Point3D>();
+    private List<Point3D> soulLocations = new ArrayList<>();
     private Future<?> basicSkillTask;
 
     @Override
@@ -118,6 +119,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 
     private void startBasicSkillTask() {
         basicSkillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -168,7 +170,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
     }
 
     private void spawnSouls() {
-        List<Point3D> points = new ArrayList<Point3D>();
+        List<Point3D> points = new ArrayList<>();
         points.addAll(soulLocations);
         int count = Rnd.get(3, 6);
         for (int i = 0; i < count; i++) {
@@ -180,7 +182,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
     }
 
     private Player getTargetPlayer() {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (Player player : getKnownList().getKnownPlayers().values()) {
             if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 40) && player != getTarget()) {
                 players.add(player);
@@ -191,6 +193,7 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
 
     private void scheduleSpecial(int delay) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 launchSpecial();
@@ -203,6 +206,6 @@ public class IsbariyaTheResoluteAI2 extends AggressiveNpcAI2 {
         float x1 = (float) (Math.cos(Math.PI * direction) * 5);
         float y1 = (float) (Math.sin(Math.PI * direction) * 5);
         return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1,
-                getPosition().getZ(), getPosition().getHeading());
+            getPosition().getZ(), getPosition().getHeading());
     }
 }

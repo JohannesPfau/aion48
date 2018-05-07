@@ -41,7 +41,8 @@ public class GameTimeUpdater implements Runnable {
     /**
      * Constructs GameTimeUpdater to update the given GameTime
      *
-     * @param time GameTime to update
+     * @param time
+     *            GameTime to update
      */
     public GameTimeUpdater(GameTime time) {
         this.time = time;

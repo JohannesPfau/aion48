@@ -29,16 +29,18 @@
  */
 package com.aionemu.commons.network.packet;
 
-import com.aionemu.commons.network.AConnection;
+import java.nio.ByteBuffer;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.nio.ByteBuffer;
+import com.aionemu.commons.network.AConnection;
 
 /**
  * Base class for every Client Packet
  *
- * @param <T> AConnection - owner of this client packet.
+ * @param <T>
+ *            AConnection - owner of this client packet.
  * @author -Nemesiss-
  */
 public abstract class BaseClientPacket<T extends AConnection> extends BasePacket implements Runnable {
@@ -59,8 +61,10 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
     /**
      * Constructs a new client packet with specified id and data buffer.
      *
-     * @param buf    packet data container.
-     * @param opcode packet opcode.
+     * @param buf
+     *            packet data container.
+     * @param opcode
+     *            packet opcode.
      */
     public BaseClientPacket(ByteBuffer buf, int opcode) {
         this(opcode);
@@ -71,7 +75,8 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
      * Constructs a new client packet with specified id. ByteBuffer must be
      * later set with setBuffer method.
      *
-     * @param opcode packet opcode.
+     * @param opcode
+     *            packet opcode.
      */
     public BaseClientPacket(int opcode) {
         super(PacketType.CLIENT, opcode);
@@ -100,7 +105,7 @@ public abstract class BaseClientPacket<T extends AConnection> extends BasePacket
      * reading data, the connection is closed.
      *
      * @return <code>true</code> if reading was successful, otherwise
-     * <code>false</code>
+     *         <code>false</code>
      */
     public final boolean read() {
         try {

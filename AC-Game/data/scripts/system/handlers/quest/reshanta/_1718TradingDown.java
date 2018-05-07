@@ -29,6 +29,7 @@
  */
 package quest.reshanta;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,7 +37,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -62,7 +62,7 @@ public class _1718TradingDown extends QuestHandler {
         qe.registerQuestNpc(204028).addOnTalkEvent(questId);
         qe.registerQuestNpc(204611).addOnTalkEvent(questId);
         qe.registerQuestNpc(279029).addOnTalkEvent(questId);
-		qe.registerQuestItem(182202156, questId);
+        qe.registerQuestItem(182202156, questId);
     }
 
     @Override
@@ -126,8 +126,8 @@ public class _1718TradingDown extends QuestHandler {
         }
         return false;
     }
-	
-	@Override
+
+    @Override
     public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
         final Player player = env.getPlayer();
         final int id = item.getItemTemplate().getTemplateId();
@@ -137,6 +137,7 @@ public class _1718TradingDown extends QuestHandler {
         }
         PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);

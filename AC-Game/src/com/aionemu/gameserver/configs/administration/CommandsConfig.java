@@ -100,10 +100,10 @@ public class CommandsConfig {
     public static int EQUIP;
     @Property(key = "fixpath", defaultValue = "3")
     public static int FIXPATH;
-	@Property(key = "fixh", defaultValue = "3")
-	public static int FIXH;
-	@Property(key = "fixz", defaultValue = "3")
-	public static int FIXZ;
+    @Property(key = "fixh", defaultValue = "3")
+    public static int FIXH;
+    @Property(key = "fixz", defaultValue = "3")
+    public static int FIXZ;
     @Property(key = "fsc", defaultValue = "3")
     public static int FSC;
     @Property(key = "gp", defaultValue = "3")

@@ -29,10 +29,10 @@
  */
 package com.aionemu.gameserver.geoEngine.math;
 
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
+
 import javolution.context.ObjectFactory;
 import javolution.lang.Reusable;
-
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 
 /**
  * @author MrPoke
@@ -41,8 +41,9 @@ public class Array3f implements Reusable {
 
     @SuppressWarnings("rawtypes")
     private static final ObjectFactory FACTORY = new ObjectFactory() {
+
         @Override
-		public Object create() {
+        public Object create() {
             return new Array3f();
         }
     };

@@ -68,7 +68,7 @@ public class TahabataAltarAI2 extends NpcAI2 {
         }
         if (creature instanceof Player) {
             if (getNpcId() == 283118 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 25, 37)
-                    || getNpcId() == 283120 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 20, 25)) {
+                || getNpcId() == 283120 && MathUtil.isIn3dRangeLimited(getOwner(), creature, 20, 25)) {
                 if (!creature.getEffectController().hasAbnormalEffect(debuff)) {
                     AI2Actions.useSkill(this, debuff);
                 }

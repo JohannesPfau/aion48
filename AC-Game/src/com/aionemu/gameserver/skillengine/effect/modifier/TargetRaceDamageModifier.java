@@ -88,8 +88,7 @@ public class TargetRaceDamageModifier extends ActionModifier {
 
             Player player = (Player) effected;
             Race race = player.getRace();
-            return (race == Race.ASMODIANS && skillTargetRace == Race.ASMODIANS)
-                    || (race == Race.ELYOS && skillTargetRace == Race.ELYOS);
+            return (race == Race.ASMODIANS && skillTargetRace == Race.ASMODIANS) || (race == Race.ELYOS && skillTargetRace == Race.ELYOS);
         } else if (effected instanceof Npc) {
             Npc npc = (Npc) effected;
 

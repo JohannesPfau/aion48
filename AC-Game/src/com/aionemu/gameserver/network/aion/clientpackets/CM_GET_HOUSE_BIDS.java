@@ -58,12 +58,12 @@ public class CM_GET_HOUSE_BIDS extends AionClientPacket {
 
     @Override
     protected void runImpl() {
-    	boolean isFirst = true;
+        boolean isFirst = true;
         Player player = getConnection().getActivePlayer();
         HouseBidEntry playerBid = HousingBidService.getInstance().getLastPlayerBid(player.getObjectId());
 
         List<HouseBidEntry> houseBids = HousingBidService.getInstance().getHouseBidEntries(player.getRace());
-        ListSplitter<HouseBidEntry> splitter = new ListSplitter<HouseBidEntry>(houseBids, 181);
+        ListSplitter<HouseBidEntry> splitter = new ListSplitter<>(houseBids, 181);
         while (!splitter.isLast()) {
             List<HouseBidEntry> packetBids = splitter.getNext();
             HouseBidEntry playerData = splitter.isLast() ? playerBid : null;

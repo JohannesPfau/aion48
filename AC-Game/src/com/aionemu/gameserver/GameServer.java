@@ -47,11 +47,6 @@ import java.util.zip.ZipOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import ch.lambdaj.Lambda;
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
-
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.network.NioServer;
@@ -119,9 +114,9 @@ import com.aionemu.gameserver.services.WeddingService;
 import com.aionemu.gameserver.services.abyss.AbyssRankUpdateService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.ecfunctions.PVPManager;
-import com.aionemu.gameserver.services.ecfunctions.bosshunt.BHService;
 import com.aionemu.gameserver.services.ecfunctions.WordFilterService;
 import com.aionemu.gameserver.services.ecfunctions.arena.ArenaService;
+import com.aionemu.gameserver.services.ecfunctions.bosshunt.BHService;
 import com.aionemu.gameserver.services.ecfunctions.ffa.DFFAService;
 import com.aionemu.gameserver.services.ecfunctions.ffa.FFaService;
 import com.aionemu.gameserver.services.gc.GarbageCollector;
@@ -159,6 +154,11 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
+import ch.lambdaj.Lambda;
+import ch.qos.logback.classic.LoggerContext;
+import ch.qos.logback.classic.joran.JoranConfigurator;
+import ch.qos.logback.core.joran.spi.JoranException;
+
 /**
  * <tt>GameServer </tt> is the main class of the application and represents the
  * whole game server.<br>
@@ -168,7 +168,7 @@ public class GameServer {
 
     private static final Logger log = LoggerFactory.getLogger(GameServer.class);
 
-    private static Set<StartupHook> startUpHooks = new HashSet<StartupHook>();
+    private static Set<StartupHook> startUpHooks = new HashSet<>();
 
     public synchronized static void addStartupHook(StartupHook hook) {
         if (startUpHooks != null) {
@@ -187,19 +187,20 @@ public class GameServer {
             hook.onStartup();
         }
     }
+
     public interface StartupHook {
+
         public void onStartup();
-    }    
-    
+    }
+
     /**
      * Starts servers for connection with aion client and login\chat server.
      */
     private void startServers() {
-    	
+
         Util.printSection("===========NETWORK=========");
-        NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS, 
-        									new ServerCfg(NetworkConfig.GAME_BIND_ADDRESS, NetworkConfig.GAME_PORT, "Game Connections", 
-        									new GameConnectionFactoryImpl()));
+        NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
+            new ServerCfg(NetworkConfig.GAME_BIND_ADDRESS, NetworkConfig.GAME_PORT, "Game Connections", new GameConnectionFactoryImpl()));
 
         LoginServer ls = LoginServer.getInstance();
         ChatServer cs = ChatServer.getInstance();
@@ -235,7 +236,7 @@ public class GameServer {
         if (JavaAgentUtils.isConfigured()) {
             log.info("JavaAgent [Callback Support] is configured.");
         }
-        
+
         Util.printSection("===========CRON==========");
         // Initialize cron service
         CronService.initSingleton(ThreadPoolManagerRunnableRunner.class);
@@ -258,22 +259,23 @@ public class GameServer {
         ThreadPoolManager.getInstance();
         Util.printSection("===========================");
     }
-    
+
     /**
      * Launching method for GameServer
      *
-     * @param args arguments, not used
+     * @param args
+     *            arguments, not used
      */
     public static void main(String[] args) {
-    	
+
         long startTime = System.currentTimeMillis();
         Lambda.enableJitting(true);
-        final GameEngine[] parallelEngines = new GameEngine[]{QuestEngine.getInstance(), InstanceEngine.getInstance(),
-                											  AI2Engine.getInstance(), ChatProcessor.getInstance()};
+        final GameEngine[] parallelEngines = new GameEngine[] { QuestEngine.getInstance(), InstanceEngine.getInstance(), AI2Engine.getInstance(),
+            ChatProcessor.getInstance() };
         final CountDownLatch progressLatch = new CountDownLatch(parallelEngines.length);
         initalizeLoggger();
         initUtilityServicesAndConfig();
-		(new ServerCommandProcessor()).start();
+        (new ServerCommandProcessor()).start();
         Util.printSection("===========DATA============");
         IDFactory.getInstance();
         DataManager.getInstance();
@@ -295,6 +297,7 @@ public class GameServer {
         for (int i = 0; i < parallelEngines.length; i++) {
             final int index = i;
             ThreadPoolManager.getInstance().execute(new Runnable() {
+
                 @Override
                 public void run() {
                     parallelEngines[index].load(progressLatch);
@@ -364,9 +367,9 @@ public class GameServer {
         LanguageHandler.getInstance();
         FlyRingService.getInstance();
         RoadService.getInstance();
-        
+
         if (EventsConfig.EVENT_ENABLED)
-            PlayerEventService.getInstance();        
+            PlayerEventService.getInstance();
         if (CustomConfig.ENABLE_REWARD_SERVICE)
             RewardService.getInstance();
         if (EventsConfig.ENABLE_EVENT_SERVICE)
@@ -380,18 +383,18 @@ public class GameServer {
         ArenaService.getInstance().Init();
         if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
             if (AutoGroupConfig.IDGELDOME_ENABLE)
-            	IdgelDomeService.getInstance().start();
+                IdgelDomeService.getInstance().start();
             if (AutoGroupConfig.OPHIDAN_ENABLE)
                 OphidanBridgeService.getInstance().start();
             if (AutoGroupConfig.IRONWALL_ENABLE)
-                IronWallWarFrontService.getInstance().start();        
+                IronWallWarFrontService.getInstance().start();
             if (AutoGroupConfig.DREDGION2_ENABLE)
                 DredgionService.getInstance().start();
             if (AutoGroupConfig.KAMAR_ENABLE)
-                KamarBattlefieldService.getInstance().start();        	
+                KamarBattlefieldService.getInstance().start();
         }
-        
-		if(EventSystem.BATTLEGROUNDS_ENABLED){
+
+        if (EventSystem.BATTLEGROUNDS_ENABLED) {
             BattleGroundManager.initialize();
         }
         LivePartyConcertHall.getInstance().init();
@@ -400,8 +403,8 @@ public class GameServer {
         Util.printSection("===========================");
         Util.printSection("==========HOUSING==========");
         HousingBidService.getInstance().start();
-        ChallengeTaskService.getInstance(); 
-        TownService.getInstance();       
+        ChallengeTaskService.getInstance();
+        TownService.getInstance();
         MaintenanceTask.getInstance();
         Util.printSection("===========================");
         Util.printSection("==========CUSTOMS==========");
@@ -411,17 +414,17 @@ public class GameServer {
         if (MembershipConfig.ONLINE_BONUS_ENABLE) {
             OnlineBonus.getInstance();
         }
-        
-		RestartService.getInstance();
-		WebshopService.getInstance();
-		Util.printSection("===========================");
+
+        RestartService.getInstance();
+        WebshopService.getInstance();
+        Util.printSection("===========================");
         Util.printSection("===========SYSTEM==========");
         AEVersions.printFullVersionInfo();
         System.gc();
         AEInfos.printAllInfos();
 
         Util.printSection("GameServerLog");
-        
+
         long endTime = System.currentTimeMillis();
         log.info("AC GameServer started in " + (endTime - startTime) / 1000 + " seconds.");
         gs.startServers();
@@ -429,12 +432,12 @@ public class GameServer {
         Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
 
         ZCXInfo.checkForRatioLimitation();
- 
+
         onStartup();
-        
+
         /**
-         *  Schedules Garbage Collector to be launched at the specified time to 
-         *  be optimized unused memory. (Avoids OutOfMemoryException)
+         * Schedules Garbage Collector to be launched at the specified time to
+         * be optimized unused memory. (Avoids OutOfMemoryException)
          */
         GarbageCollector.getInstance().start();
     }
@@ -442,6 +445,7 @@ public class GameServer {
     private static void initalizeLoggger() {
         new File("./log/backup/").mkdirs();
         File[] files = new File("log").listFiles(new FilenameFilter() {
+
             @Override
             public boolean accept(File dir, String name) {
                 return name.endsWith(".log");
@@ -468,48 +472,41 @@ public class GameServer {
                     logFile.delete();
                 }
                 out.close();
-                
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
         }
-        
+
         LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
         try {
             JoranConfigurator configurator = new JoranConfigurator();
             configurator.setContext(lc);
             lc.reset();
             configurator.doConfigure("config/slf4j-logback.xml");
-            
+
         } catch (JoranException je) {
             throw new RuntimeException("Failed to configure loggers, shutting down...", je);
         }
     }
-    
-    // utility method 
-    private static boolean checkLicenseServerOnline()
-    {
-		Socket s = null;
-		try
-		{
-			s = new Socket("ftp.aion-core.net", 21);
-			return true;		// server is online
-		} catch (IOException e)
-		{
-			// IOException means port can't be connected to and can be used.
-			return false;		// server ois offline
-		} finally
-		{
-			if (s != null)
-			{
-				try
-				{
-					s.close();	// we don't want any socket leaks 
-				} catch (IOException e)
-				{
 
-				}
-			}
-		}
+    // utility method 
+    private static boolean checkLicenseServerOnline() {
+        Socket s = null;
+        try {
+            s = new Socket("ftp.aion-core.net", 21);
+            return true; // server is online
+        } catch (IOException e) {
+            // IOException means port can't be connected to and can be used.
+            return false; // server ois offline
+        } finally {
+            if (s != null) {
+                try {
+                    s.close(); // we don't want any socket leaks 
+                } catch (IOException e) {
+
+                }
+            }
+        }
     }
 }

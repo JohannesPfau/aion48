@@ -54,9 +54,9 @@ import com.aionemu.gameserver.services.VortexService;
 public class KillInWorld extends QuestHandler {
 
     private final int questId;
-    private final Set<Integer> startNpcs = new HashSet<Integer>();
-    private final Set<Integer> endNpcs = new HashSet<Integer>();
-    private final Set<Integer> worldIds = new HashSet<Integer>();
+    private final Set<Integer> startNpcs = new HashSet<>();
+    private final Set<Integer> endNpcs = new HashSet<>();
+    private final Set<Integer> worldIds = new HashSet<>();
     private final int killAmount;
     private final int invasionWorldId;
 

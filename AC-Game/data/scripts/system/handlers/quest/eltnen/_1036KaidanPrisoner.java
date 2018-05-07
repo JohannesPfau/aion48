@@ -47,7 +47,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1036KaidanPrisoner extends QuestHandler {
 
     private final static int questId = 1036;
-    private final static int[] npc_ids = {203904, 204045, 204003, 204004, 204020, 203901};
+    private final static int[] npc_ids = { 203904, 204045, 204003, 204004, 204020, 203901 };
 
     public _1036KaidanPrisoner() {
         super(questId);
@@ -159,16 +159,16 @@ public class _1036KaidanPrisoner extends QuestHandler {
                     if (var == 4) {
                         return sendQuestDialog(env, 2375);
                     }
-                 case SETPRO5:
-               if (var == 4) {
-                  if (!giveQuestItem(env, 182201004, 1)) {
-                     return true;
-                  }
-                  qs.setQuestVarById(0, var + 1);
-                  updateQuestStatus(env);
-                  TeleportService2.teleportTo(player, 210020000, 1596.1948f, 1529.9152f, 317, (byte) 120, TeleportAnimation.BEAM_ANIMATION);   
-		  PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-                  return true;
+                case SETPRO5:
+                    if (var == 4) {
+                        if (!giveQuestItem(env, 182201004, 1)) {
+                            return true;
+                        }
+                        qs.setQuestVarById(0, var + 1);
+                        updateQuestStatus(env);
+                        TeleportService2.teleportTo(player, 210020000, 1596.1948f, 1529.9152f, 317, (byte) 120, TeleportAnimation.BEAM_ANIMATION);
+                        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                        return true;
                     }
                     return false;
             }

@@ -41,7 +41,7 @@ import javolution.util.FastList;
  * @author KID
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Exmaterials", propOrder = {"material"})
+@XmlType(name = "Exmaterials", propOrder = { "material" })
 public class ExMaterials {
 
     protected List<Material> material;

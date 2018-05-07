@@ -31,7 +31,6 @@ package com.aionemu.gameserver.model.gameobjects;
 
 /**
  * @author ATracer
-
  */
 public enum PersistentState {
 

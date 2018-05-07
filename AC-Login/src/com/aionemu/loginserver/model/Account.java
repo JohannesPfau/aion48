@@ -93,7 +93,8 @@ public class Account {
     /**
      * Sets account id
      *
-     * @param id account id
+     * @param id
+     *            account id
      */
     public void setId(Integer id) {
         this.id = id;
@@ -111,7 +112,8 @@ public class Account {
     /**
      * Sets account name
      *
-     * @param name account name
+     * @param name
+     *            account name
      */
     public void setName(String name) {
         this.name = name;
@@ -129,7 +131,8 @@ public class Account {
     /**
      * Sets password hash
      *
-     * @param passwordHash password hash
+     * @param passwordHash
+     *            password hash
      */
     public void setPasswordHash(String passwordHash) {
         this.passwordHash = passwordHash;
@@ -147,7 +150,8 @@ public class Account {
     /**
      * Sets access level of account
      *
-     * @param accessLevel access level of account
+     * @param accessLevel
+     *            access level of account
      */
     public void setAccessLevel(byte accessLevel) {
         this.accessLevel = accessLevel;
@@ -161,7 +165,8 @@ public class Account {
     }
 
     /**
-     * @param membership the membership to set
+     * @param membership
+     *            the membership to set
      */
     public void setMembership(byte membership) {
         this.membership = membership;
@@ -179,7 +184,8 @@ public class Account {
     /**
      * Sets access level of account
      *
-     * @param activated access level of account
+     * @param activated
+     *            access level of account
      */
     public void setActivated(byte activated) {
         this.activated = activated;
@@ -197,7 +203,8 @@ public class Account {
     /**
      * Sets last server that player visited
      *
-     * @param lastServer last server that player visited
+     * @param lastServer
+     *            last server that player visited
      */
     public void setLastServer(byte lastServer) {
         this.lastServer = lastServer;
@@ -215,7 +222,8 @@ public class Account {
     /**
      * Sets last ip that player players from
      *
-     * @param lastIp last ip that player played from
+     * @param lastIp
+     *            last ip that player played from
      */
     public void setLastIp(String lastIp) {
         this.lastIp = lastIp;
@@ -233,7 +241,8 @@ public class Account {
     /**
      * Sets last mac that player players from
      *
-     * @param lastMac last mac that player played from
+     * @param lastMac
+     *            last mac that player played from
      */
     public void setLastMac(String lastMac) {
         this.lastMac = lastMac;
@@ -251,7 +260,8 @@ public class Account {
     /**
      * Sets ip that player has to use with his account
      *
-     * @param ipForce sets ip that players has to use with his account
+     * @param ipForce
+     *            sets ip that players has to use with his account
      */
     public void setIpForce(String ipForce) {
         this.ipForce = ipForce;
@@ -274,7 +284,8 @@ public class Account {
     /**
      * Retunrns true if players name and password has are equals
      *
-     * @param o another player to check
+     * @param o
+     *            another player to check
      * @return true if names and password hash matches
      */
     @Override

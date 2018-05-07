@@ -38,8 +38,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_MAY_LOGIN_INTO_GAME;
 /**
  * In this packets aion client is asking if may login into game [ie start
  * playing].
- *
-
  */
 public class CM_MAY_LOGIN_INTO_GAME extends AionClientPacket {
 

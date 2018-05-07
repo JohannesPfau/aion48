@@ -1,5 +1,11 @@
 package admincommands;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
@@ -8,61 +14,52 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 /**
  * Created by Kill3r
  */
 public class Repairkit extends AdminCommand {
 
-    public Repairkit(){
+    public Repairkit() {
         super("repairkit");
     }
 
     private Logger log = LoggerFactory.getLogger("GM_MONITOR_LOG");
 
-    public void execute(Player admin, String...params){
-        if(params.length == 0){
-            PacketSendUtility.sendMessage(admin, "Syntax\n" +
-                    " //repairkit [operation] [playername] [playerRace | itemID]\n" +
-                    "##### NOTE ####\n" +
-                    "# You will need playerRace to use the 'RETURN' Operation.\n" +
-                    "# You will need itemID to use the 'REMOVE' Operation.\n" +
-                    "# NEVER USE @LINK OF ITEMS.. ONLY ITEM ID!!!!.\n" +
-                    "# PLEASE STRICTLY FOLLOW THESE RULES , BECAUSE IF WRITTEN WRONG, THIS CAN CAUSE ALOT OF DATABASE LOSE!!!!!.\n" +
-                    "# Player Name Also MUST be used as Exactly case sensitive, (example: Extreme is correct , and extreme is wrong... First letter should be capital)" +
-                    "#### NOTE END ####\n " +
-                    "# [operation] : return | remove | terminate | wipe\n" +
-                    "# [playername] : name of the player to initialize the operation\n" +
-                    "# [playerRace | itemID] : race should be given in correct spelling and case ( ELYOS | ASMODIANS ) case Sensitive!! OR use itemID if you want to remove an Item from the Player!!(NO LINKS ALLOWED, ONLY ITEM ID!!)\n" +
-                    "#######################");
+    public void execute(Player admin, String... params) {
+        if (params.length == 0) {
+            PacketSendUtility.sendMessage(admin, "Syntax\n" + " //repairkit [operation] [playername] [playerRace | itemID]\n" + "##### NOTE ####\n"
+                + "# You will need playerRace to use the 'RETURN' Operation.\n" + "# You will need itemID to use the 'REMOVE' Operation.\n"
+                + "# NEVER USE @LINK OF ITEMS.. ONLY ITEM ID!!!!.\n"
+                + "# PLEASE STRICTLY FOLLOW THESE RULES , BECAUSE IF WRITTEN WRONG, THIS CAN CAUSE ALOT OF DATABASE LOSE!!!!!.\n"
+                + "# Player Name Also MUST be used as Exactly case sensitive, (example: Extreme is correct , and extreme is wrong... First letter should be capital)"
+                + "#### NOTE END ####\n " + "# [operation] : return | remove | terminate | wipe\n"
+                + "# [playername] : name of the player to initialize the operation\n"
+                + "# [playerRace | itemID] : race should be given in correct spelling and case ( ELYOS | ASMODIANS ) case Sensitive!! OR use itemID if you want to remove an Item from the Player!!(NO LINKS ALLOWED, ONLY ITEM ID!!)\n"
+                + "#######################");
             return;
         }
 
-        if(params[0].equalsIgnoreCase("return")){
+        if (params[0].equalsIgnoreCase("return")) {
             String playerToreturn = params[1];
             String raceOfPlayer = params[2];
 
             returnPlayer(admin, playerToreturn, raceOfPlayer.toUpperCase());
-        }else if (params[0].equalsIgnoreCase("remove")){
+        } else if (params[0].equalsIgnoreCase("remove")) {
             String playerToRemove = params[1];
             int itemId = Integer.parseInt(params[2]);
 
             removeItemByID(admin, playerToRemove, itemId);
-        } else if (params[0].equalsIgnoreCase("terminate")){
-            if(admin.getAccessLevel() <= 3){
+        } else if (params[0].equalsIgnoreCase("terminate")) {
+            if (admin.getAccessLevel() <= 3) {
                 PacketSendUtility.sendMessage(admin, "You are not Insane Enough to use this Command! ;)");
                 return;
             }
             int itemId = Integer.parseInt(params[1]);
 
             removeItemFromDatabase(admin, itemId);
-        } else if (params[0].equalsIgnoreCase("wipe")){
-            if(admin.getAccessLevel() <= 3){
+        } else if (params[0].equalsIgnoreCase("wipe")) {
+            if (admin.getAccessLevel() <= 3) {
                 PacketSendUtility.sendMessage(admin, "You are not Insane Enough to use this Command! ;)");
                 return;
             }
@@ -73,7 +70,7 @@ public class Repairkit extends AdminCommand {
 
     }
 
-    private void removeItemFromDatabase(final Player admin, final int itemId){
+    private void removeItemFromDatabase(final Player admin, final int itemId) {
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
@@ -86,17 +83,17 @@ public class Repairkit extends AdminCommand {
         } finally {
             DatabaseFactory.close(con);
         }
-        PacketSendUtility.sendMessage(admin, "[item:"+itemId+"] ("+itemId+") has been successfully removed from all players!");
+        PacketSendUtility.sendMessage(admin, "[item:" + itemId + "] (" + itemId + ") has been successfully removed from all players!");
     }
 
-    private void wipeInventoryExceptEquiped(final Player admin, final String playerToWipe){
+    private void wipeInventoryExceptEquiped(final Player admin, final String playerToWipe) {
         Connection con = null;
         Player checkPOnline = World.getInstance().findPlayer(playerToWipe);
-        if(checkPOnline != null){
+        if (checkPOnline != null) {
             PacketSendUtility.sendMessage(admin, "You cannot proceed if the player is Online!");
             return;
         }
-        if (playerToWipe == admin.getName()){
+        if (playerToWipe == admin.getName()) {
             PacketSendUtility.sendMessage(admin, "Noob! you can't remove item from you're self!");
             return;
         }
@@ -109,7 +106,7 @@ public class Repairkit extends AdminCommand {
             log.info("[repairkit-wipe] GM : [" + admin.getName() + "] couldn't Find Name in Database ( RepairKIT )");
         }
 
-        if (playerID == 0){
+        if (playerID == 0) {
             PacketSendUtility.sendMessage(admin, "Couldn't find that name in the database!");
             return;
         }
@@ -129,14 +126,15 @@ public class Repairkit extends AdminCommand {
         log.error("[repairkit-wipe] GM : [" + admin.getName() + "] succesfully wiped the player's Inventory of [" + playerToWipe + "]");
     }
 
-    private void removeItemByID(final Player admin, final String playerToRemoveFrom, final int itemID){
+    private void removeItemByID(final Player admin, final String playerToRemoveFrom, final int itemID) {
         Connection con = null;
         Player checkPlayerOnline = World.getInstance().findPlayer(playerToRemoveFrom);
-        if(checkPlayerOnline != null){
-            PacketSendUtility.sendMessage(admin, "You can only remove items from Offline Player using this Command, If you want to remove item from Online Players, use '//remove'!!");
+        if (checkPlayerOnline != null) {
+            PacketSendUtility.sendMessage(admin,
+                "You can only remove items from Offline Player using this Command, If you want to remove item from Online Players, use '//remove'!!");
             return;
         }
-        if (playerToRemoveFrom == admin.getName()){
+        if (playerToRemoveFrom == admin.getName()) {
             PacketSendUtility.sendMessage(admin, "Noob! you can't remove item from you're self!");
             return;
         }
@@ -149,7 +147,7 @@ public class Repairkit extends AdminCommand {
             log.info("[repairkit-removeItem] GM : [" + admin.getName() + "] Couldn't Find Name in Database ( RepairKIT )");
         }
 
-        if (playerID == 0){
+        if (playerID == 0) {
             PacketSendUtility.sendMessage(admin, "Couldn't find that name in the database!");
             return;
         }
@@ -162,44 +160,45 @@ public class Repairkit extends AdminCommand {
             stmt.execute();
             stmt.close();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             log.error("[repairkit-removeItem] GM : [" + admin.getName() + "] ERROR while deleting item through Repairkit Command!!");
         } finally {
             DatabaseFactory.close(con);
         }
-        PacketSendUtility.sendMessage(admin, "[item:"+itemID+"] ("+itemID+") successfully removed from '" + playerToRemoveFrom + "'");
-        log.error("[repairkit-wipe] GM : [" + admin.getName() + "] succesfully removed an Item [" + itemID + "] from player [" + playerToRemoveFrom + "]");
+        PacketSendUtility.sendMessage(admin, "[item:" + itemID + "] (" + itemID + ") successfully removed from '" + playerToRemoveFrom + "'");
+        log.error(
+            "[repairkit-wipe] GM : [" + admin.getName() + "] succesfully removed an Item [" + itemID + "] from player [" + playerToRemoveFrom + "]");
     }
 
-    private void returnPlayer(final Player admin, final String playerToReturn, final String race){
+    private void returnPlayer(final Player admin, final String playerToReturn, final String race) {
         Connection con = null;
         Player checkPlayerOnline = World.getInstance().findPlayer(Util.convertName(playerToReturn));
-        if(checkPlayerOnline != null){
+        if (checkPlayerOnline != null) {
             PacketSendUtility.sendMessage(admin, "You cannot return a player while he's Online!");
             return;
         }
-        if (playerToReturn == admin.getName()){
+        if (playerToReturn == admin.getName()) {
             PacketSendUtility.sendMessage(admin, "Noob! you can't return you're self!");
             return;
         }
 
-        float x,y,z;
-        int heading,world_id;
+        float x, y, z;
+        int heading, world_id;
 
-        if(race.equalsIgnoreCase("ELYOS") || race.equalsIgnoreCase("ASMODIANS")){
+        if (race.equalsIgnoreCase("ELYOS") || race.equalsIgnoreCase("ASMODIANS")) {
             PacketSendUtility.sendMessage(admin, "GIVEN RACE : CORRECT!");
-        }else{
+        } else {
             PacketSendUtility.sendMessage(admin, "The Given RACE is not correct!.. Please use 'ELYOS' or 'ASMODIANS'");
             return;
         }
 
-        if (race.equalsIgnoreCase("ELYOS")){
+        if (race.equalsIgnoreCase("ELYOS")) {
             x = 1443.6982f;
             y = 1574.4116f;
             z = 572.87537f;
             world_id = 110010000;
             heading = 0;
-        }else if (race.equalsIgnoreCase("ASMODIANS")){
+        } else if (race.equalsIgnoreCase("ASMODIANS")) {
             x = 1316.4557f;
             y = 1425.6559f;
             z = 209.09084f;
@@ -213,7 +212,6 @@ public class Repairkit extends AdminCommand {
             heading = admin.getHeading();
         }
 
-
         int playerID = 0;
 
         try {
@@ -222,12 +220,12 @@ public class Repairkit extends AdminCommand {
             log.info("[repairkit-return] GM : [" + admin.getName() + "] Couldn't Find Name in Database ( RepairKIT )");
         }
 
-        if (playerID == 0){
+        if (playerID == 0) {
             PacketSendUtility.sendMessage(admin, "Couldn't find that name in the database!");
             return;
         }
 
-        try{
+        try {
             con = DatabaseFactory.getConnection();
             PreparedStatement stmt = con.prepareStatement("UPDATE players SET x=?, y=?, z=?, heading=?, world_id=? WHERE id=?");
 
@@ -245,11 +243,11 @@ public class Repairkit extends AdminCommand {
         } finally {
             DatabaseFactory.close(con);
         }
-        PacketSendUtility.sendMessage(admin, playerToReturn+" has been successfully moved to main city of '"+race+"'.");
+        PacketSendUtility.sendMessage(admin, playerToReturn + " has been successfully moved to main city of '" + race + "'.");
         log.error("[repairkit-return] GM : [" + admin.getName() + "] returned the player [" + playerToReturn + "] to main city of [" + race + "]");
     }
 
-    public void onFail(Player player, String msg){
+    public void onFail(Player player, String msg) {
         // TODO Auto-Generated Message
     }
 }

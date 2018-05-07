@@ -51,6 +51,7 @@ import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="ItemRaceEntry">
  *   &lt;complexContent>
@@ -64,7 +65,7 @@ import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ItemRaceEntry")
-@XmlSeeAlso({IdLevelReward.class})
+@XmlSeeAlso({ IdLevelReward.class })
 public class ItemRaceEntry {
 
     @XmlAttribute(name = "id", required = true)
@@ -92,13 +93,14 @@ public class ItemRaceEntry {
      * Method is used to check item race; Some items having PC_ALL really are
      * not for both races, like some foods and weapons
      *
-     * @param playerRace player's race
+     * @param playerRace
+     *            player's race
      * @return true if race is correct for player when overridden or not from
-     * templates
+     *         templates
      */
     public boolean checkRace(Race playerRace) {
         ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(id);
-        return template.getRace() == Race.PC_ALL && (race == null || race == playerRace) || template.getRace() != Race.PC_ALL
-                && template.getRace() == playerRace;
+        return template.getRace() == Race.PC_ALL && (race == null || race == playerRace)
+            || template.getRace() != Race.PC_ALL && template.getRace() == playerRace;
     }
 }

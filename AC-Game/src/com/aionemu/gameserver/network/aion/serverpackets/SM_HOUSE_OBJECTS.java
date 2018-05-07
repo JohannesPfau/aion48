@@ -29,13 +29,13 @@
  */
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+
+import javolution.util.FastList;
 
 /**
  * @author Rolandas
@@ -50,7 +50,7 @@ public class SM_HOUSE_OBJECTS extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         FastList<HouseObject<?>> objects = player.getHouseRegistry().getSpawnedObjects();
         writeH(objects.size());
         for (HouseObject<?> obj : objects) {

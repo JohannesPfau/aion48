@@ -37,9 +37,9 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author MrPoke
- *
  */
 public class SM_TRADE_IN_LIST extends AionServerPacket {
+
     private Npc npc;
     private TradeListTemplate tlist;
     private int buyPriceModifier;
@@ -51,7 +51,7 @@ public class SM_TRADE_IN_LIST extends AionServerPacket {
     }
 
     @Override
-	protected void writeImpl(AionConnection con) {
+    protected void writeImpl(AionConnection con) {
         PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         if ((tlist != null) && (tlist.getNpcId() != 0) && (tlist.getCount() != 0)) {
             writeD(this.npc.getObjectId());

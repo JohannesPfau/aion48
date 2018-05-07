@@ -47,7 +47,7 @@ public class _21027FearlessKantele extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {799254, 799255};
+        int[] npcs = { 799254, 799255 };
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }

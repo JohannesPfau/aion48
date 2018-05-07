@@ -53,7 +53,7 @@ public class _13525CompleteTheVoidCube extends QuestHandler {
         qe.registerQuestNpc(800569).addOnTalkEvent(questId);
     }
 
-   @Override
+    @Override
     public boolean onDialogEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -71,12 +71,11 @@ public class _13525CompleteTheVoidCube extends QuestHandler {
                             return closeDialogWindow(env);
                         }
 
-                        if (qs1.getStatus() == QuestStatus.COMPLETE && qs2.getStatus() == QuestStatus.COMPLETE && qs3.getStatus() == QuestStatus.COMPLETE
-                                && qs4.getStatus() == QuestStatus.COMPLETE ) {
+                        if (qs1.getStatus() == QuestStatus.COMPLETE && qs2.getStatus() == QuestStatus.COMPLETE
+                            && qs3.getStatus() == QuestStatus.COMPLETE && qs4.getStatus() == QuestStatus.COMPLETE) {
                             QuestService.startQuest(env);
                             return sendQuestDialog(env, 2375);
-                        }
-                        else
+                        } else
                             return closeDialogWindow(env);
                     }
 
@@ -103,6 +102,7 @@ public class _13525CompleteTheVoidCube extends QuestHandler {
         }
         return false;
     }
+
     @Override
     public boolean onEnterWorldEvent(QuestEnv env) {
         Player player = env.getPlayer();
@@ -117,8 +117,8 @@ public class _13525CompleteTheVoidCube extends QuestHandler {
         }
 
         if (qs1.getStatus() == QuestStatus.COMPLETE && qs2.getStatus() == QuestStatus.COMPLETE && qs3.getStatus() == QuestStatus.COMPLETE
-                && qs4.getStatus() == QuestStatus.COMPLETE ) {
-            if (qs == null || qs.getStatus() == QuestStatus.NONE){
+            && qs4.getStatus() == QuestStatus.COMPLETE) {
+            if (qs == null || qs.getStatus() == QuestStatus.NONE) {
                 QuestService.startQuest(env);
                 return true;
             }

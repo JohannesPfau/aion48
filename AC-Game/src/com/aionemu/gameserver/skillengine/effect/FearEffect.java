@@ -92,8 +92,7 @@ public class FearEffect extends EffectTemplate {
             ((NpcAI2) effected.getAi2()).setStateIfNot(AIState.FEAR);
         }
         if (GeoDataConfig.FEAR_ENABLE) {
-            ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(
-                    new FearTask(effector, effected), 0, 1000);
+            ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new FearTask(effector, effected), 0, 1000);
             effect.setPeriodicTask(fearTask, position);
         }
 
@@ -101,6 +100,7 @@ public class FearEffect extends EffectTemplate {
         //example skillId: 540 Terrible howl
         if (resistchance < 100) {
             ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
+
                 @Override
                 public void attacked(Creature creature) {
                     if (Rnd.get(0, 100) > resistchance) {
@@ -164,11 +164,10 @@ public class FearEffect extends EffectTemplate {
                 }
                 if (effected instanceof Npc) {
                     ((Npc) effected).getMoveController().resetMove();
-                    ((Npc) effected).getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(),
-                            closestCollision.getZ());
+                    ((Npc) effected).getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
                 } else {
-                    effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(),
-                            closestCollision.getZ(), moveAwayHeading);
+                    effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(),
+                        moveAwayHeading);
                     effected.getMoveController().startMovingToDestination();
                 }
             }

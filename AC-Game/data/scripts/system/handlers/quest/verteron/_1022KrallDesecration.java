@@ -44,7 +44,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1022KrallDesecration extends QuestHandler {
 
     private final static int questId = 1022;
-    private final static int[] mob_ids = {210178, 216892};
+    private final static int[] mob_ids = { 210178, 216892 };
 
     public _1022KrallDesecration() {
         super(questId);
@@ -67,7 +67,7 @@ public class _1022KrallDesecration extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {1130, 1017};
+        int[] quests = { 1130, 1017 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 
@@ -124,7 +124,7 @@ public class _1022KrallDesecration extends QuestHandler {
             targetId = ((Npc) env.getVisibleObject()).getNpcId();
         }
         switch (targetId) {
-			case 216892:
+            case 216892:
             case 210178:
                 if (var >= 1 && var <= 4) {
                     qs.setQuestVarById(0, var + 1);

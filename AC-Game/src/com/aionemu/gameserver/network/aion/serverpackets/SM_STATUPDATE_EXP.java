@@ -67,7 +67,7 @@ public class SM_STATUPDATE_EXP extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeQ(currentExp);
         writeQ(recoverableExp);
         writeQ(maxExp);

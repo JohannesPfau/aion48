@@ -29,6 +29,11 @@
  */
 package ai;
 
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -38,10 +43,6 @@ import com.aionemu.gameserver.model.house.PlayerScript;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_SCRIPTS;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.Map;
 
 /**
  * @author Rolandas
@@ -96,8 +97,8 @@ public class ButlerAI2 extends GeneralNpcAI2 {
                         }
                         if (totalSize + bytes.length > 8141) {
                             position--;
-                            PacketSendUtility.sendPacket(player, new SM_HOUSE_SCRIPTS(house.getAddress().getId(), house.getPlayerScripts(), from,
-                                    position));
+                            PacketSendUtility.sendPacket(player,
+                                new SM_HOUSE_SCRIPTS(house.getAddress().getId(), house.getPlayerScripts(), from, position));
                             from = position + 1;
                             totalSize = 0;
                             continue;
@@ -106,8 +107,8 @@ public class ButlerAI2 extends GeneralNpcAI2 {
                     }
                     position--;
                     if (totalSize > 0 || from == 0 && position == 7) {
-                        PacketSendUtility
-                                .sendPacket(player, new SM_HOUSE_SCRIPTS(house.getAddress().getId(), house.getPlayerScripts(), from, position));
+                        PacketSendUtility.sendPacket(player,
+                            new SM_HOUSE_SCRIPTS(house.getAddress().getId(), house.getPlayerScripts(), from, position));
                     }
                 }
             } finally {

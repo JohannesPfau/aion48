@@ -73,6 +73,7 @@ public class ItemPacketService {
         DEC_PET_FOOD(0x5E, true),
         INC_PASSPORT_ADD(0x8A, true),
         PUT(0x13, true); // from other storage
+
         private final int mask;
         private final boolean sendable;
 
@@ -114,6 +115,7 @@ public class ItemPacketService {
         ITEM_COLLECT(0x19), // Item collect
         QUEST_WORK_ITEM(0x35),
         QUESTIONNAIRE(0x40);
+
         private final int mask;
 
         private ItemAddType(int mask) {
@@ -137,6 +139,7 @@ public class ItemPacketService {
         QUEST_START(0x34),
         DECOMPOSE(0x66),
         REGISTER(0x78);
+
         private final int mask;
 
         private ItemDeleteType(int mask) {

@@ -29,18 +29,23 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.TownDAO;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.town.Town;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @author ViAl
@@ -54,7 +59,7 @@ public class MySQL5TownDAO extends TownDAO {
 
     @Override
     public Map<Integer, Town> load(Race race) {
-        Map<Integer, Town> towns = new HashMap<Integer, Town>();
+        Map<Integer, Town> towns = new HashMap<>();
         Connection conn = null;
         try {
             conn = DatabaseFactory.getConnection();

@@ -213,7 +213,8 @@ public class CM_LEGION extends AionClientPacket {
                      */
                     case 0x0D:
                         if (activePlayer.getLegionMember().isBrigadeGeneral()) {
-                            LegionService.getInstance().changePermissions(legion, deputyPermission, centurionPermission, legionarPermission, volunteerPermission);
+                            LegionService.getInstance().changePermissions(legion, deputyPermission, centurionPermission, legionarPermission,
+                                volunteerPermission);
                         }
                         break;
                     /**

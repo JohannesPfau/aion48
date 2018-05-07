@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -41,6 +39,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.itemset.ItemPart;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -57,8 +57,8 @@ public class ItemSetData {
     private TIntObjectHashMap<ItemSetTemplate> setItems;
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
-        sets = new TIntObjectHashMap<ItemSetTemplate>();
-        setItems = new TIntObjectHashMap<ItemSetTemplate>();
+        sets = new TIntObjectHashMap<>();
+        setItems = new TIntObjectHashMap<>();
 
         for (ItemSetTemplate set : itemsetList) {
             sets.put(set.getId(), set);

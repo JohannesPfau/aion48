@@ -58,8 +58,8 @@ public final class StorageObject extends HouseObject<HousingStorage> {
         for (HouseObject<?> ho : getOwnerHouse().getRegistry().getSpawnedObjects()) {
             if (ho instanceof StorageObject) {
                 int warehouseId = ((HousingStorage) ho.getObjectTemplate()).getWarehouseId() + 59;
-                PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(player.getStorage(warehouseId).getItemsWithKinah(),
-                        warehouseId, 0, true, player));
+                PacketSendUtility.sendPacket(player,
+                    new SM_WAREHOUSE_INFO(player.getStorage(warehouseId).getItemsWithKinah(), warehouseId, 0, true, player));
                 PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(null, warehouseId, 0, false, player));
             }
         }

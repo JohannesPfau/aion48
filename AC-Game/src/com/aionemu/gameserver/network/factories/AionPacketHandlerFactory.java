@@ -42,7 +42,7 @@ import com.aionemu.gameserver.network.aion.clientpackets.*;
  *
  * @author Luno, Alcapwnd, Ever
  * @version 4.7.5.3
- * romanz (4.8)
+ *          romanz (4.8)
  */
 public class AionPacketHandlerFactory {
 
@@ -58,7 +58,7 @@ public class AionPacketHandlerFactory {
     public AionPacketHandlerFactory() {
 
         handler = new AionPacketHandler();
-        
+
         ////////////////////////////4.8////////////////////////////
         addPacket(new CM_ABYSS_RANKING_LEGIONS(0x159, State.IN_GAME));//
         addPacket(new CM_ABYSS_RANKING_PLAYERS(0x19F, State.IN_GAME));//
@@ -232,7 +232,7 @@ public class AionPacketHandlerFactory {
         addPacket(new CM_REPLACE_ITEM(0x14E, State.IN_GAME));//4.8
         addPacket(new CM_MARK_FRIENDLIST(0x131, State.IN_GAME));//4.8
         addPacket(new CM_RELEASE_OBJECT(0x184, State.IN_GAME));//4.8
-		
+
         ////////////////////////////4.7.5////////////////////////////
         addPacket(new CM_GM_BOOKMARK(0xCC, State.IN_GAME));//4.8 ????????
         addPacket(new CM_CLIENT_COMMAND_LOC(0x12D, State.IN_GAME));//4.8 ????????
@@ -242,11 +242,11 @@ public class AionPacketHandlerFactory {
         addPacket(new CM_SERVER_CHECK(0x199, State.CONNECTED, State.IN_GAME));//
         addPacket(new CM_REQUEST_BEGINNER_SERVER(0x1BA, State.IN_GAME));//
         //////////////////////////////////////////////////////////////////////
-		
-		//new find by Raziel
-		//addPacket(new CM_REQUEST_RETURN_SERVER(0x1BB, State.IN_GAME));
-		//addPacket(new CM_LOGIN_OUT(0xA4, State.IN_GAME));
-        
+
+        //new find by Raziel
+        //addPacket(new CM_REQUEST_RETURN_SERVER(0x1BB, State.IN_GAME));
+        //addPacket(new CM_LOGIN_OUT(0xA4, State.IN_GAME));
+
         //addPacket(new CM_SECURITY_TOKEN(0x146, State.IN_GAME));
         //addPacket(new CM_GM_COMMAND_ACTION(0x195, State.IN_GAME)); Check Later
         //addPacket(new CM_ADMIN_PANEL(0x14A, State.IN_GAME));

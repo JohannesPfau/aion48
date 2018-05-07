@@ -51,6 +51,7 @@ public enum ATTACK_RANGE {
     GUNNER(0),
     ARTIST(0),
     BARD(0);
+
     private int value;
 
     private ATTACK_RANGE(int value) {

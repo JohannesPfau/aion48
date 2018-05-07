@@ -62,7 +62,7 @@ public class WorldMap2DInstance extends WorldMapInstance {
     }
 
     @Override
-	protected void initMapRegions() {
+    protected void initMapRegions() {
         int size = this.getParent().getWorldSize();
         // Create all mapRegion
         for (int x = 0; x <= size; x = x + regionSize) {
@@ -103,12 +103,13 @@ public class WorldMap2DInstance extends WorldMapInstance {
      * @return the ownerId
      */
     @Override
-	public int getOwnerId() {
+    public int getOwnerId() {
         return ownerId;
     }
 
     /**
-     * @param ownerId the ownerId to set
+     * @param ownerId
+     *            the ownerId to set
      */
     public void setOwnerId(int ownerId) {
         this.ownerId = ownerId;

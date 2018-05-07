@@ -29,7 +29,8 @@
  */
 package ai.instance.rentusBase;
 
-import ai.GeneralNpcAI2;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -40,7 +41,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.concurrent.Future;
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz
@@ -52,6 +53,7 @@ public class DancingFlameAI2 extends GeneralNpcAI2 {
 
     private void startTask() {
         task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -92,6 +94,7 @@ public class DancingFlameAI2 extends GeneralNpcAI2 {
             startTask();
         } else {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     SkillEngine.getInstance().getSkill(getOwner(), getNpcId() == 282998 ? 20536 : 20535, 60, getOwner()).useNoAnimationSkill();
@@ -103,6 +106,7 @@ public class DancingFlameAI2 extends GeneralNpcAI2 {
 
     private void starLifeTask() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 despawn();

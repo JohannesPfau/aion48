@@ -104,11 +104,13 @@ public class cmd_ely_channel extends PlayerCommand {
             String message = sbMessage.toString().trim();
             int messageLenght = message.length();
 
-            final String sMessage = message.substring(0, CustomConfig.MAX_CHAT_TEXT_LENGHT > messageLenght ? messageLenght : CustomConfig.MAX_CHAT_TEXT_LENGHT);
+            final String sMessage = message.substring(0,
+                CustomConfig.MAX_CHAT_TEXT_LENGHT > messageLenght ? messageLenght : CustomConfig.MAX_CHAT_TEXT_LENGHT);
             final boolean toAll = params[0].equals("ALL");
             final Race race = adminRace;
 
             World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player player) {
                     if (toAll || player.getRace() == race || (player.getAccessLevel() > 0)) {

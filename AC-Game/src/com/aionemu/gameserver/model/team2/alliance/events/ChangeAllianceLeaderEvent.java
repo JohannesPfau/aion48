@@ -84,6 +84,7 @@ public class ChangeAllianceLeaderEvent extends ChangeLeaderEvent<PlayerAlliance>
     protected void changeLeaderTo(final Player player) {
         team.changeLeader(team.getMember(player.getObjectId()));
         team.applyOnMembers(new Predicate<Player>() {
+
             @Override
             public boolean apply(Player member) {
                 PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(team));

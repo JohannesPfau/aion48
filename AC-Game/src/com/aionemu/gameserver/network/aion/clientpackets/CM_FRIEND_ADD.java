@@ -94,6 +94,7 @@ public class CM_FRIEND_ADD extends AionClientPacket {
         } else // Send request
         {
             RequestResponseHandler responseHandler = new RequestResponseHandler(activePlayer) {
+
                 @Override
                 public void acceptRequest(Creature requester, Player responder) {
                     if (!targetPlayer.getCommonData().isOnline()) {
@@ -113,8 +114,7 @@ public class CM_FRIEND_ADD extends AionClientPacket {
                 }
             };
 
-            boolean requested = targetPlayer.getResponseRequester().putRequest(
-                    SM_QUESTION_WINDOW.STR_BUDDYLIST_ADD_BUDDY_REQUEST, responseHandler);
+            boolean requested = targetPlayer.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_BUDDYLIST_ADD_BUDDY_REQUEST, responseHandler);
             // If the player is busy and could not be asked
             if (!requested) {
                 sendPacket(SM_SYSTEM_MESSAGE.STR_BUDDYLIST_BUSY);
@@ -124,9 +124,8 @@ public class CM_FRIEND_ADD extends AionClientPacket {
                     return;
                 }
                 // Send question packet to buddy
-                targetPlayer.getClientConnection().sendPacket(
-                        new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_BUDDYLIST_ADD_BUDDY_REQUEST, activePlayer.getObjectId(), 0,
-                                activePlayer.getName()));
+                targetPlayer.getClientConnection().sendPacket(new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_BUDDYLIST_ADD_BUDDY_REQUEST,
+                    activePlayer.getObjectId(), 0, activePlayer.getName()));
             }
         }
     }

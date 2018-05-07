@@ -29,16 +29,17 @@
  */
 package mysql5;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.model.Account;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * MySQL5 Account DAO implementation
@@ -173,8 +174,8 @@ public class MySQL5AccountDAO extends AccountDAO {
     @Override
     public boolean insertAccount(Account account) {
         int result = 0;
-        PreparedStatement st = DB
-                .prepareStatement("INSERT INTO account_data(`name`, `password`, access_level, membership, activated, last_server, last_ip, last_mac, ip_force, toll) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+        PreparedStatement st = DB.prepareStatement(
+            "INSERT INTO account_data(`name`, `password`, access_level, membership, activated, last_server, last_ip, last_mac, ip_force, toll) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
         try {
             st.setString(1, account.getName());
@@ -207,8 +208,8 @@ public class MySQL5AccountDAO extends AccountDAO {
     @Override
     public boolean updateAccount(Account account) {
         int result = 0;
-        PreparedStatement st = DB
-                .prepareStatement("UPDATE account_data SET `name` = ?, `password` = ?, access_level = ?, membership = ?, last_server = ?, last_ip = ?, last_mac = ?, ip_force = ? WHERE `id` = ?");
+        PreparedStatement st = DB.prepareStatement(
+            "UPDATE account_data SET `name` = ?, `password` = ?, access_level = ?, membership = ?, last_server = ?, last_ip = ?, last_mac = ?, ip_force = ? WHERE `id` = ?");
 
         try {
             st.setString(1, account.getName());
@@ -236,6 +237,7 @@ public class MySQL5AccountDAO extends AccountDAO {
     @Override
     public boolean updateLastServer(final int accountId, final byte lastServer) {
         return DB.insertUpdate("UPDATE account_data SET last_server = ? WHERE id = ?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setByte(1, lastServer);
@@ -251,6 +253,7 @@ public class MySQL5AccountDAO extends AccountDAO {
     @Override
     public boolean updateLastIp(final int accountId, final String ip) {
         return DB.insertUpdate("UPDATE account_data SET last_ip = ? WHERE id = ?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setString(1, ip);
@@ -290,6 +293,7 @@ public class MySQL5AccountDAO extends AccountDAO {
     @Override
     public boolean updateLastMac(final int accountId, final String mac) {
         return DB.insertUpdate("UPDATE `account_data` SET `last_mac` = ? WHERE `id` = ?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setString(1, mac);
@@ -304,15 +308,15 @@ public class MySQL5AccountDAO extends AccountDAO {
      */
     @Override
     public boolean updateMembership(final int accountId) {
-        return DB.insertUpdate(
-                "UPDATE account_data SET membership = old_membership, expire = NULL WHERE id = ? and expire < CURRENT_TIMESTAMP",
-                new IUStH() {
-                    @Override
-                    public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
-                        preparedStatement.setInt(1, accountId);
-                        preparedStatement.execute();
-                    }
-                });
+        return DB.insertUpdate("UPDATE account_data SET membership = old_membership, expire = NULL WHERE id = ? and expire < CURRENT_TIMESTAMP",
+            new IUStH() {
+
+                @Override
+                public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
+                    preparedStatement.setInt(1, accountId);
+                    preparedStatement.execute();
+                }
+            });
     }
 
     /**
@@ -320,7 +324,8 @@ public class MySQL5AccountDAO extends AccountDAO {
      */
     @Override
     public void deleteInactiveAccounts(int daysOfInactivity) {
-        PreparedStatement statement = DB.prepareStatement("DELETE FROM account_data WHERE id IN (SELECT account_id FROM account_time WHERE UNIX_TIMESTAMP(CURDATE())-UNIX_TIMESTAMP(last_active) > ? * 24 * 60 * 60)");
+        PreparedStatement statement = DB.prepareStatement(
+            "DELETE FROM account_data WHERE id IN (SELECT account_id FROM account_time WHERE UNIX_TIMESTAMP(CURDATE())-UNIX_TIMESTAMP(last_active) > ? * 24 * 60 * 60)");
         try {
             statement.setInt(1, daysOfInactivity);
         } catch (SQLException e) {

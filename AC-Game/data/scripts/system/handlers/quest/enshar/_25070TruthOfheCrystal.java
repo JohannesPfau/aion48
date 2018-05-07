@@ -29,9 +29,9 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -73,19 +73,19 @@ public class _25070TruthOfheCrystal extends QuestHandler {
             int var = qs.getQuestVarById(0);
             if (targetId == 731552) {
                 switch (dialog) {
-                case QUEST_SELECT: {
-                    if (var == 0) 
-                        return sendQuestDialog(env, 1011);
-                } 
-                case SET_SUCCEED:
-                    if (var == 0) {
-						giveQuestItem(env, 182215723, 1);
-                        changeQuestStep(env, 0, 1, true); 
-						return closeDialogWindow(env);
+                    case QUEST_SELECT: {
+                        if (var == 0)
+                            return sendQuestDialog(env, 1011);
                     }
-                    return false;
-				}
-            } 
+                    case SET_SUCCEED:
+                        if (var == 0) {
+                            giveQuestItem(env, 182215723, 1);
+                            changeQuestStep(env, 0, 1, true);
+                            return closeDialogWindow(env);
+                        }
+                        return false;
+                }
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 804919) {
                 if (dialog == DialogAction.QUEST_SELECT) {

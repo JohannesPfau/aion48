@@ -63,7 +63,7 @@ public class AI2Engine implements GameEngine {
     private static final Logger log = LoggerFactory.getLogger(AI2Engine.class);
     private static ScriptManager scriptManager = new ScriptManager();
     public static final File INSTANCE_DESCRIPTOR_FILE = new File("./data/scripts/system/aihandlers.xml");
-    private final Map<String, Class<? extends AbstractAI>> aiMap = new HashMap<String, Class<? extends AbstractAI>>();
+    private final Map<String, Class<? extends AbstractAI>> aiMap = new HashMap<>();
 
     @Override
     public void load(CountDownLatch progressLatch) {
@@ -129,7 +129,8 @@ public class AI2Engine implements GameEngine {
     }
 
     private void validateScripts() {
-        Collection<String> npcAINames = selectDistinct(with(DataManager.NPC_DATA.getNpcData().valueCollection()).extract(on(NpcTemplate.class).getAi()));
+        Collection<String> npcAINames = selectDistinct(
+            with(DataManager.NPC_DATA.getNpcData().valueCollection()).extract(on(NpcTemplate.class).getAi()));
         npcAINames.removeAll(aiMap.keySet());
         if (npcAINames.size() > 0) {
             log.warn("Bad AI names: " + join(npcAINames));

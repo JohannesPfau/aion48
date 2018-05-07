@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Header")
-@XmlSeeAlso({com.aionemu.gameserver.model.templates.mail.MailPart.class})
+@XmlSeeAlso({ com.aionemu.gameserver.model.templates.mail.MailPart.class })
 public class Header extends MailPart {
 
     @XmlAttribute(name = "type")

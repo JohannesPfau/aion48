@@ -45,6 +45,7 @@ public class MineAI2 extends SiegeNpcAI2 {
 
         AI2Actions.useSkill(this, 18407);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 AI2Actions.deleteOwner(MineAI2.this);

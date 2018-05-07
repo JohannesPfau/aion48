@@ -61,7 +61,7 @@ public class SM_TELEPORT_MAP extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         if (teleport != null && teleport.getTeleportId() != 0) {
             writeD(targetObjectId);
             writeH(teleport.getTeleportId());

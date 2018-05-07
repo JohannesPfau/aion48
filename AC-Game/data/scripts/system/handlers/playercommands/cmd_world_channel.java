@@ -15,7 +15,6 @@
  *  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 package playercommands;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -43,7 +42,7 @@ public class cmd_world_channel extends PlayerCommand {
     @Override
     public void execute(Player player, String... params) {
         int i = 1;
-       // int ap = CustomConfig.WORLD_CHANNEL_AP_COSTS;
+        // int ap = CustomConfig.WORLD_CHANNEL_AP_COSTS;
         int ap = 0;
         boolean check = true;
         String adminTag = "";
@@ -59,7 +58,7 @@ public class cmd_world_channel extends PlayerCommand {
             return;
         }
 
-        if (player.isGagged()){
+        if (player.isGagged()) {
             PacketSendUtility.sendMessage(player, "You cannot talk while Gagged!");
             return;
         }
@@ -90,16 +89,13 @@ public class cmd_world_channel extends PlayerCommand {
 
         adminTag += player.getName() + " : ";
 
-
-
-
         StringBuilder sbMessage;
         if (player.isGM()) {
             sbMessage = new StringBuilder("[World-Chat]" + " " + adminTag);
         } else if (player.getRace() == Race.ASMODIANS) {
             factionTag = "[\uE070]";
             sbMessage = new StringBuilder("[World-Chat]" + " " + factionTag + player.getName() + " : ");
-        }else if (player.getRace() == Race.ELYOS){
+        } else if (player.getRace() == Race.ELYOS) {
             factionTag = "[\uE042]";
             sbMessage = new StringBuilder("[World-Chat]" + " " + factionTag + player.getName() + " : ");
         } else {
@@ -115,10 +111,12 @@ public class cmd_world_channel extends PlayerCommand {
         String message = sbMessage.toString().trim();
         int messageLenght = message.length();
 
-        final String sMessage = message.substring(0, CustomConfig.MAX_CHAT_TEXT_LENGHT > messageLenght ? messageLenght : CustomConfig.MAX_CHAT_TEXT_LENGHT);
+        final String sMessage = message.substring(0,
+            CustomConfig.MAX_CHAT_TEXT_LENGHT > messageLenght ? messageLenght : CustomConfig.MAX_CHAT_TEXT_LENGHT);
         if (player.isGM()) {
 
             World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player player) {
                     PacketSendUtility.sendMessage(player, sMessage);
@@ -131,6 +129,7 @@ public class cmd_world_channel extends PlayerCommand {
             } else {
                 AbyssPointsService.addAp(player, -ap);
                 World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
                     @Override
                     public void visit(Player player) {
                         PacketSendUtility.sendMessage(player, sMessage);

@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.THashMap;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,6 +41,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.skillengine.model.MotionTime;
 
+import gnu.trove.map.hash.THashMap;
+
 /**
  * @author kecimis
  */
@@ -53,7 +53,7 @@ public class MotionData {
     @XmlElement(name = "motion_time")
     protected List<MotionTime> motionTimes;
     @XmlTransient
-    private THashMap<String, MotionTime> motionTimesMap = new THashMap<String, MotionTime>();
+    private THashMap<String, MotionTime> motionTimesMap = new THashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (MotionTime motion : motionTimes) {
@@ -66,7 +66,7 @@ public class MotionData {
      */
     public List<MotionTime> getMotionTimes() {
         if (motionTimes == null) {
-            motionTimes = new ArrayList<MotionTime>();
+            motionTimes = new ArrayList<>();
         }
 
         return motionTimes;

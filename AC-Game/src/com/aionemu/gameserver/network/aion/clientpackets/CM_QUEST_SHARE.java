@@ -106,13 +106,15 @@ public class CM_QUEST_SHARE extends AionClientPacket {
 
                 if (!questTemplate.isRepeatable()) {
                     if (member.getQuestStateList().getQuestState(questId) != null) {
-                        if (member.getQuestStateList().getQuestState(questId).getStatus() != null && member.getQuestStateList().getQuestState(questId).getStatus() != QuestStatus.NONE) {
+                        if (member.getQuestStateList().getQuestState(questId).getStatus() != null
+                            && member.getQuestStateList().getQuestState(questId).getStatus() != QuestStatus.NONE) {
                             continue;
                         }
                     }
                 } else {
                     if (member.getQuestStateList().getQuestState(questId) != null) {
-                        if (member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.START || member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.REWARD) {
+                        if (member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.START
+                            || member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.REWARD) {
                             continue;
                         }
                     }
@@ -141,11 +143,13 @@ public class CM_QUEST_SHARE extends AionClientPacket {
                 }
 
                 if (!questTemplate.isRepeatable()) {
-                    if (member.getQuestStateList().getQuestState(questId).getStatus() != null && member.getQuestStateList().getQuestState(questId).getStatus() != QuestStatus.NONE) {
+                    if (member.getQuestStateList().getQuestState(questId).getStatus() != null
+                        && member.getQuestStateList().getQuestState(questId).getStatus() != QuestStatus.NONE) {
                         continue;
                     }
                 } else {
-                    if (member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.START || member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.REWARD) {
+                    if (member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.START
+                        || member.getQuestStateList().getQuestState(questId).getStatus() == QuestStatus.REWARD) {
                         continue;
                     }
                 }

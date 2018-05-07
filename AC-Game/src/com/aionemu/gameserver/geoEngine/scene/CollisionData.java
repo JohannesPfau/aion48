@@ -42,8 +42,5 @@ import com.aionemu.gameserver.geoEngine.math.Matrix4f;
  */
 public interface CollisionData {
 
-    public int collideWith(Collidable other,
-                           Matrix4f worldMatrix,
-                           BoundingVolume worldBound,
-                           CollisionResults results);
+    public int collideWith(Collidable other, Matrix4f worldMatrix, BoundingVolume worldBound, CollisionResults results);
 }

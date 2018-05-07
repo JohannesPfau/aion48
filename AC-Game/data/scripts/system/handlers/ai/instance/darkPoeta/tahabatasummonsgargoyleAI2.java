@@ -29,12 +29,13 @@
  */
 package ai.instance.darkPoeta;
 
-import ai.GeneralNpcAI2;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import java.util.concurrent.Future;
+import ai.GeneralNpcAI2;
 
 /**
  * @author Ritsu
@@ -64,10 +65,12 @@ public class tahabatasummonsgargoyleAI2 extends GeneralNpcAI2 {
 
     private void startTimer() {
         eventTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 SkillEngine.getInstance().getSkill(getOwner(), 18219, 50, getTarget()).useSkill();
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         getOwner().getController().onDelete();

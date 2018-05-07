@@ -29,14 +29,14 @@
  */
 package admincommands;
 
+import java.util.Iterator;
+
 import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-
-import java.util.Iterator;
 
 /**
  * Admin announce faction
@@ -76,11 +76,10 @@ public class AnnounceFaction extends AdminCommand {
             while (iter.hasNext()) {
                 target = iter.next();
 
-                if (target.getAccessLevel() > CommandsConfig.ANNONCEFACTION || target.getRace() == Race.ELYOS
-                        && params[0].equals("ely")) {
+                if (target.getAccessLevel() > CommandsConfig.ANNONCEFACTION || target.getRace() == Race.ELYOS && params[0].equals("ely")) {
                     PacketSendUtility.sendBrightYellowMessageOnCenter(target, message);
                 } else if (target.getAccessLevel() > CommandsConfig.ANNONCEFACTION
-                        || target.getCommonData().getRace() == Race.ASMODIANS && params[0].equals("asmo")) {
+                    || target.getCommonData().getRace() == Race.ASMODIANS && params[0].equals("asmo")) {
                     PacketSendUtility.sendBrightYellowMessageOnCenter(target, message);
                 }
             }

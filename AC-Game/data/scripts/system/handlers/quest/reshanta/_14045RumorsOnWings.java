@@ -29,9 +29,9 @@
  */
 package quest.reshanta;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,7 +51,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {278506, 279023, 278643};
+        int[] npcs = { 278506, 279023, 278643 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.registerQuestNpc(214102).addOnKillEvent(questId);
@@ -116,10 +116,8 @@ public class _14045RumorsOnWings extends QuestHandler {
                         }
                         case SETPRO3: {
                             if (var == 2) {
-                                QuestService.addNewSpawn(400010000, player.getInstanceId(), 214102, 2344.32f, 1789.96f, 2258.88f,
-                                        (byte) 86);
-                                QuestService.addNewSpawn(400010000, player.getInstanceId(), 214102, 2344.51f, 1786.01f, 2258.88f,
-                                        (byte) 52);
+                                QuestService.addNewSpawn(400010000, player.getInstanceId(), 214102, 2344.32f, 1789.96f, 2258.88f, (byte) 86);
+                                QuestService.addNewSpawn(400010000, player.getInstanceId(), 214102, 2344.51f, 1786.01f, 2258.88f, (byte) 52);
                                 return defaultCloseDialog(env, 2, 3);
                             }
                         }
@@ -169,7 +167,7 @@ public class _14045RumorsOnWings extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {14041, 14040};
+        int[] quests = { 14041, 14040 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 }

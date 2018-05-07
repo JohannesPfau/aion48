@@ -95,7 +95,7 @@ public class PlayerTeamDistributionService {
             // Reward init
             long rewardXp = expReward * bonus * member.getLevel() / (filteredStats.partyLvlSum * 100);
             int rewardDp = StatFunctions.calculateGroupDPReward(member, owner);
-			int rewardGP = StatFunctions.calculateGPReward(member, owner);
+            int rewardGP = StatFunctions.calculateGPReward(member, owner);
             float rewardAp = 1;
 
             // Players 10 levels below highest member get 0 reward.
@@ -133,14 +133,14 @@ public class PlayerTeamDistributionService {
                     AbyssPointsService.addAp(member, owner, ap);
                 }
             }
-			
+
             // GP reward
             if (owner.isRewardGP()) {
                 if (rewardGP >= 1) {
                     AbyssPointsService.addGp(member, owner, rewardGP);
                 }
             }
-			
+
         }
 
         // Give Drop
@@ -156,7 +156,7 @@ public class PlayerTeamDistributionService {
 
     private static class PlayerTeamRewardStats implements Predicate<Player> {
 
-        final List<Player> players = new ArrayList<Player>();
+        final List<Player> players = new ArrayList<>();
         int partyLvlSum = 0;
         int highestLevel = 0;
         int mentorCount = 0;

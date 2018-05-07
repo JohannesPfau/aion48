@@ -88,7 +88,8 @@ public class DatabaseCleaningService {
             delegateToThreads(CleaningConfig.CLEANING_THREADS, dao.getInactiveAccounts(periodInDays, CleaningConfig.CLEANING_LIMIT));
             monitoringProcess();
         } else {
-            log.warn("The configured days for database cleaning is to low. For security reasons the service will only execute with periods over 30 days!");
+            log.warn(
+                "The configured days for database cleaning is to low. For security reasons the service will only execute with periods over 30 days!");
         }
     }
 
@@ -96,7 +97,8 @@ public class DatabaseCleaningService {
         while (!allWorkersReady()) {
             try {
                 Thread.sleep(WORKER_CHECK_TIME);
-                log.info("DatabaseCleaningService: Until now " + currentlyDeletedChars() + " chars deleted in " + (System.currentTimeMillis() - startTime) / 1000 + " seconds!");
+                log.info("DatabaseCleaningService: Until now " + currentlyDeletedChars() + " chars deleted in "
+                    + (System.currentTimeMillis() - startTime) / 1000 + " seconds!");
             } catch (InterruptedException ex) {
                 log.error("DatabaseCleaningService: Got Interrupted!");
             }
@@ -121,7 +123,7 @@ public class DatabaseCleaningService {
     }
 
     private void delegateToThreads(int numberOfThreads, Set<Integer> idsToDelegate) {
-        workers = new ArrayList<Worker>();
+        workers = new ArrayList<>();
         log.info("DatabaseCleaningService: Executing deletion over " + numberOfThreads + " longrunning threads");
 
         //every id to another worker with maximum of n different workers
@@ -150,7 +152,7 @@ public class DatabaseCleaningService {
 
     private class Worker implements Runnable {
 
-        private List<Integer> ids = new ArrayList<Integer>();
+        private List<Integer> ids = new ArrayList<>();
         private int deletedChars = 0;
         private boolean _READY = false;
 

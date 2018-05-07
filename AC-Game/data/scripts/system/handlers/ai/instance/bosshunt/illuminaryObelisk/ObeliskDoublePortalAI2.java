@@ -29,34 +29,34 @@
  */
 package ai.instance.bosshunt.illuminaryObelisk;
 
-import ai.ActionItemNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 
+import ai.ActionItemNpcAI2;
+
 /**
- * 
  * @author Alcapwnd
- *
  */
 @AIName("obrlisk_dportal")
-public class ObeliskDoublePortalAI2 extends ActionItemNpcAI2
-{
-	@Override
-	protected void handleUseItemFinish(Player player) {
-		switch (getNpcId()) {
-		    case 730886: //Portal
-				 switch (player.getWorldId()) {
-                     case 301230000: //Illuminary Obelisk
-						TeleportService2.teleportTo(player, 301230000, 255.1f, 269.05f, 455.2f, (byte) 90, TeleportAnimation.BEAM_ANIMATION);
-			         break;
-				 } switch (player.getWorldId()) {
-                     case 301370000: //Illuminary Obelisk Hero
-						TeleportService2.teleportTo(player, 301370000, 255.1f, 269.05f, 455.2f, (byte) 90, TeleportAnimation.BEAM_ANIMATION);
-			         break;
-				 }
-		    break;
-		}
-	}
+public class ObeliskDoublePortalAI2 extends ActionItemNpcAI2 {
+
+    @Override
+    protected void handleUseItemFinish(Player player) {
+        switch (getNpcId()) {
+            case 730886: //Portal
+                switch (player.getWorldId()) {
+                    case 301230000: //Illuminary Obelisk
+                        TeleportService2.teleportTo(player, 301230000, 255.1f, 269.05f, 455.2f, (byte) 90, TeleportAnimation.BEAM_ANIMATION);
+                        break;
+                }
+                switch (player.getWorldId()) {
+                    case 301370000: //Illuminary Obelisk Hero
+                        TeleportService2.teleportTo(player, 301370000, 255.1f, 269.05f, 455.2f, (byte) 90, TeleportAnimation.BEAM_ANIMATION);
+                        break;
+                }
+                break;
+        }
+    }
 }

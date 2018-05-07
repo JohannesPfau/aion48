@@ -24,7 +24,6 @@ import javax.xml.bind.annotation.XmlType;
 
 /**
  * @author Maestross
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "BattleGroundJoinConditions")

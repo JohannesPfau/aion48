@@ -82,7 +82,7 @@ public class IdgelResearchCenterReward extends InstanceReward<IdgelPlayerReward>
     }
 
     @Override
-	public boolean isRewarded() {
+    public boolean isRewarded() {
         return isRewarded;
     }
 

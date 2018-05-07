@@ -56,6 +56,7 @@ public enum AttackStatus {
     OFFHAND_CRITICAL_BLOCK(213, true, true),
     OFFHAND_CRITICAL_RESIST(215, false, true),
     OFFHAND_CRITICAL(219, false, true);
+
     private final int type;
     private final boolean counterSkill;
     private final boolean isCritical;

@@ -29,11 +29,11 @@
  */
 package quest.morheim;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,7 +45,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _2039AlliesAmongEnemies extends QuestHandler {
 
     private final static int questId = 2039;
-    private final static int[] npc_ids = {204345, 204387, 204388, 204411, 204412, 204413};
+    private final static int[] npc_ids = { 204345, 204387, 204388, 204411, 204412, 204413 };
 
     public _2039AlliesAmongEnemies() {
         super(questId);
@@ -100,7 +100,7 @@ public class _2039AlliesAmongEnemies extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 204387: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -128,7 +128,7 @@ public class _2039AlliesAmongEnemies extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 204411: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -144,7 +144,7 @@ public class _2039AlliesAmongEnemies extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 204412: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -160,7 +160,7 @@ public class _2039AlliesAmongEnemies extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 204413: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -176,7 +176,7 @@ public class _2039AlliesAmongEnemies extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 204388) {

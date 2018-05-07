@@ -31,8 +31,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,6 +43,8 @@ import com.aionemu.gameserver.services.base.Base;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastMap;
 
 /**
  * @author Source
@@ -83,7 +83,7 @@ public class BaseService {
             if (active.containsKey(id)) {
                 return;
             }
-            base = new Base<BaseLocation>(getBaseLocation(id));
+            base = new Base<>(getBaseLocation(id));
             active.put(id, base);
         }
 
@@ -141,6 +141,7 @@ public class BaseService {
 
     public void broadcastUpdate(final BaseLocation baseLocation) {
         World.getInstance().getWorldMap(baseLocation.getWorldId()).getMainWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 if (isActive(baseLocation.getId())) {

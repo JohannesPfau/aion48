@@ -48,6 +48,7 @@ public enum SpellStatus {
     PARRY(64),
     DODGE(128),
     RESIST(256);
+
     private int id;
 
     private SpellStatus(int id) {

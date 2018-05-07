@@ -51,7 +51,7 @@ public class MedalGroup extends BonusItemGroup {
 
     public List<MedalItem> getItems() {
         if (items == null) {
-            items = new ArrayList<MedalItem>();
+            items = new ArrayList<>();
         }
         return this.items;
     }

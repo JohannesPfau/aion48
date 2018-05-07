@@ -65,6 +65,7 @@ public class ChangeHateOnAttackedEffect extends EffectTemplate {
         final int finalValue = value1 + value2;
 
         ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
+
             @Override
             public void attacked(Creature creature) {
                 if (creature instanceof Npc) {

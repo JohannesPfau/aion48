@@ -51,21 +51,21 @@ public class CM_PTRANSFER_CONTROL extends GsClientPacket {
                 byte[] db = this.readB(bytes);
                 PlayerTransferService.getInstance().requestTransfer(taskId, name, db);
             }
-            break;
+                break;
             case 2: // ERROR
             {
                 int taskId = readD();
                 String reason = readS();
                 PlayerTransferService.getInstance().onError(taskId, reason);
             }
-            break;
+                break;
             case 3: // ok
             {
                 int taskId = readD();
                 int playerId = readD();
                 PlayerTransferService.getInstance().onOk(taskId, playerId);
             }
-            break;
+                break;
             case 4: // Task stop
             {
                 int taskId = readD();

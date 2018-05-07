@@ -29,11 +29,11 @@
  */
 package quest.carving_fortune;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -94,7 +94,7 @@ public class _2098ButWhatweMake extends QuestHandler {
                     updateQuestStatus(env);
                     PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                     if (giveQuestItem(env, 182207089, 1))
-						;
+                        ;
                     return true;
                 } else {
                     return sendQuestStartDialog(env);
@@ -181,7 +181,7 @@ public class _2098ButWhatweMake extends QuestHandler {
                     updateQuestStatus(env);
                     PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                     if (giveQuestItem(env, 182207090, 1))
-						;
+                        ;
                     return true;
                 } else {
                     return sendQuestStartDialog(env);
@@ -240,7 +240,7 @@ public class _2098ButWhatweMake extends QuestHandler {
                     updateQuestStatus(env);
                     PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                     if (giveQuestItem(env, 182207091, 1))
-						;
+                        ;
                     return true;
                 } else {
                     return sendQuestStartDialog(env);
@@ -313,7 +313,7 @@ public class _2098ButWhatweMake extends QuestHandler {
                     updateQuestStatus(env);
                     PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                     if (giveQuestItem(env, 182207092, 1))
-						;
+                        ;
                     return true;
                 } else {
                     return sendQuestStartDialog(env);

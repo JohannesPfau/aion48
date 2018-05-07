@@ -56,34 +56,38 @@ public class PacketSendUtility {
     /**
      * Global message sending
      */
-	public static void sendMessage(Player player, String senderName, String msg, ChatType chatType) { 
-		sendPacket(player, new SM_MESSAGE(0, senderName, msg, chatType));
-	}	
-	public static void sendMessage(String senderName, String msg, ChatType chatType) { 
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-		while (iter.hasNext()) {
-			Player player = iter.next();
-			sendPacket(player, new SM_MESSAGE(0, senderName, msg, chatType));
-		}
-	}	
-	public static void sendKillMessage(String message) {
-		for (Player listener : World.getInstance().getAllPlayers()) {
-			if (!listener.isInFFA() || !listener.isInArena() || !listener.isInPkMode()) {
-				PacketSendUtility.sendPacket(listener, new SM_MESSAGE(1, null, message, ChatType.WHITE_CENTER));
-			}
-		}
-	}	
-	public static void sendAnnounceMessage(String message, ChatType chattype, boolean hidden) {
-		for (Player listener : World.getInstance().getAllPlayers()) {
-			if (hidden) {
-				if (listener.getAccessLevel() > 0) {
-					PacketSendUtility.sendPacket(listener, new SM_MESSAGE(1, null, message, chattype));
-				}
-			} else {
-				PacketSendUtility.sendPacket(listener, new SM_MESSAGE(1, null, message, chattype));
-			}
-		}
-	}	
+    public static void sendMessage(Player player, String senderName, String msg, ChatType chatType) {
+        sendPacket(player, new SM_MESSAGE(0, senderName, msg, chatType));
+    }
+
+    public static void sendMessage(String senderName, String msg, ChatType chatType) {
+        Iterator<Player> iter = World.getInstance().getPlayersIterator();
+        while (iter.hasNext()) {
+            Player player = iter.next();
+            sendPacket(player, new SM_MESSAGE(0, senderName, msg, chatType));
+        }
+    }
+
+    public static void sendKillMessage(String message) {
+        for (Player listener : World.getInstance().getAllPlayers()) {
+            if (!listener.isInFFA() || !listener.isInArena() || !listener.isInPkMode()) {
+                PacketSendUtility.sendPacket(listener, new SM_MESSAGE(1, null, message, ChatType.WHITE_CENTER));
+            }
+        }
+    }
+
+    public static void sendAnnounceMessage(String message, ChatType chattype, boolean hidden) {
+        for (Player listener : World.getInstance().getAllPlayers()) {
+            if (hidden) {
+                if (listener.getAccessLevel() > 0) {
+                    PacketSendUtility.sendPacket(listener, new SM_MESSAGE(1, null, message, chattype));
+                }
+            } else {
+                PacketSendUtility.sendPacket(listener, new SM_MESSAGE(1, null, message, chattype));
+            }
+        }
+    }
+
     public static void sendMessage(Player player, String msg) {
         sendPacket(player, new SM_MESSAGE(0, null, msg, ChatType.GOLDEN_YELLOW));
     }
@@ -115,13 +119,15 @@ public class PacketSendUtility {
     public static void sendSys2Message(Player player, String sender, String msg) {
         sendPacket(player, new SM_MESSAGE(0, sender, msg, ChatType.GROUP_LEADER));
     }
-	public static void sendSpecMessage(String sender, String message) {
-		Iterator<Player> iter = World.getInstance().getPlayersIterator();
-		while (iter.hasNext()) {
-			Player player = iter.next();
-			PacketSendUtility.sendPacket(player, new SM_MESSAGE(1, sender, message, ChatType.GROUP_LEADER));
-		}
-	}
+
+    public static void sendSpecMessage(String sender, String message) {
+        Iterator<Player> iter = World.getInstance().getPlayersIterator();
+        while (iter.hasNext()) {
+            Player player = iter.next();
+            PacketSendUtility.sendPacket(player, new SM_MESSAGE(1, sender, message, ChatType.GROUP_LEADER));
+        }
+    }
+
     /**
      * Send packet to this player
      */
@@ -135,8 +141,10 @@ public class PacketSendUtility {
      * Broadcast packet to all visible players.
      *
      * @param player
-     * @param packet ServerPacket that will be broadcast
-     * @param toSelf true if packet should also be sent to this player
+     * @param packet
+     *            ServerPacket that will be broadcast
+     * @param toSelf
+     *            true if packet should also be sent to this player
      */
     public static void broadcastPacket(Player player, AionServerPacket packet, boolean toSelf) {
         if (toSelf) {
@@ -169,6 +177,7 @@ public class PacketSendUtility {
      */
     public static void broadcastPacket(VisibleObject visibleObject, final AionServerPacket packet) {
         visibleObject.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 if (player.isOnline()) {
@@ -182,17 +191,20 @@ public class PacketSendUtility {
      * Broadcasts packet to all visible players matching a filter
      *
      * @param player
-     * @param packet ServerPacket to be broadcast
-     * @param toSelf true if packet should also be sent to this player
-     * @param filter filter determining who should be messaged
+     * @param packet
+     *            ServerPacket to be broadcast
+     * @param toSelf
+     *            true if packet should also be sent to this player
+     * @param filter
+     *            filter determining who should be messaged
      */
-    public static void broadcastPacket(Player player, final AionServerPacket packet, boolean toSelf,
-                                       final ObjectFilter<Player> filter) {
+    public static void broadcastPacket(Player player, final AionServerPacket packet, boolean toSelf, final ObjectFilter<Player> filter) {
         if (toSelf) {
             sendPacket(player, packet);
         }
 
         player.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player object) {
                 if (filter.acceptObject(object)) {
@@ -212,6 +224,7 @@ public class PacketSendUtility {
      */
     public static void broadcastPacket(final VisibleObject visibleObject, final AionServerPacket packet, final int distance) {
         visibleObject.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player p) {
                 if (MathUtil.isIn3dRange(visibleObject, p, distance)) {
@@ -225,12 +238,14 @@ public class PacketSendUtility {
      * Broadcasts packet to ALL players matching a filter
      *
      * @param player
-     * @param packet ServerPacket to be broadcast
-     * @param filter filter determining who should be messaged
+     * @param packet
+     *            ServerPacket to be broadcast
+     * @param filter
+     *            filter determining who should be messaged
      */
-    public static void broadcastFilteredPacket(final AionServerPacket packet,
-                                               final ObjectFilter<Player> filter) {
+    public static void broadcastFilteredPacket(final AionServerPacket packet, final ObjectFilter<Player> filter) {
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player object) {
                 if (filter.acceptObject(object)) {
@@ -243,8 +258,10 @@ public class PacketSendUtility {
     /**
      * Broadcasts packet to all legion members of a legion
      *
-     * @param legion Legion to broadcast packet to
-     * @param packet ServerPacket to be broadcast
+     * @param legion
+     *            Legion to broadcast packet to
+     * @param packet
+     *            ServerPacket to be broadcast
      */
     public static void broadcastPacketToLegion(Legion legion, AionServerPacket packet) {
         for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {
@@ -262,6 +279,7 @@ public class PacketSendUtility {
 
     public static void broadcastPacketToZone(SiegeZoneInstance zone, final AionServerPacket packet) {
         zone.doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 sendPacket(player, packet);
@@ -297,15 +315,14 @@ public class PacketSendUtility {
     }
 
     /**
-     *
      * Special function for Aion Absolute Announce :)
-     *
      */
     /**
      * Crazy Daeva
      */
     public static void event(final String msg) {
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player sender) {
                 sendBrightYellowMessageOnCenter(sender, "[EVENT ALL ON A DAEVA]: " + msg);
@@ -315,6 +332,7 @@ public class PacketSendUtility {
 
     public static void event2(final String msg) {
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player sender) {
                 broadcastPacket(sender, new SM_MESSAGE(sender, "[EVENT]: " + msg, ChatType.GROUP_LEADER), true);
@@ -323,18 +341,17 @@ public class PacketSendUtility {
     }
 
     /**
-     *
      * Jumping Instance Announce :O
-     *
      */
-    public static void announceMeOnly(Player player, String msg){
+    public static void announceMeOnly(Player player, String msg) {
         broadcastPacket(player, new SM_MESSAGE(0, "Jumping Event", msg, ChatType.GROUP_LEADER));
     }
 
-    public static void announceAll(final String msg){
-        World.getInstance().doOnAllPlayers(new Visitor<Player>(){
+    public static void announceAll(final String msg) {
+        World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
-            public void visit(Player sender){
+            public void visit(Player sender) {
                 broadcastPacket(sender, new SM_MESSAGE(0, "Jumping Event", msg, ChatType.GROUP_LEADER));
             }
         });

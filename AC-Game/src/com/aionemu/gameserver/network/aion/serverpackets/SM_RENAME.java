@@ -53,7 +53,7 @@ public class SM_RENAME extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(0); // unk
         writeD(0); // unk - 0 or 3
         writeD(playerObjectId);

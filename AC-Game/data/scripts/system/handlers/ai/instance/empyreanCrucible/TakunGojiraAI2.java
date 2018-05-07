@@ -29,10 +29,11 @@
  */
 package ai.instance.empyreanCrucible;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Luzien
@@ -46,6 +47,7 @@ public class TakunGojiraAI2 extends AggressiveNpcAI2 {
     public void handleSpawned() {
         super.handleSpawned();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 counterpart = getPosition().getWorldMapInstance().getNpc(getNpcId() == 217596 ? 217597 : 217596);

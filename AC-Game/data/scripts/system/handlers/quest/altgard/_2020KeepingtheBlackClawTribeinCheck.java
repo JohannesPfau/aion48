@@ -58,7 +58,7 @@ public class _2020KeepingtheBlackClawTribeinCheck extends QuestHandler {
         qe.registerQuestNpc(203665).addOnTalkEvent(questId);
         qe.registerQuestNpc(203668).addOnTalkEvent(questId);
         qe.registerQuestNpc(210562).addOnKillEvent(questId);
-	qe.registerQuestNpc(210563).addOnKillEvent(questId);
+        qe.registerQuestNpc(210563).addOnKillEvent(questId);
         qe.registerQuestNpc(216914).addOnKillEvent(questId);
     }
 

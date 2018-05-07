@@ -47,13 +47,13 @@ import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.SAXException;
 
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
+
+import javolution.util.FastMap;
 
 /**
  * @author KKnD, Rolandas
@@ -66,7 +66,7 @@ public class WalkerData {
     @XmlElement(name = "walker_template")
     private List<WalkerTemplate> walkerlist;
     @XmlTransient
-    private FastMap<String, WalkerTemplate> walkerlistData = new FastMap<String, WalkerTemplate>();
+    private FastMap<String, WalkerTemplate> walkerlistData = new FastMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (WalkerTemplate route : walkerlist) {
@@ -93,7 +93,7 @@ public class WalkerData {
 
     public void AddTemplate(WalkerTemplate newTemplate) {
         if (walkerlist == null) {
-            walkerlist = new ArrayList<WalkerTemplate>();
+            walkerlist = new ArrayList<>();
         }
         walkerlist.add(newTemplate);
     }

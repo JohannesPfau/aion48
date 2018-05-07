@@ -37,8 +37,6 @@ import com.aionemu.gameserver.network.loginserver.LoginServer;
 /**
  * In this packets aion client is authenticating himself by providing accountId
  * and rest of sessionKey - we will check if its valid at login server side.
- *
-
  */
 // TODO: L2AUTH? Really? :O
 public class CM_L2AUTH_LOGIN_CHECK extends AionClientPacket {

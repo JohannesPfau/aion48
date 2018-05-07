@@ -45,13 +45,10 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "ActionModifiers")
 public class ActionModifiers {
 
-    @XmlElements({
-            @XmlElement(name = "frontdamage", type = FrontDamageModifier.class),
-            @XmlElement(name = "backdamage", type = BackDamageModifier.class),
-            @XmlElement(name = "abnormaldamage", type = AbnormalDamageModifier.class),
-            @XmlElement(name = "targetrace", type = TargetRaceDamageModifier.class),
-            @XmlElement(name = "targetclass", type = TargetClassDamageModifier.class)
-    })
+    @XmlElements({ @XmlElement(name = "frontdamage", type = FrontDamageModifier.class),
+        @XmlElement(name = "backdamage", type = BackDamageModifier.class), @XmlElement(name = "abnormaldamage", type = AbnormalDamageModifier.class),
+        @XmlElement(name = "targetrace", type = TargetRaceDamageModifier.class),
+        @XmlElement(name = "targetclass", type = TargetClassDamageModifier.class) })
     protected List<ActionModifier> actionModifiers;
 
     /**
@@ -63,7 +60,7 @@ public class ActionModifiers {
      */
     public List<ActionModifier> getActionModifiers() {
         if (actionModifiers == null) {
-            actionModifiers = new ArrayList<ActionModifier>();
+            actionModifiers = new ArrayList<>();
         }
         return this.actionModifiers;
     }

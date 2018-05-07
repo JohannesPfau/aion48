@@ -29,11 +29,11 @@
  */
 package quest.beluslan;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -46,7 +46,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _2600HumongousMalek extends QuestHandler {
 
     private final static int questId = 2600;
-    private final static int[] npc_ids = {204734, 798119, 700512};
+    private final static int[] npc_ids = { 204734, 798119, 700512 };
 
     public _2600HumongousMalek() {
         super(questId);
@@ -98,7 +98,7 @@ public class _2600HumongousMalek extends QuestHandler {
                 case SETPRO1:
                     if (var == 0) {
                         if (giveQuestItem(env, 182204528, 1))
-							;
+                            ;
                         qs.setQuestVarById(0, var + 1);
                         updateQuestStatus(env);
                         PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
@@ -113,8 +113,7 @@ public class _2600HumongousMalek extends QuestHandler {
                     if (var == 1) {
                         if (player.getInventory().getItemCountByItemId(182204528) == 1) {
                             removeQuestItem(env, 182204528, 1);
-                            QuestService.addNewSpawn(220040000, 1, 215383, (float) 1140.78, (float) 432.85, (float) 341.0825,
-                                    (byte) 0);
+                            QuestService.addNewSpawn(220040000, 1, 215383, (float) 1140.78, (float) 432.85, (float) 341.0825, (byte) 0);
                             return true;
                         }
                     }

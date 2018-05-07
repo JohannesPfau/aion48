@@ -50,7 +50,8 @@ public class CloseAerialEffect extends EffectTemplate {
 
     @Override
     public void calculate(Effect effect) {
-        if (effect.getEffected().getEffectController().hasPhysicalStateEffect() && !effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL)) {
+        if (effect.getEffected().getEffectController().hasPhysicalStateEffect()
+            && !effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.OPENAERIAL)) {
             return;
         }
 

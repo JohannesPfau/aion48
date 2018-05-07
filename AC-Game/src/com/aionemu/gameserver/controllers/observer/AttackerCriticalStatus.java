@@ -57,7 +57,8 @@ public class AttackerCriticalStatus {
     }
 
     /**
-     * @param count the count to set
+     * @param count
+     *            the count to set
      */
     public void setCount(int count) {
         this.count = count;
@@ -85,7 +86,8 @@ public class AttackerCriticalStatus {
     }
 
     /**
-     * @param result the result to set
+     * @param result
+     *            the result to set
      */
     public void setResult(boolean result) {
         this.result = result;

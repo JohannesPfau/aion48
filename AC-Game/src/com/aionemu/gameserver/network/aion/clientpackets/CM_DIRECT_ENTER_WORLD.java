@@ -35,7 +35,6 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.FastTrackService;
 
-
 /**
  * @author Alcapwnd
  */

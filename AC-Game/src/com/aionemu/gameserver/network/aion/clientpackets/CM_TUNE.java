@@ -96,6 +96,7 @@ public class CM_TUNE extends AionClientPacket {
         final int nameId = template.getNameId();
         PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), itemId, 5000, 0, 0), true);
         final ItemUseObserver observer = new ItemUseObserver() {
+
             @Override
             public void abort() {
                 player.getController().cancelTask(TaskId.ITEM_USE);
@@ -107,6 +108,7 @@ public class CM_TUNE extends AionClientPacket {
         };
         player.getObserveController().attach(observer);
         player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (item.getOptionalSocket() != -1) {

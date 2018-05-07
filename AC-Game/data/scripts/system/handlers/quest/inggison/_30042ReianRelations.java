@@ -29,9 +29,9 @@
  */
 package quest.inggison;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -39,7 +39,6 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author pralinka
- *
  */
 public class _30042ReianRelations extends QuestHandler {
 
@@ -51,12 +50,12 @@ public class _30042ReianRelations extends QuestHandler {
 
     @Override
     public void register() {
-		qe.registerOnLevelUp(questId);
+        qe.registerOnLevelUp(questId);
         qe.registerQuestNpc(798927).addOnTalkEvent(questId);
         qe.registerQuestNpc(799029).addOnTalkEvent(questId);
     }
 
-	@Override
+    @Override
     public boolean onLvlUpEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -65,14 +64,14 @@ public class _30042ReianRelations extends QuestHandler {
         }
         return false;
     }
-	
+
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         DialogAction dialog = env.getDialog();
         int targetId = env.getTargetId();
-		if (qs.getStatus() == QuestStatus.START) {
+        if (qs.getStatus() == QuestStatus.START) {
             if (targetId == 798927) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     if (qs.getQuestVarById(0) == 0) {

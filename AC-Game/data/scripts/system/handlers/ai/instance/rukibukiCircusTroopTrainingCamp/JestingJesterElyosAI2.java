@@ -40,19 +40,19 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author Ranastic
  */
 @AIName("jestingjesterelyos")
-public class JestingJesterElyosAI2 extends NpcAI2
-{
-	@Override
-	protected void handleDialogStart(Player player) {
-		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
-	}
-	
-	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-		if (dialogId == 10000) {
-			SkillEngine.getInstance().applyEffectDirectly(21331, player, player, 3600000 * 3);
-		}
-		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-		return true;
-	}
+public class JestingJesterElyosAI2 extends NpcAI2 {
+
+    @Override
+    protected void handleDialogStart(Player player) {
+        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
+    }
+
+    @Override
+    public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
+        if (dialogId == 10000) {
+            SkillEngine.getInstance().applyEffectDirectly(21331, player, player, 3600000 * 3);
+        }
+        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
+        return true;
+    }
 }

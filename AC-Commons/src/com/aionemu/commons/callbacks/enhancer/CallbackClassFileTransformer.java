@@ -29,13 +29,14 @@
  */
 package com.aionemu.commons.callbacks.enhancer;
 
-import com.aionemu.commons.utils.ExitCode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.utils.ExitCode;
 
 /**
  * Basic class that checks if class can be transformed. JDK classes are not a
@@ -50,15 +51,20 @@ public abstract class CallbackClassFileTransformer implements ClassFileTransform
     /**
      * This method analyzes class and adds callback support if needed.
      *
-     * @param loader              ClassLoader of class
-     * @param className           class name
-     * @param classBeingRedefined not used
-     * @param protectionDomain    not used
-     * @param classfileBuffer     basic class data
+     * @param loader
+     *            ClassLoader of class
+     * @param className
+     *            class name
+     * @param classBeingRedefined
+     *            not used
+     * @param protectionDomain
+     *            not used
+     * @param classfileBuffer
+     *            basic class data
      */
     @Override
-    public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined,
-                            ProtectionDomain protectionDomain, byte[] classfileBuffer) throws IllegalClassFormatException {
+    public byte[] transform(ClassLoader loader, String className, Class<?> classBeingRedefined, ProtectionDomain protectionDomain,
+        byte[] classfileBuffer) throws IllegalClassFormatException {
         try {
             // no need to scan whole jvm boot classpath
             // also there is no need to transform classes from jvm 'ext' dir
@@ -87,10 +93,13 @@ public abstract class CallbackClassFileTransformer implements ClassFileTransform
     /**
      * Actually transforms the class.
      *
-     * @param loader     class loader of this class
-     * @param clazzBytes class bytes
+     * @param loader
+     *            class loader of this class
+     * @param clazzBytes
+     *            class bytes
      * @return class as byte array if was transformed or null if was not
-     * @throws Exception if something went wrong
+     * @throws Exception
+     *             if something went wrong
      */
     protected abstract byte[] transformClass(ClassLoader loader, byte[] clazzBytes) throws Exception;
 }

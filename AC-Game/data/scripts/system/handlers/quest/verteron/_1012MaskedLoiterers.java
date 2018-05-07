@@ -47,94 +47,94 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class _1012MaskedLoiterers extends QuestHandler {
 
-	private final static int questId = 1012;
+    private final static int questId = 1012;
 
-	public _1012MaskedLoiterers() {
-		super(questId);
-	}
+    public _1012MaskedLoiterers() {
+        super(questId);
+    }
 
-	@Override
-	public void register() {
-		qe.registerQuestNpc(203111).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("LF1A_SENSORYAREA_Q1012_1_206004_8_210030000"), questId);
-		qe.registerOnEnterZone(ZoneName.get("LF1A_SENSORYAREA_Q1012_2_206005_4_210030000"), questId);
-		qe.registerOnEnterZone(ZoneName.get("LF1A_SENSORYAREA_Q1012_3_206006_6_210030000"), questId);
-		qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnLevelUp(questId);
-	}
+    @Override
+    public void register() {
+        qe.registerQuestNpc(203111).addOnTalkEvent(questId);
+        qe.registerOnEnterZone(ZoneName.get("LF1A_SENSORYAREA_Q1012_1_206004_8_210030000"), questId);
+        qe.registerOnEnterZone(ZoneName.get("LF1A_SENSORYAREA_Q1012_2_206005_4_210030000"), questId);
+        qe.registerOnEnterZone(ZoneName.get("LF1A_SENSORYAREA_Q1012_3_206006_6_210030000"), questId);
+        qe.registerOnEnterZoneMissionEnd(questId);
+        qe.registerOnLevelUp(questId);
+    }
 
-	@Override
-	public boolean onZoneMissionEndEvent(QuestEnv env) {
-		return defaultOnZoneMissionEndEvent(env);
-	}
+    @Override
+    public boolean onZoneMissionEndEvent(QuestEnv env) {
+        return defaultOnZoneMissionEndEvent(env);
+    }
 
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1130, true);
-	}
+    @Override
+    public boolean onLvlUpEvent(QuestEnv env) {
+        return defaultOnLvlUpEvent(env, 1130, true);
+    }
 
-	@Override
-	public boolean onDialogEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null) {
-			return false;
-		}
+    @Override
+    public boolean onDialogEvent(QuestEnv env) {
+        Player player = env.getPlayer();
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (qs == null) {
+            return false;
+        }
 
-		int var = qs.getQuestVarById(0);
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc) {
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-		}
+        int var = qs.getQuestVarById(0);
+        int targetId = 0;
+        if (env.getVisibleObject() instanceof Npc) {
+            targetId = ((Npc) env.getVisibleObject()).getNpcId();
+        }
 
-		if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 203111) // Spiros
-			{
-				switch (env.getDialog()) {
-					case QUEST_SELECT:
-						if (var == 0) {
-							return sendQuestDialog(env, 1011);
-						}
-						if (var == 2) {
-							return sendQuestDialog(env, 1352);
-						}
-						if (var == 3) {
-							return sendQuestDialog(env, 1693);
-						}
-					case SETPRO1:
-						return defaultCloseDialog(env, 0, 1); // 1
-					case SETPRO2:
-						return defaultCloseDialog(env, 2, 3); // 3
-					case CHECK_USER_HAS_QUEST_ITEM:
-						return checkQuestItems(env, 3, 3, true, 5, 2034);
-					default:
-						break;
-				}
-			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203111) {
-				return sendQuestEndDialog(env);
-			}
-		}
-		return false;
-	}
+        if (qs.getStatus() == QuestStatus.START) {
+            if (targetId == 203111) // Spiros
+            {
+                switch (env.getDialog()) {
+                    case QUEST_SELECT:
+                        if (var == 0) {
+                            return sendQuestDialog(env, 1011);
+                        }
+                        if (var == 2) {
+                            return sendQuestDialog(env, 1352);
+                        }
+                        if (var == 3) {
+                            return sendQuestDialog(env, 1693);
+                        }
+                    case SETPRO1:
+                        return defaultCloseDialog(env, 0, 1); // 1
+                    case SETPRO2:
+                        return defaultCloseDialog(env, 2, 3); // 3
+                    case CHECK_USER_HAS_QUEST_ITEM:
+                        return checkQuestItems(env, 3, 3, true, 5, 2034);
+                    default:
+                        break;
+                }
+            }
+        } else if (qs.getStatus() == QuestStatus.REWARD) {
+            if (targetId == 203111) {
+                return sendQuestEndDialog(env);
+            }
+        }
+        return false;
+    }
 
-	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		final Player player = env.getPlayer();
-			if (player == null) {
-				return false;
-			}
-			final QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs == null) {
-				return false;
-			}
+    @Override
+    public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+        final Player player = env.getPlayer();
+        if (player == null) {
+            return false;
+        }
+        final QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (qs == null) {
+            return false;
+        }
 
-			if (qs.getQuestVars().getQuestVars() == 1) {
-				qs.setQuestVarById(0, 2); // 2
-				updateQuestStatus(env);
-				return true;
-			}
-		return false;
-	}
+        if (qs.getQuestVars().getQuestVars() == 1) {
+            qs.setQuestVarById(0, 2); // 2
+            updateQuestStatus(env);
+            return true;
+        }
+        return false;
+    }
 }

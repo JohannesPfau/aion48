@@ -28,7 +28,7 @@
  * @Aion-Core Dev.
  */
 package quest.altgard;
- 
+
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -36,34 +36,33 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
- 
+
 /**
  * @author FrozenKiller
  */
- 
+
 public class _24114YouGottaStopUmkata extends QuestHandler {
 
     private final static int questId = 24114;
-	private final static int[] mobs = {210722, 210588}; // Hero Spirit
+    private final static int[] mobs = { 210722, 210588 }; // Hero Spirit
 
     public _24114YouGottaStopUmkata() {
         super(questId);
-    }    
-	
+    }
+
     @Override
     public void register() {
         qe.registerQuestNpc(203649).addOnQuestStart(questId);
         qe.registerQuestNpc(203649).addOnTalkEvent(questId); // Gulkalla
-		qe.registerQuestNpc(700097).addOnTalkEvent(questId); // Umkata's Jewel Box
-		qe.registerQuestNpc(700098).addOnTalkEvent(questId); // Umkata's Grave
-		qe.registerQuestNpc(210752).addOnKillEvent(questId); // Umkata
-		for (int mob : mobs) {
+        qe.registerQuestNpc(700097).addOnTalkEvent(questId); // Umkata's Jewel Box
+        qe.registerQuestNpc(700098).addOnTalkEvent(questId); // Umkata's Grave
+        qe.registerQuestNpc(210752).addOnKillEvent(questId); // Umkata
+        for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
     }
-	
-	
-	@Override
+
+    @Override
     public boolean onDialogEvent(final QuestEnv env) {
         final Player player = env.getPlayer();
         int targetId = env.getTargetId();
@@ -78,80 +77,80 @@ public class _24114YouGottaStopUmkata extends QuestHandler {
                     return sendQuestStartDialog(env);
                 }
             }
-		} else if (qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (targetId == 203649) { // Gulkalla
-				switch (dialog) {
-					case QUEST_SELECT: {
-						if (var == 3) {
-							return sendQuestDialog(env, 1011);
-						} else if (var == 1) {
-							return sendQuestDialog(env, 2375);
-						}
-					}
-					case SETPRO1: {
-						return defaultCloseDialog(env, 3, 4);
-					}
-				default:
-					break;
-				}
-			} else if (targetId == 700097) {
-                    if (env.getDialog() == DialogAction.USE_OBJECT && var == 4) {
-						giveQuestItem(env, 182215475, 1);
-                        return false; // loot
+        } else if (qs.getStatus() == QuestStatus.START) {
+            int var = qs.getQuestVarById(0);
+            if (targetId == 203649) { // Gulkalla
+                switch (dialog) {
+                    case QUEST_SELECT: {
+                        if (var == 3) {
+                            return sendQuestDialog(env, 1011);
+                        } else if (var == 1) {
+                            return sendQuestDialog(env, 2375);
+                        }
                     }
-			} else if (targetId == 700098) { // Umkata's Grave
-				switch (dialog) {
-					case USE_OBJECT: {
-						if (var == 4) {
-							return sendQuestDialog(env, 1693);
-						}
-					}
+                    case SETPRO1: {
+                        return defaultCloseDialog(env, 3, 4);
+                    }
+                    default:
+                        break;
+                }
+            } else if (targetId == 700097) {
+                if (env.getDialog() == DialogAction.USE_OBJECT && var == 4) {
+                    giveQuestItem(env, 182215475, 1);
+                    return false; // loot
+                }
+            } else if (targetId == 700098) { // Umkata's Grave
+                switch (dialog) {
+                    case USE_OBJECT: {
+                        if (var == 4) {
+                            return sendQuestDialog(env, 1693);
+                        }
+                    }
                     case CHECK_USER_HAS_QUEST_ITEM: {
-						if (QuestService.collectItemCheck(env, false)) { // don't remove yet
-						QuestService.addNewSpawn(220030000, player.getInstanceId(), 210752, 2889.9834f, 1741.3108f, 254.75f, (byte) 0);
-						return closeDialogWindow(env);
-						} else {
-							return sendQuestDialog(env, 1779);
-						}
-					}
-				default:
-					break;
-				}
-			}
+                        if (QuestService.collectItemCheck(env, false)) { // don't remove yet
+                            QuestService.addNewSpawn(220030000, player.getInstanceId(), 210752, 2889.9834f, 1741.3108f, 254.75f, (byte) 0);
+                            return closeDialogWindow(env);
+                        } else {
+                            return sendQuestDialog(env, 1779);
+                        }
+                    }
+                    default:
+                        break;
+                }
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203649) { // Gulkalla
-				switch (dialog) {
-					case USE_OBJECT: {
-						return sendQuestDialog(env, 1352);
-					}
-					case SELECT_QUEST_REWARD: {
-						return sendQuestDialog(env, 5);
-					}
+            if (targetId == 203649) { // Gulkalla
+                switch (dialog) {
+                    case USE_OBJECT: {
+                        return sendQuestDialog(env, 1352);
+                    }
+                    case SELECT_QUEST_REWARD: {
+                        return sendQuestDialog(env, 5);
+                    }
                     default: {
                         return sendQuestEndDialog(env);
-					}
-				}
-			}
-		}
-		return false;
-	}
-	
-	@Override
+                    }
+                }
+            }
+        }
+        return false;
+    }
+
+    @Override
     public boolean onKillEvent(QuestEnv env) {
-		Player player = env.getPlayer();
+        Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs == null || qs.getStatus() != QuestStatus.START) {
             return false;
         }
-		
-		int var = qs.getQuestVarById(0);
+
+        int var = qs.getQuestVarById(0);
         if (var >= 0 && var < 3) {
-			return defaultOnKillEvent(env, mobs, var, var + 1); // 0 - 3
-		} else if (var == 4) {
-			QuestService.collectItemCheck(env, true); // remove collected items
-			return defaultOnKillEvent(env, 210752, 4, true); // reward
-		}
-		return false;
-	}
+            return defaultOnKillEvent(env, mobs, var, var + 1); // 0 - 3
+        } else if (var == 4) {
+            QuestService.collectItemCheck(env, true); // remove collected items
+            return defaultOnKillEvent(env, 210752, 4, true); // reward
+        }
+        return false;
+    }
 }

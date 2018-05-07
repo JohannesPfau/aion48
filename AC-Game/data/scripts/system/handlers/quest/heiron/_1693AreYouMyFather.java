@@ -29,10 +29,10 @@
  */
 package quest.heiron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -41,12 +41,11 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _1693AreYouMyFather extends QuestHandler {
 
     private final static int questId = 1693;
-    private final static int[] npcs = {798386, 204514, 798388, 203893};
+    private final static int[] npcs = { 798386, 204514, 798388, 203893 };
 
     public _1693AreYouMyFather() {
         super(questId);
@@ -97,7 +96,7 @@ public class _1693AreYouMyFather extends QuestHandler {
                         }
                     }
                 }
-                break;
+                    break;
                 case 798388: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT: {
@@ -110,7 +109,7 @@ public class _1693AreYouMyFather extends QuestHandler {
                         }
                     }
                 }
-                break;
+                    break;
                 case 203893: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT: {

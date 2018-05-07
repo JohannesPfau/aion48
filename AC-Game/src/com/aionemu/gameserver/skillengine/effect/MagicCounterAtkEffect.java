@@ -68,16 +68,17 @@ public class MagicCounterAtkEffect extends EffectTemplate {
         final Creature effected = effect.getEffected();
         final CreatureLifeStats<? extends Creature> cls = effect.getEffected().getLifeStats();
         ActionObserver observer = new ActionObserver(ObserverType.SKILLUSE) {
+
             @Override
             public void skilluse(final Skill skill) {
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
-                        if (skill.getSkillTemplate().getType() == SkillType.MAGICAL
-                                && skill.getSkillTemplate().getSubType() == SkillSubType.ATTACK) {
+                        if (skill.getSkillTemplate().getType() == SkillType.MAGICAL && skill.getSkillTemplate().getSubType() == SkillSubType.ATTACK) {
                             if ((int) (cls.getMaxHp() / 100f * value) <= maxdmg) {
-                                effected.getController().onAttack(effector, effect.getSkillId(), TYPE.DAMAGE,
-                                        (int) (cls.getMaxHp() / 100f * value), true, LOG.REGULAR);
+                                effected.getController().onAttack(effector, effect.getSkillId(), TYPE.DAMAGE, (int) (cls.getMaxHp() / 100f * value),
+                                    true, LOG.REGULAR);
                             } else {
                                 effected.getController().onAttack(effector, maxdmg, true);
                             }

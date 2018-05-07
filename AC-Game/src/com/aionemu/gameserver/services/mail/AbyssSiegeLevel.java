@@ -39,6 +39,7 @@ public enum AbyssSiegeLevel {
     MEDAL(2),
     ELITE_SOLDIER(3),
     VETERAN_SOLDIER(4);
+
     private int value;
 
     private AbyssSiegeLevel(int value) {

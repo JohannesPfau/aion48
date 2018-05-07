@@ -36,28 +36,26 @@ import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+
 /**
  * @author Romanz
- *
  */
 
-public class _4218MysteriousAmabille extends QuestHandler
-{
-	private final static int	questId	= 4218;
-        
-	public _4218MysteriousAmabille()
-	{
-		super(questId);
-	}
+public class _4218MysteriousAmabille extends QuestHandler {
 
-	@Override
-	public void register()
-	{
-		qe.registerQuestNpc(204284).addOnQuestStart(questId);
-		qe.registerQuestNpc(204284).addOnTalkEvent(questId);
-		qe.registerQuestNpc(798334).addOnTalkEvent(questId);
-		qe.registerQuestNpc(730208).addOnTalkEvent(questId);
-	}
+    private final static int questId = 4218;
+
+    public _4218MysteriousAmabille() {
+        super(questId);
+    }
+
+    @Override
+    public void register() {
+        qe.registerQuestNpc(204284).addOnQuestStart(questId);
+        qe.registerQuestNpc(204284).addOnTalkEvent(questId);
+        qe.registerQuestNpc(798334).addOnTalkEvent(questId);
+        qe.registerQuestNpc(730208).addOnTalkEvent(questId);
+    }
 
     @Override
     public boolean onDialogEvent(QuestEnv env) {
@@ -79,11 +77,10 @@ public class _4218MysteriousAmabille extends QuestHandler
                 Npc npc = (Npc) env.getVisibleObject();
                 npc.getController().delete();
                 return true;
-            }
-            else if (targetId == 798334) {
+            } else if (targetId == 798334) {
                 if (dialog == DialogAction.QUEST_SELECT) {
-                        return sendQuestDialog(env, 1352);
-                }else if (dialog == DialogAction.SETPRO1) {
+                    return sendQuestDialog(env, 1352);
+                } else if (dialog == DialogAction.SETPRO1) {
                     changeQuestStep(env, 0, 1, true);
                     return sendQuestDialog(env, 5);
                 }

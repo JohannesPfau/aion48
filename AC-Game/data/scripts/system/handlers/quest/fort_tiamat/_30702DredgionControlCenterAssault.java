@@ -38,12 +38,11 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _30702DredgionControlCenterAssault extends QuestHandler {
 
     private final static int questId = 30702;
-    private final static int npcs[] = {800424, 730702, 800067};
+    private final static int npcs[] = { 800424, 730702, 800067 };
 
     public _30702DredgionControlCenterAssault() {
         super(questId);

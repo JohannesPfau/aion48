@@ -34,6 +34,7 @@ import com.aionemu.commons.configuration.Property;
 
 /**
  * Created by Kill3r
+ * 
  * @reworked Ghostfur
  */
 public class EventSystem {
@@ -43,11 +44,10 @@ public class EventSystem {
      * Default : FFAInstance : 320110000 MapID
      * After writing the Map ID , you need to go to here and change this part at top
      * \AL-Game\data\scripts\system\handlers\instance\FFAInstance.java -- @InstanceID(MAP ID HERE)
-     *
      * NOTE: Also you need to remove the spawns of the given map ip,
      * By going static_data > spawns > Instances > [mapid_name].xml <-- just remove it or take backup to desktop
      * Also if that instance has a script file,
-     * remove that by going data > script > handlers > ... > .. Instances > [mapName].java   <--- remove it or move to desktop for later use
+     * remove that by going data > script > handlers > ... > .. Instances > [mapName].java <--- remove it or move to desktop for later use
      */
     @Property(key = "gameserver.eventsystem.ffa.mapid", defaultValue = "300200000")
     public static int EVENTSYSTEM_FFAMAP;
@@ -206,20 +206,19 @@ public class EventSystem {
 
     @Property(key = "gameserver.eventsystem.ffa.kill.dp", defaultValue = "800")
     public static int FFA_KILL_BONUS_DP;
-    	
-    	    /**
-    	     * The killing spree rewards are from 5 to 10 and 15 to 20 and so on
-    	     * First Toll Then Tempering Solution
-    	     * Default : Toll = 3
-    	     * Default : Tempering Solution = 1
-    	     */
-    
+
+    /**
+     * The killing spree rewards are from 5 to 10 and 15 to 20 and so on
+     * First Toll Then Tempering Solution
+     * Default : Toll = 3
+     * Default : Tempering Solution = 1
+     */
+
     @Property(key = "gameserver.eventsystem.ffa.reward.toll", defaultValue = "3")
     public static int FFA_REWARD_TOLL;
     @Property(key = "gameserver.eventsystem.ffa.reward.ts", defaultValue = "1")
     public static int FFA_REWARD_TS;
-    	
-  
+
     /**
      * After 5th Kill Reward
      * First AP then GP
@@ -230,7 +229,6 @@ public class EventSystem {
     public static int FFA_REWARD_AP1;
     @Property(key = "gameserver.eventsystem.ffa.reward.gp1", defaultValue = "150")
     public static int FFA_REWARD_GP1;
-
 
     /**
      * After 10th Kill Reward
@@ -243,7 +241,6 @@ public class EventSystem {
     @Property(key = "gameserver.eventsystem.ffa.reward.gp2", defaultValue = "250")
     public static int FFA_REWARD_GP2;
 
-
     /**
      * After 15th Kill Reward
      * First AP then GP
@@ -254,7 +251,6 @@ public class EventSystem {
     public static int FFA_REWARD_AP3;
     @Property(key = "gameserver.eventsystem.ffa.reward.gp3", defaultValue = "450")
     public static int FFA_REWARD_GP3;
-
 
     /**
      * After 20th Kill Reward
@@ -267,7 +263,6 @@ public class EventSystem {
     @Property(key = "gameserver.eventsystem.ffa.reward.gp4", defaultValue = "650")
     public static int FFA_REWARD_GP4;
 
-
     /**
      * After 25th Kill Reward
      * First AP then GP
@@ -278,7 +273,6 @@ public class EventSystem {
     public static int FFA_REWARD_AP5;
     @Property(key = "gameserver.eventsystem.ffa.reward.gp5", defaultValue = "850")
     public static int FFA_REWARD_GP5;
-
 
     /**
      * After 30th Kill Reward
@@ -302,7 +296,6 @@ public class EventSystem {
     @Property(key = "gameserver.eventsystem.ffa.reward.gp7", defaultValue = "1250")
     public static int FFA_REWARD_GP7;
 
-
     /**
      * After 40th Kill Reward
      * First AP then GP
@@ -313,7 +306,6 @@ public class EventSystem {
     public static int FFA_REWARD_AP8;
     @Property(key = "gameserver.eventsystem.ffa.reward.gp8", defaultValue = "1500")
     public static int FFA_REWARD_GP8;
-
 
     /**
      * After 45th Kill Reward
@@ -337,7 +329,6 @@ public class EventSystem {
     @Property(key = "gameserver.eventsystem.ffa.reward.gp10", defaultValue = "2000")
     public static int FFA_REWARD_GP10;
 
-
     /**
      * After 50 kills and higher
      * First AP then GP
@@ -349,15 +340,14 @@ public class EventSystem {
     @Property(key = "gameserver.eventsystem.ffa.reward.gp11", defaultValue = "2250")
     public static int FFA_REWARD_GP11;
 
-
     /**
-     *  Returning Settings ( .ffa leave)
-     *  Default : False
-     *  False - The player will be ported to Pandaemonium/Sanctum
-     *  True - The player will be ported to the location where he typed .ffa enter
+     * Returning Settings ( .ffa leave)
+     * Default : False
+     * False - The player will be ported to Pandaemonium/Sanctum
+     * True - The player will be ported to the location where he typed .ffa enter
      */
     @Property(key = "gameserver.eventsystem.ffa.returnposition", defaultValue = "false")
-    public static boolean FFA_RETURN_TO_PREVLOCK;    
+    public static boolean FFA_RETURN_TO_PREVLOCK;
 
     /**
      * Crazy Daeva Event
@@ -370,11 +360,11 @@ public class EventSystem {
     public static int CRAZY_LOWEST_RND;
     @Property(key = "gameserver.crazy.daeva.endtime", defaultValue = "300000")
     public static int CRAZY_ENDTIME;
-	
-	/**
+
+    /**
      * Battleground System
      */
     @Property(key = "gameserver.battleground.enable", defaultValue = "false")
     public static boolean BATTLEGROUNDS_ENABLED;
- 
+
 }

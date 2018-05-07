@@ -61,7 +61,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 public class _14026ALoneDefense extends QuestHandler {
 
     private final static int questId = 14026;
-    private static List<Integer> mobs = new ArrayList<Integer>();
+    private static List<Integer> mobs = new ArrayList<>();
 
     static {
         mobs.add(211628);
@@ -113,7 +113,8 @@ public class _14026ALoneDefense extends QuestHandler {
                             qs.setQuestVar(1);
                             updateQuestStatus(env);
                             PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-                            TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 1596.1948f, 1529.9152f, 317, (byte) 120, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 1596.1948f, 1529.9152f, 317, (byte) 120,
+                                TeleportAnimation.BEAM_ANIMATION);
                             return true;
                         }
                     }
@@ -130,7 +131,8 @@ public class _14026ALoneDefense extends QuestHandler {
                             updateQuestStatus(env);
                             giveQuestItem(env, 182215324, 1);
                             PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-                            TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 2500.15f, 780.9f, 409, (byte) 15, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 2500.15f, 780.9f, 409, (byte) 15,
+                                TeleportAnimation.BEAM_ANIMATION);
                             return true;
                         }
                     }
@@ -158,7 +160,8 @@ public class _14026ALoneDefense extends QuestHandler {
                         case SETPRO4: {
                             qs.setStatus(QuestStatus.REWARD);
                             updateQuestStatus(env);
-                            TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 271.69f, 2787.04f, 272.47f, (byte) 50, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, WorldMapType.ELTNEN.getId(), 271.69f, 2787.04f, 272.47f, (byte) 50,
+                                TeleportAnimation.BEAM_ANIMATION);
                             return true;
                         }
                     }
@@ -184,13 +187,13 @@ public class _14026ALoneDefense extends QuestHandler {
 
     @Override
     public boolean onZoneMissionEndEvent(QuestEnv env) {
-        int[] quests = {14021, 14022, 14023, 14024, 14025};
+        int[] quests = { 14021, 14022, 14023, 14024, 14025 };
         return defaultOnZoneMissionEndEvent(env, quests);
     }
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {14021, 14022, 14023, 14024, 14025};
+        int[] quests = { 14021, 14022, 14023, 14024, 14025 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 
@@ -218,8 +221,8 @@ public class _14026ALoneDefense extends QuestHandler {
             if (var == 3) {
                 qs.setQuestVar(2);
                 updateQuestStatus(env);
-                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                        DataManager.QUEST_DATA.getQuestById(questId).getName()));
+                PacketSendUtility.sendPacket(player,
+                    new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
                 return true;
             }
         }

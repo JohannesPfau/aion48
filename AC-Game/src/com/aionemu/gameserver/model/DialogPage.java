@@ -75,6 +75,7 @@ public enum DialogPage {
     HOUSING_KICK(DialogAction.HOUSING_KICK, 40),
     HOUSING_CONFIG(DialogAction.HOUSING_CONFIG, 41),
     TOWN_CHALLENGE_TASK(43);
+
     private int id;
     private DialogAction action;
 

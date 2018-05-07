@@ -40,6 +40,7 @@ public enum DeniedStatus {
     GUILD(8),
     FRIEND(16),
     DUEL(32);
+
     private int id;
 
     private DeniedStatus(int id) {

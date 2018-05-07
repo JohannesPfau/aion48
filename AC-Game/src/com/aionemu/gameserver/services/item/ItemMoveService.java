@@ -48,8 +48,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
  */
 public class ItemMoveService {
 
-    public static void moveItem(Player player, int itemObjId, byte sourceStorageType, byte destinationStorageType,
-                                short slot) {
+    public static void moveItem(Player player, int itemObjId, byte sourceStorageType, byte destinationStorageType, short slot) {
         if (ExchangeService.getInstance().isPlayerInExchange(player)) {
             return;
         }
@@ -68,9 +67,8 @@ public class ItemMoveService {
             return;
         }
 
-        if (sourceStorageType != destinationStorageType
-                && (ItemRestrictionService.isItemRestrictedTo(player, item, destinationStorageType) || ItemRestrictionService
-                .isItemRestrictedFrom(player, item, sourceStorageType))) {
+        if (sourceStorageType != destinationStorageType && (ItemRestrictionService.isItemRestrictedTo(player, item, destinationStorageType)
+            || ItemRestrictionService.isItemRestrictedFrom(player, item, sourceStorageType))) {
             sendStorageUpdatePacket(player, StorageType.getStorageTypeById(sourceStorageType), item);
             return;
         }
@@ -108,8 +106,8 @@ public class ItemMoveService {
         item.setPersistentState(PersistentState.UPDATE_REQUIRED);
     }
 
-    public static void switchItemsInStorages(Player player, byte sourceStorageType, int sourceItemObjId,
-                                             byte replaceStorageType, int replaceItemObjId) {
+    public static void switchItemsInStorages(Player player, byte sourceStorageType, int sourceItemObjId, byte replaceStorageType,
+        int replaceItemObjId) {
         IStorage sourceStorage = player.getStorage(sourceStorageType);
         IStorage replaceStorage = player.getStorage(replaceStorageType);
 
@@ -125,9 +123,9 @@ public class ItemMoveService {
 
         // restrictions checks
         if (ItemRestrictionService.isItemRestrictedFrom(player, sourceItem, sourceStorageType)
-                || ItemRestrictionService.isItemRestrictedFrom(player, replaceItem, replaceStorageType)
-                || ItemRestrictionService.isItemRestrictedTo(player, sourceItem, replaceStorageType)
-                || ItemRestrictionService.isItemRestrictedTo(player, replaceItem, sourceStorageType)) {
+            || ItemRestrictionService.isItemRestrictedFrom(player, replaceItem, replaceStorageType)
+            || ItemRestrictionService.isItemRestrictedTo(player, sourceItem, replaceStorageType)
+            || ItemRestrictionService.isItemRestrictedTo(player, replaceItem, sourceStorageType)) {
             return;
         }
 

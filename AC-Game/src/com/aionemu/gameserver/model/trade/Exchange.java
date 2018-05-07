@@ -33,10 +33,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+
+import javolution.util.FastList;
 
 /**
  * @author ATracer
@@ -48,7 +48,7 @@ public class Exchange {
     private boolean confirmed;
     private boolean locked;
     private long kinahCount;
-    private Map<Integer, ExchangeItem> items = new HashMap<Integer, ExchangeItem>();
+    private Map<Integer, ExchangeItem> items = new HashMap<>();
     private List<Item> itemsToUpdate = FastList.newInstance();
 
     public Exchange(Player activeplayer, Player targetPlayer) {

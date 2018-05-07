@@ -30,11 +30,11 @@
 package quest.siels_spear;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.SystemMessageId;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -43,12 +43,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _41450Steps_To_The_Spear extends QuestHandler {
 
     private final static int questId = 41450;
-    private final static int[] npc_ids = {205798, 205799, 205800, 205801, 205579, 730527, 800280, 800298};
+    private final static int[] npc_ids = { 205798, 205799, 205800, 205801, 205579, 730527, 800280, 800298 };
 
     public _41450Steps_To_The_Spear() {
         super(questId);
@@ -150,8 +149,8 @@ public class _41450Steps_To_The_Spear extends QuestHandler {
                 qs.setStatus(QuestStatus.NONE);
                 qs.setQuestVar(0);
                 updateQuestStatus(env);
-                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                        DataManager.QUEST_DATA.getQuestById(questId).getName()));
+                PacketSendUtility.sendPacket(player,
+                    new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
                 return true;
             }
         }
@@ -168,8 +167,8 @@ public class _41450Steps_To_The_Spear extends QuestHandler {
                 qs.setStatus(QuestStatus.NONE);
                 qs.setQuestVar(0);
                 updateQuestStatus(env);
-                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                        DataManager.QUEST_DATA.getQuestById(questId).getName()));
+                PacketSendUtility.sendPacket(player,
+                    new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
                 return true;
             }
         }

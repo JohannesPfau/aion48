@@ -52,7 +52,7 @@ import com.aionemu.gameserver.world.World;
 public class SupportService {
 
     private static final Logger log = LoggerFactory.getLogger(SupportService.class);
-    Queue<Support> supports = new ConcurrentLinkedQueue<Support>();
+    Queue<Support> supports = new ConcurrentLinkedQueue<>();
     Set<Player> players = Collections.newSetFromMap(new ConcurrentHashMap<Player, Boolean>());
 
     private SupportService() {
@@ -82,7 +82,7 @@ public class SupportService {
         if (support == null) {
             return null;
         }
-        
+
         players.remove(support.getOwner());
 
         while (support != null && !support.getOwner().isOnline()) {

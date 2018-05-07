@@ -29,12 +29,12 @@
  */
 package quest.reshanta;
 
+import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -89,12 +89,13 @@ public class _1074FragmentofMemory extends QuestHandler {
                                 qs.setQuestVarById(0, var + 1);
                                 updateQuestStatus(env);
                                 PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-								TeleportService2.teleportTo(env.getPlayer(), 210010000, 243.46169f, 1639.7864f, 100.375f, (byte) 62, TeleportAnimation.BEAM_ANIMATION);
+                                TeleportService2.teleportTo(env.getPlayer(), 210010000, 243.46169f, 1639.7864f, 100.375f, (byte) 62,
+                                    TeleportAnimation.BEAM_ANIMATION);
                                 return true;
                             }
                     }
                 }
-                break;
+                    break;
                 case 279029: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -110,10 +111,10 @@ public class _1074FragmentofMemory extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 700355:
-					useQuestObject(env, 3, 3, true, false);
-					return playQuestMovie(env, 271);
+                    useQuestObject(env, 3, 3, true, false);
+                    return playQuestMovie(env, 271);
                 case 790001: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -125,7 +126,8 @@ public class _1074FragmentofMemory extends QuestHandler {
                                 qs.setQuestVarById(0, var + 1);
                                 updateQuestStatus(env);
                                 PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-								TeleportService2.teleportTo(env.getPlayer(), 400010000, 2939.0437f, 891.6405f, 1539.1194f, (byte) 73, TeleportAnimation.BEAM_ANIMATION);
+                                TeleportService2.teleportTo(env.getPlayer(), 400010000, 2939.0437f, 891.6405f, 1539.1194f, (byte) 73,
+                                    TeleportAnimation.BEAM_ANIMATION);
                                 return true;
                             }
                     }

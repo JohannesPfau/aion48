@@ -29,13 +29,14 @@
  */
 package com.aionemu.commons.scripting.impl.javacompiler;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.Locale;
 
 import javax.tools.Diagnostic;
 import javax.tools.DiagnosticListener;
 import javax.tools.JavaFileObject;
-import java.util.Locale;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * This class is simple compiler error listener that forwards errors to log4j
@@ -50,7 +51,8 @@ public class ErrorListener implements DiagnosticListener<JavaFileObject> {
     /**
      * Reports compilation errors to log4j
      *
-     * @param diagnostic compiler errors
+     * @param diagnostic
+     *            compiler errors
      */
     @Override
     public void report(Diagnostic<? extends JavaFileObject> diagnostic) {

@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RouteParent", propOrder = {"versions"})
+@XmlType(name = "RouteParent", propOrder = { "versions" })
 public class RouteParent {
 
     @XmlElement(name = "version", required = true)
@@ -49,7 +49,7 @@ public class RouteParent {
 
     public List<RouteVersion> getRouteVersion() {
         if (versions == null) {
-            versions = new ArrayList<RouteVersion>();
+            versions = new ArrayList<>();
         }
         return this.versions;
     }

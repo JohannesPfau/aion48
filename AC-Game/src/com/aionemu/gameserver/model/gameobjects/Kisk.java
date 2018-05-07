@@ -32,9 +32,6 @@ package com.aionemu.gameserver.model.gameobjects;
 import java.util.List;
 import java.util.Set;
 
-import javolution.util.FastList;
-import javolution.util.FastSet;
-
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -49,6 +46,9 @@ import com.aionemu.gameserver.services.SerialKillerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import javolution.util.FastList;
+import javolution.util.FastSet;
 
 /**
  * @author Sarynth, nrg
@@ -78,7 +78,7 @@ public class Kisk extends SummonedObject<Player> {
             this.kiskStatsTemplate = new KiskStatsTemplate();
         }
 
-        this.kiskMemberIds = new FastSet<Integer>(kiskStatsTemplate.getMaxMembers());
+        this.kiskMemberIds = new FastSet<>(kiskStatsTemplate.getMaxMembers());
         this.remainingResurrections = this.kiskStatsTemplate.getMaxResurrects();
         this.kiskSpawnTime = System.currentTimeMillis() / 1000;
         this.ownerLegion = owner.getLegion();
@@ -122,7 +122,7 @@ public class Kisk extends SummonedObject<Player> {
     }
 
     public List<Player> getCurrentMemberList() {
-        List<Player> currentMemberList = new FastList<Player>();
+        List<Player> currentMemberList = new FastList<>();
 
         for (int memberId : this.kiskMemberIds) {
             Player member = World.getInstance().findPlayer(memberId);
@@ -205,7 +205,7 @@ public class Kisk extends SummonedObject<Player> {
                     break;
                 case 5: // Alliance
                     if (!player.isInTeam() || (player.isInAlliance2() && !player.getPlayerAlliance2().hasMember(getCreatorId()))
-                            || (player.isInGroup2() && !player.getPlayerGroup2().hasMember(getCreatorId()))) {
+                        || (player.isInGroup2() && !player.getPlayerGroup2().hasMember(getCreatorId()))) {
                         return false;
                     }
                     break;
@@ -263,6 +263,7 @@ public class Kisk extends SummonedObject<Player> {
         final Kisk kisk = this;
         //all players having the same race in knownlist
         getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player object) {
                 // Logic to prevent enemy race from knowing kisk information.

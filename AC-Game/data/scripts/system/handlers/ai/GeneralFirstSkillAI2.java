@@ -44,8 +44,7 @@ public class GeneralFirstSkillAI2 extends GeneralNpcAI2 {
         if (getSkillList().getUseInSpawnedSkill() != null) {
             int skillId = getSkillList().getUseInSpawnedSkill().getSkillId();
             int skillLevel = getSkillList().getSkillLevel(skillId);
-            SkillEngine.getInstance().getSkill(getOwner(),
-                    skillId, skillLevel, getOwner()).useSkill();
+            SkillEngine.getInstance().getSkill(getOwner(), skillId, skillLevel, getOwner()).useSkill();
         }
     }
 
@@ -55,8 +54,7 @@ public class GeneralFirstSkillAI2 extends GeneralNpcAI2 {
         if (getSkillList().getUseInSpawnedSkill() != null) {
             int skillId = getSkillList().getUseInSpawnedSkill().getSkillId();
             int skillLevel = getSkillList().getSkillLevel(skillId);
-            SkillEngine.getInstance().getSkill(getOwner(),
-                    skillId, skillLevel, getOwner()).useSkill();
+            SkillEngine.getInstance().getSkill(getOwner(), skillId, skillLevel, getOwner()).useSkill();
         }
     }
 
@@ -66,8 +64,7 @@ public class GeneralFirstSkillAI2 extends GeneralNpcAI2 {
         if (getSkillList().getUseInSpawnedSkill() != null) {
             int skillId = getSkillList().getUseInSpawnedSkill().getSkillId();
             int skillLevel = getSkillList().getSkillLevel(skillId);
-            SkillEngine.getInstance().getSkill(getOwner(),
-                    skillId, skillLevel, getOwner()).useSkill();
+            SkillEngine.getInstance().getSkill(getOwner(), skillId, skillLevel, getOwner()).useSkill();
         }
     }
 }

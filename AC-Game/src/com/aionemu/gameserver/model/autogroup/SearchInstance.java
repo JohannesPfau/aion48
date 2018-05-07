@@ -39,7 +39,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
  * @author xTz
- (Aion-Core)
+ *         (Aion-Core)
  */
 public class SearchInstance {
 
@@ -87,8 +87,8 @@ public class SearchInstance {
     public boolean isBastion() {
         return instanceMaskId == 109;
     }
-    
+
     public boolean isIdgelDome() {
         return instanceMaskId == 111;
-    }    
+    }
 }

@@ -29,10 +29,10 @@
  */
 package quest.ishalgen;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,7 +45,7 @@ import com.aionemu.gameserver.services.QuestService;
 public class _2004ACharmedCube extends QuestHandler {
 
     private final static int questId = 2004;
-    private int[] mobs = {210402, 210403};
+    private int[] mobs = { 210402, 210403 };
 
     public _2004ACharmedCube() {
         super(questId);
@@ -53,7 +53,7 @@ public class _2004ACharmedCube extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {203539, 700047, 203550};
+        int[] npcs = { 203539, 700047, 203550 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         for (int npc : npcs) {
@@ -103,11 +103,10 @@ public class _2004ACharmedCube extends QuestHandler {
                     break;
                 }
                 case 700047: { // Tombstone
-                    if (var == 1 && env.getVisibleObject().getObjectTemplate().getTemplateId() == 700047
-                            && dialog == DialogAction.USE_OBJECT) {
+                    if (var == 1 && env.getVisibleObject().getObjectTemplate().getTemplateId() == 700047 && dialog == DialogAction.USE_OBJECT) {
                         Npc npc = (Npc) env.getVisibleObject();
-                        QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 211755, npc.getX(), npc.getY(),
-                                npc.getZ(), npc.getHeading());
+                        QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 211755, npc.getX(), npc.getY(), npc.getZ(),
+                            npc.getHeading());
                         return true;
                     }
                 }

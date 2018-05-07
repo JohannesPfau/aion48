@@ -41,7 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author MrPoke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CollectItems", propOrder = {"collectItem"})
+@XmlType(name = "CollectItems", propOrder = { "collectItem" })
 public class CollectItems {
 
     @XmlElement(name = "collect_item")
@@ -57,6 +57,7 @@ public class CollectItems {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getCollectItem().add(newItem);
      * </pre>
@@ -66,7 +67,7 @@ public class CollectItems {
      */
     public List<CollectItem> getCollectItem() {
         if (collectItem == null) {
-            collectItem = new ArrayList<CollectItem>();
+            collectItem = new ArrayList<>();
         }
         return this.collectItem;
     }

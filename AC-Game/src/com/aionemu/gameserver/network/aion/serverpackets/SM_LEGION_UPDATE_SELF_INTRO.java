@@ -48,7 +48,7 @@ public class SM_LEGION_UPDATE_SELF_INTRO extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(playerObjId);
         writeS(selfintro);
     }

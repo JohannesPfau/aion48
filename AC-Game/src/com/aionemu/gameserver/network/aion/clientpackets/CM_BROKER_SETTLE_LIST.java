@@ -37,7 +37,6 @@ import com.aionemu.gameserver.services.BrokerService;
 
 /**
  * @author kosyachok
-
  */
 public class CM_BROKER_SETTLE_LIST extends AionClientPacket {
 
@@ -51,14 +50,15 @@ public class CM_BROKER_SETTLE_LIST extends AionClientPacket {
     @Override
     protected void readImpl() {
         PacketLoggerService.getInstance().logPacketCM(this.getPacketName());
-		this.npcId = readD();
+        this.npcId = readD();
     }
 
     @Override
     protected void runImpl() {
-    	Player player = getConnection().getActivePlayer();
-    	if (player == null) return;
-    	
-		BrokerService.getInstance().showRegisteredItems(player);
+        Player player = getConnection().getActivePlayer();
+        if (player == null)
+            return;
+
+        BrokerService.getInstance().showRegisteredItems(player);
     }
 }

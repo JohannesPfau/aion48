@@ -37,8 +37,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_TIME_CHECK;
 
 /**
  * I dont know what this packet is doing - probably its ping/pong packet
- *
-
  */
 public class CM_TIME_CHECK extends AionClientPacket {
 

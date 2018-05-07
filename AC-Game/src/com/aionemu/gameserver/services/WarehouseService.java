@@ -63,22 +63,21 @@ public class WarehouseService {
      * @param npc
      */
     public static void expandWarehouse(final Player player, Npc npc) {
-        final WarehouseExpandTemplate expandTemplate = DataManager.WAREHOUSEEXPANDER_DATA
-                .getWarehouseExpandListTemplate(npc.getNpcId());
+        final WarehouseExpandTemplate expandTemplate = DataManager.WAREHOUSEEXPANDER_DATA.getWarehouseExpandListTemplate(npc.getNpcId());
 
         if (expandTemplate == null) {
             log.error("Warehouse Expand Template could not be found for Npc ID: " + npc.getObjectTemplate().getTemplateId());
             return;
         }
 
-        if (npcCanExpandLevel(expandTemplate, player.getWarehouseSize() + 1)
-                && validateNewSize(player.getWarehouseSize() + 1)) {
+        if (npcCanExpandLevel(expandTemplate, player.getWarehouseSize() + 1) && validateNewSize(player.getWarehouseSize() + 1)) {
             if (validateNewSize(player.getWarehouseSize() + 1)) {
                 /**
                  * Check if our player can pay the warehouse expand price
                  */
                 final int price = getPriceByLevel(expandTemplate, player.getWarehouseSize() + 1);
                 RequestResponseHandler responseHandler = new RequestResponseHandler(npc) {
+
                     @Override
                     public void acceptRequest(Creature requester, Player responder) {
                         if (player.getInventory().getKinah() < price) {
@@ -97,7 +96,8 @@ public class WarehouseService {
 
                 boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, responseHandler);
                 if (result) {
-                    PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, 0, 0, String.valueOf(price)));
+                    PacketSendUtility.sendPacket(player,
+                        new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, 0, 0, String.valueOf(price)));
                 }
             }
         } else {
@@ -186,28 +186,25 @@ public class WarehouseService {
             int index = 0;
 
             while (index + 10 < itemsSize) {
-                PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(items.subList(index, index + 10),
-                        StorageType.REGULAR_WAREHOUSE.getId(), whSize, firstPacket, player));
+                PacketSendUtility.sendPacket(player,
+                    new SM_WAREHOUSE_INFO(items.subList(index, index + 10), StorageType.REGULAR_WAREHOUSE.getId(), whSize, firstPacket, player));
                 index += 10;
                 firstPacket = false;
             }
-            PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(items.subList(index, itemsSize),
-                    StorageType.REGULAR_WAREHOUSE.getId(), whSize, firstPacket, player));
+            PacketSendUtility.sendPacket(player,
+                new SM_WAREHOUSE_INFO(items.subList(index, itemsSize), StorageType.REGULAR_WAREHOUSE.getId(), whSize, firstPacket, player));
         }
 
-        PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(null, StorageType.REGULAR_WAREHOUSE.getId(), whSize,
-                false, player));
+        PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(null, StorageType.REGULAR_WAREHOUSE.getId(), whSize, false, player));
 
         if (sendAccountWh) {
             /**
              * Account warehouse
              */
-            PacketSendUtility.sendPacket(player,
-                    new SM_WAREHOUSE_INFO(player.getStorage(StorageType.ACCOUNT_WAREHOUSE.getId()).getItemsWithKinah(),
-                            StorageType.ACCOUNT_WAREHOUSE.getId(), 0, true, player));
+            PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(player.getStorage(StorageType.ACCOUNT_WAREHOUSE.getId()).getItemsWithKinah(),
+                StorageType.ACCOUNT_WAREHOUSE.getId(), 0, true, player));
         }
 
-        PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(null, StorageType.ACCOUNT_WAREHOUSE.getId(), 0, false,
-                player));
+        PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(null, StorageType.ACCOUNT_WAREHOUSE.getId(), 0, false, player));
     }
 }

@@ -57,7 +57,7 @@ public class SM_STATUPDATE_HP extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(currentHp);
         writeD(maxHp);
     }

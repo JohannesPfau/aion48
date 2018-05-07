@@ -52,7 +52,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Sweetkr
-
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HideEffect")
@@ -109,6 +108,7 @@ public class HideEffect extends BufEffect {
         PacketSendUtility.broadcastPacketAndReceive(effected, new SM_PLAYER_STATE(effected));
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 // do on all who targetting on 'effected' (set target null, cancel attack skill, cancel npc pursuit)
@@ -128,6 +128,7 @@ public class HideEffect extends BufEffect {
 
             // Remove Hide when use skill
             ActionObserver observer = new ActionObserver(ObserverType.SKILLUSE) {
+
                 int bufNumber = 1;
 
                 @Override
@@ -151,6 +152,7 @@ public class HideEffect extends BufEffect {
 
             // Remove Hide when attacking
             effected.getObserveController().attach(new ActionObserver(ObserverType.ATTACK) {
+
                 @Override
                 public void attack(Creature creature) {
                     effect.endEffect();
@@ -158,12 +160,14 @@ public class HideEffect extends BufEffect {
             });
 
             effected.getObserveController().attach(new ActionObserver(ObserverType.ITEMUSE) {
+
                 @Override
                 public void itemused(Item item) {
                     effect.endEffect();
                 }
             });
             effected.getObserveController().attach(new ActionObserver(ObserverType.NPCDIALOGREQUEST) {
+
                 @Override
                 public void npcdialogrequested(Npc npc) {
                     effect.endEffect();
@@ -175,6 +179,7 @@ public class HideEffect extends BufEffect {
 
                 // Remove Hide when attacking
                 effected.getObserveController().attach(new ActionObserver(ObserverType.ATTACK) {
+
                     @Override
                     public void attack(Creature creature) {
                         effect.endEffect();
@@ -183,6 +188,7 @@ public class HideEffect extends BufEffect {
 
                 // Remove Hide when use skill
                 effected.getObserveController().attach(new ActionObserver(ObserverType.SKILLUSE) {
+
                     @Override
                     public void skilluse(Skill skill) {
                         effect.endEffect();

@@ -36,6 +36,7 @@ public enum Race {
 
     ELYOS(0),
     ASMODIANS(1);
+
     /**
      * id of race
      */

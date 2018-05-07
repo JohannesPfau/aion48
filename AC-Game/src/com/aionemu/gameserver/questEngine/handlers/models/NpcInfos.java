@@ -88,7 +88,8 @@ public class NpcInfos {
     }
 
     /**
-     * @param movie the movie to set
+     * @param movie
+     *            the movie to set
      */
     public void setMovie(int movie) {
         this.movie = movie;

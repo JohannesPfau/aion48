@@ -29,15 +29,15 @@
  */
 package com.aionemu.gameserver.taskmanager.tasks;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.ai2.event.AIEventType;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.taskmanager.FIFOSimpleExecutableQueue;
 import com.aionemu.gameserver.world.zone.ZoneUpdateService;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 /**
  * @author ATracer
@@ -66,7 +66,7 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
         final FastList<Creature> arrivedCreatures = FastList.newInstance();
         final FastList<Creature> followingCreatures = FastList.newInstance();
 
-        for (FastMap.Entry<Integer, Creature> e = movingCreatures.head(), mapEnd = movingCreatures.tail(); (e = e.getNext()) != mapEnd; ) {
+        for (FastMap.Entry<Integer, Creature> e = movingCreatures.head(), mapEnd = movingCreatures.tail(); (e = e.getNext()) != mapEnd;) {
             Creature creature = e.getValue();
             creature.getMoveController().moveToDestination();
             if (creature.getAi2().poll(AIQuestion.DESTINATION_REACHED)) {

@@ -62,7 +62,7 @@ public class IPConfig {
     /**
      * List of all ip ranges
      */
-    private static final List<IPRange> ranges = new ArrayList<IPRange>();
+    private static final List<IPRange> ranges = new ArrayList<>();
     /**
      * Default address
      */
@@ -75,6 +75,7 @@ public class IPConfig {
         try {
             SAXParser parser = SAXParserFactory.newInstance().newSAXParser();
             parser.parse(new File(CONFIG_FILE), new DefaultHandler() {
+
                 @Override
                 public void startElement(String uri, String localName, String qName, Attributes attributes) throws SAXException {
 

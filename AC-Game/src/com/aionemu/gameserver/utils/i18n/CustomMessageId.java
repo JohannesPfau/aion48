@@ -29,10 +29,8 @@
  */
 package com.aionemu.gameserver.utils.i18n;
 
-
 /**
  * @author Maestros, co-authors: Voistar
-
  */
 public enum CustomMessageId {
     WELCOME_BASIC("Welcome On "),
@@ -80,7 +78,8 @@ public enum CustomMessageId {
     COMMAND_SEND_MAPPING_NOT_FOUND("Mapping %s not found"),
     COMMAND_SEND_NO_PACKET("No packet to send"),
     COMMAND_WRONG_SKILL_ID("Wrong skill id!"),
-    COMMAND_ADDEFFECT_SYNTAX("Syntax: //addeffect <skillid> <duration>\nThis command adds specified effect to the target for a specified duration (in seconds). Leaving duration null will use the default skill duration."),
+    COMMAND_ADDEFFECT_SYNTAX(
+        "Syntax: //addeffect <skillid> <duration>\nThis command adds specified effect to the target for a specified duration (in seconds). Leaving duration null will use the default skill duration."),
     COMMAND_ADDEFFECT_SUCCESS("Effect %s added to player %s for %d second(s)."),
     COMMAND_DELSKILL_SYNTAX("Syntax: //delsskill <skill id>"),
     COMMAND_DELSKILL_ADMIN_SUCCESS("Skill %d was deleted from player %s with success"),
@@ -259,7 +258,8 @@ public enum CustomMessageId {
     BATTLEGROUND_MESSAGE7("The battleground is now open!"),
     BATTLEGROUND_MESSAGE8("The battleground will end in 30 seconds !"),
     BATTLEGROUND_MESSAGE9("Betting time has now ended."),
-    BATTLEGROUND_MESSAGE10("The battle has now ended! Click the survey to show the rank board. If you are dead, use the spell Return and you will be teleported back."),
+    BATTLEGROUND_MESSAGE10(
+        "The battle has now ended! Click the survey to show the rank board. If you are dead, use the spell Return and you will be teleported back."),
     BATTLEGROUND_MESSAGE11("You are now visible."),
     BATTLEGROUND_MESSAGE12("You are now mortal."),
     BATTLEGROUND_MESSAGE13("Do you want to join a battleground again?"),
@@ -386,7 +386,6 @@ public enum CustomMessageId {
     DIM_VORTEX_SPAWNED_ASMO("The Dimensional Vortex was opened for Asmodians!"),
     DIM_VORTEX_DESPAWNED("The Dimensional Assault finished!"),
 
-
     /**
      * Legendary Raid Spawn Events
      */
@@ -465,12 +464,12 @@ public enum CustomMessageId {
     INVASION_RIFT_MIN_LEVEL("Your level is too low to enter."),
     INVASION_RIFT_ELYOS("A rift for Pandaemonium is open at Ingisson"),
     INVASION_RIFT_ASMOS("A rift for Sanctum is open at Gelkmaros"),
-	/**
+    /**
      * Additional Chest Drops
      */
     DECOMPOSE_SERVICE_MESSAGE1("%s has obtained %s from %s."),
-	DECOMPOSE_SERVICE_MESSAGE2("%s has obtained additional %s from %s (Premium)."),
-	DECOMPOSE_SERVICE_MESSAGE3("%s has obtained additional %s from %s (VIP)."),
+    DECOMPOSE_SERVICE_MESSAGE2("%s has obtained additional %s from %s (Premium)."),
+    DECOMPOSE_SERVICE_MESSAGE3("%s has obtained additional %s from %s (VIP)."),
     /**
      * PvP Spree Service
      */
@@ -490,6 +489,7 @@ public enum CustomMessageId {
     SPREE_END_MSG3(" after "),
     SPREE_END_MSG4(" uninterrupted murders !"),
     SPREE_MONSTER_MSG("a monster");
+
     private String fallbackMessage;
 
     private CustomMessageId(String fallbackMessage) {
@@ -502,7 +502,7 @@ public enum CustomMessageId {
 
     public static String getMaster() {
         //if (NetworkConfig.GAME_BIND_ADDRESS.equals(NetworkConfig.GAME_BIND_ADDRESS)) {
-            //return "";
+        //return "";
         //}
         return "Aion-Core http://www.aion-core.net";
     }

@@ -29,6 +29,11 @@
  */
 package admincommands;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map.Entry;
+
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.UseableItemObject;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -38,11 +43,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_COOLDOWN;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map.Entry;
 
 /**
  * @author kecimis
@@ -63,15 +63,16 @@ public class RemoveCd extends AdminCommand {
         if (target instanceof Player) {
             Player player = (Player) target;
             if (params.length == 0) {
-                List<Integer> delayIds = new ArrayList<Integer>();
-                /*for (PlayerSkillEntry skillEntry : player.getSkillList().getAllSkills()) {
-                 SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillEntry.getSkillId());
-                 if (template == null) {
-                 continue;
-                 }
-
-                 PacketSendUtility.sendPacket(player, new SM_SKILL_COOLDOWN(skillEntry.getSkillId()));
-                 }*/
+                List<Integer> delayIds = new ArrayList<>();
+                /*
+                 * for (PlayerSkillEntry skillEntry : player.getSkillList().getAllSkills()) {
+                 * SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillEntry.getSkillId());
+                 * if (template == null) {
+                 * continue;
+                 * }
+                 * PacketSendUtility.sendPacket(player, new SM_SKILL_COOLDOWN(skillEntry.getSkillId()));
+                 * }
+                 */
                 if (player.getSkillCoolDowns() != null) {
                     long currentTime = System.currentTimeMillis();
                     for (Entry<Integer, Long> en : player.getSkillCoolDowns().entrySet()) {
@@ -123,7 +124,7 @@ public class RemoveCd extends AdminCommand {
                 }
                 if (params.length >= 2) {
                     if (params[1].equalsIgnoreCase("all")) {
-                        List<Integer> mapIds = new ArrayList<Integer>();
+                        List<Integer> mapIds = new ArrayList<>();
                         for (Entry<Integer, Long> mapId : player.getPortalCooldownList().getPortalCoolDowns().entrySet()) {
                             mapIds.add(mapId.getKey());
                         }
@@ -154,10 +155,9 @@ public class RemoveCd extends AdminCommand {
                             if (player.equals(admin)) {
                                 PacketSendUtility.sendMessage(admin, "Your instance cooldown worldId: " + worldId + " was removed");
                             } else {
-                                PacketSendUtility.sendMessage(admin, "You have removed instance cooldown worldId: " + worldId
-                                        + " of player: " + player.getName());
-                                PacketSendUtility.sendMessage(player, "Your instance cooldown worldId: " + worldId
-                                        + " was removed by admin");
+                                PacketSendUtility.sendMessage(admin,
+                                    "You have removed instance cooldown worldId: " + worldId + " of player: " + player.getName());
+                                PacketSendUtility.sendMessage(player, "Your instance cooldown worldId: " + worldId + " was removed by admin");
                             }
                         } else {
                             PacketSendUtility.sendMessage(admin, "You or your target can enter given instance");

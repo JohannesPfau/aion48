@@ -39,7 +39,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _11227EasyAs_4_3_2_1 extends QuestHandler {
 
     private final static int questId = 11227;
-    private final static int[] mob_ids = {217068, 217069, 217070, 217071};
+    private final static int[] mob_ids = { 217068, 217069, 217070, 217071 };
 
     public _11227EasyAs_4_3_2_1() {
         super(questId);

@@ -35,8 +35,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -156,6 +154,7 @@ import com.aionemu.gameserver.utils.collections.ListSplitter;
 import com.aionemu.gameserver.utils.rates.Rates;
 import com.aionemu.gameserver.world.World;
 
+import javolution.util.FastList;
 
 /**
  * @author ATracer
@@ -179,9 +178,9 @@ import com.aionemu.gameserver.world.World;
 public final class PlayerEnterWorldService {
 
     private static final Logger log = LoggerFactory.getLogger("GAMECONNECTION_LOG");
-    
-    private static final Set<Integer> pendingEnterWorld = new HashSet<Integer>();
-    
+
+    private static final Set<Integer> pendingEnterWorld = new HashSet<>();
+
     private static final String serverName = "Welcome to " + GSConfig.SERVER_NAME + "!";
     private static final String serverIntro = "http://www.insaneaion.com";
 
@@ -209,6 +208,7 @@ public final class PlayerEnterWorldService {
             log.warn("Postponed enter world " + objectId);
         }
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 try {
@@ -228,8 +228,8 @@ public final class PlayerEnterWorldService {
                 }
             }
         }, delay);
-    }    
-    
+    }
+
     /**
      * @param objectId
      * @param client
@@ -244,8 +244,8 @@ public final class PlayerEnterWorldService {
         } else {
             client.sendPacket(new SM_CHARACTER_SELECT(1));
         }
-    }    
-    
+    }
+
     /**
      * @param objectId
      * @param client
@@ -291,15 +291,16 @@ public final class PlayerEnterWorldService {
 
         // items
         Storage inventory = player.getInventory();
-        List<Item> allItems = new ArrayList<Item>();
-    
-        if (inventory.getKinah() == 0) inventory.increaseKinah(0); // create an empty object with value 0
+        List<Item> allItems = new ArrayList<>();
+
+        if (inventory.getKinah() == 0)
+            inventory.increaseKinah(0); // create an empty object with value 0
         allItems.add(inventory.getKinahItem()); // always included even with 0 count, and first in the packet !
         allItems.addAll(player.getEquipment().getEquippedItems());
         allItems.addAll(inventory.getItems());
-        
+
         boolean isFirst = true;
-        ListSplitter<Item> splitter = new ListSplitter<Item>(allItems, 10);
+        ListSplitter<Item> splitter = new ListSplitter<>(allItems, 10);
         while (!splitter.isLast()) {
             client.sendPacket(new SM_INVENTORY_INFO(isFirst, splitter.getNext(), npcExpands, questExpands, false, player));
             isFirst = false;
@@ -308,8 +309,8 @@ public final class PlayerEnterWorldService {
         client.sendPacket(new SM_INVENTORY_INFO(false, new ArrayList<Item>(0), npcExpands, questExpands, false, player));
         client.sendPacket(new SM_STATS_INFO(player));
         client.sendPacket(SM_CUBE_UPDATE.stigmaSlots(player.getCommonData().getAdvancedStigmaSlotSize()));
-    }    
-    
+    }
+
     /**
      * @param client
      * @param objectId
@@ -327,7 +328,8 @@ public final class PlayerEnterWorldService {
         if (player != null && client.setActivePlayer(player)) {
             player.setClientConnection(client);
 
-            log.info("[MAC_AUDIT] Player " + player.getName() + " (account " + account.getName() + ") has entered world with " + client.getMacAddress() + " MAC.");
+            log.info("[MAC_AUDIT] Player " + player.getName() + " (account " + account.getName() + ") has entered world with "
+                + client.getMacAddress() + " MAC.");
             World.getInstance().storeObject(player);
 
             StigmaService.onPlayerLogin(player);
@@ -386,7 +388,7 @@ public final class PlayerEnterWorldService {
                     player.getCommonData().setDp(0);
                 }
             }
-         
+
             InstanceService.onPlayerLogin(player);
             client.sendPacket(new SM_REQUEST_BEGINNER_SERVER(1, 1, true));
             if (!player.getSkillList().isSkillPresent(302)) { // return home
@@ -434,14 +436,18 @@ public final class PlayerEnterWorldService {
             client.sendPacket(new SM_MOTION(player.getMotions().getMotions().values()));
             client.sendPacket(new SM_FC_UNK());//TODO
             client.sendPacket(new SM_ENTER_WORLD_CHECK());
-            if (FastTrackConfig.FASTTRACK_ENABLE) FastTrackService.getInstance().checkAuthorizationRequest(player);
+            if (FastTrackConfig.FASTTRACK_ENABLE)
+                FastTrackService.getInstance().checkAuthorizationRequest(player);
             byte[] uiSettings = player.getPlayerSettings().getUiSettings();
             byte[] shortcuts = player.getPlayerSettings().getShortcuts();
             byte[] houseBuddies = player.getPlayerSettings().getHouseBuddies();
 
-            if (uiSettings != null) client.sendPacket(new SM_UI_SETTINGS(uiSettings, 0));
-            if (shortcuts != null) client.sendPacket(new SM_UI_SETTINGS(shortcuts, 1));
-            if (houseBuddies != null) client.sendPacket(new SM_UI_SETTINGS(houseBuddies, 2));
+            if (uiSettings != null)
+                client.sendPacket(new SM_UI_SETTINGS(uiSettings, 0));
+            if (shortcuts != null)
+                client.sendPacket(new SM_UI_SETTINGS(shortcuts, 1));
+            if (houseBuddies != null)
+                client.sendPacket(new SM_UI_SETTINGS(houseBuddies, 2));
 
             sendItemInfos(client, player);
             playerLoggedIn(player);
@@ -451,7 +457,7 @@ public final class PlayerEnterWorldService {
 
             KiskService.getInstance().onLogin(player);
             TeleportService2.sendSetBindPoint(player);
-            
+
             // Without player spawn initialization can't access to his mapRegion for chk below
             World.getInstance().preSpawn(player);
             player.getController().validateLoginZone();
@@ -464,7 +470,8 @@ public final class PlayerEnterWorldService {
 
             SerialKillerService.getInstance().onLogin(player);
 
-            if (player.isLegionMember()) LegionService.getInstance().onLogin(player);
+            if (player.isLegionMember())
+                LegionService.getInstance().onLogin(player);
 
             client.sendPacket(new SM_TITLE_INFO(player));
             client.sendPacket(new SM_EMOTION_LIST((byte) 0, player.getEmotions().getEmotions()));
@@ -479,8 +486,9 @@ public final class PlayerEnterWorldService {
             client.sendPacket(new SM_HOTSPOT_TELEPORT(0, 0));
             DisputeLandService.getInstance().onLogin(player);
             client.sendPacket(new SM_ABYSS_RANK(player.getAbyssRank()));
-            
-            if (CustomConfig.FATIGUE_SYSTEM_ENABLED) FatigueService.getInstance().onPlayerLogin(player);
+
+            if (CustomConfig.FATIGUE_SYSTEM_ENABLED)
+                FatigueService.getInstance().onPlayerLogin(player);
 
             client.sendPacket(new SM_PACKAGE_INFO_NOTIFY(0));
             client.sendPacket(new SM_UNK_104());
@@ -490,26 +498,25 @@ public final class PlayerEnterWorldService {
             PacketSendUtility.sendYellowMessage(player, serverIntro);
 
             if (player.isMarried()) {
-            PacketSendUtility.sendYellowMessage(player, "You are married");
+                PacketSendUtility.sendYellowMessage(player, "You are married");
             }
 
             String serverMessage = null;
             String serverMessageRegular = null;
             String serverMessagePremium = null;
             String serverMessageVip = null;
-			String bufferDisplayRev = null;
+            String bufferDisplayRev = null;
 
-			
-			if (serverMessage != null) {
-				client.sendPacket(new SM_MESSAGE(0, null, serverMessage, ChatType.GOLDEN_YELLOW));
-			} else if (client.getAccount().getMembership() == 1) {
-				client.sendPacket(new SM_MESSAGE(0, null, serverMessagePremium, ChatType.GOLDEN_YELLOW));
-			} else if (client.getAccount().getMembership() == 2) {
-				client.sendPacket(new SM_MESSAGE(0, null, serverMessageVip, ChatType.GOLDEN_YELLOW));
-			} else {
-				client.sendPacket(new SM_MESSAGE(0, null, serverMessageRegular, ChatType.GOLDEN_YELLOW));
-			}
-			
+            if (serverMessage != null) {
+                client.sendPacket(new SM_MESSAGE(0, null, serverMessage, ChatType.GOLDEN_YELLOW));
+            } else if (client.getAccount().getMembership() == 1) {
+                client.sendPacket(new SM_MESSAGE(0, null, serverMessagePremium, ChatType.GOLDEN_YELLOW));
+            } else if (client.getAccount().getMembership() == 2) {
+                client.sendPacket(new SM_MESSAGE(0, null, serverMessageVip, ChatType.GOLDEN_YELLOW));
+            } else {
+                client.sendPacket(new SM_MESSAGE(0, null, serverMessageRegular, ChatType.GOLDEN_YELLOW));
+            }
+
             player.setRates(Rates.getRatesFor(client.getAccount().getMembership()));
             if (CustomConfig.PREMIUM_NOTIFY) {
                 showPremiumAccountInfo(client, account);
@@ -517,10 +524,9 @@ public final class PlayerEnterWorldService {
 
             if (player.isGM()) {
                 if (AdminConfig.INVULNERABLE_GM_CONNECTION || AdminConfig.INVISIBLE_GM_CONNECTION
-                        || AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Neutral")
-                        || AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Enemy") || AdminConfig.VISION_GM_CONNECTION
-                        || AdminConfig.WHISPER_GM_CONNECTION
-						|| AdminConfig.GM_MODE_CONNECTION) {
+                    || AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Neutral")
+                    || AdminConfig.ENEMITY_MODE_GM_CONNECTION.equalsIgnoreCase("Enemy") || AdminConfig.VISION_GM_CONNECTION
+                    || AdminConfig.WHISPER_GM_CONNECTION || AdminConfig.GM_MODE_CONNECTION) {
                     PacketSendUtility.sendMessage(player, "=============================");
                     if (AdminConfig.INVULNERABLE_GM_CONNECTION) {
                         player.setInvul(true);
@@ -551,8 +557,8 @@ public final class PlayerEnterWorldService {
                         player.setUnWispable();
                         PacketSendUtility.sendMessage(player, ">> Whisper : OFF <<");
                     }
-					if (AdminConfig.GM_MODE_CONNECTION) {
-						player.setGmMode(true);
+                    if (AdminConfig.GM_MODE_CONNECTION) {
+                        player.setGmMode(true);
                         PacketSendUtility.sendMessage(player, ">> GM Mode : Enable <<");
                     }
                     PacketSendUtility.sendMessage(player, "=============================");
@@ -563,28 +569,28 @@ public final class PlayerEnterWorldService {
             if (player.getAccessLevel() >= AdminConfig.COMMAND_SPECIAL_SKILL) {
                 FastList<Integer> gmSkill = FastList.newInstance();
                 gmSkill.add(240); // GM's Armor
-				gmSkill.add(241); // GM's Tempest
+                gmSkill.add(241); // GM's Tempest
                 gmSkill.add(376); // GM Kerubar Time!
-				gmSkill.add(277); // Wrath of Developer
+                gmSkill.add(277); // Wrath of Developer
                 gmSkill.add(378); // GM Male Crossdresser
                 gmSkill.add(380); // GM Female Crossdresser
-				gmSkill.add(282); // Frustration of Developer
+                gmSkill.add(282); // Frustration of Developer
                 gmSkill.add(382); // GM Fungie Features!
-				gmSkill.add(384); // GM Power!
-				gmSkill.add(385); // GM Armor!
-				gmSkill.add(386); // GM Cleanse!
-				gmSkill.add(387); // GM Wings!
-				gmSkill.add(388); // Daeva's Haste!
-				gmSkill.add(389); // Daeva's Fortitude!
-				gmSkill.add(390); // Daeva's Fortune!
-				gmSkill.add(391); // GM Defenses I
-				gmSkill.add(392); // GM Defenses II
-				gmSkill.add(393); // GM Defenses III
-				gmSkill.add(394); // GM Sleight of Hand I
-				gmSkill.add(395); // GM Mental Alacrity I
-				gmSkill.add(396); // GM Hustle I
+                gmSkill.add(384); // GM Power!
+                gmSkill.add(385); // GM Armor!
+                gmSkill.add(386); // GM Cleanse!
+                gmSkill.add(387); // GM Wings!
+                gmSkill.add(388); // Daeva's Haste!
+                gmSkill.add(389); // Daeva's Fortitude!
+                gmSkill.add(390); // Daeva's Fortune!
+                gmSkill.add(391); // GM Defenses I
+                gmSkill.add(392); // GM Defenses II
+                gmSkill.add(393); // GM Defenses III
+                gmSkill.add(394); // GM Sleight of Hand I
+                gmSkill.add(395); // GM Mental Alacrity I
+                gmSkill.add(396); // GM Hustle I
 
-                for (FastList.Node<Integer> n = gmSkill.head(), end = gmSkill.tail(); (n = n.getNext()) != end; ) {
+                for (FastList.Node<Integer> n = gmSkill.head(), end = gmSkill.tail(); (n = n.getNext()) != end;) {
                     PlayerSkillEntry skill = new PlayerSkillEntry(n.getValue(), true, false, 1, PersistentState.NOACTION);
                     player.getSkillList().addStigmaSkill(player, skill.getSkillId(), skill.getSkillLevel());
                 }
@@ -615,8 +621,9 @@ public final class PlayerEnterWorldService {
             client.sendPacket(new SM_RECIPE_LIST(player.getRecipeList().getRecipeList()));
 
             PetitionService.getInstance().onPlayerLogin(player);
-            
-            if (AutoGroupConfig.AUTO_GROUP_ENABLE) AutoGroupService.getInstance().onPlayerLogin(player);
+
+            if (AutoGroupConfig.AUTO_GROUP_ENABLE)
+                AutoGroupService.getInstance().onPlayerLogin(player);
 
             ClassChangeService.showClassChangeDialog(player);
 
@@ -699,10 +706,10 @@ public final class PlayerEnterWorldService {
                 }
             }
             // scheduler periodic update
-            player.getController().addTask(TaskId.PLAYER_UPDATE, ThreadPoolManager.getInstance().scheduleAtFixedRate(new GeneralUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_GENERAL * 1000,
-            PeriodicSaveConfig.PLAYER_GENERAL * 1000));
-            player.getController().addTask(TaskId.INVENTORY_UPDATE, ThreadPoolManager.getInstance().scheduleAtFixedRate(new ItemUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_ITEMS * 1000, 
-            PeriodicSaveConfig.PLAYER_ITEMS * 1000));
+            player.getController().addTask(TaskId.PLAYER_UPDATE, ThreadPoolManager.getInstance().scheduleAtFixedRate(
+                new GeneralUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_GENERAL * 1000, PeriodicSaveConfig.PLAYER_GENERAL * 1000));
+            player.getController().addTask(TaskId.INVENTORY_UPDATE, ThreadPoolManager.getInstance().scheduleAtFixedRate(
+                new ItemUpdateTask(player.getObjectId()), PeriodicSaveConfig.PLAYER_ITEMS * 1000, PeriodicSaveConfig.PLAYER_ITEMS * 1000));
 
             SurveyService.getInstance().showAvailable(player);
 
@@ -723,10 +730,10 @@ public final class PlayerEnterWorldService {
 
     // last stigma broken 140001102
     // first stigma broken 140000005
-    private static void removeBrokenStigmas(Player player){
+    private static void removeBrokenStigmas(Player player) {
         List<Item> stigmaStone = player.getEquipment().getEquippedItemsAllStigma();
-        for(Item stigma : stigmaStone){
-            if (stigma.getItemId() > 140000004 && stigma.getItemId() < 140001103){
+        for (Item stigma : stigmaStone) {
+            if (stigma.getItemId() > 140000004 && stigma.getItemId() < 140001103) {
                 player.getEquipment().unEquipItem(stigma.getObjectId(), stigma.getEquipmentSlot());
             }
         }
@@ -750,8 +757,8 @@ public final class PlayerEnterWorldService {
             }
             client.sendPacket(new SM_MESSAGE(0, null, "Your account is " + accountType, ChatType.GOLDEN_YELLOW));
         }
-    }    
-    
+    }
+
     /**
      * @param player
      */

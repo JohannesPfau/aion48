@@ -29,10 +29,10 @@
  */
 package quest.weapon_enchant;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,7 +49,7 @@ public class _12410BuildABetterAethercannon extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {10064};
+        int[] quests = { 10064 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 
@@ -83,7 +83,8 @@ public class _12410BuildABetterAethercannon extends QuestHandler {
                     case QUEST_SELECT:
                         return sendQuestDialog(env, 1352);
                     case SETPRO1:
-                        TeleportService2.teleportTo(player, 600020000, 1444.7386f, 1359.0792f, 602.5101f, (byte) 103, TeleportAnimation.BEAM_ANIMATION);
+                        TeleportService2.teleportTo(player, 600020000, 1444.7386f, 1359.0792f, 602.5101f, (byte) 103,
+                            TeleportAnimation.BEAM_ANIMATION);
                         return defaultCloseDialog(env, 0, 1);
                 }
             }

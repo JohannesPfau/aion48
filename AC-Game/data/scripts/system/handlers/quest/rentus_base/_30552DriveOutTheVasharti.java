@@ -29,10 +29,10 @@
  */
 package quest.rentus_base;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -40,12 +40,11 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu
- *
  */
 public class _30552DriveOutTheVasharti extends QuestHandler {
 
     private final static int questId = 30552;
-    private final static int[] mobIds = {217307, 217308, 217313};
+    private final static int[] mobIds = { 217307, 217308, 217313 };
 
     public _30552DriveOutTheVasharti() {
         super(questId);
@@ -89,7 +88,7 @@ public class _30552DriveOutTheVasharti extends QuestHandler {
                             return defaultCloseDialog(env, 5, 6, false, false);
                     }
                 }
-                break;
+                    break;
                 case 799544: {
                     switch (dialog) {
                         case USE_OBJECT:

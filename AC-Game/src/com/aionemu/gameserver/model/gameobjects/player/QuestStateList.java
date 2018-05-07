@@ -34,8 +34,6 @@ import java.util.Collection;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,6 +42,8 @@ import com.aionemu.gameserver.dataholders.QuestsData;
 import com.aionemu.gameserver.model.templates.quest.QuestCategory;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+
+import javolution.util.FastList;
 
 /**
  * @author MrPoke
@@ -58,7 +58,7 @@ public class QuestStateList {
      * Creates an empty quests list
      */
     public QuestStateList() {
-        _quests = new TreeMap<Integer, QuestState>();
+        _quests = new TreeMap<>();
     }
 
     public synchronized boolean addQuest(int questId, QuestState questState) {
@@ -109,7 +109,7 @@ public class QuestStateList {
      * @author vlog
      */
     public Collection<QuestState> getNormalQuests() {
-        Collection<QuestState> l = new ArrayList<QuestState>();
+        Collection<QuestState> l = new ArrayList<>();
 
         for (QuestState qs : this.getAllQuestState()) {
             QuestCategory qc = _questData.getQuestById(qs.getQuestId()).getCategory();
@@ -117,7 +117,7 @@ public class QuestStateList {
             QuestStatus s = qs.getStatus();
 
             if (s != QuestStatus.COMPLETE && s != QuestStatus.LOCKED && s != QuestStatus.NONE && qc == QuestCategory.QUEST
-                    && !name.startsWith("[Event]")) {
+                && !name.startsWith("[Event]")) {
                 l.add(qs);
             }
         }

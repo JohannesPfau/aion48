@@ -29,17 +29,17 @@
  */
 package mysql5;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashSet;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerRecipesDAO;
 import com.aionemu.gameserver.model.gameobjects.player.RecipeList;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.HashSet;
 
 /**
  * @author lord_rex
@@ -52,8 +52,9 @@ public class MySQL5PlayerRecipesDAO extends PlayerRecipesDAO {
 
     @Override
     public RecipeList load(final int playerId) {
-        final HashSet<Integer> recipeList = new HashSet<Integer>();
+        final HashSet<Integer> recipeList = new HashSet<>();
         DB.select(SELECT_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement ps) throws SQLException {
                 ps.setInt(1, playerId);
@@ -72,6 +73,7 @@ public class MySQL5PlayerRecipesDAO extends PlayerRecipesDAO {
     @Override
     public boolean addRecipe(final int playerId, final int recipeId) {
         return DB.insertUpdate(ADD_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
                 ps.setInt(1, playerId);
@@ -84,6 +86,7 @@ public class MySQL5PlayerRecipesDAO extends PlayerRecipesDAO {
     @Override
     public boolean delRecipe(final int playerId, final int recipeId) {
         return DB.insertUpdate(DELETE_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
                 ps.setInt(1, playerId);

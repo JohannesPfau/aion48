@@ -29,9 +29,9 @@
  */
 package quest.danuar_sanctuary;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -42,7 +42,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _26988ExpungeTheExpeditionarySquad extends QuestHandler {
 
     private final static int questId = 26988;
-int[] mobs = {233126, 233127, 233128};
+    int[] mobs = { 233126, 233127, 233128 };
 
     public _26988ExpungeTheExpeditionarySquad() {
         super(questId);
@@ -52,8 +52,8 @@ int[] mobs = {233126, 233127, 233128};
     public void register() {
         qe.registerQuestNpc(801954).addOnQuestStart(questId);
         qe.registerQuestNpc(801954).addOnTalkEvent(questId);
-		qe.registerQuestNpc(804867).addOnTalkEvent(questId);
-		for (int mob : mobs) {
+        qe.registerQuestNpc(804867).addOnTalkEvent(questId);
+        for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
     }
@@ -70,8 +70,8 @@ int[] mobs = {233126, 233127, 233128};
                     return defaultOnKillEvent(env, mobs, var1, var1 + 1, 1);
                 } else if (var1 == 4) {
                     qs.setQuestVar(1);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
+                    qs.setStatus(QuestStatus.REWARD);
+                    updateQuestStatus(env);
                     return true;
                 }
             }

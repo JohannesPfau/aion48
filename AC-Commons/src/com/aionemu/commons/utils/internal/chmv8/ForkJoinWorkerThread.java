@@ -53,8 +53,7 @@ public class ForkJoinWorkerThread extends Thread {
      * ForkJoinWorkerThreads are managed by ForkJoinPools and perform
      * ForkJoinTasks. For explanation, see the internal documentation
      * of class ForkJoinPool.
-     *
-     * This class just maintains links to its pool and WorkQueue.  The
+     * This class just maintains links to its pool and WorkQueue. The
      * pool field is set immediately upon construction, but the
      * workQueue field is not set until a call to registerWorker
      * completes. This leads to a visibility race, that is tolerated
@@ -62,14 +61,16 @@ public class ForkJoinWorkerThread extends Thread {
      * owning thread.
      */
 
-    final ForkJoinPool pool;                // the pool this thread works in
+    final ForkJoinPool pool; // the pool this thread works in
     final ForkJoinPool.WorkQueue workQueue; // work-stealing mechanics
 
     /**
      * Creates a ForkJoinWorkerThread operating in the given pool.
      *
-     * @param pool the pool this thread works in
-     * @throws NullPointerException if pool is null
+     * @param pool
+     *            the pool this thread works in
+     * @throws NullPointerException
+     *             if pool is null
      */
     protected ForkJoinWorkerThread(ForkJoinPool pool) {
         // Use a placeholder until a useful name can be set in registerWorker
@@ -115,8 +116,9 @@ public class ForkJoinWorkerThread extends Thread {
      * you override this method, you must invoke {@code super.onTermination} at
      * the end of the overridden method.
      *
-     * @param exception the exception causing this thread to abort due to an
-     *                  unrecoverable error, or {@code null} if completed normally
+     * @param exception
+     *            the exception causing this thread to abort due to an
+     *            unrecoverable error, or {@code null} if completed normally
      */
     protected void onTermination(Throwable exception) {
     }

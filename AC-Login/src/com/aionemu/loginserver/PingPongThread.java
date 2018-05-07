@@ -29,13 +29,14 @@
  */
 package com.aionemu.loginserver;
 
-import com.aionemu.loginserver.configs.Config;
-import com.aionemu.loginserver.network.gameserver.GsConnection;
-import com.aionemu.loginserver.network.gameserver.serverpackets.SM_PING;
+import java.io.IOException;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+import com.aionemu.loginserver.configs.Config;
+import com.aionemu.loginserver.network.gameserver.GsConnection;
+import com.aionemu.loginserver.network.gameserver.serverpackets.SM_PING;
 
 /**
  * @author KID

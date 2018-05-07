@@ -54,7 +54,7 @@ public class SM_IN_GAME_SHOP_CATEGORY_LIST extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(type);
         switch (type) {
             case 0:

@@ -51,6 +51,7 @@ import com.aionemu.gameserver.model.templates.rewards.CraftItem;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="CraftItemGroup">
  *   &lt;complexContent>
@@ -80,6 +81,7 @@ public class CraftItemGroup extends CraftGroup {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getItems().add(newItem);
      * </pre>
@@ -89,7 +91,7 @@ public class CraftItemGroup extends CraftGroup {
      */
     public List<CraftItem> getItems() {
         if (items == null) {
-            items = new ArrayList<CraftItem>();
+            items = new ArrayList<>();
         }
         return this.items;
     }

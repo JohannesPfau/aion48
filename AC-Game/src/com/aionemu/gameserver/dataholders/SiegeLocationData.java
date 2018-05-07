@@ -38,14 +38,14 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.siege.ArtifactLocation;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.OutpostLocation;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SourceLocation;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
+
+import javolution.util.FastMap;
 
 /**
  * @author Sarynth, antness
@@ -60,15 +60,15 @@ public class SiegeLocationData {
      * Map that contains skillId - SkillTemplate key-value pair
      */
     @XmlTransient
-    private FastMap<Integer, ArtifactLocation> artifactLocations = new FastMap<Integer, ArtifactLocation>();
+    private FastMap<Integer, ArtifactLocation> artifactLocations = new FastMap<>();
     @XmlTransient
-    private FastMap<Integer, FortressLocation> fortressLocations = new FastMap<Integer, FortressLocation>();
+    private FastMap<Integer, FortressLocation> fortressLocations = new FastMap<>();
     @XmlTransient
-    private FastMap<Integer, OutpostLocation> outpostLocations = new FastMap<Integer, OutpostLocation>();
+    private FastMap<Integer, OutpostLocation> outpostLocations = new FastMap<>();
     @XmlTransient
-    private FastMap<Integer, SourceLocation> sourceLocations = new FastMap<Integer, SourceLocation>();
+    private FastMap<Integer, SourceLocation> sourceLocations = new FastMap<>();
     @XmlTransient
-    private FastMap<Integer, SiegeLocation> siegeLocations = new FastMap<Integer, SiegeLocation>();
+    private FastMap<Integer, SiegeLocation> siegeLocations = new FastMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         artifactLocations.clear();

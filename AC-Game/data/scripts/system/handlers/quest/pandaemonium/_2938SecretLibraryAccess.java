@@ -29,11 +29,11 @@
  */
 package quest.pandaemonium;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -48,7 +48,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 public class _2938SecretLibraryAccess extends QuestHandler {
 
     private final static int questId = 2938;
-    private final static int[] npc_ids = {204267, 203557};
+    private final static int[] npc_ids = { 204267, 203557 };
 
     public _2938SecretLibraryAccess() {
         super(questId);
@@ -64,14 +64,12 @@ public class _2938SecretLibraryAccess extends QuestHandler {
 
     private boolean AreAltgardQuestsFinished(Player player) {
         QuestState qs = player.getQuestStateList().getQuestState(2022);
-        return ((qs == null) || (qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE)) ? false
-                : true;
+        return ((qs == null) || (qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE)) ? false : true;
     }
 
     private boolean AreAethertechQuestsFinished(Player player) {
         QuestState qs = player.getQuestStateList().getQuestState(24016);
-        return ((qs == null) || (qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE)) ? false
-                : true;
+        return ((qs == null) || (qs.getStatus() != QuestStatus.COMPLETE && qs.getStatus() != QuestStatus.NONE)) ? false : true;
     }
 
     @Override
@@ -103,6 +101,7 @@ public class _2938SecretLibraryAccess extends QuestHandler {
                 }
             } else if (qs.getStatus() == QuestStatus.COMPLETE) {
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         TeleportService2.teleportTo(player, WorldMapType.PANDAEMONIUM.getId(), 1403.2f, 1063.7f, 206.0f, (byte) 195);

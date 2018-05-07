@@ -62,7 +62,7 @@ public class Points {
 
     public List<Point2D> getPoint() {
         if (point == null) {
-            point = new ArrayList<Point2D>();
+            point = new ArrayList<>();
         }
         return this.point;
     }

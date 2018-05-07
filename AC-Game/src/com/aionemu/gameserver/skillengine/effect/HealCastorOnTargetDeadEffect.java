@@ -76,6 +76,7 @@ public class HealCastorOnTargetDeadEffect extends EffectTemplate {
         final int valueWithDelta = value + delta * effect.getSkillLevel();
 
         ActionObserver observer = new ActionObserver(ObserverType.DEATH) {
+
             @Override
             public void died(Creature creature) {
                 // Heal Caster first

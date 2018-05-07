@@ -93,7 +93,7 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
 
         Iterator<Player> it = World.getInstance().getPlayersIterator();
 
-        List<Player> matches = new ArrayList<Player>(MAX_RESULTS);
+        List<Player> matches = new ArrayList<>(MAX_RESULTS);
 
         if (activePlayer.getLevel() < CustomConfig.LEVEL_TO_SEARCH) {
             sendPacket(SM_SYSTEM_MESSAGE.STR_CANT_WHO_LEVEL(String.valueOf(CustomConfig.LEVEL_TO_SEARCH)));
@@ -119,8 +119,7 @@ public class CM_PLAYER_SEARCH extends AionClientPacket {
                 continue;
             } else if (region > 0 && player.getActiveRegion().getMapId() != region) {
                 continue;
-            } else if ((player.getRace() != activePlayer.getRace())
-                    && (CustomConfig.FACTIONS_SEARCH_MODE == false)) {
+            } else if ((player.getRace() != activePlayer.getRace()) && (CustomConfig.FACTIONS_SEARCH_MODE == false)) {
                 continue;
             } else // This player matches criteria
             {

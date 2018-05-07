@@ -32,23 +32,22 @@ package quest.fort_tiamat;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _20073AlliancesUndone extends QuestHandler {
 
     private final static int questId = 20073;
-    private static List<Integer> beasts = new ArrayList<Integer>();
+    private static List<Integer> beasts = new ArrayList<>();
 
     public _20073AlliancesUndone() {
         super(questId);
@@ -56,7 +55,7 @@ public class _20073AlliancesUndone extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {798800, 205579, 205987, 203550};
+        int[] npcs = { 798800, 205579, 205987, 203550 };
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }

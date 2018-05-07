@@ -91,16 +91,17 @@ public class CM_ITEM_PURIFICATION extends AionClientPacket {
     @Override
     protected void runImpl() {
         Player player = getConnection().getActivePlayer();
-        if (player == null) return;
-            
+        if (player == null)
+            return;
+
         if (!ItemPurificationService.checkItemUpgrade(player, baseItem, resultItemId)) {
             return;
         }
         Item resultItem = ItemService.newItem(resultItemId, 1, null, 0, 0, 0);
-		
-		if (!ItemPurificationService.decreaseMaterial(player, baseItem, resultItemId)) {
+
+        if (!ItemPurificationService.decreaseMaterial(player, baseItem, resultItemId)) {
             return;
         }
         ItemService.makeUpgradeItem(player, baseItem, resultItem);
-        }
+    }
 }

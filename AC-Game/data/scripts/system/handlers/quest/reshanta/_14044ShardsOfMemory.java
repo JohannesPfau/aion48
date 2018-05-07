@@ -29,11 +29,11 @@
  */
 package quest.reshanta;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -91,7 +91,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 279029: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -108,7 +108,7 @@ public class _14044ShardsOfMemory extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 700355:
                     return useQuestObject(env, 3, 3, true, false);
                 case 790001: {

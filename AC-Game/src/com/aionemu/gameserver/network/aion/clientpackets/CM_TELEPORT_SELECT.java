@@ -95,7 +95,8 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
                 LoggerFactory.getLogger(CM_TELEPORT_SELECT.class).warn("teleportation id " + locId + " was not found on npc " + npcId);
             }
         } else {
-            LoggerFactory.getLogger(CM_TELEPORT_SELECT.class).debug("player " + player.getName() + " requested npc " + targetObjectId + " for teleportation " + locId + ", but he doesnt have such npc in knownlist");
+            LoggerFactory.getLogger(CM_TELEPORT_SELECT.class).debug("player " + player.getName() + " requested npc " + targetObjectId
+                + " for teleportation " + locId + ", but he doesnt have such npc in knownlist");
         }
     }
 }

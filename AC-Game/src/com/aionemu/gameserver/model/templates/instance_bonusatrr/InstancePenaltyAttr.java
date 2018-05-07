@@ -63,7 +63,8 @@ public class InstancePenaltyAttr {
     /**
      * Sets the value of the stat property.
      *
-     * @param value allowed object is {@link StatEnum }
+     * @param value
+     *            allowed object is {@link StatEnum }
      */
     public void setStat(StatEnum value) {
         this.stat = value;
@@ -81,7 +82,8 @@ public class InstancePenaltyAttr {
     /**
      * Sets the value of the func property.
      *
-     * @param value allowed object is {@link Func }
+     * @param value
+     *            allowed object is {@link Func }
      */
     public void setFunc(Func value) {
         this.func = value;

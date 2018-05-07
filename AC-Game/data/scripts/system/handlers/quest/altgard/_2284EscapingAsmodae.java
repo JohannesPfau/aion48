@@ -29,10 +29,10 @@
  */
 package quest.altgard;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -40,7 +40,6 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _2284EscapingAsmodae extends QuestHandler {
 
@@ -86,8 +85,7 @@ public class _2284EscapingAsmodae extends QuestHandler {
                         targetId = ((Npc) env.getVisibleObject()).getNpcId();
                         Npc npc = (Npc) env.getVisibleObject();
                         npc.getController().onDelete();
-                        QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 798041, 2553.9f, 916.9f,
-                                311.8f, (byte) 82);
+                        QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 798041, 2553.9f, 916.9f, 311.8f, (byte) 82);
                         return defaultCloseDialog(env, 0, 1);
                     }
                 }

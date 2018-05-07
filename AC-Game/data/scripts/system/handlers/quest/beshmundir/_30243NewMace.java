@@ -29,9 +29,9 @@
  */
 package quest.beshmundir;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,7 +50,7 @@ public class _30243NewMace extends QuestHandler {
 
     @Override
     public void register() {
-        int[] debilkarims = {286904, 281419, 215795};
+        int[] debilkarims = { 286904, 281419, 215795 };
         qe.registerQuestNpc(799032).addOnQuestStart(questId);
         qe.registerQuestNpc(799032).addOnTalkEvent(questId);
         qe.registerGetingItem(182209641, questId);

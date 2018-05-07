@@ -34,8 +34,6 @@ import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastList;
-
 import com.aionemu.commons.callbacks.EnhancedObject;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AbstractAI;
@@ -56,6 +54,8 @@ import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastList;
 
 /**
  * @author Source
@@ -138,6 +138,7 @@ public class Base<BL extends BaseLocation> {
 
     private void delayedAssault() {
         startAssault = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 chooseAttackersRace();
@@ -147,6 +148,7 @@ public class Base<BL extends BaseLocation> {
 
     private void delayedSpawn(final Race race) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (getRace().equals(race) && getBoss() == null) {
@@ -193,7 +195,7 @@ public class Base<BL extends BaseLocation> {
             throw new NullPointerException("Base:" + getId() + " flag is null!");
         } else if (!getFlag().getPosition().getMapRegion().isMapRegionActive()) {
             // 20% chance to capture base in not active region by invaders assault
-			Race CurrentRace = getFlag().getRace();
+            Race CurrentRace = getFlag().getRace();
             if (Math.random() < 0.2 && !race.equals(CurrentRace)) {
                 BaseService.getInstance().capture(getId(), race);
             } else {
@@ -224,6 +226,7 @@ public class Base<BL extends BaseLocation> {
                 throw new NullPointerException("No attackers was found for base:" + getId());
             } else {
                 stopAssault = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         despawnAttackers();

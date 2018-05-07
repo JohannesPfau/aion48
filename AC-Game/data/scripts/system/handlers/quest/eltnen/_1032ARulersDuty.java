@@ -69,31 +69,32 @@ public class _1032ARulersDuty extends QuestHandler {
         qe.registerOnLevelUp(questId);
     }
 
-	@Override
-	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
-		final Player player = env.getPlayer();
-		final int id = item.getItemTemplate().getTemplateId();
-		final int itemObjId = item.getObjectId();
+    @Override
+    public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
+        final Player player = env.getPlayer();
+        final int id = item.getItemTemplate().getTemplateId();
+        final int itemObjId = item.getObjectId();
 
-		if (id != 182201001) {
-			return HandlerResult.UNKNOWN;
-		}
-		if (!player.isInsideZone(ZoneName.get("LF2_ITEMUSEAREA_Q1032"))) {
-			return HandlerResult.UNKNOWN;
-		}
+        if (id != 182201001) {
+            return HandlerResult.UNKNOWN;
+        }
+        if (!player.isInsideZone(ZoneName.get("LF2_ITEMUSEAREA_Q1032"))) {
+            return HandlerResult.UNKNOWN;
+        }
 
-		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
-				qs.setQuestVar(4);
-				updateQuestStatus(env);
-			}
-		}, 3000);
-		return HandlerResult.SUCCESS;
-	}
+        final QuestState qs = player.getQuestStateList().getQuestState(questId);
+        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
+        ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+            @Override
+            public void run() {
+                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+                qs.setQuestVar(4);
+                updateQuestStatus(env);
+            }
+        }, 3000);
+        return HandlerResult.SUCCESS;
+    }
 
     @Override
     public boolean onZoneMissionEndEvent(QuestEnv env) {
@@ -117,23 +118,21 @@ public class _1032ARulersDuty extends QuestHandler {
             return false;
         }
 
-		if (targetId == 203932) // Phomona
-		{
-			if (qs.getStatus() == QuestStatus.START) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT) {
-					return sendQuestDialog(env, 1011);
-                } else if (env.getDialog() == DialogAction.SELECT_ACTION_1013
-                        && qs.getStatus() == QuestStatus.START
-                        && qs.getQuestVarById(0) == 0) {
-					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, questId, 177, 0, player.getTarget().getObjectId()));
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(player.getTarget().getObjectId(), 1013, questId));
-					return true;
-				} else if (env.getDialog() == DialogAction.SETPRO1) {
-					qs.setQuestVar(1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
-				}
+        if (targetId == 203932) // Phomona
+        {
+            if (qs.getStatus() == QuestStatus.START) {
+                if (env.getDialog() == DialogAction.QUEST_SELECT) {
+                    return sendQuestDialog(env, 1011);
+                } else if (env.getDialog() == DialogAction.SELECT_ACTION_1013 && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
+                    PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, questId, 177, 0, player.getTarget().getObjectId()));
+                    PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(player.getTarget().getObjectId(), 1013, questId));
+                    return true;
+                } else if (env.getDialog() == DialogAction.SETPRO1) {
+                    qs.setQuestVar(1);
+                    updateQuestStatus(env);
+                    PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+                    return true;
+                }
                 return sendQuestStartDialog(env);
             } else if (qs.getStatus() == QuestStatus.REWARD) {
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
@@ -181,7 +180,7 @@ public class _1032ARulersDuty extends QuestHandler {
                     return sendQuestDialog(env, 2034);
                 } else if (env.getDialog() == DialogAction.SETPRO4) {
                     removeQuestItem(env, 182201001, 1);
-	            playQuestMovie(env, 49);
+                    playQuestMovie(env, 49);
                     qs.setQuestVar(5);
                     updateQuestStatus(env);
                     PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

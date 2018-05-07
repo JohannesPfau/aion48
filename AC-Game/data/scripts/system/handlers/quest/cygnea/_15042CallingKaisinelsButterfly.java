@@ -29,11 +29,11 @@
  */
 package quest.cygnea;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -67,7 +67,7 @@ public class _15042CallingKaisinelsButterfly extends QuestHandler {
         if (qs == null || qs.getStatus() == QuestStatus.NONE) {
             if (targetId == 804885) {
                 if (dialog == DialogAction.QUEST_SELECT) {
-					giveQuestItem(env, 182215676, 1);
+                    giveQuestItem(env, 182215676, 1);
                     return sendQuestDialog(env, 4762);
                 } else {
                     return sendQuestStartDialog(env);
@@ -76,7 +76,7 @@ public class _15042CallingKaisinelsButterfly extends QuestHandler {
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 804885) {
                 if (dialog == DialogAction.QUEST_SELECT) {
-					removeQuestItem(env, 182215676, 1);
+                    removeQuestItem(env, 182215676, 1);
                     return sendQuestDialog(env, 2034);
                 } else {
                     return sendQuestEndDialog(env);
@@ -95,24 +95,26 @@ public class _15042CallingKaisinelsButterfly extends QuestHandler {
         if (id != 182215676 || qs.getStatus() == QuestStatus.COMPLETE) {
             return HandlerResult.UNKNOWN;
         }
-		if (!player.isInsideZone(ZoneName.get("LF5_ItemUseArea_Q15042"))) {
+        if (!player.isInsideZone(ZoneName.get("LF5_ItemUseArea_Q15042"))) {
             return HandlerResult.UNKNOWN;
         }
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
+        if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
-			int var1 = qs.getQuestVarById(1);
+            int var1 = qs.getQuestVarById(1);
             if (var == 0) {
                 if (var1 < 2) {
                     qs.setQuestVarById(1, var1 + 1);
-					updateQuestStatus(env);
+                    updateQuestStatus(env);
                 } else if (var1 == 2) {
-					giveQuestItem(env, 182215753, 1);
-					removeQuestItem(env, 182215676, 1);
+                    giveQuestItem(env, 182215753, 1);
+                    removeQuestItem(env, 182215676, 1);
                     qs.setQuestVar(1);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
+                    qs.setStatus(QuestStatus.REWARD);
+                    updateQuestStatus(env);
                     return HandlerResult.SUCCESS;
-                } } }
-		return HandlerResult.SUCCESS;
+                }
+            }
+        }
+        return HandlerResult.SUCCESS;
     }
 }

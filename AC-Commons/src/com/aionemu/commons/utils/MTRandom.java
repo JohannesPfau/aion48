@@ -90,7 +90,7 @@ public class MTRandom extends Random {
     private final static int LOWER_MASK = 0x7fffffff;
     private final static int N = 624;
     private final static int M = 397;
-    private final static int[] MAGIC = {0x0, 0x9908b0df};
+    private final static int[] MAGIC = { 0x0, 0x9908b0df };
     private final static int MAGIC_FACTOR1 = 1812433253;
     private final static int MAGIC_FACTOR2 = 1664525;
     private final static int MAGIC_FACTOR3 = 1566083941;
@@ -134,7 +134,8 @@ public class MTRandom extends Random {
      * this feature not be used unless specifically required, due to the
      * reduction in strength of the seed value.
      *
-     * @param compatible Compatibility flag for replicating original behaviour.
+     * @param compatible
+     *            Compatibility flag for replicating original behaviour.
      */
     public MTRandom(boolean compatible) {
         super(0L);
@@ -147,7 +148,8 @@ public class MTRandom extends Random {
      * given 64 bit seed value. For a better random number sequence this seed
      * value should contain as much entropy as possible.
      *
-     * @param seed The seed value with which to initialise this class.
+     * @param seed
+     *            The seed value with which to initialise this class.
      */
     public MTRandom(long seed) {
         super(seed);
@@ -157,9 +159,12 @@ public class MTRandom extends Random {
      * This version of the constructor initialises the class with the given byte
      * array. All the data will be used to initialise this instance.
      *
-     * @param buf The non-empty byte array of seed information.
-     * @throws NullPointerException     if the buffer is null.
-     * @throws IllegalArgumentException if the buffer has zero length.
+     * @param buf
+     *            The non-empty byte array of seed information.
+     * @throws NullPointerException
+     *             if the buffer is null.
+     * @throws IllegalArgumentException
+     *             if the buffer has zero length.
      */
     public MTRandom(byte[] buf) {
         super(0L);
@@ -170,9 +175,12 @@ public class MTRandom extends Random {
      * This version of the constructor initialises the class with the given
      * integer array. All the data will be used to initialise this instance.
      *
-     * @param buf The non-empty integer array of seed information.
-     * @throws NullPointerException     if the buffer is null.
-     * @throws IllegalArgumentException if the buffer has zero length.
+     * @param buf
+     *            The non-empty integer array of seed information.
+     * @throws NullPointerException
+     *             if the buffer is null.
+     * @throws IllegalArgumentException
+     *             if the buffer has zero length.
      */
     public MTRandom(int[] buf) {
         super(0L);
@@ -210,8 +218,9 @@ public class MTRandom extends Random {
      * match the behaviour of the original C code exactly with respect to state
      * initialisation.
      *
-     * @param seed The 64 bit value used to initialise the random number
-     *             generator state.
+     * @param seed
+     *            The 64 bit value used to initialise the random number
+     *            generator state.
      */
     @Override
     public final synchronized void setSeed(long seed) {
@@ -245,9 +254,12 @@ public class MTRandom extends Random {
      * behaviour of the class will be the same in both cases but it will be more
      * efficient.
      *
-     * @param buf The non-empty byte array of seed information.
-     * @throws NullPointerException     if the buffer is null.
-     * @throws IllegalArgumentException if the buffer has zero length.
+     * @param buf
+     *            The non-empty byte array of seed information.
+     * @throws NullPointerException
+     *             if the buffer is null.
+     * @throws IllegalArgumentException
+     *             if the buffer has zero length.
      */
     public final void setSeed(byte[] buf) {
         setSeed(pack(buf));
@@ -258,9 +270,12 @@ public class MTRandom extends Random {
      * seed data provided. This is the canonical way of resetting the pseudo
      * random number sequence.
      *
-     * @param buf The non-empty integer array of seed information.
-     * @throws NullPointerException     if the buffer is null.
-     * @throws IllegalArgumentException if the buffer has zero length.
+     * @param buf
+     *            The non-empty integer array of seed information.
+     * @throws NullPointerException
+     *             if the buffer is null.
+     * @throws IllegalArgumentException
+     *             if the buffer has zero length.
      */
     public final synchronized void setSeed(int[] buf) {
         int length = buf.length;
@@ -320,9 +335,10 @@ public class MTRandom extends Random {
      * mt.setSeed(12345); int foo = mt.nextInt(32);
      * </pre>
      *
-     * @param bits The number of significant bits desired in the output.
+     * @param bits
+     *            The number of significant bits desired in the output.
      * @return The next value in the pseudo random sequence with the specified
-     * number of bits in the lower part of the integer.
+     *         number of bits in the lower part of the integer.
      */
     @Override
     protected final synchronized int next(int bits) {
@@ -394,9 +410,11 @@ public class MTRandom extends Random {
      * and will produce an empty integer array, but the setSeed() method will
      * throw an exception if the empty integer array is passed to it.
      *
-     * @param buf The non-null byte array to be packed.
+     * @param buf
+     *            The non-null byte array to be packed.
      * @return A non-null integer array of the packed bytes.
-     * @throws NullPointerException if the given byte array is null.
+     * @throws NullPointerException
+     *             if the given byte array is null.
      */
     public static int[] pack(byte[] buf) {
         int k, blen = buf.length, ilen = ((buf.length + 3) >>> 2);
@@ -406,7 +424,7 @@ public class MTRandom extends Random {
             if (m > blen) {
                 m = blen;
             }
-            for (k = buf[--m] & 0xff; (m & 0x3) != 0; k = (k << 8) | buf[--m] & 0xff) ;
+            for (k = buf[--m] & 0xff; (m & 0x3) != 0; k = (k << 8) | buf[--m] & 0xff);
             ibuf[n] = k;
         }
         return ibuf;

@@ -54,7 +54,7 @@ public class TargetSpeciesProperty {
 
         switch (value) {
             case NPC:
-                for (Iterator<Creature> iter = effectedList.iterator(); iter.hasNext(); ) {
+                for (Iterator<Creature> iter = effectedList.iterator(); iter.hasNext();) {
                     Creature nextEffected = iter.next();
 
                     if (nextEffected instanceof Npc) {
@@ -65,7 +65,7 @@ public class TargetSpeciesProperty {
                 }
                 break;
             case PC:
-                for (Iterator<Creature> iter = effectedList.iterator(); iter.hasNext(); ) {
+                for (Iterator<Creature> iter = effectedList.iterator(); iter.hasNext();) {
                     Creature nextEffected = iter.next();
 
                     if (nextEffected instanceof Player) {

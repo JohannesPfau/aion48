@@ -38,7 +38,6 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 /**
  * This blob contains stigma info.
  *
-
  * @modified Rolandas
  * @reworked Kill3r
  */

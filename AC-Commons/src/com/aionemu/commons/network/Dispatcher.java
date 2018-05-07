@@ -29,10 +29,6 @@
  */
 package com.aionemu.commons.network;
 
-import com.aionemu.commons.options.Assertion;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -42,6 +38,11 @@ import java.nio.channels.Selector;
 import java.nio.channels.SocketChannel;
 import java.nio.channels.spi.SelectorProvider;
 import java.util.concurrent.Executor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.options.Assertion;
 
 /**
  * Dispatcher that dispatch SelectionKeys set selected by Selector.
@@ -112,7 +113,7 @@ public abstract class Dispatcher extends Thread {
      */
     @Override
     public void run() {
-        for (; ; ) {
+        for (;;) {
             try {
                 dispatch();
 
@@ -241,8 +242,10 @@ public abstract class Dispatcher extends Thread {
      * Parse data from buffer and prepare buffer for reading just one packet -
      * call processData(ByteBuffer b).
      *
-     * @param con Connection
-     * @param buf Buffer with packet data
+     * @param con
+     *            Connection
+     * @param buf
+     *            Buffer with packet data
      * @return True if packet was parsed.
      */
     private boolean parse(AConnection con, ByteBuffer buf) {
@@ -261,9 +264,7 @@ public abstract class Dispatcher extends Thread {
 
             return con.processData(b);
         } catch (IllegalArgumentException e) {
-            log.warn(
-                    "Error on parsing input from client - account: " + con + " packet size: " + sz + " real size:"
-                            + buf.remaining(), e);
+            log.warn("Error on parsing input from client - account: " + con + " packet size: " + sz + " real size:" + buf.remaining(), e);
             return false;
         }
     }

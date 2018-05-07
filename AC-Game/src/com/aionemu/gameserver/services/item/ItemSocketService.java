@@ -77,17 +77,17 @@ public class ItemSocketService {
         }
 
         int specialSlotsOccupied = 0;
-		int normalSlotsOccupied = specialSlotCount;
+        int normalSlotsOccupied = specialSlotCount;
         int maxSlot = specialSlotCount;
         HashSet<Integer> allSlots = new HashSet<>();
         for (ManaStone ms : manaStones) {
             ItemCategory category = DataManager.ITEM_DATA.getItemTemplate(ms.getItemId()).getCategory();
-			if (category == ItemCategory.ANCIENT_MANASTONE) {
+            if (category == ItemCategory.ANCIENT_MANASTONE) {
                 specialSlotsOccupied++;
-			}
+            }
             if (category == ItemCategory.MANASTONE) {
-					normalSlotsOccupied++;
-			}
+                normalSlotsOccupied++;
+            }
             allSlots.add(ms.getSlot());
             if (maxSlot < ms.getSlot()) {
                 maxSlot = ms.getSlot();
@@ -109,15 +109,15 @@ public class ItemSocketService {
             }
         }
         if (!slotFound) {
-			if (specialSlotCount == 0 && manastoneCategory == ItemCategory.MANASTONE) {
-				nextSlot = manaStones.size();
-			}
-			if (specialSlotCount > 0 && manastoneCategory == ItemCategory.ANCIENT_MANASTONE){
-					nextSlot = manaStones.size();
-			}
-			if(specialSlotCount > 0 && manastoneCategory == ItemCategory.MANASTONE) {
-				nextSlot = normalSlotsOccupied;
-			} 
+            if (specialSlotCount == 0 && manastoneCategory == ItemCategory.MANASTONE) {
+                nextSlot = manaStones.size();
+            }
+            if (specialSlotCount > 0 && manastoneCategory == ItemCategory.ANCIENT_MANASTONE) {
+                nextSlot = manaStones.size();
+            }
+            if (specialSlotCount > 0 && manastoneCategory == ItemCategory.MANASTONE) {
+                nextSlot = normalSlotsOccupied;
+            }
         }
 
         if (nextSlot >= item.getSockets(false)) {
@@ -127,7 +127,6 @@ public class ItemSocketService {
         ManaStone stone = new ManaStone(item.getObjectId(), itemId, nextSlot, PersistentState.NEW);
         manaStones.add(stone);
 
-        
         return stone;
     }
 
@@ -145,13 +144,13 @@ public class ItemSocketService {
         manaStones.add(stone);
         return stone;
     }
-	
-	public static void copyManaStones(Item source, Item target) {
+
+    public static void copyManaStones(Item source, Item target) {
         if (source.hasManaStones()) {
             for (ManaStone manaStone : source.getItemStones()) {
                 target.getItemStones().add(new ManaStone(target.getObjectId(), manaStone.getItemId(), manaStone.getSlot(), PersistentState.NEW));
             }
-			for (ManaStone manaStone : source.getFusionStones()) {
+            for (ManaStone manaStone : source.getFusionStones()) {
                 target.getFusionStones().add(new ManaStone(target.getObjectId(), manaStone.getItemId(), manaStone.getSlot(), PersistentState.NEW));
             }
         }
@@ -182,7 +181,7 @@ public class ItemSocketService {
         }
 
         int specialSlotsOccupied = 0;
-		int normalSlotsOccupied = specialSlotCount;
+        int normalSlotsOccupied = specialSlotCount;
         int maxSlot = specialSlotCount;
         HashSet<Integer> allSlots = new HashSet<>();
         for (ManaStone ms : manaStones) {
@@ -190,9 +189,9 @@ public class ItemSocketService {
             if (category == ItemCategory.ANCIENT_MANASTONE) {
                 specialSlotsOccupied++;
             }
-			if (category == ItemCategory.MANASTONE) {
-					normalSlotsOccupied++;
-			}
+            if (category == ItemCategory.MANASTONE) {
+                normalSlotsOccupied++;
+            }
             allSlots.add(ms.getSlot());
             if (maxSlot < ms.getSlot()) {
                 maxSlot = ms.getSlot();
@@ -214,15 +213,15 @@ public class ItemSocketService {
             }
         }
         if (!slotFound) {
-			if (specialSlotCount == 0 && manastoneCategory == ItemCategory.MANASTONE) {
-				nextSlot = manaStones.size();
-			}
-			if (specialSlotCount > 0 && manastoneCategory == ItemCategory.ANCIENT_MANASTONE){
-					nextSlot = specialSlotsOccupied;
-			}
-			if(specialSlotCount > 0 && manastoneCategory == ItemCategory.MANASTONE) {
-				nextSlot = normalSlotsOccupied;
-			} 
+            if (specialSlotCount == 0 && manastoneCategory == ItemCategory.MANASTONE) {
+                nextSlot = manaStones.size();
+            }
+            if (specialSlotCount > 0 && manastoneCategory == ItemCategory.ANCIENT_MANASTONE) {
+                nextSlot = specialSlotsOccupied;
+            }
+            if (specialSlotCount > 0 && manastoneCategory == ItemCategory.MANASTONE) {
+                nextSlot = normalSlotsOccupied;
+            }
         }
 
         if (nextSlot >= item.getSockets(true)) {
@@ -231,8 +230,8 @@ public class ItemSocketService {
 
         ManaStone stone = new ManaStone(item.getObjectId(), itemId, nextSlot, PersistentState.NEW);
         manaStones.add(stone);
-		
-		Set<ManaStone> itemStones = item.getItemStones();
+
+        Set<ManaStone> itemStones = item.getItemStones();
         DAOManager.getDAO(ItemStoneListDAO.class).storeFusionStone(itemStones);
         return stone;
     }
@@ -255,83 +254,83 @@ public class ItemSocketService {
     public static void removeManastone(Player player, int itemObjId, int slotNum) {
         Storage inventory = player.getInventory();
         Item item = inventory.getItemByObjId(itemObjId);
-		if (item == null) {
-			item = player.getEquipment().getEquippedItemByObjId(itemObjId);
-			if (item == null) {
-            log.warn("Item not found during manastone remove");
-			return;
-			}
+        if (item == null) {
+            item = player.getEquipment().getEquippedItemByObjId(itemObjId);
+            if (item == null) {
+                log.warn("Item not found during manastone remove");
+                return;
+            }
         }
 
         if (!item.hasManaStones()) {
             log.warn("Item stone list is empty");
             return;
         }
-		Set<ManaStone> itemStones = item.getItemStones();
-		int specialSlotCount = item.getItemTemplate().getSpecialSlots();
-		for (ManaStone ms : itemStones) {
-			if (ms.getSlot() == slotNum) {
-				ms.setPersistentState(PersistentState.DELETED);
+        Set<ManaStone> itemStones = item.getItemStones();
+        int specialSlotCount = item.getItemTemplate().getSpecialSlots();
+        for (ManaStone ms : itemStones) {
+            if (ms.getSlot() == slotNum) {
+                ms.setPersistentState(PersistentState.DELETED);
                 DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
                 itemStones.remove(ms);
                 break;
             }
-			if (ms.getSlot() > specialSlotCount) {
-				ms.setPersistentState(PersistentState.DELETED);
+            if (ms.getSlot() > specialSlotCount) {
+                ms.setPersistentState(PersistentState.DELETED);
                 DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
                 itemStones.remove(ms);
                 break;
             }
-			if (ms.getSlot() > slotNum && ms.getSlot() < specialSlotCount) {
-				ms.setPersistentState(PersistentState.DELETED);
+            if (ms.getSlot() > slotNum && ms.getSlot() < specialSlotCount) {
+                ms.setPersistentState(PersistentState.DELETED);
                 DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
                 itemStones.remove(ms);
                 break;
             }
-		}
-		
-		ItemPacketService.updateItemAfterInfoChange(player, item);
-		
+        }
+
+        ItemPacketService.updateItemAfterInfoChange(player, item);
+
     }
 
     public static void removeFusionstone(Player player, int itemObjId, int slotNum) {
         Storage inventory = player.getInventory();
         Item item = inventory.getItemByObjId(itemObjId);
-		if (item == null) {
-			item = player.getEquipment().getEquippedItemByObjId(itemObjId);
-			if (item == null) {
-            log.warn("Item not found during manastone remove");
-			return;
-			}            
+        if (item == null) {
+            item = player.getEquipment().getEquippedItemByObjId(itemObjId);
+            if (item == null) {
+                log.warn("Item not found during manastone remove");
+                return;
+            }
         }
 
         if (!item.hasFusionStones()) {
             log.warn("Item stone list is empty");
             return;
         }
-			Set<ManaStone> itemStones = item.getFusionStones();
-			int specialSlotCount = item.getFusionedItemTemplate().getSpecialSlots();
-			for (ManaStone ms : itemStones) {
-				if (ms.getSlot() == slotNum) {
-					ms.setPersistentState(PersistentState.DELETED);
-					DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
-					itemStones.remove(ms);
-					break;
-				}
-				if (ms.getSlot() > specialSlotCount) {
-					ms.setPersistentState(PersistentState.DELETED);
-					DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
-					itemStones.remove(ms);
-					break;
-				}
-				if (ms.getSlot() > slotNum && ms.getSlot() < specialSlotCount) {
-					ms.setPersistentState(PersistentState.DELETED);
-					DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
-					itemStones.remove(ms);
-					break;
-				}
-			}
-			ItemPacketService.updateItemAfterInfoChange(player, item);
+        Set<ManaStone> itemStones = item.getFusionStones();
+        int specialSlotCount = item.getFusionedItemTemplate().getSpecialSlots();
+        for (ManaStone ms : itemStones) {
+            if (ms.getSlot() == slotNum) {
+                ms.setPersistentState(PersistentState.DELETED);
+                DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
+                itemStones.remove(ms);
+                break;
+            }
+            if (ms.getSlot() > specialSlotCount) {
+                ms.setPersistentState(PersistentState.DELETED);
+                DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
+                itemStones.remove(ms);
+                break;
+            }
+            if (ms.getSlot() > slotNum && ms.getSlot() < specialSlotCount) {
+                ms.setPersistentState(PersistentState.DELETED);
+                DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(ms));
+                itemStones.remove(ms);
+                break;
+            }
+        }
+        ItemPacketService.updateItemAfterInfoChange(player, item);
     }
 
     public static void removeAllManastone(Player player, Item item) {
@@ -403,8 +402,7 @@ public class ItemSocketService {
         }
 
         weaponItem.addGodStone(godStoneItemId);
-        PacketSendUtility.sendPacket(player,
-                SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(new DescriptionId(weaponItem.getNameId())));
+        PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_ENCHANTED_TARGET_ITEM(new DescriptionId(weaponItem.getNameId())));
 
         ItemPacketService.updateItemAfterInfoChange(player, weaponItem);
     }

@@ -42,7 +42,8 @@ public enum StigmaType {
     NONE(0),
     BASIC(1),
     ADVANCED(2),
-	MAJOR(3);
+    MAJOR(3);
+
     private int id;
 
     private StigmaType(int id) {

@@ -50,7 +50,7 @@ public class SM_RECIPE_LIST extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(count);
         for (int id : recipeIds) {
             writeD(id);

@@ -63,7 +63,8 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
     protected void runImpl() {
 
         final Player player = getConnection().getActivePlayer();
-        boolean haveUnreadExpress = (player.getMailbox().haveUnreadByType(LetterType.EXPRESS) || player.getMailbox().haveUnreadByType(LetterType.BLACKCLOUD));
+        boolean haveUnreadExpress = (player.getMailbox().haveUnreadByType(LetterType.EXPRESS)
+            || player.getMailbox().haveUnreadByType(LetterType.BLACKCLOUD));
         switch (this.action) {
             case 0:
                 // window is closed
@@ -83,6 +84,7 @@ public class CM_READ_EXPRESS_MAIL extends AionClientPacket {
                 } else if (haveUnreadExpress) {
                     VisibleObjectSpawner.spawnPostman(player);
                     Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                         }

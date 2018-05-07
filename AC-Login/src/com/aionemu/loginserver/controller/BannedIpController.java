@@ -29,16 +29,17 @@
  */
 package com.aionemu.loginserver.controller;
 
+import java.sql.Timestamp;
+import java.util.Iterator;
+import java.util.Set;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.loginserver.dao.BannedIpDAO;
 import com.aionemu.loginserver.model.BannedIP;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.Timestamp;
-import java.util.Iterator;
-import java.util.Set;
 
 /**
  * Class that controlls all ip banning activity
@@ -84,7 +85,8 @@ public class BannedIpController {
     /**
      * Checks if ip (or mask) is banned
      *
-     * @param ip ip address to check for ban
+     * @param ip
+     *            ip address to check for ban
      * @return is it banned or not
      */
     public static boolean isBanned(String ip) {
@@ -99,7 +101,8 @@ public class BannedIpController {
     /**
      * Bans ip or mask for infinite period of time
      *
-     * @param ip ip to ban
+     * @param ip
+     *            ip to ban
      * @return was ip banned or not
      */
     public static boolean banIp(String ip) {
@@ -109,8 +112,10 @@ public class BannedIpController {
     /**
      * Bans ip (or mask)
      *
-     * @param ip         ip to ban
-     * @param expireTime ban expiration time, null = never expires
+     * @param ip
+     *            ip to ban
+     * @param expireTime
+     *            ban expiration time, null = never expires
      * @return was ip banned or not
      */
     public static boolean banIp(String ip, Timestamp expireTime) {
@@ -134,7 +139,8 @@ public class BannedIpController {
     /**
      * Adds or updates ip ban. Changes are reflected in DB
      *
-     * @param ipBan banned ip to add or change
+     * @param ipBan
+     *            banned ip to add or change
      * @return was it updated or not
      */
     public static boolean addOrUpdateBan(BannedIP ipBan) {
@@ -151,7 +157,8 @@ public class BannedIpController {
     /**
      * Removes ip ban.
      *
-     * @param ip ip to unban
+     * @param ip
+     *            ip to unban
      * @return returns true if ip was successfully unbanned
      */
     public static boolean unbanIp(String ip) {

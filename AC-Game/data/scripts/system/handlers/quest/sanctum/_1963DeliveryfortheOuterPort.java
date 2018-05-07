@@ -45,7 +45,7 @@ public class _1963DeliveryfortheOuterPort extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {203726, 203851};
+        int[] npcs = { 203726, 203851 };
         qe.registerQuestNpc(203726).addOnQuestStart(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);

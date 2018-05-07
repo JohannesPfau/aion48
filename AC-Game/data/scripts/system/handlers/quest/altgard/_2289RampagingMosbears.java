@@ -29,9 +29,9 @@
  */
 package quest.altgard;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -126,7 +126,7 @@ public class _2289RampagingMosbears extends QuestHandler {
 
     @Override
     public boolean onKillEvent(QuestEnv env) {
-        int[] mobs = {210564, 210584};
+        int[] mobs = { 210564, 210584 };
         return defaultOnKillEvent(env, mobs, 0, 5); // 1, 2, 3, 4, 5
     }
 }

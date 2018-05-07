@@ -29,11 +29,11 @@
  */
 package quest.crafting;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -46,8 +46,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _19057MasterConstructorsPotential extends QuestHandler {
 
     private final static int questId = 19057;
-    private final static int[] recipesItemIds = {152203543, 152203544};
-    private final static int[] recipesIds = {155003543, 155003544};
+    private final static int[] recipesItemIds = { 152203543, 152203544 };
+    private final static int[] recipesIds = { 155003543, 155003544 };
 
     public _19057MasterConstructorsPotential() {
         super(questId);
@@ -141,7 +141,8 @@ public class _19057MasterConstructorsPotential extends QuestHandler {
                                 int checkFailId = 3398;
                                 if (player.getRecipeList().isRecipePresent(recipesIds[0]) || player.getRecipeList().isRecipePresent(recipesIds[1])) {
                                     checkFailId = 2716;
-                                } else if (player.getInventory().getItemCountByItemId(recipesItemIds[0]) > 0 || player.getInventory().getItemCountByItemId(recipesItemIds[1]) > 0) {
+                                } else if (player.getInventory().getItemCountByItemId(recipesItemIds[0]) > 0
+                                    || player.getInventory().getItemCountByItemId(recipesItemIds[1]) > 0) {
                                     checkFailId = 3057;
                                 }
 

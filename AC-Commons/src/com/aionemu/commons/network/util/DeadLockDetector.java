@@ -29,11 +29,16 @@
  */
 package com.aionemu.commons.network.util;
 
-import com.aionemu.commons.utils.ExitCode;
+import java.lang.management.LockInfo;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MonitorInfo;
+import java.lang.management.ThreadInfo;
+import java.lang.management.ThreadMXBean;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.management.*;
+import com.aionemu.commons.utils.ExitCode;
 
 /**
  * @author -Nemesiss-, ATracer
@@ -101,16 +106,16 @@ public class DeadLockDetector extends Thread {
                         LockInfo[] locks = ti.getLockedSynchronizers();
                         MonitorInfo[] monitors = ti.getLockedMonitors();
                         if (locks.length == 0 && monitors.length == 0) /**
-                         * this thread is deadlocked but its not guilty
-                         */ {
+                                                                        * this thread is deadlocked but its not guilty
+                                                                        */
+                        {
                             continue;
                         }
 
                         ThreadInfo dl = ti;
                         info += "Java-level deadlock:\n";
                         info += createShortLockInfo(dl);
-                        while ((dl = tmx.getThreadInfo(new long[]{dl.getLockOwnerId()}, true, true)[0]).getThreadId() != ti
-                                .getThreadId()) {
+                        while ((dl = tmx.getThreadInfo(new long[] { dl.getLockOwnerId() }, true, true)[0]).getThreadId() != ti.getThreadId()) {
                             info += createShortLockInfo(dl);
                         }
 
@@ -169,8 +174,7 @@ public class DeadLockDetector extends Thread {
      */
     private String printDumpedThreadInfo(ThreadInfo threadInfo) {
         StringBuilder sb = new StringBuilder();
-        sb.append("\n\"" + threadInfo.getThreadName() + "\"" + " Id=" + threadInfo.getThreadId() + " "
-                + threadInfo.getThreadState() + "\n");
+        sb.append("\n\"" + threadInfo.getThreadName() + "\"" + " Id=" + threadInfo.getThreadId() + " " + threadInfo.getThreadState() + "\n");
         StackTraceElement[] stacktrace = threadInfo.getStackTrace();
         for (int i = 0; i < stacktrace.length; i++) {
             StackTraceElement ste = stacktrace[i];

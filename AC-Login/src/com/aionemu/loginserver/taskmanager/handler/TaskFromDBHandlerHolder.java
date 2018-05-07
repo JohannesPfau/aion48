@@ -41,6 +41,7 @@ public enum TaskFromDBHandlerHolder {
     SHUTDOWN(ShutdownHandler.class),
     RESTART(RestartHandler.class),
     CLEAN_ACCOUNTS(CleanAccountsHandler.class);
+
     private Class<? extends TaskFromDBHandler> taskClass;
 
     private TaskFromDBHandlerHolder(Class<? extends TaskFromDBHandler> taskClass) {

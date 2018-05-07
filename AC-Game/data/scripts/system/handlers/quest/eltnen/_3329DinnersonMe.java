@@ -29,22 +29,21 @@
  */
 package quest.eltnen;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Ritsu
- *
  */
 public class _3329DinnersonMe extends QuestHandler {
 
     private final static int questId = 3329;
-    private final static int[] mob_ids = {210887, 210912, 210914, 210932};
+    private final static int[] mob_ids = { 210887, 210912, 210914, 210932 };
 
     public _3329DinnersonMe() {
         super(questId);
@@ -62,8 +61,8 @@ public class _3329DinnersonMe extends QuestHandler {
 
     @Override
     public boolean onKillEvent(QuestEnv env) {
-        int[] mobs1 = {210887, 210912};
-        int[] mobs2 = {210914, 210932};
+        int[] mobs1 = { 210887, 210912 };
+        int[] mobs2 = { 210914, 210932 };
         if (defaultOnKillEvent(env, mobs1, 0, 11, 0) || defaultOnKillEvent(env, mobs2, 0, 17, 1)) {
             return true;
         } else {

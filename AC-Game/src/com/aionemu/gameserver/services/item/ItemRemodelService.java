@@ -67,7 +67,7 @@ public class ItemRemodelService {
         }
 
         // Check Player Level
-		if (player.getLevel() < 10) {
+        if (player.getLevel() < 10) {
 
             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_PC_LEVEL_LIMIT);
             return;
@@ -76,7 +76,7 @@ public class ItemRemodelService {
         // Check Kinah
         if (player.getInventory().getKinah() < remodelCost) {
             PacketSendUtility.sendPacket(player,
-                    SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_ENOUGH_GOLD(new DescriptionId(keepItem.getItemTemplate().getNameId())));
+                SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_ENOUGH_GOLD(new DescriptionId(keepItem.getItemTemplate().getNameId())));
             return;
         }
 
@@ -104,28 +104,29 @@ public class ItemRemodelService {
             // Notify Player
             ItemPacketService.updateItemAfterInfoChange(player, keepItem);
             PacketSendUtility.sendPacket(player,
-                    SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_SUCCEED(new DescriptionId(keepItem.getItemTemplate().getNameId())));
+                SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_SUCCEED(new DescriptionId(keepItem.getItemTemplate().getNameId())));
             return;
         }
         // Check that types match.
         if (keepItem.getItemTemplate().getWeaponType() != extractItem.getItemSkinTemplate().getWeaponType()
-                || (extractItem.getItemSkinTemplate().getArmorType() != ArmorType.CLOTHES && keepItem.getItemTemplate().getArmorType() != extractItem
-                .getItemSkinTemplate().getArmorType()) || keepItem.getItemTemplate().getArmorType() == ArmorType.CLOTHES
-                || keepItem.getItemTemplate().getItemSlot() != extractItem.getItemSkinTemplate().getItemSlot()) {
-                	
-            PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_COMPATIBLE(new DescriptionId(keepItem
-                    .getItemTemplate().getNameId()), new DescriptionId(extractItem.getItemSkinTemplate().getNameId())));
+            || (extractItem.getItemSkinTemplate().getArmorType() != ArmorType.CLOTHES
+                && keepItem.getItemTemplate().getArmorType() != extractItem.getItemSkinTemplate().getArmorType())
+            || keepItem.getItemTemplate().getArmorType() == ArmorType.CLOTHES
+            || keepItem.getItemTemplate().getItemSlot() != extractItem.getItemSkinTemplate().getItemSlot()) {
+
+            PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CHANGE_ITEM_SKIN_NOT_COMPATIBLE(
+                new DescriptionId(keepItem.getItemTemplate().getNameId()), new DescriptionId(extractItem.getItemSkinTemplate().getNameId())));
             return;
         }
 
         if (!keepItem.isRemodelable(player)) {
-        	// "1300478" = The appearance of %0 cannot be modified.
+            // "1300478" = The appearance of %0 cannot be modified.
             PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300478, new DescriptionId(keepItem.getItemTemplate().getNameId())));
             return;
         }
 
         if (!extractItem.isRemodelable(player)) {
-        	// "1300482" = You have failed to modify the appearance of the item as you could not remove the skin item %0.
+            // "1300482" = You have failed to modify the appearance of the item as you could not remove the skin item %0.
             PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300482, new DescriptionId(extractItem.getItemTemplate().getNameId())));
             return;
         }
@@ -133,8 +134,8 @@ public class ItemRemodelService {
         ItemTemplate skin = extractItem.getItemSkinTemplate();
         ItemActions actions = skin.getActions();
         if (extractItem.isSkinnedItem() && actions != null && actions.getRemodelAction() != null
-                && actions.getRemodelAction().getExtractType() == 2) {
-        	// "1300482" = You have failed to modify the appearance of the item as you could not remove the skin item %0.
+            && actions.getRemodelAction().getExtractType() == 2) {
+            // "1300482" = You have failed to modify the appearance of the item as you could not remove the skin item %0.
             PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300482, new DescriptionId(extractItem.getItemTemplate().getNameId())));
             return;
         }
@@ -170,19 +171,17 @@ public class ItemRemodelService {
 
         for (Item item : equip.getEquippedItemsWithoutStigmaOld()) {
             if (item.getEquipmentSlot() == ItemSlot.MAIN_OFF_HAND.getSlotIdMask()
-                    || item.getEquipmentSlot() == ItemSlot.SUB_OFF_HAND.getSlotIdMask()) {
+                || item.getEquipmentSlot() == ItemSlot.SUB_OFF_HAND.getSlotIdMask()) {
                 continue;
             }
 
             if (item.getItemTemplate().isWeapon()) {
-                if (item.getItemTemplate().getWeaponType() == template.getWeaponType()
-                        && item.getItemSkinTemplate().getTemplateId() != itemId) {
+                if (item.getItemTemplate().getWeaponType() == template.getWeaponType() && item.getItemSkinTemplate().getTemplateId() != itemId) {
                     systemPreviewRemodelItem(player, item, template, duration);
                     return true;
                 }
             } else if (item.getItemTemplate().isArmor()) {
-                if (item.getItemTemplate().getItemSlot() == template.getItemSlot()
-                        && item.getItemSkinTemplate().getTemplateId() != itemId) {
+                if (item.getItemTemplate().getItemSlot() == template.getItemSlot() && item.getItemSkinTemplate().getTemplateId() != itemId) {
                     systemPreviewRemodelItem(player, item, template, duration);
                     return true;
                 }
@@ -192,20 +191,18 @@ public class ItemRemodelService {
         return false;
     }
 
-    public static void systemPreviewRemodelItem(final Player player, final Item item,
-                                                ItemTemplate template, int duration) {
+    public static void systemPreviewRemodelItem(final Player player, final Item item, ItemTemplate template, int duration) {
         final ItemTemplate oldTemplate = item.getItemSkinTemplate();
         item.setItemSkinTemplate(template);
 
         PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForApparence()));
-        PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300483, new DescriptionId(item
-                .getItemTemplate().getNameId())));
+        PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300483, new DescriptionId(item.getItemTemplate().getNameId())));
 
         PacketSendUtility.broadcastPacket(player,
-                new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment()
-                        .getEquippedItemsWithoutStigma()), true);
+            new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedItemsWithoutStigma()), true);
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 item.setItemSkinTemplate(oldTemplate);
@@ -213,12 +210,13 @@ public class ItemRemodelService {
         }, 50);
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
-                PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForApparence()));
+                PacketSendUtility.sendPacket(player,
+                    new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForApparence()));
                 PacketSendUtility.broadcastPacket(player,
-                        new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment()
-                                .getEquippedItemsWithoutStigma()), true);
+                    new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedItemsWithoutStigma()), true);
             }
         }, duration * 1000);
     }
@@ -227,6 +225,7 @@ public class ItemRemodelService {
         keepItem.setItemSkinTemplate(template);
         ItemPacketService.updateItemAfterInfoChange(player, keepItem);
         PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForApparence()));
-        PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300483, new Object[]{new DescriptionId(keepItem.getItemTemplate().getNameId())}));
+        PacketSendUtility.sendPacket(player,
+            new SM_SYSTEM_MESSAGE(1300483, new Object[] { new DescriptionId(keepItem.getItemTemplate().getNameId()) }));
     }
 }

@@ -39,6 +39,7 @@ public enum EventType {
     HALLOWEEN(1 << 1, "halloween"), // 2
     VALENTINE(1 << 2, "valentine"), // 4
     BRAXCAFE(1 << 3, "braxcafe"); // 8
+
     private int id;
     private String theme;
 

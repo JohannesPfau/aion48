@@ -69,10 +69,8 @@ public final class Matrix4f implements Cloneable {
     /**
      * constructs a matrix with the given values.
      */
-    public Matrix4f(float m00, float m01, float m02, float m03,
-                    float m10, float m11, float m12, float m13,
-                    float m20, float m21, float m22, float m23,
-                    float m30, float m31, float m32, float m33) {
+    public Matrix4f(float m00, float m01, float m02, float m03, float m10, float m11, float m12, float m13, float m20, float m21, float m22,
+        float m23, float m30, float m31, float m32, float m33) {
 
         this.m00 = m00;
         this.m01 = m01;
@@ -95,8 +93,9 @@ public final class Matrix4f implements Cloneable {
     /**
      * Create a new Matrix4f, given data in column-major format.
      *
-     * @param array An array of 16 floats in column-major format (translation in
-     *              elements 12, 13 and 14).
+     * @param array
+     *            An array of 16 floats in column-major format (translation in
+     *            elements 12, 13 and 14).
      */
     public Matrix4f(float[] array) {
         set(array, false);
@@ -108,7 +107,8 @@ public final class Matrix4f implements Cloneable {
      * copies a given Matrix. If the provided matrix is null, the constructor
      * sets the matrix to the identity.
      *
-     * @param mat the matrix to copy.
+     * @param mat
+     *            the matrix to copy.
      */
     public Matrix4f(Matrix4f mat) {
         copy(mat);
@@ -119,7 +119,8 @@ public final class Matrix4f implements Cloneable {
      * matrix. If a null matrix is supplied, this matrix is set to the identity
      * matrix.
      *
-     * @param matrix the matrix to copy.
+     * @param matrix
+     *            the matrix to copy.
      */
     public void copy(Matrix4f matrix) {
         if (null == matrix) {
@@ -148,7 +149,8 @@ public final class Matrix4f implements Cloneable {
      * <code>get</code> retrieves the values of this object into a float array
      * in row-major order.
      *
-     * @param matrix the matrix to set the values into.
+     * @param matrix
+     *            the matrix to set the values into.
      */
     public void get(float[] matrix) {
         get(matrix, true);
@@ -157,14 +159,15 @@ public final class Matrix4f implements Cloneable {
     /**
      * <code>set</code> retrieves the values of this object into a float array.
      *
-     * @param matrix   the matrix to set the values into.
-     * @param rowMajor whether the outgoing data is in row or column major
-     *                 order.
+     * @param matrix
+     *            the matrix to set the values into.
+     * @param rowMajor
+     *            whether the outgoing data is in row or column major
+     *            order.
      */
     public void get(float[] matrix, boolean rowMajor) {
         if (matrix.length != 16) {
-            throw new IllegalArgumentException(
-                    "Array must be of size 16.");
+            throw new IllegalArgumentException("Array must be of size 16.");
         }
 
         if (rowMajor) {
@@ -209,8 +212,10 @@ public final class Matrix4f implements Cloneable {
      * If the position is invalid a
      * <code>JmeException</code> is thrown.
      *
-     * @param i the row index.
-     * @param j the colum index.
+     * @param i
+     *            the row index.
+     * @param j
+     *            the colum index.
      * @return the value at (i, j).
      */
     public float get(int i, int j) {
@@ -269,7 +274,8 @@ public final class Matrix4f implements Cloneable {
      * <code>getColumn</code> returns one of three columns specified by the
      * parameter. This column is returned as a float array of length 4.
      *
-     * @param i the column to retrieve. Must be between 0 and 3.
+     * @param i
+     *            the column to retrieve. Must be between 0 and 3.
      * @return the column specified by the index.
      */
     public float[] getColumn(int i) {
@@ -280,9 +286,11 @@ public final class Matrix4f implements Cloneable {
      * <code>getColumn</code> returns one of three columns specified by the
      * parameter. This column is returned as a float[4].
      *
-     * @param i     the column to retrieve. Must be between 0 and 3.
-     * @param store the float array to store the result in. if null, a new one
-     *              is created.
+     * @param i
+     *            the column to retrieve. Must be between 0 and 3.
+     * @param store
+     *            the float array to store the result in. if null, a new one
+     *            is created.
      * @return the column specified by the index.
      */
     public float[] getColumn(int i, float[] store) {
@@ -325,8 +333,10 @@ public final class Matrix4f implements Cloneable {
      * <code>setColumn</code> sets a particular column of this matrix to that
      * represented by the provided vector.
      *
-     * @param i      the column to set.
-     * @param column the data to set.
+     * @param i
+     *            the column to set.
+     * @param column
+     *            the data to set.
      */
     public void setColumn(int i, float[] column) {
 
@@ -370,9 +380,12 @@ public final class Matrix4f implements Cloneable {
      * position. If the position is invalid a
      * <code>JmeException</code> is thrown.
      *
-     * @param i     the row index.
-     * @param j     the colum index.
-     * @param value the value for (i, j).
+     * @param i
+     *            the row index.
+     * @param j
+     *            the colum index.
+     * @param value
+     *            the value for (i, j).
      */
     public void set(int i, int j, float value) {
         switch (i) {
@@ -445,13 +458,14 @@ public final class Matrix4f implements Cloneable {
     /**
      * <code>set</code> sets the values of this matrix from an array of values.
      *
-     * @param matrix the matrix to set the value to.
-     * @throws JmeException if the array is not of size 16.
+     * @param matrix
+     *            the matrix to set the value to.
+     * @throws JmeException
+     *             if the array is not of size 16.
      */
     public void set(float[][] matrix) {
         if (matrix.length != 4 || matrix[0].length != 4) {
-            throw new IllegalArgumentException(
-                    "Array must be of size 16.");
+            throw new IllegalArgumentException("Array must be of size 16.");
         }
 
         m00 = matrix[0][0];
@@ -475,7 +489,8 @@ public final class Matrix4f implements Cloneable {
     /**
      * <code>set</code> sets the values of this matrix from another matrix.
      *
-     * @param matrix the matrix to read the value from.
+     * @param matrix
+     *            the matrix to read the value from.
      */
     public Matrix4f set(Matrix4f matrix) {
         m00 = matrix.m00;
@@ -501,7 +516,8 @@ public final class Matrix4f implements Cloneable {
      * <code>set</code> sets the values of this matrix from an array of values
      * assuming that the data is rowMajor order;
      *
-     * @param matrix the matrix to set the value to.
+     * @param matrix
+     *            the matrix to set the value to.
      */
     public void set(float[] matrix) {
         set(matrix, true);
@@ -510,14 +526,15 @@ public final class Matrix4f implements Cloneable {
     /**
      * <code>set</code> sets the values of this matrix from an array of values;
      *
-     * @param matrix   the matrix to set the value to.
-     * @param rowMajor whether the incoming data is in row or column major
-     *                 order.
+     * @param matrix
+     *            the matrix to set the value to.
+     * @param rowMajor
+     *            whether the incoming data is in row or column major
+     *            order.
      */
     public void set(float[] matrix, boolean rowMajor) {
         if (matrix.length != 16) {
-            throw new IllegalArgumentException(
-                    "Array must be of size 16.");
+            throw new IllegalArgumentException("Array must be of size 16.");
         }
 
         if (rowMajor) {
@@ -611,10 +628,11 @@ public final class Matrix4f implements Cloneable {
      * <code>toFloatBuffer</code> returns a FloatBuffer object that contains the
      * matrix data.
      *
-     * @param columnMajor if true, this buffer should be filled with column
-     *                    major data, otherwise it will be filled row major.
+     * @param columnMajor
+     *            if true, this buffer should be filled with column
+     *            major data, otherwise it will be filled row major.
      * @return matrix data as a FloatBuffer. The position is set to 0 for
-     * convenience.
+     *         convenience.
      */
     public FloatBuffer toFloatBuffer(boolean columnMajor) {
         FloatBuffer fb = BufferUtils.createFloatBuffer(16);
@@ -627,7 +645,8 @@ public final class Matrix4f implements Cloneable {
      * <code>fillFloatBuffer</code> fills a FloatBuffer object with the matrix
      * data.
      *
-     * @param fb the buffer to fill, must be correct size
+     * @param fb
+     *            the buffer to fill, must be correct size
      * @return matrix data as a FloatBuffer.
      */
     public FloatBuffer fillFloatBuffer(FloatBuffer fb) {
@@ -638,12 +657,14 @@ public final class Matrix4f implements Cloneable {
      * <code>fillFloatBuffer</code> fills a FloatBuffer object with the matrix
      * data.
      *
-     * @param fb          the buffer to fill, starting at current position. Must have
-     *                    room for 16 more floats.
-     * @param columnMajor if true, this buffer should be filled with column
-     *                    major data, otherwise it will be filled row major.
+     * @param fb
+     *            the buffer to fill, starting at current position. Must have
+     *            room for 16 more floats.
+     * @param columnMajor
+     *            if true, this buffer should be filled with column
+     *            major data, otherwise it will be filled row major.
      * @return matrix data as a FloatBuffer. (position is advanced by 16 and any
-     * limit set is not changed).
+     *         limit set is not changed).
      */
     public FloatBuffer fillFloatBuffer(FloatBuffer fb, boolean columnMajor) {
         if (columnMajor) {
@@ -702,7 +723,8 @@ public final class Matrix4f implements Cloneable {
      * <code>readFloatBuffer</code> reads value for this matrix from a
      * FloatBuffer.
      *
-     * @param fb the buffer to read from, must be correct size
+     * @param fb
+     *            the buffer to read from, must be correct size
      * @return this data as a FloatBuffer.
      */
     public Matrix4f readFloatBuffer(FloatBuffer fb) {
@@ -713,9 +735,11 @@ public final class Matrix4f implements Cloneable {
      * <code>readFloatBuffer</code> reads value for this matrix from a
      * FloatBuffer.
      *
-     * @param fb          the buffer to read from, must be correct size
-     * @param columnMajor if true, this buffer should be filled with column
-     *                    major data, otherwise it will be filled row major.
+     * @param fb
+     *            the buffer to read from, must be correct size
+     * @param columnMajor
+     *            if true, this buffer should be filled with column
+     *            major data, otherwise it will be filled row major.
      * @return this data as a FloatBuffer.
      */
     public Matrix4f readFloatBuffer(FloatBuffer fb, boolean columnMajor) {
@@ -810,8 +834,10 @@ public final class Matrix4f implements Cloneable {
      * an angle and an axis of rotation. This method creates an object, so use
      * fromAngleNormalAxis if your axis is already normalized.
      *
-     * @param angle the angle to rotate (in radians).
-     * @param axis  the axis of rotation.
+     * @param angle
+     *            the angle to rotate (in radians).
+     * @param axis
+     *            the axis of rotation.
      */
     public void fromAngleAxis(float angle, Vector3f axis) {
         Vector3f normAxis = axis.normalize();
@@ -822,8 +848,10 @@ public final class Matrix4f implements Cloneable {
      * <code>fromAngleNormalAxis</code> sets this matrix4f to the values
      * specified by an angle and a normalized axis of rotation.
      *
-     * @param angle the angle to rotate (in radians).
-     * @param axis  the axis of rotation (already normalized).
+     * @param angle
+     *            the angle to rotate (in radians).
+     * @param axis
+     *            the axis of rotation (already normalized).
      */
     public void fromAngleNormalAxis(float angle, Vector3f axis) {
         zero();
@@ -856,7 +884,8 @@ public final class Matrix4f implements Cloneable {
     /**
      * <code>mult</code> multiplies this matrix by a scalar.
      *
-     * @param scalar the scalar to multiply this matrix by.
+     * @param scalar
+     *            the scalar to multiply this matrix by.
      */
     public void multLocal(float scalar) {
         m00 *= scalar;
@@ -895,7 +924,8 @@ public final class Matrix4f implements Cloneable {
      * matrix will then be returned. This matrix will be on the left hand side,
      * while the parameter matrix will be on the right.
      *
-     * @param in2 the matrix to multiply this matrix by.
+     * @param in2
+     *            the matrix to multiply this matrix by.
      * @return the resultant matrix
      */
     public Matrix4f mult(Matrix4f in2) {
@@ -907,9 +937,11 @@ public final class Matrix4f implements Cloneable {
      * matrix will then be returned. This matrix will be on the left hand side,
      * while the parameter matrix will be on the right.
      *
-     * @param in2   the matrix to multiply this matrix by.
-     * @param store where to store the result. It is safe for in2 and store to
-     *              be the same object.
+     * @param in2
+     *            the matrix to multiply this matrix by.
+     * @param store
+     *            where to store the result. It is safe for in2 and store to
+     *            be the same object.
      * @return the resultant matrix
      */
     public Matrix4f mult(Matrix4f in2, Matrix4f store) {
@@ -922,73 +954,25 @@ public final class Matrix4f implements Cloneable {
         float temp20, temp21, temp22, temp23;
         float temp30, temp31, temp32, temp33;
 
-        temp00 = m00 * in2.m00
-                + m01 * in2.m10
-                + m02 * in2.m20
-                + m03 * in2.m30;
-        temp01 = m00 * in2.m01
-                + m01 * in2.m11
-                + m02 * in2.m21
-                + m03 * in2.m31;
-        temp02 = m00 * in2.m02
-                + m01 * in2.m12
-                + m02 * in2.m22
-                + m03 * in2.m32;
-        temp03 = m00 * in2.m03
-                + m01 * in2.m13
-                + m02 * in2.m23
-                + m03 * in2.m33;
+        temp00 = m00 * in2.m00 + m01 * in2.m10 + m02 * in2.m20 + m03 * in2.m30;
+        temp01 = m00 * in2.m01 + m01 * in2.m11 + m02 * in2.m21 + m03 * in2.m31;
+        temp02 = m00 * in2.m02 + m01 * in2.m12 + m02 * in2.m22 + m03 * in2.m32;
+        temp03 = m00 * in2.m03 + m01 * in2.m13 + m02 * in2.m23 + m03 * in2.m33;
 
-        temp10 = m10 * in2.m00
-                + m11 * in2.m10
-                + m12 * in2.m20
-                + m13 * in2.m30;
-        temp11 = m10 * in2.m01
-                + m11 * in2.m11
-                + m12 * in2.m21
-                + m13 * in2.m31;
-        temp12 = m10 * in2.m02
-                + m11 * in2.m12
-                + m12 * in2.m22
-                + m13 * in2.m32;
-        temp13 = m10 * in2.m03
-                + m11 * in2.m13
-                + m12 * in2.m23
-                + m13 * in2.m33;
+        temp10 = m10 * in2.m00 + m11 * in2.m10 + m12 * in2.m20 + m13 * in2.m30;
+        temp11 = m10 * in2.m01 + m11 * in2.m11 + m12 * in2.m21 + m13 * in2.m31;
+        temp12 = m10 * in2.m02 + m11 * in2.m12 + m12 * in2.m22 + m13 * in2.m32;
+        temp13 = m10 * in2.m03 + m11 * in2.m13 + m12 * in2.m23 + m13 * in2.m33;
 
-        temp20 = m20 * in2.m00
-                + m21 * in2.m10
-                + m22 * in2.m20
-                + m23 * in2.m30;
-        temp21 = m20 * in2.m01
-                + m21 * in2.m11
-                + m22 * in2.m21
-                + m23 * in2.m31;
-        temp22 = m20 * in2.m02
-                + m21 * in2.m12
-                + m22 * in2.m22
-                + m23 * in2.m32;
-        temp23 = m20 * in2.m03
-                + m21 * in2.m13
-                + m22 * in2.m23
-                + m23 * in2.m33;
+        temp20 = m20 * in2.m00 + m21 * in2.m10 + m22 * in2.m20 + m23 * in2.m30;
+        temp21 = m20 * in2.m01 + m21 * in2.m11 + m22 * in2.m21 + m23 * in2.m31;
+        temp22 = m20 * in2.m02 + m21 * in2.m12 + m22 * in2.m22 + m23 * in2.m32;
+        temp23 = m20 * in2.m03 + m21 * in2.m13 + m22 * in2.m23 + m23 * in2.m33;
 
-        temp30 = m30 * in2.m00
-                + m31 * in2.m10
-                + m32 * in2.m20
-                + m33 * in2.m30;
-        temp31 = m30 * in2.m01
-                + m31 * in2.m11
-                + m32 * in2.m21
-                + m33 * in2.m31;
-        temp32 = m30 * in2.m02
-                + m31 * in2.m12
-                + m32 * in2.m22
-                + m33 * in2.m32;
-        temp33 = m30 * in2.m03
-                + m31 * in2.m13
-                + m32 * in2.m23
-                + m33 * in2.m33;
+        temp30 = m30 * in2.m00 + m31 * in2.m10 + m32 * in2.m20 + m33 * in2.m30;
+        temp31 = m30 * in2.m01 + m31 * in2.m11 + m32 * in2.m21 + m33 * in2.m31;
+        temp32 = m30 * in2.m02 + m31 * in2.m12 + m32 * in2.m22 + m33 * in2.m32;
+        temp33 = m30 * in2.m03 + m31 * in2.m13 + m32 * in2.m23 + m33 * in2.m33;
 
         store.m00 = temp00;
         store.m01 = temp01;
@@ -1016,7 +1000,8 @@ public final class Matrix4f implements Cloneable {
      * This matrix will be on the left hand side, while the parameter matrix
      * will be on the right.
      *
-     * @param in2 the matrix to multiply this matrix by.
+     * @param in2
+     *            the matrix to multiply this matrix by.
      * @return the resultant matrix
      */
     public Matrix4f multLocal(Matrix4f in2) {
@@ -1027,7 +1012,8 @@ public final class Matrix4f implements Cloneable {
      * <code>mult</code> multiplies a vector about a rotation matrix. The
      * resulting vector is returned as a new Vector3f.
      *
-     * @param vec vec to multiply against.
+     * @param vec
+     *            vec to multiply against.
      * @return the rotated vector.
      */
     public Vector3f mult(Vector3f vec) {
@@ -1038,8 +1024,10 @@ public final class Matrix4f implements Cloneable {
      * <code>mult</code> multiplies a vector about a rotation matrix and adds
      * translation. The resulting vector is returned.
      *
-     * @param vec   vec to multiply against.
-     * @param store a vector to store the result in. Created if null is passed.
+     * @param vec
+     *            vec to multiply against.
+     * @param store
+     *            a vector to store the result in. Created if null is passed.
      * @return the rotated vector.
      */
     public Vector3f mult(Vector3f vec, Vector3f store) {
@@ -1059,8 +1047,10 @@ public final class Matrix4f implements Cloneable {
      * <code>multNormal</code> multiplies a vector about a rotation matrix, but
      * does not add translation. The resulting vector is returned.
      *
-     * @param vec   vec to multiply against.
-     * @param store a vector to store the result in. Created if null is passed.
+     * @param vec
+     *            vec to multiply against.
+     * @param store
+     *            a vector to store the result in. Created if null is passed.
      * @return the rotated vector.
      */
     public Vector3f multNormal(Vector3f vec, Vector3f store) {
@@ -1080,8 +1070,10 @@ public final class Matrix4f implements Cloneable {
      * <code>multNormal</code> multiplies a vector about a rotation matrix, but
      * does not add translation. The resulting vector is returned.
      *
-     * @param vec   vec to multiply against.
-     * @param store a vector to store the result in. Created if null is passed.
+     * @param vec
+     *            vec to multiply against.
+     * @param store
+     *            a vector to store the result in. Created if null is passed.
      * @return the rotated vector.
      */
     public Vector3f multNormalAcross(Vector3f vec, Vector3f store) {
@@ -1102,8 +1094,10 @@ public final class Matrix4f implements Cloneable {
      * translation. The w value is returned as a result of multiplying the last
      * column of the matrix by 1.0
      *
-     * @param vec   vec to multiply against.
-     * @param store a vector to store the result in.
+     * @param vec
+     *            vec to multiply against.
+     * @param store
+     *            a vector to store the result in.
      * @return the W value
      */
     public float multProj(Vector3f vec, Vector3f store) {
@@ -1118,8 +1112,10 @@ public final class Matrix4f implements Cloneable {
      * <code>mult</code> multiplies a vector about a rotation matrix. The
      * resulting vector is returned.
      *
-     * @param vec   vec to multiply against.
-     * @param store a vector to store the result in. created if null is passed.
+     * @param vec
+     *            vec to multiply against.
+     * @param store
+     *            a vector to store the result in. created if null is passed.
      * @return the rotated vector.
      */
     public Vector3f multAcross(Vector3f vec, Vector3f store) {
@@ -1143,7 +1139,8 @@ public final class Matrix4f implements Cloneable {
      * <code>mult</code> multiplies an array of 4 floats against this rotation
      * matrix. The results are stored directly in the array. (vec4f x mat4f)
      *
-     * @param vec4f float array (size 4) to multiply against the matrix.
+     * @param vec4f
+     *            float array (size 4) to multiply against the matrix.
      * @return the vec4f for chaining.
      */
     public float[] mult(float[] vec4f) {
@@ -1166,7 +1163,8 @@ public final class Matrix4f implements Cloneable {
      * <code>mult</code> multiplies an array of 4 floats against this rotation
      * matrix. The results are stored directly in the array. (vec4f x mat4f)
      *
-     * @param vec4f float array (size 4) to multiply against the matrix.
+     * @param vec4f
+     *            float array (size 4) to multiply against the matrix.
      * @return the vec4f for chaining.
      */
     public float[] multAcross(float[] vec4f) {
@@ -1322,8 +1320,9 @@ public final class Matrix4f implements Cloneable {
     /**
      * Places the adjoint of this matrix in store (creates store if null.)
      *
-     * @param store The matrix to store the result in. If null, a new matrix is
-     *              created.
+     * @param store
+     *            The matrix to store the result in. If null, a new matrix is
+     *            created.
      * @return store
      */
     public Matrix4f adjoint(Matrix4f store) {
@@ -1423,7 +1422,8 @@ public final class Matrix4f implements Cloneable {
     /**
      * <code>add</code> adds the values of a parameter matrix to this matrix.
      *
-     * @param mat the matrix to add to this.
+     * @param mat
+     *            the matrix to add to this.
      */
     public void addLocal(Matrix4f mat) {
         m00 += mat.m00;
@@ -1498,13 +1498,14 @@ public final class Matrix4f implements Cloneable {
     /**
      * <code>setTranslation</code> will set the matrix's translation values.
      *
-     * @param translation the new values for the translation.
-     * @throws JmeException if translation is not size 3.
+     * @param translation
+     *            the new values for the translation.
+     * @throws JmeException
+     *             if translation is not size 3.
      */
     public void setTranslation(float[] translation) {
         if (translation.length != 3) {
-            throw new IllegalArgumentException(
-                    "Translation size must be 3.");
+            throw new IllegalArgumentException("Translation size must be 3.");
         }
         m03 = translation[0];
         m13 = translation[1];
@@ -1514,9 +1515,12 @@ public final class Matrix4f implements Cloneable {
     /**
      * <code>setTranslation</code> will set the matrix's translation values.
      *
-     * @param x value of the translation on the x axis
-     * @param y value of the translation on the y axis
-     * @param z value of the translation on the z axis
+     * @param x
+     *            value of the translation on the x axis
+     * @param y
+     *            value of the translation on the y axis
+     * @param z
+     *            value of the translation on the z axis
      */
     public void setTranslation(float x, float y, float z) {
         m03 = x;
@@ -1527,7 +1531,8 @@ public final class Matrix4f implements Cloneable {
     /**
      * <code>setTranslation</code> will set the matrix's translation values.
      *
-     * @param translation the new values for the translation.
+     * @param translation
+     *            the new values for the translation.
      */
     public void setTranslation(Vector3f translation) {
         m03 = translation.x;
@@ -1539,13 +1544,14 @@ public final class Matrix4f implements Cloneable {
      * <code>setInverseTranslation</code> will set the matrix's inverse
      * translation values.
      *
-     * @param translation the new values for the inverse translation.
-     * @throws JmeException if translation is not size 3.
+     * @param translation
+     *            the new values for the inverse translation.
+     * @throws JmeException
+     *             if translation is not size 3.
      */
     public void setInverseTranslation(float[] translation) {
         if (translation.length != 3) {
-            throw new IllegalArgumentException(
-                    "Translation size must be 3.");
+            throw new IllegalArgumentException("Translation size must be 3.");
         }
         m03 = -translation[0];
         m13 = -translation[1];
@@ -1558,7 +1564,8 @@ public final class Matrix4f implements Cloneable {
      * degrees. These rotations are expressed in a single
      * <code>Vector3f</code> object.
      *
-     * @param angles the angles to rotate.
+     * @param angles
+     *            the angles to rotate.
      */
     public void angleRotation(Vector3f angles) {
         float angle;
@@ -1593,13 +1600,14 @@ public final class Matrix4f implements Cloneable {
      * <code>setInverseRotationRadians</code> builds an inverted rotation from
      * Euler angles that are in radians.
      *
-     * @param angles the Euler angles in radians.
-     * @throws JmeException if angles is not size 3.
+     * @param angles
+     *            the Euler angles in radians.
+     * @throws JmeException
+     *             if angles is not size 3.
      */
     public void setInverseRotationRadians(float[] angles) {
         if (angles.length != 3) {
-            throw new IllegalArgumentException(
-                    "Angles must be of size 3.");
+            throw new IllegalArgumentException("Angles must be of size 3.");
         }
         double cr = FastMath.cos(angles[0]);
         double sr = FastMath.sin(angles[0]);
@@ -1628,13 +1636,14 @@ public final class Matrix4f implements Cloneable {
      * <code>setInverseRotationDegrees</code> builds an inverted rotation from
      * Euler angles that are in degrees.
      *
-     * @param angles the Euler angles in degrees.
-     * @throws JmeException if angles is not size 3.
+     * @param angles
+     *            the Euler angles in degrees.
+     * @throws JmeException
+     *             if angles is not size 3.
      */
     public void setInverseRotationDegrees(float[] angles) {
         if (angles.length != 3) {
-            throw new IllegalArgumentException(
-                    "Angles must be of size 3.");
+            throw new IllegalArgumentException("Angles must be of size 3.");
         }
         float vec[] = new float[3];
         vec[0] = (angles[0] * FastMath.RAD_TO_DEG);
@@ -1647,13 +1656,14 @@ public final class Matrix4f implements Cloneable {
      * <code>inverseTranslateVect</code> translates a given Vector3f by the
      * translation part of this matrix.
      *
-     * @param vec the Vector3f data to be translated.
-     * @throws JmeException if the size of the Vector3f is not 3.
+     * @param vec
+     *            the Vector3f data to be translated.
+     * @throws JmeException
+     *             if the size of the Vector3f is not 3.
      */
     public void inverseTranslateVect(float[] vec) {
         if (vec.length != 3) {
-            throw new IllegalArgumentException(
-                    "vec must be of size 3.");
+            throw new IllegalArgumentException("vec must be of size 3.");
         }
 
         vec[0] = vec[0] - m03;
@@ -1665,8 +1675,10 @@ public final class Matrix4f implements Cloneable {
      * <code>inverseTranslateVect</code> translates a given Vector3f by the
      * translation part of this matrix.
      *
-     * @param data the Vector3f to be translated.
-     * @throws JmeException if the size of the Vector3f is not 3.
+     * @param data
+     *            the Vector3f to be translated.
+     * @throws JmeException
+     *             if the size of the Vector3f is not 3.
      */
     public void inverseTranslateVect(Vector3f data) {
         data.x -= m03;
@@ -1678,8 +1690,10 @@ public final class Matrix4f implements Cloneable {
      * <code>inverseTranslateVect</code> translates a given Vector3f by the
      * translation part of this matrix.
      *
-     * @param data the Vector3f to be translated.
-     * @throws JmeException if the size of the Vector3f is not 3.
+     * @param data
+     *            the Vector3f to be translated.
+     * @throws JmeException
+     *             if the size of the Vector3f is not 3.
      */
     public void translateVect(Vector3f data) {
         data.x += m03;
@@ -1691,7 +1705,8 @@ public final class Matrix4f implements Cloneable {
      * <code>inverseRotateVect</code> rotates a given Vector3f by the rotation
      * part of this matrix.
      *
-     * @param vec the Vector3f to be rotated.
+     * @param vec
+     *            the Vector3f to be rotated.
      */
     public void inverseRotateVect(Vector3f vec) {
         float vx = vec.x, vy = vec.y, vz = vec.z;
@@ -1712,11 +1727,13 @@ public final class Matrix4f implements Cloneable {
     /**
      * <code>toString</code> returns the string representation of this object.
      * It is in a format of a 4x4 matrix. For example, an identity matrix would
-     * be represented by the following string. com.jme.math.Matrix3f <br>[<br>
+     * be represented by the following string. com.jme.math.Matrix3f <br>
+     * [<br>
      * 1.0 0.0 0.0 0.0 <br>
      * 0.0 1.0 0.0 0.0 <br>
      * 0.0 0.0 1.0 0.0 <br>
-     * 0.0 0.0 0.0 1.0 <br>]<br>
+     * 0.0 0.0 0.0 1.0 <br>
+     * ]<br>
      *
      * @return the string representation of this object.
      */
@@ -1800,7 +1817,8 @@ public final class Matrix4f implements Cloneable {
      * are these two matrices the same? they are is they both have the same mXX
      * values.
      *
-     * @param o the object to compare for equality
+     * @param o
+     *            the object to compare for equality
      * @return true if they are equal
      */
     @Override
@@ -1877,16 +1895,15 @@ public final class Matrix4f implements Cloneable {
      * @return true if this matrix is identity
      */
     public boolean isIdentity() {
-        return (m00 == 1 && m01 == 0 && m02 == 0 && m03 == 0)
-                && (m10 == 0 && m11 == 1 && m12 == 0 && m13 == 0)
-                && (m20 == 0 && m21 == 0 && m22 == 1 && m23 == 0)
-                && (m30 == 0 && m31 == 0 && m32 == 0 && m33 == 1);
+        return (m00 == 1 && m01 == 0 && m02 == 0 && m03 == 0) && (m10 == 0 && m11 == 1 && m12 == 0 && m13 == 0)
+            && (m20 == 0 && m21 == 0 && m22 == 1 && m23 == 0) && (m30 == 0 && m31 == 0 && m32 == 0 && m33 == 1);
     }
 
     /**
      * Apply a scale to this matrix.
      *
-     * @param scale the scale to apply
+     * @param scale
+     *            the scale to apply
      */
     public void scale(Vector3f scale) {
         m00 *= scale.getX();
@@ -1906,7 +1923,8 @@ public final class Matrix4f implements Cloneable {
     /**
      * Apply a scale to this matrix.
      *
-     * @param scale the scale to apply
+     * @param scale
+     *            the scale to apply
      */
     public void scale(float scale) {
         m00 *= scale;

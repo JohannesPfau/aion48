@@ -51,6 +51,7 @@ public enum KNOWLEDGE {
     GUNNER(100),
     ARTIST(115),
     BARD(115);
+
     private int value;
 
     private KNOWLEDGE(int value) {

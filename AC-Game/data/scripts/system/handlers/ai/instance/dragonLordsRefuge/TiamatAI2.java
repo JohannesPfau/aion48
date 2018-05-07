@@ -29,7 +29,12 @@
  */
 package ai.instance.dragonLordsRefuge;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -38,11 +43,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -51,7 +52,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @AIName("tiamat") // 219361
 public class TiamatAI2 extends AggressiveNpcAI2 {
 
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
     private AtomicBoolean isHome = new AtomicBoolean(true);
     private Future<?> skillTask;
     private Future<?> painTask;
@@ -68,6 +69,7 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 
     private void startPainTask() {
         painTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -81,6 +83,7 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 
     private void startSkillTask() {
         skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -171,6 +174,7 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 
     private void spawnDivisiveCreation() {
         addTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -202,7 +206,7 @@ public class TiamatAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{50, 30, 25, 20, 15, 10});
+        Collections.addAll(percents, new Integer[] { 50, 30, 25, 20, 15, 10 });
     }
 
     @Override

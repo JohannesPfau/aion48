@@ -29,12 +29,13 @@
  */
 package quest.inggison;
 
+import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY;
+
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -59,7 +60,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class _10021FriendsForLife extends QuestHandler {
 
     private final static int questId = 10021;
-    private final static int[] mobs = {215522, 215520, 215523, 215521};
+    private final static int[] mobs = { 215522, 215520, 215523, 215521 };
 
     public _10021FriendsForLife() {
         super(questId);
@@ -67,7 +68,7 @@ public class _10021FriendsForLife extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {798927, 798954, 799022};
+        int[] npcs = { 798927, 798954, 799022 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.registerOnEnterWorld(questId);
@@ -147,8 +148,8 @@ public class _10021FriendsForLife extends QuestHandler {
                                     if (giveQuestItem(env, 182206627, 1) && giveQuestItem(env, 182206628, 1)) {
                                         WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300190000);
                                         InstanceService.registerPlayerWithInstance(newInstance, player);
-                                        TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f,
-                                                1098.236f, (byte) 30);
+                                        TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f,
+                                            (byte) 30);
                                         changeQuestStep(env, 4, 5, false); // 5
                                         return closeDialogWindow(env);
                                     } else {

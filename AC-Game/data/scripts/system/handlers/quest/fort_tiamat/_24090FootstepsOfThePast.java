@@ -29,13 +29,13 @@
  */
 package quest.fort_tiamat;
 
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
+import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -135,7 +135,8 @@ public class _24090FootstepsOfThePast extends QuestHandler {
                         case SETPRO3: {
                             WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300500000);
                             InstanceService.registerPlayerWithInstance(newInstance, player);
-                            TeleportService2.teleportTo(player, 300500000, newInstance.getInstanceId(), 224f, 251f, 125f, (byte) 10, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, 300500000, newInstance.getInstanceId(), 224f, 251f, 125f, (byte) 10,
+                                TeleportAnimation.BEAM_ANIMATION);
                             QuestService.addNewSpawn(300500000, player.getInstanceId(), 802062, 257f, 246f, 125f, (byte) 60);
                             QuestService.addNewSpawn(300500000, player.getInstanceId(), 730890, 253f, 245f, 125f, (byte) 119);
                             Npc npc = (Npc) env.getVisibleObject();
@@ -198,7 +199,8 @@ public class _24090FootstepsOfThePast extends QuestHandler {
             if (player.isInsideZone(ZoneName.get("LDF4b_ITEMUSEAREA_Q24090")) && item.getItemId() == 182215412) {
                 WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300490000);
                 InstanceService.registerPlayerWithInstance(newInstance, player);
-                TeleportService2.teleportTo(player, 300490000, newInstance.getInstanceId(), 549f, 525f, 417f, (byte) 10, TeleportAnimation.BEAM_ANIMATION);
+                TeleportService2.teleportTo(player, 300490000, newInstance.getInstanceId(), 549f, 525f, 417f, (byte) 10,
+                    TeleportAnimation.BEAM_ANIMATION);
 
                 return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false));
             }

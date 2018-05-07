@@ -44,7 +44,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1013HuntingLepharistRevolutionaries extends QuestHandler {
 
     private final static int questId = 1013;
-    private final static int[] mob_ids = {210688, 210316};
+    private final static int[] mob_ids = { 210688, 210316 };
 
     public _1013HuntingLepharistRevolutionaries() {
         super(questId);

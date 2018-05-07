@@ -29,11 +29,11 @@
  */
 package com.aionemu.commons.configuration.transformers;
 
-import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
-
 import java.lang.reflect.Field;
 import java.util.regex.Pattern;
+
+import com.aionemu.commons.configuration.PropertyTransformer;
+import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * Authomatic pattern transformer for RegExp resolving
@@ -50,10 +50,13 @@ public class PatternTransformer implements PropertyTransformer<Pattern> {
     /**
      * Transforms String to Pattern object
      *
-     * @param value value that will be transformed
-     * @param field value will be assigned to this field
+     * @param value
+     *            value that will be transformed
+     * @param field
+     *            value will be assigned to this field
      * @return Pattern Object
-     * @throws TransformationException if pattern is not valid
+     * @throws TransformationException
+     *             if pattern is not valid
      */
     @Override
     public Pattern transform(String value, Field field) throws TransformationException {

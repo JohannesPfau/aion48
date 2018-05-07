@@ -29,11 +29,11 @@
  */
 package quest.altgard;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -42,7 +42,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Ritsu
  * @Fix Majka Ajural
- *
  */
 public class _2278ASecretProposal extends QuestHandler {
 
@@ -92,7 +91,7 @@ public class _2278ASecretProposal extends QuestHandler {
                             updateQuestStatus(env);
                             return sendQuestDialog(env, 2375);
                         }
-												break;
+                        break;
                     case SETPRO1:
                         if (var == 0) {
                             qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
@@ -100,7 +99,7 @@ public class _2278ASecretProposal extends QuestHandler {
                             PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                             return true;
                         }
-												break;
+                        break;
                     case SELECT_QUEST_REWARD:
                         return sendQuestEndDialog(env);
                 }
@@ -111,7 +110,7 @@ public class _2278ASecretProposal extends QuestHandler {
                         if (var == 1) {
                             return sendQuestDialog(env, 1693);
                         }
-												break;
+                        break;
                     case SETPRO2:
                         if (var == 1) {
                             qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
@@ -127,7 +126,7 @@ public class _2278ASecretProposal extends QuestHandler {
                         if (var == 2) {
                             return sendQuestDialog(env, 2034);
                         }
-												break;
+                        break;
                     case SETPRO3:
                         if (var == 2) {
                             qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);

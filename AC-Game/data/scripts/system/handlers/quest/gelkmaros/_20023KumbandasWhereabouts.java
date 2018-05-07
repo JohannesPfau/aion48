@@ -30,13 +30,13 @@
 package quest.gelkmaros;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.SystemMessageId;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -53,7 +53,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class _20023KumbandasWhereabouts extends QuestHandler {
 
     private final static int questId = 20023;
-    private final static int[] npc_ids = {799226, 799292, 700810, 204057, 730243, 799513, 799341, 700706, 799515};
+    private final static int[] npc_ids = { 799226, 799292, 700810, 204057, 730243, 799513, 799341, 700706, 799515 };
 
     public _20023KumbandasWhereabouts() {
         super(questId);
@@ -99,8 +99,8 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
         if (var == 8) {
             qs.setQuestVar(7);
             updateQuestStatus(env);
-            PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                    DataManager.QUEST_DATA.getQuestById(questId).getName()));
+            PacketSendUtility.sendPacket(player,
+                new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
         }
 
         return false;
@@ -113,7 +113,7 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {20020, 2094};
+        int[] quests = { 20020, 2094 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 
@@ -153,8 +153,7 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
         if (qs == null || qs.getStatus() != QuestStatus.START || qs.getQuestVars().getQuestVars() != 8) {
             return false;
         }
-        QuestService.addNewSpawn(300150000, player.getInstanceId(), 216592, (float) 561.8763, (float) 192.25128,
-                (float) 135.88919, (byte) 30);
+        QuestService.addNewSpawn(300150000, player.getInstanceId(), 216592, (float) 561.8763, (float) 192.25128, (float) 135.88919, (byte) 30);
         return true;
     }
 
@@ -291,8 +290,7 @@ public class _20023KumbandasWhereabouts extends QuestHandler {
                     if (var > 5) {
                         WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300150000);
                         InstanceService.registerPlayerWithInstance(newInstance, player);
-                        TeleportService2.teleportTo(player, 300150000, newInstance.getInstanceId(), 561.8651f, 221.91483f,
-                                134.53333f, (byte) 90);
+                        TeleportService2.teleportTo(player, 300150000, newInstance.getInstanceId(), 561.8651f, 221.91483f, 134.53333f, (byte) 90);
                         return true;
                     }
                     break;

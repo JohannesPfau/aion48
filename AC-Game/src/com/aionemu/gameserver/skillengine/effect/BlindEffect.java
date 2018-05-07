@@ -63,6 +63,7 @@ public class BlindEffect extends EffectTemplate {
         effect.setAbnormal(AbnormalState.BLIND.getId());
         effect.getEffected().getEffectController().setAbnormal(AbnormalState.BLIND.getId());
         AttackCalcObserver acObserver = new AttackStatusObserver(value, AttackStatus.DODGE) {
+
             @Override
             public boolean checkAttackerStatus(AttackStatus status) {
                 return Rnd.get(0, 100) <= value;

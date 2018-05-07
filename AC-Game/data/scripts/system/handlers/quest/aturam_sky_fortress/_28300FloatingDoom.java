@@ -38,7 +38,6 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author zhkchi
- *
  */
 public class _28300FloatingDoom extends QuestHandler {
 

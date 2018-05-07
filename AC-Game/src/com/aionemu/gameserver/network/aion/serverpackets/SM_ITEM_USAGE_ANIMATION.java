@@ -90,7 +90,7 @@ public class SM_ITEM_USAGE_ANIMATION extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         if (time > 0) {
             final Player player = World.getInstance().findPlayer(playerObjId);
             final Item item = player.getInventory().getItemByObjId(itemObjId);

@@ -29,10 +29,11 @@
  */
 package com.aionemu.loginserver.taskmanager.trigger.implementations;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
-import com.aionemu.loginserver.taskmanager.trigger.TaskFromDBTrigger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.network.util.ThreadPoolManager;
+import com.aionemu.loginserver.taskmanager.trigger.TaskFromDBTrigger;
 
 /**
  * @author nrg

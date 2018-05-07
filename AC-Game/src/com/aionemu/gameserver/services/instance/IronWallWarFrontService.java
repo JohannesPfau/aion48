@@ -31,8 +31,6 @@ package com.aionemu.gameserver.services.instance;
 
 import java.util.Iterator;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,14 +44,16 @@ import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
+import javolution.util.FastList;
+
 /**
  * @author Ever
- (Aion-Core) 
+ *         (Aion-Core)
  */
 public class IronWallWarFrontService {
 
     private boolean registerAvailable;
-    private FastList<Integer> playersWithCooldown = new FastList<Integer>();
+    private FastList<Integer> playersWithCooldown = new FastList<>();
     private static final Logger log = LoggerFactory.getLogger(IronWallWarFrontService.class);
     public static final byte minlevel = 60, maxlevel = 66;
     public static final int maskId = 109;
@@ -62,17 +62,20 @@ public class IronWallWarFrontService {
         String[] times = AutoGroupConfig.IRONWALL_TIMES.split("\\|");
         for (String cron : times) {
             CronService.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     startIronWallRegistration();
                 }
             }, cron);
-            log.info("Scheduled Iron Wall WarFront based on cron expression: " + cron + " Duration: " + AutoGroupConfig.IRONWALL_TIMER + " in minutes");
+            log.info(
+                "Scheduled Iron Wall WarFront based on cron expression: " + cron + " Duration: " + AutoGroupConfig.IRONWALL_TIMER + " in minutes");
         }
     }
 
     public void startUregisterIronWallTask() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 registerAvailable = false;
@@ -122,20 +125,21 @@ public class IronWallWarFrontService {
     }
 
     private boolean isInInstance(Player player) {
-    	if (player.isInInstance()) {
-    		return true;
-    	}
+        if (player.isInInstance()) {
+            return true;
+        }
         return false;
     }
 
     public boolean canPlayerJoin(Player player) {
-		if (registerAvailable && player.getLevel() > minlevel && player.getLevel() < maxlevel && !hasCoolDown(player) && !isInInstance(player)) {
-			 return true;
-		}
-		return false;
+        if (registerAvailable && player.getLevel() > minlevel && player.getLevel() < maxlevel && !hasCoolDown(player) && !isInInstance(player)) {
+            return true;
+        }
+        return false;
     }
-    
+
     private static class SingletonHolder {
+
         protected static final IronWallWarFrontService instance = new IronWallWarFrontService();
     }
 

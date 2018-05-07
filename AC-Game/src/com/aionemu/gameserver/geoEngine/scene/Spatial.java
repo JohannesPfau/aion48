@@ -96,8 +96,9 @@ public abstract class Spatial implements Collidable, Cloneable {
      * <code>Spatial</code> object setting the rotation, translation and scale
      * value to defaults.
      *
-     * @param name the name of the scene element. This is required for
-     *             identification and comparision purposes.
+     * @param name
+     *            the name of the scene element. This is required for
+     *            identification and comparision purposes.
      */
     public Spatial(String name) {
         this();
@@ -109,7 +110,8 @@ public abstract class Spatial implements Collidable, Cloneable {
     /**
      * Sets the name of this spatial.
      *
-     * @param name The spatial's new name.
+     * @param name
+     *            The spatial's new name.
      */
     public void setName(String name) {
         if (name != null) {
@@ -141,7 +143,8 @@ public abstract class Spatial implements Collidable, Cloneable {
      * {@link Node#detachChild(Spatial)} - don't call directly.
      * <code>setParent</code> sets the parent of this node.
      *
-     * @param parent the parent of this node.
+     * @param parent
+     *            the parent of this node.
      */
     protected void setParent(Node parent) {
         this.parent = parent;
@@ -164,7 +167,8 @@ public abstract class Spatial implements Collidable, Cloneable {
      * determines if the provided Node is the parent, or parent's parent, etc.
      * of this Spatial.
      *
-     * @param ancestor the ancestor object to look for.
+     * @param ancestor
+     *            the ancestor object to look for.
      * @return true if the ancestor is found, false otherwise.
      */
     public boolean hasAncestor(Node ancestor) {
@@ -186,7 +190,8 @@ public abstract class Spatial implements Collidable, Cloneable {
     /**
      * <code>setModelBound</code> sets the bounding object for this Spatial.
      *
-     * @param modelBound the bounding object for this spatial.
+     * @param modelBound
+     *            the bounding object for this spatial.
      */
     public abstract void setModelBound(BoundingVolume modelBound);
 
@@ -218,12 +223,14 @@ public abstract class Spatial implements Collidable, Cloneable {
      * "^" and "$"). You can set regex modes, like case insensitivity, by using
      * the (?X) or (?X:Y) constructs.
      *
-     * @param spatialSubclass Subclass which this must implement. Null causes
-     *                        all Spatials to qualify.
-     * @param nameRegex       Regular expression to match this name against. Null
-     *                        causes all Names to qualify.
+     * @param spatialSubclass
+     *            Subclass which this must implement. Null causes
+     *            all Spatials to qualify.
+     * @param nameRegex
+     *            Regular expression to match this name against. Null
+     *            causes all Names to qualify.
      * @return true if this implements the specified class and this's name
-     * matches the specified pattern.
+     *         matches the specified pattern.
      * @see java.util.regex.Pattern
      */
     public boolean matches(Class<? extends Spatial> spatialSubclass, String nameRegex) {

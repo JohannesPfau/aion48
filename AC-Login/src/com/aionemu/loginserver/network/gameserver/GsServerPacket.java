@@ -29,9 +29,9 @@
  */
 package com.aionemu.loginserver.network.gameserver;
 
-import com.aionemu.commons.network.packet.BaseServerPacket;
-
 import java.nio.ByteBuffer;
+
+import com.aionemu.commons.network.packet.BaseServerPacket;
 
 /**
  * Base class for every LS -> GameServer Server Packet.
@@ -43,7 +43,8 @@ public abstract class GsServerPacket extends BaseServerPacket {
     /**
      * Constructs a new server packet with specified id.
      *
-     * @param opcode packet opcode.
+     * @param opcode
+     *            packet opcode.
      */
     protected GsServerPacket() {
         super(0);

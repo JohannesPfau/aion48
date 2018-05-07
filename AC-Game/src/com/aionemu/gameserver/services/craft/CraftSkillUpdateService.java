@@ -64,9 +64,9 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class CraftSkillUpdateService {
 
     private static final Logger log = LoggerFactory.getLogger(CraftSkillUpdateService.class);
-    protected static final Map<Integer, CraftLearnTemplate> npcBySkill = new HashMap<Integer, CraftLearnTemplate>();
-    private static final Map<Integer, Integer> cost = new HashMap<Integer, Integer>();
-    private static final List<Integer> craftingSkillIds = new ArrayList<Integer>();
+    protected static final Map<Integer, CraftLearnTemplate> npcBySkill = new HashMap<>();
+    private static final Map<Integer, Integer> cost = new HashMap<>();
+    private static final List<Integer> craftingSkillIds = new ArrayList<>();
 
     public static final CraftSkillUpdateService getInstance() {
         return SingletonHolder.instance;
@@ -222,14 +222,13 @@ public class CraftSkillUpdateService {
         }
 
         // You must do quest before being able to buy master update (499 to 500)
-        if (skillLvl == 499
-                && ((skillId == 40001 && (!player.isCompleteQuest(29039) || !player.isCompleteQuest(19039)))
-                || (skillId == 40002 && (!player.isCompleteQuest(29009) || !player.isCompleteQuest(19009)))
-                || (skillId == 40003 && (!player.isCompleteQuest(29015) || !player.isCompleteQuest(19015)))
-                || (skillId == 40004 && (!player.isCompleteQuest(29021) || !player.isCompleteQuest(19021)))
-                || (skillId == 40007 && (!player.isCompleteQuest(29033) || !player.isCompleteQuest(19033)))
-                || (skillId == 40008 && (!player.isCompleteQuest(29027) || !player.isCompleteQuest(19027))) || (skillId == 40010 && (!player
-                .isCompleteQuest(29058) || !player.isCompleteQuest(19058))))) {
+        if (skillLvl == 499 && ((skillId == 40001 && (!player.isCompleteQuest(29039) || !player.isCompleteQuest(19039)))
+            || (skillId == 40002 && (!player.isCompleteQuest(29009) || !player.isCompleteQuest(19009)))
+            || (skillId == 40003 && (!player.isCompleteQuest(29015) || !player.isCompleteQuest(19015)))
+            || (skillId == 40004 && (!player.isCompleteQuest(29021) || !player.isCompleteQuest(19021)))
+            || (skillId == 40007 && (!player.isCompleteQuest(29033) || !player.isCompleteQuest(19033)))
+            || (skillId == 40008 && (!player.isCompleteQuest(29027) || !player.isCompleteQuest(19027)))
+            || (skillId == 40010 && (!player.isCompleteQuest(29058) || !player.isCompleteQuest(19058))))) {
             PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400286));
             return;
         }
@@ -244,6 +243,7 @@ public class CraftSkillUpdateService {
         final long kinah = player.getInventory().getKinah();
         final int skillLevel = skillLvl;
         RequestResponseHandler responseHandler = new RequestResponseHandler(npc) {
+
             @Override
             public void acceptRequest(Creature requester, Player responder) {
                 if (price < kinah && responder.getInventory().tryDecreaseKinah(price)) {
@@ -264,8 +264,8 @@ public class CraftSkillUpdateService {
 
         boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, responseHandler);
         if (result) {
-            PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, 0, 0, new DescriptionId(
-                    DataManager.SKILL_DATA.getSkillTemplate(skillId).getNameId()), String.valueOf(price)));
+            PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_CRAFT_ADDSKILL_CONFIRM, 0, 0,
+                new DescriptionId(DataManager.SKILL_DATA.getSkillTemplate(skillId).getNameId()), String.valueOf(price)));
         }
     }
 

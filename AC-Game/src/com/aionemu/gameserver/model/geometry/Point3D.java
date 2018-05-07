@@ -36,8 +36,6 @@ import com.aionemu.gameserver.model.templates.zone.Point2D;
 /**
  * This class represents 3D point.<br>
  * It's valid for serializing and cloning.
- *
-
  */
 @SuppressWarnings("serial")
 public class Point3D implements Cloneable, Serializable {
@@ -64,8 +62,10 @@ public class Point3D implements Cloneable, Serializable {
     /**
      * Creates new 3D point from 2D point and z coord
      *
-     * @param point 2D point
-     * @param z     z coord
+     * @param point
+     *            2D point
+     * @param z
+     *            z coord
      */
     public Point3D(Point2D point, float z) {
         this(point.getX(), point.getY(), z);
@@ -74,7 +74,8 @@ public class Point3D implements Cloneable, Serializable {
     /**
      * Clones another 3D point
      *
-     * @param point 3d point to clone
+     * @param point
+     *            3d point to clone
      */
     public Point3D(Point3D point) {
         this(point.getX(), point.getY(), point.getZ());
@@ -83,9 +84,12 @@ public class Point3D implements Cloneable, Serializable {
     /**
      * Creates new 3d point with given coords
      *
-     * @param x x coord
-     * @param y y coord
-     * @param z z coord
+     * @param x
+     *            x coord
+     * @param y
+     *            y coord
+     * @param z
+     *            z coord
      */
     public Point3D(float x, float y, float z) {
         this.x = x;
@@ -105,7 +109,8 @@ public class Point3D implements Cloneable, Serializable {
     /**
      * Sets x coord of this point
      *
-     * @param x x coord
+     * @param x
+     *            x coord
      */
     public void setX(float x) {
         this.x = x;
@@ -123,7 +128,8 @@ public class Point3D implements Cloneable, Serializable {
     /**
      * Sets y coord of this point
      *
-     * @param y y coord
+     * @param y
+     *            y coord
      */
     public void setY(float y) {
         this.y = y;
@@ -141,7 +147,8 @@ public class Point3D implements Cloneable, Serializable {
     /**
      * Sets z coord of this point
      *
-     * @param z z coord
+     * @param z
+     *            z coord
      */
     public void setZ(float z) {
         this.z = z;
@@ -150,7 +157,8 @@ public class Point3D implements Cloneable, Serializable {
     /**
      * Checks if this point is equal to another point
      *
-     * @param o point to compare with
+     * @param o
+     *            point to compare with
      * @return true if equal
      */
     @Override
@@ -170,6 +178,7 @@ public class Point3D implements Cloneable, Serializable {
     /**
      * Returns point's hashcode.<br>
      * <p/>
+     * 
      * <pre>
      * int result = x;
      * result = 31 * result + y;
@@ -191,7 +200,8 @@ public class Point3D implements Cloneable, Serializable {
      * Clones this point
      *
      * @return copy of this point
-     * @throws CloneNotSupportedException never thrown
+     * @throws CloneNotSupportedException
+     *             never thrown
      */
     @Override
     public Point3D clone() throws CloneNotSupportedException {

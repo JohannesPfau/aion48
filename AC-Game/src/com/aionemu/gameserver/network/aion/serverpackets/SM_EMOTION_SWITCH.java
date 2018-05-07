@@ -54,7 +54,7 @@ public class SM_EMOTION_SWITCH extends AionServerPacket {
         this.emotionType = et.getTypeId();
         this.isPlayer = false;
     }
-    
+
     public SM_EMOTION_SWITCH(Player pl, int state, EmotionType et) {
         this.pl = pl;
         this.state = state;
@@ -64,11 +64,11 @@ public class SM_EMOTION_SWITCH extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
-    	if (isPlayer) 
-    		writeD(pl.getObjectId());
-    	else
-    		writeD(npc.getObjectId());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        if (isPlayer)
+            writeD(pl.getObjectId());
+        else
+            writeD(npc.getObjectId());
         writeC(state);
         writeD(emotionType);
         writeD(0);

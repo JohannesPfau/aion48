@@ -29,7 +29,8 @@
  */
 package ai.instance.esoterrace;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -38,7 +39,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -58,6 +59,7 @@ public class KexkraPrototypeAI2 extends AggressiveNpcAI2 {
         if (hpPercentage <= 75) {
             if (isStartEvent.compareAndSet(false, true)) {
                 getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
                     @Override
                     public void visit(Player player) {
                         if (player.isOnline() && !player.getLifeStats().isAlreadyDead()) {

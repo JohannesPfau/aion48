@@ -40,7 +40,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * Emotion packet
  *
-
  * @modified -Enomine- 4.0
  */
 public class SM_EMOTION extends AionServerPacket {
@@ -89,10 +88,14 @@ public class SM_EMOTION extends AionServerPacket {
     /**
      * Constructs new server packet with specified opcode
      *
-     * @param senderObjectId who sended emotion
-     * @param unknown        Dunno what it is, can be 0x10 or 0x11
-     * @param emotionId      emotion to play
-     * @param emotionId      who target emotion
+     * @param senderObjectId
+     *            who sended emotion
+     * @param unknown
+     *            Dunno what it is, can be 0x10 or 0x11
+     * @param emotionId
+     *            emotion to play
+     * @param emotionId
+     *            who target emotion
      */
     public SM_EMOTION(Creature creature, EmotionType emotionType, int emotion, int targetObjectId) {
         this.senderObjectId = creature.getObjectId();
@@ -142,7 +145,7 @@ public class SM_EMOTION extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(senderObjectId);
         writeC(emotionType.getTypeId());
         writeH(state);
@@ -160,7 +163,7 @@ public class SM_EMOTION extends AionServerPacket {
             case WALK: // toggle walk
             case RUN: // toggle run
             case OPEN_PRIVATESHOP: // private shop open
-            case CLOSE_PRIVATESHOP:    // private shop close
+            case CLOSE_PRIVATESHOP: // private shop close
             case POWERSHARD_ON: // powershard on
             case POWERSHARD_OFF: // powershard off
             case ATTACKMODE2: // toggle attack mode

@@ -47,7 +47,7 @@ import com.aionemu.gameserver.skillengine.change.Func;
  */
 public class SerialKillerDebuff implements StatOwner {
 
-    private List<IStatFunction> functions = new ArrayList<IStatFunction>();
+    private List<IStatFunction> functions = new ArrayList<>();
     private RankRestriction rankRestriction;
 
     public void applyEffect(Player player, int rank) {

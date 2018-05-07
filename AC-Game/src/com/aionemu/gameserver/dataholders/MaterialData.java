@@ -53,16 +53,16 @@ import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"materialTemplates"})
+@XmlType(name = "", propOrder = { "materialTemplates" })
 @XmlRootElement(name = "material_templates")
 public class MaterialData {
 
     @XmlElement(name = "material")
     protected List<MaterialTemplate> materialTemplates;
     @XmlTransient
-    Map<Integer, MaterialTemplate> materialsById = new HashMap<Integer, MaterialTemplate>();
+    Map<Integer, MaterialTemplate> materialsById = new HashMap<>();
     @XmlTransient
-    Set<Integer> skillIds = new HashSet<Integer>();
+    Set<Integer> skillIds = new HashSet<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (materialTemplates == null) {

@@ -37,7 +37,6 @@ import com.aionemu.gameserver.services.BrokerService;
 
 /**
  * @author kosyak
-
  */
 public class CM_BUY_BROKER_ITEM extends AionClientPacket {
 
@@ -60,10 +59,12 @@ public class CM_BUY_BROKER_ITEM extends AionClientPacket {
 
     @Override
     protected void runImpl() {
-    	Player player = getConnection().getActivePlayer();
-    	if (player == null) return;
-    	
-        if (itemCount < 1) return;
+        Player player = getConnection().getActivePlayer();
+        if (player == null)
+            return;
+
+        if (itemCount < 1)
+            return;
         BrokerService.getInstance().buyBrokerItem(player, itemUniqueId, itemCount);
     }
 }

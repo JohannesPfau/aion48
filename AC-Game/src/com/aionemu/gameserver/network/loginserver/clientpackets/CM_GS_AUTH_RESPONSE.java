@@ -44,8 +44,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * This packet is response for SM_GS_AUTH its notify Gameserver if registration
  * was ok or what was wrong.
- *
-
  */
 public class CM_GS_AUTH_RESPONSE extends LsClientPacket {
 
@@ -87,20 +85,21 @@ public class CM_GS_AUTH_RESPONSE extends LsClientPacket {
             sendPacket(new SM_ACCOUNT_LIST(LoginServer.getInstance().getLoggedInAccounts()));
             NetworkController.getInstance().setServerCount(serverCount);
         } /**
-         * NotAuthed
-         */
+           * NotAuthed
+           */
         else if (response == 1) {
             log.error("GameServer is not authenticated at LoginServer side, shutting down!");
             System.exit(ExitCode.CODE_ERROR);
         } /**
-         * AlreadyRegistered
-         */
+           * AlreadyRegistered
+           */
         else if (response == 2) {
             log.info("GameServer is already registered at LoginServer side! trying again...");
             /**
              * try again after 10s
              */
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     CM_GS_AUTH_RESPONSE.this.sendPacket(new SM_GS_AUTH());

@@ -29,16 +29,17 @@
  */
 package mysql5;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.loginserver.dao.AccountTimeDAO;
 import com.aionemu.loginserver.model.AccountTime;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * MySQL5 AccountTimeDAO implementation
@@ -58,20 +59,20 @@ public class MySQL5AccountTimeDAO extends AccountTimeDAO {
     @Override
     public boolean updateAccountTime(final int accountId, final AccountTime accountTime) {
         return DB.insertUpdate("REPLACE INTO account_time (account_id, last_active, expiration_time, "
-                        + "session_duration, accumulated_online, accumulated_rest, penalty_end) values " + "(?,?,?,?,?,?,?)",
-                new IUStH() {
-                    @Override
-                    public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
-                        preparedStatement.setLong(1, accountId);
-                        preparedStatement.setTimestamp(2, accountTime.getLastLoginTime());
-                        preparedStatement.setTimestamp(3, accountTime.getExpirationTime());
-                        preparedStatement.setLong(4, accountTime.getSessionDuration());
-                        preparedStatement.setLong(5, accountTime.getAccumulatedOnlineTime());
-                        preparedStatement.setLong(6, accountTime.getAccumulatedRestTime());
-                        preparedStatement.setTimestamp(7, accountTime.getPenaltyEnd());
-                        preparedStatement.execute();
-                    }
-                });
+            + "session_duration, accumulated_online, accumulated_rest, penalty_end) values " + "(?,?,?,?,?,?,?)", new IUStH() {
+
+                @Override
+                public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
+                    preparedStatement.setLong(1, accountId);
+                    preparedStatement.setTimestamp(2, accountTime.getLastLoginTime());
+                    preparedStatement.setTimestamp(3, accountTime.getExpirationTime());
+                    preparedStatement.setLong(4, accountTime.getSessionDuration());
+                    preparedStatement.setLong(5, accountTime.getAccumulatedOnlineTime());
+                    preparedStatement.setLong(6, accountTime.getAccumulatedRestTime());
+                    preparedStatement.setTimestamp(7, accountTime.getPenaltyEnd());
+                    preparedStatement.execute();
+                }
+            });
     }
 
     /**

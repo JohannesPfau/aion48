@@ -29,10 +29,10 @@
  */
 package quest.reshanta;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -54,7 +54,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _2076TheShadowSummons extends QuestHandler {
 
     private final static int questId = 2076;
-    private final static int[] npcs = {798300, 204253, 700369, 204089, 203550};
+    private final static int[] npcs = { 798300, 204253, 700369, 204089, 203550 };
 
     public _2076TheShadowSummons() {
         super(questId);
@@ -136,8 +136,7 @@ public class _2076TheShadowSummons extends QuestHandler {
                     if (dialog == DialogAction.SETPRO4) {
                         WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320120000);
                         InstanceService.registerPlayerWithInstance(newInstance, player);
-                        TeleportService2.teleportTo(player, 320120000, newInstance.getInstanceId(), 591.47894f, 420.20865f,
-                                202.97754f);
+                        TeleportService2.teleportTo(player, 320120000, newInstance.getInstanceId(), 591.47894f, 420.20865f, 202.97754f);
                         playQuestMovie(env, 423);
                         changeQuestStep(env, 3, 5, false); // 5
                         return closeDialogWindow(env);
@@ -150,7 +149,7 @@ public class _2076TheShadowSummons extends QuestHandler {
                 if (dialog == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
                 } else {
-                    int[] questItems = {182205502};
+                    int[] questItems = { 182205502 };
                     return sendQuestEndDialog(env, questItems);
                 }
             }

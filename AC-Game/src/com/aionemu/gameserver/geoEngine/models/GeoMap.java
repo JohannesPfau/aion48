@@ -35,8 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
@@ -49,18 +47,19 @@ import com.aionemu.gameserver.geoEngine.scene.Node;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
 
+import javolution.util.FastMap;
+
 /**
  * @author Mr. Poke
  */
 public class GeoMap extends Node {
 
     private short[] terrainData;
-    private List<BoundingBox> tmpBox = new ArrayList<BoundingBox>();
-    private Map<String, DoorGeometry> doors = new FastMap<String, DoorGeometry>();
+    private List<BoundingBox> tmpBox = new ArrayList<>();
+    private Map<String, DoorGeometry> doors = new FastMap<>();
 
     /**
-     * @param name 
-     *
+     * @param name
      */
     public GeoMap(String name, int worldSize) {
         setCollisionFlags((short) (CollisionIntention.ALL.getId() << 8));
@@ -136,7 +135,8 @@ public class GeoMap extends Node {
     }
 
     /**
-     * @param terrainData The terrainData to set.
+     * @param terrainData
+     *            The terrainData to set.
      */
     public void setTerrainData(short[] terrainData) {
         this.terrainData = terrainData;
@@ -194,8 +194,8 @@ public class GeoMap extends Node {
         return results.getClosestCollision().getContactPoint().z;
     }
 
-    public Vector3f getClosestCollision(float x, float y, float z, float targetX, float targetY, float targetZ, boolean changeDirection,
-                                        boolean fly, int instanceId, byte intentions) {
+    public Vector3f getClosestCollision(float x, float y, float z, float targetX, float targetY, float targetZ, boolean changeDirection, boolean fly,
+        int instanceId, byte intentions) {
         float zChecked1 = 0;
         float zChecked2 = 0;
         if (!fly && changeDirection) {
@@ -263,7 +263,7 @@ public class GeoMap extends Node {
     }
 
     public CollisionResults getCollisions(float x, float y, float z, float targetX, float targetY, float targetZ, boolean changeDirection,
-                                          boolean fly, int instanceId, byte intentions) {
+        boolean fly, int instanceId, byte intentions) {
         if (!fly && changeDirection) {
             z = getZ(x, y, z + 2, instanceId);
         }
@@ -291,9 +291,9 @@ public class GeoMap extends Node {
     }
 
     /**
-	 * @param z 
-     * @param targetZ  
-	 */
+     * @param z
+     * @param targetZ
+     */
     private Vector3f calculateTerrainCollision(float x, float y, float z, float targetX, float targetY, float targetZ, Ray ray) {
 
         float x2 = targetX - x;
@@ -336,15 +336,15 @@ public class GeoMap extends Node {
         }
         Vector3f result = new Vector3f();
         if (p1 >= 0 && p2 >= 0 && p3 >= 0) {
-            Triangle tringle1 = new Triangle(new Vector3f(xInt * 2, yInt * 2, p1), new Vector3f(xInt * 2, (yInt + 1) * 2, p2), new Vector3f(
-                    (xInt + 1) * 2, yInt * 2, p3));
+            Triangle tringle1 = new Triangle(new Vector3f(xInt * 2, yInt * 2, p1), new Vector3f(xInt * 2, (yInt + 1) * 2, p2),
+                new Vector3f((xInt + 1) * 2, yInt * 2, p3));
             if (ray.intersectWhere(tringle1, result)) {
                 return result;
             }
         }
         if (p4 >= 0 && p2 >= 0 && p3 >= 0) {
             Triangle tringle2 = new Triangle(new Vector3f((xInt + 1) * 2, (yInt + 1) * 2, p4), new Vector3f(xInt * 2, (yInt + 1) * 2, p2),
-                    new Vector3f((xInt + 1) * 2, yInt * 2, p3));
+                new Vector3f((xInt + 1) * 2, yInt * 2, p3));
             if (ray.intersectWhere(tringle2, result)) {
                 return result;
             }
@@ -381,7 +381,7 @@ public class GeoMap extends Node {
             }
         }
         CollisionResults results = new CollisionResults((byte) (CollisionIntention.PHYSICAL.getId() | CollisionIntention.DOOR.getId()), false,
-                instanceId);
+            instanceId);
         int collisions = this.collideWith(r, results);
         return (results.size() == 0 && collisions == 0);
     }

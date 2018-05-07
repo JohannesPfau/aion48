@@ -29,7 +29,9 @@
  */
 package ai.quests;
 
-import ai.ActionItemNpcAI2;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AI2Actions.SelectDialogResult;
 import com.aionemu.gameserver.ai2.AIName;
@@ -45,8 +47,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import java.util.ArrayList;
-import java.util.List;
+import ai.ActionItemNpcAI2;
 
 /**
  * @author xTz
@@ -54,12 +55,12 @@ import java.util.List;
 @AIName("quest_use_item")
 public class QuestItemNpcAI2 extends ActionItemNpcAI2 {
 
-    private List<Player> registeredPlayers = new ArrayList<Player>();
+    private List<Player> registeredPlayers = new ArrayList<>();
 
     @Override
     protected void handleDialogStart(Player player) {
-        if (!(QuestEngine.getInstance().onCanAct(new QuestEnv(getOwner(), player, 0, 0),
-                getObjectTemplate().getTemplateId(), QuestActionType.ACTION_ITEM_USE))) {
+        if (!(QuestEngine.getInstance().onCanAct(new QuestEnv(getOwner(), player, 0, 0), getObjectTemplate().getTemplateId(),
+            QuestActionType.ACTION_ITEM_USE))) {
             return;
         }
         super.handleDialogStart(player);

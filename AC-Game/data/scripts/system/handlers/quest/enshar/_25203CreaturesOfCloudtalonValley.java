@@ -29,9 +29,9 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -42,8 +42,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _25203CreaturesOfCloudtalonValley extends QuestHandler {
 
     private final static int questId = 25203;
-	int[] mobs = {219692, 219693, 219694, 219695, 219696, 219697, 219698};
-	
+    int[] mobs = { 219692, 219693, 219694, 219695, 219696, 219697, 219698 };
+
     public _25203CreaturesOfCloudtalonValley() {
         super(questId);
     }
@@ -51,8 +51,8 @@ public class _25203CreaturesOfCloudtalonValley extends QuestHandler {
     @Override
     public void register() {
         qe.registerQuestNpc(804914).addOnQuestStart(questId);
-        qe.registerQuestNpc(804914).addOnTalkEvent(questId);		
-		for (int mob : mobs) {
+        qe.registerQuestNpc(804914).addOnTalkEvent(questId);
+        for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
     }
@@ -69,8 +69,8 @@ public class _25203CreaturesOfCloudtalonValley extends QuestHandler {
                     return defaultOnKillEvent(env, mobs, var1, var1 + 1, 1);
                 } else if (var1 == 9) {
                     qs.setQuestVar(1);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
+                    qs.setStatus(QuestStatus.REWARD);
+                    updateQuestStatus(env);
                     return true;
                 }
             }

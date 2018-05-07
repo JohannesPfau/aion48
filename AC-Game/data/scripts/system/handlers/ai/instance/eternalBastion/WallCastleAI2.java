@@ -30,8 +30,10 @@
 
 package ai.instance.eternalBastion;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import ai.GeneralNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -40,9 +42,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import ai.GeneralNpcAI2;
 
 /**
  * @author Alcapwnd
@@ -51,8 +51,7 @@ import java.util.List;
 @AIName("wall_castle_bastion")
 public class WallCastleAI2 extends GeneralNpcAI2 {
 
-
-    private List<Integer> percents = new ArrayList<Integer>();
+    private List<Integer> percents = new ArrayList<>();
 
     @Override
     protected void handleSpawned() {
@@ -110,6 +109,7 @@ public class WallCastleAI2 extends GeneralNpcAI2 {
 
     private void shout_attack() { // MSG Notice 03
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401825));
@@ -119,6 +119,7 @@ public class WallCastleAI2 extends GeneralNpcAI2 {
 
     private void shout_destroy() { // MSG Notice 04
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401826));
@@ -128,7 +129,7 @@ public class WallCastleAI2 extends GeneralNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{98, 80, 70, 60, 50, 40, 30, 20, 0});
+        Collections.addAll(percents, new Integer[] { 98, 80, 70, 60, 50, 40, 30, 20, 0 });
     }
 
     @Override

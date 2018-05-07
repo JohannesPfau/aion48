@@ -58,7 +58,7 @@ public class _1075NewWings extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {278506, 279023, 278643};
+        int[] npcs = { 278506, 279023, 278643 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.registerQuestNpc(214102).addOnKillEvent(questId);
@@ -192,7 +192,7 @@ public class _1075NewWings extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {1701, 1072};
+        int[] quests = { 1701, 1072 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 }

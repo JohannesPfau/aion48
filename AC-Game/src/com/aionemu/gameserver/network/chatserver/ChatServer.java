@@ -71,7 +71,7 @@ public class ChatServer {
      */
     public ChatServerConnection connect() {
         SocketChannel sc;
-        for (; ; ) {
+        for (;;) {
             chatServer = null;
             log.info("Connecting to ChatServer: " + NetworkConfig.CHAT_ADDRESS);
             try {
@@ -111,6 +111,7 @@ public class ChatServer {
 
         if (!serverShutdown) {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     connect();

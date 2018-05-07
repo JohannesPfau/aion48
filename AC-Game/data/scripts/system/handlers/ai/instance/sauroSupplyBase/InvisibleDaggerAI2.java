@@ -29,12 +29,11 @@
  */
 package ai.instance.sauroSupplyBase;
 
-
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Alcapwnd
@@ -42,31 +41,30 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 @AIName("dagger_invisible")
 public class InvisibleDaggerAI2 extends AggressiveNpcAI2 {
-	
 
-	@Override
-	protected void handleSpawned() {
-		DaggerBless(3000);
-		DaggerBless(4000);
-		super.handleSpawned();
-	  }
-   
-	private void InvisibleDaggerBless(int skillId) {
-		SkillEngine.getInstance().getSkill(getOwner(), skillId, 60, getOwner()).useNoAnimationSkill();
-		}
-	
-	private void DaggerBless(final int time) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-	
-	@Override
-	public void run() {
-			if (time == 3000) {
-				InvisibleDaggerBless(21135);
-			    }
-			if (time == 4000) {
-				InvisibleDaggerBless(20251);
-			    }
-		    }
-    }, time);
-  }
+    @Override
+    protected void handleSpawned() {
+        DaggerBless(3000);
+        DaggerBless(4000);
+        super.handleSpawned();
+    }
+
+    private void InvisibleDaggerBless(int skillId) {
+        SkillEngine.getInstance().getSkill(getOwner(), skillId, 60, getOwner()).useNoAnimationSkill();
+    }
+
+    private void DaggerBless(final int time) {
+        ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+            @Override
+            public void run() {
+                if (time == 3000) {
+                    InvisibleDaggerBless(21135);
+                }
+                if (time == 4000) {
+                    InvisibleDaggerBless(20251);
+                }
+            }
+        }, time);
+    }
 }

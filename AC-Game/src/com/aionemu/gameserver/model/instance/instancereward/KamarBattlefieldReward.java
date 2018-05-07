@@ -81,6 +81,7 @@ public class KamarBattlefieldReward extends InstanceReward<KamarBattlefieldPlaye
 
     public List<KamarBattlefieldPlayerReward> sortPoints() {
         return sort(getInstanceRewards(), on(PvPArenaPlayerReward.class).getScorePoints(), new Comparator<Integer>() {
+
             @Override
             public int compare(Integer o1, Integer o2) {
                 return o2 != null ? o2.compareTo(o1) : -o1.compareTo(o2);
@@ -104,14 +105,15 @@ public class KamarBattlefieldReward extends InstanceReward<KamarBattlefieldPlaye
 
     public void portToPosition(Player player) {
         if (player.getRace() == Race.ASMODIANS) {
-            TeleportService2.teleportTo(player, mapId, instanceId, asmodiansStartPosition.getX(), asmodiansStartPosition.getY(), asmodiansStartPosition.getZ());
+            TeleportService2.teleportTo(player, mapId, instanceId, asmodiansStartPosition.getX(), asmodiansStartPosition.getY(),
+                asmodiansStartPosition.getZ());
         } else {
             TeleportService2.teleportTo(player, mapId, instanceId, elyosStartPosition.getX(), elyosStartPosition.getY(), elyosStartPosition.getZ());
         }
     }
 
     public MutableInt getPointsByRace(Race race) {
-    	return (race == Race.ELYOS) ? elyosPoins : (race == Race.ASMODIANS) ? asmodiansPoints : null;
+        return (race == Race.ELYOS) ? elyosPoins : (race == Race.ASMODIANS) ? asmodiansPoints : null;
     }
 
     public void addPointsByRace(Race race, int points) {
@@ -123,7 +125,7 @@ public class KamarBattlefieldReward extends InstanceReward<KamarBattlefieldPlaye
     }
 
     public MutableInt getPvpKillsByRace(Race race) {
-    	return (race == Race.ELYOS) ? elyosPvpKills : (race == Race.ASMODIANS) ? asmodiansPvpKills : null;
+        return (race == Race.ELYOS) ? elyosPvpKills : (race == Race.ASMODIANS) ? asmodiansPvpKills : null;
     }
 
     public void addPvpKillsByRace(Race race, int points) {
@@ -177,6 +179,7 @@ public class KamarBattlefieldReward extends InstanceReward<KamarBattlefieldPlaye
 
     public void sendPacket(final int type, final Integer object) {
         instance.doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(type, getTime(), getInstanceReward(), object));
@@ -204,5 +207,5 @@ public class KamarBattlefieldReward extends InstanceReward<KamarBattlefieldPlaye
 
     public boolean hasCapPoints() {
         return maxFrom(getInstanceRewards()).getPoints() >= capPoints;
-    }  
+    }
 }

@@ -38,7 +38,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
 /**
  * @author GiGatR00n (Aion-Core)
  */
@@ -48,37 +47,38 @@ public class BlindSilenceStuffAI2 extends NpcAI2 {
     @Override
     protected void handleCreatureSee(Creature creature) {
         checkDistance(this, creature);
-    }  
+    }
 
     @Override
     protected void handleCreatureMoved(Creature creature) {
         checkDistance(this, creature);
-    } 
-    
+    }
+
     private void checkDistance(NpcAI2 ai, Creature creature) {
         if (creature instanceof Player && !creature.getLifeStats().isAlreadyDead()) {
-        	if (MathUtil.isIn3dRange(getOwner(), creature, 5)) {
-        		HowlofEmptiness();
-        	} 	
+            if (MathUtil.isIn3dRange(getOwner(), creature, 5)) {
+                HowlofEmptiness();
+            }
         }
     }
-    
+
     private void useSkill(int skillId, VisibleObject target) {
         SkillEngine.getInstance().getSkill(getOwner(), skillId, 65, target).useSkill();
     }
-    
+
     private void HowlofEmptiness() {
-    	// SKILL HowlofEmptiness (21557) = IDLDF5_Fortress_Re_BlindSilence_SA
-    	useSkill(21557, getOwner());
-    	DeleteNpc();//After 10-Seconds It will be despawned and also deleted from thw world.
+        // SKILL HowlofEmptiness (21557) = IDLDF5_Fortress_Re_BlindSilence_SA
+        useSkill(21557, getOwner());
+        DeleteNpc();//After 10-Seconds It will be despawned and also deleted from thw world.
     }
-    
+
     private void DeleteNpc() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				getOwner().getController().onDelete();
-			}
-		}, 10000);//After 10-Seconds, It will be despawned and also deleted from thw world.
-    }    
+        ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+            @Override
+            public void run() {
+                getOwner().getController().onDelete();
+            }
+        }, 10000);//After 10-Seconds, It will be despawned and also deleted from thw world.
+    }
 }

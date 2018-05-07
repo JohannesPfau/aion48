@@ -29,13 +29,13 @@
  */
 package com.aionemu.commons.scripting.url;
 
-import com.aionemu.commons.scripting.ScriptClassLoader;
-
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 import java.net.URLConnection;
+
+import com.aionemu.commons.scripting.ScriptClassLoader;
 
 /**
  * This class represents URL Connection that is used to "connect" to scripts
@@ -57,8 +57,10 @@ public class VirtualClassURLConnection extends URLConnection {
     /**
      * Creates URL connections that "connects" to class binary data
      *
-     * @param url class name
-     * @param cl  classloader
+     * @param url
+     *            class name
+     * @param cl
+     *            classloader
      */
     protected VirtualClassURLConnection(URL url, ScriptClassLoader cl) {
         super(url);

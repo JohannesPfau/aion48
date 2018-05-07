@@ -38,9 +38,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.templates.assemblednpc.AssembledNpcTemplate;
+
+import javolution.util.FastMap;
 
 /**
  * @author xTz
@@ -54,9 +54,9 @@ public class AssembledNpcsData {
     private final Map<Integer, AssembledNpcTemplate> assembledNpcsTemplates = new FastMap<Integer, AssembledNpcTemplate>().shared();
 
     /**
-	 * @param u  
-     * @param parent 
-	 */
+     * @param u
+     * @param parent
+     */
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (AssembledNpcTemplate template : templates) {
             assembledNpcsTemplates.put(template.getNr(), template);

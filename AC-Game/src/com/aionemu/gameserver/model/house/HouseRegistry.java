@@ -29,9 +29,6 @@
  */
 package com.aionemu.gameserver.model.house;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,6 +38,9 @@ import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.templates.housing.PartType;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 /**
  * @author Rolandas

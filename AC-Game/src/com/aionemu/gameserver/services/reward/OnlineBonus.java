@@ -51,9 +51,11 @@ public class OnlineBonus {
 
     private OnlineBonus() {
         ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
                     @Override
                     public void visit(Player object) {
                         int time = MembershipConfig.ONLINE_BONUS_TIME;
@@ -62,12 +64,14 @@ public class OnlineBonus {
                                 log.warn("[OnlineBonus] Player " + object.getName() + " tried to receive item with full inventory.");
                             } else {
                                 ItemService.addItem(object, MembershipConfig.ONLINE_BONUS_ITEM, MembershipConfig.ONLINE_BONUS_COUNT);
-                                if(MembershipConfig.ONLINE_BONUS_ABYSS_ENABLE){
+                                if (MembershipConfig.ONLINE_BONUS_ABYSS_ENABLE) {
                                     AbyssPointsService.addAp(object, MembershipConfig.ONLINE_BONUS_AP);
                                     AbyssPointsService.addGp(object, MembershipConfig.ONLINE_BONUS_GP);
-                                    PacketSendUtility.sendMessage(object, "[Online Bonus Sevice]: You've Played " + time + " Minutes. You earn a Bonus Item! :)");
-                                }else{
-                                    PacketSendUtility.sendMessage(object, "[Online Bonus Sevice]: You've Played " + time + " Minutes. You earn a Bonus Item and Some AP! :)");
+                                    PacketSendUtility.sendMessage(object,
+                                        "[Online Bonus Sevice]: You've Played " + time + " Minutes. You earn a Bonus Item! :)");
+                                } else {
+                                    PacketSendUtility.sendMessage(object,
+                                        "[Online Bonus Sevice]: You've Played " + time + " Minutes. You earn a Bonus Item and Some AP! :)");
                                 }
                             }
                         } catch (Exception ex) {

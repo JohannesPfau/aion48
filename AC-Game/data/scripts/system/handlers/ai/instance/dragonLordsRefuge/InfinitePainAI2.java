@@ -48,6 +48,7 @@ public class InfinitePainAI2 extends NpcAI2 {
 
     private void gravitationalDisturbance() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 AI2Actions.useSkill(InfinitePainAI2.this, 20969);
@@ -58,6 +59,7 @@ public class InfinitePainAI2 extends NpcAI2 {
 
     private void despawn() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 getOwner().getController().onDelete();

@@ -29,10 +29,10 @@
  */
 package quest.abyss_entry;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -83,7 +83,7 @@ public class _2946AbyssGeneralKnowledge extends QuestHandler {
                             return defaultCloseDialog(env, 0, 1); // 1
                     }
                 }
-                break;
+                    break;
                 case 204210: { // Phosphor
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -94,7 +94,7 @@ public class _2946AbyssGeneralKnowledge extends QuestHandler {
                             return defaultCloseDialog(env, 1, 2); // 2
                     }
                 }
-                break;
+                    break;
                 case 204211: { // Moreinen
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -105,7 +105,7 @@ public class _2946AbyssGeneralKnowledge extends QuestHandler {
                             return defaultCloseDialog(env, 2, 3); // 3
                     }
                 }
-                break;
+                    break;
                 case 204208: { // Kushar
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -116,7 +116,7 @@ public class _2946AbyssGeneralKnowledge extends QuestHandler {
                             return defaultCloseDialog(env, 3, 3, true, false); // reward
                     }
                 }
-                break;
+                    break;
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 204053) { // Kvasir

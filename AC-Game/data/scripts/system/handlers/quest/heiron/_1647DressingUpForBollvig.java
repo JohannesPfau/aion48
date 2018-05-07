@@ -29,9 +29,9 @@
  */
 package quest.heiron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -80,7 +80,7 @@ public class _1647DressingUpForBollvig extends QuestHandler {
                 if (dialog == DialogAction.USE_OBJECT) {
                     // Wearing Stenon Blouse and Stenon Skirt
                     if (!player.getEquipment().getEquippedItemsByItemId(110100150).isEmpty()
-                            && !player.getEquipment().getEquippedItemsByItemId(113100144).isEmpty()) {
+                        && !player.getEquipment().getEquippedItemsByItemId(113100144).isEmpty()) {
                         // Having Myanee's Flute
                         if (player.getInventory().getItemCountByItemId(182201783) > 0) {
                             playQuestMovie(env, 199);
@@ -111,8 +111,10 @@ public class _1647DressingUpForBollvig extends QuestHandler {
         if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
             if (movieId == 199) {
                 QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 204635, player.getX(), player.getY(), player.getZ(), (byte) 0);
-                QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 204635, player.getX() + 2, player.getY() - 2, player.getZ(), (byte) 0);
-                QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 204635, player.getX() - 2, player.getY() + 2, player.getZ(), (byte) 0);
+                QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 204635, player.getX() + 2, player.getY() - 2, player.getZ(),
+                    (byte) 0);
+                QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 204635, player.getX() - 2, player.getY() + 2, player.getZ(),
+                    (byte) 0);
                 return true;
             }
         }

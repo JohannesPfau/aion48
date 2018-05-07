@@ -29,6 +29,13 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerNpcFactionsDAO;
@@ -37,12 +44,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.ENpcFactionQuestState;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFaction;
 import com.aionemu.gameserver.model.gameobjects.player.npcFaction.NpcFactions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  * @author MrPoke
@@ -81,9 +82,7 @@ public class MySQL5PlayerNpcFactionsDAO extends PlayerNpcFactionsDAO {
             rset.close();
             stmt.close();
         } catch (Exception e) {
-            log.error(
-                    "Could not restore Npc faction data for playerObjId: " + player.getObjectId() + " from DB: " + e.getMessage(),
-                    e);
+            log.error("Could not restore Npc faction data for playerObjId: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
         } finally {
             DatabaseFactory.close(con);
         }
@@ -117,8 +116,7 @@ public class MySQL5PlayerNpcFactionsDAO extends PlayerNpcFactionsDAO {
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
-            log.error("Could not insert Npc faction data for playerObjId: " + playerObjectId + " from DB: " + e.getMessage(),
-                    e);
+            log.error("Could not insert Npc faction data for playerObjId: " + playerObjectId + " from DB: " + e.getMessage(), e);
         } finally {
             DatabaseFactory.close(con);
         }
@@ -138,8 +136,7 @@ public class MySQL5PlayerNpcFactionsDAO extends PlayerNpcFactionsDAO {
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
-            log.error("Could not update Npc faction data for playerObjId: " + playerObjectId + " from DB: " + e.getMessage(),
-                    e);
+            log.error("Could not update Npc faction data for playerObjId: " + playerObjectId + " from DB: " + e.getMessage(), e);
         } finally {
             DatabaseFactory.close(con);
         }

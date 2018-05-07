@@ -64,6 +64,7 @@ public class TiamatEyeAI2 extends NpcAI2 {
 
     private void despawn() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {

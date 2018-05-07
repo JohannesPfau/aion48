@@ -57,7 +57,8 @@ public class PulledEffect extends EffectTemplate {
         effected.getController().cancelCurrentSkill();
         //effected.getMoveController().abortMove();
         World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
-        PacketSendUtility.broadcastPacketAndReceive(effected, new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
+        PacketSendUtility.broadcastPacketAndReceive(effected,
+            new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
     }
 
     @Override

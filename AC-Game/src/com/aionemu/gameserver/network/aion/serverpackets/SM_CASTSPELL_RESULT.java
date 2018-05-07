@@ -58,8 +58,7 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
     private int targetType;
     private boolean chainSuccess;
 
-    public SM_CASTSPELL_RESULT(Skill skill, List<Effect> effects, int hitTime, boolean chainSuccess, int spellStatus,
-                               int dashStatus) {
+    public SM_CASTSPELL_RESULT(Skill skill, List<Effect> effects, int hitTime, boolean chainSuccess, int spellStatus, int dashStatus) {
         this.skill = skill;
         this.effector = skill.getEffector();
         this.target = skill.getFirstTarget();
@@ -72,15 +71,15 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
         this.dashStatus = dashStatus;
     }
 
-    public SM_CASTSPELL_RESULT(Skill skill, List<Effect> effects, int hitTime, boolean chainSuccess, int spellStatus,
-                               int dashStatus, int targetType) {
+    public SM_CASTSPELL_RESULT(Skill skill, List<Effect> effects, int hitTime, boolean chainSuccess, int spellStatus, int dashStatus,
+        int targetType) {
         this(skill, effects, hitTime, chainSuccess, spellStatus, dashStatus);
         this.targetType = targetType;
     }
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(effector.getObjectId());
         writeC(targetType);
         switch (targetType) {
@@ -123,7 +122,7 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
         } else if (chainSuccess && skill.getChainCategory() != null) {
             writeH(32);
         } else if (skill.getChainCategory() == null) {
-        	writeH(160);
+            writeH(160);
         } else {
             writeH(0);
         }
@@ -195,57 +194,57 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
             }
 
             writeC(1);
-            
-                writeC(effect.isMphealInstant() ? 1 : 0);
-                if (effect.isDelayedDamage()) {
+
+            writeC(effect.isMphealInstant() ? 1 : 0);
+            if (effect.isDelayedDamage()) {
+                writeD(0);
+            } else {
+                writeD(effect.getReserved1());
+            }
+            writeC(effect.getAttackStatus().getId());
+
+            //setting counter skill from packet to have the best synchronization of time with client
+            if (effect.getEffected() instanceof Player) {
+                if (effect.getAttackStatus().isCounterSkill()) {
+                    ((Player) effect.getEffected()).setLastCounterSkill(effect.getAttackStatus());
+                }
+            }
+
+            writeC(effect.getShieldDefense());
+
+            /**
+             * shield Type: 1: reflector 2: normal shield 8: protect effect
+             * (ex. skillId: 417 Bodyguard) TODO find out 4
+             */
+            switch (effect.getShieldDefense()) {
+                case 0:
+                case 2:
+                    break;
+                case 8:
+                case 10:
+                    writeD(effect.getProtectorId());
+                    writeD(effect.getProtectedDamage());
+                    writeD(effect.getProtectedSkillId());
+                    break;
+                case 16:
                     writeD(0);
-                } else {
-                    writeD(effect.getReserved1());
-                }
-                writeC(effect.getAttackStatus().getId());
-
-                //setting counter skill from packet to have the best synchronization of time with client
-                if (effect.getEffected() instanceof Player) {
-                    if (effect.getAttackStatus().isCounterSkill()) {
-                        ((Player) effect.getEffected()).setLastCounterSkill(effect.getAttackStatus());
-                    }
-                }
-
-                writeC(effect.getShieldDefense());
-
-                /**
-                 * shield Type: 1: reflector 2: normal shield 8: protect effect
-                 * (ex. skillId: 417 Bodyguard) TODO find out 4
-                 */
-                switch (effect.getShieldDefense()) {
-                	case 0: 
-                    case 2: 
-                      break;
-                    case 8: 
-                    case 10: 
-                      writeD(effect.getProtectorId());
-                      writeD(effect.getProtectedDamage());
-                      writeD(effect.getProtectedSkillId());
-                      break;
-                    case 16: 
-                      writeD(0);
-                      writeD(0);
-                      writeD(0);
-                      writeD(0);
-                      writeD(0);
-                      writeD(effect.getMpShield());
-                      writeD(effect.getReflectedSkillId());
-                      break;
-                    default: 
-                      writeD(effect.getProtectorId());
-                      writeD(effect.getProtectedDamage());
-                      writeD(effect.getProtectedSkillId());
-                      writeD(effect.getReflectedDamage());
-                      writeD(effect.getReflectedSkillId());
-                      writeD(0);
-                      writeD(0);
-                      break;
-                }
+                    writeD(0);
+                    writeD(0);
+                    writeD(0);
+                    writeD(0);
+                    writeD(effect.getMpShield());
+                    writeD(effect.getReflectedSkillId());
+                    break;
+                default:
+                    writeD(effect.getProtectorId());
+                    writeD(effect.getProtectedDamage());
+                    writeD(effect.getProtectedSkillId());
+                    writeD(effect.getReflectedDamage());
+                    writeD(effect.getReflectedSkillId());
+                    writeD(0);
+                    writeD(0);
+                    break;
+            }
         }
     }
 }

@@ -41,6 +41,7 @@ public enum DashStatus {
     BACKDASH(3),
     MOVEBEHIND(4),
     ROBOTMOVELOC(6);
+
     private int id;
 
     private DashStatus(int id) {

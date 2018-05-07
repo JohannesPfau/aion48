@@ -51,6 +51,7 @@ public enum MAGICAL_OFF_HAND_ATTACK {
     GUNNER(19),
     ARTIST(0),
     BARD(0);
+
     private int value;
 
     private MAGICAL_OFF_HAND_ATTACK(int value) {

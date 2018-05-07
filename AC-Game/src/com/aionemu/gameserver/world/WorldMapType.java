@@ -202,6 +202,7 @@ public enum WorldMapType {
     TEST_TAG_MATCH(900190000),
     TEST_TIME_ATTACK(900200000),
     SYSTEM_BASIC(900220000);
+
     private final int worldId;
     private final boolean isPersonal;
 
@@ -223,7 +224,8 @@ public enum WorldMapType {
     }
 
     /**
-     * @param id of world
+     * @param id
+     *            of world
      * @return WorldMapType
      */
     public static WorldMapType getWorld(int id) {

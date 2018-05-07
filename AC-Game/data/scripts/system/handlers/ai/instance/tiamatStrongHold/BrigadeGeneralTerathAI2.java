@@ -29,7 +29,12 @@
  */
 package ai.instance.tiamatStrongHold;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -44,11 +49,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -57,7 +58,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
 
     private AtomicBoolean isHome = new AtomicBoolean(true);
-    private List<Integer> percents = new ArrayList<Integer>();
+    private List<Integer> percents = new ArrayList<>();
     private Future<?> skillTask;
     private boolean canThink = true;
     private Npc aethericField;
@@ -83,6 +84,7 @@ public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
 
     private void startSkillTask() {
         skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -106,6 +108,7 @@ public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
         spawn(283097, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);
         spawn(283098, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 SkillEngine.getInstance().getSkill(getOwner(), 20741, 55, getOwner()).useNoAnimationSkill();
@@ -124,17 +127,21 @@ public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
                 spawn(283558, 1002.07f, 297.4f, 409.85f, (byte) 0);
                 SkillEngine.getInstance().getSkill(getOwner(), 20737, 55, getOwner()).useNoAnimationSkill();
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         EmoteManager.emoteStopAttacking(getOwner());
                         setStateIfNot(AIState.WALKING);
-                        getOwner().getMoveController().moveToPoint(getOwner().getSpawn().getX(), getOwner().getSpawn().getY(), getOwner().getSpawn().getZ());
+                        getOwner().getMoveController().moveToPoint(getOwner().getSpawn().getX(), getOwner().getSpawn().getY(),
+                            getOwner().getSpawn().getZ());
                         WalkManager.startWalking(BrigadeGeneralTerathAI2.this);
                         getOwner().setState(1);
-                        PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
+                        PacketSendUtility.broadcastPacket(getOwner(),
+                            new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
                     }
                 }, 4000);
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         spawn(283110, 1029.9f, 297.26f, 409.08f, (byte) 0);
@@ -142,6 +149,7 @@ public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
                     }
                 }, 10000);
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         WorldMapInstance instance = getPosition().getWorldMapInstance();
@@ -166,7 +174,8 @@ public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
                             setStateIfNot(AIState.WALKING);
                             getOwner().setState(1);
                             getOwner().getMoveController().moveToTargetObject();
-                            PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
+                            PacketSendUtility.broadcastPacket(getOwner(),
+                                new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
                         }
                     }
                 }, 30000);
@@ -219,7 +228,7 @@ public class BrigadeGeneralTerathAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{90, 70, 50, 30, 25});
+        Collections.addAll(percents, new Integer[] { 90, 70, 50, 30, 25 });
     }
 
     @Override

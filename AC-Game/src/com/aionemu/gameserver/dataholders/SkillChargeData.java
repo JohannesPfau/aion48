@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -43,18 +41,20 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.skillengine.model.ChargeSkillEntry;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"chargeSkills"})
+@XmlType(name = "", propOrder = { "chargeSkills" })
 @XmlRootElement(name = "skill_charge")
 public class SkillChargeData {
 
     @XmlElement(name = "charge", required = true)
     protected List<ChargeSkillEntry> chargeSkills;
     @XmlTransient
-    private TIntObjectHashMap<ChargeSkillEntry> skillChargeData = new TIntObjectHashMap<ChargeSkillEntry>();
+    private TIntObjectHashMap<ChargeSkillEntry> skillChargeData = new TIntObjectHashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (ChargeSkillEntry chargeSkill : chargeSkills) {

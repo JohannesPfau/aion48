@@ -32,7 +32,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
@@ -82,12 +81,9 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
         PacketLoggerService.getInstance().logPacketCM(this.getPacketName());
         actionId = readC();
         action = HousingAction.getActionTypeById(actionId);
-        if (action == HousingAction.ADD_ITEM
-                || action == HousingAction.DELETE_ITEM
-                || action == HousingAction.DESPAWN_OBJECT) {
+        if (action == HousingAction.ADD_ITEM || action == HousingAction.DELETE_ITEM || action == HousingAction.DESPAWN_OBJECT) {
             itemObjectId = readD();
-        } else if (action == HousingAction.SPAWN_OBJECT
-                || action == HousingAction.MOVE_OBJECT) {
+        } else if (action == HousingAction.SPAWN_OBJECT || action == HousingAction.MOVE_OBJECT) {
             itemObjectId = readD();
             x = readF();
             y = readF();

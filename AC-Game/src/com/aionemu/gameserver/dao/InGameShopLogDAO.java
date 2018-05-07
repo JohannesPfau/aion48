@@ -38,7 +38,8 @@ import com.aionemu.commons.database.dao.DAO;
  */
 public abstract class InGameShopLogDAO implements DAO {
 
-    public abstract void log(String transactionType, Timestamp transactionDate, String payerName, String payerAccountName, String receiverName, int itemId, long itemCount, long itemPrice);
+    public abstract void log(String transactionType, Timestamp transactionDate, String payerName, String payerAccountName, String receiverName,
+        int itemId, long itemCount, long itemPrice);
 
     @Override
     public String getClassName() {

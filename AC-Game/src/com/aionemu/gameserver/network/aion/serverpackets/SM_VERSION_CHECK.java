@@ -45,25 +45,27 @@ import com.aionemu.gameserver.services.ChatService;
 import com.aionemu.gameserver.services.EventService;
 
 /**
- CC fix
+ * CC fix
+ * 
  * @modified by Novo, cura, Raziel, romanz (4.8)
  * @Reworked frozenkiller
  */
 
 public class SM_VERSION_CHECK extends AionServerPacket {
-	/**
-	 * Aion Client version
-	 */
-	private int version;
-	/**
-	 * Number of characters can be created
-	 */
-	private int characterLimitCount;
-	/**
-	 * Related to the character creation mode
-	 */
-	private final int characterFactionsMode;
-	private final int characterCreateMode;
+
+    /**
+     * Aion Client version
+     */
+    private int version;
+    /**
+     * Number of characters can be created
+     */
+    private int characterLimitCount;
+    /**
+     * Related to the character creation mode
+     */
+    private final int characterFactionsMode;
+    private final int characterCreateMode;
 
     /**
      * @param version
@@ -92,24 +94,24 @@ public class SM_VERSION_CHECK extends AionServerPacket {
         }
     }
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	protected void writeImpl(AionConnection con) {
-		//aion 3.0 = 194
-		//aion 3.5 = 196
-		//aion 4.0 = 201
-		//aion 4.5 = 203
-		//aion 4.7 = 204
-		//aion 4.7.0.7 = 205
-		//aion 4.7.5.x = 206
-		//aion 4.8.0.0 = 207
-		if (version < 207) {
-			//Send wrong client version
-			writeC(0x02);
-			return;
-		}
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    protected void writeImpl(AionConnection con) {
+        //aion 3.0 = 194
+        //aion 3.5 = 196
+        //aion 4.0 = 201
+        //aion 4.5 = 203
+        //aion 4.7 = 204
+        //aion 4.7.0.7 = 205
+        //aion 4.7.5.x = 206
+        //aion 4.8.0.0 = 207
+        if (version < 207) {
+            //Send wrong client version
+            writeC(0x02);
+            return;
+        }
         if (version == 207) {
             log.info("Authentication with client version 4.8");
         } else if (version > 208) {

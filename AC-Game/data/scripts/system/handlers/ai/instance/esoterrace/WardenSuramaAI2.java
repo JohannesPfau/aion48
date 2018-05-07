@@ -29,7 +29,10 @@
  */
 package ai.instance.esoterrace;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -40,9 +43,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -50,7 +51,7 @@ import java.util.List;
 @AIName("wardensurama")
 public class WardenSuramaAI2 extends AggressiveNpcAI2 {
 
-    private List<Integer> percents = new ArrayList<Integer>();
+    private List<Integer> percents = new ArrayList<>();
 
     @Override
     protected void handleSpawned() {
@@ -83,7 +84,7 @@ public class WardenSuramaAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{50, 25, 5});
+        Collections.addAll(percents, new Integer[] { 50, 25, 5 });
     }
 
     private void spawnGeysers() {
@@ -98,6 +99,7 @@ public class WardenSuramaAI2 extends AggressiveNpcAI2 {
         spawn(282174, 1290.778442f, 1170.730957f, 53.203529f, (byte) 0, 597);
 
         getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 if (player.isOnline()) {
@@ -129,6 +131,7 @@ public class WardenSuramaAI2 extends AggressiveNpcAI2 {
 
     private void doSchedule() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 deSpawnGeysers();

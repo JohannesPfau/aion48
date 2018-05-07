@@ -46,7 +46,7 @@ public class SM_FRIEND_LIST extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         FriendList list = con.getActivePlayer().getFriendList();
 
         writeH((0 - list.getSize()));
@@ -77,7 +77,7 @@ public class SM_FRIEND_LIST extends AionServerPacket {
                 writeD(0);
                 writeC(0);
             }
-			writeS(friend.getFriendNote());
+            writeS(friend.getFriendNote());
         }
     }
 }

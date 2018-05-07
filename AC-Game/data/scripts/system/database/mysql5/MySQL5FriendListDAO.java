@@ -29,6 +29,16 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
@@ -40,15 +50,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Friend;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author Ben
@@ -62,7 +63,7 @@ public class MySQL5FriendListDAO extends FriendListDAO {
 
     @Override
     public FriendList load(final Player player) {
-        final List<Friend> friends = new ArrayList<Friend>();
+        final List<Friend> friends = new ArrayList<>();
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
@@ -94,6 +95,7 @@ public class MySQL5FriendListDAO extends FriendListDAO {
     @Override
     public boolean addFriends(final Player player, final Player friend) {
         return DB.insertUpdate(ADD_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
                 ps.setInt(1, player.getObjectId());
@@ -113,6 +115,7 @@ public class MySQL5FriendListDAO extends FriendListDAO {
     @Override
     public boolean delFriends(final int playerOid, final int friendOid) {
         return DB.insertUpdate(DEL_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
                 ps.setInt(1, playerOid);

@@ -29,10 +29,10 @@
  */
 package quest.cygnea;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -52,32 +52,32 @@ public class _10507ABigPlotToFoil extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {804711, 804712, 804713, 804714, 804715};
-		qe.registerQuestNpc(236264).addOnKillEvent(questId);
-		qe.registerQuestNpc(236265).addOnKillEvent(questId);
-		qe.registerQuestNpc(702668).addOnKillEvent(questId);
-		qe.registerOnLevelUp(questId);
+        int[] npcs = { 804711, 804712, 804713, 804714, 804715 };
+        qe.registerQuestNpc(236264).addOnKillEvent(questId);
+        qe.registerQuestNpc(236265).addOnKillEvent(questId);
+        qe.registerQuestNpc(702668).addOnKillEvent(questId);
+        qe.registerOnLevelUp(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }
-		qe.registerOnEnterZone(ZoneName.get("LF5_SensoryArea_Q10507"), questId);
-		qe.registerOnMovieEndQuest(993, questId);
+        qe.registerOnEnterZone(ZoneName.get("LF5_SensoryArea_Q10507"), questId);
+        qe.registerOnMovieEndQuest(993, questId);
     }
 
-	@Override
+    @Override
     public boolean onLvlUpEvent(QuestEnv env) {
         return defaultOnLvlUpEvent(env, 10506, true);
     }
 
-	@Override
+    @Override
     public boolean onKillEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             if (var == 6) {
-                int[] mobs = {236264, 236265};
-                int[] chest = {702668};
+                int[] mobs = { 236264, 236265 };
+                int[] chest = { 702668 };
                 int targetId = env.getTargetId();
                 int var1 = qs.getQuestVarById(1);
                 int var2 = qs.getQuestVarById(2);
@@ -116,6 +116,7 @@ public class _10507ABigPlotToFoil extends QuestHandler {
         }
         return false;
     }
+
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         final Player player = env.getPlayer();
@@ -135,60 +136,59 @@ public class _10507ABigPlotToFoil extends QuestHandler {
                     case QUEST_SELECT:
                         if (var == 0) {
                             return sendQuestDialog(env, 1011);
-                        }	
-						else if (var == 4) {
+                        } else if (var == 4) {
                             return sendQuestDialog(env, 2375);
-                        }	
+                        }
                     case SETPRO1:
-                        changeQuestStep(env, 0, 1, false); 
-						return closeDialogWindow(env);
-					case SETPRO5:
-                        changeQuestStep(env, 4, 5, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 0, 1, false);
+                        return closeDialogWindow(env);
+                    case SETPRO5:
+                        changeQuestStep(env, 4, 5, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804712) {
+            if (targetId == 804712) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 1) {
                             return sendQuestDialog(env, 1352);
-                        }						
+                        }
                     case SETPRO2:
-                        changeQuestStep(env, 1, 2, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 1, 2, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804713) {
+            if (targetId == 804713) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 2) {
                             return sendQuestDialog(env, 1693);
-                        }						
+                        }
                     case SETPRO3:
-                        changeQuestStep(env, 2, 3, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 2, 3, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804714) {
+            if (targetId == 804714) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 3) {
                             return sendQuestDialog(env, 2034);
-                        }						
+                        }
                     case SETPRO4:
-                        changeQuestStep(env, 3, 4, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 3, 4, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804715) {
+            if (targetId == 804715) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 5) {
                             return sendQuestDialog(env, 2716);
-                        }						
+                        }
                     case SETPRO6:
-                        changeQuestStep(env, 5, 6, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 5, 6, false);
+                        return closeDialogWindow(env);
                 }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
@@ -202,29 +202,29 @@ public class _10507ABigPlotToFoil extends QuestHandler {
         }
         return false;
     }
-	
-	@Override
+
+    @Override
     public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             if (var == 7) {
-				playQuestMovie(env, 993);
+                playQuestMovie(env, 993);
                 return true;
             }
         }
         return false;
     }
-	
-	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		Player player = env.getPlayer();
-		if (movieId == 993) {
-			changeQuestStep(env, 7, 8, true);
-			QuestService.addNewSpawn(210070000, player.getInstanceId(), 236273, player.getX()+2, player.getY()+2, player.getZ()+1, (byte) 0);
-			return true;
-		}
-		return false;
-	}
+
+    @Override
+    public boolean onMovieEndEvent(QuestEnv env, int movieId) {
+        Player player = env.getPlayer();
+        if (movieId == 993) {
+            changeQuestStep(env, 7, 8, true);
+            QuestService.addNewSpawn(210070000, player.getInstanceId(), 236273, player.getX() + 2, player.getY() + 2, player.getZ() + 1, (byte) 0);
+            return true;
+        }
+        return false;
+    }
 }

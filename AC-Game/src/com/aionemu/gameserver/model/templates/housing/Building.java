@@ -47,7 +47,7 @@ import com.mysql.jdbc.StringUtils;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"parts"})
+@XmlType(name = "", propOrder = { "parts" })
 @XmlRootElement(name = "building")
 public class Building {
 
@@ -68,7 +68,7 @@ public class Building {
     }
 
     @XmlTransient
-    Map<PartType, Integer> partsByType = new HashMap<PartType, Integer>();
+    Map<PartType, Integer> partsByType = new HashMap<>();
 
     /**
      * @param u

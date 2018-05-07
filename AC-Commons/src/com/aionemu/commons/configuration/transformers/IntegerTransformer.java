@@ -29,10 +29,10 @@
  */
 package com.aionemu.commons.configuration.transformers;
 
+import java.lang.reflect.Field;
+
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
-
-import java.lang.reflect.Field;
 
 /**
  * Transfomrs string to integer. Integer can be represented both as decimal or
@@ -51,10 +51,13 @@ public class IntegerTransformer implements PropertyTransformer<Integer> {
     /**
      * Transforms value to integer
      *
-     * @param value value that will be transformed
-     * @param field value will be assigned to this field
+     * @param value
+     *            value that will be transformed
+     * @param field
+     *            value will be assigned to this field
      * @return Integer object that represents value
-     * @throws TransformationException if something went wrong
+     * @throws TransformationException
+     *             if something went wrong
      */
     @Override
     public Integer transform(String value, Field field) throws TransformationException {

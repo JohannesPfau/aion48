@@ -29,9 +29,9 @@
  */
 package quest.miragent_holy_templar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,7 +49,7 @@ public class _19064TemplarOfConstruction extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {203701, 798450, 203752};
+        int[] npcs = { 203701, 798450, 203752 };
         qe.registerQuestNpc(203701).addOnQuestStart(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -92,12 +92,14 @@ public class _19064TemplarOfConstruction extends QuestHandler {
                 case 203752:
                     switch (dialog) {
                         case QUEST_SELECT: {
-                            if (var == 1 && player.getInventory().getItemCountByItemId(182213237) >= 1 && player.getInventory().getItemCountByItemId(186000081) >= 1) {
+                            if (var == 1 && player.getInventory().getItemCountByItemId(182213237) >= 1
+                                && player.getInventory().getItemCountByItemId(186000081) >= 1) {
                                 return sendQuestDialog(env, 2375);
                             }
                         }
                         case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
-                            if (player.getInventory().getItemCountByItemId(182213237) >= 1 && player.getInventory().getItemCountByItemId(186000081) >= 1) {
+                            if (player.getInventory().getItemCountByItemId(182213237) >= 1
+                                && player.getInventory().getItemCountByItemId(186000081) >= 1) {
                                 removeQuestItem(env, 182213237, 1);
                                 removeQuestItem(env, 186000081, 1);
                                 return defaultCloseDialog(env, 1, 1, true, false);

@@ -40,8 +40,6 @@ import com.aionemu.gameserver.services.player.PlayerService;
 
 /**
  * Request to create
- *
-
  */
 public class CM_MACRO_CREATE extends AionClientPacket {
 

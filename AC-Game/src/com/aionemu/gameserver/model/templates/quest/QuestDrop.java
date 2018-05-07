@@ -105,7 +105,8 @@ public class QuestDrop {
     }
 
     /**
-     * @param questId the questId to set
+     * @param questId
+     *            the questId to set
      */
     public void setQuestId(Integer questId) {
         this.questId = questId;

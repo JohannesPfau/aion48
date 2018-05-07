@@ -58,7 +58,7 @@ public class PlayerAccountData {
     private LegionMember legionMember;
 
     public PlayerAccountData(PlayerCommonData playerCommonData, CharacterBanInfo cbi, PlayerAppearance appereance, List<Item> equipment,
-                             LegionMember legionMember) {
+        LegionMember legionMember) {
         this.playerCommonData = playerCommonData;
         this.cbi = cbi;
         this.appereance = appereance;
@@ -110,7 +110,8 @@ public class PlayerAccountData {
     }
 
     /**
-     * @param playerCommonData the playerCommonData to set
+     * @param playerCommonData
+     *            the playerCommonData to set
      */
     public void setPlayerCommonData(PlayerCommonData playerCommonData) {
         this.playerCommonData = playerCommonData;
@@ -151,7 +152,8 @@ public class PlayerAccountData {
     }
 
     /**
-     * @param equipment the equipment to set
+     * @param equipment
+     *            the equipment to set
      */
     public void setEquipment(List<Item> equipment) {
         this.equipment = equipment;

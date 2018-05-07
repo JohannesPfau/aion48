@@ -54,7 +54,7 @@ public class SM_GATHER_STATUS extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(playerobjid);
         writeD(gatherableobjid);
         writeH(0); // unk

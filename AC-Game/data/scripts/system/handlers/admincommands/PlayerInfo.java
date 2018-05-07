@@ -29,6 +29,10 @@
  */
 package admincommands;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -45,10 +49,6 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 import com.google.common.base.Predicate;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 /**
  * @author lyahim
  * @modified antness
@@ -62,7 +62,8 @@ public class PlayerInfo extends AdminCommand {
     @Override
     public void execute(Player admin, String... params) {
         if (params == null || params.length < 1) {
-            PacketSendUtility.sendMessage(admin, "syntax //playerinfo <playername> <loc | item | group | skill | legion | ap | chars | knownlist[info|add|remove] | visual[see|notsee]> ");
+            PacketSendUtility.sendMessage(admin,
+                "syntax //playerinfo <playername> <loc | item | group | skill | legion | ap | chars | knownlist[info|add|remove] | visual[see|notsee]> ");
             return;
         }
 
@@ -73,13 +74,11 @@ public class PlayerInfo extends AdminCommand {
             return;
         }
 
-        PacketSendUtility.sendMessage(
-                admin,
-                "\n[Info about " + target.getName() + "]\n-common: lv" + target.getLevel() + "("
-                        + target.getCommonData().getExpShown() + " xp), " + target.getRace() + ", "
-                        + target.getPlayerClass() + "\n-IP: " + target.getClientConnection().getIP() + "\n" + "-MAC: "
-                        + target.getClientConnection().getMacAddress() + "\n" + "-account name: "
-                        + target.getClientConnection().getAccount().getName() + "\n");
+        PacketSendUtility.sendMessage(admin,
+            "\n[Info about " + target.getName() + "]\n-common: lv" + target.getLevel() + "(" + target.getCommonData().getExpShown() + " xp), "
+                + target.getRace() + ", " + target.getPlayerClass() + "\n-IP: " + target.getClientConnection().getIP() + "\n" + "-MAC: "
+                + target.getClientConnection().getMacAddress() + "\n" + "-account name: " + target.getClientConnection().getAccount().getName()
+                + "\n");
 
         if (params.length < 2) {
             return;
@@ -97,8 +96,7 @@ public class PlayerInfo extends AdminCommand {
                 while (it.hasNext()) {
 
                     Item act = it.next();
-                    strbld.append("    " + act.getItemCount() + "(s) of " + ChatUtil.item(act.getItemTemplate().getTemplateId())
-                            + "\n");
+                    strbld.append("    " + act.getItemCount() + "(s) of " + ChatUtil.item(act.getItemTemplate().getTemplateId()) + "\n");
                 }
             }
             items.clear();
@@ -110,8 +108,7 @@ public class PlayerInfo extends AdminCommand {
             } else {
                 while (it.hasNext()) {
                     Item act = it.next();
-                    strbld.append("    " + act.getItemCount() + "(s) of " + ChatUtil.item(act.getItemTemplate().getTemplateId())
-                            + "\n");
+                    strbld.append("    " + act.getItemCount() + "(s) of " + ChatUtil.item(act.getItemTemplate().getTemplateId()) + "\n");
                 }
             }
             showAllLines(admin, strbld.toString());
@@ -124,6 +121,7 @@ public class PlayerInfo extends AdminCommand {
             } else {
                 strbld.append(group.getLeader().getName() + "\n  Members:\n");
                 group.applyOnMembers(new Predicate<Player>() {
+
                     @Override
                     public boolean apply(Player player) {
                         strbld.append("    " + player.getName() + "\n");
@@ -144,10 +142,8 @@ public class PlayerInfo extends AdminCommand {
             showAllLines(admin, strbld.toString());
         } else if (params[1].equals("loc")) {
             String chatLink = ChatUtil.position(target.getName(), admin.getRace().getRaceId(), target.getPosition());
-            PacketSendUtility.sendMessage(
-                    admin,
-                    "- " + chatLink + "'s location:\n  mapid: " + target.getWorldId() + "\n  X: " + target.getX() + " Y: "
-                            + target.getY() + "Z: " + target.getZ() + "heading: " + target.getHeading());
+            PacketSendUtility.sendMessage(admin, "- " + chatLink + "'s location:\n  mapid: " + target.getWorldId() + "\n  X: " + target.getX()
+                + " Y: " + target.getY() + "Z: " + target.getZ() + "heading: " + target.getHeading());
         } else if (params[1].equals("legion")) {
             StringBuilder strbld = new StringBuilder();
 
@@ -158,12 +154,11 @@ public class PlayerInfo extends AdminCommand {
                 ArrayList<LegionMemberEx> legionmemblist = LegionService.getInstance().loadLegionMemberExList(legion, null);
                 Iterator<LegionMemberEx> it = legionmemblist.iterator();
 
-                strbld.append("-legion info:\n  name: " + legion.getLegionName() + ", level: " + legion.getLegionLevel()
-                        + "\n  members(online):\n");
+                strbld.append("-legion info:\n  name: " + legion.getLegionName() + ", level: " + legion.getLegionLevel() + "\n  members(online):\n");
                 while (it.hasNext()) {
                     LegionMemberEx act = it.next();
-                    strbld.append("    " + act.getName() + "(" + ((act.isOnline() == true) ? "online" : "offline") + ")"
-                            + act.getRank().toString() + "\n");
+                    strbld.append(
+                        "    " + act.getName() + "(" + ((act.isOnline() == true) ? "online" : "offline") + ")" + act.getRank().toString() + "\n");
                 }
             }
             showAllLines(admin, strbld.toString());
@@ -180,7 +175,8 @@ public class PlayerInfo extends AdminCommand {
             PacketSendUtility.sendMessage(admin, "Today Kills = " + target.getAbyssRank().getDailyKill());
             PacketSendUtility.sendMessage(admin, "Today GP = " + target.getAbyssRank().getDailyGP());
         } else if (params[1].equals("chars")) {
-            PacketSendUtility.sendMessage(admin, "Others characters of " + target.getName() + " (" + target.getClientConnection().getAccount().size() + ") :");
+            PacketSendUtility.sendMessage(admin,
+                "Others characters of " + target.getName() + " (" + target.getClientConnection().getAccount().size() + ") :");
 
             Iterator<PlayerAccountData> data = target.getClientConnection().getAccount().iterator();
             while (data.hasNext()) {
@@ -227,7 +223,8 @@ public class PlayerInfo extends AdminCommand {
             }
         } else {
             PacketSendUtility.sendMessage(admin, "bad switch!");
-            PacketSendUtility.sendMessage(admin, "syntax //playerinfo <playername> <loc | item | group | skill | legion | ap | chars | knownlist[info|add|remove] | visual[see|notsee]> ");
+            PacketSendUtility.sendMessage(admin,
+                "syntax //playerinfo <playername> <loc | item | group | skill | legion | ap | chars | knownlist[info|add|remove] | visual[see|notsee]> ");
         }
     }
 

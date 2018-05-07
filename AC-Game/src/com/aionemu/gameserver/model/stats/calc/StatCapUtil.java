@@ -64,9 +64,9 @@ public class StatCapUtil {
         }
     }
 
-    static HashMap<StatEnum, Integer> minValues = new HashMap<StatEnum, Integer>();
-    static HashMap<StatEnum, Integer> maxValues = new HashMap<StatEnum, Integer>();
-    static HashMap<StatEnum, StatLimits> limits = new HashMap<StatEnum, StatLimits>();
+    static HashMap<StatEnum, Integer> minValues = new HashMap<>();
+    static HashMap<StatEnum, Integer> maxValues = new HashMap<>();
+    static HashMap<StatEnum, StatLimits> limits = new HashMap<>();
 
     static {
         for (StatEnum stat : StatEnum.values()) {
@@ -168,7 +168,7 @@ public class StatCapUtil {
                 break;
             case PHYSICAL_CRITICAL:
                 value = CustomConfig.MAX_PHYSICAL_CRITICAL;
-                break;    
+                break;
             case PVP_DEFEND_RATIO:
                 value = 900;
             case MAXHP:
@@ -204,7 +204,7 @@ public class StatCapUtil {
             }
             if (wrongStat != null) {
                 if (wrongStats == null) {
-                    wrongStats = new ArrayList<Stat2>();
+                    wrongStats = new ArrayList<>();
                 }
                 wrongStats.add(wrongStat);
             }

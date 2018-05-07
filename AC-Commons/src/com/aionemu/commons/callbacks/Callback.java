@@ -52,8 +52,10 @@ public interface Callback<T> {
      * method will be executed normally. In other case
      * {@link CallbackResult#getResult()} will be returned.
      *
-     * @param obj  on whom method should be invoked
-     * @param args method args
+     * @param obj
+     *            on whom method should be invoked
+     * @param args
+     *            method args
      * @return see {@link CallbackResult}
      */
     public CallbackResult beforeCall(T obj, Object[] args);
@@ -72,9 +74,12 @@ public interface Callback<T> {
      * mehodResult will return unmodified. In other case
      * {@link CallbackResult#getResult()} will be returned.
      *
-     * @param obj          on whom method was called
-     * @param args         method args
-     * @param methodResult result of method invocation
+     * @param obj
+     *            on whom method was called
+     * @param args
+     *            method args
+     * @param methodResult
+     *            result of method invocation
      * @return see {@link CallbackResult}
      */
     public CallbackResult afterCall(T obj, Object[] args, Object methodResult);

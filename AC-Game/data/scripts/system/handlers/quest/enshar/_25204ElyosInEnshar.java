@@ -29,9 +29,9 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -39,23 +39,23 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author pralinka
  */
- 
+
 public class _25204ElyosInEnshar extends QuestHandler {
 
-	private final static int questId = 25204;
+    private final static int questId = 25204;
 
-	public _25204ElyosInEnshar() {
-		super(questId);
-	}
+    public _25204ElyosInEnshar() {
+        super(questId);
+    }
 
-	@Override
-	public void register() {
-		qe.registerQuestNpc(804914).addOnQuestStart(questId);
-		qe.registerQuestNpc(804914).addOnTalkEvent(questId);
-		qe.registerOnKillInWorld(220080000, questId);
-	}
-	
-	@Override
+    @Override
+    public void register() {
+        qe.registerQuestNpc(804914).addOnQuestStart(questId);
+        qe.registerQuestNpc(804914).addOnTalkEvent(questId);
+        qe.registerOnKillInWorld(220080000, questId);
+    }
+
+    @Override
     public boolean onKillInWorldEvent(QuestEnv env) {
         return defaultOnKillRankedEvent(env, 0, 5, true);
     }

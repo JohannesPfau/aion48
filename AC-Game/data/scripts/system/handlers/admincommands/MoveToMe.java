@@ -29,14 +29,15 @@
  */
 package admincommands;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Admin movetome command.
@@ -69,8 +70,8 @@ public class MoveToMe extends AdminCommand {
             return;
         }
 
-        TeleportService2.teleportTo(playerToMove, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(),
-                player.getZ(), player.getHeading());
+        TeleportService2.teleportTo(playerToMove, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(), player.getZ(),
+            player.getHeading());
         PacketSendUtility.sendMessage(player, "Teleported player " + playerToMove.getName() + " to your location.");
         PacketSendUtility.sendMessage(playerToMove, "You have been teleported by " + player.getName() + ".");
 

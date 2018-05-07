@@ -61,9 +61,10 @@ public class CM_BROKER_LIST extends AionClientPacket {
 
     @Override
     protected void runImpl() {
-    	Player player = getConnection().getActivePlayer();
-    	if (player == null) return;
-    	
+        Player player = getConnection().getActivePlayer();
+        if (player == null)
+            return;
+
         BrokerService.getInstance().showRequestedItems(player, listMask, sortType, page, null);
     }
 }

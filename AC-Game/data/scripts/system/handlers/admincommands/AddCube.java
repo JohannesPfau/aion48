@@ -69,7 +69,8 @@ public class AddCube extends AdminCommand {
                 PacketSendUtility.sendMessage(admin, "12 cube slots successfully added to player " + receiver.getName() + "!");
                 PacketSendUtility.sendMessage(receiver, "Admin " + admin.getName() + " gave you a cube expansion!");
             } else {
-                PacketSendUtility.sendMessage(admin, "Cube expansion cannot be added to " + receiver.getName() + "!\nReason: player cube already fully expanded.");
+                PacketSendUtility.sendMessage(admin,
+                    "Cube expansion cannot be added to " + receiver.getName() + "!\nReason: player cube already fully expanded.");
                 return;
             }
         }

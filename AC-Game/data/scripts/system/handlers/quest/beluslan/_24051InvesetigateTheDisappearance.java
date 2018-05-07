@@ -29,12 +29,12 @@
  */
 package quest.beluslan;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
+import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -48,7 +48,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _24051InvesetigateTheDisappearance extends QuestHandler {
 
     private final static int questId = 24051;
-    private final static int[] npcs = {204707, 204749, 204800, 700359};
+    private final static int[] npcs = { 204707, 204749, 204800, 700359 };
 
     public _24051InvesetigateTheDisappearance() {
         super(questId);
@@ -171,6 +171,7 @@ public class _24051InvesetigateTheDisappearance extends QuestHandler {
             if (name == ZoneName.get("MINE_PORT_220040000")) {
                 if (var == 5) {
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             playQuestMovie(env, 236);

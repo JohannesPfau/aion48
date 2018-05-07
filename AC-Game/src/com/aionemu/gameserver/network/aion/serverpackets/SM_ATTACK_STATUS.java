@@ -50,7 +50,7 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
     public static enum TYPE {
 
         NATURAL_HP(3),
-        USED_HP(4),//when skill uses hp as cost parameter
+        USED_HP(4), //when skill uses hp as cost parameter
         REGULAR(5),
         ABSORBED_HP(6),
         HP(7),
@@ -66,6 +66,7 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
         FP_RINGS(24),
         FP(25),
         NATURAL_FP(26);
+
         private int value;
 
         private TYPE(int value) {
@@ -93,6 +94,7 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
         REGULARHEAL(170),
         REGULAR(189),
         ATTACK(190);
+
         private int value;
 
         private LOG(int value) {
@@ -125,12 +127,12 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(creature.getObjectId());
         switch (type) {
-        	case ATTACK:
-        		writeD(0xffffffd9);//unk like objectids for skills O.o
-        		break;
+            case ATTACK:
+                writeD(0xffffffd9);//unk like objectids for skills O.o
+                break;
             case DAMAGE:
             case DELAYDAMAGE:
                 writeD(-value);
@@ -142,9 +144,9 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
         writeC(creature.getLifeStats().getHpPercentage());
         writeH(skillId);
         if (skillId != 0)
-        	writeH(logId);
+            writeH(logId);
         else
-        	writeH(LOG.ATTACK.getValue());
+            writeH(LOG.ATTACK.getValue());
     }
     // logId
     // depends on effecttemplate

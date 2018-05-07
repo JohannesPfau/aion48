@@ -29,11 +29,11 @@
  */
 package quest.morheim;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -83,10 +83,9 @@ public class _2300MorheimCommandersCall extends QuestHandler {
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
-                int[] ids = {2031, 2032, 2033, 2034, 2035, 2036, 2037, 2038, 2039, 2040, 2041, 2042};
+                int[] ids = { 2031, 2032, 2033, 2034, 2035, 2036, 2037, 2038, 2039, 2040, 2041, 2042 };
                 for (int id : ids) {
-                    QuestEngine.getInstance().onEnterZoneMissionEnd(
-                            new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+                    QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
                 }
             }
             return sendQuestEndDialog(env);

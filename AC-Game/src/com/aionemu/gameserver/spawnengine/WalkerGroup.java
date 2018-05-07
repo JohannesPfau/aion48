@@ -85,8 +85,8 @@ public class WalkerGroup {
                 float bounds = sum(members, on(ClusteredNpc.class).getNpc().getObjectTemplate().getBoundRadius().getSide());
                 float distance = (1 - members.size()) / 2f * (WalkerGroupShift.DISTANCE + bounds);
                 Point2D origin = new Point2D(walkerXpos, walkerYpos);
-                Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(), members.get(0).getWalkTemplate()
-                        .getRouteStep(2).getY());
+                Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(),
+                    members.get(0).getWalkTemplate().getRouteStep(2).getY());
                 for (int i = 0; i < members.size(); i++, distance += WalkerGroupShift.DISTANCE) {
                     WalkerGroupShift shift = new WalkerGroupShift(distance, 0);
                     Point2D loc = getLinePoint(origin, destination, shift);
@@ -109,8 +109,8 @@ public class WalkerGroup {
                     coronalDist -= rowDistances[i];
                 }
                 Point2D origin = new Point2D(walkerXpos, walkerYpos);
-                Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(), members.get(0).getWalkTemplate()
-                        .getRouteStep(2).getY());
+                Point2D destination = new Point2D(members.get(0).getWalkTemplate().getRouteStep(2).getX(),
+                    members.get(0).getWalkTemplate().getRouteStep(2).getY());
                 int index = 0;
                 for (int i = 0; i < rows.length; i++) {
                     float sagittalDist = (1 - rows[i]) / 2f * WalkerGroupShift.DISTANCE;
@@ -146,25 +146,28 @@ public class WalkerGroup {
     /**
      * Returns coordinates of NPC in 2D from the initial spawn location
      *
-     * @param origin      - initial spawn location
-     * @param destination - point of next move
-     * @param shift       - distance from origin located in lines perpendicular to
-     *                    destination; for SagittalShift if negative then located to the left from
-     *                    origin, otherwise, to the right for CoronalShift if negative then located
-     *                    to back, otherwise to the front
+     * @param origin
+     *            - initial spawn location
+     * @param destination
+     *            - point of next move
+     * @param shift
+     *            - distance from origin located in lines perpendicular to
+     *            destination; for SagittalShift if negative then located to the left from
+     *            origin, otherwise, to the right for CoronalShift if negative then located
+     *            to back, otherwise to the front
      * @category TODO: move to MathUtil when all kinds of WalkerGroupType are
-     * implemented.
+     *           implemented.
      */
     public static Point2D getLinePoint(Point2D origin, Point2D destination, WalkerGroupShift shift) {
         // TODO: implement angle shift
         WalkerGroupShift dir = getShiftSigns(origin, destination);
         Point2D result = null;
         if (origin.getY() - destination.getY() == 0) {
-            return new Point2D(origin.getX() + dir.getCoronalShift() * shift.getCoronalShift(), origin.getY() - dir.getSagittalShift()
-                    * shift.getSagittalShift());
+            return new Point2D(origin.getX() + dir.getCoronalShift() * shift.getCoronalShift(),
+                origin.getY() - dir.getSagittalShift() * shift.getSagittalShift());
         } else if (origin.getX() - destination.getX() == 0) {
-            return new Point2D(origin.getX() + dir.getCoronalShift() * shift.getSagittalShift(), origin.getY() + dir.getCoronalShift()
-                    * shift.getCoronalShift());
+            return new Point2D(origin.getX() + dir.getCoronalShift() * shift.getSagittalShift(),
+                origin.getY() + dir.getCoronalShift() * shift.getCoronalShift());
         } else {
             double slope = (origin.getX() - destination.getX()) / (origin.getY() - destination.getY());
             double dx = Math.abs(shift.getSagittalShift()) / Math.sqrt(1 + slope * slope);
@@ -178,7 +181,7 @@ public class WalkerGroup {
             Point2D rotatedShift = null;
             if (shift.getSagittalShift() != 0) {
                 rotatedShift = getLinePoint(origin, destination,
-                        new WalkerGroupShift(Math.signum(shift.getSagittalShift()) * Math.abs(shift.getCoronalShift()), 0));
+                    new WalkerGroupShift(Math.signum(shift.getSagittalShift()) * Math.abs(shift.getCoronalShift()), 0));
             } else {
                 rotatedShift = getLinePoint(origin, destination, new WalkerGroupShift(Math.abs(shift.getCoronalShift()), 0));
             }

@@ -33,11 +33,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javolution.util.FastMap;
-
 import org.apache.commons.lang.math.IntRange;
 
 import com.aionemu.gameserver.model.templates.rewards.CraftReward;
+
+import javolution.util.FastMap;
 
 /**
  * @author Rolandas
@@ -50,7 +50,7 @@ public abstract class CraftGroup extends BonusItemGroup {
         if (!dataHolder.containsKey(skillId)) {
             return new ItemRaceEntry[0];
         }
-        List<ItemRaceEntry> result = new ArrayList<ItemRaceEntry>();
+        List<ItemRaceEntry> result = new ArrayList<>();
         for (List<CraftReward> items : dataHolder.get(skillId).values()) {
             result.addAll(items);
         }
@@ -61,7 +61,7 @@ public abstract class CraftGroup extends BonusItemGroup {
         if (!dataHolder.containsKey(skillId)) {
             return new ItemRaceEntry[0];
         }
-        List<ItemRaceEntry> result = new ArrayList<ItemRaceEntry>();
+        List<ItemRaceEntry> result = new ArrayList<>();
         for (Entry<IntRange, List<CraftReward>> entry : dataHolder.get(skillId).entrySet()) {
             if (!entry.getKey().containsInteger(skillPoints)) {
                 continue;
@@ -79,7 +79,8 @@ public abstract class CraftGroup extends BonusItemGroup {
     }
 
     /**
-     * @param dataHolder the dataHolder to set
+     * @param dataHolder
+     *            the dataHolder to set
      */
     public void setDataHolder(FastMap<Integer, FastMap<IntRange, List<CraftReward>>> dataHolder) {
         this.dataHolder = dataHolder;

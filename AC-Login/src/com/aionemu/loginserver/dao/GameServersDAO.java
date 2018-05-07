@@ -29,10 +29,10 @@
  */
 package com.aionemu.loginserver.dao;
 
+import java.util.Map;
+
 import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.loginserver.GameServerInfo;
-
-import java.util.Map;
 
 /**
  * DAO that manages GameServers

@@ -35,8 +35,6 @@ import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,30 +55,30 @@ import com.aionemu.gameserver.services.rift.RiftManager;
 import com.aionemu.gameserver.services.rift.RiftOpenRunnable;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 
-
+import javolution.util.FastMap;
 
 /**
  * @author Source
  */
 public class RiftService {
 
-	private static final Logger log = LoggerFactory.getLogger(RiftService.class);
-	private static final int duration = CustomConfig.RIFT_DURATION;
-	
+    private static final Logger log = LoggerFactory.getLogger(RiftService.class);
+    private static final int duration = CustomConfig.RIFT_DURATION;
+
     private RiftSchedule schedule;
     private Map<Integer, RiftLocation> locations;
     private final Lock closing = new ReentrantLock();
-    private FastMap<Integer, RiftLocation> activeRifts = new FastMap<Integer, RiftLocation>();
-    
+    private FastMap<Integer, RiftLocation> activeRifts = new FastMap<>();
 
     public static RiftService getInstance() {
         return RiftServiceHolder.INSTANCE;
     }
 
     private static class RiftServiceHolder {
+
         private static final RiftService INSTANCE = new RiftService();
-    } 
-    
+    }
+
     public void openRifts(RiftLocation location, boolean guards) {
         location.setOpened(true);
 
@@ -141,8 +139,8 @@ public class RiftService {
 
     public Map<Integer, RiftLocation> getRiftLocations() {
         return locations;
-    }   
-    
+    }
+
     public void initRiftLocations() {
         if (CustomConfig.RIFT_ENABLED) {
             log.info("Loading Rift Locations...");
@@ -154,7 +152,7 @@ public class RiftService {
     }
 
     public void initRifts() {
-    	if (CustomConfig.RIFT_ENABLED) {
+        if (CustomConfig.RIFT_ENABLED) {
             log.info("Init Rifts...");
             schedule = RiftSchedule.load();
             for (RiftSchedule.Rift rift : schedule.getRiftsList()) {
@@ -214,10 +212,10 @@ public class RiftService {
         }
         return false;
     }
-    
+
     public boolean isValidId(int id) {
         if (isRift(id)) {
-        	
+
             return RiftService.getInstance().getRiftLocations().keySet().contains(id);
         } else {
             for (RiftLocation loc : RiftService.getInstance().getRiftLocations().values()) {
@@ -232,5 +230,5 @@ public class RiftService {
 
     private boolean isRift(int id) {
         return id < 10000;
-    }    
+    }
 }

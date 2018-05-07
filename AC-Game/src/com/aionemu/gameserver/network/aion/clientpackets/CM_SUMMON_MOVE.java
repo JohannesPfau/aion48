@@ -48,8 +48,8 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 
     private byte type;
     private byte heading;
-    private float x = 0f, y = 0f, z = 0f, x2 = 0f, y2 = 0f, z2 = 0f, vehicleX = 0f, vehicleY = 0f, vehicleZ = 0f,
-            vectorX = 0f, vectorY = 0f, vectorZ = 0f;
+    private float x = 0f, y = 0f, z = 0f, x2 = 0f, y2 = 0f, z2 = 0f, vehicleX = 0f, vehicleY = 0f, vehicleZ = 0f, vectorX = 0f, vectorY = 0f,
+        vectorZ = 0f;
     private byte glideFlag;
     private int unk1, unk2;
 
@@ -77,10 +77,12 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 
         if ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE) {
             if ((type & MovementMask.MOUSE) == 0) {
-                /* [xTz] in packet is missed this for type 0xC0
-                 vectorX = readF();
-                 vectorY = readF();
-                 vectorZ = readF();*/
+                /*
+                 * [xTz] in packet is missed this for type 0xC0
+                 * vectorX = readF();
+                 * vectorY = readF();
+                 * vectorZ = readF();
+                 */
                 x2 = vectorX + x;
                 y2 = vectorY + y;
                 z2 = vectorZ + z;

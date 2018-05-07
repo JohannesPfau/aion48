@@ -29,6 +29,8 @@
  */
 package admincommands;
 
+import java.util.List;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -41,9 +43,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import javolution.util.FastList;
 
-import java.util.List;
+import javolution.util.FastList;
 
 /**
  * @author KID
@@ -130,7 +131,8 @@ public class LegionCommand extends AdminCommand {
 
             long old = legion.getContributionPoints();
             service.setContributionPoints(legion, points, true);
-            PacketSendUtility.sendMessage(player, "legion " + legion.getLegionName() + " has raised from " + old + " to " + points + " contributiong points.");
+            PacketSendUtility.sendMessage(player,
+                "legion " + legion.getLegionName() + " has raised from " + old + " to " + points + " contributiong points.");
         } else if (params[0].equalsIgnoreCase("setname")) {
             if (!verifyLenght(player, 3, params)) //legion setname NAME NEWNAME
             {
@@ -233,7 +235,8 @@ public class LegionCommand extends AdminCommand {
             }
 
             if (target.isLegionMember()) {
-                PacketSendUtility.sendMessage(player, "player " + target.getName() + " is a already member of " + target.getLegion().getLegionName() + "!");
+                PacketSendUtility.sendMessage(player,
+                    "player " + target.getName() + " is a already member of " + target.getLegion().getLegionName() + "!");
                 return;
             }
 
@@ -260,7 +263,8 @@ public class LegionCommand extends AdminCommand {
             }
 
             if (!legion.isMember(target.getObjectId())) {
-                PacketSendUtility.sendMessage(player, "player " + target.getName() + " is not a member of " + legion.getLegionName() + ", invite them!");
+                PacketSendUtility.sendMessage(player,
+                    "player " + target.getName() + " is not a member of " + legion.getLegionName() + ", invite them!");
                 return;
             }
 

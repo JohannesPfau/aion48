@@ -85,6 +85,7 @@ public class CM_CLOSE_DIALOG extends AionClientPacket {
             DialogService.onCloseDialog(npc, player);
 
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     client.sendPacket(new SM_HEADING_UPDATE(targetObjectId, obj.getHeading()));

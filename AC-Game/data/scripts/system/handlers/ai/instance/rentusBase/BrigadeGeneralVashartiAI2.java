@@ -29,7 +29,12 @@
  */
 package ai.instance.rentusBase;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -48,11 +53,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -60,13 +61,13 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @AIName("brigade_general_vasharti")
 public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 
-    private List<Integer> percents = new ArrayList<Integer>();
+    private List<Integer> percents = new ArrayList<>();
     private AtomicBoolean isHome = new AtomicBoolean(true);
     private boolean canThink = true;
     private Future<?> flameBuffTask;
     private Future<?> flameSmashTask;
-    private List<Point3D> blueFlameSmashs = new ArrayList<Point3D>();
-    private List<Point3D> redFlameSmashs = new ArrayList<Point3D>();
+    private List<Point3D> blueFlameSmashs = new ArrayList<>();
+    private List<Point3D> redFlameSmashs = new ArrayList<>();
     private int flameSmashCount = 1;
 
     @Override
@@ -104,6 +105,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 
     private void startAirEvent(final NpcAI2 ai, final int percent) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
 
@@ -141,12 +143,14 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
                     final Npc buffNpc = (Npc) spawn(283007, 188.33f, 414.61f, 260.61f, (byte) 0);
 
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             if (!buffNpc.getLifeStats().isAlreadyDead()) {
                                 startFlameSmashEvent(percent);
                                 SkillEngine.getInstance().getSkill(buffNpc, 20538, 60, buffNpc).useNoAnimationSkill();
                                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                     @Override
                                     public void run() {
                                         buffNpc.getController().onDelete();
@@ -156,6 +160,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
                         }
                     }, 1000);
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             cancelFlameSmashTask();
@@ -191,6 +196,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 
     private void startFlameSmashEvent(final int percent) {
         flameSmashTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -260,7 +266,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
     }
 
     private List<Point3D> getRedFlameSmashs(int npcId) {
-        List<Point3D> flameSmashs = new ArrayList<Point3D>();
+        List<Point3D> flameSmashs = new ArrayList<>();
         for (Point3D flameSmash : (npcId == 283008 ? redFlameSmashs : blueFlameSmashs)) {
             if (!isSpawned(npcId, flameSmash)) {
                 flameSmashs.add(flameSmash);
@@ -308,6 +314,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 
     private void startFlameBuffEvent() {
         flameBuffTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead() || !getOwner().isSpawned()) {
@@ -334,6 +341,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 
     private void useKissBuff(final Npc npc) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (npc != null && !npc.getLifeStats().isAlreadyDead()) {
@@ -345,7 +353,7 @@ public class BrigadeGeneralVashartiAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{80, 70, 50, 40, 25});
+        Collections.addAll(percents, new Integer[] { 80, 70, 50, 40, 25 });
     }
 
     @Override

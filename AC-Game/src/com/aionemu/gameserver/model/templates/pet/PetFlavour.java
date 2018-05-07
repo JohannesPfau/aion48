@@ -47,7 +47,7 @@ import com.aionemu.gameserver.services.toypet.PetHungryLevel;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PetFlavour", propOrder = {"food"})
+@XmlType(name = "PetFlavour", propOrder = { "food" })
 public class PetFlavour {
 
     @XmlElement(required = true)
@@ -63,7 +63,7 @@ public class PetFlavour {
 
     public List<PetRewards> getFood() {
         if (food == null) {
-            food = new ArrayList<PetRewards>();
+            food = new ArrayList<>();
         }
         return this.food;
     }

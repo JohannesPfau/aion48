@@ -49,6 +49,7 @@ import com.aionemu.gameserver.model.templates.itemgroups.ItemRaceEntry;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="CraftReward">
  *   &lt;complexContent>
@@ -63,7 +64,7 @@ import com.aionemu.gameserver.model.templates.itemgroups.ItemRaceEntry;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "CraftReward")
-@XmlSeeAlso({CraftRecipe.class, CraftItem.class})
+@XmlSeeAlso({ CraftRecipe.class, CraftItem.class })
 public abstract class CraftReward extends ItemRaceEntry {
 
     @XmlAttribute(name = "skill")

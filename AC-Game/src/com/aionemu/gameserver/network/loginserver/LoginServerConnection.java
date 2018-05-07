@@ -46,8 +46,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * Object representing connection between LoginServer and GameServer.
- *
-
  */
 public class LoginServerConnection extends AConnection {
 
@@ -74,7 +72,7 @@ public class LoginServerConnection extends AConnection {
     /**
      * Server Packet "to send" Queue
      */
-    private final Deque<LsServerPacket> sendMsgQueue = new ArrayDeque<LsServerPacket>();
+    private final Deque<LsServerPacket> sendMsgQueue = new ArrayDeque<>();
     /**
      * Current state of this connection
      */
@@ -111,7 +109,7 @@ public class LoginServerConnection extends AConnection {
      *
      * @param data
      * @return True if data was processed correctly, False if some error
-     * occurred and connection should be closed NOW.
+     *         occurred and connection should be closed NOW.
      */
     @Override
     public boolean processData(ByteBuffer data) {
@@ -134,7 +132,7 @@ public class LoginServerConnection extends AConnection {
      *
      * @param data
      * @return True if data was written to buffer, False indicating that there
-     * are not any more data to write.
+     *         are not any more data to write.
      */
     @Override
     protected final boolean writeData(ByteBuffer data) {
@@ -154,7 +152,7 @@ public class LoginServerConnection extends AConnection {
      * closed.
      *
      * @return time in ms after witch onDisconnect() method will be called.
-     * Always return 0.
+     *         Always return 0.
      */
     @Override
     protected final long getDisconnectionDelay() {
@@ -181,7 +179,8 @@ public class LoginServerConnection extends AConnection {
     /**
      * Sends GsServerPacket to this client.
      *
-     * @param bp GsServerPacket to be sent.
+     * @param bp
+     *            GsServerPacket to be sent.
      */
     public final void sendPacket(LsServerPacket bp) {
         synchronized (guard) {
@@ -207,8 +206,10 @@ public class LoginServerConnection extends AConnection {
      * other things. forced means that server shouldn't wait with removing this
      * connection.
      *
-     * @param closePacket Packet that will be send before closing.
-     * @param forced      have no effect in this implementation.
+     * @param closePacket
+     *            Packet that will be send before closing.
+     * @param forced
+     *            have no effect in this implementation.
      */
     public final void close(LsServerPacket closePacket, boolean forced) {
         synchronized (guard) {
@@ -234,7 +235,8 @@ public class LoginServerConnection extends AConnection {
     }
 
     /**
-     * @param state Set current state of this connection.
+     * @param state
+     *            Set current state of this connection.
      */
     public void setState(State state) {
         this.state = state;

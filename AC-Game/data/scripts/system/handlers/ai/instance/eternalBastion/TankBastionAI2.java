@@ -29,7 +29,8 @@
  */
 package ai.instance.eternalBastion;
 
-import ai.GeneralNpcAI2;
+import java.util.List;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -42,13 +43,14 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import java.util.List;
+import ai.GeneralNpcAI2;
 
 /**
  * @author Alcapwnd
  */
 @AIName("tank_bastion")
 public class TankBastionAI2 extends GeneralNpcAI2 {
+
     protected int rewardDialogId = 5;
     protected int startingDialogId = 10;
     protected int questDialogId = 10;

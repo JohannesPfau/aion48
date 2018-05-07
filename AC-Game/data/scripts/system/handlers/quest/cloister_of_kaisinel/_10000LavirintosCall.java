@@ -29,16 +29,15 @@
  */
 package quest.cloister_of_kaisinel;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -62,20 +61,22 @@ public class _10000LavirintosCall extends QuestHandler {
         qe.registerQuestNpc(798600).addOnTalkEvent(questId); // eremitia
     }
 
-    /*@Override
-    public boolean onEnterWorldEvent(QuestEnv env) {
-        Player player = env.getPlayer();
-        if (player.getWorldId() == 110010000) {
-            QuestState qs = player.getQuestStateList().getQuestState(questId);
-            if (qs == null) {
-                env.setQuestId(questId);
-                if (QuestService.startQuest(env)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }*/
+    /*
+     * @Override
+     * public boolean onEnterWorldEvent(QuestEnv env) {
+     * Player player = env.getPlayer();
+     * if (player.getWorldId() == 110010000) {
+     * QuestState qs = player.getQuestStateList().getQuestState(questId);
+     * if (qs == null) {
+     * env.setQuestId(questId);
+     * if (QuestService.startQuest(env)) {
+     * return true;
+     * }
+     * }
+     * }
+     * return false;
+     * }
+     */
 
     @Override
     public boolean onDialogEvent(QuestEnv env) {
@@ -120,12 +121,12 @@ public class _10000LavirintosCall extends QuestHandler {
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
                 } else {
-                    int[] quests = {10001, 10026, 10020, 10021, 10022, 10023, 10024, 10025};
+                    int[] quests = { 10001, 10026, 10020, 10021, 10022, 10023, 10024, 10025 };
                     for (int quest : quests) {
-                        QuestEngine.getInstance().onEnterZoneMissionEnd(
-                                new QuestEnv(env.getVisibleObject(), env.getPlayer(), quest, env.getDialogId()));
+                        QuestEngine.getInstance()
+                            .onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), quest, env.getDialogId()));
                     }
-                    int[] questItems = {182206300};
+                    int[] questItems = { 182206300 };
                     return sendQuestEndDialog(env, questItems);
                 }
             }

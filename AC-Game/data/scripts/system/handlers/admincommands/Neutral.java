@@ -46,10 +46,9 @@ public class Neutral extends AdminCommand {
 
     @Override
     public void execute(Player admin, String... params) {
-        String help = "Syntax: //neutral < players | npcs | all | cancel >\n"
-                + "Players - You're neutral to Players of both factions.\n" + "Npcs - You're neutral to all Npcs and Monsters.\n"
-                + "All - You're neutral to Players of both factions and all Npcs.\n"
-                + "Cancel - Cancel all. Players and Npcs have default enmity to you.";
+        String help = "Syntax: //neutral < players | npcs | all | cancel >\n" + "Players - You're neutral to Players of both factions.\n"
+            + "Npcs - You're neutral to all Npcs and Monsters.\n" + "All - You're neutral to Players of both factions and all Npcs.\n"
+            + "Cancel - Cancel all. Players and Npcs have default enmity to you.";
 
         if (params.length != 1) {
             onFail(admin, null);
@@ -94,8 +93,7 @@ public class Neutral extends AdminCommand {
 
     @Override
     public void onFail(Player player, String message) {
-        String syntax = "Syntax: //neutral < players | npcs | all | cancel >\n"
-                + "If you're unsure about what you want to do, type //neutral help";
+        String syntax = "Syntax: //neutral < players | npcs | all | cancel >\n" + "If you're unsure about what you want to do, type //neutral help";
         PacketSendUtility.sendMessage(player, syntax);
     }
 }

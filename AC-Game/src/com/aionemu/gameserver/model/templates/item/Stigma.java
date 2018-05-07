@@ -57,7 +57,7 @@ public class Stigma {
      * @return list
      */
     public List<StigmaSkill> getSkills() {
-        List<StigmaSkill> list = new ArrayList<StigmaSkill>();
+        List<StigmaSkill> list = new ArrayList<>();
         for (String st : skill) {
             String[] array = st.split(":");
             list.add(new StigmaSkill(Integer.parseInt(array[0]), Integer.parseInt(array[1])));
@@ -65,11 +65,12 @@ public class Stigma {
 
         return list;
     }
+
     public List<Integer> getSkillIdOnly() {
-        ArrayList<Integer> arrayList = new ArrayList<Integer>();
+        ArrayList<Integer> arrayList = new ArrayList<>();
         List<String> list = this.skill;
         if (list.size() != 1) {
-            String[] arrstring = new String[]{};
+            String[] arrstring = new String[] {};
             for (String string : list) {
                 arrstring = string.split(":");
                 arrayList.add(Integer.parseInt(arrstring[1]));
@@ -82,6 +83,7 @@ public class Stigma {
         }
         return arrayList;
     }
+
     /**
      * @return the kinah //4.8
      */
@@ -91,7 +93,7 @@ public class Stigma {
 
     public List<RequireSkill> getRequireSkill() {
         if (requireSkill == null) {
-            requireSkill = new ArrayList<RequireSkill>();
+            requireSkill = new ArrayList<>();
         }
         return this.requireSkill;
     }

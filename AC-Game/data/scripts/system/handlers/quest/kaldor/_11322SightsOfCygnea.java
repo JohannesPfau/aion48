@@ -29,9 +29,9 @@
  */
 package quest.kaldor;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -39,7 +39,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author pralinka
  */
- 
+
 public class _11322SightsOfCygnea extends QuestHandler {
 
     private final static int questId = 11322;
@@ -51,7 +51,7 @@ public class _11322SightsOfCygnea extends QuestHandler {
     @Override
     public void register() {
         qe.registerQuestNpc(802452).addOnQuestStart(questId);
-		qe.registerQuestNpc(802452).addOnTalkEvent(questId);
+        qe.registerQuestNpc(802452).addOnTalkEvent(questId);
         qe.registerQuestNpc(804782).addOnTalkEvent(questId);
 
     }
@@ -83,7 +83,7 @@ public class _11322SightsOfCygnea extends QuestHandler {
             if (targetId == 804782) {
                 return sendQuestEndDialog(env);
             }
-        } 
+        }
         return false;
     }
 }

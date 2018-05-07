@@ -38,21 +38,18 @@ public class Webshop {
 
     private int id;
     private String recipient;
-	private int itemId;
-	private int count;
-	private String send;
-    
-    
-    
+    private int itemId;
+    private int count;
+    private String send;
+
     public Webshop(int id, String recipient, int itemId, int count, String send) {
         this.id = id;
         this.recipient = recipient;
-		this.itemId = itemId;
-		this.count = count;
-		this.send = send;
+        this.itemId = itemId;
+        this.count = count;
+        this.send = send;
     }
 
-    
     public int getId() {
         if (id != 0) {
             return id;
@@ -64,8 +61,8 @@ public class Webshop {
     public String getRecipient() {
         return recipient;
     }
-	
-	public int getItemId() {
+
+    public int getItemId() {
         return itemId;
     }
 
@@ -73,7 +70,7 @@ public class Webshop {
         return count;
     }
 
-   	public String getSend() {
+    public String getSend() {
         return send;
     }
 }

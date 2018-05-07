@@ -29,11 +29,11 @@
  */
 package quest.sanctum;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -133,7 +133,7 @@ public class _3968PalentinesRequest extends QuestHandler {
             if (env.getDialog() == DialogAction.USE_OBJECT && qs.getStatus() == QuestStatus.REWARD) {
                 return sendQuestDialog(env, 2375);
             } else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-                    && qs.getStatus() != QuestStatus.NONE) {
+                && qs.getStatus() != QuestStatus.NONE) {
                 qs.setStatus(QuestStatus.REWARD);
                 updateQuestStatus(env);
                 removeQuestItem(env, 182206123, 1);

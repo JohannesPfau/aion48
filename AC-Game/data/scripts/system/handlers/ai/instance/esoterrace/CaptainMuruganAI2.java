@@ -29,7 +29,9 @@
  */
 package ai.instance.esoterrace;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -38,8 +40,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -65,6 +66,7 @@ public class CaptainMuruganAI2 extends AggressiveNpcAI2 {
             SkillEngine.getInstance().getSkill(getOwner(), 19324, 10, target).useNoAnimationSkill();
         }
         task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -74,6 +76,7 @@ public class CaptainMuruganAI2 extends AggressiveNpcAI2 {
                     SkillEngine.getInstance().getSkill(getOwner(), 19325, 5, getOwner()).useNoAnimationSkill();
                     if (getLifeStats().getHpPercentage() < 50) {
                         specialSkillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                             @Override
                             public void run() {
                                 if (!isAlreadyDead()) {
@@ -83,6 +86,7 @@ public class CaptainMuruganAI2 extends AggressiveNpcAI2 {
                                         SkillEngine.getInstance().getSkill(getOwner(), 19324, 10, target).useNoAnimationSkill();
                                     }
                                     specialSkillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                         @Override
                                         public void run() {
                                             if (!isAlreadyDead()) {

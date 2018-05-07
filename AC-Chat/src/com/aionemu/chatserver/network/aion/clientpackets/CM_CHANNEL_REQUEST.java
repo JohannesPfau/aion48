@@ -32,9 +32,8 @@ package com.aionemu.chatserver.network.aion.clientpackets;
 import java.io.UnsupportedEncodingException;
 
 import org.jboss.netty.buffer.ChannelBuffer;
-import org.slf4j.LoggerFactory;
-
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.Config;
 import com.aionemu.chatserver.model.ChatClient;
@@ -93,7 +92,6 @@ public class CM_CHANNEL_REQUEST extends AbstractClientPacket {
 
     @Override
     public String toString() {
-        return "CM_CHANNEL_REQUEST [channelIndex=" + channelIndex + ", channelIdentifier=" + new String(channelIdentifier)
-                + "]";
+        return "CM_CHANNEL_REQUEST [channelIndex=" + channelIndex + ", channelIdentifier=" + new String(channelIdentifier) + "]";
     }
 }

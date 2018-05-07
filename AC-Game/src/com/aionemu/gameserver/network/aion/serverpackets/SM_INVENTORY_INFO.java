@@ -42,8 +42,7 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob;
 
 /**
  * In this packet Server is sending Inventory Info
- *
-, alexa026, Avol ;d modified by ATracer, Rolandas
+ * , alexa026, Avol ;d modified by ATracer, Rolandas
  */
 public class SM_INVENTORY_INFO extends AionServerPacket {
 
@@ -67,7 +66,7 @@ public class SM_INVENTORY_INFO extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         // something wrong with cube part.
         writeC(isFirstPacket ? 1 : 0);
         writeC(npcExpandsSize); // cube size from npc (so max 5 for now)

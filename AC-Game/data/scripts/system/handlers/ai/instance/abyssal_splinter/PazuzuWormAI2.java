@@ -29,10 +29,11 @@
  */
 package ai.instance.abyssal_splinter;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Eloann
@@ -44,6 +45,7 @@ public class PazuzuWormAI2 extends AggressiveNpcAI2 {
     protected void handleSpawned() {
         super.handleSpawned();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 AI2Actions.targetCreature(PazuzuWormAI2.this, getPosition().getWorldMapInstance().getNpc(219942));

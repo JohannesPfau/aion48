@@ -68,8 +68,7 @@ public class DispelEffect extends EffectTemplate {
             return;
         }
 
-        if ((dispeltype == DispelType.EFFECTID || dispeltype == DispelType.EFFECTIDRANGE)
-                && effectids == null) {
+        if ((dispeltype == DispelType.EFFECTID || dispeltype == DispelType.EFFECTIDRANGE) && effectids == null) {
             return;
         }
 
@@ -84,26 +83,26 @@ public class DispelEffect extends EffectTemplate {
         switch (dispeltype) {
             case EFFECTID:
                 for (Integer effectId : effectids) {
-					if (effectId == 10216101 || effectId == 10216111 || effectId == 10216121 || effectId == 10216181) {
-						if (effect.getEffected().getEffectController().isAbnormalPresentBySkillId(21610)) {
-							effect.getEffected().getEffectController().removeEffectByEffectId(10216101);
-							break;
-						}
-						if (effect.getEffected().getEffectController().isAbnormalPresentBySkillId(21611)) {
-							effect.getEffected().getEffectController().removeEffectByEffectId(10216111);
-							break;
-						}
-						if (effect.getEffected().getEffectController().isAbnormalPresentBySkillId(21612)) {
-							effect.getEffected().getEffectController().removeEffectByEffectId(10216121);
-							break;
-						}
-						if (effect.getEffected().getEffectController().isAbnormalPresentBySkillId(21618)) {
-							effect.getEffected().getEffectController().removeEffectByEffectId(10216181);
-							break;
-						}
-					} else {
-						effect.getEffected().getEffectController().removeEffectByEffectId(effectId);
-					}
+                    if (effectId == 10216101 || effectId == 10216111 || effectId == 10216121 || effectId == 10216181) {
+                        if (effect.getEffected().getEffectController().isAbnormalPresentBySkillId(21610)) {
+                            effect.getEffected().getEffectController().removeEffectByEffectId(10216101);
+                            break;
+                        }
+                        if (effect.getEffected().getEffectController().isAbnormalPresentBySkillId(21611)) {
+                            effect.getEffected().getEffectController().removeEffectByEffectId(10216111);
+                            break;
+                        }
+                        if (effect.getEffected().getEffectController().isAbnormalPresentBySkillId(21612)) {
+                            effect.getEffected().getEffectController().removeEffectByEffectId(10216121);
+                            break;
+                        }
+                        if (effect.getEffected().getEffectController().isAbnormalPresentBySkillId(21618)) {
+                            effect.getEffected().getEffectController().removeEffectByEffectId(10216181);
+                            break;
+                        }
+                    } else {
+                        effect.getEffected().getEffectController().removeEffectByEffectId(effectId);
+                    }
                 }
                 break;
             case EFFECTIDRANGE:
@@ -118,9 +117,9 @@ public class DispelEffect extends EffectTemplate {
 
                 //fix for AT HyperGate skill - 3853 , 3818
                 for (String type : effecttype) {
-                    if (type.equals("RIDEROBOT")){
+                    if (type.equals("RIDEROBOT")) {
                         Player player = (Player) effect.getEffector();
-                        if (checkEmbark(player) != 0){
+                        if (checkEmbark(player) != 0) {
                             player.getEffectController().removeEffect(checkEmbark(player));
                         }
                     } else {
@@ -145,11 +144,11 @@ public class DispelEffect extends EffectTemplate {
         PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_PLAYER_STATE(effect.getEffected()));
     }
 
-    private int checkEmbark(Player player){
+    private int checkEmbark(Player player) {
         //All Embark Skills 1 to 5
-        int[] embarkSkills = {3601, 3600, 3599, 3598, 3597};
-        for(int eIds : embarkSkills){
-            if(player.getEffectController().isNoshowPresentBySkillId(eIds)){
+        int[] embarkSkills = { 3601, 3600, 3599, 3598, 3597 };
+        for (int eIds : embarkSkills) {
+            if (player.getEffectController().isNoshowPresentBySkillId(eIds)) {
                 return eIds;
             }
         }

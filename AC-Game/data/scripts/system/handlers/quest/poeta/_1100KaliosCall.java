@@ -29,16 +29,15 @@
  */
 package quest.poeta;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-
 
 /**
  * @author MrPoke
@@ -54,28 +53,28 @@ public class _1100KaliosCall extends QuestHandler {
 
     @Override
     public void register() {
-		qe.registerOnLevelUp(questId);
+        qe.registerOnLevelUp(questId);
         qe.registerQuestNpc(203067).addOnTalkEvent(questId);
     }
 
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
+    @Override
+    public boolean onLvlUpEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         boolean lvlCheck = QuestService.checkLevelRequirement(questId, player.getCommonData().getLevel());
-		
-		if (!lvlCheck || qs != null)
-				return false;
-     
-			env.setQuestId(questId);
-			if (QuestService.startQuest(env)) {
-				qs = player.getQuestStateList().getQuestState(questId);
-				qs.setStatus(QuestStatus.START);
-				updateQuestStatus(env);
-			}
-			return true;
+
+        if (!lvlCheck || qs != null)
+            return false;
+
+        env.setQuestId(questId);
+        if (QuestService.startQuest(env)) {
+            qs = player.getQuestStateList().getQuestState(questId);
+            qs.setStatus(QuestStatus.START);
+            updateQuestStatus(env);
+        }
+        return true;
     }
-	
+
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         final Player player = env.getPlayer();
@@ -92,7 +91,7 @@ public class _1100KaliosCall extends QuestHandler {
             return false;
         }
         if (qs.getStatus() == QuestStatus.START) {
-            if (env.getDialog() == DialogAction.QUEST_SELECT) {           
+            if (env.getDialog() == DialogAction.QUEST_SELECT) {
                 qs.setStatus(QuestStatus.REWARD);
                 updateQuestStatus(env);
                 return sendQuestDialog(env, 1011);
@@ -101,10 +100,9 @@ public class _1100KaliosCall extends QuestHandler {
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
-                int[] ids = {1001, 1002, 1003, 1004, 1005};
+                int[] ids = { 1001, 1002, 1003, 1004, 1005 };
                 for (int id : ids) {
-                    QuestEngine.getInstance().onEnterZoneMissionEnd(
-                            new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+                    QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
                 }
             }
             return sendQuestEndDialog(env);

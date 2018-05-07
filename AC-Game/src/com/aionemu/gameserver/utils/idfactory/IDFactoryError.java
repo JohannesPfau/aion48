@@ -31,8 +31,6 @@ package com.aionemu.gameserver.utils.idfactory;
 
 /**
  * This error is thrown by id factory
- *
-
  */
 @SuppressWarnings("serial")
 public class IDFactoryError extends Error {

@@ -29,11 +29,11 @@
  */
 package quest.inggison;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,7 +45,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _11455WhentheTimeisRipe extends QuestHandler {
 
     private final static int questId = 11455;
-    private final static int[] npc_ids = {799070, 798933, 798946};
+    private final static int[] npc_ids = { 799070, 798933, 798946 };
 
     public _11455WhentheTimeisRipe() {
         super(questId);

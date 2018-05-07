@@ -39,7 +39,6 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
  * ie: sending equip slot only) It is the first and only block for non-equipable
  * items, and the last blob for EquipableItems
  *
-
  * @modified Rolandas
  */
 public class GeneralInfoBlobEntry extends ItemBlobEntry {

@@ -45,7 +45,8 @@ import com.aionemu.gameserver.skillengine.properties.AreaDirections;
 
 /**
  * Class with basic math.<br>
- * Thanks to: <li>
+ * Thanks to:
+ * <li>
  * <ul>
  * http://geom-java.sourceforge.net/
  * </ul>
@@ -56,6 +57,7 @@ import com.aionemu.gameserver.skillengine.properties.AreaDirections;
  * <br>
  * Few words about speed:
  * <p/>
+ * 
  * <pre>
  * Math.hypot(dx, dy); // Extremely slow
  * Math.sqrt(Math.pow(dx, 2) + Math.pow(dy, 2)); // 20 times faster than hypot
@@ -67,62 +69,56 @@ import com.aionemu.gameserver.skillengine.properties.AreaDirections;
  * In fact the difference is very small, so it can be ignored.<br>
  * Feel free to run the following test (or to find a mistake in it ^^).<br>
  * <p/>
+ * 
  * <pre>
  * import java.util.Random;
  *
  * public class MathSpeedTest {
  *
- * 	private static long time;
+ *     private static long time;
  *
- * 	private static long n = 100000000L;
+ *     private static long n = 100000000L;
  *
- * 	public static void main(String[] args) {
+ *     public static void main(String[] args) {
  *
- * 		Random r = new Random();
+ *         Random r = new Random();
  *
- * 		long x;
- * 		long y;
+ *         long x;
+ *         long y;
  *
- * 		double res = 0;
- * 		setTime();
- * 		for (int i = 0; i &lt; n; i++) {
- * 			x = r.nextInt();
- * 			y = r.nextInt();
- * 			res = Math.sqrt(x * x + y * y);
- *        }
- * 		printTime();
- * 		System.out.println(res);
+ *         double res = 0;
+ *         setTime();
+ *         for (int i = 0; i &lt; n; i++) {
+ *             x = r.nextInt();
+ *             y = r.nextInt();
+ *             res = Math.sqrt(x * x + y * y);
+ *         }
+ *         printTime();
+ *         System.out.println(res);
  *
- * 		setTime();
- * 		for (int i = 0; i &lt; n; i++) {
- * 			x = r.nextInt();
- * 			y = r.nextInt();
- * 			res = x * x + y * y;
- *        }
- * 		printTime();
- * 		System.out.println(Math.sqrt(res));
- *    }
+ *         setTime();
+ *         for (int i = 0; i &lt; n; i++) {
+ *             x = r.nextInt();
+ *             y = r.nextInt();
+ *             res = x * x + y * y;
+ *         }
+ *         printTime();
+ *         System.out.println(Math.sqrt(res));
+ *     }
  *
- * 	public static void setTime() {
- * 		time = System.currentTimeMillis();
- *    }
+ *     public static void setTime() {
+ *         time = System.currentTimeMillis();
+ *     }
  *
- * 	public static void printTime() {
- * 		System.out.println(System.currentTimeMillis() - time);
- *    }
+ *     public static void printTime() {
+ *         System.out.println(System.currentTimeMillis() - time);
+ *     }
  * }
- *
- *
- *
- *
- *
- *
- *
  *
  * </pre>
  *
  * @author Disturbing
- modified by Wakizashi
+ *         modified by Wakizashi
  * @author GiGatR00n (Aion-Core)
  */
 public class MathUtil {
@@ -130,8 +126,10 @@ public class MathUtil {
     /**
      * Returns distance between two 2D points
      *
-     * @param point1 first point
-     * @param point2 second point
+     * @param point1
+     *            first point
+     * @param point2
+     *            second point
      * @return distance between points
      */
     public static double getDistance(Point2D point1, Point2D point2) {
@@ -141,10 +139,14 @@ public class MathUtil {
     /**
      * Returns distance between two sets of coords
      *
-     * @param x1 first x coord
-     * @param y1 first y coord
-     * @param x2 second x coord
-     * @param y2 second y coord
+     * @param x1
+     *            first x coord
+     * @param y1
+     *            first y coord
+     * @param x2
+     *            second x coord
+     * @param y2
+     *            second y coord
      * @return distance between sets of coords
      */
     public static double getDistance(float x1, float y1, float x2, float y2) {
@@ -160,8 +162,10 @@ public class MathUtil {
     /**
      * Returns distance between two 3D points
      *
-     * @param point1 first point
-     * @param point2 second point
+     * @param point1
+     *            first point
+     * @param point2
+     *            second point
      * @return distance between points
      */
     public static double getDistance(Point3D point1, Point3D point2) {
@@ -175,12 +179,18 @@ public class MathUtil {
     /**
      * Returns distance between 3D set of coords
      *
-     * @param x1 first x coord
-     * @param y1 first y coord
-     * @param z1 first z coord
-     * @param x2 second x coord
-     * @param y2 second y coord
-     * @param z2 second z coord
+     * @param x1
+     *            first x coord
+     * @param y1
+     *            first y coord
+     * @param z1
+     *            first z coord
+     * @param x2
+     *            second x coord
+     * @param y2
+     *            second y coord
+     * @param z2
+     *            second z coord
      * @return distance between coords
      */
     public static double getDistance(float x1, float y1, float z1, float x2, float y2, float z2) {
@@ -215,9 +225,12 @@ public class MathUtil {
     /**
      * Returns closest point on segment to point
      *
-     * @param ss segment start point
-     * @param se segment end point
-     * @param p  point to found closest point on segment
+     * @param ss
+     *            segment start point
+     * @param se
+     *            segment end point
+     * @param p
+     *            point to found closest point on segment
      * @return closest point on segment to p
      */
     public static Point2D getClosestPointOnSegment(Point ss, Point se, Point p) {
@@ -227,12 +240,18 @@ public class MathUtil {
     /**
      * Returns closest point on segment to point
      *
-     * @param sx1 segment x coord 1
-     * @param sy1 segment y coord 1
-     * @param sx2 segment x coord 2
-     * @param sy2 segment y coord 2
-     * @param px  point x coord
-     * @param py  point y coord
+     * @param sx1
+     *            segment x coord 1
+     * @param sy1
+     *            segment y coord 1
+     * @param sx2
+     *            segment x coord 2
+     * @param sy2
+     *            segment y coord 2
+     * @param px
+     *            point x coord
+     * @param py
+     *            point y coord
      * @return closets point on segment to point
      */
     public static Point2D getClosestPointOnSegment(float sx1, float sy1, float sx2, float sy2, float px, float py) {
@@ -260,9 +279,12 @@ public class MathUtil {
     /**
      * Returns distance to segment
      *
-     * @param ss segment start point
-     * @param se segment end point
-     * @param p  point to found closest point on segment
+     * @param ss
+     *            segment start point
+     * @param se
+     *            segment end point
+     * @param p
+     *            point to found closest point on segment
      * @return distance to segment
      */
     public static double getDistanceToSegment(Point ss, Point se, Point p) {
@@ -272,12 +294,18 @@ public class MathUtil {
     /**
      * Returns distance to segment
      *
-     * @param sx1 segment x coord 1
-     * @param sy1 segment y coord 1
-     * @param sx2 segment x coord 2
-     * @param sy2 segment y coord 2
-     * @param px  point x coord
-     * @param py  point y coord
+     * @param sx1
+     *            segment x coord 1
+     * @param sy1
+     *            segment y coord 1
+     * @param sx2
+     *            segment x coord 2
+     * @param sy2
+     *            segment y coord 2
+     * @param px
+     *            point x coord
+     * @param py
+     *            point y coord
      * @return distance to segment
      */
     public static double getDistanceToSegment(int sx1, int sy1, int sx2, int sy2, int px, int py) {
@@ -344,8 +372,8 @@ public class MathUtil {
      * @param range
      * @return boolean
      */
-    public static boolean isIn3dRange(final float obj1X, final float obj1Y, final float obj1Z, final float obj2X,
-                                      final float obj2Y, final float obj2Z, float range) {
+    public static boolean isIn3dRange(final float obj1X, final float obj1Y, final float obj1Z, final float obj2X, final float obj2Y,
+        final float obj2Z, float range) {
         float dx = (obj2X - obj1X);
         float dy = (obj2Y - obj1Y);
         float dz = (obj2Z - obj1Z);
@@ -363,8 +391,7 @@ public class MathUtil {
      * @param radius
      * @return true if the object is in the sphere
      */
-    public static boolean isInSphere(final VisibleObject obj, final float centerX, final float centerY,
-                                     final float centerZ, final float radius) {
+    public static boolean isInSphere(final VisibleObject obj, final float centerX, final float centerY, final float centerZ, final float radius) {
         float dx = (obj.getX() - centerX);
         float dy = (obj.getY() - centerY);
         float dz = (obj.getZ() - centerZ);
@@ -429,8 +456,7 @@ public class MathUtil {
      * @return
      */
     public final static boolean isNearCoordinates(VisibleObject obj, VisibleObject obj2, int offset) {
-        return getDistance(obj.getX(), obj.getY(), obj.getZ(), obj2.getX(), obj2.getY(), obj2.getZ()) < offset
-                + NpcMoveController.MOVE_CHECK_OFFSET;
+        return getDistance(obj.getX(), obj.getY(), obj.getZ(), obj2.getX(), obj2.getY(), obj2.getZ()) < offset + NpcMoveController.MOVE_CHECK_OFFSET;
     }
 
     public final static boolean isInAttackRange(Creature object1, Creature object2, float range) {
@@ -440,8 +466,7 @@ public class MathUtil {
         if (object1.getWorldId() != object2.getWorldId() || object1.getInstanceId() != object2.getInstanceId()) {
             return false;
         }
-        float offset = object1.getObjectTemplate().getBoundRadius().getCollision()
-                + object2.getObjectTemplate().getBoundRadius().getCollision();
+        float offset = object1.getObjectTemplate().getBoundRadius().getCollision() + object2.getObjectTemplate().getBoundRadius().getCollision();
         if (object1.getMoveController().isInMove()) {
             offset = +3f;
         }
@@ -451,8 +476,7 @@ public class MathUtil {
         return ((getDistance(object1, object2) - offset) <= range);
     }
 
-    public final static boolean isInsideAttackCylinder(VisibleObject obj1, VisibleObject obj2, int length, int radius,
-                                                       AreaDirections directions) {
+    public final static boolean isInsideAttackCylinder(VisibleObject obj1, VisibleObject obj2, int length, int radius, AreaDirections directions) {
         double radian = Math.toRadians(convertHeadingToDegree(obj1.getHeading()));
         int direction = directions == AreaDirections.FRONT ? 0 : 1;
         float dx = (float) (Math.cos(Math.PI * direction + radian) * length);
@@ -472,153 +496,143 @@ public class MathUtil {
         return (tdx * tdx + tdy * tdy + tdz * tdz) - dot * dot / lengthSqr <= radius;
     }
 
-    
     /**
      * Generate a Random 2DPoint within a Circle of radius R (uniformly)
      */
     public final static Point get2DPointInsideCircle(float CenterX, float CenterY, int Radius) {
 
-    	//Choose a Random X between -1 and 1
-    	double X = Math.random() * 2 - 1;
-    	
-    	//Calculate the Maximum and Minimum values of Y with a radius of 1
-    	double YMin = -Math.sqrt(1 - X * X);
-    	double YMax = Math.sqrt(1 - X * X);
-    	
-    	//Choose a Random Y Between Them
-    	double Y = Math.random() * (YMax - YMin) + YMin;
-    	
-    	//Incorporate your Location and Radius values in the final value
-    	double finalX = X * Radius + CenterX;
-    	double finalY = Y * Radius + CenterY;
-    	
-    	return new Point((int) finalX, (int) finalY);
-    }
-    
-    
-    /**
-     *  Generate a Random 2DPoint on a <b>Circle Circumference</b> using the given <b>angle</b>
-     */
-    public final static Point get2DPointOnCircleCircumference(float CenterX, float CenterY, int Radius, float angleInDegrees)
-    {
-        // Convert from degrees to radians via multiplication by PI/180        
-        float finalX = (float)(Radius * Math.cos(angleInDegrees * Math.PI / 180F)) + CenterX;
-        float finalY = (float)(Radius * Math.sin(angleInDegrees * Math.PI / 180F)) + CenterY;
+        //Choose a Random X between -1 and 1
+        double X = Math.random() * 2 - 1;
+
+        //Calculate the Maximum and Minimum values of Y with a radius of 1
+        double YMin = -Math.sqrt(1 - X * X);
+        double YMax = Math.sqrt(1 - X * X);
+
+        //Choose a Random Y Between Them
+        double Y = Math.random() * (YMax - YMin) + YMin;
+
+        //Incorporate your Location and Radius values in the final value
+        double finalX = X * Radius + CenterX;
+        double finalY = Y * Radius + CenterY;
 
         return new Point((int) finalX, (int) finalY);
     }
-    
+
     /**
-     *  Generate a Random 2DPoint on a Circle Circumference.
-     *  <br><br>
-     *  <b>Note:</b> It calculated using the angle between two point <i><b>"CenterPoint"</b></i> and <i><b>"EndPoint"</b></i> with <i><b>x-axis</b></i>.
+     * Generate a Random 2DPoint on a <b>Circle Circumference</b> using the given <b>angle</b>
      */
-    public final static Point get2DPointOnCircleCircumference(Point CenterPoint, Point EndPoint, int Radius)
-    {
-    	// Calculates the Angle between the line through those two points "StarPoint" and "EndPoint" and the X-Axis
-    	double AngleinXAxis = getAngle(CenterPoint, EndPoint);
-    	
+    public final static Point get2DPointOnCircleCircumference(float CenterX, float CenterY, int Radius, float angleInDegrees) {
         // Convert from degrees to radians via multiplication by PI/180        
-        float finalX = (float)(Radius * Math.cos(AngleinXAxis * Math.PI / 180F)) + CenterPoint.x;
-        float finalY = (float)(Radius * Math.sin(AngleinXAxis * Math.PI / 180F)) + CenterPoint.y;
+        float finalX = (float) (Radius * Math.cos(angleInDegrees * Math.PI / 180F)) + CenterX;
+        float finalY = (float) (Radius * Math.sin(angleInDegrees * Math.PI / 180F)) + CenterY;
 
         return new Point((int) finalX, (int) finalY);
     }
-    
+
+    /**
+     * Generate a Random 2DPoint on a Circle Circumference.
+     * <br>
+     * <br>
+     * <b>Note:</b> It calculated using the angle between two point <i><b>"CenterPoint"</b></i> and <i><b>"EndPoint"</b></i> with
+     * <i><b>x-axis</b></i>.
+     */
+    public final static Point get2DPointOnCircleCircumference(Point CenterPoint, Point EndPoint, int Radius) {
+        // Calculates the Angle between the line through those two points "StarPoint" and "EndPoint" and the X-Axis
+        double AngleinXAxis = getAngle(CenterPoint, EndPoint);
+
+        // Convert from degrees to radians via multiplication by PI/180        
+        float finalX = (float) (Radius * Math.cos(AngleinXAxis * Math.PI / 180F)) + CenterPoint.x;
+        float finalY = (float) (Radius * Math.sin(AngleinXAxis * Math.PI / 180F)) + CenterPoint.y;
+
+        return new Point((int) finalX, (int) finalY);
+    }
+
     /**
      * Calculates the angle between the line through those two points <i><b>P1</b></i> and <i><b>P2</b></i> and the <i><b>x-axis</b></i>.
-     * <br><br>
+     * <br>
+     * <br>
      * (Degrees)
      */
-    public final static double getAngle(Point P1, Point P2)
-    {
-    	float dx = P2.x - P1.x;
-    	float dy = P2.y - P1.y;
-    	
-    	double angle = Math.atan2(dx, dy) * 180 / Math.PI;
-    	
-    	return angle;
+    public final static double getAngle(Point P1, Point P2) {
+        float dx = P2.x - P1.x;
+        float dy = P2.y - P1.y;
+
+        double angle = Math.atan2(dx, dy) * 180 / Math.PI;
+
+        return angle;
     }
-    
+
     /**
-     * Generate a 2DPoint inside a Circle of radius R which closest to a given point (pX, pY) <br><br>
+     * Generate a 2DPoint inside a Circle of radius R which closest to a given point (pX, pY) <br>
+     * <br>
      */
-    public final static Point get2DPointInsideCircleClosestTo(Point Center, int Radius, Point GivenPoint)
-    {
-		/*
-		 * P is the Point, C is the Center, and R is the radius
-		 * 
-		 * 		V = (P - C); Answer = C + V / |V| * R;
-		 *
-		 * 		where |V| is length of V
-		 */
-    	double vX = GivenPoint.x - Center.x;
-    	double vY = GivenPoint.y - Center.y;
-    	double magV = Math.sqrt(vX * vX + vY * vY);
+    public final static Point get2DPointInsideCircleClosestTo(Point Center, int Radius, Point GivenPoint) {
+        /*
+         * P is the Point, C is the Center, and R is the radius
+         * V = (P - C); Answer = C + V / |V| * R;
+         * where |V| is length of V
+         */
+        double vX = GivenPoint.x - Center.x;
+        double vY = GivenPoint.y - Center.y;
+        double magV = Math.sqrt(vX * vX + vY * vY);
 
-    	double aX = Center.x + vX / magV * Radius;
-    	double aY = Center.y + vY / magV * Radius;
+        double aX = Center.x + vX / magV * Radius;
+        double aY = Center.y + vY / magV * Radius;
 
-    	return new Point((int) aX, (int) aY);
+        return new Point((int) aX, (int) aY);
     }
-    
-    
-    
+
     /**
-     * Generate a Random 2D Point within an <b>Annulus</b> (ring) <br><br>
-     * 
+     * Generate a Random 2D Point within an <b>Annulus</b> (ring) <br>
+     * <br>
      * <b>Note:</b><br>
-     * 		both circles are centered at the same point
+     * both circles are centered at the same point
      */
-    public final static Point get2DPointInsideAnnulus(Point Center, int Radius1, int Radius2)
-    {
-		/*
-		 * Circle 1 of Radius R1
-		 * Circle 2 of Radius R2
-		 * 
-		 * Where R1 > R2
-		 * 
-		 * Generate one Random Value for the Angular Value "theta", and one for the Distance from the Origin. 
-		 * As the Circles are both at the same origin this would be easy
-		 */
-    	
-		// Radians
-		//double theta = 2 * Math.PI * Math.random();
-    	
-		// Degrees
-		double theta = 360 * Math.random();
-		
-		// Distance from the Origin
-    	double dist = Math.sqrt(Math.random() * (Radius1*Radius1 - Radius2*Radius2) + Radius2*Radius2);
-    	
-    	double X = dist * Math.cos(theta) + Center.x;
-    	double Y = dist * Math.sin(theta) + Center.y;    	
+    public final static Point get2DPointInsideAnnulus(Point Center, int Radius1, int Radius2) {
+        /*
+         * Circle 1 of Radius R1
+         * Circle 2 of Radius R2
+         * Where R1 > R2
+         * Generate one Random Value for the Angular Value "theta", and one for the Distance from the Origin.
+         * As the Circles are both at the same origin this would be easy
+         */
 
-    	return new Point((int) X, (int) Y);
+        // Radians
+        //double theta = 2 * Math.PI * Math.random();
+
+        // Degrees
+        double theta = 360 * Math.random();
+
+        // Distance from the Origin
+        double dist = Math.sqrt(Math.random() * (Radius1 * Radius1 - Radius2 * Radius2) + Radius2 * Radius2);
+
+        double X = dist * Math.cos(theta) + Center.x;
+        double Y = dist * Math.sin(theta) + Center.y;
+
+        return new Point((int) X, (int) Y);
     }
-    
-    
+
     /**
-     * Determines whether the given object, is within an <b>Annulus (Ring)</b><br><br>
-     * 
+     * Determines whether the given object, is within an <b>Annulus (Ring)</b><br>
+     * <br>
      * <b>Where:</b><br>
      * Radius1 > Radius2<br>
      * both Circles are centered at the same point (center)
      */
     public static boolean isInAnnulus(final VisibleObject obj, Point3D Center, float Radius1, float Radius2) {
 
-    	/**
-    	 * if the given object was not within smaller circle and it was on bigger circle,
-    	 * it means that it is on Annulus (Ring)
-    	 */
-    	if (!isInSphere(obj, Center.getX(), Center.getY(), Center.getZ(), Radius2)) {
-    		if (isInSphere(obj, Center.getX(), Center.getY(), Center.getZ(), Radius1)) {
-    			return true;
-    		}
-    	}
-    	return false;
+        /**
+         * if the given object was not within smaller circle and it was on bigger circle,
+         * it means that it is on Annulus (Ring)
+         */
+        if (!isInSphere(obj, Center.getX(), Center.getY(), Center.getZ(), Radius2)) {
+            if (isInSphere(obj, Center.getX(), Center.getY(), Center.getZ(), Radius1)) {
+                return true;
+            }
+        }
+        return false;
     }
-    
+
     /**
      * Returns the correctly rounded square root of a positive BigDecimal. The
      * algorithm for taking the square root of a BigDecimal is most critical for
@@ -626,11 +640,15 @@ public class MathUtil {
      * by Coupled Newton Iteration algorithm by Timm Ahrendt, from the book "Pi,
      * unleashed" by Jörg Arndt in a neat loop.
      *
-     * @param squarD number to get the root from (called "d" in the book)
-     * @param rootMC precision and rounding mode (for the last root "x")
+     * @param squarD
+     *            number to get the root from (called "d" in the book)
+     * @param rootMC
+     *            precision and rounding mode (for the last root "x")
      * @return the root of the argument number
-     * @throws ArithmeticException if the argument number is negative
-     * @throws IllegalArgumentException if rootMC has precision 0
+     * @throws ArithmeticException
+     *             if the argument number is negative
+     * @throws IllegalArgumentException
+     *             if rootMC has precision 0
      */
     static final BigDecimal TWO = new BigDecimal(2);
     static final double SQRT_10 = 3.162277660168379332;
@@ -689,7 +707,7 @@ public class MathUtil {
         v = BigDecimal.ONE.divide(TWO.multiply(x), nMC); // v0 = 1/(2*x)
 
         // Collect iteration precisions beforehand
-        ArrayList<Integer> nPrecs = new ArrayList<Integer>();
+        ArrayList<Integer> nPrecs = new ArrayList<>();
 
         assert nInit > 3 : "Never ending loop!"; // assume nInit = 16 <= prec
 

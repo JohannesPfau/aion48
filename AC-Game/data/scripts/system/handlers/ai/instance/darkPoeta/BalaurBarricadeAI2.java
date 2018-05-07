@@ -29,15 +29,16 @@
  */
 package ai.instance.darkPoeta;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu
@@ -45,7 +46,7 @@ import java.util.List;
 @AIName("balaurbarricade")
 public class BalaurBarricadeAI2 extends AggressiveNpcAI2 {
 
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
 
     @Override
     public int modifyDamage(int damage) {
@@ -90,7 +91,7 @@ public class BalaurBarricadeAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{60, 10});
+        Collections.addAll(percents, new Integer[] { 60, 10 });
     }
 
     @Override

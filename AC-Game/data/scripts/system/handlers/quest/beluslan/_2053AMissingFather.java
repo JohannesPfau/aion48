@@ -29,11 +29,11 @@
  */
 package quest.beluslan;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -55,7 +55,7 @@ public class _2053AMissingFather extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {204707, 204749, 204800, 730108, 700359};
+        int[] npcs = { 204707, 204749, 204800, 730108, 700359 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.registerQuestItem(182204305, questId);
@@ -177,6 +177,7 @@ public class _2053AMissingFather extends QuestHandler {
             } else if (name == ZoneName.get("MINE_PORT_220040000")) {
                 if (var == 7) {
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             playQuestMovie(env, 236);

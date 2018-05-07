@@ -55,6 +55,7 @@ public class SiegeProtectorNpcAI2 extends SiegeNpcAI2 {
     private void despawnClaw() {
         final Npc claw = getPosition().getWorldMapInstance().getNpc(701237);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 claw.getController().onDelete();

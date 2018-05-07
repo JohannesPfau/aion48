@@ -46,7 +46,7 @@ public class RequireSkill {
 
     public List<Integer> getSkillIds() {
         if (skillIds == null) {
-            skillIds = new ArrayList<Integer>();
+            skillIds = new ArrayList<>();
         }
         return this.skillIds;
     }

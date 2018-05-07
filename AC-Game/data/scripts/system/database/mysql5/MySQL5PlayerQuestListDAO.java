@@ -29,6 +29,19 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.sql.Types;
+import java.util.Collection;
+
+import javax.annotation.Nullable;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
@@ -40,12 +53,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.annotation.Nullable;
-import java.sql.*;
-import java.util.Collection;
 
 /**
  * @author MrPoke
@@ -59,18 +66,21 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
     public static final String DELETE_QUERY = "DELETE FROM `player_quests` WHERE `player_id`=? AND `quest_id`=?";
     public static final String INSERT_QUERY = "INSERT INTO `player_quests` (`player_id`, `quest_id`, `status`, `quest_vars`, `complete_count`, `next_repeat_time`, `reward`, `complete_time`) VALUES (?,?,?,?,?,?,?,?)";
     private static final Predicate<QuestState> questsToAddPredicate = new Predicate<QuestState>() {
+
         @Override
         public boolean apply(@Nullable QuestState input) {
             return input != null && PersistentState.NEW == input.getPersistentState();
         }
     };
     private static final Predicate<QuestState> questsToUpdatePredicate = new Predicate<QuestState>() {
+
         @Override
         public boolean apply(@Nullable QuestState input) {
             return input != null && PersistentState.UPDATE_REQUIRED == input.getPersistentState();
         }
     };
     private static final Predicate<QuestState> questsToDeletePredicate = new Predicate<QuestState>() {
+
         @Override
         public boolean apply(@Nullable QuestState input) {
             return input != null && PersistentState.DELETED == input.getPersistentState();
@@ -105,8 +115,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
             }
             rset.close();
         } catch (Exception e) {
-            log.error(
-                    "Could not restore QuestStateList data for player: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
+            log.error("Could not restore QuestStateList data for player: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
         } finally {
             DatabaseFactory.close(stmt, con);
         }

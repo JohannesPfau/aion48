@@ -29,7 +29,10 @@
  */
 package ai.instance.shugoImperialTomb;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
@@ -41,9 +44,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 import com.aionemu.gameserver.world.World;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Swig
@@ -53,9 +54,9 @@ public class CaptainLediarAI2 extends AggressiveNpcAI2 {
 
     private WalkerTemplate template;
     private boolean canThink = true;
-    private final List<Integer> spawnedNpc = new ArrayList<Integer>();
+    private final List<Integer> spawnedNpc = new ArrayList<>();
     private AtomicBoolean isSpawnedHelpers = new AtomicBoolean(false);
-    private final static int[] npc_ids = {831251, 831250, 831305};
+    private final static int[] npc_ids = { 831251, 831250, 831305 };
 
     @Override
     protected void handleAttack(Creature creature) {

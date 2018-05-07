@@ -29,6 +29,9 @@
  */
 package com.aionemu.loginserver.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.loginserver.GameServerInfo;
@@ -51,9 +54,6 @@ import com.aionemu.loginserver.network.gameserver.serverpackets.SM_GS_CHARACTER_
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_REQUEST_KICK_ACCOUNT;
 import com.aionemu.loginserver.utils.AccountUtils;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * This class is resposible for controlling all account actions
  *
@@ -66,21 +66,22 @@ public class AccountController {
      * Map with accounts that are active on LoginServer or joined GameServer and
      * are not authenticated yet.
      */
-    private static final Map<Integer, LoginConnection> accountsOnLS = new HashMap<Integer, LoginConnection>();
+    private static final Map<Integer, LoginConnection> accountsOnLS = new HashMap<>();
     /**
      * Map with accounts that are reconnecting to LoginServer ie was joined
      * GameServer.
      */
-    private static final Map<Integer, ReconnectingAccount> reconnectingAccounts = new HashMap<Integer, ReconnectingAccount>();
+    private static final Map<Integer, ReconnectingAccount> reconnectingAccounts = new HashMap<>();
     /**
      * Map with characters count on each gameserver and accounts
      */
-    private static final Map<Integer, Map<Integer, Integer>> accountsGSCharacterCounts = new HashMap<Integer, Map<Integer, Integer>>();
+    private static final Map<Integer, Map<Integer, Integer>> accountsGSCharacterCounts = new HashMap<>();
 
     /**
      * Removes account from list of connections
      *
-     * @param account account
+     * @param account
+     *            account
      */
     public static synchronized void removeAccountOnLS(Account account) {
         accountsOnLS.remove(account.getId());
@@ -118,7 +119,8 @@ public class AccountController {
             /**
              * Send response to GameServer
              */
-            gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, true, acc.getName(), acc.getAccessLevel(), acc.getMembership(), toll));
+            gsConnection
+                .sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, true, acc.getName(), acc.getAccessLevel(), acc.getMembership(), toll));
         } else {
             gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, false, null, (byte) 0, (byte) 0, 0));
         }
@@ -136,10 +138,14 @@ public class AccountController {
     /**
      * Check if reconnecting account may auth.
      *
-     * @param accountId    id of account
-     * @param loginOk      loginOk
-     * @param reconnectKey reconnect key
-     * @param client       aion client
+     * @param accountId
+     *            id of account
+     * @param loginOk
+     *            loginOk
+     * @param reconnectKey
+     *            reconnect key
+     * @param client
+     *            aion client
      */
     public static synchronized void authReconnectingAccount(int accountId, int loginOk, int reconnectKey, LoginConnection client) {
         ReconnectingAccount reconnectingAccount = reconnectingAccounts.remove(accountId);
@@ -164,9 +170,12 @@ public class AccountController {
      * If {@link com.aionemu.loginserver.configs.Config#ACCOUNT_AUTO_CREATION}
      * is enabled - creates new account.<br>
      *
-     * @param name       name of account
-     * @param password   password of account
-     * @param connection connection for account
+     * @param name
+     *            name of account
+     * @param password
+     *            password of account
+     * @param connection
+     *            connection for account
      * @return Response with error code
      */
     public static AionAuthResponse login(String name, String password, LoginConnection connection) {
@@ -212,11 +221,9 @@ public class AccountController {
         }
 
         // if account is restricted to some ip or mask
-          String ipForce = account.getIpForce(); // saves multiple dao method calls
-        if (ipForce != null && ipForce.length() > 0 && !ipForce.equals("0"))
-        {
-            if (!NetworkUtils.checkIPMatching(ipForce, connection.getIP()))
-            {
+        String ipForce = account.getIpForce(); // saves multiple dao method calls
+        if (ipForce != null && ipForce.length() > 0 && !ipForce.equals("0")) {
+            if (!NetworkUtils.checkIPMatching(ipForce, connection.getIP())) {
                 return AionAuthResponse.BAN_IP;
             }
         }
@@ -252,7 +259,8 @@ public class AccountController {
     /**
      * Kicks account from LoginServer and GameServers
      *
-     * @param accountId account ID to kick
+     * @param accountId
+     *            account ID to kick
      */
     public static void kickAccount(int accountId) {
         synchronized (AccountController.class) {
@@ -272,8 +280,10 @@ public class AccountController {
     /**
      * Refresh last_mac of account
      *
-     * @param accountId id of account
-     * @param adress    new macAdress
+     * @param accountId
+     *            id of account
+     * @param adress
+     *            new macAdress
      * @return refreshed or not
      */
     public static boolean refreshAccountsLastMac(int accountId, String address) {
@@ -284,7 +294,8 @@ public class AccountController {
      * Loads account from DB and returns it, or returns null if account was not
      * loaded
      *
-     * @param name acccount name
+     * @param name
+     *            acccount name
      * @return loaded account or null
      */
     public static Account loadAccount(String name) {
@@ -307,8 +318,10 @@ public class AccountController {
      * Creates new account and stores it in DB. Returns account object in case
      * of success or null if failed
      *
-     * @param name     account name
-     * @param password account password
+     * @param name
+     *            account name
+     * @param password
+     *            account password
      * @return account object or null
      */
     public static Account createAccount(String name, String password) {

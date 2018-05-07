@@ -29,10 +29,11 @@
  */
 package ai.instance.shugoImperialTomb;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.manager.EmoteManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Swig
@@ -40,7 +41,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 @AIName("lediar_assistant") //219461
 public class LediarAssistantAI2 extends AggressiveNpcAI2 {
 
-    private final static int[] npc_ids = {831251, 831250, 831305};
+    private final static int[] npc_ids = { 831251, 831250, 831305 };
 
     @Override
     public int modifyOwnerDamage(int damage) {

@@ -29,12 +29,20 @@
  */
 package admincommands;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.NumberUtils;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.model.siege.*;
+import com.aionemu.gameserver.model.siege.ArtifactLocation;
+import com.aionemu.gameserver.model.siege.FortressLocation;
+import com.aionemu.gameserver.model.siege.OutpostLocation;
+import com.aionemu.gameserver.model.siege.SiegeLocation;
+import com.aionemu.gameserver.model.siege.SiegeModType;
+import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.SiegeService;
@@ -42,8 +50,6 @@ import com.aionemu.gameserver.services.siegeservice.BalaurAssaultService;
 import com.aionemu.gameserver.services.siegeservice.Siege;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import org.apache.commons.lang.StringUtils;
-import org.apache.commons.lang.math.NumberUtils;
 
 @SuppressWarnings("rawtypes")
 public class SiegeCommand extends AdminCommand {
@@ -254,9 +260,8 @@ public class SiegeCommand extends AdminCommand {
     }
 
     protected void showHelp(Player player) {
-        PacketSendUtility.sendMessage(player, "AdminCommand //siege Help\n"
-                + "//siege start|stop <LocationId>\n"
-                + "//siege list locations|sieges\n"
+        PacketSendUtility.sendMessage(player,
+            "AdminCommand //siege Help\n" + "//siege start|stop <LocationId>\n" + "//siege list locations|sieges\n"
                 + "//siege capture <LocationId> <siegeRaceName(ELYOS,ASMODIANS,BALAUR)|legionName|legionId>\n"
                 + "//siege assault <LocationId> <delaySec>");
 

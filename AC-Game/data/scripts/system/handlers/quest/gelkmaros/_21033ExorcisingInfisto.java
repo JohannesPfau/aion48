@@ -48,7 +48,7 @@ public class _21033ExorcisingInfisto extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {799256, 204734};
+        int[] npcs = { 799256, 204734 };
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }

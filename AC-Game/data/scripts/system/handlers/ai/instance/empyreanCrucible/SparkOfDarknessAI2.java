@@ -29,7 +29,6 @@
  */
 package ai.instance.empyreanCrucible;
 
-import ai.GeneralNpcAI2;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -37,6 +36,8 @@ import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Luzien
@@ -53,6 +54,7 @@ public class SparkOfDarknessAI2 extends GeneralNpcAI2 {
 
     private void startEventTask() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
@@ -64,6 +66,7 @@ public class SparkOfDarknessAI2 extends GeneralNpcAI2 {
 
     private void startLifeTask() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 AI2Actions.deleteOwner(SparkOfDarknessAI2.this);

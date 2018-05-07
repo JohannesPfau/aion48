@@ -41,7 +41,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SELECT_ITEM_ADD;
 import com.aionemu.gameserver.services.item.ItemService;
 
-
 /**
  * @author Alcapwnd
  */
@@ -77,7 +76,8 @@ public class CM_SELECTITEM_OK extends AionClientPacket {
         if (item == null) {
             return;
         }
-        sendPacket(new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(), player.getObjectId().intValue(), this.uniqueItemId, item.getItemId(), 0, 1, 0));
+        sendPacket(new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(), player.getObjectId().intValue(), this.uniqueItemId, item.getItemId(),
+            0, 1, 0));
         boolean delete = player.getInventory().decreaseByObjectId(this.uniqueItemId, 1L);
         if (delete) {
             SelectItems selectitem = DataManager.DECOMPOSABLE_SELECT_ITEM_DATA.getSelectItem(player.getPlayerClass(), item.getItemId());
@@ -87,6 +87,5 @@ public class CM_SELECTITEM_OK extends AionClientPacket {
         }
 
     }
-
 
 }

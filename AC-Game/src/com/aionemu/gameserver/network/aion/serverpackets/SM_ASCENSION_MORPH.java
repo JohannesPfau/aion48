@@ -48,7 +48,7 @@ public class SM_ASCENSION_MORPH extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(inascension);// if inascension =0x01 morph.
         writeC(0x00); // new 2.0 Packet --- probably pet info?
     }

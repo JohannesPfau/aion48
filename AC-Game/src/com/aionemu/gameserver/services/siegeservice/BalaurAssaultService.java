@@ -32,9 +32,6 @@ package com.aionemu.gameserver.services.siegeservice;
 import java.util.Iterator;
 import java.util.Map;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -57,10 +54,13 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 
+import javolution.util.FastList;
+import javolution.util.FastMap;
+
 /**
  * @author synchro2
  * @reworked Luzien TODO: Send Peace Dredgion without assault TODO: Artifact
- * Siege
+ *           Siege
  */
 public class BalaurAssaultService {
 
@@ -138,7 +138,7 @@ public class BalaurAssaultService {
     }
 
     public void startAssault(Player player, int location, int delay) {
-        if (fortressAssaults.containsKey(location) /* || artifactAssaults.containsKey(location)*/) {
+        if (fortressAssaults.containsKey(location) /* || artifactAssaults.containsKey(location) */) {
             PacketSendUtility.sendMessage(player, "Assault on " + location + " was already started");
             return;
         }
@@ -174,7 +174,8 @@ public class BalaurAssaultService {
             }
             influence = ownedForts >= 2 ? 0.25f : 0.1f;
         } else {
-            influence = locationRace.equals(SiegeRace.ASMODIANS) ? Influence.getInstance().getGlobalAsmodiansInfluence() : Influence.getInstance().getGlobalElyosInfluence();
+            influence = locationRace.equals(SiegeRace.ASMODIANS) ? Influence.getInstance().getGlobalAsmodiansInfluence()
+                : Influence.getInstance().getGlobalElyosInfluence();
         }
 
         return Rnd.get() < influence * SiegeConfig.BALAUR_ASSAULT_RATE;
@@ -182,7 +183,7 @@ public class BalaurAssaultService {
 
     public void spawnDredgion(int spawnId) {
         AssembledNpcTemplate template = DataManager.ASSEMBLED_NPC_DATA.getAssembledNpcTemplate(spawnId);
-        FastList<AssembledNpcPart> assembledPatrs = new FastList<AssembledNpcPart>();
+        FastList<AssembledNpcPart> assembledPatrs = new FastList<>();
         for (AssembledNpcTemplate.AssembledNpcPartTemplate npcPart : template.getAssembledNpcPartTemplates()) {
             assembledPatrs.add(new AssembledNpcPart(IDFactory.getInstance().nextId(), npcPart));
         }

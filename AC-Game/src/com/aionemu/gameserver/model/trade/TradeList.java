@@ -49,10 +49,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class TradeList {
 
     private int sellerObjId;
-    private List<TradeItem> tradeItems = new ArrayList<TradeItem>();
+    private List<TradeItem> tradeItems = new ArrayList<>();
     private long requiredKinah;
     private int requiredAp;
-    private Map<Integer, Long> requiredItems = new HashMap<Integer, Long>();
+    private Map<Integer, Long> requiredItems = new HashMap<>();
 
     public TradeList() {
     }
@@ -101,8 +101,8 @@ public class TradeList {
         requiredKinah = 0;
 
         for (TradeItem tradeItem : tradeItems) {
-            requiredKinah += PricesService.getKinahForBuy(tradeItem.getItemTemplate().getPrice(), player.getRace())
-                    * tradeItem.getCount() * modifier / 100;
+            requiredKinah += PricesService.getKinahForBuy(tradeItem.getItemTemplate().getPrice(), player.getRace()) * tradeItem.getCount() * modifier
+                / 100;
         }
 
         return availableKinah >= requiredKinah;
@@ -119,8 +119,7 @@ public class TradeList {
 
         for (TradeItem tradeItem : tradeItems) {
             Acquisition aquisition = tradeItem.getItemTemplate().getAcquisition();
-            if (aquisition == null || aquisition.getType() != AcquisitionType.ABYSS
-                    && aquisition.getType() != AcquisitionType.AP) {
+            if (aquisition == null || aquisition.getType() != AcquisitionType.ABYSS && aquisition.getType() != AcquisitionType.AP) {
                 continue;
             }
 
@@ -167,8 +166,7 @@ public class TradeList {
 
         for (TradeItem tradeItem : tradeItems) {
             Acquisition aquisition = tradeItem.getItemTemplate().getAcquisition();
-            if (aquisition == null || aquisition.getType() != AcquisitionType.REWARD
-                    && aquisition.getType() != AcquisitionType.COUPON) {
+            if (aquisition == null || aquisition.getType() != AcquisitionType.REWARD && aquisition.getType() != AcquisitionType.COUPON) {
                 continue;
             }
 

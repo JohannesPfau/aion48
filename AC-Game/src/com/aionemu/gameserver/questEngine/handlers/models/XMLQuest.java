@@ -42,9 +42,9 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QuestScriptData")
-@XmlSeeAlso({ReportToData.class, RelicRewardsData.class, CraftingRewardsData.class, ReportToManyData.class, MonsterHuntData.class,
-        ItemCollectingData.class, WorkOrdersData.class, XmlQuestData.class, MentorMonsterHuntData.class, ItemOrdersData.class,
-        FountainRewardsData.class, SkillUseData.class})
+@XmlSeeAlso({ ReportToData.class, RelicRewardsData.class, CraftingRewardsData.class, ReportToManyData.class, MonsterHuntData.class,
+    ItemCollectingData.class, WorkOrdersData.class, XmlQuestData.class, MentorMonsterHuntData.class, ItemOrdersData.class, FountainRewardsData.class,
+    SkillUseData.class })
 public abstract class XMLQuest {
 
     @XmlAttribute(name = "id", required = true)
@@ -73,7 +73,8 @@ public abstract class XMLQuest {
     }
 
     /**
-     * @param mission the mission to set
+     * @param mission
+     *            the mission to set
      */
     public void setMission(boolean mission) {
         this.mission = mission;

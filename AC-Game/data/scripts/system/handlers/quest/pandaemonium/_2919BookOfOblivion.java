@@ -29,9 +29,9 @@
  */
 package quest.pandaemonium;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -39,7 +39,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author Cheatkiller
  * @Fix Majka Ajural
- *
  */
 public class _2919BookOfOblivion extends QuestHandler {
 
@@ -98,15 +97,15 @@ public class _2919BookOfOblivion extends QuestHandler {
                         return sendQuestDialog(env, 3057);
                     }
                 } else if (dialog == DialogAction.SETPRO4) {
-										qs.setQuestVar(3);
-										updateQuestStatus(env);
-										return closeDialogWindow(env);
+                    qs.setQuestVar(3);
+                    updateQuestStatus(env);
+                    return closeDialogWindow(env);
                 } else if (dialog == DialogAction.SETPRO7) {
                     giveQuestItem(env, 182207013, 1);
-										qs.setQuestVar(7);
-										qs.setStatus(QuestStatus.REWARD);
-										updateQuestStatus(env);
-										return closeDialogWindow(env);
+                    qs.setQuestVar(7);
+                    qs.setStatus(QuestStatus.REWARD);
+                    updateQuestStatus(env);
+                    return closeDialogWindow(env);
                 }
             } else if (targetId == 204206) {
                 if (qs.getQuestVarById(0) == 7) {

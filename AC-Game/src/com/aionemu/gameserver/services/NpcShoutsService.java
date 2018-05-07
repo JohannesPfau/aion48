@@ -87,6 +87,7 @@ public class NpcShoutsService {
             }
 
             ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
                 @Override
                 public void run() {
                     AionObject npcObj = World.getInstance().findVisibleObject(objectId);
@@ -98,8 +99,7 @@ public class NpcShoutsService {
                         }
                         int randomShout = Rnd.get(shouts.size());
                         NpcShout shout = shouts.get(randomShout);
-                        if (shout.getPattern() != null
-                                && !((AITemplate) npc2.getAi2()).onPatternShout(ShoutEventType.IDLE, shout.getPattern(), 0)) {
+                        if (shout.getPattern() != null && !((AITemplate) npc2.getAi2()).onPatternShout(ShoutEventType.IDLE, shout.getPattern(), 0)) {
                             return;
                         }
                         Iterator<Player> iter = npc2.getKnownList().getKnownPlayers().values().iterator();
@@ -201,12 +201,15 @@ public class NpcShoutsService {
         sendMsg(null, instance, msg, 0, false, 25, delay);
     }
 
-    public void sendMsg(final Npc npc, final WorldMapInstance instance, final int msg, final int Obj, final boolean isShout, final int color, int delay) {
+    public void sendMsg(final Npc npc, final WorldMapInstance instance, final int msg, final int Obj, final boolean isShout, final int color,
+        int delay) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (npc != null && npc.isSpawned()) {
                     npc.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
                         @Override
                         public void visit(Player player) {
                             PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(isShout, msg, Obj, color));
@@ -214,6 +217,7 @@ public class NpcShoutsService {
                     });
                 } else if (instance != null) {
                     instance.doOnAllPlayers(new Visitor<Player>() {
+
                         @Override
                         public void visit(Player player) {
                             PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(isShout, msg, Obj, color));

@@ -29,7 +29,8 @@
  */
 package ai.instance.rentusBase;
 
-import ai.GeneralNpcAI2;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -44,7 +45,7 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz

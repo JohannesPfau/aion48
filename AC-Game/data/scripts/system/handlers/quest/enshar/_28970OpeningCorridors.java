@@ -29,9 +29,9 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,10 +49,10 @@ public class _28970OpeningCorridors extends QuestHandler {
 
     @Override
     public void register() {
-		qe.registerQuestNpc(804927).addOnQuestStart(questId);
-		qe.registerQuestNpc(805216).addOnTalkEvent(questId);
-		qe.registerQuestNpc(805217).addOnTalkEvent(questId);
-		qe.registerQuestNpc(805218).addOnTalkEvent(questId);
+        qe.registerQuestNpc(804927).addOnQuestStart(questId);
+        qe.registerQuestNpc(805216).addOnTalkEvent(questId);
+        qe.registerQuestNpc(805217).addOnTalkEvent(questId);
+        qe.registerQuestNpc(805218).addOnTalkEvent(questId);
     }
 
     @Override
@@ -82,7 +82,7 @@ public class _28970OpeningCorridors extends QuestHandler {
             if ((targetId == 805216) || (targetId == 805217) || (targetId == 805218)) {
                 return sendQuestEndDialog(env);
             }
-        } 
+        }
         return false;
     }
 }

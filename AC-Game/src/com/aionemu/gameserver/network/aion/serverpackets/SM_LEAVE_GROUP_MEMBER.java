@@ -40,7 +40,7 @@ public class SM_LEAVE_GROUP_MEMBER extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(0x00);
         writeC(0x00);
         writeD(0x3F);

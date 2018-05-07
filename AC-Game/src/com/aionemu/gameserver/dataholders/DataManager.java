@@ -38,8 +38,11 @@ import com.aionemu.gameserver.model.templates.mail.Mails;
 
 /**
  * This class is holding whole static data, that is loaded from
- * /data/static_data directory.<br> The data is loaded by XMLDataLoader using
- * JAXB.<br> <br> This class temporarily also contains data loaded from txt
+ * /data/static_data directory.<br>
+ * The data is loaded by XMLDataLoader using
+ * JAXB.<br>
+ * <br>
+ * This class temporarily also contains data loaded from txt
  * files by DataLoaders. It'll be changed later.
  *
  * @author Luno , orz modified by Wakizashi, reworked by Voidstar for Dual NPC DROP .dat&xml
@@ -48,7 +51,6 @@ public final class DataManager {
 
     static Logger log = LoggerFactory.getLogger(DataManager.class);
     public static NpcData NPC_DATA;
-
 
     public static NpcDropData NPC_DROP_DATA;
     public static NpcShoutData NPC_SHOUT_DATA;
@@ -150,7 +152,7 @@ public final class DataManager {
     public static ArcadeUpgradeData ARCADE_UPGRADE_DATA;
     public static MultiReturnItemData MULTI_RETURN_ITEM_DATA;
     public static BattleGroundData BATTLEGROUND_DATA;
-	
+
     private XmlDataLoader loader;
 
     /**

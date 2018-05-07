@@ -29,10 +29,10 @@
  */
 package quest.beluslan;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,7 +45,7 @@ import com.aionemu.gameserver.services.QuestService;
 public class _2051SavingBeluslanFortress extends QuestHandler {
 
     private final static int questId = 2051;
-    private final static int[] npc_ids = {204702, 204733, 204206, 278040, 700285, 700284};
+    private final static int[] npc_ids = { 204702, 204733, 204206, 278040, 700285, 700284 };
 
     public _2051SavingBeluslanFortress() {
         super(questId);

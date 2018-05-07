@@ -102,7 +102,8 @@ public class BindPointPosition {
     }
 
     /**
-     * @param persistentState the persistentState to set
+     * @param persistentState
+     *            the persistentState to set
      */
     public void setPersistentState(PersistentState persistentState) {
         switch (persistentState) {

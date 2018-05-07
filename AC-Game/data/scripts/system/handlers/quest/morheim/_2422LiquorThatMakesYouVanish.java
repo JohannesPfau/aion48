@@ -29,9 +29,9 @@
  */
 package quest.morheim;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -100,8 +100,8 @@ public class _2422LiquorThatMakesYouVanish extends QuestHandler {
                             qs.setQuestVar(2);
                             qs.setStatus(QuestStatus.REWARD);
                             updateQuestStatus(env);
-                            TeleportService2.teleportTo(player, 210020000, player.getInstanceId(), (float) 535.46, (float) 2555.62,
-                                    (float) 326.63605, (byte) 112);
+                            TeleportService2.teleportTo(player, 210020000, player.getInstanceId(), (float) 535.46, (float) 2555.62, (float) 326.63605,
+                                (byte) 112);
                             return true;
                         }
                         case FINISH_DIALOG: {

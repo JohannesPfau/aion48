@@ -29,15 +29,15 @@
  */
 package quest.eltnen;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Xitanium
@@ -51,20 +51,20 @@ public class _1041ADangerousArtifact extends QuestHandler {
         super(questId);
     }
 
-	@Override
-	public void register() {
-		int[] npcs = { 203901, 204015, 203833, 278500, 204042, 700181 };
-		qe.registerGetingItem(182201011, questId);
-		qe.registerOnLogOut(questId);
-		qe.registerAddOnReachTargetEvent(questId);
-		qe.registerAddOnLostTargetEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("LF2_SENSORYAREA_Q1041_A_206040_21_210020000"), questId);
-		qe.registerOnEnterZone(ZoneName.get("LF2_SENSORYAREA_Q1041_B_206042_23_210020000"), questId);
-		qe.registerOnLevelUp(questId);
-		for (int npc : npcs) {
-			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
-		}
-	}
+    @Override
+    public void register() {
+        int[] npcs = { 203901, 204015, 203833, 278500, 204042, 700181 };
+        qe.registerGetingItem(182201011, questId);
+        qe.registerOnLogOut(questId);
+        qe.registerAddOnReachTargetEvent(questId);
+        qe.registerAddOnLostTargetEvent(questId);
+        qe.registerOnEnterZone(ZoneName.get("LF2_SENSORYAREA_Q1041_A_206040_21_210020000"), questId);
+        qe.registerOnEnterZone(ZoneName.get("LF2_SENSORYAREA_Q1041_B_206042_23_210020000"), questId);
+        qe.registerOnLevelUp(questId);
+        for (int npc : npcs) {
+            qe.registerQuestNpc(npc).addOnTalkEvent(questId);
+        }
+    }
 
     @Override
     public boolean onDialogEvent(final QuestEnv env) {
@@ -135,11 +135,11 @@ public class _1041ADangerousArtifact extends QuestHandler {
                                 return sendQuestDialog(env, 2375);
                             }
                         }
-						case SETPRO5: {
-							TeleportService2.teleportTo(player, 210020000, 267.9352f, 2790.1128f, 272.47702f);
-							changeQuestStep(env, 5, 6, false); // 6
-							return closeDialogWindow(env);
-						}
+                        case SETPRO5: {
+                            TeleportService2.teleportTo(player, 210020000, 267.9352f, 2790.1128f, 272.47702f);
+                            changeQuestStep(env, 5, 6, false); // 6
+                            return closeDialogWindow(env);
+                        }
                     }
                     break;
                 }
@@ -220,28 +220,28 @@ public class _1041ADangerousArtifact extends QuestHandler {
         return defaultFollowEndEvent(env, 2, 1, false); // 1
     }
 
-	@Override
-	public boolean onLvlUpEvent(QuestEnv env) {
-		return defaultOnLvlUpEvent(env, 1300, true);
-	}
-	
-	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-	final Player player = env.getPlayer();
-		if (player == null) {
-			return false;
-		}
-		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() != QuestStatus.START) {
-			return false;
-		}
-		int var = qs.getQuestVarById(0);
-		if (var == 2) {
-		env.setQuestId(questId);
-		changeQuestStep(env, 2, 3, false); // 3
-		updateQuestStatus(env);
-		return true;
-		}
-	return false;
-	}
+    @Override
+    public boolean onLvlUpEvent(QuestEnv env) {
+        return defaultOnLvlUpEvent(env, 1300, true);
+    }
+
+    @Override
+    public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+        final Player player = env.getPlayer();
+        if (player == null) {
+            return false;
+        }
+        final QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (qs == null || qs.getStatus() != QuestStatus.START) {
+            return false;
+        }
+        int var = qs.getQuestVarById(0);
+        if (var == 2) {
+            env.setQuestId(questId);
+            changeQuestStep(env, 2, 3, false); // 3
+            updateQuestStatus(env);
+            return true;
+        }
+        return false;
+    }
 }

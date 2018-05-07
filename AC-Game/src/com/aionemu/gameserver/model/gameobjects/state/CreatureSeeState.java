@@ -39,6 +39,7 @@ public enum CreatureSeeState {
     SEARCH2(2), // See-Through: Hide II
     SEARCH5(5), // npc stealth
     SEARCH10(10); //3.0 npc stealth
+
     private int id;
 
     private CreatureSeeState(int id) {

@@ -29,7 +29,8 @@
  */
 package ai.instance.aturamSkyFortress;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -40,7 +41,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 
-import java.util.concurrent.Future;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -77,6 +78,7 @@ public class ShulackGuidedBombAI2 extends AggressiveNpcAI2 {
 
     private void starLifeTask() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead() && !isDestroyed) {
@@ -89,6 +91,7 @@ public class ShulackGuidedBombAI2 extends AggressiveNpcAI2 {
     private void doSchedule(final Creature creature) {
 
         task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead() && !isDestroyed) {
@@ -115,6 +118,7 @@ public class ShulackGuidedBombAI2 extends AggressiveNpcAI2 {
                 isDestroyed = true;
                 SkillEngine.getInstance().getSkill(getOwner(), 19415, 49, getOwner()).useNoAnimationSkill();
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         despawn();

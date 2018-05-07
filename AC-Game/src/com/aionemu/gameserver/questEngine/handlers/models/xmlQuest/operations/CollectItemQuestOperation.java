@@ -42,7 +42,7 @@ import com.aionemu.gameserver.services.QuestService;
  * @author Mr. Poke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "CollectItemQuestOperation", propOrder = {"_true", "_false"})
+@XmlType(name = "CollectItemQuestOperation", propOrder = { "_true", "_false" })
 public class CollectItemQuestOperation extends QuestOperation {
 
     @XmlElement(name = "true", required = true)

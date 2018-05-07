@@ -65,7 +65,7 @@ public class SM_INVENTORY_ADD_ITEM extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         // TODO: Rework it, who knows where it could be bugged else.
         int mask = addType.getMask();
         if (addType == ItemAddType.ITEM_COLLECT) {

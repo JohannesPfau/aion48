@@ -29,7 +29,11 @@
  */
 package ai.instance.udasTemple;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
@@ -48,10 +52,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * Devoted Anurati BossScript
@@ -62,8 +63,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class DevotedAnuratiAI2 extends AggressiveNpcAI2 {
 
     private AtomicBoolean isHome = new AtomicBoolean(true);
-    protected List<Integer> percents = new ArrayList<Integer>();
-    private final List<Integer> spawnedNpc = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
+    private final List<Integer> spawnedNpc = new ArrayList<>();
     private boolean canThink = true;
 
     @Override
@@ -73,7 +74,7 @@ public class DevotedAnuratiAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{80, 65, 45, 35, 25, 15, 5});
+        Collections.addAll(percents, new Integer[] { 80, 65, 45, 35, 25, 15, 5 });
     }
 
     private synchronized void checkPercentage(int hpPercentage) {
@@ -156,6 +157,7 @@ public class DevotedAnuratiAI2 extends AggressiveNpcAI2 {
         NpcShoutsService.getInstance().sendMsg(getOwner(), 1500032, getObjectId(), 0, 0);
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (isHome.equals(true) || isAlreadyDead()) {
@@ -168,6 +170,7 @@ public class DevotedAnuratiAI2 extends AggressiveNpcAI2 {
         }, 2000);
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (isHome.equals(true) || isAlreadyDead()) {

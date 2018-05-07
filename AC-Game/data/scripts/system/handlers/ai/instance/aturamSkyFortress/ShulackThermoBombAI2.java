@@ -29,7 +29,6 @@
  */
 package ai.instance.aturamSkyFortress;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -37,6 +36,8 @@ import com.aionemu.gameserver.ai2.poll.AIAnswer;
 import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -53,11 +54,13 @@ public class ShulackThermoBombAI2 extends AggressiveNpcAI2 {
     private void doSchedule() {
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
                     SkillEngine.getInstance().getSkill(getOwner(), 19416, 49, getOwner()).useNoAnimationSkill();
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             if (!isAlreadyDead()) {

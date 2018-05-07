@@ -29,13 +29,13 @@
  */
 package quest.time_of_return;
 
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
+import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -103,7 +103,8 @@ public class _14095PreparingForTheFuture extends QuestHandler {
                         case SETPRO1: {
                             WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300330000);
                             InstanceService.registerPlayerWithInstance(newInstance, player);
-                            TeleportService2.teleportTo(player, 300330000, newInstance.getInstanceId(), 224f, 251f, 125f, (byte) 10, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, 300330000, newInstance.getInstanceId(), 224f, 251f, 125f, (byte) 10,
+                                TeleportAnimation.BEAM_ANIMATION);
                             return defaultCloseDialog(env, 0, 1);
                         }
                     }

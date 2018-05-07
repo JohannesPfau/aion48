@@ -29,7 +29,10 @@
  */
 package ai.instance.theobomosLab;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
@@ -40,9 +43,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu
@@ -50,7 +51,7 @@ import java.util.List;
 @AIName("triroan")
 public class UnstableTriroanAI2 extends AggressiveNpcAI2 {
 
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
 
     @Override
     protected void handleSpawned() {
@@ -144,7 +145,7 @@ public class UnstableTriroanAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{99, 90, 80, 70, 60, 50, 40, 30, 20, 10, 5});
+        Collections.addAll(percents, new Integer[] { 99, 90, 80, 70, 60, 50, 40, 30, 20, 10, 5 });
     }
 
     @Override

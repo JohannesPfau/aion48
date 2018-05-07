@@ -31,8 +31,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.Calendar;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -47,6 +45,8 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 import com.aionemu.gameserver.world.zone.ZoneAttributes;
 
+import javolution.util.FastList;
+
 /**
  * @author Source
  * @rework Eloann
@@ -54,8 +54,8 @@ import com.aionemu.gameserver.world.zone.ZoneAttributes;
 public class DisputeLandService {
 
     private boolean active;
-    private FastList<Integer> worlds = new FastList<Integer>();
-    private static /*final*/ int chance;// = CustomConfig.DISPUTE_RND_CHANCE;
+    private FastList<Integer> worlds = new FastList<>();
+    private static /* final */ int chance;// = CustomConfig.DISPUTE_RND_CHANCE;
     private static final String rnd = CustomConfig.DISPUTE_RND_SCHEDULE; //11h to 16h
     private static final String rnd2 = CustomConfig.DISPUTE_RND2_SCHEDULE; //21h to 2h
     private static final String rnd3 = CustomConfig.DISPUTE_RND3_SCHEDULE; //2h to 7h
@@ -90,12 +90,14 @@ public class DisputeLandService {
         worlds.add(600030000); // Tiamaranta
 
         CronService.getInstance().schedule(new Runnable() { //11h to 16h
+
             @Override
             public void run() {
                 setActive(chance > Rnd.get(100));
 
                 if (isActive()) {
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             setActive(false);
@@ -106,12 +108,14 @@ public class DisputeLandService {
         }, rnd);
 
         CronService.getInstance().schedule(new Runnable() { //21h to 2h
+
             @Override
             public void run() {
                 setActive(chance > Rnd.get(100));
 
                 if (isActive()) {
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             setActive(false);
@@ -122,12 +126,14 @@ public class DisputeLandService {
         }, rnd2);
 
         CronService.getInstance().schedule(new Runnable() { //2h to 7h
+
             @Override
             public void run() {
                 setActive(chance > Rnd.get(100));
 
                 if (isActive()) {
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             setActive(false);
@@ -138,12 +144,14 @@ public class DisputeLandService {
         }, rnd3);
 
         CronService.getInstance().schedule(new Runnable() { //7h to 11h
+
             @Override
             public void run() {
                 setActive(chance > Rnd.get(100));
 
                 if (isActive()) {
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             setActive(false);
@@ -154,11 +162,13 @@ public class DisputeLandService {
         }, rnd4);
 
         CronService.getInstance().schedule(new Runnable() { //16h to 21h Always
+
             @Override
             public void run() {
                 setActive(true);
 
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         setActive(false);
@@ -202,6 +212,7 @@ public class DisputeLandService {
 
     private void broadcast() {
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 broadcast(player);

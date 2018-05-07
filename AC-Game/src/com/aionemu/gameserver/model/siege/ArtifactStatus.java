@@ -38,6 +38,7 @@ public enum ArtifactStatus {
     ACTIVATION(1),
     CASTING(2),
     ACTIVATED(3);
+
     private int id;
 
     ArtifactStatus(int id) {

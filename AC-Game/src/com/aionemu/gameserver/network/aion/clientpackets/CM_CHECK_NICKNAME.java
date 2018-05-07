@@ -42,7 +42,6 @@ import com.aionemu.gameserver.services.player.PlayerService;
 /**
  * In this packets aion client is asking if given nickname is ok/free?.
  *
-
  * @modified cura
  */
 public class CM_CHECK_NICKNAME extends AionClientPacket {

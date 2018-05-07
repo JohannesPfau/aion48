@@ -29,9 +29,9 @@
  */
 package quest.abyss_entry;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -91,7 +91,7 @@ public class _1920TestingYourMettle extends QuestHandler {
                             }
                         }
                         case SET_SUCCEED: {
-                            return defaultCloseDialog(env, 1, 1, true, false);  // reward
+                            return defaultCloseDialog(env, 1, 1, true, false); // reward
                         }
                     }
                     break;

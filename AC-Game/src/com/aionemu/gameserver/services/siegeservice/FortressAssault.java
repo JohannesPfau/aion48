@@ -67,11 +67,13 @@ public class FortressAssault extends Assault<FortressSiege> {
     @Override
     protected void scheduleAssault(int delay) {
         dredgionTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 BalaurAssaultService.getInstance().spawnDredgion(getSpawnIdByFortressId());
 
                 spawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         spawnAttackers();
@@ -94,6 +96,7 @@ public class FortressAssault extends Assault<FortressSiege> {
             rewardDefendingPlayers();
         } else {
             siegeLocation.doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player player) {
                     PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED);
@@ -145,19 +148,22 @@ public class FortressAssault extends Assault<FortressSiege> {
             Npc attaker;
             if ((i > Math.round(amount / 3)) && !spawnLocations.isEmpty()) {
                 float[] coords = spawnLocations.get(Rnd.get(spawnLocations.size()));
-                spawn = SpawnEngine.addNewSiegeSpawn(worldId, templateId, locationId, SiegeRace.BALAUR, SiegeModType.ASSAULT, coords[0], coords[1], coords[2], heading);
+                spawn = SpawnEngine.addNewSiegeSpawn(worldId, templateId, locationId, SiegeRace.BALAUR, SiegeModType.ASSAULT, coords[0], coords[1],
+                    coords[2], heading);
 
                 attaker = (Npc) SpawnEngine.spawnObject(spawn, 1);
                 attaker.getSpawn().setX(x + x1);
                 attaker.getSpawn().setY(y + y1);
                 attaker.getSpawn().setZ(z);
             } else {
-                spawn = SpawnEngine.addNewSiegeSpawn(worldId, templateId, locationId, SiegeRace.BALAUR, SiegeModType.ASSAULT, x + x1, y + y1, z, heading);
+                spawn = SpawnEngine.addNewSiegeSpawn(worldId, templateId, locationId, SiegeRace.BALAUR, SiegeModType.ASSAULT, x + x1, y + y1, z,
+                    heading);
                 SpawnEngine.spawnObject(spawn, 1);
             }
         }
 
         siegeLocation.doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ABYSS_CARRIER_DROP_DRAGON);
@@ -168,20 +174,20 @@ public class FortressAssault extends Assault<FortressSiege> {
     }
 
     private void spawnRegularBalaurs() {
-        spawnLocations = new ArrayList<float[]>();
+        spawnLocations = new ArrayList<>();
         List<SpawnGroup2> siegeSpawns = DataManager.SPAWNS_DATA2.getSiegeSpawnsByLocId(locationId);
         for (SpawnGroup2 spawnGroup : siegeSpawns) {
             for (SpawnTemplate spawnTemplate : spawnGroup.getSpawnTemplates()) {
                 SiegeSpawnTemplate temp = (SiegeSpawnTemplate) spawnTemplate;
                 AbyssNpcType type = DataManager.NPC_DATA.getNpcTemplate(temp.getNpcId()).getAbyssNpcType();
-                if (temp.getSiegeRace() != SiegeRace.BALAUR || !temp.isPeace()
-                        || type.equals(AbyssNpcType.ARTIFACT) || type.equals(AbyssNpcType.TELEPORTER)) {
+                if (temp.getSiegeRace() != SiegeRace.BALAUR || !temp.isPeace() || type.equals(AbyssNpcType.ARTIFACT)
+                    || type.equals(AbyssNpcType.TELEPORTER)) {
                     continue;
                 }
 
-                float[] loc = {spawnTemplate.getX() + 2, spawnTemplate.getY() + 2, spawnTemplate.getZ()};
+                float[] loc = { spawnTemplate.getX() + 2, spawnTemplate.getY() + 2, spawnTemplate.getZ() };
                 SiegeSpawnTemplate spawn = SpawnEngine.addNewSiegeSpawn(spawnTemplate.getWorldId(), spawnTemplate.getNpcId(), locationId,
-                        SiegeRace.BALAUR, SiegeModType.ASSAULT, loc[0], loc[1], loc[2], spawnTemplate.getHeading());
+                    SiegeRace.BALAUR, SiegeModType.ASSAULT, loc[0], loc[1], loc[2], spawnTemplate.getHeading());
                 VisibleObject attaker = SpawnEngine.spawnObject(spawn, 1);
 
                 if (MathUtil.isIn3dRange(attaker, boss, isBalaurea ? 100 : 70)) {
@@ -225,9 +231,9 @@ public class FortressAssault extends Assault<FortressSiege> {
     }
 
     private List<Integer> getSpawnIds() {
-        List<Integer> Spawns = new ArrayList<Integer>();
+        List<Integer> Spawns = new ArrayList<>();
         switch (locationId) {
-            case 1131:        //Lower Abyss
+            case 1131: //Lower Abyss
             case 1132:
             case 1141:
                 Spawns.add(276649);//Commander
@@ -277,7 +283,7 @@ public class FortressAssault extends Assault<FortressSiege> {
                 Spawns.add(276629);
                 Spawns.add(276628);
                 return Spawns;
-            case 1211:        //Upper Abyss
+            case 1211: //Upper Abyss
             case 1221:
             case 1231:
             case 1241:
@@ -378,11 +384,11 @@ public class FortressAssault extends Assault<FortressSiege> {
                 Spawns.add(276850);
                 Spawns.add(276700);
                 return Spawns;
-            case 2011:        //Balaurea Fortresses
+            case 2011: //Balaurea Fortresses
             case 2021:
             case 3011:
             case 3021:
-				Spawns.add(258236);//Commander
+                Spawns.add(258236);//Commander
                 // Spawns.add(258259); Artifact Attacker
                 Spawns.add(258246);
                 Spawns.add(258245);

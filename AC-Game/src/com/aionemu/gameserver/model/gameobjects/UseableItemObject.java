@@ -59,7 +59,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class UseableItemObject extends HouseObject<HousingUseableItem> {
 
     private volatile boolean mustGiveLastReward = false;
-    private AtomicReference<Player> usingPlayer = new AtomicReference<Player>();
+    private AtomicReference<Player> usingPlayer = new AtomicReference<>();
     private UseDataWriter entryWriter = null;
 
     public UseableItemObject(House owner, int objId, int templateId) {
@@ -190,6 +190,7 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
         final int ownerId = getOwnerHouse().getOwnerId();
         final int usedCount = useCount == null ? 0 : currentUseCount + 1;
         final ItemUseObserver observer = new ItemUseObserver() {
+
             @Override
             public void abort() {
                 PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, 9));
@@ -207,6 +208,7 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
         PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_USE(getObjectTemplate().getNameId()));
         PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delay, 8));
         player.getController().addTask(TaskId.HOUSE_OBJECT_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 try {
@@ -230,7 +232,7 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
                             ItemService.addItem(player, rewardId, 1);
                             if (useCount == usedCount) {
                                 PacketSendUtility.sendPacket(player,
-                                        SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_FLOWERPOT_GOAL(myself.getObjectTemplate().getNameId()));
+                                    SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_FLOWERPOT_GOAL(myself.getObjectTemplate().getNameId()));
                                 if (action.getFinalRewardId() == null) {
                                     delete = true;
                                 } else {
@@ -257,7 +259,7 @@ public class UseableItemObject extends HouseObject<HousingUseableItem> {
                     if (rewardId > 0) {
                         int rewardNameId = DataManager.ITEM_DATA.getItemTemplate(rewardId).getNameId();
                         PacketSendUtility.sendPacket(player,
-                                SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_REWARD_ITEM(myself.getObjectTemplate().getNameId(), rewardNameId));
+                            SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_REWARD_ITEM(myself.getObjectTemplate().getNameId(), rewardNameId));
                     }
                     if (delete) {
                         selfDestroy(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(getObjectTemplate().getNameId()));

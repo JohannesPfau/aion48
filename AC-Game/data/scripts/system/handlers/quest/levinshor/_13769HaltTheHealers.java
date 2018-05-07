@@ -29,9 +29,9 @@
  */
 package quest.levinshor;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,12 +50,12 @@ public class _13769HaltTheHealers extends QuestHandler {
     @Override
     public void register() {
         qe.registerQuestNpc(805278).addOnQuestStart(questId);
-		qe.registerQuestNpc(805279).addOnQuestStart(questId);
-		qe.registerQuestNpc(805280).addOnQuestStart(questId);
+        qe.registerQuestNpc(805279).addOnQuestStart(questId);
+        qe.registerQuestNpc(805280).addOnQuestStart(questId);
         qe.registerQuestNpc(805278).addOnTalkEvent(questId);
-		qe.registerQuestNpc(805279).addOnTalkEvent(questId);
-		qe.registerQuestNpc(805280).addOnTalkEvent(questId);
-		qe.registerQuestNpc(235364).addOnKillEvent(questId);
+        qe.registerQuestNpc(805279).addOnTalkEvent(questId);
+        qe.registerQuestNpc(805280).addOnTalkEvent(questId);
+        qe.registerQuestNpc(235364).addOnKillEvent(questId);
     }
 
     @Override
@@ -70,8 +70,8 @@ public class _13769HaltTheHealers extends QuestHandler {
                     return defaultOnKillEvent(env, 235364, var1, var1 + 1, 1);
                 } else if (var1 == 4) {
                     qs.setQuestVar(1);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
+                    qs.setStatus(QuestStatus.REWARD);
+                    updateQuestStatus(env);
                     return true;
                 }
             }

@@ -47,8 +47,6 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 
 /**
  * Packet about player movement.
- *
-
  */
 public class CM_MOVE extends AionClientPacket {
 
@@ -121,7 +119,7 @@ public class CM_MOVE extends AionClientPacket {
 
         // Admin Teleportation
         if (player.getAdminTeleportation() && ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE)
-                && ((type & MovementMask.MOUSE) == MovementMask.MOUSE)) {
+            && ((type & MovementMask.MOUSE) == MovementMask.MOUSE)) {
             m.setNewDirection(x2, y2, z2);
             World.getInstance().updatePosition(player, x2, y2, z2, heading);
             PacketSendUtility.broadcastPacketAndReceive(player, new SM_MOVE(player));
@@ -151,8 +149,8 @@ public class CM_MOVE extends AionClientPacket {
             player.getController().onMove();
             if ((type & MovementMask.MOUSE) == 0) {
                 speed = player.getGameStats().getMovementSpeedFloat();
-                player.getMoveController().setNewDirection(x + m.vectorX * speed * 1.5f, y + m.vectorY * speed * 1.5f,
-                        z + m.vectorZ * speed * 1.5f, heading);
+                player.getMoveController().setNewDirection(x + m.vectorX * speed * 1.5f, y + m.vectorY * speed * 1.5f, z + m.vectorZ * speed * 1.5f,
+                    heading);
             }
         }
 
@@ -177,6 +175,7 @@ public class CM_MOVE extends AionClientPacket {
 
         if ((type & MovementMask.STARTMOVE) == MovementMask.STARTMOVE || type == 0) {
             player.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player observer) {
                     if (observer.isOnline()) {
@@ -203,9 +202,8 @@ public class CM_MOVE extends AionClientPacket {
 
     @Override
     public String toString() {
-        return "CM_MOVE [type=" + type + ", heading=" + heading + ", x=" + x + ", y=" + y + ", z=" + z + ", x2=" + x2
-                + ", y2=" + y2 + ", z2=" + z2 + ", vehicleX=" + vehicleX + ", vehicleY=" + vehicleY + ", vehicleZ=" + vehicleZ
-                + ", vectorX=" + vectorX + ", vectorY=" + vectorY + ", vectorZ=" + vectorZ + ", glideFlag=" + glideFlag
-                + ", unk1=" + unk1 + ", unk2=" + unk2 + "]";
+        return "CM_MOVE [type=" + type + ", heading=" + heading + ", x=" + x + ", y=" + y + ", z=" + z + ", x2=" + x2 + ", y2=" + y2 + ", z2=" + z2
+            + ", vehicleX=" + vehicleX + ", vehicleY=" + vehicleY + ", vehicleZ=" + vehicleZ + ", vectorX=" + vectorX + ", vectorY=" + vectorY
+            + ", vectorZ=" + vectorZ + ", glideFlag=" + glideFlag + ", unk1=" + unk1 + ", unk2=" + unk2 + "]";
     }
 }

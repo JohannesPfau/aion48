@@ -31,7 +31,6 @@ package playercommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.WeddingService;
-import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
@@ -69,12 +68,11 @@ public class cmd_divorce extends PlayerCommand {
             PacketSendUtility.sendMessage(admin, "You can't cancel marry player on himself.");
             return;
         }
-        if (partner1.getWorldId() == 510010000 || partner1.getWorldId() == 520010000 || partner2.getWorldId() == 510010000 || partner2.getWorldId() == 520010000) {
+        if (partner1.getWorldId() == 510010000 || partner1.getWorldId() == 520010000 || partner2.getWorldId() == 510010000
+            || partner2.getWorldId() == 520010000) {
             PacketSendUtility.sendMessage(admin, "One of the players is in prison.");
             return;
         }
-
-        
 
         WeddingService.getInstance().unDoWedding(partner1, partner2);
         ItemService.addItem(partner1, 182400001, -75000000);

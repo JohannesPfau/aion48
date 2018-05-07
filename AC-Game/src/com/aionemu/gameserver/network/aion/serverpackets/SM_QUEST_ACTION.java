@@ -133,7 +133,7 @@ public class SM_QUEST_ACTION extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         QuestTemplate questTemplate = DataManager.QUEST_DATA.getQuestById(questId);
         if (questTemplate != null && questTemplate.getExtraCategory() != QuestExtraCategory.NONE) {
             return;

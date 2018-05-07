@@ -64,9 +64,11 @@ public class PetDopingBag {
     /**
      * Adds or removes item to the bag
      *
-     * @param itemId - item Id, or 0 to remove
-     * @param slot   - slot number; 0 for food, 1 for drink, the rest are for
-     *               scrolls
+     * @param itemId
+     *            - item Id, or 0 to remove
+     * @param slot
+     *            - slot number; 0 for food, 1 for drink, the rest are for
+     *            scrolls
      */
     public void setItem(int itemId, int slot) {
         if (itemBag == null) {

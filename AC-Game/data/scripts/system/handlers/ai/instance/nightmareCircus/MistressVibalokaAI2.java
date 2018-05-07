@@ -29,7 +29,11 @@
  */
 package ai.instance.nightmareCircus;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
@@ -41,15 +45,12 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
+import ai.AggressiveNpcAI2;
 
 @AIName("mistress_vibaloka")
 public class MistressVibalokaAI2 extends AggressiveNpcAI2 {
 
-    private final List<Integer> percents = new ArrayList<Integer>();
+    private final List<Integer> percents = new ArrayList<>();
     private boolean canThink = true;
     private Future<?> thinkTask;
 
@@ -77,6 +78,7 @@ public class MistressVibalokaAI2 extends AggressiveNpcAI2 {
                 percents.remove(percent);
                 canThink = false;
                 thinkTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         int count = Rnd.get(2, 4);
@@ -115,6 +117,7 @@ public class MistressVibalokaAI2 extends AggressiveNpcAI2 {
         WorldPosition p = getPosition();
         final Npc npc = (Npc) spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), p.getHeading());
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!NpcActions.isAlreadyDead(npc) && npc.isSpawned()) {
@@ -126,7 +129,7 @@ public class MistressVibalokaAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{85, 65, 55, 45, 30, 15});
+        Collections.addAll(percents, new Integer[] { 85, 65, 55, 45, 30, 15 });
     }
 
     private void cancelThinkTask() {

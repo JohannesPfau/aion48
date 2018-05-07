@@ -33,16 +33,16 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+
+import javolution.util.FastMap;
 
 /**
  * @author kecimis
  */
 public class ChainSkills {
 
-    private Map<String, ChainSkill> multiSkills = new FastMap<String, ChainSkill>();
+    private Map<String, ChainSkill> multiSkills = new FastMap<>();
     private ChainSkill chainSkill = new ChainSkill("", 0, 0);
 
     //private Logger log = LoggerFactory.getLogger(ChainSkills.class);
@@ -110,7 +110,7 @@ public class ChainSkills {
     }
 
     public Collection<ChainSkill> getChainSkills() {
-        Collection<ChainSkill> collection = new ArrayList<ChainSkill>();
+        Collection<ChainSkill> collection = new ArrayList<>();
         collection.add(this.chainSkill);
         collection.addAll(this.multiSkills.values());
 

@@ -41,8 +41,7 @@ import com.aionemu.commons.utils.Rnd;
  *
  * @author hack99
  * @author kao
-
- * romanz (4.8)
+ *         romanz (4.8)
  */
 public class Crypt {
 
@@ -63,8 +62,9 @@ public class Crypt {
      * packets. This method is called from SM_KEY server packet, that packet
      * sends key to aion client.
      * Default constructor * 21072015_iCExMyGmGk46oaqMp1chMTYwIYeoOrI= *.
+     * 
      * @return "false key" that should by used by aion client to encrypt/decrypt
-     * packets.
+     *         packets.
      */
     public final int enableKey() {
         if (packetKey != null) {
@@ -129,10 +129,10 @@ public class Crypt {
      * @return obfuscated opcodec
      */
     public static final int encodeOpcodec(int op) {
-		return (op + 0xCF) ^ 0xDF;
-		//return (op + 0xCE) ^ 0xDF; //4.7.5
-		//return (op + 0xCC) ^ 0xDD; //4.6 | 4.7
-		//return ((op + 0xCB) ^ 0xDB); //4.5
-		//return ((op + 0xC9) ^ 0xD9); //4.3
-	}
+        return (op + 0xCF) ^ 0xDF;
+        //return (op + 0xCE) ^ 0xDF; //4.7.5
+        //return (op + 0xCC) ^ 0xDD; //4.6 | 4.7
+        //return ((op + 0xCB) ^ 0xDB); //4.5
+        //return ((op + 0xC9) ^ 0xD9); //4.3
+    }
 }

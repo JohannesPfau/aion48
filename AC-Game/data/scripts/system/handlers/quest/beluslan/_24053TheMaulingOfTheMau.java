@@ -30,12 +30,12 @@
 package quest.beluslan;
 
 import com.aionemu.gameserver.ai2.event.AIEventType;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,7 +49,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _24053TheMaulingOfTheMau extends QuestHandler {
 
     private final static int questId = 24053;
-    private final static int[] npc_ids = {204787, 204795, 204796, 204700};
+    private final static int[] npc_ids = { 204787, 204795, 204796, 204700 };
 
     public _24053TheMaulingOfTheMau() {
         super(questId);
@@ -175,7 +175,8 @@ public class _24053TheMaulingOfTheMau extends QuestHandler {
                         qs.setQuestVarById(0, var + 1);
                         updateQuestStatus(env);
                         PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-                        Npc survivor = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 204806, player.getX(), player.getY(), player.getZ(), (byte) 0);
+                        Npc survivor = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 204806, player.getX(),
+                            player.getY(), player.getZ(), (byte) 0);
                         survivor.getAi2().onCreatureEvent(AIEventType.FOLLOW_ME, player);
                         player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, survivor, 204813));
                         return true;

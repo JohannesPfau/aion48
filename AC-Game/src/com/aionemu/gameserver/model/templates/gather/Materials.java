@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author ATracer
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Materials", propOrder = {"material"})
+@XmlType(name = "Materials", propOrder = { "material" })
 public class Materials {
 
     protected List<Material> material;
@@ -50,7 +50,7 @@ public class Materials {
      */
     public List<Material> getMaterial() {
         if (material == null) {
-            material = new ArrayList<Material>();
+            material = new ArrayList<>();
         }
         return this.material;
     }

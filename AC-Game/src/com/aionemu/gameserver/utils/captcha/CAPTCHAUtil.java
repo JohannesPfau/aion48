@@ -66,7 +66,8 @@ public class CAPTCHAUtil {
     /**
      * CAPTCHA image create
      *
-     * @param word text word
+     * @param word
+     *            text word
      * @return BufferedImage
      */
     private static BufferedImage createImage(String word) {

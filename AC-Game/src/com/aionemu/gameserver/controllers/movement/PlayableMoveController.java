@@ -154,11 +154,11 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
             }
         }
     }
-    
+
     @Override
-	public void skillMovement() {
-    	this.movementMask = MovementMask.IMMEDIATE;
-    	PacketSendUtility.broadcastPacketAndReceive(owner, new SM_MOVE(owner));
+    public void skillMovement() {
+        this.movementMask = MovementMask.IMMEDIATE;
+        PacketSendUtility.broadcastPacketAndReceive(owner, new SM_MOVE(owner));
     }
 
     public int getMovementHeading() {

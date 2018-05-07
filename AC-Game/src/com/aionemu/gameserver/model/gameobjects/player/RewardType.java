@@ -38,6 +38,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 public enum RewardType {
 
     AP_PLAYER {
+
         @Override
         public long calcReward(Player player, long reward) {
             float statRate = player.getGameStats().getStat(StatEnum.AP_BOOST, 100).getCurrent() / 100f;
@@ -45,6 +46,7 @@ public enum RewardType {
         }
     },
     AP_NPC {
+
         @Override
         public long calcReward(Player player, long reward) {
             float statRate = player.getGameStats().getStat(StatEnum.AP_BOOST, 100).getCurrent() / 100f;
@@ -52,12 +54,14 @@ public enum RewardType {
         }
     },
     GP_NPC {
-    	@Override
+
+        @Override
         public long calcReward(Player player, long reward) {
             return (long) (reward * player.getRates().getGpNpcRate());
         }
     },
     HUNTING {
+
         @Override
         public long calcReward(Player player, long reward) {
             float statRate = player.getGameStats().getStat(StatEnum.BOOST_HUNTING_XP_RATE, 100).getCurrent() / 100f;
@@ -69,6 +73,7 @@ public enum RewardType {
         }
     },
     GROUP_HUNTING {
+
         @Override
         public long calcReward(Player player, long reward) {
             float statRate = player.getGameStats().getStat(StatEnum.BOOST_GROUP_HUNTING_XP_RATE, 100).getCurrent() / 100f;
@@ -80,12 +85,14 @@ public enum RewardType {
         }
     },
     PVP_KILL {
+
         @Override
         public long calcReward(Player player, long reward) {
             return (reward);
         }
     },
     QUEST {
+
         @Override
         public long calcReward(Player player, long reward) {
             float statRate = player.getGameStats().getStat(StatEnum.BOOST_QUEST_XP_RATE, 100).getCurrent() / 100f;
@@ -93,6 +100,7 @@ public enum RewardType {
         }
     },
     CRAFTING {
+
         @Override
         public long calcReward(Player player, long reward) {
             float statRate = player.getGameStats().getStat(StatEnum.BOOST_CRAFTING_XP_RATE, 100).getCurrent() / 100f;
@@ -104,6 +112,7 @@ public enum RewardType {
         }
     },
     GATHERING {
+
         @Override
         public long calcReward(Player player, long reward) {
             float statRate = player.getGameStats().getStat(StatEnum.BOOST_GATHERING_XP_RATE, 100).getCurrent() / 100f;
@@ -115,6 +124,7 @@ public enum RewardType {
         }
     },
     USEITEM {
+
         @Override
         public long calcReward(Player player, long reward) {
             float statRate = player.getGameStats().getStat(StatEnum.BOOST_QUEST_XP_RATE, 100).getCurrent() / 100f;

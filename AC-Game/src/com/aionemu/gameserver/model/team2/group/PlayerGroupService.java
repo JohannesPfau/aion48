@@ -33,8 +33,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,13 +69,15 @@ import com.aionemu.gameserver.utils.TimeUtil;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Predicate;
 
+import javolution.util.FastMap;
+
 /**
  * @author ATracer
  */
 public class PlayerGroupService {
 
     private static final Logger log = LoggerFactory.getLogger(PlayerGroupService.class);
-    private static final Map<Integer, PlayerGroup> groups = new ConcurrentHashMap<Integer, PlayerGroup>();
+    private static final Map<Integer, PlayerGroup> groups = new ConcurrentHashMap<>();
     private static final AtomicBoolean offlineCheckStarted = new AtomicBoolean();
     private static FastMap<Integer, PlayerGroup> groupMembers;
 
@@ -85,8 +85,8 @@ public class PlayerGroupService {
         if (canInvite(inviter, invited)) {
             PlayerGroupInvite invite = new PlayerGroupInvite(inviter, invited);
             if (invited.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_PARTY_DO_YOU_ACCEPT_INVITATION, invite)) {
-                PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_DO_YOU_ACCEPT_INVITATION, 0, 0,
-                        inviter.getName()));
+                PacketSendUtility.sendPacket(invited,
+                    new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_DO_YOU_ACCEPT_INVITATION, 0, 0, inviter.getName()));
             }
         }
     }
@@ -219,7 +219,7 @@ public class PlayerGroupService {
     public static void distributeKinah(Player player, long kinah) {
         PlayerGroup group = player.getPlayerGroup2();
         if (group != null) {
-            group.onEvent(new TeamKinahDistributionEvent<PlayerGroup>(group, player, kinah));
+            group.onEvent(new TeamKinahDistributionEvent<>(group, player, kinah));
         }
     }
 
@@ -229,7 +229,7 @@ public class PlayerGroupService {
     public static void showBrand(Player player, int targetObjId, int brandId) {
         PlayerGroup group = player.getPlayerGroup2();
         if (group != null) {
-            group.onEvent(new ShowBrandEvent<PlayerGroup>(group, targetObjId, brandId));
+            group.onEvent(new ShowBrandEvent<>(group, targetObjId, brandId));
         }
     }
 

@@ -29,10 +29,10 @@
  */
 package quest.verteron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -52,7 +52,7 @@ public class _1016SourceOfThePollution extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {203149, 203148, 203832, 203705, 203822, 203761, 203098, 203195};
+        int[] npcs = { 203149, 203148, 203832, 203705, 203822, 203761, 203098, 203195 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.registerQuestNpc(210318).addOnKillEvent(questId);
@@ -230,7 +230,7 @@ public class _1016SourceOfThePollution extends QuestHandler {
             if (var == 8) {
                 int targetId = env.getTargetId();
                 if (targetId == 210318) {
-                	QuestService.addNewSpawn(210030000, player.getInstanceId(), 203195, player.getX()+2, player.getY()+2, player.getZ()+1,
+                    QuestService.addNewSpawn(210030000, player.getInstanceId(), 203195, player.getX() + 2, player.getY() + 2, player.getZ() + 1,
                         (byte) 0);
                     return defaultOnKillEvent(env, 210318, 8, 9); // 9
                 }

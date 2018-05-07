@@ -63,7 +63,7 @@ public class CM_BROKER_SEARCH extends AionClientPacket {
         this.page = readH();
         this.mask = readH();
         this.itemCount = readH();
-        this.itemList = new ArrayList<Integer>();
+        this.itemList = new ArrayList<>();
 
         for (int index = 0; index < this.itemCount; index++) {
             this.itemList.add(readD());
@@ -72,9 +72,10 @@ public class CM_BROKER_SEARCH extends AionClientPacket {
 
     @Override
     protected void runImpl() {
-    	Player player = getConnection().getActivePlayer();
-    	if (player == null) return;
-    	
+        Player player = getConnection().getActivePlayer();
+        if (player == null)
+            return;
+
         BrokerService.getInstance().showRequestedItems(player, mask, sortType, page, itemList);
     }
 }

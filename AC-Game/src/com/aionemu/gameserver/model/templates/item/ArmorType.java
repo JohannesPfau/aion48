@@ -40,16 +40,17 @@ import javax.xml.bind.annotation.XmlType;
 @XmlEnum
 public enum ArmorType {
 
-    NO_ARMOR(new int[]{}),
-    CHAIN(new int[]{42, 49}),
-    CLOTHES(new int[]{40}),
-    LEATHER(new int[]{41, 48}),
-    PLATE(new int[]{54}),
-    ROBE(new int[]{103, 106}),
-    SHIELD(new int[]{43, 50}),
-    ARROW(new int[]{}),
-    WING(new int[]{}),
-    PLUME(new int[]{});
+    NO_ARMOR(new int[] {}),
+    CHAIN(new int[] { 42, 49 }),
+    CLOTHES(new int[] { 40 }),
+    LEATHER(new int[] { 41, 48 }),
+    PLATE(new int[] { 54 }),
+    ROBE(new int[] { 103, 106 }),
+    SHIELD(new int[] { 43, 50 }),
+    ARROW(new int[] {}),
+    WING(new int[] {}),
+    PLUME(new int[] {});
+
     private int[] requiredSkills;
 
     private ArmorType(int[] requiredSkills) {

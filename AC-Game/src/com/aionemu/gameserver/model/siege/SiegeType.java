@@ -44,6 +44,7 @@ public enum SiegeType {
     INDUN(4),
     UNDERPASS(5),
     SOURCE(6);
+
     private int typeId;
 
     private SiegeType(int id) {

@@ -29,16 +29,15 @@
  */
 package quest.fort_tiamat;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _10071OnTheTrailOfIsraphel extends QuestHandler {
 
@@ -50,7 +49,7 @@ public class _10071OnTheTrailOfIsraphel extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {205579, 205535, 730465, 295987, 730465};
+        int[] npcs = { 205579, 205535, 730465, 295987, 730465 };
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }

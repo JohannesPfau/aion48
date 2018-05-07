@@ -50,13 +50,15 @@ public class SpellAttackInstantEffect extends DamageEffect {
         final Creature effected = effect.getEffected();
 
         //hotfix for http://www.aionarmory.com/spell.aspx?id=2713 (Balaur Seeker)
-        /*if (effect.getSkillId() == 2713) {
-         if (effected instanceof Npc) {
-         effect.getEffected().getEffectController().setAbnormal(AbnormalState.STUN.getId());
-         } else if (effected instanceof Player) {
-         return;
-         }
-         }*/
+        /*
+         * if (effect.getSkillId() == 2713) {
+         * if (effected instanceof Npc) {
+         * effect.getEffected().getEffectController().setAbnormal(AbnormalState.STUN.getId());
+         * } else if (effected instanceof Player) {
+         * return;
+         * }
+         * }
+         */
         if (effected instanceof Player) {
             //hotfix for http://www.aiondatabase.com/skill/19332
             if (effect.getSkillId() == 19332) {

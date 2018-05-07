@@ -56,10 +56,11 @@ public class Letter extends AionObject {
      * @param message
      * @param senderId
      * @param senderName
-     * @param timeStamp     new letter constructor
+     * @param timeStamp
+     *            new letter constructor
      */
-    public Letter(int objId, int recipientId, Item attachedItem, long attachedKinahCount, String title, String message,
-                  String senderName, Timestamp timeStamp, boolean unread, LetterType letterType) {
+    public Letter(int objId, int recipientId, Item attachedItem, long attachedKinahCount, String title, String message, String senderName,
+        Timestamp timeStamp, boolean unread, LetterType letterType) {
         super(objId);
 
         if (letterType == LetterType.EXPRESS || letterType == LetterType.BLACKCLOUD) {

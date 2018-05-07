@@ -38,9 +38,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * 
  * @author Alcapwnd
- *
  */
 
 public class _23500InspecttheKatalamBase extends QuestHandler {
@@ -59,7 +57,6 @@ public class _23500InspecttheKatalamBase extends QuestHandler {
         qe.registerQuestNpc(801244).addOnTalkEvent(questId);
         qe.registerQuestNpc(801241).addOnTalkEvent(questId);
     }
-
 
     @Override
     public boolean onDialogEvent(QuestEnv env) {
@@ -93,55 +90,46 @@ public class _23500InspecttheKatalamBase extends QuestHandler {
             }
         } else if (qs != null && qs.getStatus() == QuestStatus.START) {
             if (env.getTargetId() == 801239) {
-                if (env.getDialog() == DialogAction.QUEST_SELECT)
-                {
+                if (env.getDialog() == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 2375);
                 }
-                if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
-                {
+                if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
                     changeQuestStepRew(env, 0, 1);
                     return sendQuestDialog(env, 5);
                 }
 
             }
             if (env.getTargetId() == 801241) {
-                if (env.getDialog() == DialogAction.QUEST_SELECT)
-                {
+                if (env.getDialog() == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 2716);
 
                 }
-                if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
-                {
+                if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
                     changeQuestStepRew(env, 0, 2);
                     return sendQuestDialog(env, 6);
                 }
 
             }
             if (env.getTargetId() == 801244) {
-                if (env.getDialog() == DialogAction.QUEST_SELECT)
-                {
+                if (env.getDialog() == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 3057);
                 }
-                if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD)
-                {
+                if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {
                     changeQuestStepRew(env, 0, 3);
                     return sendQuestDialog(env, 7);
                 }
 
             }
+        } else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+            if (targetId == 801239 || targetId == 801241 || targetId == 801244) {
+                int rewInd = 0;
+                if (qs.getQuestVarById(0) == 2)
+                    rewInd = 1;
+                else if (qs.getQuestVarById(0) == 3)
+                    rewInd = 2;
+                return sendQuestEndDialog(env, rewInd);
+            }
         }
-		else if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 801239 || targetId == 801241 || targetId == 801244) {
-				int rewInd = 0;
-				if(qs.getQuestVarById(0) == 2)
-					rewInd = 1;
-				else if(qs.getQuestVarById(0) == 3)
-					rewInd = 2;
-				return sendQuestEndDialog(env, rewInd);
-			}
-		}
-		return false;
+        return false;
     }
 }
-
-

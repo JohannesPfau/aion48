@@ -29,10 +29,10 @@
  */
 package quest.gelkmaros;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -52,7 +52,7 @@ public class _20026WaytoInggison extends QuestHandler {
     public void register() {
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
-        int[] npcs = {799364, 799365};
+        int[] npcs = { 799364, 799365 };
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }

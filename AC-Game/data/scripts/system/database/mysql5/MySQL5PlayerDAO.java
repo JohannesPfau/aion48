@@ -29,6 +29,24 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
@@ -54,14 +72,6 @@ import com.aionemu.gameserver.world.WorldPosition;
 import com.google.common.collect.Maps;
 
 import javolution.util.FastMap;
-
-import org.apache.commons.lang.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.*;
-import java.util.*;
-import java.util.Map.Entry;
 
 /**
  * @author SoulKeeper, Saelya
@@ -129,8 +139,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
-            PreparedStatement stmt = con
-                    .prepareStatement("UPDATE players SET account_id=? WHERE id=?");
+            PreparedStatement stmt = con.prepareStatement("UPDATE players SET account_id=? WHERE id=?");
             stmt.setInt(1, accountId);
             stmt.setInt(2, player.getObjectId());
             stmt.execute();
@@ -150,8 +159,8 @@ public class MySQL5PlayerDAO extends PlayerDAO {
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
-            PreparedStatement stmt = con
-                    .prepareStatement("UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, last_online=?, quest_expands=?, npc_expands=?, advanced_stigma_slot_size=?, warehouse_size=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, event_exp=?, bg_points=?, mentor_flag_time=?, initial_gamestats=?, world_owner=?, fatigue=?, fatigueRecover=?, fatigueReset=? WHERE id=?");
+            PreparedStatement stmt = con.prepareStatement(
+                "UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, last_online=?, quest_expands=?, npc_expands=?, advanced_stigma_slot_size=?, warehouse_size=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, event_exp=?, bg_points=?, mentor_flag_time=?, initial_gamestats=?, world_owner=?, fatigue=?, fatigueRecover=?, fatigueReset=? WHERE id=?");
 
             log.debug("[DAO: MySQL5PlayerDAO] storing player " + player.getObjectId() + " " + player.getName());
             PlayerCommonData pcd = player.getCommonData();
@@ -185,7 +194,9 @@ public class MySQL5PlayerDAO extends PlayerDAO {
             stmt.setInt(26, pcd.getMentorFlagTime());
             stmt.setInt(27, pcd.isInitialGameStats());
             if (player.getPosition().getWorldMapInstance() == null) {
-                log.error("Error saving player: " + player.getObjectId() + " " + player.getName() + ", world map instance is null. Setting world owner to 0. Position: " + player.getWorldId() + " " + player.getX() + " " + player.getY() + " " + player.getZ());
+                log.error("Error saving player: " + player.getObjectId() + " " + player.getName()
+                    + ", world map instance is null. Setting world owner to 0. Position: " + player.getWorldId() + " " + player.getX() + " "
+                    + player.getY() + " " + player.getZ());
                 stmt.setInt(28, 0);
             } else {
                 stmt.setInt(28, player.getPosition().getWorldMapInstance().getOwnerId());
@@ -218,9 +229,9 @@ public class MySQL5PlayerDAO extends PlayerDAO {
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();
-            PreparedStatement preparedStatement = con
-                    .prepareStatement("INSERT INTO players(id, `name`, account_id, account_name, x, y, z, heading, world_id, gender, race, player_class , quest_expands, npc_expands, warehouse_size, online) "
-                            + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)");
+            PreparedStatement preparedStatement = con.prepareStatement(
+                "INSERT INTO players(id, `name`, account_id, account_name, x, y, z, heading, world_id, gender, race, player_class , quest_expands, npc_expands, warehouse_size, online) "
+                    + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)");
 
             log.debug("[DAO: MySQL5PlayerDAO] saving new player: " + pcd.getPlayerObjId() + " " + pcd.getName());
 
@@ -411,8 +422,9 @@ public class MySQL5PlayerDAO extends PlayerDAO {
      */
     @Override
     public List<Integer> getPlayerOidsOnAccount(final int accountId) {
-        final List<Integer> result = new ArrayList<Integer>();
+        final List<Integer> result = new ArrayList<>();
         boolean success = DB.select("SELECT id FROM players WHERE account_id = ?", new ParamReadStH() {
+
             @Override
             public void handleRead(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {
@@ -435,6 +447,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
     @Override
     public void setCreationDeletionTime(final PlayerAccountData acData) {
         DB.select("SELECT creation_date, deletion_date FROM players WHERE id = ?", new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, acData.getPlayerCommonData().getPlayerObjId());
@@ -456,6 +469,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
     @Override
     public void updateDeletionTime(final int objectId, final Timestamp deletionDate) {
         DB.insertUpdate("UPDATE players set deletion_date = ? where id = ?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setTimestamp(1, deletionDate);
@@ -471,6 +485,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
     @Override
     public void storeCreationTime(final int objectId, final Timestamp creationDate) {
         DB.insertUpdate("UPDATE players set creation_date = ? where id = ?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setTimestamp(1, creationDate);
@@ -483,6 +498,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
     @Override
     public void storeLastOnlineTime(final int objectId, final Timestamp lastOnline) {
         DB.insertUpdate("UPDATE players set last_online = ? where id = ?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setTimestamp(1, lastOnline);
@@ -497,8 +513,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
      */
     @Override
     public int[] getUsedIDs() {
-        PreparedStatement statement = DB.prepareStatement("SELECT id FROM players", ResultSet.TYPE_SCROLL_INSENSITIVE,
-                ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement statement = DB.prepareStatement("SELECT id FROM players", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
 
         try {
             ResultSet rs = statement.executeQuery();
@@ -526,6 +541,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
     @Override
     public void onlinePlayer(final Player player, final boolean online) {
         DB.insertUpdate("UPDATE players SET online=? WHERE id=?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 log.debug("[DAO: MySQL5PlayerDAO] online status " + player.getObjectId() + " " + player.getName());
@@ -543,6 +559,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
     @Override
     public void setPlayersOffline(final boolean online) {
         DB.insertUpdate("UPDATE players SET online=?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setBoolean(1, online);
@@ -555,6 +572,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
     public String getPlayerNameByObjId(final int playerObjId) {
         final String[] result = new String[1];
         DB.select("SELECT name FROM players WHERE id = ?", new ParamReadStH() {
+
             @Override
             public void handleRead(ResultSet arg0) throws SQLException {
                 arg0.next();
@@ -573,6 +591,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
     public int getPlayerIdByName(final String playerName) {
         final int[] result = new int[1];
         DB.select("SELECT id FROM players WHERE name = ?", new ParamReadStH() {
+
             @Override
             public void handleRead(ResultSet arg0) throws SQLException {
                 arg0.next();
@@ -621,16 +640,14 @@ public class MySQL5PlayerDAO extends PlayerDAO {
             con = DatabaseFactory.getConnection();
             PreparedStatement stmt = con.prepareStatement("UPDATE players SET name=? WHERE id=?");
 
-            log.debug("[DAO: MySQL5PlayerDAO] storing playerName " + recipientCommonData.getPlayerObjId() + " "
-                    + recipientCommonData.getName());
+            log.debug("[DAO: MySQL5PlayerDAO] storing playerName " + recipientCommonData.getPlayerObjId() + " " + recipientCommonData.getName());
 
             stmt.setString(1, recipientCommonData.getName());
             stmt.setInt(2, recipientCommonData.getPlayerObjId());
             stmt.execute();
             stmt.close();
         } catch (Exception e) {
-            log.error(
-                    "Error saving playerName: " + recipientCommonData.getPlayerObjId() + " " + recipientCommonData.getName(), e);
+            log.error("Error saving playerName: " + recipientCommonData.getPlayerObjId() + " " + recipientCommonData.getName(), e);
         } finally {
             DatabaseFactory.close(con);
         }
@@ -643,8 +660,8 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 
         try {
             con = DatabaseFactory.getConnection();
-            PreparedStatement stmt = con
-                    .prepareStatement("SELECT COUNT(*) AS cnt FROM `players` WHERE `account_id` = ? AND (players.deletion_date IS NULL || players.deletion_date > CURRENT_TIMESTAMP)");
+            PreparedStatement stmt = con.prepareStatement(
+                "SELECT COUNT(*) AS cnt FROM `players` WHERE `account_id` = ? AND (players.deletion_date IS NULL || players.deletion_date > CURRENT_TIMESTAMP)");
             stmt.setInt(1, accountId);
             ResultSet rs = stmt.executeQuery();
             rs.next();
@@ -667,7 +684,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
         try {
             con = DatabaseFactory.getConnection();
             PreparedStatement stmt = con
-                    .prepareStatement("SELECT COUNT(DISTINCT(`account_name`)) AS `count` FROM `players` WHERE `race` = ? AND `exp` >= ?");
+                .prepareStatement("SELECT COUNT(DISTINCT(`account_name`)) AS `count` FROM `players` WHERE `race` = ? AND `exp` >= ?");
             stmt.setString(1, race.name());
             stmt.setLong(2, DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(GSConfig.RATIO_MIN_REQUIRED_LEVEL));
             ResultSet rs = stmt.executeQuery();
@@ -716,6 +733,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
         final Map<Integer, Integer> inactiveAccounts = FastMap.newInstance();
 
         DB.select(SELECT_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, daysOfInactivity);
@@ -738,7 +756,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
         });
 
         //filter accounts with active chars on them
-        for (Iterator<Entry<Integer, Integer>> i = inactiveAccounts.entrySet().iterator(); i.hasNext(); ) {
+        for (Iterator<Entry<Integer, Integer>> i = inactiveAccounts.entrySet().iterator(); i.hasNext();) {
             Entry<Integer, Integer> entry = i.next();
 
             //atleast one active char on account
@@ -756,6 +774,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
     @Override
     public void setPlayerLastTransferTime(final int playerId, final long time) {
         DB.insertUpdate("UPDATE players SET last_transfer_time=? WHERE id=?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setLong(1, time);
@@ -764,29 +783,27 @@ public class MySQL5PlayerDAO extends PlayerDAO {
             }
         });
     }
-    
+
     @Override
-	public Timestamp getCharacterCreationDateId(final int obj) {
-		Connection con = null;
-		Timestamp creationDate;
-		try {
-			con = DatabaseFactory.getConnection();
-			PreparedStatement s = con.prepareStatement("SELECT `creation_date` FROM `players` WHERE `id` = ?");
-			s.setInt(1, obj);
-			ResultSet rs = s.executeQuery();
-			rs.next();
-			creationDate = rs.getTimestamp("creation_date");
-			rs.close();
-			s.close();
-		}
-		catch (@SuppressWarnings("unused") Exception e) {
-			return null;
-		}
-		finally {
-			DatabaseFactory.close(con);
-		}
-		return creationDate;
-	}
+    public Timestamp getCharacterCreationDateId(final int obj) {
+        Connection con = null;
+        Timestamp creationDate;
+        try {
+            con = DatabaseFactory.getConnection();
+            PreparedStatement s = con.prepareStatement("SELECT `creation_date` FROM `players` WHERE `id` = ?");
+            s.setInt(1, obj);
+            ResultSet rs = s.executeQuery();
+            rs.next();
+            creationDate = rs.getTimestamp("creation_date");
+            rs.close();
+            s.close();
+        } catch (@SuppressWarnings("unused") Exception e) {
+            return null;
+        } finally {
+            DatabaseFactory.close(con);
+        }
+        return creationDate;
+    }
 
     /**
      * {@inheritDoc}

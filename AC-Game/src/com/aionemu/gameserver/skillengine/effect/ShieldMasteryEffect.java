@@ -51,7 +51,7 @@ public class ShieldMasteryEffect extends BufEffect {
     public void startEffect(Effect effect) {
 
         List<IStatFunction> modifiers = getModifiers(effect);
-        List<IStatFunction> masteryModifiers = new ArrayList<IStatFunction>(modifiers.size());
+        List<IStatFunction> masteryModifiers = new ArrayList<>(modifiers.size());
         for (IStatFunction modifier : modifiers) {
             masteryModifiers.add(new StatShieldMasteryFunction(modifier.getName(), modifier.getValue(), modifier.isBonus()));
         }

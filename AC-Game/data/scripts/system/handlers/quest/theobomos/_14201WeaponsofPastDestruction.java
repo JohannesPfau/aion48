@@ -28,7 +28,7 @@
  * @Aion-Core Dev.
  */
 package quest.theobomos;
- 
+
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
@@ -36,29 +36,28 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
- 
+
 /**
  * @author FrozenKiller
  */
- 
+
 public class _14201WeaponsofPastDestruction extends QuestHandler {
 
     private final static int questId = 14201;
 
     public _14201WeaponsofPastDestruction() {
         super(questId);
-    }    
-	
+    }
+
     @Override
     public void register() {
         qe.registerQuestNpc(798155).addOnQuestStart(questId);
         qe.registerQuestNpc(798155).addOnTalkEvent(questId); // Atropos
-		qe.registerQuestNpc(800407).addOnTalkEvent(questId); // Hongras
-		qe.registerQuestNpc(798212).addOnTalkEvent(questId); // Serimnir
+        qe.registerQuestNpc(800407).addOnTalkEvent(questId); // Hongras
+        qe.registerQuestNpc(798212).addOnTalkEvent(questId); // Serimnir
     }
-	
-	
-	@Override
+
+    @Override
     public boolean onDialogEvent(final QuestEnv env) {
         final Player player = env.getPlayer();
         int targetId = env.getTargetId();
@@ -73,62 +72,62 @@ public class _14201WeaponsofPastDestruction extends QuestHandler {
                     return sendQuestStartDialog(env);
                 }
             }
-		} else if (qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (targetId == 800407) { // Hongras
-				switch (dialog) {
-					case QUEST_SELECT: {
-						if (var == 0) {
-							return sendQuestDialog(env, 1352);
-						}
-					}
-					case SETPRO1: {
-						qs.setQuestVar(1);
-						updateQuestStatus(env);
-						return closeDialogWindow(env);
-					}
-				default:
-					break;
-				}
-			}  else if (targetId == 798212) { // Serimnir
-				switch (dialog) {
-					case QUEST_SELECT: {
-						if (var == 1) {
-							return sendQuestDialog(env, 1693);
-						}
-					}
-					case SETPRO2: {
-						qs.setQuestVar(2);
-						updateQuestStatus(env);
-						return closeDialogWindow(env);
-					}
-				default:
-					break;
-				}
-			} else if (targetId == 798155) { // Atropos
-				switch (dialog) {
-					case QUEST_SELECT: {
-						if (var == 2) {
-							return sendQuestDialog(env, 2375);
-						}
-					}
-					case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
-						if (QuestService.collectItemCheck(env, true)) {
-							changeQuestStep(env, 2, 2, true);
-							return sendQuestDialog(env, 5);
+        } else if (qs.getStatus() == QuestStatus.START) {
+            int var = qs.getQuestVarById(0);
+            if (targetId == 800407) { // Hongras
+                switch (dialog) {
+                    case QUEST_SELECT: {
+                        if (var == 0) {
+                            return sendQuestDialog(env, 1352);
+                        }
+                    }
+                    case SETPRO1: {
+                        qs.setQuestVar(1);
+                        updateQuestStatus(env);
+                        return closeDialogWindow(env);
+                    }
+                    default:
+                        break;
+                }
+            } else if (targetId == 798212) { // Serimnir
+                switch (dialog) {
+                    case QUEST_SELECT: {
+                        if (var == 1) {
+                            return sendQuestDialog(env, 1693);
+                        }
+                    }
+                    case SETPRO2: {
+                        qs.setQuestVar(2);
+                        updateQuestStatus(env);
+                        return closeDialogWindow(env);
+                    }
+                    default:
+                        break;
+                }
+            } else if (targetId == 798155) { // Atropos
+                switch (dialog) {
+                    case QUEST_SELECT: {
+                        if (var == 2) {
+                            return sendQuestDialog(env, 2375);
+                        }
+                    }
+                    case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
+                        if (QuestService.collectItemCheck(env, true)) {
+                            changeQuestStep(env, 2, 2, true);
+                            return sendQuestDialog(env, 5);
                         } else {
-							return closeDialogWindow(env);
-						}
-					}
-				default:
-					break;
-				}
-			}
+                            return closeDialogWindow(env);
+                        }
+                    }
+                    default:
+                        break;
+                }
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 798155) { // Atropos
+            if (targetId == 798155) { // Atropos
                 return sendQuestEndDialog(env);
-			}
-		}
+            }
+        }
         return false;
     }
 }

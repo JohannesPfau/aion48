@@ -36,8 +36,7 @@ public class SafeMath {
 
     public static int addSafe(int source, int value) throws OverfowException {
         long s = (long) source + (long) value;
-        if (s < Integer.MIN_VALUE
-                || s > Integer.MAX_VALUE) {
+        if (s < Integer.MIN_VALUE || s > Integer.MAX_VALUE) {
             throw new OverfowException(source + " + " + value + " = " + ((long) source + (long) value));
         }
         return (int) s;
@@ -52,8 +51,7 @@ public class SafeMath {
 
     public static int multSafe(int source, int value) throws OverfowException {
         long m = ((long) source) * ((long) value);
-        if (m < Integer.MIN_VALUE
-                || m > Integer.MAX_VALUE) {
+        if (m < Integer.MIN_VALUE || m > Integer.MAX_VALUE) {
             throw new OverfowException(source + " * " + value + " = " + ((long) source * (long) value));
         }
         return (int) m;

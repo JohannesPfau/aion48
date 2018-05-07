@@ -35,8 +35,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * In this packet Server is sending response for CM_RESTORE_CHARACTER.
- *
-
  */
 public class SM_RESTORE_CHARACTER extends AionServerPacket {
 
@@ -62,7 +60,7 @@ public class SM_RESTORE_CHARACTER extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(success ? 0x00 : 0x10);// unk
         writeD(chaOid);
     }

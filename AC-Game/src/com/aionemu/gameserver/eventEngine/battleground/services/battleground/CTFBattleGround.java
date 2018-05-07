@@ -71,17 +71,17 @@ public class CTFBattleGround extends BattleGround {
          * Spawn Healers
          */
         SpawnTemplate se = SpawnEngine.addNewSingleTimeSpawn(bgTemplate.getWorldId(), 203098, bgTemplate.getHealerLocation().getXe(),
-                bgTemplate.getHealerLocation().getYe(), bgTemplate.getHealerLocation().getZe(), (byte) 0);
+            bgTemplate.getHealerLocation().getYe(), bgTemplate.getHealerLocation().getZe(), (byte) 0);
         SpawnTemplate sa = SpawnEngine.addNewSingleTimeSpawn(bgTemplate.getWorldId(), 203557, bgTemplate.getHealerLocation().getXa(),
-                bgTemplate.getHealerLocation().getYa(), bgTemplate.getHealerLocation().getZa(), (byte) 0);
+            bgTemplate.getHealerLocation().getYa(), bgTemplate.getHealerLocation().getZa(), (byte) 0);
 
         /*
          * Spawn Flags
          */
         SpawnTemplate sfe = SpawnEngine.addNewSingleTimeSpawn(bgTemplate.getWorldId(), 700336, bgTemplate.getFlagLocation().getXe(),
-                bgTemplate.getFlagLocation().getYe(), bgTemplate.getFlagLocation().getZe(), (byte) 0);
+            bgTemplate.getFlagLocation().getYe(), bgTemplate.getFlagLocation().getZe(), (byte) 0);
         SpawnTemplate sfa = SpawnEngine.addNewSingleTimeSpawn(bgTemplate.getWorldId(), 700037, bgTemplate.getFlagLocation().getXa(),
-                bgTemplate.getFlagLocation().getYa(), bgTemplate.getFlagLocation().getZa(), (byte) 0);
+            bgTemplate.getFlagLocation().getYa(), bgTemplate.getFlagLocation().getZa(), (byte) 0);
 
         SpawnEngine.spawnBGHealer(se, instance.getInstanceId(), Race.ELYOS);
         SpawnEngine.spawnBGHealer(sa, instance.getInstanceId(), Race.ASMODIANS);
@@ -99,6 +99,7 @@ public class CTFBattleGround extends BattleGround {
 
         if (elyosFlagCount > asmosFlagCount) {
             instance.doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player player) {
                     if (player.getCommonData().getRace() == Race.ELYOS) {
@@ -108,6 +109,7 @@ public class CTFBattleGround extends BattleGround {
             });
         } else if (elyosFlagCount == asmosFlagCount) {
             instance.doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player player) {
                     player.getBattleGround().increasePoints(player, player.getBattleGround().getTemplate().getRules().getCTFReward());
@@ -115,6 +117,7 @@ public class CTFBattleGround extends BattleGround {
             });
         } else {
             instance.doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player player) {
                     if (player.getCommonData().getRace() == Race.ASMODIANS) {
@@ -125,6 +128,7 @@ public class CTFBattleGround extends BattleGround {
         }
 
         instance.doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player object) {
                 HTMLService.showHTML(object, SurveyFactory.buildCTFBattleGroundReport(object), 152000001);

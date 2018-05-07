@@ -86,19 +86,23 @@ public class CompositionAction extends AbstractItemAction {
 
     public void act(final Player player, final Item tools, final Item first, final Item second) {
 
-        PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tools.getObjectId(), tools.getItemTemplate().getTemplateId(), 5000, 0, 0));
+        PacketSendUtility.sendPacket(player,
+            new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tools.getObjectId(), tools.getItemTemplate().getTemplateId(), 5000, 0, 0));
         player.getController().cancelTask(TaskId.ITEM_USE);
 
         final ItemUseObserver observer = new ItemUseObserver() {
+
             @Override
             public void abort() {
                 player.getController().cancelTask(TaskId.ITEM_USE);
-                PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tools.getObjectId(), tools.getItemTemplate().getTemplateId(), 0, 2, 0));
+                PacketSendUtility.sendPacket(player,
+                    new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tools.getObjectId(), tools.getItemTemplate().getTemplateId(), 0, 2, 0));
                 player.getObserveController().removeObserver(this);
             }
         };
         player.getObserveController().attach(observer);
         player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 player.getObserveController().removeObserver(observer);
@@ -108,7 +112,8 @@ public class CompositionAction extends AbstractItemAction {
                 if (result && result1 && result2) {
                     ItemService.addItem(player, getItemId(calcLevel(first.getItemTemplate().getLevel(), second.getItemTemplate().getLevel())), 1);
                 }
-                PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tools.getObjectId(), tools.getItemTemplate().getTemplateId(), 0, 1, 0));
+                PacketSendUtility.sendPacket(player,
+                    new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tools.getObjectId(), tools.getItemTemplate().getTemplateId(), 0, 1, 0));
             }
         }, 5000));
 

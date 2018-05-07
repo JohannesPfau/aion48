@@ -29,10 +29,10 @@
  */
 package quest.verteron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -43,9 +43,9 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _1143NolasRequest extends QuestHandler {
 
     private final static int questId = 1143;
-	private final static int npcId = 730001;
-	 private final static int[] monsterId0 = {210077, 210698};
-	 
+    private final static int npcId = 730001;
+    private final static int[] monsterId0 = { 210077, 210698 };
+
     public _1143NolasRequest() {
         super(questId);
     }
@@ -54,28 +54,28 @@ public class _1143NolasRequest extends QuestHandler {
     public void register() {
         qe.registerQuestNpc(npcId).addOnQuestStart(questId);
         qe.registerQuestNpc(npcId).addOnTalkEvent(questId);
-		for (int monsterId : monsterId0) {
+        for (int monsterId : monsterId0) {
             qe.registerQuestNpc(monsterId).addOnKillEvent(questId);
         }
     }
 
     @Override
     public boolean onDialogEvent(QuestEnv env) {
-    Player player = env.getPlayer();
-    QuestState qs = player.getQuestStateList().getQuestState(questId);
-    int targetId = env.getTargetId();
+        Player player = env.getPlayer();
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        int targetId = env.getTargetId();
 
         if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-            if (targetId == npcId) { 
+            if (targetId == npcId) {
                 if (env.getDialog() == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 1011);
                 } else {
                     return sendQuestStartDialog(env);
                 }
-            }		
-		} else if (qs.getStatus() == QuestStatus.START) {
+            }
+        } else if (qs.getStatus() == QuestStatus.START) {
             if (targetId == npcId) {
-				if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 10) {
+                if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getQuestVarById(0) == 10) {
                     qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
                     qs.setStatus(QuestStatus.REWARD);
                     updateQuestStatus(env);
@@ -83,36 +83,36 @@ public class _1143NolasRequest extends QuestHandler {
                 } else {
                     return sendQuestStartDialog(env);
                 }
-			}
-        }else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == npcId) {
-				if (env.getDialog() == DialogAction.USE_OBJECT) {
-					return sendQuestDialog(env, 5);
-				} else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
-					return sendQuestDialog(env, 5);
-				} else {
-					return sendQuestEndDialog(env);
-				}
-			}
-		}
+            }
+        } else if (qs.getStatus() == QuestStatus.REWARD) {
+            if (targetId == npcId) {
+                if (env.getDialog() == DialogAction.USE_OBJECT) {
+                    return sendQuestDialog(env, 5);
+                } else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id()) {
+                    return sendQuestDialog(env, 5);
+                } else {
+                    return sendQuestEndDialog(env);
+                }
+            }
+        }
         return false;
     }
-        
+
     @Override
     public boolean onKillEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
-		int targetId = 0;
-		
+        int targetId = 0;
+
         if (qs == null || qs.getStatus() != QuestStatus.START) {
             return false;
-        }       
+        }
 
         if (env.getVisibleObject() instanceof Npc) {
             targetId = ((Npc) env.getVisibleObject()).getNpcId();
         }
-		
-		 switch (targetId) {
+
+        switch (targetId) {
             case 210698:
             case 210077:
                 if (qs.getQuestVarById(0) < 10) {
@@ -121,7 +121,7 @@ public class _1143NolasRequest extends QuestHandler {
                     return true;
                 }
                 break;
-		 }
+        }
         return false;
     }
 }

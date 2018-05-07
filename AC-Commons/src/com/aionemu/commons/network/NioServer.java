@@ -29,11 +29,6 @@
  */
 package com.aionemu.commons.network;
 
-import com.aionemu.commons.network.util.ThreadPoolManager;
-import com.aionemu.commons.options.Assertion;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.channels.SelectionKey;
@@ -41,6 +36,12 @@ import java.nio.channels.ServerSocketChannel;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.network.util.ThreadPoolManager;
+import com.aionemu.commons.options.Assertion;
 
 /**
  * NioServer instance that handle connections on specified addresses.
@@ -57,7 +58,7 @@ public class NioServer {
     /**
      * The channels on which we'll accept connections
      */
-    private final List<SelectionKey> serverChannelKeys = new ArrayList<SelectionKey>();
+    private final List<SelectionKey> serverChannelKeys = new ArrayList<>();
 
     /**
      * Dispatcher that will accept connections
@@ -89,10 +90,13 @@ public class NioServer {
     /**
      * Constructor.
      *
-     * @param readWriteThreads - number of threads that will be used for
-     *                         handling read and write.
-     * @param dcPool           - ThreadPool on witch Disconnection tasks will be executed.
-     * @param cfgs             - Server Configurations
+     * @param readWriteThreads
+     *            - number of threads that will be used for
+     *            handling read and write.
+     * @param dcPool
+     *            - ThreadPool on witch Disconnection tasks will be executed.
+     * @param cfgs
+     *            - Server Configurations
      */
     public NioServer(int readWriteThreads, ServerCfg... cfgs) {
         /**
@@ -104,7 +108,7 @@ public class NioServer {
             assert assertionEnabled = true;
             if (!assertionEnabled) {
                 throw new RuntimeException(
-                        "This is unstable build. Assertion must be enabled! Add -ea to your start script or consider using stable build instead.");
+                    "This is unstable build. Assertion must be enabled! Add -ea to your start script or consider using stable build instead.");
             }
         }
         this.dcPool = ThreadPoolManager.getInstance();
@@ -140,8 +144,7 @@ public class NioServer {
                  * Register the server socket channel, indicating an interest in
                  * accepting new connections
                  */
-                SelectionKey acceptKey = getAcceptDispatcher().register(serverChannel, SelectionKey.OP_ACCEPT,
-                        new Acceptor(cfg.factory, this));
+                SelectionKey acceptKey = getAcceptDispatcher().register(serverChannel, SelectionKey.OP_ACCEPT, new Acceptor(cfg.factory, this));
                 serverChannelKeys.add(acceptKey);
             }
         } catch (Exception e) {
@@ -159,7 +162,7 @@ public class NioServer {
 
     /**
      * @return one of ReadWrite Dispatcher or Accept Dispatcher if
-     * readWriteThreads was set to 0.
+     *         readWriteThreads was set to 0.
      */
     public final Dispatcher getReadWriteDispatcher() {
         if (readWriteDispatchers == null) {

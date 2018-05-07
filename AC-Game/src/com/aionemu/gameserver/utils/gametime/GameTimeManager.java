@@ -65,7 +65,8 @@ public class GameTimeManager {
     /**
      * Starts the counter that increases the clock every tick
      *
-     * @throws IllegalStateException If called twice
+     * @throws IllegalStateException
+     *             If called twice
      */
     public static void startClock() {
         if (clockStarted) {

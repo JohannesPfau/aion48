@@ -29,17 +29,18 @@
  */
 package com.aionemu.chatserver.service;
 
-import com.aionemu.chatserver.ShutdownHook;
-import com.aionemu.chatserver.configs.Config;
-import com.aionemu.chatserver.model.RestartFrequency;
 import java.util.Calendar;
 import java.util.Timer;
 import java.util.TimerTask;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.chatserver.ShutdownHook;
+import com.aionemu.chatserver.configs.Config;
+import com.aionemu.chatserver.model.RestartFrequency;
+
 /**
- *
  * @author nrg
  */
 public class RestartService {
@@ -91,6 +92,7 @@ public class RestartService {
         //Restart timer
         Timer timer = new Timer();
         timer.schedule(new TimerTask() {
+
             @Override
             public void run() {
                 RestartService.log.info("Restart task is triggered - restarting chatserver!");
@@ -106,7 +108,7 @@ public class RestartService {
         String[] time;
         if ((time = Config.CHATSERVER_RESTART_TIME.split(":")).length != 2) {
             log.warn("You did not state a valid restart time. Using 5:00 AM as default value!");
-            return new String[]{"5", "0"};
+            return new String[] { "5", "0" };
         }
         return time;
     }

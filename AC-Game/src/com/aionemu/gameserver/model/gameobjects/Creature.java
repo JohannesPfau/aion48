@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.model.gameobjects;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,11 +62,11 @@ import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
+import javolution.util.FastMap;
+
 /**
  * This class is representing movable objects, its base class for all in game
  * objects that may move
- *
-
  */
 public abstract class Creature extends VisibleObject {
 
@@ -104,8 +102,8 @@ public abstract class Creature extends VisibleObject {
      * @param objectTemplate
      * @param position
      */
-    public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate,
-                    VisibleObjectTemplate objectTemplate, WorldPosition position) {
+    public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, VisibleObjectTemplate objectTemplate,
+        WorldPosition position) {
         super(objId, controller, spawnTemplate, objectTemplate, position);
         this.observeController = new ObserveController();
         this.setTransformModel(new TransformModel(this));
@@ -143,7 +141,8 @@ public abstract class Creature extends VisibleObject {
     }
 
     /**
-     * @param lifeStats the lifeStats to set
+     * @param lifeStats
+     *            the lifeStats to set
      */
     public void setLifeStats(CreatureLifeStats<? extends Creature> lifeStats) {
         this.lifeStats = lifeStats;
@@ -157,7 +156,8 @@ public abstract class Creature extends VisibleObject {
     }
 
     /**
-     * @param gameStats the gameStats to set
+     * @param gameStats
+     *            the gameStats to set
      */
     public void setGameStats(CreatureGameStats<? extends Creature> gameStats) {
         this.gameStats = gameStats;
@@ -173,7 +173,8 @@ public abstract class Creature extends VisibleObject {
     }
 
     /**
-     * @param effectController the effectController to set
+     * @param effectController
+     *            the effectController to set
      */
     public void setEffectController(EffectController effectController) {
         this.effectController = effectController;
@@ -321,7 +322,8 @@ public abstract class Creature extends VisibleObject {
      * @return
      */
     public boolean canAttack() {
-        return !(getEffectController().isAbnormalState(AbnormalState.CANT_ATTACK_STATE) || isCasting() || isInState(CreatureState.RESTING) || isInState(CreatureState.PRIVATE_SHOP));
+        return !(getEffectController().isAbnormalState(AbnormalState.CANT_ATTACK_STATE) || isCasting() || isInState(CreatureState.RESTING)
+            || isInState(CreatureState.PRIVATE_SHOP));
     }
 
     /**
@@ -332,14 +334,16 @@ public abstract class Creature extends VisibleObject {
     }
 
     /**
-     * @param state the state to set
+     * @param state
+     *            the state to set
      */
     public void setState(CreatureState state) {
         this.state |= state.getId();
     }
 
     /**
-     * @param state taken usually from templates
+     * @param state
+     *            taken usually from templates
      */
     public void setState(int state) {
         this.state = state;
@@ -367,7 +371,8 @@ public abstract class Creature extends VisibleObject {
     }
 
     /**
-     * @param visualState the visualState to set
+     * @param visualState
+     *            the visualState to set
      */
     public void setVisualState(CreatureVisualState visualState) {
         this.visualState |= visualState.getId();
@@ -395,7 +400,8 @@ public abstract class Creature extends VisibleObject {
     }
 
     /**
-     * @param seeState the seeState to set
+     * @param seeState
+     *            the seeState to set
      */
     public void setSeeState(CreatureSeeState seeState) {
         this.seeState |= seeState.getId();
@@ -423,7 +429,8 @@ public abstract class Creature extends VisibleObject {
     }
 
     /**
-     * @param transformModel the transformedModel to set
+     * @param transformModel
+     *            the transformedModel to set
      */
     public final void setTransformModel(TransformModel model) {
         this.transformModel = model;
@@ -464,7 +471,7 @@ public abstract class Creature extends VisibleObject {
         // Debug
         if (log.isDebugEnabled()) {
             log.debug("PacketBroadcaster: Packet " + mode.name() + " removed from player " + this.getName()); // fix
-        }                                                                                                                                                                                                                // ClassCastException
+        } // ClassCastException
     }
 
     /**
@@ -533,7 +540,7 @@ public abstract class Creature extends VisibleObject {
         }
 
         if (creature.isInInstance() && creature.isInVisualState(CreatureVisualState.HIDE2)
-                || creature.isInInstance() && creature.isInVisualState(CreatureVisualState.HIDE1)) {
+            || creature.isInInstance() && creature.isInVisualState(CreatureVisualState.HIDE1)) {
             return true;
         }
 

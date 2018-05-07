@@ -42,15 +42,15 @@ import javax.xml.bind.annotation.XmlType;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "StringParamList", propOrder = {"param"})
-@XmlSeeAlso({MailPart.class})
+@XmlType(name = "StringParamList", propOrder = { "param" })
+@XmlSeeAlso({ MailPart.class })
 public class StringParamList {
 
     protected List<StringParamList.Param> param;
 
     public List<StringParamList.Param> getParam() {
         if (param == null) {
-            param = new ArrayList<StringParamList.Param>();
+            param = new ArrayList<>();
         }
         return this.param;
     }

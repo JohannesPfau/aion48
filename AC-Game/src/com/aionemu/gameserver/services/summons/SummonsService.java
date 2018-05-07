@@ -134,6 +134,7 @@ public class SummonsService {
                         final Creature lastAttacker = (Creature) target;
                         if (!master.getLifeStats().isAlreadyDead() && !lastAttacker.getLifeStats().isAlreadyDead() && isAttacked) {
                             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                 @Override
                                 public void run() {
                                     lastAttacker.getAggroList().addHate(master, 1);

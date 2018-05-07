@@ -46,7 +46,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _14024AKrallingSuspicion extends QuestHandler {
 
     private final static int questId = 14024;
-    private final static int[] npc_ids = {203904, 204045, 204004, 204020};
+    private final static int[] npc_ids = { 203904, 204045, 204004, 204020 };
 
     public _14024AKrallingSuspicion() {
         super(questId);

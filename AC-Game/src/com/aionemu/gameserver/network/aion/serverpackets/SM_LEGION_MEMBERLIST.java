@@ -53,7 +53,8 @@ public class SM_LEGION_MEMBERLIST extends AionServerPacket {
      * This constructor will handle legion member info when a List of members is
      * given
      *
-     * @param ArrayList <LegionMemberEx> legionMembers
+     * @param ArrayList
+     *            <LegionMemberEx> legionMembers
      */
     public SM_LEGION_MEMBERLIST(List<LegionMemberEx> legionMembers, boolean result, boolean isFirst) {
         this.legionMembers = legionMembers;
@@ -63,7 +64,7 @@ public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         int size = legionMembers.size();
         writeC(isFirst ? 1 : 0);
         writeH(result ? size : -size);
@@ -91,8 +92,8 @@ public class SM_LEGION_MEMBERLIST extends AionServerPacket {
                 writeD(0);
                 writeD(0);
             }
-           // writeD(115); // unk, seen values 0, 1, 111
-              writeD(NetworkConfig.GAMESERVER_ID);
+            // writeD(115); // unk, seen values 0, 1, 111
+            writeD(NetworkConfig.GAMESERVER_ID);
         }
     }
 }

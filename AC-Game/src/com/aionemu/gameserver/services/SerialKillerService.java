@@ -29,9 +29,6 @@
  */
 package com.aionemu.gameserver.services;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,15 +47,18 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
+import javolution.util.FastList;
+import javolution.util.FastMap;
+
 /**
  * @author Source
  * @modified Dtem
  */
 public class SerialKillerService {
 
-    private FastMap<Integer, SerialKiller> serialKillers = new FastMap<Integer, SerialKiller>();
-    private FastMap<Integer, FastMap<Integer, Player>> worldKillers = new FastMap<Integer, FastMap<Integer, Player>>();
-    private static final FastMap<Integer, WorldType> handledWorlds = new FastMap<Integer, WorldType>();
+    private FastMap<Integer, SerialKiller> serialKillers = new FastMap<>();
+    private FastMap<Integer, FastMap<Integer, Player>> worldKillers = new FastMap<>();
+    private static final FastMap<Integer, WorldType> handledWorlds = new FastMap<>();
     private int refresh = CustomConfig.SERIALKILLER_REFRESH;
     private int levelDiff = CustomConfig.SERIALKILLER_LEVEL_DIFF;
     private SerialKillerDebuff debuff;
@@ -90,6 +90,7 @@ public class SerialKillerService {
         }
 
         ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 for (SerialKiller info : serialKillers.values()) {
@@ -117,7 +118,7 @@ public class SerialKillerService {
         if (worldKillers.containsKey(worldId)) {
             return worldKillers.get(worldId);
         } else {
-            FastMap<Integer, Player> killers = new FastMap<Integer, Player>();
+            FastMap<Integer, Player> killers = new FastMap<>();
             worldKillers.putEntry(worldId, killers);
             return killers;
         }
@@ -167,8 +168,8 @@ public class SerialKillerService {
 
             debuff.applyEffect(player, info.getRank());
 
-            World.getInstance().getWorldMap(worldId).
-                    getWorldMapInstanceById(player.getInstanceId()).doOnAllPlayers(new Visitor<Player>() {
+            World.getInstance().getWorldMap(worldId).getWorldMapInstanceById(player.getInstanceId()).doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player victim) {
                     if (!player.getRace().equals(victim.getRace())) {
@@ -190,15 +191,14 @@ public class SerialKillerService {
 
         if (isEnemyWorld(player)) {
             SerialKiller info = player.getSKInfo();
-            FastList<Player> kill = new FastList<Player>();
+            FastList<Player> kill = new FastList<>();
             FastMap<Integer, Player> killers = getWorldKillers(worldId);
             kill.addAll(killers.values());
             killers.remove(player.getObjectId());
             if (info.getRank() > 0) {
                 info.setRank(0);
                 debuff.endEffect(player);
-                for (Player victim : World.getInstance().getWorldMap(worldId).
-                        getWorldMapInstanceById(player.getInstanceId()).getPlayersInside()) {
+                for (Player victim : World.getInstance().getWorldMap(worldId).getWorldMapInstanceById(player.getInstanceId()).getPlayersInside()) {
                     if (!player.getRace().equals(victim.getRace())) {
                         PacketSendUtility.sendPacket(victim, new SM_SERIAL_KILLER(kill));
                     }
@@ -225,15 +225,16 @@ public class SerialKillerService {
                     debuff.applyEffect(killer, rank);
                     final FastMap<Integer, Player> killers = getWorldKillers(killer.getWorldId());
                     PacketSendUtility.sendPacket(killer, new SM_SERIAL_KILLER(true, info.getRank()));
-                    World.getInstance().getWorldMap(killer.getWorldId()).
-                            getWorldMapInstanceById(killer.getInstanceId()).doOnAllPlayers(new Visitor<Player>() {
-                        @Override
-                        public void visit(Player observed) {
-                            if (!killer.getRace().equals(observed.getRace())) {
-                                PacketSendUtility.sendPacket(observed, new SM_SERIAL_KILLER(killers.values()));
+                    World.getInstance().getWorldMap(killer.getWorldId()).getWorldMapInstanceById(killer.getInstanceId())
+                        .doOnAllPlayers(new Visitor<Player>() {
+
+                            @Override
+                            public void visit(Player observed) {
+                                if (!killer.getRace().equals(observed.getRace())) {
+                                    PacketSendUtility.sendPacket(observed, new SM_SERIAL_KILLER(killers.values()));
+                                }
                             }
-                        }
-                    });
+                        });
                 }
 
                 if (!serialKillers.containsKey(killer.getObjectId())) {
@@ -252,6 +253,7 @@ public class SerialKillerService {
         if (isEnemyWorld(victim)) {
             final SerialKiller info = victim.getSKInfo();
             victim.getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player player) {
                     if (killer.getRace().equals(player.getRace()) && MathUtil.isIn3dRange(victim, player, 30)) {

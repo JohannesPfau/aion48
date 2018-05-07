@@ -48,8 +48,8 @@ public class SM_TOWNS_LIST extends AionServerPacket {
     }
 
     @Override
-	protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+    protected void writeImpl(AionConnection con) {
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(towns.size());
         for (Town town : towns.values()) {
             writeD(town.getId());

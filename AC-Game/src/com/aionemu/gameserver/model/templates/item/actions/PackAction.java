@@ -76,15 +76,18 @@ public class PackAction extends AbstractItemAction {
         final int parentItemId = parentItem.getItemId();
         final int parntObjectId = parentItem.getObjectId().intValue();
         final int parentNameId = parentItem.getNameId();
-        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(), parentItem.getObjectId().intValue(), parentItemId, 5000, 0, 0), true);
+        PacketSendUtility.broadcastPacket(player,
+            new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(), parentItem.getObjectId().intValue(), parentItemId, 5000, 0, 0), true);
 
         final ItemUseObserver observer = new ItemUseObserver() {
+
             @Override
             public void abort() {
                 player.getController().cancelTask(TaskId.ITEM_USE);
                 player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
-                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402015, new Object[]{new DescriptionId(parentNameId)})); // You cannot wrap %0
-                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(), parntObjectId, parentItemId, 0, 2, 0), true);
+                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402015, new Object[] { new DescriptionId(parentNameId) })); // You cannot wrap %0
+                PacketSendUtility.broadcastPacket(player,
+                    new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(), parntObjectId, parentItemId, 0, 2, 0), true);
 
                 player.getObserveController().removeObserver(this);
             }
@@ -92,10 +95,12 @@ public class PackAction extends AbstractItemAction {
         player.getObserveController().attach(observer);
 
         player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 player.getObserveController().removeObserver(observer);
-                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(), parntObjectId, parentItemId, 0, 1, 1), true);
+                PacketSendUtility.broadcastPacket(player,
+                    new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(), parntObjectId, parentItemId, 0, 1, 1), true);
                 if (!player.getInventory().decreaseByObjectId(parntObjectId, 1)) {
                     return;
                 }
@@ -112,18 +117,19 @@ public class PackAction extends AbstractItemAction {
                     return;
                 }
                 if (parentItem.getItemTemplate().getItemQuality() != targetItem.getItemTemplate().getItemQuality()) {
-                    PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_TARGET_ITEM_CATEGORY(parentNameId, targetItem.getNameId())); // %1 cannot be wrapped with %0
+                    PacketSendUtility.sendPacket(player,
+                        SM_SYSTEM_MESSAGE.STR_MSG_PACK_ITEM_WRONG_TARGET_ITEM_CATEGORY(parentNameId, targetItem.getNameId())); // %1 cannot be wrapped with %0
                     return;
                 }
                 if (targetItem.getPackCount() > targetItem.getItemTemplate().getPackCount()) {
-                    PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402015, new Object[]{new DescriptionId(targetItem.getNameId())}));
+                    PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402015, new Object[] { new DescriptionId(targetItem.getNameId()) }));
                     return;
                 }
                 targetItem.setPacked(true);
                 targetItem.setPackCount(++_packCount);
                 targetItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
                 PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, targetItem));
-                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402031, new Object[]{new DescriptionId(targetItem.getNameId())})); // Wrapping of %0 is complete
+                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1402031, new Object[] { new DescriptionId(targetItem.getNameId()) })); // Wrapping of %0 is complete
             }
         }, 5000));
     }

@@ -29,16 +29,15 @@
  */
 package quest.convent_of_marchutan;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -56,27 +55,29 @@ public class _20000VidarsCall extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {204052, 798800};
+        int[] npcs = { 204052, 798800 };
         qe.registerOnEnterWorld(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }
     }
 
-    /*@Override
-    public boolean onEnterWorldEvent(QuestEnv env) {
-        Player player = env.getPlayer();
-        if (player.getWorldId() == 120010000) {
-            QuestState qs = player.getQuestStateList().getQuestState(questId);
-            if (qs == null) {
-                env.setQuestId(questId);
-                if (QuestService.startQuest(env)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }*/
+    /*
+     * @Override
+     * public boolean onEnterWorldEvent(QuestEnv env) {
+     * Player player = env.getPlayer();
+     * if (player.getWorldId() == 120010000) {
+     * QuestState qs = player.getQuestStateList().getQuestState(questId);
+     * if (qs == null) {
+     * env.setQuestId(questId);
+     * if (QuestService.startQuest(env)) {
+     * return true;
+     * }
+     * }
+     * }
+     * return false;
+     * }
+     */
 
     @Override
     public boolean onDialogEvent(QuestEnv env) {
@@ -111,10 +112,10 @@ public class _20000VidarsCall extends QuestHandler {
                 if (env.getDialog() == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 10002);
                 } else {
-                    int[] quests = {20001, 20026, 20020, 20021, 20022, 20023, 20024, 20025};
+                    int[] quests = { 20001, 20026, 20020, 20021, 20022, 20023, 20024, 20025 };
                     for (int quest : quests) {
-                        QuestEngine.getInstance().onEnterZoneMissionEnd(
-                                new QuestEnv(env.getVisibleObject(), env.getPlayer(), quest, env.getDialogId()));
+                        QuestEngine.getInstance()
+                            .onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), quest, env.getDialogId()));
                     }
                     return sendQuestEndDialog(env);
                 }

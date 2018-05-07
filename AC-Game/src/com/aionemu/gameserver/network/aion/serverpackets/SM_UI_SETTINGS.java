@@ -54,7 +54,7 @@ public class SM_UI_SETTINGS extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(type);
         writeH(0x1C00);
         writeB(data);

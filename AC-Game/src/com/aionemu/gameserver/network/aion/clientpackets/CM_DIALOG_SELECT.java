@@ -99,7 +99,8 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
         }
 
         if (targetObjectId == 0 || targetObjectId == player.getObjectId()) {
-            if (questTemplate != null && !questTemplate.isCannotShare() && (dialogId == DialogAction.QUEST_ACCEPT_1.id() || dialogId == DialogAction.QUEST_ACCEPT_SIMPLE.id())) {
+            if (questTemplate != null && !questTemplate.isCannotShare()
+                && (dialogId == DialogAction.QUEST_ACCEPT_1.id() || dialogId == DialogAction.QUEST_ACCEPT_SIMPLE.id())) {
                 QuestService.startQuest(env);
                 return;
             }

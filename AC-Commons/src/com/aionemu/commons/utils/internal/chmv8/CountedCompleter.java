@@ -29,6 +29,8 @@
  */
 package com.aionemu.commons.utils.internal.chmv8;
 
+import java.util.concurrent.RecursiveAction;
+
 /**
  * A {@link ForkJoinTask} with a completion action performed when triggered and
  * there are no remaining pending actions. CountedCompleters are in general more
@@ -123,7 +125,7 @@ package com.aionemu.commons.utils.internal.chmv8;
  * <p/>
  * <
  * pre> {@code
- * class MyOperation<E> { void apply(E e) { ... }  }
+ * class MyOperation<E> { void apply(E e) { ... } }
  * <p/>
  * class ForEach<E> extends CountedCompleter<Void> {
  * <p/>
@@ -139,7 +141,8 @@ package com.aionemu.commons.utils.internal.chmv8;
  * ForEach(this, array, op, mid, hi).fork(); // right child new ForEach(this,
  * array, op, lo, mid).fork(); // left child } else if (hi > lo)
  * op.apply(array[lo]); tryComplete(); }
- * }}</pre>
+ * }}
+ * </pre>
  * <p/>
  * This design can be improved by noticing that in the recursive case, the task
  * has nothing to do after forking its right task, so can directly invoke its
@@ -164,7 +167,8 @@ package com.aionemu.commons.utils.internal.chmv8;
  * tryComplete();
  * }
  * }
- * }</pre>
+ * }
+ * </pre>
  * <p/>
  * As a further improvement, notice that the left task need not even exist.
  * Instead of creating a new one, we can iterate using the original task, and
@@ -188,7 +192,8 @@ package com.aionemu.commons.utils.internal.chmv8;
  * op.apply(array[l]);
  * propagateCompletion();
  * }
- * }</pre>
+ * }
+ * </pre>
  * <p/>
  * Additional improvements of such classes might entail precomputing pending
  * counts so that they can be established in constructors, specializing classes
@@ -217,7 +222,7 @@ package com.aionemu.commons.utils.internal.chmv8;
  * }
  * public E getRawResult() { return result.get(); }
  * public void compute() { // similar to ForEach version 3
- * int l = lo,  h = hi;
+ * int l = lo, h = hi;
  * while (result.get() == null && h >= l) {
  * if (h - l >= 2) {
  * int mid = (l + h) >>> 1;
@@ -238,7 +243,8 @@ package com.aionemu.commons.utils.internal.chmv8;
  * <p/>
  * public static <E> E search(E[] array) { return new Searcher<E>(null, array,
  * new AtomicReference<E>(), 0, array.length).invoke(); }
- * }}</pre>
+ * }}
+ * </pre>
  * <p/>
  * In this example, as well as others in which tasks have no other effects
  * except to compareAndSet a common result, the trailing unconditional
@@ -260,8 +266,8 @@ package com.aionemu.commons.utils.internal.chmv8;
  * <p/>
  * <
  * pre> {@code
- * class MyMapper<E> { E apply(E v) {  ...  } }
- * class MyReducer<E> { E apply(E x, E y) {  ...  } }
+ * class MyMapper<E> { E apply(E v) { ... } }
+ * class MyReducer<E> { E apply(E x, E y) { ... } }
  * class MapReducer<E> extends CountedCompleter<E> {
  * final E[] array; final MyMapper<E> mapper;
  * final MyReducer<E> reducer; final int lo, hi;
@@ -282,7 +288,7 @@ package com.aionemu.commons.utils.internal.chmv8;
  * right.sibling = left;
  * setPendingCount(1); // only right is pending
  * right.fork();
- * left.compute();     // directly execute left
+ * left.compute(); // directly execute left
  * }
  * else {
  * if (hi > lo)
@@ -305,7 +311,8 @@ package com.aionemu.commons.utils.internal.chmv8;
  * public static <E> E mapReduce(E[] array, MyMapper<E> mapper, MyReducer<E>
  * reducer) { return new MapReducer<E>(null, array, mapper, reducer, 0,
  * array.length).invoke(); }
- * }}</pre>
+ * }}
+ * </pre>
  * <p/>
  * Here, method {@code onCompletion} takes a form common to many completion
  * designs that combine results. This callback-style method is triggered once
@@ -345,7 +352,7 @@ package com.aionemu.commons.utils.internal.chmv8;
  * this.next = next;
  * }
  * public void compute() {
- * int l = lo,  h = hi;
+ * int l = lo, h = hi;
  * while (h - l >= 2) {
  * int mid = (l + h) >>> 1;
  * addToPendingCount(1);
@@ -356,7 +363,7 @@ package com.aionemu.commons.utils.internal.chmv8;
  * result = mapper.apply(array[l]);
  * // process completions by reducing along and advancing subtask links
  * for (CountedCompleter<?> c = firstComplete(); c != null; c = c.nextComplete()) {
- * for (MapReducer t = (MapReducer)c, s = t.forks;  s != null; s = t.forks = s.next)
+ * for (MapReducer t = (MapReducer)c, s = t.forks; s != null; s = t.forks = s.next)
  * t.result = reducer.apply(t.result, s.result);
  * }
  * }
@@ -365,7 +372,8 @@ package com.aionemu.commons.utils.internal.chmv8;
  * public static <E> E mapReduce(E[] array, MyMapper<E> mapper, MyReducer<E>
  * reducer) { return new MapReducer<E>(null, array, mapper, reducer, 0,
  * array.length, null).invoke(); }
- * }}</pre>
+ * }}
+ * </pre>
  * <p/>
  * <p/>
  * <b>Triggers.</b> Some CountedCompleters are themselves never forked, but
@@ -386,7 +394,8 @@ package com.aionemu.commons.utils.internal.chmv8;
  * PacketSender p = new PacketSender();
  * new HeaderBuilder(p, ...).fork();
  * new BodyBuilder(p, ...).fork();
- * }</pre>
+ * }
+ * </pre>
  *
  * @author Doug Lea
  * @since 1.8
@@ -408,11 +417,12 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      * Creates a new CountedCompleter with the given completer and initial
      * pending count.
      *
-     * @param completer           this task's completer, or {@code null} if none
-     * @param initialPendingCount the initial pending count
+     * @param completer
+     *            this task's completer, or {@code null} if none
+     * @param initialPendingCount
+     *            the initial pending count
      */
-    protected CountedCompleter(CountedCompleter<?> completer,
-                               int initialPendingCount) {
+    protected CountedCompleter(CountedCompleter<?> completer, int initialPendingCount) {
         this.completer = completer;
         this.pending = initialPendingCount;
     }
@@ -421,7 +431,8 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      * Creates a new CountedCompleter with the given completer and an initial
      * pending count of zero.
      *
-     * @param completer this task's completer, or {@code null} if none
+     * @param completer
+     *            this task's completer, or {@code null} if none
      */
     protected CountedCompleter(CountedCompleter<?> completer) {
         this.completer = completer;
@@ -449,8 +460,9 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      * this}, then it is typically a subtask that may contain results (and/or
      * links to other results) to combine.
      *
-     * @param caller the task invoking this method (which may be this task
-     *               itself)
+     * @param caller
+     *            the task invoking this method (which may be this task
+     *            itself)
      */
     public void onCompletion(CountedCompleter<?> caller) {
     }
@@ -465,11 +477,13 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      * default implementation of this method does nothing except return
      * {@code true}.
      *
-     * @param ex     the exception
-     * @param caller the task invoking this method (which may be this task
-     *               itself)
+     * @param ex
+     *            the exception
+     * @param caller
+     *            the task invoking this method (which may be this task
+     *            itself)
      * @return true if this exception should be propagated to this task's
-     * completer, if one exists
+     *         completer, if one exists
      */
     public boolean onExceptionalCompletion(Throwable ex, CountedCompleter<?> caller) {
         return true;
@@ -497,7 +511,8 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
     /**
      * Sets the pending count to the given value.
      *
-     * @param count the count
+     * @param count
+     *            the count
      */
     public final void setPendingCount(int count) {
         pending = count;
@@ -506,7 +521,8 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
     /**
      * Adds (atomically) the given value to the pending count.
      *
-     * @param delta the value to add
+     * @param delta
+     *            the value to add
      */
     public final void addToPendingCount(int delta) {
         int c; // note: can replace with intrinsic in jdk8
@@ -518,8 +534,10 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      * Sets (atomically) the pending count to the given count only if it
      * currently holds the given expected value.
      *
-     * @param expected the expected value
-     * @param count    the new value
+     * @param expected
+     *            the expected value
+     * @param count
+     *            the new value
      * @return true if successful
      */
     public final boolean compareAndSetPendingCount(int expected, int count) {
@@ -530,13 +548,12 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      * If the pending count is nonzero, (atomically) decrements it.
      *
      * @return the initial (undecremented) pending count holding on entry to
-     * this method
+     *         this method
      */
     public final int decrementPendingCountUnlessZero() {
         int c;
         do {
-        } while ((c = pending) != 0
-                && !U.compareAndSwapInt(this, PENDING, c, c - 1));
+        } while ((c = pending) != 0 && !U.compareAndSwapInt(this, PENDING, c, c - 1));
         return c;
     }
 
@@ -561,7 +578,7 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      */
     public final void tryComplete() {
         CountedCompleter<?> a = this, s = a;
-        for (int c; ; ) {
+        for (int c;;) {
             if ((c = a.pending) == 0) {
                 a.onCompletion(s);
                 if ((a = (s = a).completer) == null) {
@@ -584,7 +601,7 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      */
     public final void propagateCompletion() {
         CountedCompleter<?> a = this, s = a;
-        for (int c; ; ) {
+        for (int c;;) {
             if ((c = a.pending) == 0) {
                 if ((a = (s = a).completer) == null) {
                     s.quietlyComplete();
@@ -611,7 +628,8 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      * setRawResult} is not overridden, this effect can be obtained more simply
      * using {@code quietlyCompleteRoot();}.
      *
-     * @param rawResult the raw result
+     * @param rawResult
+     *            the raw result
      */
     public void complete(T rawResult) {
         CountedCompleter<?> p;
@@ -632,7 +650,7 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      * @return this task, if pending count was zero, else {@code null}
      */
     public final CountedCompleter<?> firstComplete() {
-        for (int c; ; ) {
+        for (int c;;) {
             if ((c = pending) == 0) {
                 return this;
             } else if (U.compareAndSwapInt(this, PENDING, c, c - 1)) {
@@ -655,7 +673,8 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      * c != null;
      * c = c.nextComplete()) {
      * // ... process c ...
-     * }}</pre>
+     * }}
+     * </pre>
      *
      * @return the completer, or {@code null} if none
      */
@@ -673,7 +692,7 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      * Equivalent to {@code getRoot().quietlyComplete()}.
      */
     public final void quietlyCompleteRoot() {
-        for (CountedCompleter<?> a = this, p; ; ) {
+        for (CountedCompleter<?> a = this, p;;) {
             if ((p = a.completer) == null) {
                 a.quietlyComplete();
                 return;
@@ -687,8 +706,7 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
      */
     void internalPropagateException(Throwable ex) {
         CountedCompleter<?> a = this, s = a;
-        while (a.onExceptionalCompletion(ex, s)
-                && (a = (s = a).completer) != null && a.status >= 0) {
+        while (a.onExceptionalCompletion(ex, s) && (a = (s = a).completer) != null && a.status >= 0) {
             a.recordExceptionalCompletion(ex);
         }
     }
@@ -749,6 +767,7 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
         }
         try {
             return java.security.AccessController.doPrivileged(new java.security.PrivilegedExceptionAction<sun.misc.Unsafe>() {
+
                 public sun.misc.Unsafe run() throws Exception {
                     Class<sun.misc.Unsafe> k = sun.misc.Unsafe.class;
                     for (java.lang.reflect.Field f : k.getDeclaredFields()) {
@@ -762,8 +781,7 @@ public abstract class CountedCompleter<T> extends ForkJoinTask<T> {
                 }
             });
         } catch (java.security.PrivilegedActionException e) {
-            throw new RuntimeException("Could not initialize intrinsics",
-                    e.getCause());
+            throw new RuntimeException("Could not initialize intrinsics", e.getCause());
         }
     }
 }

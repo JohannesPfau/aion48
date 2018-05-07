@@ -30,10 +30,10 @@
 package quest.black_cloud_traders;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -41,12 +41,11 @@ import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _39505BackbitingBotheration extends QuestHandler {
 
     private final static int questId = 39505;
-    private int[] mobs = {218600, 218602, 218023, 218024, 218025, 218022};
+    private int[] mobs = { 218600, 218602, 218023, 218024, 218025, 218022 };
 
     public _39505BackbitingBotheration() {
         super(questId);
@@ -128,8 +127,7 @@ public class _39505BackbitingBotheration extends QuestHandler {
             if (Rnd.get(1, 100) < 20) {
                 Npc npc = (Npc) env.getVisibleObject();
                 npc.getController().onDelete();
-                QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 701153, npc.getX(), npc.getY(),
-                        npc.getZ(), (byte) 0);
+                QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 701153, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
                 return true;
             }
         }

@@ -49,6 +49,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="ManastoneGroup">
  *   &lt;complexContent>
@@ -78,6 +79,7 @@ public class ManastoneGroup extends BonusItemGroup {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getItems().add(newItem);
      * </pre>
@@ -87,12 +89,13 @@ public class ManastoneGroup extends BonusItemGroup {
      */
     public List<ItemRaceEntry> getItems() {
         if (items == null) {
-            items = new ArrayList<ItemRaceEntry>();
+            items = new ArrayList<>();
         }
         return this.items;
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.gameserver.model.templates.itemgroups.ItemGroup#getRewards()
      */
     @Override

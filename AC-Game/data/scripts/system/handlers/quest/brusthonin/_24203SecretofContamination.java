@@ -28,7 +28,7 @@
  * @Aion-Core Dev.
  */
 package quest.brusthonin;
- 
+
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -38,19 +38,19 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
- 
+
 /**
  * @author FrozenKiller
  */
- 
+
 public class _24203SecretofContamination extends QuestHandler {
 
     private final static int questId = 24203;
 
     public _24203SecretofContamination() {
         super(questId);
-    }    
-	
+    }
+
     @Override
     public void register() {
         qe.registerQuestNpc(205150).addOnQuestStart(questId);
@@ -58,17 +58,16 @@ public class _24203SecretofContamination extends QuestHandler {
         qe.registerQuestNpc(205192).addOnTalkEvent(questId); // Sahnu
         qe.registerQuestNpc(205155).addOnTalkEvent(questId); // Heintz
         qe.registerQuestNpc(204057).addOnTalkEvent(questId); // Sigyn
-		qe.registerQuestNpc(214700).addOnKillEvent(questId); // Suspicious Boy
+        qe.registerQuestNpc(214700).addOnKillEvent(questId); // Suspicious Boy
     }
-	
-	
-	@Override
+
+    @Override
     public boolean onDialogEvent(final QuestEnv env) {
         final Player player = env.getPlayer();
         int targetId = env.getTargetId();
-		final Npc npc = (Npc) env.getVisibleObject();
+        final Npc npc = (Npc) env.getVisibleObject();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
-		int var = qs.getQuestVarById(0);
+        int var = qs.getQuestVarById(0);
         DialogAction dialog = env.getDialog();
 
         if (qs == null || qs.getStatus() == QuestStatus.NONE) {
@@ -79,75 +78,76 @@ public class _24203SecretofContamination extends QuestHandler {
                     return sendQuestStartDialog(env);
                 }
             }
-		}  else if (targetId == 205150) { // Surt
-				if (var == 0) {
-					switch (dialog) {
-						case QUEST_SELECT: {
-							return sendQuestDialog(env, 1011);
-						}
-						case SETPRO1: {
-							return defaultCloseDialog(env, 0, 1);
-						}
-					default:
-						break;
-					}
-				}
-			} else if (qs.getStatus() == QuestStatus.START) {
-				if (targetId == 205192) { // Sahnu
-					switch (dialog) {
-						case QUEST_SELECT: {
-							if (var == 1) {
-								return sendQuestDialog(env, 1352);
-							} else if (var == 2) {
-								return sendQuestDialog(env, 1693);
-							} else if (var == 3) {
-								return sendQuestDialog(env, 2034);
-							} 
-						}
-						case SETPRO2: {
-							TeleportService2.teleportTo(player, 220040000, 569.95056f, 2845.857f, 231.00928f, (byte) 114, TeleportAnimation.BEAM_ANIMATION);
-							qs.setQuestVarById(0, var + 1);
-							updateQuestStatus(env);
-							return true;
-						}
-						case CHECK_USER_HAS_QUEST_ITEM: {
-							if (var == 2) {
-								return checkQuestItems(env, 2, 3, false, 10000, 10001); // 3
-							}
-						}
-						case FINISH_DIALOG: {
-                            if (var == 3) {
-                                return defaultCloseDialog(env, 3, 3); // 3
-                            }
-						}
-						case SETPRO4: {
-							if (var == 3) {
-								return defaultCloseDialog(env, 3 ,4); //4
-							}
-						}
-					default:
-						break;
-					}
-				} else if (targetId == 205155) { // Heintz
-					if (var == 5) {
-						switch (dialog) {
-							case QUEST_SELECT: {
-								return sendQuestDialog(env, 2716);
-							}
-							case SETPRO6: {
-								qs.setQuestVarById(0, var + 1);
-								qs.setStatus(QuestStatus.REWARD);
-								updateQuestStatus(env);
-								return closeDialogWindow(env);
-							}
-						default:
-							break;
-						}
-					}
-				}
-			} else if (qs.getStatus() == QuestStatus.REWARD) {
-				if (targetId == 204057) { // Sigyn
-					switch (dialog) {
+        } else if (targetId == 205150) { // Surt
+            if (var == 0) {
+                switch (dialog) {
+                    case QUEST_SELECT: {
+                        return sendQuestDialog(env, 1011);
+                    }
+                    case SETPRO1: {
+                        return defaultCloseDialog(env, 0, 1);
+                    }
+                    default:
+                        break;
+                }
+            }
+        } else if (qs.getStatus() == QuestStatus.START) {
+            if (targetId == 205192) { // Sahnu
+                switch (dialog) {
+                    case QUEST_SELECT: {
+                        if (var == 1) {
+                            return sendQuestDialog(env, 1352);
+                        } else if (var == 2) {
+                            return sendQuestDialog(env, 1693);
+                        } else if (var == 3) {
+                            return sendQuestDialog(env, 2034);
+                        }
+                    }
+                    case SETPRO2: {
+                        TeleportService2.teleportTo(player, 220040000, 569.95056f, 2845.857f, 231.00928f, (byte) 114,
+                            TeleportAnimation.BEAM_ANIMATION);
+                        qs.setQuestVarById(0, var + 1);
+                        updateQuestStatus(env);
+                        return true;
+                    }
+                    case CHECK_USER_HAS_QUEST_ITEM: {
+                        if (var == 2) {
+                            return checkQuestItems(env, 2, 3, false, 10000, 10001); // 3
+                        }
+                    }
+                    case FINISH_DIALOG: {
+                        if (var == 3) {
+                            return defaultCloseDialog(env, 3, 3); // 3
+                        }
+                    }
+                    case SETPRO4: {
+                        if (var == 3) {
+                            return defaultCloseDialog(env, 3, 4); //4
+                        }
+                    }
+                    default:
+                        break;
+                }
+            } else if (targetId == 205155) { // Heintz
+                if (var == 5) {
+                    switch (dialog) {
+                        case QUEST_SELECT: {
+                            return sendQuestDialog(env, 2716);
+                        }
+                        case SETPRO6: {
+                            qs.setQuestVarById(0, var + 1);
+                            qs.setStatus(QuestStatus.REWARD);
+                            updateQuestStatus(env);
+                            return closeDialogWindow(env);
+                        }
+                        default:
+                            break;
+                    }
+                }
+            }
+        } else if (qs.getStatus() == QuestStatus.REWARD) {
+            if (targetId == 204057) { // Sigyn
+                switch (dialog) {
                     case USE_OBJECT: {
                         return sendQuestDialog(env, 10002);
                     }
@@ -159,7 +159,7 @@ public class _24203SecretofContamination extends QuestHandler {
         }
         return false;
     }
-	
+
     @Override
     public boolean onKillEvent(QuestEnv env) {
         Player player = env.getPlayer();

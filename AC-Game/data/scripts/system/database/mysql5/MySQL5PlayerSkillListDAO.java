@@ -29,6 +29,19 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+
+import javax.annotation.Nullable;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
@@ -40,17 +53,6 @@ import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Lists;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.annotation.Nullable;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 
 /**
  * @author SoulKeeper
@@ -64,18 +66,21 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
     public static final String DELETE_QUERY = "DELETE FROM `player_skills` WHERE `player_id`=? AND skill_id=?";
     public static final String SELECT_QUERY = "SELECT `skill_id`, `skill_level` FROM `player_skills` WHERE `player_id`=?";
     private static final Predicate<PlayerSkillEntry> skillsToInsertPredicate = new Predicate<PlayerSkillEntry>() {
+
         @Override
         public boolean apply(@Nullable PlayerSkillEntry input) {
             return input != null && PersistentState.NEW == input.getPersistentState();
         }
     };
     private static final Predicate<PlayerSkillEntry> skillsToUpdatePredicate = new Predicate<PlayerSkillEntry>() {
+
         @Override
         public boolean apply(@Nullable PlayerSkillEntry input) {
             return input != null && PersistentState.UPDATE_REQUIRED == input.getPersistentState();
         }
     };
     private static final Predicate<PlayerSkillEntry> skillsToDeletePredicate = new Predicate<PlayerSkillEntry>() {
+
         @Override
         public boolean apply(@Nullable PlayerSkillEntry input) {
             return input != null && PersistentState.DELETED == input.getPersistentState();
@@ -84,7 +89,7 @@ public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 
     @Override
     public PlayerSkillList loadSkillList(int playerId) {
-        List<PlayerSkillEntry> skills = new ArrayList<PlayerSkillEntry>();
+        List<PlayerSkillEntry> skills = new ArrayList<>();
         Connection con = null;
         try {
             con = DatabaseFactory.getConnection();

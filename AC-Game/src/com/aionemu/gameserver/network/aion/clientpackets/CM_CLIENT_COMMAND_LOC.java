@@ -67,6 +67,7 @@ public class CM_CLIENT_COMMAND_LOC extends AionClientPacket {
         log.info("Received \"/loc\" command");
 
         player.getPosition();
-        sendPacket(SM_SYSTEM_MESSAGE.STR_CMD_LOCATION_DESC(player.getPosition().getMapId(), player.getPosition().getX(), player.getPosition().getY(), player.getPosition().getZ()));
+        sendPacket(SM_SYSTEM_MESSAGE.STR_CMD_LOCATION_DESC(player.getPosition().getMapId(), player.getPosition().getX(), player.getPosition().getY(),
+            player.getPosition().getZ()));
     }
 }

@@ -214,6 +214,7 @@ public enum MapId {
     Housing_DC_legion(710020000),
     housing_idlf_personal(720010000),
     housing_iddf_personal(730010000);
+
     /**
      * id of map
      */

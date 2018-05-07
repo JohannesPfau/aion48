@@ -45,39 +45,37 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @AIName("buffer")
 public class BufferEventAI2 extends NpcAI2 {
 
-	@Override
-	protected void handleDialogStart(Player player) {
-		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
-	}
+    @Override
+    protected void handleDialogStart(Player player) {
+        PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
+    }
 
-	@Override
-	public boolean onDialogSelect(Player player, int dialogId, int questId, int exp) {
-		switch (dialogId) {
-			case 10000: {
-				int[] rr = { 2, 2, 1, 1, 1 };
-				Random rand = new Random();
+    @Override
+    public boolean onDialogSelect(Player player, int dialogId, int questId, int exp) {
+        switch (dialogId) {
+            case 10000: {
+                int[] rr = { 2, 2, 1, 1, 1 };
+                Random rand = new Random();
 
-				int skillLevel = 1;
-				getOwner().setTarget(player);
+                int skillLevel = 1;
+                getOwner().setTarget(player);
 
-				int skillId1 = 20950; // Blessing of Rock I SKILLID:20950
-				int skillId2 = 20950; // Blessing of Health I
+                int skillId1 = 20950; // Blessing of Rock I SKILLID:20950
+                int skillId2 = 20950; // Blessing of Health I
 
-				if (rr[rand.nextInt(4)] == 2) {
-					SkillEngine.getInstance().getSkill(getOwner(), skillId1, skillLevel, player).useWithoutPropSkill();
-				}
-				else {
-					if (rand.nextInt(1) == 0) {
-						SkillEngine.getInstance().getSkill(getOwner(), skillId1, skillLevel, player).useWithoutPropSkill();
-					}
-					else {
-						SkillEngine.getInstance().getSkill(getOwner(), skillId2, skillLevel, player).useWithoutPropSkill();
-					}
-				}
+                if (rr[rand.nextInt(4)] == 2) {
+                    SkillEngine.getInstance().getSkill(getOwner(), skillId1, skillLevel, player).useWithoutPropSkill();
+                } else {
+                    if (rand.nextInt(1) == 0) {
+                        SkillEngine.getInstance().getSkill(getOwner(), skillId1, skillLevel, player).useWithoutPropSkill();
+                    } else {
+                        SkillEngine.getInstance().getSkill(getOwner(), skillId2, skillLevel, player).useWithoutPropSkill();
+                    }
+                }
 
-				break;
-			}
-		}
-		return true;
-	}
+                break;
+            }
+        }
+        return true;
+    }
 }

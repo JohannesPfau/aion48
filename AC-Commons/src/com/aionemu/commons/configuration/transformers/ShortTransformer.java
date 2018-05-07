@@ -29,10 +29,10 @@
  */
 package com.aionemu.commons.configuration.transformers;
 
+import java.lang.reflect.Field;
+
 import com.aionemu.commons.configuration.PropertyTransformer;
 import com.aionemu.commons.configuration.TransformationException;
-
-import java.lang.reflect.Field;
 
 /**
  * Thransforms string that represents short to the short value. Short value can
@@ -51,10 +51,13 @@ public class ShortTransformer implements PropertyTransformer<Short> {
     /**
      * Transforms value to short
      *
-     * @param value value that will be transformed
-     * @param field value will be assigned to this field
+     * @param value
+     *            value that will be transformed
+     * @param field
+     *            value will be assigned to this field
      * @return Short object that represents value
-     * @throws TransformationException if something went wrong
+     * @throws TransformationException
+     *             if something went wrong
      */
     @Override
     public Short transform(String value, Field field) throws TransformationException {

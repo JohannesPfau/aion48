@@ -54,7 +54,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Rolandas
-
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PolishAction")
@@ -71,8 +70,8 @@ public class PolishAction extends AbstractItemAction {
         }
         // to do You need to tune your equipment before socketing Idian.
         if (targetItem.hasTune()) {
-	        PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401750));
-	        return false;
+            PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401750));
+            return false;
         }
         return !player.isAttackMode() && targetItem.getItemTemplate().isWeapon() && targetItem.getItemTemplate().isCanPolish();
     }
@@ -82,24 +81,29 @@ public class PolishAction extends AbstractItemAction {
         final int parentItemId = parentItem.getItemId();
         final int parentObjectId = parentItem.getObjectId();
         final int parentNameId = parentItem.getNameId();
-        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 0, 0), true);
+        PacketSendUtility.broadcastPacket(player,
+            new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 0, 0), true);
         final ItemUseObserver observer = new ItemUseObserver() {
+
             @Override
             public void abort() {
                 player.getController().cancelTask(TaskId.ITEM_USE);
                 player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
                 PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(parentNameId)));
-                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, 2, 0), true);
+                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, 2, 0),
+                    true);
                 player.getObserveController().removeObserver(this);
             }
         };
         player.getObserveController().attach(observer);
         player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 player.getObserveController().removeObserver(observer);
 
-                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, 1, 1), true);
+                PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentObjectId, parentItemId, 0, 1, 1),
+                    true);
                 if (!player.getInventory().decreaseByObjectId(parentObjectId, 1)) {
                     return;
                 }
@@ -108,7 +112,8 @@ public class PolishAction extends AbstractItemAction {
                     PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_FAILED(new DescriptionId(parentNameId)));
                     return;
                 }
-                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401650, "[item_ex:" + targetItem.getItemId() + ";" + targetItem.getItemName() + "]"));
+                PacketSendUtility.sendPacket(player,
+                    new SM_SYSTEM_MESSAGE(1401650, "[item_ex:" + targetItem.getItemId() + ";" + targetItem.getItemName() + "]"));
                 IdianStone idianStone = targetItem.getIdianStone();
                 if (idianStone != null) {
                     idianStone.onUnEquip(player);

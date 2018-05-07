@@ -34,7 +34,6 @@ import com.aionemu.chatserver.service.GameServerService;
 import com.aionemu.commons.utils.ExitCode;
 
 /**
- *
  * @author nrg
  */
 public class ShutdownHook extends Thread {
@@ -58,8 +57,9 @@ public class ShutdownHook extends Thread {
     /**
      * Set's restartOnly attribute
      *
-     * @param restartOnly Indicates wether the loginserver should shut dpwn or
-     * only restart
+     * @param restartOnly
+     *            Indicates wether the loginserver should shut dpwn or
+     *            only restart
      */
     public static void setRestartOnly(boolean restartOnly) {
         ShutdownHook.restartOnly = restartOnly;

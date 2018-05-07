@@ -76,7 +76,7 @@ public class CM_REVIVE extends AionClientPacket {
             PlayerReviveService.battlegroundRevive(activePlayer);
             return;
         }
-        
+
         ReviveType reviveType = ReviveType.getReviveTypeById(reviveId);
 
         switch (reviveType) {

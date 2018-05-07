@@ -56,7 +56,7 @@ public class SummonTotemEffect extends SummonServantEffect {
     @Override
     public void applyEffect(Effect effect) {
         Creature effector = effect.getEffector();
-        switch (effect.getSkillId()){
+        switch (effect.getSkillId()) {
             case 662:
             case 661:
             case 660:
@@ -82,10 +82,11 @@ public class SummonTotemEffect extends SummonServantEffect {
                 int instanceId = effector.getInstanceId();
 
                 SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, x, y, z, heading);
-                final Servant servant = VisibleObjectSpawner.spawnServant(spawn, instanceId, effector, effect.getSkillId(), effect.getSkillLevel(), NpcObjectType.SKILLAREA);
-
+                final Servant servant = VisibleObjectSpawner.spawnServant(spawn, instanceId, effector, effect.getSkillId(), effect.getSkillLevel(),
+                    NpcObjectType.SKILLAREA);
 
                 Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         servant.getController().delete();

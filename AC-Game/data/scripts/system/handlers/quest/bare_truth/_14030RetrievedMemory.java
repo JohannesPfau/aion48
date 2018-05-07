@@ -30,6 +30,7 @@
 package quest.bare_truth;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -38,7 +39,6 @@ import com.aionemu.gameserver.network.aion.SystemMessageId;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -56,8 +56,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class _14030RetrievedMemory extends QuestHandler {
 
     private final static int questId = 14030;
-    private final static int[] npcs = {790001, 700551, 205119, 700552, 203700};
-    private final static int[] mobs = {214578, 215396, 215397, 215398, 215399, 205021, 205022};
+    private final static int[] npcs = { 790001, 700551, 205119, 700552, 203700 };
+    private final static int[] mobs = { 214578, 215396, 215397, 215398, 215399, 205021, 205022 };
 
     public _14030RetrievedMemory() {
         super(questId);
@@ -74,7 +74,7 @@ public class _14030RetrievedMemory extends QuestHandler {
         for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
-		qe.registerQuestNpc(215400).addOnKillEvent(questId);
+        qe.registerQuestNpc(215400).addOnKillEvent(questId);
     }
 
     @Override
@@ -150,6 +150,7 @@ public class _14030RetrievedMemory extends QuestHandler {
                                 PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 1001, 0));
                                 final QuestEnv qe = env;
                                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                     @Override
                                     public void run() {
                                         changeQuestStep(qe, 4, 5, false); //5
@@ -186,7 +187,7 @@ public class _14030RetrievedMemory extends QuestHandler {
             if (var == 2) {
                 return defaultOnKillEvent(env, 214578, 2, 3); // 3
             } else if (var >= 5 && var < 55) {
-                int[] npcIds = {215396, 215397, 215398, 215399, 205021, 205022};
+                int[] npcIds = { 215396, 215397, 215398, 215399, 205021, 205022 };
                 if (var == 54) {
                     QuestService.addNewSpawn(310120000, player.getInstanceId(), 215400, 240f, 257f, 208.53946f, (byte) 68);
                 }
@@ -206,8 +207,8 @@ public class _14030RetrievedMemory extends QuestHandler {
             int var = qs.getQuestVarById(0);
             if (var > 4 && var < 56) {
                 changeQuestStep(env, var, 4, false); // 3
-                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                        DataManager.QUEST_DATA.getQuestById(questId).getName()));
+                PacketSendUtility.sendPacket(player,
+                    new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
                 return true;
             }
         }
@@ -223,8 +224,8 @@ public class _14030RetrievedMemory extends QuestHandler {
                 int var = qs.getQuestVarById(0);
                 if (var > 4 && var < 56) {
                     changeQuestStep(env, var, 4, false); // 3
-                    PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                            DataManager.QUEST_DATA.getQuestById(questId).getName()));
+                    PacketSendUtility.sendPacket(player,
+                        new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
                     return true;
                 }
             }

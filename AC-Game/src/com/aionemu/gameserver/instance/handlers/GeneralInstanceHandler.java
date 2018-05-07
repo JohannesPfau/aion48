@@ -44,7 +44,6 @@ import com.aionemu.gameserver.spawnengine.WalkerFormator;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
-
 /**
  * @author ATracer
  */
@@ -60,8 +59,8 @@ public class GeneralInstanceHandler implements InstanceHandler {
         this.instance = instance;
         this.instanceId = instance.getInstanceId();
         this.mapId = instance.getMapId();
-    }    
-    
+    }
+
     public GeneralInstanceHandler() {
         creationTime = System.currentTimeMillis();
     }
@@ -73,7 +72,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
     @Override
     public void onPlayerLogin(Player player) {
     }
-    
+
     @Override
     public void onEnterZone(Player player, ZoneInstance zone) {
     }
@@ -81,7 +80,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
     @Override
     public void onLeaveZone(Player player, ZoneInstance zone) {
     }
-    
+
     @Override
     public void onPlayerLogOut(Player player) {
     }
@@ -93,7 +92,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
     @Override
     public void onPlayMovieEnd(Player player, int movieId) {
     }
-    
+
     protected VisibleObject spawn(int npcId, float x, float y, float z, byte heading) {
         SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(mapId, npcId, x, y, z, heading);
         return SpawnEngine.spawnObject(template, instanceId);
@@ -109,7 +108,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
         SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(this.mapId.intValue(), npcId, x, y, z, heading, walkerId, walkerIdx);
         return SpawnEngine.spawnObject(template, this.instanceId);
     }
-    
+
     @Override
     public void onEnterInstance(Player player) {
 
@@ -118,7 +117,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
     @Override
     public void onLeaveInstance(Player player) {
     }
-    
+
     @Override
     public boolean onReviveEvent(Player player) {
         return false;
@@ -126,7 +125,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
 
     public void onCheckAfk(Player player) {
     }
-    
+
     protected void sendMsg(int msg, int Obj, boolean isShout, int color) {
         sendMsg(msg, Obj, isShout, color, 0);
     }
@@ -138,7 +137,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
     protected void sendMsg(int msg) {
         sendMsg(msg, 0, false, 25);
     }
-    
+
     protected void organizeAndSpawn() {
         WalkerFormator.organizeAndSpawn(this.mapId.intValue(), this.instanceId);
     }
@@ -150,7 +149,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
     protected Npc getNpc(int npcId) {
         return instance.getNpc(npcId);
     }
-    
+
     @Override
     public StageType getStage() {
         return StageType.DEFAULT;
@@ -177,7 +176,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
     @Override
     public void handleUseItemFinish(Player player, Npc npc) {
     }
-    
+
     @Override
     public void onExitInstance(Player player) {
     }

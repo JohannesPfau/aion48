@@ -40,6 +40,7 @@ public enum SiegeRace {
     ELYOS(0, 1800481),
     ASMODIANS(1, 1800483),
     BALAUR(2, 1800485);
+
     private int raceId;
     private DescriptionId descriptionId;
 

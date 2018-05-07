@@ -29,7 +29,6 @@
  */
 package ai.instance.padmarashkasCave;
 
-import ai.NoActionAI2;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -40,6 +39,8 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.NoActionAI2;
 
 /**
  * @author Ritsu
@@ -99,8 +100,8 @@ public class PadmarashkaEggAI2 extends NoActionAI2 {
         float direction = Rnd.get(0, 199) / 100f;
         float x1 = (float) (Math.cos(Math.PI * direction) * 5);
         float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-        return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY()
-                + y1, getPosition().getZ(), getPosition().getHeading());
+        return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1,
+            getPosition().getZ(), getPosition().getHeading());
     }
 
     @Override
@@ -118,6 +119,7 @@ public class PadmarashkaEggAI2 extends NoActionAI2 {
 
     private void smallEggSpawn() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (getOwner() != null && !isAlreadyDead()) {
@@ -131,6 +133,7 @@ public class PadmarashkaEggAI2 extends NoActionAI2 {
 
     private void hugeEggSpawn() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (getOwner() != null && !isAlreadyDead()) {

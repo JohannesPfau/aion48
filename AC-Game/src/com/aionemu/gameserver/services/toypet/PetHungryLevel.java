@@ -38,6 +38,7 @@ public enum PetHungryLevel {
     CONTENT(1),
     SEMIFULL(2),
     FULL(3);
+
     private byte value;
 
     PetHungryLevel(int value) {

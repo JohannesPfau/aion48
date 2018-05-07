@@ -55,8 +55,8 @@ public class QuestState {
     private PersistentState persistentState;
     private static final Logger log = LoggerFactory.getLogger(QuestState.class);
 
-    public QuestState(int questId, QuestStatus status, int questVars, int completeCount, Timestamp nextRepeatTime,
-                      Integer reward, Timestamp completeTime) {
+    public QuestState(int questId, QuestStatus status, int questVars, int completeCount, Timestamp nextRepeatTime, Integer reward,
+        Timestamp completeTime) {
         this.questId = questId;
         this.status = status;
         this.questVars = new QuestVars(questVars);
@@ -155,8 +155,7 @@ public class QuestState {
     public boolean canRepeat() {
         QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
         if (status != QuestStatus.NONE
-                && (status != QuestStatus.COMPLETE || (completeCount >= template.getMaxRepeatCount() && template
-                .getMaxRepeatCount() != 255))) {
+            && (status != QuestStatus.COMPLETE || (completeCount >= template.getMaxRepeatCount() && template.getMaxRepeatCount() != 255))) {
             return false;
         }
         if (questVars.getQuestVars() != 0) {
@@ -179,7 +178,8 @@ public class QuestState {
     }
 
     /**
-     * @param persistentState the pState to set
+     * @param persistentState
+     *            the pState to set
      */
     public void setPersistentState(PersistentState persistentState) {
         switch (persistentState) {

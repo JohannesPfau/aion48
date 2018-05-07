@@ -37,8 +37,6 @@ import com.aionemu.gameserver.network.loginserver.LsClientPacket;
  * In this packet LoginServer is answering on GameServer request about valid
  * authentication data and also sends account name of user that is
  * authenticating on GameServer.
- *
-
  */
 public class CM_ACOUNT_AUTH_RESPONSE extends LsClientPacket {
 

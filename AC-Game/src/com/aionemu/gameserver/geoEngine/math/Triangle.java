@@ -29,10 +29,10 @@
  */
 package com.aionemu.gameserver.geoEngine.math;
 
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
+
 import javolution.context.ObjectFactory;
 import javolution.lang.Reusable;
-
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 
 /**
  * <code>Triangle</code> defines a object for containing triangle information.
@@ -46,8 +46,9 @@ public class Triangle extends AbstractTriangle implements Reusable {
 
     @SuppressWarnings("rawtypes")
     private static final ObjectFactory FACTORY = new ObjectFactory() {
+
         @Override
-		public Object create() {
+        public Object create() {
             return new Triangle();
         }
     };
@@ -68,9 +69,12 @@ public class Triangle extends AbstractTriangle implements Reusable {
      * is recommended that the vertices be supplied in a counter clockwise
      * winding to support normals for a right handed coordinate system.
      *
-     * @param p1 the first point of the triangle.
-     * @param p2 the second point of the triangle.
-     * @param p3 the third point of the triangle.
+     * @param p1
+     *            the first point of the triangle.
+     * @param p2
+     *            the second point of the triangle.
+     * @param p3
+     *            the third point of the triangle.
      */
     public Triangle(Vector3f p1, Vector3f p2, Vector3f p3) {
         pointa.set(p1);
@@ -82,7 +86,8 @@ public class Triangle extends AbstractTriangle implements Reusable {
      * <code>get</code> retrieves a point on the triangle denoted by the index
      * supplied.
      *
-     * @param i the index of the point.
+     * @param i
+     *            the index of the point.
      * @return the point.
      */
     public Vector3f get(int i) {
@@ -99,17 +104,17 @@ public class Triangle extends AbstractTriangle implements Reusable {
     }
 
     @Override
-	public Vector3f get1() {
+    public Vector3f get1() {
         return pointa;
     }
 
     @Override
-	public Vector3f get2() {
+    public Vector3f get2() {
         return pointb;
     }
 
     @Override
-	public Vector3f get3() {
+    public Vector3f get3() {
         return pointc;
     }
 
@@ -117,8 +122,10 @@ public class Triangle extends AbstractTriangle implements Reusable {
      * <code>set</code> sets one of the triangles points to that specified as a
      * parameter.
      *
-     * @param i     the index to place the point.
-     * @param point the point to set.
+     * @param i
+     *            the index to place the point.
+     * @param point
+     *            the point to set.
      */
     public void set(int i, Vector3f point) {
         switch (i) {
@@ -138,8 +145,10 @@ public class Triangle extends AbstractTriangle implements Reusable {
      * <code>set</code> sets one of the triangles points to that specified as a
      * parameter.
      *
-     * @param i     the index to place the point.
-     * @param point the point to set.
+     * @param i
+     *            the index to place the point.
+     * @param point
+     *            the point to set.
      */
     public void set(int i, float x, float y, float z) {
         switch (i) {
@@ -168,7 +177,7 @@ public class Triangle extends AbstractTriangle implements Reusable {
     }
 
     @Override
-	public void set(Vector3f v1, Vector3f v2, Vector3f v3) {
+    public void set(Vector3f v1, Vector3f v2, Vector3f v3) {
         pointa.set(v1);
         pointb.set(v2);
         pointc.set(v3);
@@ -215,7 +224,8 @@ public class Triangle extends AbstractTriangle implements Reusable {
     /**
      * sets the center point of this triangle (average of the three triangles)
      *
-     * @param center the center point.
+     * @param center
+     *            the center point.
      */
     public void setCenter(Vector3f center) {
         this.center = center;
@@ -237,7 +247,8 @@ public class Triangle extends AbstractTriangle implements Reusable {
     /**
      * sets the normal vector of this triangle (to conform, must be unit length)
      *
-     * @param normal the normal vector.
+     * @param normal
+     *            the normal vector.
      */
     public void setNormal(Vector3f normal) {
         this.normal = normal;
@@ -255,7 +266,8 @@ public class Triangle extends AbstractTriangle implements Reusable {
     /**
      * sets the projection of the vertices relative to the line origin.
      *
-     * @param projection the projection of the triangle.
+     * @param projection
+     *            the projection of the triangle.
      */
     public void setProjection(float projection) {
         this.projection = projection;
@@ -275,7 +287,8 @@ public class Triangle extends AbstractTriangle implements Reusable {
      * sets an index that this triangle represents if it is contained in a
      * OBBTree.
      *
-     * @param index the index in an OBBtree
+     * @param index
+     *            the index in an OBBtree
      */
     public void setIndex(int index) {
         this.index = index;
@@ -309,7 +322,8 @@ public class Triangle extends AbstractTriangle implements Reusable {
         }
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see javolution.lang.Reusable#reset()
      */
     @Override

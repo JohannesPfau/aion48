@@ -55,7 +55,7 @@ public class HpUsePeriodicAction extends PeriodicAction {
             return;
         }
 
-        if(ratio){
+        if (ratio) {
             int maxHp = effected.getGameStats().getMaxHp().getCurrent();
             requiredHp = (int) (maxHp * (value / 100f));
         }

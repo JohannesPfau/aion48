@@ -42,13 +42,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import javolution.util.FastMap;
-
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.HTMLConfig;
+
+import javolution.util.FastMap;
 
 /**
  * @authors Layane, nbali, savormix, hex1r0, lord_rex
@@ -57,6 +57,7 @@ public final class HTMLCache {
 
     private static final Logger log = LoggerFactory.getLogger(HTMLCache.class);
     private static final FileFilter HTML_FILTER = new FileFilter() {
+
         @Override
         public boolean accept(File file) {
             return file.isDirectory() || file.getName().endsWith(".xhtml");
@@ -73,7 +74,7 @@ public final class HTMLCache {
         return SingletonHolder.INSTANCE;
     }
 
-    private FastMap<String, String> cache = new FastMap<String, String>(16000);
+    private FastMap<String, String> cache = new FastMap<>(16000);
     private int loadedFiles;
     private int size;
 
@@ -172,9 +173,9 @@ public final class HTMLCache {
 
     static {
         // TODO: is there any other tag that should be replaced?
-        final String[] tagsToCompact = {"html", "title", "body", "br", "br1", "p", "table", "tr", "td"};
+        final String[] tagsToCompact = { "html", "title", "body", "br", "br1", "p", "table", "tr", "td" };
 
-        final List<String> list = new ArrayList<String>();
+        final List<String> list = new ArrayList<>();
 
         for (String tag : tagsToCompact) {
             list.add("<" + tag + ">");
@@ -183,7 +184,7 @@ public final class HTMLCache {
             list.add("<" + tag + " />");
         }
 
-        final List<String> list2 = new ArrayList<String>();
+        final List<String> list2 = new ArrayList<>();
 
         for (String tag : list) {
             list2.add(tag);
@@ -232,7 +233,7 @@ public final class HTMLCache {
     }
 
     private void replaceAll(StringBuilder sb, String pattern, String value) {
-        for (int index = 0; (index = sb.indexOf(pattern, index)) != -1; ) {
+        for (int index = 0; (index = sb.indexOf(pattern, index)) != -1;) {
             sb.replace(index, index + pattern.length(), value);
         }
     }
@@ -300,8 +301,7 @@ public final class HTMLCache {
 
     @Override
     public String toString() {
-        return "Cache[HTML]: " + String.format("%.3f", (float) size / 1024) + " kilobytes on " + loadedFiles
-                + " file(s) loaded.";
+        return "Cache[HTML]: " + String.format("%.3f", (float) size / 1024) + " kilobytes on " + loadedFiles + " file(s) loaded.";
     }
 
     public static String getRelativePath(File base, File file) {

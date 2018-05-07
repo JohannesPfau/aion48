@@ -124,7 +124,8 @@ public class GatheringTask extends AbstractCraftTask {
 
     @Override
     protected void sendInteractionUpdate() {
-        PacketSendUtility.sendPacket(requestor, new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, this.critType.getPacketId()));
+        PacketSendUtility.sendPacket(requestor,
+            new SM_GATHER_UPDATE(template, material, currentSuccessValue, currentFailureValue, this.critType.getPacketId()));
         if (this.critType == CraftCritType.BLUE) {
             this.critType = CraftCritType.NONE;
         }

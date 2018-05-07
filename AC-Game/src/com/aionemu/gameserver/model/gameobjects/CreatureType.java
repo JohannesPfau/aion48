@@ -54,6 +54,7 @@ public enum CreatureType {
      */
     FRIEND(38),
     SUPPORT(54);
+
     private int someClientSideId;
 
     private CreatureType(int id) {

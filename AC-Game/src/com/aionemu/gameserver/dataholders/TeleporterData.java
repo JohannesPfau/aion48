@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -42,6 +40,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate}
@@ -61,7 +61,7 @@ public class TeleporterData {
     /**
      * A map containing all trade list templates
      */
-    private TIntObjectHashMap<TeleporterTemplate> npctlistData = new TIntObjectHashMap<TeleporterTemplate>();
+    private TIntObjectHashMap<TeleporterTemplate> npctlistData = new TIntObjectHashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (TeleporterTemplate template : tlist) {

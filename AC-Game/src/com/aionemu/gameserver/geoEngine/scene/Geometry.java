@@ -54,7 +54,8 @@ public class Geometry extends Spatial {
     /**
      * Create a geometry node without any mesh data.
      *
-     * @param name The name of this geometry
+     * @param name
+     *            The name of this geometry
      */
     public Geometry(String name) {
         super(name);
@@ -63,8 +64,10 @@ public class Geometry extends Spatial {
     /**
      * Create a geometry node with mesh data.
      *
-     * @param name The name of this geometry
-     * @param mesh The mesh data for this geometry
+     * @param name
+     *            The name of this geometry
+     * @param mesh
+     *            The mesh data for this geometry
      */
     public Geometry(String name, Mesh mesh) {
         this(name);
@@ -76,12 +79,12 @@ public class Geometry extends Spatial {
     }
 
     @Override
-	public int getVertexCount() {
+    public int getVertexCount() {
         return mesh.getVertexCount();
     }
 
     @Override
-	public int getTriangleCount() {
+    public int getTriangleCount() {
         return mesh.getTriangleCount();
     }
 
@@ -106,7 +109,7 @@ public class Geometry extends Spatial {
      * has been modified.
      */
     @Override
-	public void updateModelBound() {
+    public void updateModelBound() {
         mesh.updateBound();
         worldBound = getModelBound().transform(cachedWorldMat, worldBound);
     }
@@ -121,7 +124,7 @@ public class Geometry extends Spatial {
     }
 
     @Override
-	public int collideWith(Collidable other, CollisionResults results) {
+    public int collideWith(Collidable other, CollisionResults results) {
         if (other instanceof Ray) {
             if (!worldBound.intersects(((Ray) other))) {
                 return 0;

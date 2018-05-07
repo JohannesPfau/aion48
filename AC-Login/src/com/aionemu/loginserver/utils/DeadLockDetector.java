@@ -29,11 +29,16 @@
  */
 package com.aionemu.loginserver.utils;
 
-import com.aionemu.commons.utils.ExitCode;
+import java.lang.management.LockInfo;
+import java.lang.management.ManagementFactory;
+import java.lang.management.MonitorInfo;
+import java.lang.management.ThreadInfo;
+import java.lang.management.ThreadMXBean;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.lang.management.*;
+import com.aionemu.commons.utils.ExitCode;
 
 /**
  * @author -Nemesiss-
@@ -111,12 +116,11 @@ public class DeadLockDetector extends Thread {
 
                         ThreadInfo dl = ti;
                         info += "Java-level deadlock:\n";
-                        info += "\t" + dl.getThreadName() + " is waiting to lock " + dl.getLockInfo().toString()
-                                + " which is held by " + dl.getLockOwnerName() + "\n";
-                        while ((dl = tmx.getThreadInfo(new long[]{dl.getLockOwnerId()}, true, true)[0]).getThreadId() != ti
-                                .getThreadId()) {
-                            info += "\t" + dl.getThreadName() + " is waiting to lock " + dl.getLockInfo().toString()
-                                    + " which is held by " + dl.getLockOwnerName() + "\n";
+                        info += "\t" + dl.getThreadName() + " is waiting to lock " + dl.getLockInfo().toString() + " which is held by "
+                            + dl.getLockOwnerName() + "\n";
+                        while ((dl = tmx.getThreadInfo(new long[] { dl.getLockOwnerId() }, true, true)[0]).getThreadId() != ti.getThreadId()) {
+                            info += "\t" + dl.getThreadName() + " is waiting to lock " + dl.getLockInfo().toString() + " which is held by "
+                                + dl.getLockOwnerName() + "\n";
                         }
                     }
                     log.warn(info);

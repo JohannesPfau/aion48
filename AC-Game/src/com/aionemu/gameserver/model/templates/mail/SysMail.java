@@ -48,7 +48,7 @@ import com.aionemu.gameserver.model.Race;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "SysMail", propOrder = {"templates"})
+@XmlType(name = "SysMail", propOrder = { "templates" })
 public class SysMail {
 
     @XmlElement(name = "template", required = true)
@@ -56,14 +56,14 @@ public class SysMail {
     @XmlAttribute(name = "name", required = true)
     private String name;
     @XmlTransient
-    private Map<String, List<MailTemplate>> mailCaseTemplates = new HashMap<String, List<MailTemplate>>();
+    private Map<String, List<MailTemplate>> mailCaseTemplates = new HashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (MailTemplate template : templates) {
             String caseName = template.getName().toLowerCase();
             List<MailTemplate> sysTemplates = mailCaseTemplates.get(caseName);
             if (sysTemplates == null) {
-                sysTemplates = new ArrayList<MailTemplate>();
+                sysTemplates = new ArrayList<>();
                 mailCaseTemplates.put(caseName, sysTemplates);
             }
             sysTemplates.add(template);

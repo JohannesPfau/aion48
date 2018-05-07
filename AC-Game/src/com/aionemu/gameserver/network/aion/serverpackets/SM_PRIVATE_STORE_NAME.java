@@ -51,7 +51,7 @@ public class SM_PRIVATE_STORE_NAME extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(playerObjId);
         writeS(name);
     }

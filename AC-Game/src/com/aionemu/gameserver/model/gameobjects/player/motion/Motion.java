@@ -41,9 +41,9 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public class Motion implements IExpirable {
 
-    static final Map<Integer, Integer> motionType = new HashMap<Integer, Integer>();
+    static final Map<Integer, Integer> motionType = new HashMap<>();
 
-    static {  
+    static {
         motionType.put(1, 1);
         motionType.put(2, 2);
         motionType.put(3, 3);
@@ -108,7 +108,8 @@ public class Motion implements IExpirable {
     }
 
     /**
-     * @param active the active to set
+     * @param active
+     *            the active to set
      */
     public void setActive(boolean active) {
         this.active = active;

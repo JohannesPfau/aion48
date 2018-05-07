@@ -68,24 +68,25 @@ public class RideRobotEffect extends EffectTemplate {
         PacketSendUtility.broadcastPacketAndReceive(player, new SM_RIDE_ROBOT(player.getObjectId(), template.getRobotId()));
         player.setRobotId(template.getRobotId());
 
-        ActionObserver obsZ = new ActionObserver(ObserverType.SKILLUSE){
+        ActionObserver obsZ = new ActionObserver(ObserverType.SKILLUSE) {
+
             @Override
             public void skilluse(Skill skill) { // can put stability thruster and mobility thrsuter in here (but for now not sure if its stackable or not)
-                int[] batteryId = {3770, 3769, 3768, 3767, 3766};
-                int[] bulwarkId = {3774, 3773, 3772, 3771};
-                for(int id : batteryId){
-                    if (skill.getSkillTemplate().getSkillId() == id){
-                        for(int bulId : bulwarkId){
-                            if (player.getEffectController().hasAbnormalEffect(bulId)){
+                int[] batteryId = { 3770, 3769, 3768, 3767, 3766 };
+                int[] bulwarkId = { 3774, 3773, 3772, 3771 };
+                for (int id : batteryId) {
+                    if (skill.getSkillTemplate().getSkillId() == id) {
+                        for (int bulId : bulwarkId) {
+                            if (player.getEffectController().hasAbnormalEffect(bulId)) {
                                 player.getEffectController().removeEffect(bulId);
                             }
                         }
                     }
                 }
-                for(int id : bulwarkId){
-                    if (skill.getSkillTemplate().getSkillId() == id){
-                        for(int baId : batteryId){
-                            if (player.getEffectController().hasAbnormalEffect(baId)){
+                for (int id : bulwarkId) {
+                    if (skill.getSkillTemplate().getSkillId() == id) {
+                        for (int baId : batteryId) {
+                            if (player.getEffectController().hasAbnormalEffect(baId)) {
                                 player.getEffectController().removeEffect(baId);
                             }
                         }
@@ -96,6 +97,7 @@ public class RideRobotEffect extends EffectTemplate {
         player.getObserveController().addObserver(obsZ);
 
         ActionObserver observer = new ActionObserver(ObserverType.UNEQUIP) {
+
             @Override
             public void unequip(Item item, Player owner) {
                 if (item.getEquipmentType() == EquipType.WEAPON) {
@@ -113,10 +115,10 @@ public class RideRobotEffect extends EffectTemplate {
         Player player = (Player) effect.getEffected();
         List<Effect> myEffects = player.getEffectController().getAbnormalEffects();
 
-        for(Effect ef : myEffects){
+        for (Effect ef : myEffects) {
             int skillId = ef.getSkillTemplate().getSkillId();
 
-            if(ef.isRiderEffect(skillId)){
+            if (ef.isRiderEffect(skillId)) {
                 player.getEffectController().removeEffect(skillId);
                 player.getEffectController().removeNoshowEffect(skillId);
             }

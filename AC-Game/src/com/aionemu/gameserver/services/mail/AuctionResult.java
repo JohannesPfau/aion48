@@ -42,6 +42,7 @@ public enum AuctionResult {
     GRACE_START(5),
     GRACE_FAIL(6),
     GRACE_SUCCESS(7);
+
     private int value;
 
     private AuctionResult(int value) {

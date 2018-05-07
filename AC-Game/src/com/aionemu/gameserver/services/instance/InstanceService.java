@@ -31,8 +31,6 @@ package com.aionemu.gameserver.services.instance;
 
 import java.util.Iterator;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,6 +65,8 @@ import com.aionemu.gameserver.world.WorldMapInstanceFactory;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
+import javolution.util.FastList;
+
 /**
  * @author ATracer
  * @modified Kill3r (ffa)
@@ -74,8 +74,8 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class InstanceService {
 
     private static final Logger log = LoggerFactory.getLogger("INSTANCE_LOG");
-    private static final FastList<Integer> instanceAggro = new FastList<Integer>();
-    private static final FastList<Integer> instanceCoolDownFilter = new FastList<Integer>();
+    private static final FastList<Integer> instanceAggro = new FastList<>();
+    private static final FastList<Integer> instanceCoolDownFilter = new FastList<>();
     private static final int SOLO_INSTANCES_DESTROY_DELAY = 10 * 60 * 1000; // 10 minutes
 
     public static void load() {
@@ -86,13 +86,15 @@ public class InstanceService {
             instanceCoolDownFilter.add(Integer.parseInt(s));
         }
     }
+
     public synchronized static WorldMapInstance getNextAvailableSoloInstance(int worldId, boolean withDoor) {
-		if (withDoor) {
-			return getNextAvailableSoloInstanceDoor(worldId, 0);
-		} else {
-			return getNextAvailableSoloInstance(worldId, 0);
-		}
-	}
+        if (withDoor) {
+            return getNextAvailableSoloInstanceDoor(worldId, 0);
+        } else {
+            return getNextAvailableSoloInstance(worldId, 0);
+        }
+    }
+
     private synchronized static WorldMapInstance getNextAvailableSoloInstance(int worldId, int ownerId) {
         WorldMap map = World.getInstance().getWorldMap(worldId);
 
@@ -101,9 +103,9 @@ public class InstanceService {
         }
 
         int nextInstanceId = map.getNextInstanceId();
-        
+
         log.info("Creating Solo Map:" + worldId + " id:" + nextInstanceId + " owner:" + ownerId);
-        
+
         WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, ownerId);
         map.addInstance(nextInstanceId, worldMapInstance);
         InstanceEngine.getInstance().onInstanceCreate(worldMapInstance);
@@ -114,8 +116,8 @@ public class InstanceService {
         }
 
         return worldMapInstance;
-    }    
-   
+    }
+
     private synchronized static WorldMapInstance getNextAvailableSoloInstanceDoor(int worldId, int ownerId) {
         WorldMap map = World.getInstance().getWorldMap(worldId);
 
@@ -124,9 +126,9 @@ public class InstanceService {
         }
 
         int nextInstanceId = map.getNextInstanceId();
-        
+
         log.info("Creating Solo Map with Door:" + worldId + " id:" + nextInstanceId + " owner:" + ownerId);
-        
+
         WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, ownerId);
         map.addInstance(nextInstanceId, worldMapInstance);
         SpawnEngine.spawnFFAInstance(worldId, worldMapInstance.getInstanceId(), (byte) 0, ownerId);
@@ -137,10 +139,12 @@ public class InstanceService {
             startInstanceChecker(worldMapInstance);
         }
         return worldMapInstance;
-    }   
+    }
+
     /**
      * @param worldId
-     * @param ownerId - playerObjectId or Legion id in future
+     * @param ownerId
+     *            - playerObjectId or Legion id in future
      * @return
      */
     public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId) {
@@ -210,46 +214,48 @@ public class InstanceService {
         }
         WalkerFormator.onInstanceDestroy(worldId, instanceId);
     }
-	public synchronized static WorldMapInstance getNextAvailableFFAInstance(int worldId, boolean withDoor) {
-		if (withDoor) {
-			return getNextAvailableFFAInstanceDoor(worldId, 0);
-		} else {
-			return getNextAvailableFFAInstance(worldId, 0);
-		}
-	}
-	private synchronized static WorldMapInstance getNextAvailableFFAInstance(int worldId, int ownerId) {
-		WorldMap map = World.getInstance().getWorldMap(worldId);
 
-		if (!map.isInstanceType()) {
-			throw new UnsupportedOperationException("Invalid call for next available instance  of " + worldId);
-		}
-		
-		int nextInstanceId = map.getNextInstanceId();
-		log.info("Creating FFA Map - World: " + worldId + " - Id: " + nextInstanceId);
-		
-		
-		WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, ownerId);
-		map.addInstance(nextInstanceId, worldMapInstance);
-		InstanceEngine.getInstance().onInstanceCreate(worldMapInstance);
-		return worldMapInstance;
-	}
-	private synchronized static WorldMapInstance getNextAvailableFFAInstanceDoor(int worldId, int ownerId) {
-		WorldMap map = World.getInstance().getWorldMap(worldId);
+    public synchronized static WorldMapInstance getNextAvailableFFAInstance(int worldId, boolean withDoor) {
+        if (withDoor) {
+            return getNextAvailableFFAInstanceDoor(worldId, 0);
+        } else {
+            return getNextAvailableFFAInstance(worldId, 0);
+        }
+    }
 
-		if (!map.isInstanceType()) {
-			throw new UnsupportedOperationException("Invalid call for next available instance  of " + worldId);
-		}
-		
-		int nextInstanceId = map.getNextInstanceId();
-		log.info("Creating FFA Map with Door - World: " + worldId + " - Id: " + nextInstanceId);
-		
-		
-		WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, ownerId);
-		map.addInstance(nextInstanceId, worldMapInstance);
-		SpawnEngine.spawnFFAInstance(worldId, worldMapInstance.getInstanceId(), (byte) 0, ownerId);
-		InstanceEngine.getInstance().onInstanceCreate(worldMapInstance);
-		return worldMapInstance;
-	}
+    private synchronized static WorldMapInstance getNextAvailableFFAInstance(int worldId, int ownerId) {
+        WorldMap map = World.getInstance().getWorldMap(worldId);
+
+        if (!map.isInstanceType()) {
+            throw new UnsupportedOperationException("Invalid call for next available instance  of " + worldId);
+        }
+
+        int nextInstanceId = map.getNextInstanceId();
+        log.info("Creating FFA Map - World: " + worldId + " - Id: " + nextInstanceId);
+
+        WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, ownerId);
+        map.addInstance(nextInstanceId, worldMapInstance);
+        InstanceEngine.getInstance().onInstanceCreate(worldMapInstance);
+        return worldMapInstance;
+    }
+
+    private synchronized static WorldMapInstance getNextAvailableFFAInstanceDoor(int worldId, int ownerId) {
+        WorldMap map = World.getInstance().getWorldMap(worldId);
+
+        if (!map.isInstanceType()) {
+            throw new UnsupportedOperationException("Invalid call for next available instance  of " + worldId);
+        }
+
+        int nextInstanceId = map.getNextInstanceId();
+        log.info("Creating FFA Map with Door - World: " + worldId + " - Id: " + nextInstanceId);
+
+        WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, ownerId);
+        map.addInstance(nextInstanceId, worldMapInstance);
+        SpawnEngine.spawnFFAInstance(worldId, worldMapInstance.getInstanceId(), (byte) 0, ownerId);
+        InstanceEngine.getInstance().onInstanceCreate(worldMapInstance);
+        return worldMapInstance;
+    }
+
     /**
      * @param instance
      * @param player
@@ -352,7 +358,8 @@ public class InstanceService {
         WorldMapInstance beginnerInstance = getBeginnerInstance(worldId, lookupId);
         if (beginnerInstance != null) {
             // set to correct twin instanceId, not to #1
-            World.getInstance().setPosition(player, worldId, beginnerInstance.getInstanceId(), player.getX(), player.getY(), player.getZ(), player.getHeading());
+            World.getInstance().setPosition(player, worldId, beginnerInstance.getInstanceId(), player.getX(), player.getY(), player.getZ(),
+                player.getHeading());
         }
 
         WorldMapTemplate worldTemplate = DataManager.WORLD_MAPS_DATA.getTemplate(worldId);
@@ -371,7 +378,8 @@ public class InstanceService {
             }
 
             if (registeredInstance != null) {
-                World.getInstance().setPosition(player, worldId, registeredInstance.getInstanceId(), player.getX(), player.getY(), player.getZ(), player.getHeading());
+                World.getInstance().setPosition(player, worldId, registeredInstance.getInstanceId(), player.getX(), player.getY(), player.getZ(),
+                    player.getHeading());
                 player.getPosition().getWorldMapInstance().getInstanceHandler().onPlayerLogin(player);
                 return;
             }
@@ -404,7 +412,8 @@ public class InstanceService {
 
         int delay = 150000; // 2.5 minutes
         int period = 60000; // 1 minute
-        worldMapInstance.setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new EmptyInstanceCheckerTask(worldMapInstance), delay, period));
+        worldMapInstance
+            .setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new EmptyInstanceCheckerTask(worldMapInstance), delay, period));
     }
 
     private static class EmptyInstanceCheckerTask implements Runnable {
@@ -504,7 +513,9 @@ public class InstanceService {
     }
 
     public static int getInstanceRate(Player player, int mapId) {
-        int instanceCooldownRate = player.havePermission(MembershipConfig.INSTANCES_COOLDOWN) && !instanceCoolDownFilter.contains(mapId) ? CustomConfig.INSTANCES_RATE : 1;
+        int instanceCooldownRate = player.havePermission(MembershipConfig.INSTANCES_COOLDOWN) && !instanceCoolDownFilter.contains(mapId)
+            ? CustomConfig.INSTANCES_RATE
+            : 1;
         if (instanceCoolDownFilter.contains(mapId)) {
             instanceCooldownRate = 1;
         }

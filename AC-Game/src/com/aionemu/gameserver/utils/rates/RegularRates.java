@@ -34,7 +34,7 @@ import com.aionemu.gameserver.configs.main.RateConfig;
 
 /**
  * @author ATracer
- (Aion-Core)
+ *         (Aion-Core)
  */
 public class RegularRates extends Rates {
 
@@ -84,12 +84,12 @@ public class RegularRates extends Rates {
     public float getQuestApRate() {
         return RateConfig.QUEST_AP_RATE + holidayRate;
     }
-	
-	@Override
+
+    @Override
     public float getQuestGpRate() {
         return RateConfig.QUEST_GP_RATE + holidayRate;
     }
-	
+
     @Override
     public float getXpRate() {
         return RateConfig.XP_RATE + holidayRate;
@@ -163,19 +163,18 @@ public class RegularRates extends Rates {
         return RateConfig.SELL_LIMIT_RATE + holidayRate;
     }
 
-
     @Override
     public float getKamarRewardRate() {
         return RateConfig.KAMAR_REWARD_RATE + holidayRate;
     }
-    
+
     @Override
     public float getIdgelDomeBoxRewardRate() {
         return RateConfig.IDGEL_DOME_BOX_REWARD_RATE + holidayRate;
     }
-    
-	@Override
-	public float getGpNpcRate() {
-		return RateConfig.GP_NPC_RATE + holidayRate;
-	}
+
+    @Override
+    public float getGpNpcRate() {
+        return RateConfig.GP_NPC_RATE + holidayRate;
+    }
 }

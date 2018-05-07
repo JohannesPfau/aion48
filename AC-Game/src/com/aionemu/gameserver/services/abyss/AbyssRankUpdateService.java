@@ -75,6 +75,7 @@ public class AbyssRankUpdateService {
 
         log.info("Starting ranking update task based on cron expression: " + RankingConfig.TOP_RANKING_UPDATE_RULE);
         CronService.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 performUpdate();
@@ -90,6 +91,7 @@ public class AbyssRankUpdateService {
         long startTime = System.currentTimeMillis();
 
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 player.getAbyssRank().doUpdate();
@@ -118,7 +120,7 @@ public class AbyssRankUpdateService {
 
     private void updateAllRanksForRace(Race race, int apLimit, int activeAfterDays) {
         Map<Integer, Integer> playerApMap = DAOManager.getDAO(AbyssRankDAO.class).loadPlayersAp(race, apLimit, activeAfterDays);
-        List<Entry<Integer, Integer>> playerApEntries = new ArrayList<Entry<Integer, Integer>>(playerApMap.entrySet());
+        List<Entry<Integer, Integer>> playerApEntries = new ArrayList<>(playerApMap.entrySet());
         Collections.sort(playerApEntries, new PlayerApComparator<Integer, Integer>());
 
         selectRank(AbyssRankEnum.GRADE1_SOLDIER, playerApEntries);
@@ -136,7 +138,7 @@ public class AbyssRankUpdateService {
 
     private void updateAllRanksGpForRace(Race race, int gpLimit, int activeAfterDays) {
         Map<Integer, Integer> playerGpMap = DAOManager.getDAO(AbyssRankDAO.class).loadPlayersGp(race, gpLimit, activeAfterDays);
-        List<Entry<Integer, Integer>> playerGpEntries = new ArrayList<Entry<Integer, Integer>>(playerGpMap.entrySet());
+        List<Entry<Integer, Integer>> playerGpEntries = new ArrayList<>(playerGpMap.entrySet());
         Collections.sort(playerGpEntries, new PlayerGpComparator<Integer, Integer>());
 
         selectGpRank(AbyssRankEnum.SUPREME_COMMANDER, playerGpEntries);
@@ -177,7 +179,8 @@ public class AbyssRankUpdateService {
     }
 
     private void selectGpRank(AbyssRankEnum rank, List<Entry<Integer, Integer>> playerGpEntries) {
-        int quota = (rank.getId() > 9 && rank.getId() < 18) ? rank.getQuota() - AbyssRankEnum.getRankById(rank.getId() + 1).getQuota() : rank.getQuota();
+        int quota = (rank.getId() > 9 && rank.getId() < 18) ? rank.getQuota() - AbyssRankEnum.getRankById(rank.getId() + 1).getQuota()
+            : rank.getQuota();
         for (int i = 0; i < quota; i++) {
             if (playerGpEntries.isEmpty()) {
                 return;

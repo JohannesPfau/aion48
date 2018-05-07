@@ -29,13 +29,12 @@
  */
 package ai.instance.sauroSupplyBase;
 
+import java.util.concurrent.Future;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-
-import java.util.concurrent.Future;
-
 
 @AIName("danuar")
 public class GuardDanuarAI2 extends NpcAI2 {
@@ -50,6 +49,7 @@ public class GuardDanuarAI2 extends NpcAI2 {
 
     private void startpower() {
         skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 AI2Actions.targetSelf(GuardDanuarAI2.this);

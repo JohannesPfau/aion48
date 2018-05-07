@@ -35,8 +35,6 @@ import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -68,6 +66,8 @@ import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.transfers.TransferablePlayer;
+
+import javolution.util.FastList;
 
 /**
  * @author KID
@@ -334,7 +334,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
                 PlayerSkillList skillList = player.getSkillList();
 
                 //discard stigma skills
-                List<PlayerSkillEntry> skills = new ArrayList<PlayerSkillEntry>();
+                List<PlayerSkillEntry> skills = new ArrayList<>();
                 for (PlayerSkillEntry sk : skillList.getAllSkills()) {
                     if (!sk.isStigma()) {
                         skills.add(sk);
@@ -388,7 +388,7 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 
                 FastList.recycle(quests);
             }
-            break;
+                break;
         }
     }
 }

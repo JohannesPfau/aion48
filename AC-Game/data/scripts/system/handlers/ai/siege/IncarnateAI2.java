@@ -29,7 +29,8 @@
  */
 package ai.siege;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.Future;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.controllers.effect.EffectController;
@@ -42,7 +43,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-import java.util.concurrent.Future;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Source
@@ -56,10 +57,12 @@ public class IncarnateAI2 extends AggressiveNpcAI2 {
     protected void handleSpawned() {
         super.handleSpawned();
         avatar_scan = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (SiegeConfig.SIEGE_IDA_ENABLED) {
                     getOwner().getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
                         @Override
                         public void visit(Player player) {
                             if (player.getAbyssRank().getRank().getId() > AbyssRankEnum.STAR4_OFFICER.getId()) {
@@ -75,7 +78,8 @@ public class IncarnateAI2 extends AggressiveNpcAI2 {
 
                                 if (inform) {
                                     String message = "The power of incarnation removes " + player.getName() + " morph state.";
-                                    PacketSendUtility.broadcastPacket(getOwner(), new SM_MESSAGE(getObjectId(), getOwner().getName(), message, ChatType.BRIGHT_YELLOW_CENTER));
+                                    PacketSendUtility.broadcastPacket(getOwner(),
+                                        new SM_MESSAGE(getObjectId(), getOwner().getName(), message, ChatType.BRIGHT_YELLOW_CENTER));
                                 }
                             }
                         }

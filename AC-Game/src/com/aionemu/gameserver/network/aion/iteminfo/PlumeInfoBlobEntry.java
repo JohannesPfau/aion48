@@ -36,7 +36,7 @@ import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 
 /**
- * @author  Cx3
+ * @author Cx3
  * @rework Ever'
  */
 public class PlumeInfoBlobEntry extends ItemBlobEntry {

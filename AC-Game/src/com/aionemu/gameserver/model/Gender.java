@@ -34,8 +34,6 @@ import javax.xml.bind.annotation.XmlEnum;
 /**
  * Creature gender. Typically there are males and females. But who knows, maybe
  * NC can invent something new ;)
- *
-
  */
 @XmlEnum
 public enum Gender {
@@ -52,6 +50,7 @@ public enum Gender {
      * Dummy for create
      */
     DUMMY(8);
+
     /**
      * id of gender
      */
@@ -60,7 +59,8 @@ public enum Gender {
     /**
      * Constructor.
      *
-     * @param genderId id of the gender
+     * @param genderId
+     *            id of the gender
      */
     private Gender(int genderId) {
         this.genderId = genderId;
@@ -78,10 +78,11 @@ public enum Gender {
     /**
      * Returns <tt>Gender</tt> object correlating with given classId.
      *
-     * @param genderId - id of player gender
+     * @param genderId
+     *            - id of player gender
      * @return Gender objects that matches the given genderId. If there isn't
-     * any objects that matches given id, then
-     * <b>IllegalArgumentException</b> is being thrown.
+     *         any objects that matches given id, then
+     *         <b>IllegalArgumentException</b> is being thrown.
      */
     public static Gender getGenderById(int genderId) {
         for (Gender gender : values()) {

@@ -96,7 +96,7 @@ public class TargetRangeProperty {
                     //if (nextCreature instanceof Kisk && isInsideDisablePvpZone((Creature) nextCreature))
                     //	continue;
                     if (Math.abs(firstTarget.getZ() - nextCreature.getZ()) > altitude
-                            || ((nextCreature instanceof Player) && ((Player) nextCreature).isInPlayerMode(PlayerMode.WINDSTREAM))) {
+                        || ((nextCreature instanceof Player) && ((Player) nextCreature).isInPlayerMode(PlayerMode.WINDSTREAM))) {
                         continue;
                     }
 
@@ -111,8 +111,8 @@ public class TargetRangeProperty {
                     }
 
                     if (skill.isPointSkill()) {
-                        if (MathUtil.isIn3dRange(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(),
-                                nextCreature.getY(), nextCreature.getZ(), distanceToTarget + 1)) {
+                        if (MathUtil.isIn3dRange(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(),
+                            nextCreature.getZ(), distanceToTarget + 1)) {
                             skill.getEffectedList().add((Creature) nextCreature);
                         }
                     }
@@ -133,15 +133,16 @@ public class TargetRangeProperty {
                     } else if (properties.getEffectiveDist() > 0) {
                         // Lightning bolt
                         if (MathUtil.isInsideAttackCylinder(skill.getEffector(), nextCreature, distanceToTarget, properties.getEffectiveDist(),
-                                properties.getDirection()) || MathUtil.isIn3dRange(firstTarget, nextCreature, effectiveRange
-                                + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
+                            properties.getDirection())
+                            || MathUtil.isIn3dRange(firstTarget, nextCreature,
+                                effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
                             if (!skill.shouldAffectTarget(nextCreature)) {
                                 continue;
                             }
                             skill.getEffectedList().add((Creature) nextCreature);
                         }
-                    } else if (MathUtil.isIn3dRange(firstTarget, nextCreature, effectiveRange
-                            + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
+                    } else if (MathUtil.isIn3dRange(firstTarget, nextCreature,
+                        effectiveRange + firstTarget.getObjectTemplate().getBoundRadius().getCollision())) {
                         if (!skill.shouldAffectTarget(nextCreature)) {
                             continue;
                         }
@@ -246,7 +247,7 @@ public class TargetRangeProperty {
                     }
 
                     if (MathUtil.getDistance(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(),
-                            nextCreature.getZ()) <= distanceToTarget + 1) {
+                        nextCreature.getZ()) <= distanceToTarget + 1) {
                         effectedList.add((Creature) nextCreature);
                     }
                 }

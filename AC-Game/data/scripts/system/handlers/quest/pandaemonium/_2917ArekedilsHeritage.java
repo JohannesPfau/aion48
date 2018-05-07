@@ -29,11 +29,11 @@
  */
 package quest.pandaemonium;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -41,6 +41,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * author : Altaress
+ * 
  * @Fix Majka Ajural
  */
 public class _2917ArekedilsHeritage extends QuestHandler {
@@ -71,11 +72,11 @@ public class _2917ArekedilsHeritage extends QuestHandler {
         if (targetId == 203574) {
             if (qs == null || qs.getStatus() == QuestStatus.NONE) {
                 if (env.getDialog() == DialogAction.QUEST_SELECT) {
-										return sendQuestDialog(env, 1011);
+                    return sendQuestDialog(env, 1011);
                 } else {
-										if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) { // If quest is accepted add the Ornate Necklace
-											giveQuestItem(env, 182207008, 1);
-										}
+                    if (env.getDialog() == DialogAction.QUEST_ACCEPT_1) { // If quest is accepted add the Ornate Necklace
+                        giveQuestItem(env, 182207008, 1);
+                    }
                     return sendQuestStartDialog(env);
                 }
             } else if (qs != null && qs.getStatus() == QuestStatus.START) {
@@ -123,7 +124,7 @@ public class _2917ArekedilsHeritage extends QuestHandler {
                 if (env.getDialog() == DialogAction.QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
                     return sendQuestDialog(env, 2375);
                 } else if (env.getDialogId() == DialogAction.SELECT_QUEST_REWARD.id() && qs.getStatus() != QuestStatus.COMPLETE
-                        && qs.getStatus() != QuestStatus.NONE) {
+                    && qs.getStatus() != QuestStatus.NONE) {
                     removeQuestItem(env, 182207008, 1);
                     qs.setQuestVar(3);
                     qs.setStatus(QuestStatus.REWARD);

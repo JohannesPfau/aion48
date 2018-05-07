@@ -32,7 +32,6 @@ package quest.levinshor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -54,48 +53,48 @@ public class _13745EljersRequest extends QuestHandler {
     @Override
     public void register() {
         qe.registerQuestNpc(802350).addOnTalkEvent(questId);
-		qe.registerOnKillInWorld(600100000, questId);
-		qe.registerOnEnterZone(ZoneName.get("LUMEWILLOW_GLADE_SCOUT_BASE_600100000"), questId);
+        qe.registerOnKillInWorld(600100000, questId);
+        qe.registerOnEnterZone(ZoneName.get("LUMEWILLOW_GLADE_SCOUT_BASE_600100000"), questId);
     }
 
-	@Override
+    @Override
     public boolean onKillInWorldEvent(QuestEnv env) {
         return defaultOnKillRankedEvent(env, 0, 2, true);
     }
 
     @Override
-	public boolean onDialogEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		int targetId = env.getTargetId();
-		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 802350) {
-				switch (env.getDialog()) {
-					case USE_OBJECT:
-						return sendQuestDialog(env, 10002);
-					case SELECT_QUEST_REWARD:
-						return sendQuestDialog(env, 5);
-					default:
-						return sendQuestEndDialog(env);
-				}
-			}
-		}
-		return false;
-	}
+    public boolean onDialogEvent(QuestEnv env) {
+        Player player = env.getPlayer();
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        int targetId = env.getTargetId();
+        if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
+            if (targetId == 802350) {
+                switch (env.getDialog()) {
+                    case USE_OBJECT:
+                        return sendQuestDialog(env, 10002);
+                    case SELECT_QUEST_REWARD:
+                        return sendQuestDialog(env, 5);
+                    default:
+                        return sendQuestEndDialog(env);
+                }
+            }
+        }
+        return false;
+    }
 
     @Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName == ZoneName.get("LUMEWILLOW_GLADE_SCOUT_BASE_600100000")) {
-			Player player = env.getPlayer();
-			if (player == null)
-				return false;
-			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
-				QuestService.startQuest(env);
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
-				return true;
-			}
-		}
-		return false;
-	}
+    public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+        if (zoneName == ZoneName.get("LUMEWILLOW_GLADE_SCOUT_BASE_600100000")) {
+            Player player = env.getPlayer();
+            if (player == null)
+                return false;
+            QuestState qs = player.getQuestStateList().getQuestState(questId);
+            if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.canRepeat()) {
+                QuestService.startQuest(env);
+                PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
+                return true;
+            }
+        }
+        return false;
+    }
 }

@@ -58,7 +58,7 @@ public class SM_LEGION_INFO extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeS(legion.getLegionName());
         writeC(legion.getLegionLevel());
         writeD(legion.getLegionRank());
@@ -70,12 +70,12 @@ public class SM_LEGION_INFO extends AionServerPacket {
         writeD(0x00);
         writeD(0x00);
         writeD(0x00); // unk 3.0
-        
+
         /**
          * Get Announcements List From DB By Legion *
          */
         Map<Timestamp, String> announcementList = legion.getAnnouncementList().descendingMap();
-        
+
         /**
          * Show max 7 announcements *
          */
@@ -88,7 +88,7 @@ public class SM_LEGION_INFO extends AionServerPacket {
                 break;
             }
         }
-        
+
         writeB(new byte[26]);//something like a spacer
     }
 }

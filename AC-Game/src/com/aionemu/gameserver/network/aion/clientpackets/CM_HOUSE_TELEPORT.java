@@ -88,7 +88,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
         if (actionId == 1) {
             playerId2 = playerId1;
         } else if (actionId == 3) {
-            List<Integer> relationIds = new ArrayList<Integer>();
+            List<Integer> relationIds = new ArrayList<>();
             Iterator<Friend> friends = player1.getFriendList().iterator();
             int address = 0;
 
@@ -157,7 +157,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
         if (target != null) {
             PacketSendUtility.sendPacket(player1, new SM_DIALOG_WINDOW(target.getObjectId(), 0));
         }
-        TeleportService2
-                .teleportTo(player1, address.getMapId(), instanceId, address.getX(), address.getY(), address.getZ(), (byte) 0, TeleportAnimation.BEAM_ANIMATION);
+        TeleportService2.teleportTo(player1, address.getMapId(), instanceId, address.getX(), address.getY(), address.getZ(), (byte) 0,
+            TeleportAnimation.BEAM_ANIMATION);
     }
 }

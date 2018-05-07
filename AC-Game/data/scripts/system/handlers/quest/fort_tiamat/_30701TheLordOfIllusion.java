@@ -29,21 +29,20 @@
  */
 package quest.fort_tiamat;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _30701TheLordOfIllusion extends QuestHandler {
 
     private final static int questId = 30701;
-    private final static int npcs[] = {205842, 800430, 800350};
+    private final static int npcs[] = { 205842, 800430, 800350 };
 
     public _30701TheLordOfIllusion() {
         super(questId);

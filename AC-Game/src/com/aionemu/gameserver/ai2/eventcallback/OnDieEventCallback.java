@@ -34,8 +34,6 @@ import com.aionemu.gameserver.ai2.event.AIEventType;
 
 /**
  * Callback for {@link AIEventType#DIED} event
- *
-
  */
 public abstract class OnDieEventCallback extends OnHandleAIGeneralEvent {
 

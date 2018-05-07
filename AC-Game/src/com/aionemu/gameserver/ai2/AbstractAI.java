@@ -421,8 +421,7 @@ public abstract class AbstractAI implements AI2 {
             case CREATURE_NEEDS_SUPPORT:
                 if (!handleCreatureNeedsSupport(creature)) {
                     if (creature.getTarget() instanceof Creature) {
-                        if (!handleCreatureNeedsSupport((Creature) creature.getTarget())
-                                && !handleGuardAgainstAttacker(creature)) {
+                        if (!handleCreatureNeedsSupport((Creature) creature.getTarget()) && !handleGuardAgainstAttacker(creature)) {
                             handleGuardAgainstAttacker((Creature) creature.getTarget());
                         }
                     }
@@ -505,8 +504,8 @@ public abstract class AbstractAI implements AI2 {
         AIState state = currentState;
         switch (state) {
             case FEAR:
-                return MathUtil.isNearCoordinates(getOwner(), owner.getMoveController().getTargetX2(), owner
-                        .getMoveController().getTargetY2(), owner.getMoveController().getTargetZ2(), 1);
+                return MathUtil.isNearCoordinates(getOwner(), owner.getMoveController().getTargetX2(), owner.getMoveController().getTargetY2(),
+                    owner.getMoveController().getTargetZ2(), 1);
             case FIGHT:
                 return SimpleAttackManager.isTargetInAttackRange((Npc) owner);
             case RETURNING:
@@ -554,8 +553,7 @@ public abstract class AbstractAI implements AI2 {
         return spawn(owner.getWorldId(), npcId, x, y, z, heading, staticId, getPosition().getInstanceId());
     }
 
-    protected VisibleObject spawn(int worldId, int npcId, float x, float y, float z, byte heading, int staticId,
-                                  int instanceId) {
+    protected VisibleObject spawn(int worldId, int npcId, float x, float y, float z, byte heading, int staticId, int instanceId) {
         SpawnTemplate template = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, x, y, z, heading);
         template.setStaticId(staticId);
         return SpawnEngine.spawnObject(template, instanceId);

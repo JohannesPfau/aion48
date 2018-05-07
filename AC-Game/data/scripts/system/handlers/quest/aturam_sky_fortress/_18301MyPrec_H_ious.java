@@ -31,11 +31,11 @@ package quest.aturam_sky_fortress;
 
 import java.util.Collections;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -96,8 +96,7 @@ public class _18301MyPrec_H_ious extends QuestHandler {
                             targetId = ((Npc) env.getVisibleObject()).getNpcId();
                             Npc npc = (Npc) env.getVisibleObject();
                             npc.getController().onDelete();
-                            QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 700978, npc.getX(), npc.getY(),
-                                    npc.getZ(), (byte) 0);
+                            QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 700978, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
                             qs.setQuestVarById(0, var + 1);
                             updateQuestStatus(env);
                             return closeDialogWindow(env);

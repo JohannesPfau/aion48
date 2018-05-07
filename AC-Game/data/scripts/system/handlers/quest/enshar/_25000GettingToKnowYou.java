@@ -29,9 +29,9 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -53,10 +53,10 @@ public class _25000GettingToKnowYou extends QuestHandler {
         qe.registerQuestNpc(804753).addOnTalkEvent(questId);
         qe.registerQuestNpc(804990).addOnTalkEvent(questId);
         qe.registerQuestNpc(805000).addOnTalkEvent(questId);
-		qe.registerQuestNpc(804718).addOnTalkEvent(questId);
+        qe.registerQuestNpc(804718).addOnTalkEvent(questId);
     }
 
-	@Override
+    @Override
     public boolean onDialogEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -73,38 +73,38 @@ public class _25000GettingToKnowYou extends QuestHandler {
             }
         } else if (qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
-            if (targetId == 804753) { 
+            if (targetId == 804753) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     if (var == 0) {
                         return sendQuestDialog(env, 1011);
                     }
                 } else if (dialog == DialogAction.SETPRO1) {
-                    changeQuestStep(env, 0, 1, false); 
+                    changeQuestStep(env, 0, 1, false);
                     return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804990) { 
+            if (targetId == 804990) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     if (var == 1) {
                         return sendQuestDialog(env, 1352);
                     }
                 } else if (dialog == DialogAction.SETPRO2) {
-                    changeQuestStep(env, 1, 2, false); 
+                    changeQuestStep(env, 1, 2, false);
                     return closeDialogWindow(env);
                 }
             }
-			if (targetId == 805000) { 
+            if (targetId == 805000) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     if (var == 2) {
                         return sendQuestDialog(env, 1693);
                     }
                 } else if (dialog == DialogAction.SET_SUCCEED) {
-                    changeQuestStep(env, 2, 3, true); 
+                    changeQuestStep(env, 2, 3, true);
                     return closeDialogWindow(env);
                 }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-            if (targetId == 804718) { 
+            if (targetId == 804718) {
                 if (dialog == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
                 } else {

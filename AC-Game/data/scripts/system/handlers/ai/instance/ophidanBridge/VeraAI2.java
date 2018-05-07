@@ -29,9 +29,10 @@
  */
 package ai.instance.ophidanBridge;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author DeathMagnestic

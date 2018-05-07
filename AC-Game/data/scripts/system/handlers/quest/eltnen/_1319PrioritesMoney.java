@@ -29,11 +29,11 @@
  */
 package quest.eltnen;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -200,7 +200,7 @@ public class _1319PrioritesMoney extends QuestHandler // NEED FIX ITEM
                 if (env.getDialog() == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 3739);
                 } else if (env.getDialogId() == DialogAction.SETPRO8.id() && qs.getStatus() != QuestStatus.COMPLETE
-                        && qs.getStatus() != QuestStatus.NONE) {
+                    && qs.getStatus() != QuestStatus.NONE) {
                     qs.setStatus(QuestStatus.REWARD);
                     updateQuestStatus(env);
                     PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

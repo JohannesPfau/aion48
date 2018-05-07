@@ -38,17 +38,17 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "ScrollItemLocationList")
 public class ScrollItemLocationList {
 
-	@XmlAttribute(name = "worldid")
-	protected int worldid;
-	
-	@XmlAttribute(name = "desc")
-	protected String desc;
+    @XmlAttribute(name = "worldid")
+    protected int worldid;
 
-	public final int getWorldId() {
-		return worldid;
-	}
+    @XmlAttribute(name = "desc")
+    protected String desc;
 
-	public final String getDesc() {
-		return desc;
-	}
+    public final int getWorldId() {
+        return worldid;
+    }
+
+    public final String getDesc() {
+        return desc;
+    }
 }

@@ -29,13 +29,13 @@
  */
 package com.aionemu.commons.network;
 
-import com.aionemu.commons.options.Assertion;
-
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.SocketChannel;
+
+import com.aionemu.commons.options.Assertion;
 
 /**
  * Class that represent Connection with server socket. Connection is created by
@@ -155,8 +155,9 @@ public abstract class AConnection {
      * Connection will be closed at some time [by Dispatcher Thread], after that
      * onDisconnect() method will be called to clear all other things.
      *
-     * @param forced is just hint that getDisconnectionDelay() should return 0
-     *               so OnDisconnect() method will be called without any delay.
+     * @param forced
+     *            is just hint that getDisconnectionDelay() should return 0
+     *            so OnDisconnect() method will be called without any delay.
      */
     public final void close(boolean forced) {
         synchronized (guard) {
@@ -247,7 +248,7 @@ public abstract class AConnection {
     /**
      * @param data
      * @return True if data was processed correctly, False if some error
-     * occurred and connection should be closed NOW.
+     *         occurred and connection should be closed NOW.
      */
     abstract protected boolean processData(ByteBuffer data);
 
@@ -257,7 +258,7 @@ public abstract class AConnection {
      *
      * @param data
      * @return True if data was written to buffer, False indicating that there
-     * are not any more data to write.
+     *         are not any more data to write.
      */
     abstract protected boolean writeData(ByteBuffer data);
 

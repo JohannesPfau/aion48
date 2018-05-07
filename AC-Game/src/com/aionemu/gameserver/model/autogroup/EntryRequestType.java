@@ -37,6 +37,7 @@ public enum EntryRequestType {
     NEW_GROUP_ENTRY((byte) 0),
     QUICK_GROUP_ENTRY((byte) 1),
     GROUP_ENTRY((byte) 2);
+
     private byte id;
 
     private EntryRequestType(byte id) {

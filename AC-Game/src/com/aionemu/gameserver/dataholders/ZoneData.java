@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -63,6 +61,8 @@ import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author ATracer
  */
@@ -75,9 +75,9 @@ public class ZoneData {
     @XmlElement(name = "zone")
     public List<ZoneTemplate> zoneList;
     @XmlTransient
-    private TIntObjectHashMap<List<ZoneInfo>> zoneNameMap = new TIntObjectHashMap<List<ZoneInfo>>();
+    private TIntObjectHashMap<List<ZoneInfo>> zoneNameMap = new TIntObjectHashMap<>();
     @XmlTransient
-    private HashMap<ZoneTemplate, Integer> weatherZoneIds = new HashMap<ZoneTemplate, Integer>();
+    private HashMap<ZoneTemplate, Integer> weatherZoneIds = new HashMap<>();
     @XmlTransient
     private int count;
 
@@ -88,25 +88,25 @@ public class ZoneData {
             Area area = null;
             switch (zone.getAreaType()) {
                 case POLYGON:
-                    area = new PolyArea(zone.getName(), zone.getMapid(), zone.getPoints().getPoint(), zone.getPoints().getBottom(), zone.getPoints()
-                            .getTop());
+                    area = new PolyArea(zone.getName(), zone.getMapid(), zone.getPoints().getPoint(), zone.getPoints().getBottom(),
+                        zone.getPoints().getTop());
                     break;
                 case CYLINDER:
-                    area = new CylinderArea(zone.getName(), zone.getMapid(), zone.getCylinder().getX(), zone.getCylinder().getY(), zone.getCylinder()
-                            .getR(), zone.getCylinder().getBottom(), zone.getCylinder().getTop());
+                    area = new CylinderArea(zone.getName(), zone.getMapid(), zone.getCylinder().getX(), zone.getCylinder().getY(),
+                        zone.getCylinder().getR(), zone.getCylinder().getBottom(), zone.getCylinder().getTop());
                     break;
                 case SPHERE:
                     area = new SphereArea(zone.getName(), zone.getMapid(), zone.getSphere().getX(), zone.getSphere().getY(), zone.getSphere().getZ(),
-                            zone.getSphere().getR());
+                        zone.getSphere().getR());
                     break;
                 case SEMISPHERE:
-                    area = new SemisphereArea(zone.getName(), zone.getMapid(), zone.getSemisphere().getX(), zone.getSemisphere().getY(), zone.getSemisphere().getZ(),
-                            zone.getSemisphere().getR());
+                    area = new SemisphereArea(zone.getName(), zone.getMapid(), zone.getSemisphere().getX(), zone.getSemisphere().getY(),
+                        zone.getSemisphere().getZ(), zone.getSemisphere().getR());
             }
             if (area != null) {
                 List<ZoneInfo> zones = zoneNameMap.get(zone.getMapid());
                 if (zones == null) {
-                    zones = new ArrayList<ZoneInfo>();
+                    zones = new ArrayList<>();
                     zoneNameMap.put(zone.getMapid(), zones);
                 }
                 if (zone.getZoneType() == ZoneClassName.WEATHER) {

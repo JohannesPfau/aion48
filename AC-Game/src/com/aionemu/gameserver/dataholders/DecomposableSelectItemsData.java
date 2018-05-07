@@ -43,7 +43,6 @@ import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.templates.decomposable.DecomposableSelectItem;
 import com.aionemu.gameserver.model.templates.decomposable.SelectItems;
 
-
 /**
  * @author Alcapwnd
  */
@@ -54,16 +53,16 @@ public class DecomposableSelectItemsData {
     @XmlElement(name = "decomposable_selectitem", required = true)
     protected List<DecomposableSelectItem> selectItems;
 
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     private HashMap<Integer, HashMap<PlayerClass, SelectItems>> selectItemData = new HashMap();
 
     /**
      * @param u
      * @param parent
      */
-    @SuppressWarnings({"unchecked", "rawtypes"})
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     void afterUnmarshal(Unmarshaller u, Object parent) {
-        for (Iterator i$ = this.selectItems.iterator(); i$.hasNext(); ) {
+        for (Iterator i$ = this.selectItems.iterator(); i$.hasNext();) {
             DecomposableSelectItem item;
             item = (DecomposableSelectItem) i$.next();
             if (item.getItems() != null) {

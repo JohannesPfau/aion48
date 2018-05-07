@@ -29,7 +29,8 @@
  */
 package ai.instance.shugoImperialTomb;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.Future;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.poll.AIAnswer;
@@ -39,7 +40,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import java.util.concurrent.Future;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Swig
@@ -77,6 +78,7 @@ public class DefenseTowerAI2 extends AggressiveNpcAI2 {
         super.handleSpawned();
         SkillEngine.getInstance().applyEffectDirectly(21097, getOwner(), getOwner(), 0);
         task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 AI2Actions.useSkill(DefenseTowerAI2.this, 20954);

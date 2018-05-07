@@ -29,6 +29,17 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.ChallengeTasksDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
@@ -38,13 +49,8 @@ import com.aionemu.gameserver.model.challenge.ChallengeTask;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.templates.challenge.ChallengeQuestTemplate;
 import com.aionemu.gameserver.model.templates.challenge.ChallengeType;
-import javolution.util.FastMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.sql.*;
-import java.util.HashMap;
-import java.util.Map;
+import javolution.util.FastMap;
 
 /**
  * @author ViAl
@@ -75,7 +81,7 @@ public class MySQL5ChallengeTasksDAO extends ChallengeTasksDAO {
                 ChallengeQuest quest = new ChallengeQuest(template, completeCount);
                 quest.setPersistentState(PersistentState.UPDATED);
                 if (!tasks.containsKey(taskId)) {
-                    Map<Integer, ChallengeQuest> quests = new HashMap<Integer, ChallengeQuest>(2);
+                    Map<Integer, ChallengeQuest> quests = new HashMap<>(2);
                     quests.put(quest.getQuestId(), quest);
                     ChallengeTask task = new ChallengeTask(taskId, ownerId, quests, date);
                     tasks.put(taskId, task);

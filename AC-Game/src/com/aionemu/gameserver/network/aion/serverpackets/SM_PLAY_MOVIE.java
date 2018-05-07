@@ -62,7 +62,7 @@ public class SM_PLAY_MOVIE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(type);
         writeD(objectId);
         writeD(id);

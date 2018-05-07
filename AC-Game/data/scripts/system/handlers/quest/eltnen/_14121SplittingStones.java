@@ -29,9 +29,9 @@
  */
 package quest.eltnen;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,53 +51,53 @@ public class _14121SplittingStones extends QuestHandler {
     public void register() {
         qe.registerQuestNpc(203903).addOnQuestStart(questId);
         qe.registerQuestNpc(203903).addOnTalkEvent(questId); // Valerius
-		qe.registerQuestNpc(204032).addOnTalkEvent(questId); // Lakaias
+        qe.registerQuestNpc(204032).addOnTalkEvent(questId); // Lakaias
     }
-	
-	@Override
+
+    @Override
     public boolean onDialogEvent(final QuestEnv env) {
         final Player player = env.getPlayer();
         int targetId = env.getTargetId();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         DialogAction dialog = env.getDialog();
 
-		if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-			if (targetId == 203903) { // Valerius
-			   if (env.getDialog() == DialogAction.QUEST_SELECT) {
-				   return sendQuestDialog(env, 1011);
-			   } else {
-				   return sendQuestStartDialog(env);
-			   }
-			}
-		} else if (qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (targetId == 204032) { // Lakaias
-				switch (dialog) {
-					case QUEST_SELECT: {
-						if (var == 0) {
-							return sendQuestDialog(env, 1352);
-						} else if (var == 1) {
-							return sendQuestDialog(env, 2375);
-						}
-					}
-					case SETPRO1: {
-						return defaultCloseDialog(env, 0, 1); //1
-					}
-					case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
-						return checkQuestItems(env, 1, 1, true, 5, 2716); // reward (TODO FAIL)
-					}
-					case FINISH_DIALOG: {
+        if (qs == null || qs.getStatus() == QuestStatus.NONE) {
+            if (targetId == 203903) { // Valerius
+                if (env.getDialog() == DialogAction.QUEST_SELECT) {
+                    return sendQuestDialog(env, 1011);
+                } else {
+                    return sendQuestStartDialog(env);
+                }
+            }
+        } else if (qs.getStatus() == QuestStatus.START) {
+            int var = qs.getQuestVarById(0);
+            if (targetId == 204032) { // Lakaias
+                switch (dialog) {
+                    case QUEST_SELECT: {
+                        if (var == 0) {
+                            return sendQuestDialog(env, 1352);
+                        } else if (var == 1) {
+                            return sendQuestDialog(env, 2375);
+                        }
+                    }
+                    case SETPRO1: {
+                        return defaultCloseDialog(env, 0, 1); //1
+                    }
+                    case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: {
+                        return checkQuestItems(env, 1, 1, true, 5, 2716); // reward (TODO FAIL)
+                    }
+                    case FINISH_DIALOG: {
                         return sendQuestSelectionDialog(env);
                     }
-				default:
-					break;
-				}
-			}
+                    default:
+                        break;
+                }
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204032) { // Lakaias
+            if (targetId == 204032) { // Lakaias
                 return sendQuestEndDialog(env);
-			}
-		}
+            }
+        }
         return false;
     }
 }

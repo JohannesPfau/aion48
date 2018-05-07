@@ -29,6 +29,9 @@
  */
 package admincommands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
@@ -39,9 +42,6 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author ATracer
@@ -73,7 +73,7 @@ public class Speed extends AdminCommand implements StatOwner {
         }
 
         admin.getGameStats().endEffect(this);
-        List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        List<IStatFunction> functions = new ArrayList<>();
         functions.add(new SpeedFunction(StatEnum.SPEED, parameter));
         functions.add(new SpeedFunction(StatEnum.FLY_SPEED, parameter));
         admin.getGameStats().addEffect(this, functions);

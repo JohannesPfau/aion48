@@ -29,9 +29,9 @@
  */
 package quest.altgard;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -118,8 +118,7 @@ public class _2018ReconstructingImpetusium extends QuestHandler {
                         }
                         case CHECK_USER_HAS_QUEST_ITEM: {
                             if (QuestService.collectItemCheck(env, false)) { // don't remove yet
-                                QuestService.addNewSpawn(220030000, player.getInstanceId(), 210752, 2889.9834f, 1741.3108f, 254.75f,
-                                        (byte) 0);
+                                QuestService.addNewSpawn(220030000, player.getInstanceId(), 210752, 2889.9834f, 1741.3108f, 254.75f, (byte) 0);
                                 return closeDialogWindow(env);
                             } else {
                                 return sendQuestDialog(env, 2120);
@@ -148,7 +147,7 @@ public class _2018ReconstructingImpetusium extends QuestHandler {
         }
         int var = qs.getQuestVarById(0);
         if (var >= 1 && var < 4) {
-            int[] npcs = {210588, 210722};
+            int[] npcs = { 210588, 210722 };
             return defaultOnKillEvent(env, npcs, var, var + 1); // 2 - 4
         } else if (var == 5) {
             if (env.getTargetId() == 210752) {

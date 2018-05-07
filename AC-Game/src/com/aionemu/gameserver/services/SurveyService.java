@@ -31,9 +31,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.List;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -52,6 +49,9 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 /**
  * @author KID
@@ -111,8 +111,7 @@ public class SurveyService {
                 PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300945, new DescriptionId(template.getNameId())));
             } else // You received %num1 %0 items as reward for the survey.
             {
-                PacketSendUtility.sendPacket(player,
-                        new SM_SYSTEM_MESSAGE(1300946, item.count, new DescriptionId(template.getNameId())));
+                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300946, item.count, new DescriptionId(template.getNameId())));
             }
 
             template = null;

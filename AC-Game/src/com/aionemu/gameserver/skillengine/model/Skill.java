@@ -121,7 +121,7 @@ public class Skill {
     private long castStartTime;
     private String chainCategory = null;
     private volatile boolean isMultiCast = false;
-    private List<ChargedSkill> chargeSkillList = new ArrayList<ChargedSkill>();
+    private List<ChargedSkill> chargeSkillList = new ArrayList<>();
 
     public enum SkillMethod {
 
@@ -157,7 +157,7 @@ public class Skill {
      * @param firstTarget
      */
     public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate) {
-        this.effectedList = new ArrayList<Creature>();
+        this.effectedList = new ArrayList<>();
         this.conditionChangeListener = new StartMovingListener();
         this.firstTarget = firstTarget;
         this.skillLevel = skillLvl;
@@ -238,7 +238,7 @@ public class Skill {
 
         // TODO: Enable non-targeted, non-point AOE skills to trigger.
         if (targetType == 0 && effectedList.size() == 0 && firstTargetAttribute != FirstTargetAttribute.ME
-                && targetRangeAttribute != TargetRangeAttribute.AREA) {
+            && targetRangeAttribute != TargetRangeAttribute.AREA) {
             log.debug("targettype failed");
             return false;
         }
@@ -293,8 +293,9 @@ public class Skill {
         // log skill time if effector instance of player
         // TODO config
         if (effector instanceof Player) {
-            if (((Player) effector).getAccessLevel() > 1){
-                MotionLoggingService.getInstance().logTime((Player) effector, this.getSkillTemplate(), this.getHitTime(), MathUtil.getDistance(effector, firstTarget));
+            if (((Player) effector).getAccessLevel() > 1) {
+                MotionLoggingService.getInstance().logTime((Player) effector, this.getSkillTemplate(), this.getHitTime(),
+                    MathUtil.getDistance(effector, firstTarget));
             }
         }
 
@@ -364,7 +365,7 @@ public class Skill {
 
         if (effector instanceof Player) {
             if (this.isMulticast()
-                    && ((Player) effector).getChainSkills().getChainCount((Player) effector, this.getSkillTemplate(), this.chainCategory) != 0) {
+                && ((Player) effector).getChainSkills().getChainCount((Player) effector, this.getSkillTemplate(), this.chainCategory) != 0) {
                 duration = 0;
             }
         }
@@ -452,14 +453,14 @@ public class Skill {
             return true;
         }
 
-        WeaponTypeWrapper weapons = new WeaponTypeWrapper(player.getEquipment().getMainHandWeaponType(), player.getEquipment()
-                .getOffHandWeaponType());
+        WeaponTypeWrapper weapons = new WeaponTypeWrapper(player.getEquipment().getMainHandWeaponType(),
+            player.getEquipment().getOffHandWeaponType());
         float serverTime = motionTime.getTimeForWeapon(player.getRace(), player.getGender(), weapons);
         int clientTime = hitTime;
 
         if (serverTime == 0) {
-            log.warn("missing weapon time for motionName: " + motion.getName() + " weapons: " + weapons.toString() + " skillId: "
-                    + this.getSkillId());
+            log.warn(
+                "missing weapon time for motionName: " + motion.getName() + " weapons: " + weapons.toString() + " skillId: " + this.getSkillId());
             return true;
         }
 
@@ -506,16 +507,16 @@ public class Skill {
                         if (SecurityConfig.NO_ANIMATION_KICK) {
                             player.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
                             AuditLogger.info(player, "Modified client_skills:" + this.getSkillId() + " (clientTime<finalTime:" + clientTime + "/"
-                                    + finalTime + ") Kicking Player: " + player.getName());
+                                + finalTime + ") Kicking Player: " + player.getName());
                         } else {
-                            AuditLogger.info(player, "Modified client_skills:" + this.getSkillId() + " (clientTime<finalTime:" + clientTime + "/"
-                                    + finalTime + ")");
+                            AuditLogger.info(player,
+                                "Modified client_skills:" + this.getSkillId() + " (clientTime<finalTime:" + clientTime + "/" + finalTime + ")");
                         }
                         return false;
                     }
                 }
                 log.warn("Possible modified client_skills:" + this.getSkillId() + " (clientTime<finalTime:" + clientTime + "/" + finalTime
-                        + ") player Name: " + player.getName());
+                    + ") player Name: " + player.getName());
             }
             this.serverTime = hitTime;
         }
@@ -544,10 +545,12 @@ public class Skill {
         if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE) {
             switch (targetType) {
                 case 0: // PlayerObjectId as Target
-                    PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector.getObjectId(), skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, this.duration, skillTemplate.isCharge()));
+                    PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector.getObjectId(), skillTemplate.getSkillId(),
+                        skillLevel, targetType, targetObjId, this.duration, skillTemplate.isCharge()));
                     if (firstTarget.getObjectId() != effector.getObjectId()) {
-                    	PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ATTACK_STATUS(effector, SM_ATTACK_STATUS.TYPE.ATTACK, 0, 0, SM_ATTACK_STATUS.LOG.ATTACK));
-                    	//effector.getMoveController().skillMovement();
+                        PacketSendUtility.broadcastPacketAndReceive(effector,
+                            new SM_ATTACK_STATUS(effector, SM_ATTACK_STATUS.TYPE.ATTACK, 0, 0, SM_ATTACK_STATUS.LOG.ATTACK));
+                        //effector.getMoveController().skillMovement();
                     }
                     if (effector instanceof Npc && firstTarget instanceof Player) {
                         NpcAI2 ai = (NpcAI2) effector.getAi2();
@@ -558,24 +561,28 @@ public class Skill {
                     break;
 
                 case 3: // Target not in sight?
-                    PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector.getObjectId(), skillTemplate.getSkillId(), skillLevel, targetType, 0, this.duration, skillTemplate.isCharge()));
+                    PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector.getObjectId(), skillTemplate.getSkillId(),
+                        skillLevel, targetType, 0, this.duration, skillTemplate.isCharge()));
                     if (firstTarget.getObjectId() != effector.getObjectId()) {
-                    	PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ATTACK_STATUS(effector, SM_ATTACK_STATUS.TYPE.ATTACK, 0, 0, SM_ATTACK_STATUS.LOG.ATTACK));
-                    	//effector.getMoveController().skillMovement();
+                        PacketSendUtility.broadcastPacketAndReceive(effector,
+                            new SM_ATTACK_STATUS(effector, SM_ATTACK_STATUS.TYPE.ATTACK, 0, 0, SM_ATTACK_STATUS.LOG.ATTACK));
+                        //effector.getMoveController().skillMovement();
                     }
                     break;
 
                 case 1: // XYZ as Target
-                    PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL(effector.getObjectId(), skillTemplate.getSkillId(), skillLevel, targetType, x, y, z, this.duration));
+                    PacketSendUtility.broadcastPacketAndReceive(effector,
+                        new SM_CASTSPELL(effector.getObjectId(), skillTemplate.getSkillId(), skillLevel, targetType, x, y, z, this.duration));
                     if (firstTarget.getObjectId() != effector.getObjectId()) {
-                    	PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ATTACK_STATUS(effector, SM_ATTACK_STATUS.TYPE.ATTACK, 0, 0, SM_ATTACK_STATUS.LOG.ATTACK));
-                    	//effector.getMoveController().skillMovement();
+                        PacketSendUtility.broadcastPacketAndReceive(effector,
+                            new SM_ATTACK_STATUS(effector, SM_ATTACK_STATUS.TYPE.ATTACK, 0, 0, SM_ATTACK_STATUS.LOG.ATTACK));
+                        //effector.getMoveController().skillMovement();
                     }
                     break;
             }
         } else if (skillMethod == SkillMethod.ITEM && duration > 0) {
             PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(),
-                    (this.itemObjectId == 0 ? 0 : this.itemObjectId), itemTemplate.getTemplateId(), this.duration, 0, 0));
+                (this.itemObjectId == 0 ? 0 : this.itemObjectId), itemTemplate.getTemplateId(), this.duration, 0, 0));
         }
     }
 
@@ -645,7 +652,7 @@ public class Skill {
         int resistCount = 0;
         boolean blockedChain = false;
         boolean blockedStance = false;
-        final List<Effect> effects = new ArrayList<Effect>();
+        final List<Effect> effects = new ArrayList<>();
         if (skillTemplate.getEffects() != null) {
             boolean blockAOESpread = false;
             for (Creature effected : effectedList) {
@@ -707,7 +714,8 @@ public class Skill {
 
         boolean setCooldowns = true;
         if (effector instanceof Player) {
-            if (this.isMulticast() && ((Player) effector).getChainSkills().getChainCount((Player) effector, this.getSkillTemplate(), this.chainCategory) != 0) {
+            if (this.isMulticast()
+                && ((Player) effector).getChainSkills().getChainCount((Player) effector, this.getSkillTemplate(), this.chainCategory) != 0) {
                 setCooldowns = false;
             }
         }
@@ -754,6 +762,7 @@ public class Skill {
             applyEffect(effects);
         } else {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     applyEffect(effects);
@@ -795,23 +804,29 @@ public class Skill {
         if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE) {
             switch (targetType) {
                 case 0: // PlayerObjectId as Target
-                    PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, spellStatus, dashStatus));
-                    PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ATTACK_STATUS(firstTarget, SM_ATTACK_STATUS.TYPE.REGULAR, 0, 0, SM_ATTACK_STATUS.LOG.ATTACK));
+                    PacketSendUtility.broadcastPacketAndReceive(effector,
+                        new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, spellStatus, dashStatus));
+                    PacketSendUtility.broadcastPacketAndReceive(effector,
+                        new SM_ATTACK_STATUS(firstTarget, SM_ATTACK_STATUS.TYPE.REGULAR, 0, 0, SM_ATTACK_STATUS.LOG.ATTACK));
                     break;
 
                 case 3: // Target not in sight?
-                    PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, spellStatus, dashStatus));
-                    PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ATTACK_STATUS(firstTarget, SM_ATTACK_STATUS.TYPE.REGULAR, 0, 0, SM_ATTACK_STATUS.LOG.ATTACK));
+                    PacketSendUtility.broadcastPacketAndReceive(effector,
+                        new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, spellStatus, dashStatus));
+                    PacketSendUtility.broadcastPacketAndReceive(effector,
+                        new SM_ATTACK_STATUS(firstTarget, SM_ATTACK_STATUS.TYPE.REGULAR, 0, 0, SM_ATTACK_STATUS.LOG.ATTACK));
                     break;
 
                 case 1: // XYZ as Target
-                    PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, spellStatus, dashStatus, targetType));
-                    PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ATTACK_STATUS(firstTarget, SM_ATTACK_STATUS.TYPE.REGULAR, 0, 0, SM_ATTACK_STATUS.LOG.ATTACK));
+                    PacketSendUtility.broadcastPacketAndReceive(effector,
+                        new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, spellStatus, dashStatus, targetType));
+                    PacketSendUtility.broadcastPacketAndReceive(effector,
+                        new SM_ATTACK_STATUS(firstTarget, SM_ATTACK_STATUS.TYPE.REGULAR, 0, 0, SM_ATTACK_STATUS.LOG.ATTACK));
                     break;
             }
         } else if (skillMethod == SkillMethod.ITEM) {
             PacketSendUtility.broadcastPacketAndReceive(effector, new SM_ITEM_USAGE_ANIMATION(effector.getObjectId(), firstTarget.getObjectId(),
-                    (this.itemObjectId == 0 ? 0 : this.itemObjectId), itemTemplate.getTemplateId(), 0, 1, 0));
+                (this.itemObjectId == 0 ? 0 : this.itemObjectId), itemTemplate.getTemplateId(), 0, 1, 0));
             if (effector instanceof Player) {
                 PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_USE_ITEM(new DescriptionId(getItemTemplate().getNameId())));
             }
@@ -823,6 +838,7 @@ public class Skill {
      */
     private void schedule(int delay) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isCancelled && skillMethod == SkillMethod.CHARGE) {
@@ -861,7 +877,8 @@ public class Skill {
     }
 
     /**
-     * @param value is the changeMpConsumptionValue to set
+     * @param value
+     *            is the changeMpConsumptionValue to set
      */
     public void setBoostSkillCost(int value) {
         boostSkillCost = value;
@@ -931,7 +948,8 @@ public class Skill {
     }
 
     /**
-     * @param firstTarget the firstTarget to set
+     * @param firstTarget
+     *            the firstTarget to set
      */
     public void setFirstTarget(Creature firstTarget) {
         this.firstTarget = firstTarget;
@@ -952,7 +970,8 @@ public class Skill {
     }
 
     /**
-     * @param FirstTargetAttribute the firstTargetAttribute to set
+     * @param FirstTargetAttribute
+     *            the firstTargetAttribute to set
      */
     public void setFirstTargetAttribute(FirstTargetAttribute firstTargetAttribute) {
         this.firstTargetAttribute = firstTargetAttribute;
@@ -974,11 +993,11 @@ public class Skill {
 
     /**
      * @return true if the present skill is a self buff includes items (such as
-     * scroll buffs)
+     *         scroll buffs)
      */
     public boolean isSelfBuff() {
         return (firstTargetAttribute == FirstTargetAttribute.ME && targetRangeAttribute == TargetRangeAttribute.ONLYONE
-                && skillTemplate.getSubType() == SkillSubType.BUFF && !skillTemplate.isDeityAvatar());
+            && skillTemplate.getSubType() == SkillSubType.BUFF && !skillTemplate.isDeityAvatar());
     }
 
     /**
@@ -996,14 +1015,16 @@ public class Skill {
     }
 
     /**
-     * @param firstTargetRangeCheck the firstTargetRangeCheck to set
+     * @param firstTargetRangeCheck
+     *            the firstTargetRangeCheck to set
      */
     public void setFirstTargetRangeCheck(boolean firstTargetRangeCheck) {
         this.firstTargetRangeCheck = firstTargetRangeCheck;
     }
 
     /**
-     * @param itemTemplate the itemTemplate to set
+     * @param itemTemplate
+     *            the itemTemplate to set
      */
     public void setItemTemplate(ItemTemplate itemTemplate) {
         this.itemTemplate = itemTemplate;
@@ -1022,7 +1043,8 @@ public class Skill {
     }
 
     /**
-     * @param targetRangeAttribute the targetRangeAttribute to set
+     * @param targetRangeAttribute
+     *            the targetRangeAttribute to set
      */
     public void setTargetRangeAttribute(TargetRangeAttribute targetRangeAttribute) {
         this.targetRangeAttribute = targetRangeAttribute;
@@ -1084,7 +1106,8 @@ public class Skill {
     }
 
     /**
-     * @param time The time to set.
+     * @param time
+     *            The time to set.
      */
     public void setHitTime(int time) {
         this.hitTime = time;
@@ -1092,9 +1115,9 @@ public class Skill {
 
     /**
      * @return true if skill must not be affected by boost casting time this
-     * comes from old 1.5.0.5 patch notes and still applies on 2.5 (confirmed)
-     * TODO: maybe another implementation? At the moment this doesnt seem to be
-     * handled on client infos, so it's hard coded
+     *         comes from old 1.5.0.5 patch notes and still applies on 2.5 (confirmed)
+     *         TODO: maybe another implementation? At the moment this doesnt seem to be
+     *         handled on client infos, so it's hard coded
      */
     private boolean isCastTimeFixed() {
         if (skillMethod != SkillMethod.CAST) // only casted skills are affected
@@ -1165,7 +1188,7 @@ public class Skill {
         if (GeoDataConfig.GEO_ENABLE) {
             if (isGroundSkill()) {
                 if ((object.getZ() - GeoService.getInstance().getZ(object) > 1.0f)
-                        || (object.getZ() - GeoService.getInstance().getZ(object) < -2.0f)) {
+                    || (object.getZ() - GeoService.getInstance().getZ(object) < -2.0f)) {
                     return false;
                 }
             }
@@ -1177,9 +1200,9 @@ public class Skill {
     public void setChainCategory(String chainCategory) {
         this.chainCategory = chainCategory;
     }
-    
+
     public String getChainCategory() {
-    	return this.chainCategory;
+        return this.chainCategory;
     }
 
     public SkillMethod getSkillMethod() {
@@ -1188,7 +1211,7 @@ public class Skill {
 
     public boolean isPointPointSkill() {
         if (this.getSkillTemplate().getProperties().getFirstTarget() == FirstTargetAttribute.POINT
-                && this.getSkillTemplate().getProperties().getTargetType() == TargetRangeAttribute.POINT) {
+            && this.getSkillTemplate().getProperties().getTargetType() == TargetRangeAttribute.POINT) {
             return true;
         }
 

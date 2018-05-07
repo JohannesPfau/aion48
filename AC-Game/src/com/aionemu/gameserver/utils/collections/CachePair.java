@@ -32,7 +32,7 @@ package com.aionemu.gameserver.utils.collections;
 /**
  * @author Rolandas
  */
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class CachePair<K extends Comparable, V> implements Comparable<CachePair> {
 
     public CachePair(K key, V value) {
@@ -44,7 +44,7 @@ public class CachePair<K extends Comparable, V> implements Comparable<CachePair>
     public V value;
 
     @Override
-	public boolean equals(Object obj) {
+    public boolean equals(Object obj) {
         if (obj instanceof CachePair) {
             CachePair p = (CachePair) obj;
             return key.equals(p.key) && value.equals(p.value);
@@ -53,7 +53,7 @@ public class CachePair<K extends Comparable, V> implements Comparable<CachePair>
     }
 
     @Override
-	public int compareTo(CachePair p) {
+    public int compareTo(CachePair p) {
         int v = key.compareTo(p.key);
         if (v == 0 && p.value instanceof Comparable) {
             return ((Comparable) value).compareTo(p.value);

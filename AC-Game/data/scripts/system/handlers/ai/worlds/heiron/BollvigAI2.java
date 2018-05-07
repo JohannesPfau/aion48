@@ -29,7 +29,11 @@
  */
 package ai.worlds.heiron;
 
-import ai.AggressiveFirstSkillAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -38,10 +42,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
+import ai.AggressiveFirstSkillAI2;
 
 /**
  * @author Ritsu
@@ -49,7 +50,7 @@ import java.util.concurrent.Future;
 @AIName("bollvig")
 public class BollvigAI2 extends AggressiveFirstSkillAI2 {
 
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
     private Future<?> firstTask;
     private Future<?> secondTask;
     private Future<?> thirdTask;
@@ -114,6 +115,7 @@ public class BollvigAI2 extends AggressiveFirstSkillAI2 {
         int hpPercent = getLifeStats().getHpPercentage();
         if (50 >= hpPercent && hpPercent > 25) {
             firstTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     useSkill(18034);//Nerve Absorption
@@ -124,6 +126,7 @@ public class BollvigAI2 extends AggressiveFirstSkillAI2 {
             useSkill(18037);//Blood Cell Destruction
         }
         secondTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 skillThree();
@@ -134,6 +137,7 @@ public class BollvigAI2 extends AggressiveFirstSkillAI2 {
     private void skillThree() {
         useSkill(17899);//Charming Attraction
         thirdTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 int hpPercent = getLifeStats().getHpPercentage();
@@ -146,6 +150,7 @@ public class BollvigAI2 extends AggressiveFirstSkillAI2 {
                 } else if (25 >= hpPercent) {
                     useSkill(18027);//Mortal Cutting
                     lastTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             skillThree();
@@ -181,7 +186,7 @@ public class BollvigAI2 extends AggressiveFirstSkillAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{75, 50, 25});
+        Collections.addAll(percents, new Integer[] { 75, 50, 25 });
     }
 
     @Override
@@ -228,8 +233,7 @@ public class BollvigAI2 extends AggressiveFirstSkillAI2 {
 
     private boolean checkNpc() {
         WorldMapInstance map = getPosition().getWorldMapInstance();
-        if (map.getNpc(204655) == null && (map.getNpc(212314) == null
-                || map.getNpc(212314).getLifeStats().isAlreadyDead())) {
+        if (map.getNpc(204655) == null && (map.getNpc(212314) == null || map.getNpc(212314).getLifeStats().isAlreadyDead())) {
             return true;
         }
 

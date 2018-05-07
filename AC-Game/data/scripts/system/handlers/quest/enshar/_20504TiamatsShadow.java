@@ -29,10 +29,10 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -44,7 +44,7 @@ import com.aionemu.gameserver.services.QuestService;
 public class _20504TiamatsShadow extends QuestHandler {
 
     public static final int questId = 20504;
-		int[] mobs = {219943, 219944, 219945, 219946, 219947, 219948};
+    int[] mobs = { 219943, 219944, 219945, 219946, 219947, 219948 };
 
     public _20504TiamatsShadow() {
         super(questId);
@@ -52,79 +52,77 @@ public class _20504TiamatsShadow extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {804730, 804742, 804731};
-		qe.registerQuestNpc(219949).addOnKillEvent(questId);
-		qe.registerOnLevelUp(questId);
+        int[] npcs = { 804730, 804742, 804731 };
+        qe.registerQuestNpc(219949).addOnKillEvent(questId);
+        qe.registerOnLevelUp(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }
-		for (int mob : mobs) {
+        for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
     }
-	
-	@Override
+
+    @Override
     public boolean onLvlUpEvent(QuestEnv env) {
         return defaultOnLvlUpEvent(env, 20503, true);
     }
-	
-	@Override
+
+    @Override
     public boolean onKillEvent(QuestEnv env) {
         Player player = env.getPlayer();
-		Npc npc = (Npc) env.getVisibleObject();
+        Npc npc = (Npc) env.getVisibleObject();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
-			int var1 = qs.getQuestVarById(1);
-			int var2 = qs.getQuestVarById(2);
-			int targetId = env.getTargetId();
+            int var1 = qs.getQuestVarById(1);
+            int var2 = qs.getQuestVarById(2);
+            int targetId = env.getTargetId();
             if (var == 1) {
-				int[] mobs1 = {219943, 219944, 219945};
-                
-				switch (targetId) {
+                int[] mobs1 = { 219943, 219944, 219945 };
+
+                switch (targetId) {
                     case 219943:
-					case 219944:
+                    case 219944:
                     case 219945: {
                         if (var1 >= 0 && var1 < 4) {
-							return defaultOnKillEvent(env, mobs1, var1, var1 + 1, 1);
-						} else if (var1 == 4) {
-							qs.setQuestVar(2);
-							updateQuestStatus(env);
-							return true;
-						}
+                            return defaultOnKillEvent(env, mobs1, var1, var1 + 1, 1);
+                        } else if (var1 == 4) {
+                            qs.setQuestVar(2);
+                            updateQuestStatus(env);
+                            return true;
+                        }
                         break;
                     }
-				}
-            }
-			else if (var == 3) {
-				int[] mobs2 = {219946, 219947, 219948};
-                
-				switch (targetId) {
+                }
+            } else if (var == 3) {
+                int[] mobs2 = { 219946, 219947, 219948 };
+
+                switch (targetId) {
                     case 219946:
-					case 219947:
+                    case 219947:
                     case 219948: {
                         if (var2 >= 0 && var2 < 4) {
-							return defaultOnKillEvent(env, mobs2, var2, var2 + 1, 2);
-						} else if (var2 == 4) {
-							qs.setQuestVar(4);
-							updateQuestStatus(env);
-							return true;
-						}
+                            return defaultOnKillEvent(env, mobs2, var2, var2 + 1, 2);
+                        } else if (var2 == 4) {
+                            qs.setQuestVar(4);
+                            updateQuestStatus(env);
+                            return true;
+                        }
                         break;
                     }
-				}
-            }
-			else if (var == 4) {
-				switch (targetId) {
+                }
+            } else if (var == 4) {
+                switch (targetId) {
                     case 219949: {
-						QuestService.addNewSpawn(220080000, 1, 804742, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
-						qs.setQuestVar(5);
-						updateQuestStatus(env);
-						return true;
-						}
+                        QuestService.addNewSpawn(220080000, 1, 804742, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
+                        qs.setQuestVar(5);
+                        updateQuestStatus(env);
+                        return true;
                     }
-				}
-            
+                }
+            }
+
         }
         return false;
     }
@@ -149,40 +147,39 @@ public class _20504TiamatsShadow extends QuestHandler {
                     case QUEST_SELECT:
                         if (var == 0) {
                             return sendQuestDialog(env, 1011);
-                        }
-						else if (var == 2) {
+                        } else if (var == 2) {
                             return sendQuestDialog(env, 1693);
                         }
                     case SETPRO1:
-                        changeQuestStep(env, 0, 1, false); 
-						return closeDialogWindow(env);
-					case SETPRO3:
-                        changeQuestStep(env, 2, 3, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 0, 1, false);
+                        return closeDialogWindow(env);
+                    case SETPRO3:
+                        changeQuestStep(env, 2, 3, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804742) {
+            if (targetId == 804742) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 5) {
                             return sendQuestDialog(env, 2716);
                         }
                     case SETPRO6:
-                        changeQuestStep(env, 5, 6, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 5, 6, false);
+                        return closeDialogWindow(env);
                 }
-			}	
-			if (targetId == 804731) {
+            }
+            if (targetId == 804731) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 6) {
                             return sendQuestDialog(env, 3057);
                         }
                     case SET_SUCCEED:
-                        changeQuestStep(env, 6, 7, true); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 6, 7, true);
+                        return closeDialogWindow(env);
                 }
-			}
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 804730) {
                 if (env.getDialog() == DialogAction.QUEST_SELECT) {

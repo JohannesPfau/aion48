@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -40,6 +38,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.TitleTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author xavier
@@ -53,7 +53,7 @@ public class TitleData {
     private TIntObjectHashMap<TitleTemplate> titles;
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
-        titles = new TIntObjectHashMap<TitleTemplate>();
+        titles = new TIntObjectHashMap<>();
         for (TitleTemplate tt : tts) {
             titles.put(tt.getTitleId(), tt);
         }

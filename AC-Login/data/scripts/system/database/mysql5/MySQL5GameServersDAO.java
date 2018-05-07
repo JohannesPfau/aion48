@@ -29,15 +29,15 @@
  */
 package mysql5;
 
-import com.aionemu.commons.database.DB;
-import com.aionemu.commons.database.ReadStH;
-import com.aionemu.loginserver.GameServerInfo;
-import com.aionemu.loginserver.dao.GameServersDAO;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+
+import com.aionemu.commons.database.DB;
+import com.aionemu.commons.database.ReadStH;
+import com.aionemu.loginserver.GameServerInfo;
+import com.aionemu.loginserver.dao.GameServersDAO;
 
 /**
  * GameServers DAO implementation for MySQL5
@@ -52,8 +52,9 @@ public class MySQL5GameServersDAO extends GameServersDAO {
     @Override
     public Map<Byte, GameServerInfo> getAllGameServers() {
 
-        final Map<Byte, GameServerInfo> result = new HashMap<Byte, GameServerInfo>();
+        final Map<Byte, GameServerInfo> result = new HashMap<>();
         DB.select("SELECT * FROM gameservers", new ReadStH() {
+
             @Override
             public void handleRead(ResultSet resultSet) throws SQLException {
                 while (resultSet.next()) {

@@ -29,11 +29,11 @@
  */
 package quest.theobomos;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -127,7 +127,7 @@ public class _3093RecetteSecretedeQuenelles extends QuestHandler {
                     return sendQuestDialog(env, 2034);
                 } else if (env.getDialog() == DialogAction.SETPRO3) {
                     if (giveQuestItem(env, 182208052, 1))
-						;
+                        ;
                     qs.setStatus(QuestStatus.REWARD);
                     updateQuestStatus(env);
                     PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

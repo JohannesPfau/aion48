@@ -52,8 +52,8 @@ public class Petition {
         this.status = PetitionStatus.PENDING;
     }
 
-    public Petition(int petitionId, int playerObjId, int petitionTypeId, String title, String contentText,
-                    String additionalData, int petitionStatus) {
+    public Petition(int petitionId, int playerObjId, int petitionTypeId, String title, String contentText, String additionalData,
+        int petitionStatus) {
         this.petitionId = petitionId;
         this.playerObjId = playerObjId;
         switch (petitionTypeId) {

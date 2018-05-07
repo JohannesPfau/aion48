@@ -64,6 +64,7 @@ public class ResurrectBaseEffect extends ResurrectEffect {
 
         if (effected instanceof Player) {
             ActionObserver observer = new ActionObserver(ObserverType.DEATH) {
+
                 @Override
                 public void died(Creature creature) {
                     if (effected instanceof Player) {

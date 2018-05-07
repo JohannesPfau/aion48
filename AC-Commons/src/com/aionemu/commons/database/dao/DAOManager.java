@@ -29,20 +29,24 @@
  */
 package com.aionemu.commons.database.dao;
 
+import static com.aionemu.commons.database.DatabaseFactory.getDatabaseMajorVersion;
+import static com.aionemu.commons.database.DatabaseFactory.getDatabaseMinorVersion;
+import static com.aionemu.commons.database.DatabaseFactory.getDatabaseName;
+
+import java.io.FileNotFoundException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.xml.bind.JAXBException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.configs.DatabaseConfig;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
 import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.xml.bind.JAXBException;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
-
-import static com.aionemu.commons.database.DatabaseFactory.*;
 
 /**
  * This class manages {@link DAO} implementations, it resolves valid
@@ -60,7 +64,7 @@ public class DAOManager {
     /**
      * Collection of registered DAOs
      */
-    private static final Map<String, DAO> daoMap = new HashMap<String, DAO>();
+    private static final Map<String, DAO> daoMap = new HashMap<>();
 
     /**
      * This script manager is responsible for loading
@@ -114,10 +118,13 @@ public class DAOManager {
      * AccountDAO dao = DAOManager.getDAO(AccountDAO.class);
      * </pre>
      *
-     * @param clazz Abstract DAO class implementation of which was registered
-     * @param <T>   Subclass of DAO
+     * @param clazz
+     *            Abstract DAO class implementation of which was registered
+     * @param <T>
+     *            Subclass of DAO
      * @return DAO implementation
-     * @throws DAONotFoundException if DAO implementation not found
+     * @throws DAONotFoundException
+     *             if DAO implementation not found
      */
     @SuppressWarnings("unchecked")
     public static <T extends DAO> T getDAO(Class<T> clazz) throws DAONotFoundException {
@@ -143,15 +150,19 @@ public class DAOManager {
      * {@link com.aionemu.commons.database.dao.DAOAlreadyRegisteredException}
      * will be thrown
      *
-     * @param daoClass DAO implementation
-     * @throws DAOAlreadyRegisteredException if DAO is already registered
-     * @throws IllegalAccessException        if something went wrong during
-     *                                       instantiation of DAO
-     * @throws InstantiationException        if something went wrong during
-     *                                       instantiation of DAO
+     * @param daoClass
+     *            DAO implementation
+     * @throws DAOAlreadyRegisteredException
+     *             if DAO is already registered
+     * @throws IllegalAccessException
+     *             if something went wrong during
+     *             instantiation of DAO
+     * @throws InstantiationException
+     *             if something went wrong during
+     *             instantiation of DAO
      */
-    public static void registerDAO(Class<? extends DAO> daoClass) throws DAOAlreadyRegisteredException,
-            IllegalAccessException, InstantiationException {
+    public static void registerDAO(Class<? extends DAO> daoClass)
+        throws DAOAlreadyRegisteredException, IllegalAccessException, InstantiationException {
         DAO dao = daoClass.newInstance();
 
         if (!dao.supports(getDatabaseName(), getDatabaseMajorVersion(), getDatabaseMinorVersion())) {
@@ -180,7 +191,8 @@ public class DAOManager {
     /**
      * Unregisters DAO class
      *
-     * @param daoClass DAO implementation to unregister
+     * @param daoClass
+     *            DAO implementation to unregister
      */
     public static void unregisterDAO(Class<? extends DAO> daoClass) {
         synchronized (DAOManager.class) {

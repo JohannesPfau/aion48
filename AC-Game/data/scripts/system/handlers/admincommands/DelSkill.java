@@ -29,6 +29,9 @@
  */
 package admincommands;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
@@ -38,8 +41,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author xTz
@@ -55,8 +56,8 @@ public class DelSkill extends AdminCommand {
     @Override
     public void execute(Player admin, String... params) {
         if (params.length < 1 || params.length > 2) {
-            PacketSendUtility.sendMessage(admin, "No parameters detected.\n"
-                    + "Please use //delskill <Player name> <all | skillId>\n" + "or use //delskill [target] <all | skillId>");
+            PacketSendUtility.sendMessage(admin,
+                "No parameters detected.\n" + "Please use //delskill <Player name> <all | skillId>\n" + "or use //delskill [target] <all | skillId>");
             return;
         }
 
@@ -87,7 +88,8 @@ public class DelSkill extends AdminCommand {
                 }
             }
             apply(admin, player, skillId, playerSkillList);
-            log.info("[delskill-all/id{name}] GM : " + admin.getName() + " removed player ["+ player.getName() + "] skill's  in mapId '" + admin.getWorldId() + "'");
+            log.info("[delskill-all/id{name}] GM : " + admin.getName() + " removed player [" + player.getName() + "] skill's  in mapId '"
+                + admin.getWorldId() + "'");
         }
         if (params.length == 1) {
             VisibleObject target = admin.getTarget();
@@ -116,7 +118,8 @@ public class DelSkill extends AdminCommand {
                 if (target instanceof Player) {
                     apply(admin, player, skillId, playerSkillList);
                 }
-                log.info("[delskill-all/id{target}] GM : " + admin.getName() + " removed player ["+ player.getName() + "] skill's  in mapId '" + admin.getWorldId() + "'");
+                log.info("[delskill-all/id{target}] GM : " + admin.getName() + " removed player [" + player.getName() + "] skill's  in mapId '"
+                    + admin.getWorldId() + "'");
             } else {
                 PacketSendUtility.sendMessage(admin, "This command can only be used on a player !");
             }
@@ -153,7 +156,7 @@ public class DelSkill extends AdminCommand {
 
     @Override
     public void onFail(Player player, String message) {
-        PacketSendUtility.sendMessage(player, "No parameters detected.\n"
-                + "Please use //delskill <Player name> <all | skillId>\n" + "or use //delskill [target] <all | skillId>");
+        PacketSendUtility.sendMessage(player,
+            "No parameters detected.\n" + "Please use //delskill <Player name> <all | skillId>\n" + "or use //delskill [target] <all | skillId>");
     }
 }

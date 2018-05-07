@@ -29,6 +29,15 @@
  */
 package com.aionemu.loginserver.network.aion.clientpackets;
 
+import java.nio.ByteBuffer;
+import java.security.GeneralSecurityException;
+import java.sql.Timestamp;
+
+import javax.crypto.Cipher;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.controller.BannedIpController;
@@ -40,13 +49,6 @@ import com.aionemu.loginserver.network.aion.SessionKey;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_LOGIN_FAIL;
 import com.aionemu.loginserver.network.aion.serverpackets.SM_LOGIN_OK;
 import com.aionemu.loginserver.utils.BruteForceProtector;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.crypto.Cipher;
-import java.nio.ByteBuffer;
-import java.security.GeneralSecurityException;
-import java.sql.Timestamp;
 
 /**
  * @author -Nemesiss-, KID, Lyahim

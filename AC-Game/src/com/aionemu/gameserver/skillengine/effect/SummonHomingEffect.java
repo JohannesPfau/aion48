@@ -77,15 +77,16 @@ public class SummonHomingEffect extends SummonEffect {
 
         for (int i = 0; i < npcCount; i++) {
             SpawnTemplate spawn = SpawnEngine.addNewSingleTimeSpawn(worldId, npcId, x, y, z, heading);
-            final Homing homing = VisibleObjectSpawner.spawnHoming(spawn, instanceId, effector, attackCount,
-                    effect.getSkillId(), effect.getSkillLevel(), skillId);
+            final Homing homing = VisibleObjectSpawner.spawnHoming(spawn, instanceId, effector, attackCount, effect.getSkillId(),
+                effect.getSkillLevel(), skillId);
 
             if (attackCount > 0) {
                 ActionObserver observer = new ActionObserver(ObserverType.ATTACK) {
+
                     @Override
                     public void attack(Creature creature) {
                         homing.setAttackCount(homing.getAttackCount() - 1);
-                        if(skillId != 0){
+                        if (skillId != 0) {
                             SkillEngine.getInstance().applyEffectDirectly(skillId, effector, effected, 0);
                         }
                         if (homing.getAttackCount() <= 0) {
@@ -99,6 +100,7 @@ public class SummonHomingEffect extends SummonEffect {
             }
             // Schedule a despawn just in case
             Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     if ((homing != null) && (homing.isSpawned())) {

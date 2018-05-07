@@ -29,11 +29,11 @@
  */
 package quest.morheim;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -46,7 +46,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _2040KikanantasLoyalty extends QuestHandler {
 
     private final static int questId = 2040;
-    private final static int[] npc_ids = {204388, 204414, 204304, 204345};
+    private final static int[] npc_ids = { 204388, 204414, 204304, 204345 };
 
     public _2040KikanantasLoyalty() {
         super(questId);
@@ -68,7 +68,7 @@ public class _2040KikanantasLoyalty extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {2300, 2039};
+        int[] quests = { 2300, 2039 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 
@@ -111,7 +111,7 @@ public class _2040KikanantasLoyalty extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 204345: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -127,7 +127,7 @@ public class _2040KikanantasLoyalty extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 204414: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -163,7 +163,7 @@ public class _2040KikanantasLoyalty extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 204304) {

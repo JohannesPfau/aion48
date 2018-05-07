@@ -29,14 +29,20 @@
  */
 package com.aionl.slf4j.conversion;
 
-import ch.qos.logback.core.FileAppender;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipOutputStream;
+
 import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipOutputStream;
+import ch.qos.logback.core.FileAppender;
 
 /**
  * This class is appender that zips old file instead of appending it.<br>
@@ -66,7 +72,8 @@ public class TruncateToZipFileAppender extends FileAppender<Object> {
     /**
      * This method creates archive with file instead of deleting it.
      *
-     * @param file file to truncate
+     * @param file
+     *            file to truncate
      */
     protected void truncate(File file) {
         File backupRoot = new File(backupDir);

@@ -188,7 +188,7 @@ public class DDSConverter {
     }
 
     protected static long computeBitMask(Color[] colors, int[] extremaIndices) {
-        Color[] colorPoints = new Color[]{null, null, new Color(), new Color()};
+        Color[] colorPoints = new Color[] { null, null, new Color(), new Color() };
         colorPoints[0] = colors[extremaIndices[0]];
         colorPoints[1] = colors[extremaIndices[1]];
         if (colorPoints[0].equals(colorPoints[1])) {

@@ -29,10 +29,10 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -52,28 +52,28 @@ public class _20507ItsWorseThanWeThought extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {804738, 804739, 804740, 804741};
+        int[] npcs = { 804738, 804739, 804740, 804741 };
         qe.registerOnEnterZone(ZoneName.get("UNCHARTED_CAVE_220080000"), questId);
-		qe.registerOnLevelUp(questId);
+        qe.registerOnLevelUp(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }
     }
-	
-	@Override
+
+    @Override
     public boolean onLvlUpEvent(QuestEnv env) {
         return defaultOnLvlUpEvent(env, 20506, true);
     }
 
-   @Override
+    @Override
     public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             if (var == 4) {
-				playQuestMovie(env, 864);
-				QuestService.addNewSpawn(220080000, player.getInstanceId(), 219954, player.getX() + 2, player.getY() - 2, player.getZ(), (byte) 0);
+                playQuestMovie(env, 864);
+                QuestService.addNewSpawn(220080000, player.getInstanceId(), 219954, player.getX() + 2, player.getY() - 2, player.getZ(), (byte) 0);
                 QuestService.addNewSpawn(220080000, player.getInstanceId(), 219955, player.getX() - 2, player.getY() + 2, player.getZ(), (byte) 0);
                 changeQuestStep(env, 4, 5, true);
                 return true;
@@ -104,41 +104,41 @@ public class _20507ItsWorseThanWeThought extends QuestHandler {
                             return sendQuestDialog(env, 1011);
                         }
                     case SETPRO1:
-                        changeQuestStep(env, 0, 1, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 0, 1, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804739) {
+            if (targetId == 804739) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 1) {
                             return sendQuestDialog(env, 1352);
                         }
                     case SETPRO2:
-                        changeQuestStep(env, 1, 2, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 1, 2, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804740) {
+            if (targetId == 804740) {
                 switch (env.getDialog()) {
                     case USE_OBJECT:
                         if (var == 2) {
                             return sendQuestDialog(env, 1693);
                         }
                     case SETPRO3:
-                        changeQuestStep(env, 2, 3, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 2, 3, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804741) {
+            if (targetId == 804741) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 3) {
                             return sendQuestDialog(env, 2034);
                         }
                     case SETPRO4:
-                        changeQuestStep(env, 3, 4, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 3, 4, false);
+                        return closeDialogWindow(env);
                 }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {

@@ -41,6 +41,7 @@ public enum BuildingType {
 
     PERSONAL_FIELD(2),
     PERSONAL_INS(1);
+
     private int id;
 
     BuildingType(int id) {

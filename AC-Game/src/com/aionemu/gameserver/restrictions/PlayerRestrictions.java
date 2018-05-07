@@ -72,16 +72,14 @@ public class PlayerRestrictions extends AbstractRestrictions {
             return false;
         }
 
-        if (((Creature) target).getLifeStats().isAlreadyDead() && !skill.getSkillTemplate().hasResurrectEffect()
-                && !skill.checkNonTargetAOE()) {
+        if (((Creature) target).getLifeStats().isAlreadyDead() && !skill.getSkillTemplate().hasResurrectEffect() && !skill.checkNonTargetAOE()) {
             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
             return false;
         }
 
         //cant ressurect non players and non dead
-        if (skill.getSkillTemplate().hasResurrectEffect() && (!(target instanceof Player)
-                || !((Creature) target).getLifeStats().isAlreadyDead() || (!((Creature) target).isInState(CreatureState.DEAD)
-                && !((Creature) target).isInState(CreatureState.FLOATING_CORPSE)))) {
+        if (skill.getSkillTemplate().hasResurrectEffect() && (!(target instanceof Player) || !((Creature) target).getLifeStats().isAlreadyDead()
+            || (!((Creature) target).isInState(CreatureState.DEAD) && !((Creature) target).isInState(CreatureState.FLOATING_CORPSE)))) {
             return false;
         }
 
@@ -111,29 +109,30 @@ public class PlayerRestrictions extends AbstractRestrictions {
             return false;
         }
 
-        if(player.isInFFA() && skill.getSkillTemplate().getSkillId() == 50046){ // escape skill
+        if (player.isInFFA() && skill.getSkillTemplate().getSkillId() == 50046) { // escape skill
             return false;
         }
 
-        if(player.isInDuelArena() && skill.getSkillTemplate().getSkillId() == 50046){ //escape skill
+        if (player.isInDuelArena() && skill.getSkillTemplate().getSkillId() == 50046) { //escape skill
             return false;
         }
-        if (player.getBattleGround() != null && !player.getBattleGround().running && target instanceof Player && ((Player) target).getCommonData().getRace() != player.getCommonData().getRace()) {
+        if (player.getBattleGround() != null && !player.getBattleGround().running && target instanceof Player
+            && ((Player) target).getCommonData().getRace() != player.getCommonData().getRace()) {
             return false;
         }
-        
-     // if target is in neutral zone, you cannot hit them
+
+        // if target is in neutral zone, you cannot hit them
         //if (!skill.getSkillTemplate().hasHealEffect() || !skill.getSkillTemplate().hasRandomMoveEffect()
-                //|| skill.getSkillTemplate().getSubType() != SkillSubType.BUFF || skill.getSkillTemplate().getSubType() != SkillSubType.CHANT
-                //|| skill.getSkillTemplate().getSubType() != SkillSubType.SUMMON || skill.getSkillTemplate().getSubType() != SkillSubType.SUMMONHOMING) {
-            //if (target instanceof Player && ((Player) target).isInsideZoneType(ZoneType.PVP)) {
-                //List<ZoneInstance> zones = target.getPosition().getMapRegion().getZones((Player) target);
-                //for (ZoneInstance zone : zones) {
-                    //if (!zone.isPvpAllowed()) {
-                        //return false;
-                    //}
-                //}
-            //}
+        //|| skill.getSkillTemplate().getSubType() != SkillSubType.BUFF || skill.getSkillTemplate().getSubType() != SkillSubType.CHANT
+        //|| skill.getSkillTemplate().getSubType() != SkillSubType.SUMMON || skill.getSkillTemplate().getSubType() != SkillSubType.SUMMONHOMING) {
+        //if (target instanceof Player && ((Player) target).isInsideZoneType(ZoneType.PVP)) {
+        //List<ZoneInstance> zones = target.getPosition().getMapRegion().getZones((Player) target);
+        //for (ZoneInstance zone : zones) {
+        //if (!zone.isPvpAllowed()) {
+        //return false;
+        //}
+        //}
+        //}
         //}
 
         return true;
@@ -172,7 +171,8 @@ public class PlayerRestrictions extends AbstractRestrictions {
         }
 
         //in 3.0 players can use remove shock even when silenced
-        if (template.getType() == SkillType.MAGICAL && player.getEffectController().isAbnormalSet(AbnormalState.SILENCE) && !template.hasEvadeEffect()) {
+        if (template.getType() == SkillType.MAGICAL && player.getEffectController().isAbnormalSet(AbnormalState.SILENCE)
+            && !template.hasEvadeEffect()) {
             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_MAGIC_SKILL_WHILE_SILENCED);
             return false;
         }
@@ -196,7 +196,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
             return false;
         }
 
-        if ((player.getTransformModel().getModelId() == 202635) && (player.isInGroup2() || player.isInAlliance2())){
+        if ((player.getTransformModel().getModelId() == 202635) && (player.isInGroup2() || player.isInAlliance2())) {
             return true;
         }
 
@@ -251,10 +251,10 @@ public class PlayerRestrictions extends AbstractRestrictions {
         } else if (target.isInFFA() || target.isInArena()) {
             PacketSendUtility.sendMessage(player, "You cannot invite player in FFA or Arena!");
             return false;
-        }else if (target.isInPkMode()){
+        } else if (target.isInPkMode()) {
             PacketSendUtility.sendMessage(player, "You cannot invite player in Outlaw Mode !");
             return false;
-        }else if (target.isInDuelArena()){
+        } else if (target.isInDuelArena()) {
             PacketSendUtility.sendMessage(player, "You cannot invite player in 1 vs 1 Arena!");
             return false;
         } else if (player.isInGroup2() && target.isInGroup2() && player.getPlayerGroup2().getTeamId() == target.getPlayerGroup2().getTeamId()) {
@@ -277,8 +277,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
             return false;
         }
 
-        if (target.getRace() != player.getRace()
-                && !GroupConfig.ALLIANCE_INVITEOTHERFACTION) {
+        if (target.getRace() != player.getRace() && !GroupConfig.ALLIANCE_INVITEOTHERFACTION) {
             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_INVITE_OTHER_RACE);
             return false;
         }
@@ -323,7 +322,8 @@ public class PlayerRestrictions extends AbstractRestrictions {
         if (target.isInGroup2()) {
             PlayerGroup targetGroup = target.getPlayerGroup2();
             if (targetGroup.isLeader(target)) {
-                PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_INVITE_PARTY_HIM(target.getName(), targetGroup.getLeader().getName()));
+                PacketSendUtility.sendPacket(player,
+                    SM_SYSTEM_MESSAGE.STR_FORCE_INVITE_PARTY_HIM(target.getName(), targetGroup.getLeader().getName()));
                 return false;
             }
             if (alliance != null && (targetGroup.size() + alliance.size() >= 24)) {
@@ -332,17 +332,17 @@ public class PlayerRestrictions extends AbstractRestrictions {
             }
         }
 
-        if(target.isInFFA()){
+        if (target.isInFFA()) {
             PacketSendUtility.sendMessage(player, "You cannot invite player in FFA.");
             return false;
         }
 
-        if(target.isInArena()){
+        if (target.isInArena()) {
             PacketSendUtility.sendMessage(player, "You cannot invite player in 1vs1 Arena!");
             return false;
         }
 
-        if(target.isInPkMode()){
+        if (target.isInPkMode()) {
             PacketSendUtility.sendMessage(player, "You cannot invite player in Outlaw Mode!");
             return false;
         }
@@ -364,7 +364,8 @@ public class PlayerRestrictions extends AbstractRestrictions {
             return false;
         }
 
-        if ((target instanceof Player) && ((Player) target).getTransformModel().getModelId() == 202635 && ((player.isInGroup2() || player.isInAlliance2()))){
+        if ((target instanceof Player) && ((Player) target).getTransformModel().getModelId() == 202635
+            && ((player.isInGroup2() || player.isInAlliance2()))) {
             return true;
         }
 
@@ -406,8 +407,8 @@ public class PlayerRestrictions extends AbstractRestrictions {
     }
 
     @Override
-    public boolean canChangeEquip(Player player){
-        if (player.getEffectController().isAbnormalSet(AbnormalState.CANT_ATTACK_STATE)){
+    public boolean canChangeEquip(Player player) {
+        if (player.getEffectController().isAbnormalSet(AbnormalState.CANT_ATTACK_STATE)) {
             return false;
         }
         return true;
@@ -417,16 +418,14 @@ public class PlayerRestrictions extends AbstractRestrictions {
     public boolean canChat(Player player) {
         if (player == null || !player.isOnline()) {
             return false;
+        } else if (player.isInFFA() || player.isInArena() || player.isInDuoFFA()) {
+            if (player.getAccessLevel() >= 2) {
+                return true;
+            } else {
+                PacketSendUtility.sendMessage(player, "You cannot chat in Battlegrounds!");
+                return false;
+            }
         }
-        else if (player.isInFFA() || player.isInArena() || player.isInDuoFFA()) {
-        	if (player.getAccessLevel() >= 2) {
-        		return true;
-        	} 
-        	else {
-	        	PacketSendUtility.sendMessage(player, "You cannot chat in Battlegrounds!");
-	        	return false;
-        	}
-        } 
 
         return !player.isGagged();
     }

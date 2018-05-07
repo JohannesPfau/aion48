@@ -86,6 +86,7 @@ enum AbyssSkills {
     GREAT_GENERAL_A(Race.ASMODIANS, AbyssRankEnum.GREAT_GENERAL, 11892, 11897, 11901, 11903),
     GENERAL_A(Race.ASMODIANS, AbyssRankEnum.GENERAL, 11891, 11896, 11901),
     STAR5_OFFICER_A(Race.ASMODIANS, AbyssRankEnum.STAR5_OFFICER, 11890, 11895);
+
     private int[] skills;
     private AbyssRankEnum rankenum;
     private Race race;

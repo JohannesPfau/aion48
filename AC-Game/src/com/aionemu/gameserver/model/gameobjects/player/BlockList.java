@@ -58,10 +58,11 @@ public class BlockList implements Iterable<BlockedPlayer> {
     /**
      * Constructs a new blocked list with the given initial items
      *
-     * @param initialList A map of blocked players indexed by their object IDs
+     * @param initialList
+     *            A map of blocked players indexed by their object IDs
      */
     public BlockList(Map<Integer, BlockedPlayer> initialList) {
-        this.blockedList = new ConcurrentHashMap<Integer, BlockedPlayer>(initialList);
+        this.blockedList = new ConcurrentHashMap<>(initialList);
 
     }
 
@@ -71,8 +72,10 @@ public class BlockList implements Iterable<BlockedPlayer> {
      * <li>Does not send packets or update the database</li>
      * </ul>
      *
-     * @param playerToBlock The player to be blocked
-     * @param reason        The reason for blocking this user
+     * @param playerToBlock
+     *            The player to be blocked
+     * @param reason
+     *            The reason for blocking this user
      */
     public void add(BlockedPlayer plr) {
         blockedList.put(plr.getObjId(), plr);

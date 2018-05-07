@@ -37,7 +37,7 @@ import com.aionemu.gameserver.services.TradeService;
 
 /**
  * @author MrPoke
-, Raziel
+ *         , Raziel
  */
 public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
 
@@ -45,8 +45,8 @@ public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
     private int BuyMask; // v4.7.5.7 Maybe implemented at future
     private int itemId;
     private int BuyCount;
-    
-	private int TradeinListCount; // They can be used for implementing Anti-Cheat System
+
+    private int TradeinListCount; // They can be used for implementing Anti-Cheat System
     private int TradeinItemObjectId1;
     private int TradeinItemObjectId2;
     private int TradeinItemObjectId3;
@@ -66,27 +66,29 @@ public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
         itemId = readD();
         BuyCount = readD();
         TradeinListCount = readH();
-        
+
         switch (TradeinListCount) {
-			 case 1:
-				 TradeinItemObjectId1 = readD();
-				 break;
-			 case 2:
-				 TradeinItemObjectId1 = readD();
-				 TradeinItemObjectId2 = readD();
-				 break;
-			 case 3:
-				 TradeinItemObjectId1 = readD();
-				 TradeinItemObjectId2 = readD();
-				 TradeinItemObjectId3 = readD();
-				 break;
-	    }
+            case 1:
+                TradeinItemObjectId1 = readD();
+                break;
+            case 2:
+                TradeinItemObjectId1 = readD();
+                TradeinItemObjectId2 = readD();
+                break;
+            case 3:
+                TradeinItemObjectId1 = readD();
+                TradeinItemObjectId2 = readD();
+                TradeinItemObjectId3 = readD();
+                break;
+        }
     }
 
     @Override
     protected void runImpl() {
         Player player = this.getConnection().getActivePlayer();
-        if (BuyCount < 1) return;
-        TradeService.performBuyFromTradeInTrade(player, sellerObjId, itemId, BuyCount, TradeinListCount, TradeinItemObjectId1, TradeinItemObjectId2, TradeinItemObjectId3);
+        if (BuyCount < 1)
+            return;
+        TradeService.performBuyFromTradeInTrade(player, sellerObjId, itemId, BuyCount, TradeinListCount, TradeinItemObjectId1, TradeinItemObjectId2,
+            TradeinItemObjectId3);
     }
 }

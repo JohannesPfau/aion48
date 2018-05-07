@@ -62,12 +62,12 @@ public class SM_SKILL_LIST extends AionServerPacket {
 
     @SuppressWarnings("unused")
     public SM_SKILL_LIST(Player player, PlayerSkillEntry stigmaSkill) {
-        this.skillList = new PlayerSkillEntry[]{stigmaSkill};
+        this.skillList = new PlayerSkillEntry[] { stigmaSkill };
         this.messageId = 0;
     }
 
     public SM_SKILL_LIST(PlayerSkillEntry skillListEntry, int messageId, boolean isNew) {
-        this.skillList = new PlayerSkillEntry[]{skillListEntry};
+        this.skillList = new PlayerSkillEntry[] { skillListEntry };
         this.messageId = messageId;
         this.skillNameId = DataManager.SKILL_DATA.getSkillTemplate(skillListEntry.getSkillId()).getNameId();
         this.skillLvl = String.valueOf(skillListEntry.getSkillLevel());
@@ -76,7 +76,7 @@ public class SM_SKILL_LIST extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         final int size = skillList.length;
         writeH(size); // skills list size
         if (isNew)
@@ -113,6 +113,6 @@ public class SM_SKILL_LIST extends AionServerPacket {
             writeH(0x00);
             writeS(skillLvl);
         }
-		writeH(0); // unk 4.8
+        writeH(0); // unk 4.8
     }
 }

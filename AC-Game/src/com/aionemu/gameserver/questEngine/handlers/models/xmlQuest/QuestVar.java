@@ -43,7 +43,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
  * @author Mr. Poke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "QuestVar", propOrder = {"npc"})
+@XmlType(name = "QuestVar", propOrder = { "npc" })
 public class QuestVar {
 
     protected List<QuestNpc> npc;

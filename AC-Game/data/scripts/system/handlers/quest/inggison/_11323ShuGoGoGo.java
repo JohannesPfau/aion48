@@ -29,9 +29,9 @@
  */
 package quest.inggison;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -39,7 +39,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author pralinka
  */
- 
+
 public class _11323ShuGoGoGo extends QuestHandler {
 
     private final static int questId = 11323;
@@ -50,7 +50,7 @@ public class _11323ShuGoGoGo extends QuestHandler {
 
     @Override
     public void register() {
-		int[] npcs = {798928, 702725, 702743, 702744, 702745, 702727};
+        int[] npcs = { 798928, 702725, 702743, 702744, 702745, 702727 };
         qe.registerQuestNpc(798928).addOnQuestStart(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -85,7 +85,7 @@ public class _11323ShuGoGoGo extends QuestHandler {
                     }
                     break;
                 }
-                case 702727: { 
+                case 702727: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT: {
                             if (var == 1) {
@@ -98,7 +98,7 @@ public class _11323ShuGoGoGo extends QuestHandler {
                     }
                     break;
                 }
-                case 702743: { 
+                case 702743: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT: {
                             if (var == 2) {
@@ -111,7 +111,7 @@ public class _11323ShuGoGoGo extends QuestHandler {
                     }
                     break;
                 }
-                case 702744: { 
+                case 702744: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT: {
                             if (var == 3) {
@@ -125,7 +125,7 @@ public class _11323ShuGoGoGo extends QuestHandler {
                     break;
                 }
 
-                case 702745: { 
+                case 702745: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT: {
                             if (var == 4) {
@@ -140,7 +140,7 @@ public class _11323ShuGoGoGo extends QuestHandler {
                 }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-            if (targetId == 798928) { 
+            if (targetId == 798928) {
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
                 } else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {

@@ -74,11 +74,9 @@ public class ChangeMemberGroupEvent extends AlwaysTrueTeamEvent implements Predi
 
     @Override
     public boolean apply(PlayerAllianceMember member) {
-        PacketSendUtility.sendPacket(member.getObject(), new SM_ALLIANCE_MEMBER_INFO(firstMember,
-                PlayerAllianceEvent.MEMBER_GROUP_CHANGE));
+        PacketSendUtility.sendPacket(member.getObject(), new SM_ALLIANCE_MEMBER_INFO(firstMember, PlayerAllianceEvent.MEMBER_GROUP_CHANGE));
         if (secondMember != null) {
-            PacketSendUtility.sendPacket(member.getObject(), new SM_ALLIANCE_MEMBER_INFO(secondMember,
-                    PlayerAllianceEvent.MEMBER_GROUP_CHANGE));
+            PacketSendUtility.sendPacket(member.getObject(), new SM_ALLIANCE_MEMBER_INFO(secondMember, PlayerAllianceEvent.MEMBER_GROUP_CHANGE));
         }
         return true;
     }

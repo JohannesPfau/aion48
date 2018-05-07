@@ -78,7 +78,7 @@ public class PlayerAllianceInvite extends RequestResponseHandler {
                 }
             }
 
-            List<Player> playersToAdd = new ArrayList<Player>();
+            List<Player> playersToAdd = new ArrayList<>();
             collectPlayersToAdd(playersToAdd, alliance);
 
             if (alliance == null) {
@@ -120,7 +120,6 @@ public class PlayerAllianceInvite extends RequestResponseHandler {
 
     @Override
     public void denyRequest(Creature requester, Player responder) {
-        PacketSendUtility.sendPacket(inviter,
-                SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_REJECT_INVITATION(responder.getName()));
+        PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_REJECT_INVITATION(responder.getName()));
     }
 }

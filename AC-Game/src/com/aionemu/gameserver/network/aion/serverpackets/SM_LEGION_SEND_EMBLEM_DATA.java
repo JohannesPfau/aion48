@@ -48,7 +48,7 @@ public class SM_LEGION_SEND_EMBLEM_DATA extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(size);
         writeB(data);
     }

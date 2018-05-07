@@ -40,8 +40,10 @@ public abstract class AccountTimeDAO implements DAO {
     /**
      * Updates @link com.aionemu.loginserver.model.AccountTime data of account
      *
-     * @param accountId   account id
-     * @param accountTime account time set
+     * @param accountId
+     *            account id
+     * @param accountTime
+     *            account time set
      * @return was update successfull or not
      */
     public abstract boolean updateAccountTime(int accountId, AccountTime accountTime);

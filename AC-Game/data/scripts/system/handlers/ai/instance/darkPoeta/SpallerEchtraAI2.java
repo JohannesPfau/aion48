@@ -29,7 +29,9 @@
  */
 package ai.instance.darkPoeta;
 
-import ai.AggressiveNpcAI2;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -42,8 +44,7 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.MathUtil;
 
-import java.util.List;
-import java.util.concurrent.Future;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu
@@ -74,10 +75,12 @@ public class SpallerEchtraAI2 extends AggressiveNpcAI2 {
                     getOwner().getMoveController().abortMove();
                     getOwner().getEffectController().setAbnormal(AbnormalState.PARALYZE.getId());
                     skillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             SkillEngine.getInstance().getSkill(getOwner(), 18534, 50, getOwner()).useSkill();
                             skillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                 @Override
                                 public void run() {
                                     SkillEngine.getInstance().getSkill(getOwner(), 18574, 50, getOwner()).useSkill();

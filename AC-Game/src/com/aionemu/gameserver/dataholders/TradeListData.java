@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -42,6 +40,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate}
@@ -65,9 +65,9 @@ public class TradeListData {
     /**
      * A map containing all trade list templates
      */
-    private TIntObjectHashMap<TradeListTemplate> npctlistData = new TIntObjectHashMap<TradeListTemplate>();
-    private TIntObjectHashMap<TradeListTemplate> npcTradeInlistData = new TIntObjectHashMap<TradeListTemplate>();
-    private TIntObjectHashMap<TradeListTemplate> npcPurchaseTemplateData = new TIntObjectHashMap<TradeListTemplate>();
+    private TIntObjectHashMap<TradeListTemplate> npctlistData = new TIntObjectHashMap<>();
+    private TIntObjectHashMap<TradeListTemplate> npcTradeInlistData = new TIntObjectHashMap<>();
+    private TIntObjectHashMap<TradeListTemplate> npcPurchaseTemplateData = new TIntObjectHashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (TradeListTemplate npc : tlist) {
@@ -89,7 +89,8 @@ public class TradeListData {
     /**
      * Returns an {@link TradeListTemplate} object with given id.
      *
-     * @param id id of NPC
+     * @param id
+     *            id of NPC
      * @return TradeListTemplate object containing data about NPC with that id.
      */
     public TradeListTemplate getTradeListTemplate(int id) {

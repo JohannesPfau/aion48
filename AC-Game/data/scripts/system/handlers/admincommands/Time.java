@@ -96,9 +96,10 @@ public class Time extends AdminCommand {
         GameTimeManager.getGameTime().calculateDayTime();
 
         // Trigger time change event
-		    GameTimeManager.getGameTime().checkDayTimeChange();
-        
+        GameTimeManager.getGameTime().checkDayTimeChange();
+
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendPacket(player, new SM_GAME_TIME());

@@ -47,8 +47,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,6 +62,8 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.skillengine.model.Times;
 import com.aionemu.gameserver.skillengine.model.WeaponTypeWrapper;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import javolution.util.FastMap;
 
 /**
  * @author kecimis
@@ -140,13 +140,13 @@ public class MotionLoggingService {
         // logging
         if (advancedLog) {
             PacketSendUtility.sendMessage(player, "skillId: " + sk.getSkillId() + " motionName: " + motionName);
-            PacketSendUtility.sendMessage(player, "attackSpeed: " + currentAttackSpeed + " mainHand: " + mainHandWeapon.toString() + " isDual: " + (offHandWeapon != null));
+            PacketSendUtility.sendMessage(player,
+                "attackSpeed: " + currentAttackSpeed + " mainHand: " + mainHandWeapon.toString() + " isDual: " + (offHandWeapon != null));
             PacketSendUtility.sendMessage(player, "clientTime: " + clientTime + " baseTime: " + baseTime + " playSpeed: " + motion.getSpeed());
             PacketSendUtility.sendMessage(player, "ammoTime: " + ammoTime + " ammoSpeed: " + sk.getAmmoSpeed() + " distance: " + distance);
             PacketSendUtility.sendMessage(player, "-------------------");
         } else {
-            PacketSendUtility.sendMessage(player, "motionName: " + motionName + " clientTime: " + clientTime + " baseTime: "
-                    + baseTime);
+            PacketSendUtility.sendMessage(player, "motionName: " + motionName + " clientTime: " + clientTime + " baseTime: " + baseTime);
         }
 
         Race race = player.getRace();
@@ -156,9 +156,11 @@ public class MotionLoggingService {
         WeaponTypeWrapper weapon = new WeaponTypeWrapper(mainHandWeapon, offHandWeapon);
         //check if its present
         if (this.isPresent(motionName, weapon, skillId, currentAttackSpeed, race, gender)) {
-            log.info("motionName: " + motionName + " weapon: " + (offHandWeapon != null ? "dual" : mainHandWeapon.toString()) + " skillId: " + skillId + " currentAttackSpeed: " + currentAttackSpeed
-                    + "baseTime: " + baseTime + " storedTime: " + this.getTime(motionName, weapon, skillId, currentAttackSpeed, race, gender));
-            PacketSendUtility.sendMessage(player, "Its already stored. storedTime: " + this.getTime(motionName, weapon, skillId, currentAttackSpeed, race, gender));
+            log.info("motionName: " + motionName + " weapon: " + (offHandWeapon != null ? "dual" : mainHandWeapon.toString()) + " skillId: " + skillId
+                + " currentAttackSpeed: " + currentAttackSpeed + "baseTime: " + baseTime + " storedTime: "
+                + this.getTime(motionName, weapon, skillId, currentAttackSpeed, race, gender));
+            PacketSendUtility.sendMessage(player,
+                "Its already stored. storedTime: " + this.getTime(motionName, weapon, skillId, currentAttackSpeed, race, gender));
             return;
         }
 
@@ -173,104 +175,93 @@ public class MotionLoggingService {
 
     public void createAnalyzeFiles() {
         /*
-         TreeMap<String, WeaponTime> resultsBase = new TreeMap<String, WeaponTime>();
-         TreeMap<String, WeaponTime> resultsCap = new TreeMap<String, WeaponTime>();
-         TreeMap<String, WeaponTime> results1000 = new TreeMap<String, WeaponTime>();
-         for (Entry<String, MotionLog> entry : motionsMap.entrySet()) {
-         String fileName = "motions/" + entry.getKey() + ".xml";
-         WeaponTime weaponTimeBase = new WeaponTime();
-         WeaponTime weaponTimeCap = new WeaponTime();
-         WeaponTime weaponTime1000 = new WeaponTime();
-         try {
-         FileWriter fstream = new FileWriter(fileName);
-         BufferedWriter out = new BufferedWriter(fstream);
-
-         out.append("<motion name=\"" + entry.getKey() + "\">\n");
-
-         if (entry.getValue() != null) {
-         // loop through weaponType
-         for (Entry<WeaponTypeWrapper, List<SkillTime>> entry2 : entry.getValue().getMotionLog().entrySet()) {
-         WeaponTypeWrapper weapon =  entry2.getKey();
-         out.append("\t<motionlog "+ weapon.toString() + "\">\n");
-
-         if (entry2.getValue() == null)
-         continue;
-         for (SkillTime st : entry2.getValue()) {
-         out.append("\t\t<skilltime skillId=\"" + st.getSkillId() + "\" attackspeed=\""
-         + st.getAttackSpeed() + "\" clienttime=\"" + st.getClientTime() + "\" race=\"" + st.getRace() + "\" gender=\"" + st.getGender() + "\" baseTime=\"" + this.recalculate("base", weapon, st.getAttackSpeed(), st.getClientTime()) + "\" >\n");
-         //fill weaponTime
-         weaponTimeBase.add(weapon, this.recalculate("base", weapon, st.getAttackSpeed(), st.getClientTime()));
-         weaponTimeCap.add(weapon, this.recalculate("cap", weapon, st.getAttackSpeed(), st.getClientTime()));
-         weaponTime1000.add(weapon, this.recalculate("1000", weapon, st.getAttackSpeed(), st.getClientTime()));
-
-         }
-         out.append("\t<motionlog/>\n");
-         }
-					
-         //fill results
-         resultsBase.put(entry.getKey(), weaponTimeBase);
-         resultsCap.put(entry.getKey(), weaponTimeCap);
-         results1000.put(entry.getKey(), weaponTime1000);
-         }
-         out.append("<motion/>");
-         out.close();
-         fstream.close();
-         }
-         catch (IOException e) {
-         log.error("Error: " + e.getMessage());
-         }
-         }
-		
-         // create results files
-         String fileName = "motions/results.xml";
-         try {
-         FileWriter fstream = new FileWriter(fileName);
-         BufferedWriter out = new BufferedWriter(fstream);
-         out.append("<base attack speed>\n");
-         for (Entry<String, WeaponTime> entry : resultsBase.entrySet()) {
-         out.append("<motion name=\"" + entry.getKey() + "\">\n");
-         TreeMap<WeaponTypeWrapper, Integer> map = entry.getValue().process();
-				
-         for(Entry<WeaponTypeWrapper, Integer> entry2 : map.entrySet()) {
-         out.append("\t<weapontime " + entry2.getKey().toString() + "\" time=\"" +entry2.getValue()+ "\" >\n");
-         }
-         out.append("<motion/>\n");
-         map.clear();
-         }
-         out.append("<base attack speed/>\n\n");
-			
-         out.append("<cap attack speed>\n");
-         for (Entry<String, WeaponTime> entry : resultsCap.entrySet()) {
-         out.append("<motion name=\"" + entry.getKey() + "\">\n");
-         TreeMap<WeaponTypeWrapper, Integer> map = entry.getValue().process();
-				
-         for(Entry<WeaponTypeWrapper, Integer> entry2 : map.entrySet()) {
-         out.append("\t<weapontime " + entry2.getKey().toString() + "\" time=\"" +entry2.getValue()+ "\" >\n");
-         }
-         out.append("<motion/>\n");
-         map.clear();
-         }
-         out.append("<cap attack speed/>\n\n");
-			
-         out.append("<1000 attack speed>\n");
-         for (Entry<String, WeaponTime> entry : results1000.entrySet()) {
-         out.append("<motion name=\"" + entry.getKey() + "\">\n");
-         TreeMap<WeaponTypeWrapper, Integer> map = entry.getValue().process();
-				
-         for(Entry<WeaponTypeWrapper, Integer> entry2 : map.entrySet()) {
-         out.append("\t<weapontime " + entry2.getKey().toString() + "\" time=\"" +entry2.getValue()+ "\" >\n");
-         }
-         out.append("<motion/>\n");
-         map.clear();
-         }
-         out.append("<1000 attack speed/>\n");
-			
-         out.close();
-         fstream.close();
-         }
-         catch (IOException e) {
-         log.error("Error: " + e.getMessage());
-         }
+         * TreeMap<String, WeaponTime> resultsBase = new TreeMap<String, WeaponTime>();
+         * TreeMap<String, WeaponTime> resultsCap = new TreeMap<String, WeaponTime>();
+         * TreeMap<String, WeaponTime> results1000 = new TreeMap<String, WeaponTime>();
+         * for (Entry<String, MotionLog> entry : motionsMap.entrySet()) {
+         * String fileName = "motions/" + entry.getKey() + ".xml";
+         * WeaponTime weaponTimeBase = new WeaponTime();
+         * WeaponTime weaponTimeCap = new WeaponTime();
+         * WeaponTime weaponTime1000 = new WeaponTime();
+         * try {
+         * FileWriter fstream = new FileWriter(fileName);
+         * BufferedWriter out = new BufferedWriter(fstream);
+         * out.append("<motion name=\"" + entry.getKey() + "\">\n");
+         * if (entry.getValue() != null) {
+         * // loop through weaponType
+         * for (Entry<WeaponTypeWrapper, List<SkillTime>> entry2 : entry.getValue().getMotionLog().entrySet()) {
+         * WeaponTypeWrapper weapon = entry2.getKey();
+         * out.append("\t<motionlog "+ weapon.toString() + "\">\n");
+         * if (entry2.getValue() == null)
+         * continue;
+         * for (SkillTime st : entry2.getValue()) {
+         * out.append("\t\t<skilltime skillId=\"" + st.getSkillId() + "\" attackspeed=\""
+         * + st.getAttackSpeed() + "\" clienttime=\"" + st.getClientTime() + "\" race=\"" + st.getRace() + "\" gender=\"" + st.getGender() +
+         * "\" baseTime=\"" + this.recalculate("base", weapon, st.getAttackSpeed(), st.getClientTime()) + "\" >\n");
+         * //fill weaponTime
+         * weaponTimeBase.add(weapon, this.recalculate("base", weapon, st.getAttackSpeed(), st.getClientTime()));
+         * weaponTimeCap.add(weapon, this.recalculate("cap", weapon, st.getAttackSpeed(), st.getClientTime()));
+         * weaponTime1000.add(weapon, this.recalculate("1000", weapon, st.getAttackSpeed(), st.getClientTime()));
+         * }
+         * out.append("\t<motionlog/>\n");
+         * }
+         * //fill results
+         * resultsBase.put(entry.getKey(), weaponTimeBase);
+         * resultsCap.put(entry.getKey(), weaponTimeCap);
+         * results1000.put(entry.getKey(), weaponTime1000);
+         * }
+         * out.append("<motion/>");
+         * out.close();
+         * fstream.close();
+         * }
+         * catch (IOException e) {
+         * log.error("Error: " + e.getMessage());
+         * }
+         * }
+         * // create results files
+         * String fileName = "motions/results.xml";
+         * try {
+         * FileWriter fstream = new FileWriter(fileName);
+         * BufferedWriter out = new BufferedWriter(fstream);
+         * out.append("<base attack speed>\n");
+         * for (Entry<String, WeaponTime> entry : resultsBase.entrySet()) {
+         * out.append("<motion name=\"" + entry.getKey() + "\">\n");
+         * TreeMap<WeaponTypeWrapper, Integer> map = entry.getValue().process();
+         * for(Entry<WeaponTypeWrapper, Integer> entry2 : map.entrySet()) {
+         * out.append("\t<weapontime " + entry2.getKey().toString() + "\" time=\"" +entry2.getValue()+ "\" >\n");
+         * }
+         * out.append("<motion/>\n");
+         * map.clear();
+         * }
+         * out.append("<base attack speed/>\n\n");
+         * out.append("<cap attack speed>\n");
+         * for (Entry<String, WeaponTime> entry : resultsCap.entrySet()) {
+         * out.append("<motion name=\"" + entry.getKey() + "\">\n");
+         * TreeMap<WeaponTypeWrapper, Integer> map = entry.getValue().process();
+         * for(Entry<WeaponTypeWrapper, Integer> entry2 : map.entrySet()) {
+         * out.append("\t<weapontime " + entry2.getKey().toString() + "\" time=\"" +entry2.getValue()+ "\" >\n");
+         * }
+         * out.append("<motion/>\n");
+         * map.clear();
+         * }
+         * out.append("<cap attack speed/>\n\n");
+         * out.append("<1000 attack speed>\n");
+         * for (Entry<String, WeaponTime> entry : results1000.entrySet()) {
+         * out.append("<motion name=\"" + entry.getKey() + "\">\n");
+         * TreeMap<WeaponTypeWrapper, Integer> map = entry.getValue().process();
+         * for(Entry<WeaponTypeWrapper, Integer> entry2 : map.entrySet()) {
+         * out.append("\t<weapontime " + entry2.getKey().toString() + "\" time=\"" +entry2.getValue()+ "\" >\n");
+         * }
+         * out.append("<motion/>\n");
+         * map.clear();
+         * }
+         * out.append("<1000 attack speed/>\n");
+         * out.close();
+         * fstream.close();
+         * }
+         * catch (IOException e) {
+         * log.error("Error: " + e.getMessage());
+         * }
          */
     }
 
@@ -279,7 +270,7 @@ public class MotionLoggingService {
         List<MotionTime> motionTimes = motionData.getMotionTimes();
 
         // create results
-        TreeMap<String, List<WeaponTime>> results = new TreeMap<String, List<WeaponTime>>();
+        TreeMap<String, List<WeaponTime>> results = new TreeMap<>();
         for (Entry<String, MotionLog> entry : motionsMap.entrySet()) {
             WeaponTime weaponTimeAm = new WeaponTime(Race.ASMODIANS, Gender.MALE);
             WeaponTime weaponTimeAf = new WeaponTime(Race.ASMODIANS, Gender.FEMALE);
@@ -315,7 +306,7 @@ public class MotionLoggingService {
                             break;
                     }
                 }
-                List<WeaponTime> weaponTimes = new ArrayList<WeaponTime>(4);
+                List<WeaponTime> weaponTimes = new ArrayList<>(4);
                 weaponTimes.add(weaponTimeAm);
                 weaponTimes.add(weaponTimeAf);
                 weaponTimes.add(weaponTimeEm);
@@ -326,7 +317,7 @@ public class MotionLoggingService {
         }
 
         for (Entry<String, List<WeaponTime>> entry : results.entrySet()) {
-            Set<WeaponTypeWrapper> listofWeapons = new TreeSet<WeaponTypeWrapper>();
+            Set<WeaponTypeWrapper> listofWeapons = new TreeSet<>();
             //ordering BOOK_2H BOW DAGGER_1H MACE_1H ORB_2H POLEARM_2H STAFF_2H SWORD_1H SWORD_2H dualwield GUN_1H GUN_1H dualwield TOOLHOE_1H TOOLHOE_1H dualwield TOOLPICK_2H TOOLROD_2H CANNON_2H HARP_2H GUN_2H KEYBLADE_2H KEYHAMMER_2H
             listofWeapons.add(new WeaponTypeWrapper(WeaponType.BOOK_2H, null));
             listofWeapons.add(new WeaponTypeWrapper(WeaponType.BOW, null));
@@ -403,8 +394,7 @@ public class MotionLoggingService {
         try {
             JAXBContext jaxbContext = JAXBContext.newInstance(templates.getClass());
             Marshaller marshaller = jaxbContext.createMarshaller();
-            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT,
-                    new Boolean(true));
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, new Boolean(true));
             marshaller.marshal(templates, new FileOutputStream(file));
         } catch (JAXBException e) {
             e.printStackTrace();
@@ -425,30 +415,30 @@ public class MotionLoggingService {
     private int recalculate(String method, WeaponTypeWrapper weapon, int attackSpeed, int time) {
         int finalTime = 0;
 
-        TreeMap<WeaponType, float[]> list = new TreeMap<WeaponType, float[]>();
+        TreeMap<WeaponType, float[]> list = new TreeMap<>();
 
-        float dagger[] = {600f, 1200f};
+        float dagger[] = { 600f, 1200f };
         list.put(WeaponType.DAGGER_1H, dagger);
-        float mace[] = {750f, 1500f};
+        float mace[] = { 750f, 1500f };
         list.put(WeaponType.MACE_1H, mace);
         list.put(WeaponType.GUN_1H, mace);
         list.put(WeaponType.TOOLHOE_1H, mace);
-        float sword1h[] = {700f, 1400f};
+        float sword1h[] = { 700f, 1400f };
         list.put(WeaponType.SWORD_1H, sword1h);
-        float bookorb[] = {1100f, 2200f};
+        float bookorb[] = { 1100f, 2200f };
         list.put(WeaponType.BOOK_2H, bookorb);
         list.put(WeaponType.ORB_2H, bookorb);
-        float polearm[] = {1400f, 2800f};
+        float polearm[] = { 1400f, 2800f };
         list.put(WeaponType.POLEARM_2H, polearm);
         list.put(WeaponType.TOOLPICK_2H, polearm);
         list.put(WeaponType.TOOLROD_2H, polearm);
         list.put(WeaponType.CANNON_2H, polearm);
         list.put(WeaponType.GUN_2H, polearm);
         list.put(WeaponType.KEYBLADE_2H, polearm);
-        float staff[] = {1000f, 2000f};
+        float staff[] = { 1000f, 2000f };
         list.put(WeaponType.STAFF_2H, staff);
         list.put(WeaponType.HARP_2H, staff);
-        float swordbow[] = {1200f, 2400f};
+        float swordbow[] = { 1200f, 2400f };
         list.put(WeaponType.SWORD_2H, swordbow);
         list.put(WeaponType.BOW, swordbow);
 
@@ -538,7 +528,8 @@ public class MotionLoggingService {
             while (resultSet.next()) {
                 String motionName = resultSet.getString("motion_name");
                 WeaponType mainHandWeapon = WeaponType.valueOf(resultSet.getString("weapon_type"));
-                WeaponType offHandWeapon = (resultSet.getString("off_weapon_type").contains("null") ? null : WeaponType.valueOf(resultSet.getString("off_weapon_type")));
+                WeaponType offHandWeapon = (resultSet.getString("off_weapon_type").contains("null") ? null
+                    : WeaponType.valueOf(resultSet.getString("off_weapon_type")));
                 int skillId = resultSet.getInt("skill_id");
                 int attackSpeed = resultSet.getInt("attack_speed");
                 int time = resultSet.getInt("time");
@@ -594,17 +585,15 @@ public class MotionLoggingService {
         return 0;
     }
 
-    public boolean addTime(String motionName, WeaponTypeWrapper weapon, int skillId,
-                           int currentAttackSpeed, Race race, Gender gender, int clientTime) {
+    public boolean addTime(String motionName, WeaponTypeWrapper weapon, int skillId, int currentAttackSpeed, Race race, Gender gender,
+        int clientTime) {
         if (!motionsMap.containsKey(motionName)) {
             MotionLog motionLog = new MotionLog();
-            boolean result = motionLog.addSkillTime(weapon, new SkillTime(skillId, currentAttackSpeed, race, gender,
-                    clientTime));
+            boolean result = motionLog.addSkillTime(weapon, new SkillTime(skillId, currentAttackSpeed, race, gender, clientTime));
             motionsMap.put(motionName, motionLog);
             return result;
         } else {
-            return motionsMap.get(motionName).addSkillTime(weapon,
-                    new SkillTime(skillId, currentAttackSpeed, race, gender, clientTime));
+            return motionsMap.get(motionName).addSkillTime(weapon, new SkillTime(skillId, currentAttackSpeed, race, gender, clientTime));
         }
     }
 
@@ -628,7 +617,7 @@ public class MotionLoggingService {
 
     private class MotionLog {
 
-        private FastMap<WeaponTypeWrapper, List<SkillTime>> motionsForWeapons = new FastMap<WeaponTypeWrapper, List<SkillTime>>();
+        private FastMap<WeaponTypeWrapper, List<SkillTime>> motionsForWeapons = new FastMap<>();
 
         public FastMap<WeaponTypeWrapper, List<SkillTime>> getMotionLog() {
             return this.motionsForWeapons;
@@ -641,7 +630,7 @@ public class MotionLoggingService {
                     return true;
                 }
             } else {
-                List<SkillTime> list = new ArrayList<SkillTime>();
+                List<SkillTime> list = new ArrayList<>();
                 list.add(skillTime);
                 motionsForWeapons.put(weapon, list);
                 return true;
@@ -653,8 +642,7 @@ public class MotionLoggingService {
         public int getTime(WeaponTypeWrapper weapon, int skillId, int currentAttackSpeed, Race race, Gender gender) {
             if (motionsForWeapons.containsKey(weapon)) {
                 for (SkillTime st : motionsForWeapons.get(weapon)) {
-                    if (st.getSkillId() == skillId && st.getAttackSpeed() == currentAttackSpeed
-                            && st.getRace() == race && st.getGender() == gender) {
+                    if (st.getSkillId() == skillId && st.getAttackSpeed() == currentAttackSpeed && st.getRace() == race && st.getGender() == gender) {
                         return st.getClientTime();
                     }
                 }
@@ -666,8 +654,7 @@ public class MotionLoggingService {
         public boolean isPresent(WeaponTypeWrapper weapon, int skillId, int currentAttackSpeed, Race race, Gender gender) {
             if (motionsForWeapons.containsKey(weapon)) {
                 for (SkillTime st : motionsForWeapons.get(weapon)) {
-                    if (st.getSkillId() == skillId && st.getAttackSpeed() == currentAttackSpeed
-                            && st.getRace() == race && st.getGender() == gender) {
+                    if (st.getSkillId() == skillId && st.getAttackSpeed() == currentAttackSpeed && st.getRace() == race && st.getGender() == gender) {
                         return true;
                     }
                 }
@@ -704,8 +691,8 @@ public class MotionLoggingService {
             }
         }
 
-
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
          * @see java.lang.Object#hashCode()
          */
         @Override
@@ -721,7 +708,8 @@ public class MotionLoggingService {
             return result;
         }
 
-        /* (non-Javadoc)
+        /*
+         * (non-Javadoc)
          * @see java.lang.Object#equals(java.lang.Object)
          */
         @Override
@@ -784,7 +772,7 @@ public class MotionLoggingService {
 
     private class WeaponTime {
 
-        private TreeMap<WeaponTypeWrapper, List<Integer>> values = new TreeMap<WeaponTypeWrapper, List<Integer>>();
+        private TreeMap<WeaponTypeWrapper, List<Integer>> values = new TreeMap<>();
         private Race race;
         private Gender gender;
 
@@ -811,14 +799,14 @@ public class MotionLoggingService {
             if (values.containsKey(weapon)) {
                 values.get(weapon).add(value);
             } else {
-                List<Integer> list = new ArrayList<Integer>();
+                List<Integer> list = new ArrayList<>();
                 list.add(value);
                 values.put(weapon, list);
             }
         }
 
         public TreeMap<WeaponTypeWrapper, Integer> process() {
-            TreeMap<WeaponTypeWrapper, Integer> weaponMap = new TreeMap<WeaponTypeWrapper, Integer>();
+            TreeMap<WeaponTypeWrapper, Integer> weaponMap = new TreeMap<>();
 
             for (Entry<WeaponTypeWrapper, List<Integer>> entry2 : values.entrySet()) {
                 //logic to calculate one value per weaponType

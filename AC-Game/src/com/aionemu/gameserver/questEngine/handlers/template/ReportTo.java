@@ -47,8 +47,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  */
 public class ReportTo extends QuestHandler {
 
-    private final Set<Integer> startNpcs = new HashSet<Integer>();
-    private final Set<Integer> endNpcs = new HashSet<Integer>();
+    private final Set<Integer> startNpcs = new HashSet<>();
+    private final Set<Integer> endNpcs = new HashSet<>();
     private final int itemId;
 
     /**

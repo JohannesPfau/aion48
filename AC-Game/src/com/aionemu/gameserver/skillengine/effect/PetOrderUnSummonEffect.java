@@ -41,7 +41,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PetOrderUnSummonEffect")
-public class PetOrderUnSummonEffect extends EffectTemplate{
+public class PetOrderUnSummonEffect extends EffectTemplate {
 
     @Override
     public void applyEffect(Effect effect) {

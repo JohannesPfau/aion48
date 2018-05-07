@@ -13,48 +13,44 @@ public class Testcmd extends AdminCommand {
         super("testcmd");
     }
 
-    public void execute(Player player, String...params){
+    public void execute(Player player, String... params) {
         PacketSendUtility.sendMessage(player, "working..");
-        if(params[0].equals("meow")){
+        if (params[0].equals("meow")) {
             player.getEffectController().updatePlayerEffectIconsImpl();
             return;
         }
-        if(params[0].equals("muh")){
+        if (params[0].equals("muh")) {
             player.getGameStats().updateStatInfo();
             return;
         }
-        if(params[0].equals("meh")){
+        if (params[0].equals("meh")) {
             player.getGameStats().updateStatsAndSpeedVisually();
             return;
         }
-        if(params[0].equals("moh")){
+        if (params[0].equals("moh")) {
             player.getGameStats().updateStatsVisually();
         }
         player.getEffectController().updatePlayerEffectIcons();
         player.getEffectController().broadCastEffects();
 
-
-
         /*
-        TIntObjectHashMap<ItemTemplate> it = DataManager.ITEM_DATA.getItemData();
-        String allitemNames = "";
-        int total = 0;
-
-        for(ItemTemplate id : DataManager.ITEM_DATA.getItemData().valueCollection()){
-            if(id.getUseLimits().getMinRank() == 18){
-                if(allitemNames.length() > 23){
-                    total = total + 1;
-                    PacketSendUtility.sendMessage(player, allitemNames + id.getTemplateId() + ", ");
-                    allitemNames = "";
-                }else{
-                    total = total + 1;
-                    allitemNames += id.getTemplateId() + ", ";
-                }
-
-            }
-        }
-        PacketSendUtility.sendMessage(player, "Total Count of Items : " + total);
-        */
+         * TIntObjectHashMap<ItemTemplate> it = DataManager.ITEM_DATA.getItemData();
+         * String allitemNames = "";
+         * int total = 0;
+         * for(ItemTemplate id : DataManager.ITEM_DATA.getItemData().valueCollection()){
+         * if(id.getUseLimits().getMinRank() == 18){
+         * if(allitemNames.length() > 23){
+         * total = total + 1;
+         * PacketSendUtility.sendMessage(player, allitemNames + id.getTemplateId() + ", ");
+         * allitemNames = "";
+         * }else{
+         * total = total + 1;
+         * allitemNames += id.getTemplateId() + ", ";
+         * }
+         * }
+         * }
+         * PacketSendUtility.sendMessage(player, "Total Count of Items : " + total);
+         */
 
     }
 }

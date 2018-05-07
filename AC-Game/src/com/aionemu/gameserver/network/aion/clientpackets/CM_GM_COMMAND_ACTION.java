@@ -33,7 +33,6 @@ import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 
-
 /**
  * @author Alcapwnd
  */
@@ -52,7 +51,8 @@ public class CM_GM_COMMAND_ACTION extends AionClientPacket {
         super(opcode, state, restStates);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.commons.network.packet.BaseClientPacket#readImpl()
      */
     @Override
@@ -67,7 +67,8 @@ public class CM_GM_COMMAND_ACTION extends AionClientPacket {
 
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.commons.network.packet.BaseClientPacket#runImpl()
      */
     @Override

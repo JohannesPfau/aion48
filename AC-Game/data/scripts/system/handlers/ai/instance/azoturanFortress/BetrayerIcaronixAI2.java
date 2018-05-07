@@ -29,13 +29,14 @@
  */
 package ai.instance.azoturanFortress;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Antraxx
@@ -54,11 +55,8 @@ public class BetrayerIcaronixAI2 extends AggressiveNpcAI2 {
     private void checkPercentage(int hpPercentage) {
         if (hpPercentage <= 50) {
             if (isStartEvent.compareAndSet(false, true)) {
-                scheduleSpawnIcaronixTheBetrayer(
-                        this.getPosition().getX(),
-                        this.getPosition().getY(),
-                        this.getPosition().getZ(),
-                        this.getPosition().getHeading());
+                scheduleSpawnIcaronixTheBetrayer(this.getPosition().getX(), this.getPosition().getY(), this.getPosition().getZ(),
+                    this.getPosition().getHeading());
                 AI2Actions.deleteOwner(this);
             }
         }
@@ -69,6 +67,7 @@ public class BetrayerIcaronixAI2 extends AggressiveNpcAI2 {
      */
     private void scheduleSpawnIcaronixTheBetrayer(final float x, final float y, final float z, final byte h) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 spawn(214599, x, y, z, (byte) h);

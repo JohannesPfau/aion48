@@ -192,6 +192,7 @@ public enum WorldMapType {
     SOUTHERN_KATALAM(600060000),
     UNDERGROUND_KATALAM(600070000),
     IDIU(600080000);
+
     private final int worldId;
 
     WorldMapType(int worldId) {

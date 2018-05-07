@@ -60,7 +60,7 @@ public enum AbnormalState {
     DEFORM(2097152), // (Curse of Roots I, Fear I)
     CANNOT_MOVE(4194304), // (Inescapable Judgment I)
     NOFLY(8388608), // cannot fly
-    KNOCKBACK(16777216),//simple_root
+    KNOCKBACK(16777216), //simple_root
     HIDE(536870912), // hide 33554432
 
     /**
@@ -68,8 +68,10 @@ public enum AbnormalState {
      */
     CANT_ATTACK_STATE(SPIN.id | SLEEP.id | STUN.id | STUMBLE.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | FEAR.id | CANNOT_MOVE.id),
     CANT_MOVE_STATE(SPIN.id | ROOT.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | CANNOT_MOVE.id),
-    CANT_MOVE_STATE2(SPIN.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | CANNOT_MOVE.id),//without root , for CM_EMOTION, because you can buff up and go attack mode while rooted
-    DISMOUT_RIDE(SPIN.id | ROOT.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | CANNOT_MOVE.id | FEAR.id | SNARE.id);
+    CANT_MOVE_STATE2(SPIN.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | CANNOT_MOVE.id), //without root , for CM_EMOTION, because you can buff up and go attack mode while rooted
+    DISMOUT_RIDE(
+        SPIN.id | ROOT.id | SLEEP.id | STUMBLE.id | STUN.id | STAGGER.id | OPENAERIAL.id | PARALYZE.id | CANNOT_MOVE.id | FEAR.id | SNARE.id);
+
     private int id;
 
     private AbnormalState(int id) {

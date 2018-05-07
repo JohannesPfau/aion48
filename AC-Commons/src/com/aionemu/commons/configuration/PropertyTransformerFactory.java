@@ -29,12 +29,25 @@
  */
 package com.aionemu.commons.configuration;
 
-import com.aionemu.commons.configuration.transformers.*;
-import com.aionemu.commons.utils.ClassUtils;
-
 import java.io.File;
 import java.net.InetSocketAddress;
 import java.util.regex.Pattern;
+
+import com.aionemu.commons.configuration.transformers.BooleanTransformer;
+import com.aionemu.commons.configuration.transformers.ByteTransformer;
+import com.aionemu.commons.configuration.transformers.CharTransformer;
+import com.aionemu.commons.configuration.transformers.ClassTransformer;
+import com.aionemu.commons.configuration.transformers.DoubleTransformer;
+import com.aionemu.commons.configuration.transformers.EnumTransformer;
+import com.aionemu.commons.configuration.transformers.FileTransformer;
+import com.aionemu.commons.configuration.transformers.FloatTransformer;
+import com.aionemu.commons.configuration.transformers.InetSocketAddressTransformer;
+import com.aionemu.commons.configuration.transformers.IntegerTransformer;
+import com.aionemu.commons.configuration.transformers.LongTransformer;
+import com.aionemu.commons.configuration.transformers.PatternTransformer;
+import com.aionemu.commons.configuration.transformers.ShortTransformer;
+import com.aionemu.commons.configuration.transformers.StringTransformer;
+import com.aionemu.commons.utils.ClassUtils;
 
 /**
  * This class is responsible for creating property transformers. Each time it
@@ -50,16 +63,18 @@ public class PropertyTransformerFactory {
      * {@link com.aionemu.commons.configuration.TransformationException} if
      * can't create new one.
      *
-     * @param clazzToTransform Class that will is going to be transformed
-     * @param tc               {@link com.aionemu.commons.configuration.PropertyTransformer}
-     *                         class that will be instantiated
+     * @param clazzToTransform
+     *            Class that will is going to be transformed
+     * @param tc
+     *            {@link com.aionemu.commons.configuration.PropertyTransformer}
+     *            class that will be instantiated
      * @return instance of PropertyTransformer
-     * @throws TransformationException if can't instantiate
-     *                                 {@link com.aionemu.commons.configuration.PropertyTransformer}
+     * @throws TransformationException
+     *             if can't instantiate
+     *             {@link com.aionemu.commons.configuration.PropertyTransformer}
      */
     @SuppressWarnings("rawtypes")
-    public static PropertyTransformer newTransformer(Class clazzToTransform, Class<? extends PropertyTransformer> tc)
-            throws TransformationException {
+    public static PropertyTransformer newTransformer(Class clazzToTransform, Class<? extends PropertyTransformer> tc) throws TransformationException {
 
         // Just a hack, we can't set null to annotation value
         if (tc == PropertyTransformer.class) {

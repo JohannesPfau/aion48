@@ -50,7 +50,7 @@ public class _2011FungusAmongUs extends QuestHandler {
 
     @Override
     public void register() {
-        int[] talkNpcs = {203558, 203572, 203558};
+        int[] talkNpcs = { 203558, 203572, 203558 };
         qe.registerQuestNpc(700092).addOnKillEvent(questId);
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
@@ -117,7 +117,7 @@ public class _2011FungusAmongUs extends QuestHandler {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 1) {
-	                playQuestMovie(env, 60);
+                            playQuestMovie(env, 60);
                             return sendQuestDialog(env, 1352);
                         }
                     case SETPRO2:

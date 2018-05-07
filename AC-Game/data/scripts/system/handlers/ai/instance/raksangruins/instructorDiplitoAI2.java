@@ -30,14 +30,15 @@
  */
 package ai.instance.raksangruins;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Kill3r
@@ -45,18 +46,18 @@ import java.util.List;
 @AIName("diplito")
 public class instructorDiplitoAI2 extends AggressiveNpcAI2 {
 
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
     private boolean used = false;
 
-    private void addPercents(){
+    private void addPercents() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{40});
+        Collections.addAll(percents, new Integer[] { 40 });
     }
 
-    private synchronized void checkhpPercentage(int hpPercentage){
-        for (Integer percent : percents){
-            if (hpPercentage <= percent){
-                switch (percent){
+    private synchronized void checkhpPercentage(int hpPercentage) {
+        for (Integer percent : percents) {
+            if (hpPercentage <= percent) {
+                switch (percent) {
                     case 40:
                         summonAdd();
                         used = true;
@@ -66,7 +67,7 @@ public class instructorDiplitoAI2 extends AggressiveNpcAI2 {
         }
     }
 
-    private void summonAdd(){
+    private void summonAdd() {
         if (!used) {
             spawn(855908, getPosition().getX(), getPosition().getY(), getPosition().getZ(), getPosition().getHeading());
         }

@@ -50,7 +50,7 @@ public class SM_ABYSS_RANK extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeQ(rank.getAp()); // curAP
         writeD(rank.getGp()); // curGP
         writeD(currentRankId); // curRank

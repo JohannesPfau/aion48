@@ -60,7 +60,7 @@ public class SM_ABNORMAL_EFFECT extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(effectedId);
         writeC(effectType); //unk
         writeD(0); // time

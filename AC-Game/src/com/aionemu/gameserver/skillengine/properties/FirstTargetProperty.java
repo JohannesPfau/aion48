@@ -88,8 +88,7 @@ public class FirstTargetProperty {
                 }
                 if (changeTargetToMe) {
                     if (skill.getEffector() instanceof Player) {
-                        PacketSendUtility.sendPacket((Player) skill.getEffector(),
-                                SM_SYSTEM_MESSAGE.STR_SKILL_AUTO_CHANGE_TARGET_TO_MY);
+                        PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_AUTO_CHANGE_TARGET_TO_MY);
                     }
                     skill.setFirstTarget(skill.getEffector());
                 }
@@ -101,7 +100,7 @@ public class FirstTargetProperty {
                 }
                 // Exception for NPC skills which applied on players
                 if (skill.getSkillTemplate().getDispelCategory() == DispelCategoryType.NPC_BUFF
-                        || skill.getSkillTemplate().getDispelCategory() == DispelCategoryType.NPC_DEBUFF_PHYSICAL) {
+                    || skill.getSkillTemplate().getDispelCategory() == DispelCategoryType.NPC_DEBUFF_PHYSICAL) {
                     break;
                 }
 
@@ -114,9 +113,8 @@ public class FirstTargetProperty {
                         TargetRelationAttribute relation = skill.getSkillTemplate().getProperties().getTargetRelation();
                         TargetRangeAttribute type = skill.getSkillTemplate().getProperties().getTargetType();
                         if ((relation != TargetRelationAttribute.ALL && relation != TargetRelationAttribute.MYPARTY)
-                                || type == TargetRangeAttribute.PARTY || skill.getSkillId() == 2353) { //TODO: Remove ID, find logic!
-                            PacketSendUtility.sendPacket((Player) skill.getEffector(),
-                                    SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
+                            || type == TargetRangeAttribute.PARTY || skill.getSkillId() == 2353) { //TODO: Remove ID, find logic!
+                            PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID);
                             return false;
                         }
                     }

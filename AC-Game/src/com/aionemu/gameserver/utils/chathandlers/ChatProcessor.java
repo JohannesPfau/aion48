@@ -34,8 +34,6 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -50,6 +48,8 @@ import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
+import javolution.util.FastMap;
+
 /**
  * @author KID
  * @Modified Rolandas
@@ -58,8 +58,8 @@ public class ChatProcessor implements GameEngine {
 
     private static final Logger log = LoggerFactory.getLogger("ADMINAUDIT_LOG");
     private static ChatProcessor instance = new ChatProcessor();
-    private Map<String, ChatCommand> commands = new FastMap<String, ChatCommand>();
-    private Map<String, Byte> accessLevel = new FastMap<String, Byte>();
+    private Map<String, ChatCommand> commands = new FastMap<>();
+    private Map<String, Byte> accessLevel = new FastMap<>();
     private ScriptManager sm = new ScriptManager();
     private Exception loadException = null;
 
@@ -99,13 +99,14 @@ public class ChatProcessor implements GameEngine {
         acl.addClassListener(new ChatCommandsLoader(processor));
         scriptManager.setGlobalClassListener(acl);
 
-        final File[] files = new File[]{new File("./data/scripts/system/adminhandlers.xml"),
-                new File("./data/scripts/system/playerhandlers.xml"), new File("./data/scripts/system/weddinghandlers.xml")};
+        final File[] files = new File[] { new File("./data/scripts/system/adminhandlers.xml"), new File("./data/scripts/system/playerhandlers.xml"),
+            new File("./data/scripts/system/weddinghandlers.xml") };
         final CountDownLatch loadLatch = new CountDownLatch(files.length);
 
         for (int i = 0; i < files.length; i++) {
             final int index = i;
             ThreadPoolManager.getInstance().execute(new Runnable() {
+
                 @Override
                 public void run() {
                     try {
@@ -146,7 +147,7 @@ public class ChatProcessor implements GameEngine {
     public void reload() {
         ScriptManager tmpSM;
         final ChatProcessor adminCP;
-        Map<String, ChatCommand> backupCommands = new FastMap<String, ChatCommand>(commands);
+        Map<String, ChatCommand> backupCommands = new FastMap<>(commands);
         commands.clear();
         loadException = null;
 
@@ -186,11 +187,10 @@ public class ChatProcessor implements GameEngine {
             return false;
         }
         if ((text.startsWith("//") && getCommand(text.substring(2)) instanceof AdminCommand)
-                || (text.startsWith("..") && getCommand(text.substring(2)) instanceof WeddingCommand)) {
+            || (text.startsWith("..") && getCommand(text.substring(2)) instanceof WeddingCommand)) {
             return (getCommand(text.substring(2))).process(player, text.substring(2));
-        } else if (text.startsWith(".")
-                && (getCommand(text.substring(1)) instanceof PlayerCommand
-                || (CustomConfig.ENABLE_ADMIN_DOT_COMMANDS && getCommand(text.substring(1)) instanceof AdminCommand))) {
+        } else if (text.startsWith(".") && (getCommand(text.substring(1)) instanceof PlayerCommand
+            || (CustomConfig.ENABLE_ADMIN_DOT_COMMANDS && getCommand(text.substring(1)) instanceof AdminCommand))) {
             return (getCommand(text.substring(1))).process(player, text.substring(1));
         } else {
             return false;

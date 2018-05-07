@@ -51,6 +51,7 @@ public enum AGILITY {
     GUNNER(110),
     ARTIST(100),
     BARD(100);
+
     private int value;
 
     private AGILITY(int value) {

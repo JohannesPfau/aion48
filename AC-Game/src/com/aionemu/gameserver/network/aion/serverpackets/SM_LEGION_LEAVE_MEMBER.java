@@ -58,7 +58,7 @@ public class SM_LEGION_LEAVE_MEMBER extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(playerObjId);
         writeC(0x00); // isMember ? 1 : 0
         writeD(0x00); // unix time for log off

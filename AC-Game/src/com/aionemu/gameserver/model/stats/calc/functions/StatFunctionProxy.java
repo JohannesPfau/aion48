@@ -145,6 +145,6 @@ public class StatFunctionProxy implements IStatFunction, Comparable<IStatFunctio
     @Override
     public String toString() {
         return "Proxy [name=" + proxiedFunction.getName() + ", bonus=" + isBonus() + ", value=" + getValue() + ", priority=" + getPriority()
-                + ", owner=" + owner + "]";
+            + ", owner=" + owner + "]";
     }
 }

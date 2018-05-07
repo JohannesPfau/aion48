@@ -50,53 +50,62 @@ public class SM_CUSTOM_PACKET extends AionServerPacket {
     public static enum PacketElementType {
 
         D('d') {
+
             @Override
             public void write(SM_CUSTOM_PACKET packet, String value) {
                 packet.writeD(Integer.decode(value));
             }
         },
         B('b') {
+
             @Override
             public void write(SM_CUSTOM_PACKET packet, String value) {
                 packet.writeB(new byte[Integer.valueOf(value)]);
             }
         },
         H('h') {
+
             @Override
             public void write(SM_CUSTOM_PACKET packet, String value) {
                 packet.writeH(Integer.decode(value));
             }
         },
         C('c') {
+
             @Override
             public void write(SM_CUSTOM_PACKET packet, String value) {
                 packet.writeC(Integer.decode(value));
             }
         },
         F('f') {
+
             @Override
             public void write(SM_CUSTOM_PACKET packet, String value) {
                 packet.writeF(Float.valueOf(value));
             }
         },
         DF('e') {
+
             @Override
             public void write(SM_CUSTOM_PACKET packet, String value) {
                 packet.writeDF(Double.valueOf(value));
             }
         },
         Q('q') {
+
             @Override
             public void write(SM_CUSTOM_PACKET packet, String value) {
                 packet.writeQ(Long.decode(value));
             }
         },
         S('s') {
+
             @Override
             public void write(SM_CUSTOM_PACKET packet, String value) {
                 packet.writeS(value);
             }
         };
+
         private final char code;
 
         private PacketElementType(char code) {
@@ -115,9 +124,12 @@ public class SM_CUSTOM_PACKET extends AionServerPacket {
         /**
          * Writes <tt>value</tt> to buffer according to the ElementType
          *
-         * @param packet packet instance
-         * @param buf    packet write buffer
-         * @param value  element value
+         * @param packet
+         *            packet instance
+         * @param buf
+         *            packet write buffer
+         * @param value
+         *            element value
          */
         public abstract void write(SM_CUSTOM_PACKET packet, String value);
     }
@@ -135,15 +147,17 @@ public class SM_CUSTOM_PACKET extends AionServerPacket {
         /**
          * Writes value stored in this PacketElement into buffer <tt>buf</tt>
          *
-         * @param packet packet instance.
-         * @param buf    packet write buffer.
+         * @param packet
+         *            packet instance.
+         * @param buf
+         *            packet write buffer.
          */
         public void writeValue(SM_CUSTOM_PACKET packet) {
             type.write(packet, value);
         }
     }
 
-    private List<PacketElement> elements = new ArrayList<PacketElement>();
+    private List<PacketElement> elements = new ArrayList<>();
 
     public SM_CUSTOM_PACKET(int opcode) {
         super();

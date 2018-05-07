@@ -42,16 +42,15 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 
 /**
  * Class that is responsible for storing/loading player data
- *
-, Saelya
-
+ * , Saelya
  */
 public abstract class PlayerDAO implements IDFactoryAwareDAO {
 
     /**
      * Returns true if name is used, false in other case
      *
-     * @param name name to check
+     * @param name
+     *            name to check
      * @return true if name is used, false in other case
      */
     public abstract boolean isNameUsed(String name);
@@ -59,7 +58,8 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
     /**
      * Returns player name by player object id
      *
-     * @param playerObjectIds player object ids to get name
+     * @param playerObjectIds
+     *            player object ids to get name
      * @return map ObjectID-To-Name
      */
     public abstract Map<Integer, String> getPlayerNames(Collection<Integer> playerObjectIds);
@@ -76,7 +76,8 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
     /**
      * This method is used to store only newly created characters
      *
-     * @param pcd player to save in database
+     * @param pcd
+     *            player to save in database
      * @return true if every things went ok.
      */
     public abstract boolean saveNewPlayer(PlayerCommonData pcd, int accountId, String accountName);
@@ -86,7 +87,8 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
     /**
      * Removes player and all related data (Done by CASCADE DELETION)
      *
-     * @param playerId player to delete
+     * @param playerId
+     *            player to delete
      */
     public abstract void deletePlayer(int playerId);
 
@@ -114,8 +116,10 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
     /**
      * Stores the last online time
      *
-     * @param objectId   Object ID of player to store
-     * @param lastOnline Last online time of player to store
+     * @param objectId
+     *            Object ID of player to store
+     * @param lastOnline
+     *            Last online time of player to store
      */
     public abstract void storeLastOnlineTime(final int objectId, final Timestamp lastOnline);
 
@@ -195,8 +199,10 @@ public abstract class PlayerDAO implements IDFactoryAwareDAO {
      * Returns a Set of objectId of accounts that are inactive for more than
      * dayOfInactivity days
      *
-     * @param daysOfInactivity Number of days a char needs to be inactive
-     * @param limitation       Maximum number of chars deleted in one run
+     * @param daysOfInactivity
+     *            Number of days a char needs to be inactive
+     * @param limitation
+     *            Maximum number of chars deleted in one run
      * @return List of IDs
      */
     public abstract Set<Integer> getInactiveAccounts(final int daysOfInactivity, int limitation);

@@ -45,6 +45,7 @@ public enum LegionHistoryType {
     ITEM_WITHDRAW(16), // Parameter: name
     KINAH_DEPOSIT(17), // Parameter: name
     KINAH_WITHDRAW(18); // Parameter: name
+
     private byte historyType;
 
     private LegionHistoryType(int historyType) {

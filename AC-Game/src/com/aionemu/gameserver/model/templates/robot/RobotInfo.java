@@ -40,7 +40,7 @@ import com.aionemu.gameserver.model.templates.RobotBounds;
  * @author Ever'
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RobotInfo", propOrder = {"bound"})
+@XmlType(name = "RobotInfo", propOrder = { "bound" })
 public class RobotInfo {
 
     protected RobotBounds bound;

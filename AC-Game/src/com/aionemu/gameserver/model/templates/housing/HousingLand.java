@@ -42,7 +42,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Land", propOrder = {"addresses", "buildings", "sale", "fee", "caps"})
+@XmlType(name = "Land", propOrder = { "addresses", "buildings", "sale", "fee", "caps" })
 public class HousingLand {
 
     @XmlElementWrapper(name = "addresses", required = true)

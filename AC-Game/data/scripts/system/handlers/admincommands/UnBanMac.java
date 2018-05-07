@@ -29,12 +29,13 @@
  */
 package admincommands;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.BannedMacManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author KID
@@ -56,7 +57,7 @@ public class UnBanMac extends AdminCommand {
 
         String address = params[0];
         boolean result = BannedMacManager.getInstance().unbanAddress(address,
-                "uban;mac=" + address + ", " + player.getObjectId() + "; admin=" + player.getName());
+            "uban;mac=" + address + ", " + player.getObjectId() + "; admin=" + player.getName());
         if (result) {
             PacketSendUtility.sendMessage(player, "mac " + address + " has unbanned");
             log.info("[unbanmac] GM : " + player.getName() + " has unbanned mac [" + address + "] in mapId '" + player.getWorldId() + "'");

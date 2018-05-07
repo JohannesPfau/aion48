@@ -52,6 +52,7 @@ public enum QuestCategory {
     PUBLIC(0),
     LEGION(0),
     PRIMARY(0);
+
     private int id;
 
     private QuestCategory(int id) {

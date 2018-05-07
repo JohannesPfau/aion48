@@ -50,13 +50,13 @@ public class SM_SHIELD_EFFECT extends AionServerPacket {
     }
 
     public SM_SHIELD_EFFECT(int location) {
-        this.locations = new ArrayList<SiegeLocation>();
+        this.locations = new ArrayList<>();
         this.locations.add(SiegeService.getInstance().getSiegeLocation(location));
     }
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(locations.size());
         for (SiegeLocation loc : locations) {
             writeD(loc.getLocationId());

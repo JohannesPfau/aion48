@@ -77,7 +77,7 @@ public class HouseObjectCooldownList {
 
     public void addHouseObjectCooldown(int objectId, int delay) {
         if (houseObjectCooldowns == null) {
-            houseObjectCooldowns = new FastMap<Integer, Long>();
+            houseObjectCooldowns = new FastMap<>();
         }
 
         long nextUseTime = System.currentTimeMillis() + (delay * 1000);

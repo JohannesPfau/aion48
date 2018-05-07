@@ -33,7 +33,6 @@ import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
-
 /**
  * @author Alcapwnd
  * @see need to implement this packet fully, its only dummy actual
@@ -52,7 +51,7 @@ public class SM_MOVE_BEGINNER_SERVER extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(newServerId);
         writeD(currentServerId);
         writeC(0);

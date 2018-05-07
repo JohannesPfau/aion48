@@ -35,9 +35,6 @@ import java.util.List;
 import java.util.TreeSet;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import javolution.util.FastMap;
-import javolution.util.FastMap.Entry;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -53,6 +50,9 @@ import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunctionProxy;
+
+import javolution.util.FastMap;
+import javolution.util.FastMap.Entry;
 
 /**
  * @author xavier
@@ -71,7 +71,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 
     protected CreatureGameStats(T owner) {
         this.owner = owner;
-        this.stats = new FastMap<StatEnum, TreeSet<IStatFunction>>();
+        this.stats = new FastMap<>();
     }
 
     /**
@@ -82,7 +82,8 @@ public abstract class CreatureGameStats<T extends Creature> {
     }
 
     /**
-     * @param atcount the atcount to set
+     * @param atcount
+     *            the atcount to set
      */
     protected void setAttackCounter(int attackCounter) {
         if (attackCounter <= 0) {
@@ -114,10 +115,10 @@ public abstract class CreatureGameStats<T extends Creature> {
                 // If already contains old stat, it won't add anyway, so next check will be false positive
                 // Useless Warning!!!
                 /*
-                 TreeSet<IStatFunction> mods = getStatsByStatEnum(function.getName());
-                 if (mods.contains(func)) {
-                 log.warn("Effect " + statOwner + " already active" + func);
-                 }
+                 * TreeSet<IStatFunction> mods = getStatsByStatEnum(function.getName());
+                 * if (mods.contains(func)) {
+                 * log.warn("Effect " + statOwner + " already active" + func);
+                 * }
                  */
                 addFunction(function.getName(), func);
             }
@@ -134,9 +135,9 @@ public abstract class CreatureGameStats<T extends Creature> {
     public final void endEffect(StatOwner statOwner) {
         lock.writeLock().lock();
         try {
-            for (Entry<StatEnum, TreeSet<IStatFunction>> e = stats.head(), end = stats.tail(); (e = e.getNext()) != end; ) {
+            for (Entry<StatEnum, TreeSet<IStatFunction>> e = stats.head(), end = stats.tail(); (e = e.getNext()) != end;) {
                 TreeSet<IStatFunction> value = e.getValue();
-                for (Iterator<IStatFunction> iter = value.iterator(); iter.hasNext(); ) {
+                for (Iterator<IStatFunction> iter = value.iterator(); iter.hasNext();) {
                     IStatFunction ownedMod = iter.next();
                     if (ownedMod.getOwner() != null && ownedMod.getOwner().equals(statOwner)) {
                         iter.remove();
@@ -320,12 +321,12 @@ public abstract class CreatureGameStats<T extends Creature> {
         if (allStats == null) {
             return null;
         }
-        TreeSet<IStatFunction> tmp = new TreeSet<IStatFunction>();
+        TreeSet<IStatFunction> tmp = new TreeSet<>();
         List<IStatFunction> setFuncs = null;
         for (IStatFunction func : allStats) {
             if (func.getPriority() >= Integer.MAX_VALUE - 10) {
                 if (setFuncs == null) {
-                    setFuncs = new ArrayList<IStatFunction>();
+                    setFuncs = new ArrayList<>();
                 }
                 setFuncs.add(func);
             } else if (setFuncs != null) {

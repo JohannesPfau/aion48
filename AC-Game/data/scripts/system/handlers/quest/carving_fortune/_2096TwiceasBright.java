@@ -29,9 +29,9 @@
  */
 package quest.carving_fortune;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -107,7 +107,7 @@ public class _2096TwiceasBright extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {2007, 2022, 2041, 2094, 2061, 2076, 2900};
+        int[] quests = { 2007, 2022, 2041, 2094, 2061, 2076, 2900 };
         return defaultOnLvlUpEvent(env, quests, false);
     }
 }

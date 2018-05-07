@@ -29,7 +29,12 @@
  */
 package ai.instance.rentusBase;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -41,11 +46,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -53,7 +54,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 @AIName("tarotran")
 public class TarotranAI2 extends AggressiveNpcAI2 {
 
-    private List<Integer> percents = new ArrayList<Integer>();
+    private List<Integer> percents = new ArrayList<>();
     private AtomicBoolean isStartedEvent = new AtomicBoolean(false);
     private Future<?> eventTask;
     private Future<?> thinkTask;
@@ -95,6 +96,7 @@ public class TarotranAI2 extends AggressiveNpcAI2 {
                 canThink = false;
                 SkillEngine.getInstance().getSkill(getOwner(), 19700, 60, getOwner()).useNoAnimationSkill();
                 thinkTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         int count = Rnd.get(4, 8);
@@ -132,6 +134,7 @@ public class TarotranAI2 extends AggressiveNpcAI2 {
         WorldPosition p = getPosition();
         final Npc npc = (Npc) spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), p.getHeading());
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!NpcActions.isAlreadyDead(npc) && npc.isSpawned()) {
@@ -144,6 +147,7 @@ public class TarotranAI2 extends AggressiveNpcAI2 {
     private void startEventTask() {
         cancelEventTask();
         eventTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -172,7 +176,7 @@ public class TarotranAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{85, 65, 55, 45, 30, 15});
+        Collections.addAll(percents, new Integer[] { 85, 65, 55, 45, 30, 15 });
     }
 
     private void deleteNpcs(List<Npc> npcs) {

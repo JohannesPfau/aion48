@@ -29,6 +29,13 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.MotionDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
@@ -36,12 +43,6 @@ import com.aionemu.gameserver.dao.PlayerEmotionListDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.motion.Motion;
 import com.aionemu.gameserver.model.gameobjects.player.motion.MotionList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  * @author MrPoke
@@ -80,8 +81,7 @@ public class MySQL5MotionDAO extends MotionDAO {
             rset.close();
             stmt.close();
         } catch (Exception e) {
-            log.error("Could not restore motions for playerObjId: " + player.getObjectId() + " from DB: " + e.getMessage(),
-                    e);
+            log.error("Could not restore motions for playerObjId: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
         } finally {
             DatabaseFactory.close(con);
         }

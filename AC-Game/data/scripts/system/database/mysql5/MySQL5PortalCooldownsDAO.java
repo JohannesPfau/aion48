@@ -29,19 +29,21 @@
  */
 package mysql5;
 
-import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-import com.aionemu.gameserver.dao.PortalCooldownsDAO;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import javolution.util.FastMap;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.database.DatabaseFactory;
+import com.aionemu.gameserver.dao.MySQL5DAOUtils;
+import com.aionemu.gameserver.dao.PortalCooldownsDAO;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+
+import javolution.util.FastMap;
 
 public class MySQL5PortalCooldownsDAO extends PortalCooldownsDAO {
 
@@ -53,7 +55,7 @@ public class MySQL5PortalCooldownsDAO extends PortalCooldownsDAO {
     @Override
     public void loadPortalCooldowns(final Player player) {
         Connection con = null;
-        FastMap<Integer, Long> portalCoolDowns = new FastMap<Integer, Long>();
+        FastMap<Integer, Long> portalCoolDowns = new FastMap<>();
         PreparedStatement stmt = null;
         try {
             con = DatabaseFactory.getConnection();

@@ -64,7 +64,8 @@ public class ItemCollectingData extends XMLQuest {
 
     @Override
     public void register(QuestEngine questEngine) {
-        ItemCollecting template = new ItemCollecting(id, startNpcIds, nextNpcId, actionItemIds, endNpcIds, questMovie, startDialogId, startDialogId2, itemId);
+        ItemCollecting template = new ItemCollecting(id, startNpcIds, nextNpcId, actionItemIds, endNpcIds, questMovie, startDialogId, startDialogId2,
+            itemId);
         questEngine.addQuestHandler(template);
     }
 }

@@ -55,5 +55,5 @@ public enum BonusType {
     REDEEM, // %Quest_L_redeem, exchange angel's/demon's eyes + kinah
     RIFT, // %Quest_L_BranchRiftEvent
     TASK, // %Quest_L_task; craft related
-    WINTER                    // %Quest_A_BranchWinterEvent
+    WINTER // %Quest_A_BranchWinterEvent
 }

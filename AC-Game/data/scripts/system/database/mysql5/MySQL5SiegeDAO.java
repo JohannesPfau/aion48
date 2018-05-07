@@ -29,20 +29,21 @@
  */
 package mysql5;
 
-import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-import com.aionemu.gameserver.dao.SiegeDAO;
-import com.aionemu.gameserver.model.siege.SiegeLocation;
-import com.aionemu.gameserver.model.siege.SiegeRace;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.database.DatabaseFactory;
+import com.aionemu.gameserver.dao.MySQL5DAOUtils;
+import com.aionemu.gameserver.dao.SiegeDAO;
+import com.aionemu.gameserver.model.siege.SiegeLocation;
+import com.aionemu.gameserver.model.siege.SiegeRace;
 
 /**
  * @author Sarynth
@@ -58,7 +59,7 @@ public class MySQL5SiegeDAO extends SiegeDAO {
     public boolean loadSiegeLocations(final Map<Integer, SiegeLocation> locations) {
         boolean success = true;
         Connection con = null;
-        List<Integer> loaded = new ArrayList<Integer>();
+        List<Integer> loaded = new ArrayList<>();
 
         PreparedStatement stmt = null;
         try {
@@ -101,8 +102,7 @@ public class MySQL5SiegeDAO extends SiegeDAO {
             stmt.setInt(3, siegeLocation.getLocationId());
             stmt.execute();
         } catch (Exception e) {
-            log.error("Error update Siege Location: " + siegeLocation.getLocationId() + " to race: "
-                    + siegeLocation.getRace().toString(), e);
+            log.error("Error update Siege Location: " + siegeLocation.getLocationId() + " to race: " + siegeLocation.getRace().toString(), e);
             return false;
         } finally {
             DatabaseFactory.close(stmt, con);

@@ -31,11 +31,11 @@ package quest.greater_stigma;
 
 import java.util.Collection;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -49,7 +49,7 @@ import com.aionemu.gameserver.world.World;
 public class _3932StopTheShulacks extends QuestHandler {
 
     private final static int questId = 3932;
-    private final static int[] npc_ids = {203711, 204656};
+    private final static int[] npc_ids = { 203711, 204656 };
 
     /**
      * 203711 - Miriya 204656 - Maloren

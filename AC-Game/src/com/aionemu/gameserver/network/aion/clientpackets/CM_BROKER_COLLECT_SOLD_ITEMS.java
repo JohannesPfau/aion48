@@ -55,9 +55,10 @@ public class CM_BROKER_COLLECT_SOLD_ITEMS extends AionClientPacket {
 
     @Override
     protected void runImpl() {
-    	Player player = getConnection().getActivePlayer();
-        if (player == null) return;
-            
+        Player player = getConnection().getActivePlayer();
+        if (player == null)
+            return;
+
         BrokerService.getInstance().settleAccount(player);
     }
 }

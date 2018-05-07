@@ -47,7 +47,7 @@ public class SM_SUMMON_PANEL extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(summon.getObjectId());
         writeH(summon.getLevel());
         writeD(0);// unk

@@ -29,12 +29,12 @@
  */
 package com.aionemu.loginserver.network.gameserver.serverpackets;
 
+import java.util.Map;
+
 import com.aionemu.loginserver.controller.BannedMacManager;
 import com.aionemu.loginserver.model.base.BannedMacEntry;
 import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.GsServerPacket;
-
-import java.util.Map;
 
 /**
  * @author KID

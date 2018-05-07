@@ -33,17 +33,16 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author zhkchi
- *
  */
 public class _28830InteriorDecorator extends QuestHandler {
 
@@ -51,7 +50,7 @@ public class _28830InteriorDecorator extends QuestHandler {
     private static final Set<Integer> butlers;
 
     static {
-        butlers = new HashSet<Integer>();
+        butlers = new HashSet<>();
         butlers.add(810022);
         butlers.add(810023);
         butlers.add(810024);
@@ -117,17 +116,17 @@ public class _28830InteriorDecorator extends QuestHandler {
                 case SELECTED_QUEST_NOREWARD:
                     sendQuestEndDialog(env);
                     return true;
-			}
-		}else if (qs.getStatus() == QuestStatus.START && targetId == 830651) {
-			switch (dialog) {
-				case USE_OBJECT:
-					changeQuestStep(env, 1, 1, true);
-					return sendQuestDialog(env, 2375);
-				case SELECT_QUEST_REWARD:
-					return sendQuestDialog(env, 5);
-				case SELECTED_QUEST_NOREWARD:
-					sendQuestEndDialog(env);
-					return true;
+            }
+        } else if (qs.getStatus() == QuestStatus.START && targetId == 830651) {
+            switch (dialog) {
+                case USE_OBJECT:
+                    changeQuestStep(env, 1, 1, true);
+                    return sendQuestDialog(env, 2375);
+                case SELECT_QUEST_REWARD:
+                    return sendQuestDialog(env, 5);
+                case SELECTED_QUEST_NOREWARD:
+                    sendQuestEndDialog(env);
+                    return true;
             }
         }
 

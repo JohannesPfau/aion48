@@ -71,7 +71,7 @@ public class ClientPacketHandler extends AbstractPacketHandler {
                         clientPacket = new CM_PLAYER_AUTH(buf, channelHandler, chatService);
                         break;
                     default:
-                    // unknownPacket(opCode, state.toString());
+                        // unknownPacket(opCode, state.toString());
                 }
                 break;
             case AUTHED:
@@ -82,7 +82,7 @@ public class ClientPacketHandler extends AbstractPacketHandler {
                     case 0x18:
                         clientPacket = new CM_CHANNEL_MESSAGE(buf, channelHandler, broadcastService);
                     default:
-                    // unknownPacket(opCode, state.toString());
+                        // unknownPacket(opCode, state.toString());
                 }
                 break;
         }

@@ -29,10 +29,10 @@
  */
 package quest.altgard;
 
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,7 +45,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 public class _24016AStrangeNewThreat extends QuestHandler {
 
     private final static int questId = 24016;
-    private final static int[] npcs = {203557, 700140};
+    private final static int[] npcs = { 203557, 700140 };
 
     public _24016AStrangeNewThreat() {
         super(questId);
@@ -88,18 +88,19 @@ public class _24016AStrangeNewThreat extends QuestHandler {
                     }
                     break;
                 }
-				case 700140: { // Gate Guardian Stone
-					if (var == 2) {
-						if (env.getDialog() == DialogAction.USE_OBJECT) {
-							QuestService.addNewSpawn(320030000, player.getInstanceId(), 233876, (float) 260.12, (float) 234.93, (float) 216.00, (byte) 90);
-							return useQuestObject(env, 2, 3, false, false); // 3
-						}
-					} else if (var == 4) {
-						if (env.getDialog() == DialogAction.USE_OBJECT) {							
-							playQuestMovie(env, 154);
-							changeQuestStep(env, 4, 4, true); // reward
-							TeleportService2.teleportTo(env.getPlayer(), 220030000, 1683, 1753, 260, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
-							return true;
+                case 700140: { // Gate Guardian Stone
+                    if (var == 2) {
+                        if (env.getDialog() == DialogAction.USE_OBJECT) {
+                            QuestService.addNewSpawn(320030000, player.getInstanceId(), 233876, (float) 260.12, (float) 234.93, (float) 216.00,
+                                (byte) 90);
+                            return useQuestObject(env, 2, 3, false, false); // 3
+                        }
+                    } else if (var == 4) {
+                        if (env.getDialog() == DialogAction.USE_OBJECT) {
+                            playQuestMovie(env, 154);
+                            changeQuestStep(env, 4, 4, true); // reward
+                            TeleportService2.teleportTo(env.getPlayer(), 220030000, 1683, 1753, 260, (byte) 60, TeleportAnimation.BEAM_ANIMATION);
+                            return true;
                         }
                     }
                 }
@@ -163,7 +164,7 @@ public class _24016AStrangeNewThreat extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] altgardQuests = {24011, 24012, 24013, 24014, 24015};
+        int[] altgardQuests = { 24011, 24012, 24013, 24014, 24015 };
         return defaultOnLvlUpEvent(env, altgardQuests, true);
     }
 }

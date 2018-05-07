@@ -50,7 +50,6 @@ public class KamarBattlefieldPlayerReward extends InstancePlayerReward {
     private int bonusReward2;
     private float rewardCount;
 
-
     public KamarBattlefieldPlayerReward(Integer object, int timeBonus, Race race) {
         super(object);
         this.timeBonus = timeBonus;
@@ -110,23 +109,23 @@ public class KamarBattlefieldPlayerReward extends InstancePlayerReward {
     public int getBonusReward() {
         return bonusReward;
     }
-    
+
     public void setBonusReward(int reward) {
         this.bonusReward = reward;
     }
-    
-	public int getBonusReward2() {
-		return bonusReward2;
-	}
 
-	public void setBonusReward2(int bonusReward2) {
-		this.bonusReward2 = bonusReward2;
-	}
+    public int getBonusReward2() {
+        return bonusReward2;
+    }
+
+    public void setBonusReward2(int bonusReward2) {
+        this.bonusReward2 = bonusReward2;
+    }
 
     public int getRewardCount() {
         return (int) rewardCount;
     }
-    
+
     public void setRewardCount(float rewardCount) {
         this.rewardCount = rewardCount;
     }
@@ -147,11 +146,11 @@ public class KamarBattlefieldPlayerReward extends InstancePlayerReward {
         this.rewardGp = rewardGp;
     }
 
-	public int getBonusGp() {
-		return bonusGp;
-	}
+    public int getBonusGp() {
+        return bonusGp;
+    }
 
-	public void setBonusGp(int bonusGp) {
-		this.bonusGp = bonusGp;
-	}
+    public void setBonusGp(int bonusGp) {
+        this.bonusGp = bonusGp;
+    }
 }

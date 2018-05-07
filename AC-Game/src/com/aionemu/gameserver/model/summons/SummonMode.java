@@ -39,6 +39,7 @@ public enum SummonMode {
     REST(2),
     RELEASE(3),
     UNK(5);
+
     private int id;
 
     private SummonMode(int id) {

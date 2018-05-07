@@ -30,11 +30,11 @@
 package quest.reshanta;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSearchResult;
+import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -53,7 +53,7 @@ public class _24043LazyLanguageLessons extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {278003, 278086, 278039, 279027, 204210};
+        int[] npcs = { 278003, 278086, 278039, 279027, 204210 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.registerQuestNpc(253610).addOnAttackEvent(questId);
@@ -171,7 +171,8 @@ public class _24043LazyLanguageLessons extends QuestHandler {
             if (var == 2) {
                 final Npc npc = (Npc) env.getVisibleObject();
                 final SpawnSearchResult searchResult = DataManager.SPAWNS_DATA2.getFirstSpawnByNpcId(npc.getWorldId(), 278086); // Sinjah
-                if (MathUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(), npc.getY(), npc.getZ()) <= 15) {
+                if (MathUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(),
+                    npc.getY(), npc.getZ()) <= 15) {
                     npc.getController().onDie(player);
                     changeQuestStep(env, 2, 3, false); // 3
                     return true;

@@ -33,9 +33,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.slf4j.LoggerFactory;
-
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.Config;
 import com.aionemu.chatserver.model.Gender;
@@ -49,7 +48,7 @@ import com.aionemu.chatserver.service.GameServerService;
 public class ChatChannels {
 
     private static final Logger log = LoggerFactory.getLogger(ChatChannels.class);
-    private static final List<Channel> channels = new ArrayList<Channel>();
+    private static final List<Channel> channels = new ArrayList<>();
 
     static {
         // LFG channels
@@ -66,8 +65,8 @@ public class ChatChannels {
         addTradeChannel("trade_LF1A");
         addTradeChannel("trade_LF3");
         addTradeChannel("trade_LF4");
-		addTradeChannel("trade_LF5");
-		addTradeChannel("trade_LF5_Ship");
+        addTradeChannel("trade_LF5");
+        addTradeChannel("trade_LF5_Ship");
         addTradeChannel("trade_LF2A");
         addTradeChannel("trade_DF1");
         addTradeChannel("trade_DF2");
@@ -75,10 +74,10 @@ public class ChatChannels {
         addTradeChannel("trade_DF3");
         addTradeChannel("trade_DF2A");
         addTradeChannel("trade_DF4");
-		addTradeChannel("trade_DF5");
-		addTradeChannel("trade_DF5_Ship");
-		addTradeChannel("trade_LDF5_Under_L");
-		addTradeChannel("trade_LDF5_Under_D");
+        addTradeChannel("trade_DF5");
+        addTradeChannel("trade_DF5_Ship");
+        addTradeChannel("trade_LDF5_Under_L");
+        addTradeChannel("trade_LDF5_Under_D");
         addTradeChannel("trade_IDAbPro");
         addTradeChannel("trade_IDTest_Dungeon");
         addTradeChannel("trade_IDAb1_MiniCastle");
@@ -194,8 +193,8 @@ public class ChatChannels {
         addTradeChannel("trade_LDF5b");
         addTradeChannel("trade_LDF5_Under");
         addTradeChannel("trade_IDIU");
-		addTradeChannel("trade_LDF4_Advance");
-		addTradeChannel("trade_LDF5_Fortress");
+        addTradeChannel("trade_LDF4_Advance");
+        addTradeChannel("trade_LDF5_Fortress");
         addTradeChannel("trade_Housing_LF_personal");
         addTradeChannel("trade_Housing_LC_legion");
         addTradeChannel("trade_Housing_DF_personal");
@@ -223,9 +222,9 @@ public class ChatChannels {
         addRegionChannel(210030000, "public_LF1A");
         addRegionChannel(210040000, "public_LF3");
         addRegionChannel(210050000, "public_LF4");
-		addRegionChannel(210070000, "public_LF5");
-		addRegionChannel(210080000, "public_LF5_Ship");
-		addRegionChannel(210090000, "public_LDF5_Under_L");
+        addRegionChannel(210070000, "public_LF5");
+        addRegionChannel(210080000, "public_LF5_Ship");
+        addRegionChannel(210090000, "public_LDF5_Under_L");
         addRegionChannel(210060000, "public_LF2A");
         addRegionChannel(220010000, "public_DF1");
         addRegionChannel(220020000, "public_DF2");
@@ -233,9 +232,9 @@ public class ChatChannels {
         addRegionChannel(220040000, "public_DF3");
         addRegionChannel(220050000, "public_DF2A");
         addRegionChannel(220070000, "public_DF4");
-		addRegionChannel(220080000, "public_DF5");
-		addRegionChannel(220090000, "public_DF5_Ship");
-		addRegionChannel(210090000, "public_LDF5_Under_D");
+        addRegionChannel(220080000, "public_DF5");
+        addRegionChannel(220090000, "public_DF5_Ship");
+        addRegionChannel(210090000, "public_LDF5_Under_D");
         addRegionChannel(300010000, "public_IDAbPro");
         addRegionChannel(300020000, "public_IDTest_Dungeon");
         addRegionChannel(300030000, "public_IDAb1_MiniCastle");
@@ -364,8 +363,8 @@ public class ChatChannels {
         addRegionChannel(600060000, "public_LDF5b");
         addRegionChannel(600070000, "public_LDF5_Under");
         addRegionChannel(600080000, "public_IDIU");
-		addRegionChannel(600100000, "public_LDF4_Advance");
-		addRegionChannel(600100000, "public_LDF5_Fortress");
+        addRegionChannel(600100000, "public_LDF4_Advance");
+        addRegionChannel(600100000, "public_LDF5_Fortress");
         addRegionChannel(700010000, "public_Housing_LF_personal");
         addRegionChannel(700020000, "public_Housing_LC_legion");
         addRegionChannel(710010000, "public_Housing_DF_personal");
@@ -488,29 +487,29 @@ public class ChatChannels {
             addJobChannel(Gender.MALE, PlayerClass.MAGE, "job_Magier");
             addJobChannel(Gender.MALE, PlayerClass.SORCERER, "job_Zauberer");
             addJobChannel(Gender.MALE, PlayerClass.SPIRIT_MASTER, "job_Beschwörer");
-			addJobChannel(Gender.MALE, PlayerClass.PRIEST, "job_Priester");
+            addJobChannel(Gender.MALE, PlayerClass.PRIEST, "job_Priester");
             addJobChannel(Gender.MALE, PlayerClass.CHANTER, "job_Kantor");
             addJobChannel(Gender.MALE, PlayerClass.CLERIC, "job_Kleriker");
-			addJobChannel(Gender.MALE, PlayerClass.SCOUT, "job_Späher");
-			addJobChannel(Gender.MALE, PlayerClass.RANGER, "job_Jäger");
+            addJobChannel(Gender.MALE, PlayerClass.SCOUT, "job_Späher");
+            addJobChannel(Gender.MALE, PlayerClass.RANGER, "job_Jäger");
             addJobChannel(Gender.MALE, PlayerClass.ASSASSIN, "job_Assassine");
             addJobChannel(Gender.MALE, PlayerClass.ENGINEER, "job_Ingenieur");
-			addJobChannel(Gender.MALE, PlayerClass.GUNNER, "job_Schütze");
-			addJobChannel(Gender.MALE, PlayerClass.RIDER, "job_Äthertech");
+            addJobChannel(Gender.MALE, PlayerClass.GUNNER, "job_Schütze");
+            addJobChannel(Gender.MALE, PlayerClass.RIDER, "job_Äthertech");
             addJobChannel(Gender.MALE, PlayerClass.ARTIST, "job_Künstler");
             addJobChannel(Gender.MALE, PlayerClass.BARD, "job_Barde");
-            
+
             // Femaletest
             addJobChannel(Gender.FEMALE, PlayerClass.WARRIOR, "job_Krieger[f:" + '"' + "Kriegerin" + '"' + "]");
             addJobChannel(Gender.FEMALE, PlayerClass.GLADIATOR, "job_Gladiator[f:" + '"' + "Gladiatorin" + '"' + "]");
             addJobChannel(Gender.FEMALE, PlayerClass.TEMPLAR, "job_Templer[f:" + '"' + "Templerin" + '"' + "]");
-			addJobChannel(Gender.FEMALE, PlayerClass.MAGE, "job_Magier[f:" + '"' + "Magierin" + '"' + "]");
+            addJobChannel(Gender.FEMALE, PlayerClass.MAGE, "job_Magier[f:" + '"' + "Magierin" + '"' + "]");
             addJobChannel(Gender.FEMALE, PlayerClass.SORCERER, "job_Zauberer[f:" + '"' + "Zauberin" + '"' + "]");
             addJobChannel(Gender.FEMALE, PlayerClass.SPIRIT_MASTER, "job_Beschw\u00f6rer[f:" + '"' + "Beschw\u00f6rerin" + '"' + "]");
-			addJobChannel(Gender.FEMALE, PlayerClass.PRIEST, "job_Priester[f:" + '"' + "Priesterin" + '"' + "]");
-			addJobChannel(Gender.FEMALE, PlayerClass.CLERIC, "job_Kleriker[f:" + '"' + "Klerikerin" + '"' + "]");
+            addJobChannel(Gender.FEMALE, PlayerClass.PRIEST, "job_Priester[f:" + '"' + "Priesterin" + '"' + "]");
+            addJobChannel(Gender.FEMALE, PlayerClass.CLERIC, "job_Kleriker[f:" + '"' + "Klerikerin" + '"' + "]");
             addJobChannel(Gender.FEMALE, PlayerClass.CHANTER, "job_Kantor[f:" + '"' + "Kantorin" + '"' + "]");
-			addJobChannel(Gender.FEMALE, PlayerClass.SCOUT, "job_Sp\u00e4her[f:" + '"' + "Sp\u00e4herin" + '"' + "]");
+            addJobChannel(Gender.FEMALE, PlayerClass.SCOUT, "job_Sp\u00e4her[f:" + '"' + "Sp\u00e4herin" + '"' + "]");
             addJobChannel(Gender.FEMALE, PlayerClass.RANGER, "job_J\u00e4ger[f:" + '"' + "J\u00e4gerin" + '"' + "]");
             addJobChannel(Gender.FEMALE, PlayerClass.ASSASSIN, "job_Assassine[f:" + '"' + "Assassine" + '"' + "]");
             addJobChannel(Gender.FEMALE, PlayerClass.ENGINEER, "job_Ingenieur[f:" + '"' + "Ingenieur" + '"' + "]");
@@ -574,8 +573,10 @@ public class ChatChannels {
     }
 
     private static void addJobChannel(Gender gender, PlayerClass playerClass, String channelName) {
-        addChannel(new JobChannel(gender, playerClass, Race.ELYOS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".0.AION.KOR"));
-        addChannel(new JobChannel(gender, playerClass, Race.ASMODIANS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".1.AION.KOR"));
+        addChannel(
+            new JobChannel(gender, playerClass, Race.ELYOS, "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".0.AION.KOR"));
+        addChannel(new JobChannel(gender, playerClass, Race.ASMODIANS,
+            "@\u0001" + channelName + "\u0001" + GameServerService.GAMESERVER_ID + ".1.AION.KOR"));
     }
 
     private static void addLangChannel(String channelName) {

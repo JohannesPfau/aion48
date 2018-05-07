@@ -46,7 +46,6 @@ import com.aionemu.gameserver.world.World;
 /**
  * @author Lyahim, ATracer, Modified by Simple
  * @Reworked Voidstar
- 
  */
 public class CM_INVITE_TO_GROUP extends AionClientPacket {
 

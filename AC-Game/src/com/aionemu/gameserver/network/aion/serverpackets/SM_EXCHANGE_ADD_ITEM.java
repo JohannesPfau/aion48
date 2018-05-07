@@ -55,7 +55,7 @@ public class SM_EXCHANGE_ADD_ITEM extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         ItemTemplate itemTemplate = item.getItemTemplate();
 
         writeC(action); // 0 -self 1-other

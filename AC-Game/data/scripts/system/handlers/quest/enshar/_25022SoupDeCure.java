@@ -29,9 +29,9 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -62,7 +62,7 @@ public class _25022SoupDeCure extends QuestHandler {
         int targetId = env.getTargetId();
 
         if (qs == null || qs.getStatus() == QuestStatus.NONE) {
-            if (targetId == 804908) { 
+            if (targetId == 804908) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 4762);
                 } else {
@@ -72,7 +72,7 @@ public class _25022SoupDeCure extends QuestHandler {
         } else if (qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             switch (targetId) {
-                case 804908: { 
+                case 804908: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 0) {
@@ -80,16 +80,16 @@ public class _25022SoupDeCure extends QuestHandler {
                             }
                         }
                         case CHECK_USER_HAS_QUEST_ITEM: {
-							giveQuestItem(env, 182215709, 1);
+                            giveQuestItem(env, 182215709, 1);
                             return checkQuestItems(env, 0, 1, false, 1352, 10001);
                         }
                         case SET_SUCCEED:
-							if (var == 1) {
-								qs.setQuestVarById(0, var + 1);
-								qs.setStatus(QuestStatus.REWARD);
-								updateQuestStatus(env);
-								return true;
-							}
+                            if (var == 1) {
+                                qs.setQuestVarById(0, var + 1);
+                                qs.setStatus(QuestStatus.REWARD);
+                                updateQuestStatus(env);
+                                return true;
+                            }
                         case FINISH_DIALOG: {
                             return closeDialogWindow(env);
                         }
@@ -97,7 +97,7 @@ public class _25022SoupDeCure extends QuestHandler {
                 }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-            if (targetId == 804724) { 
+            if (targetId == 804724) {
                 if (dialog == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
                 } else {

@@ -48,7 +48,7 @@ public class SM_ICON_INFO extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(buffId);
         writeC(display ? 1 : 0);
     }

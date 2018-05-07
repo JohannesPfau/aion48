@@ -29,9 +29,9 @@
  */
 package quest.fenris_fang;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,7 +50,7 @@ public class _4938WorkOfTheFenrisFangs extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {204053, 798367, 798368, 798369, 798370, 798371, 798372, 798373, 798374, 204075};
+        int[] npcs = { 204053, 798367, 798368, 798369, 798370, 798371, 798372, 798373, 798374, 204075 };
         qe.registerQuestNpc(204053).addOnQuestStart(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);

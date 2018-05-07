@@ -45,7 +45,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 
     private final static int questId = 2094;
-    private final static int[] npc_ids = {205150, 205192, 205155, 730164, 205191, 204057};
+    private final static int[] npc_ids = { 205150, 205192, 205155, 730164, 205191, 204057 };
 
     public _2094TheSecretofAdmaStronghold() {
         super(questId);
@@ -63,13 +63,13 @@ public class _2094TheSecretofAdmaStronghold extends QuestHandler {
 
     @Override
     public boolean onZoneMissionEndEvent(QuestEnv env) {
-        int[] quests = {2092, 2093, 2054};
+        int[] quests = { 2092, 2093, 2054 };
         return defaultOnZoneMissionEndEvent(env, quests);
     }
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {2091, 2092, 2093, 2054};
+        int[] quests = { 2091, 2092, 2093, 2054 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 

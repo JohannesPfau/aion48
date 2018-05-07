@@ -29,9 +29,9 @@
  */
 package quest.morheim;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -119,7 +119,7 @@ public class _24024ANepraProtector extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 204361: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -133,7 +133,7 @@ public class _24024ANepraProtector extends QuestHandler {
 
                     }
                 }
-                break;
+                    break;
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 204369) {

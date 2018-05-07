@@ -29,9 +29,9 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,8 +51,8 @@ public class _25060TakeDownTheBarricade extends QuestHandler {
     public void register() {
         qe.registerQuestNpc(804730).addOnQuestStart(questId);
         qe.registerQuestNpc(804730).addOnTalkEvent(questId);
-		qe.registerQuestNpc(220033).addOnKillEvent(questId);
-		qe.registerQuestNpc(220034).addOnKillEvent(questId);
+        qe.registerQuestNpc(220033).addOnKillEvent(questId);
+        qe.registerQuestNpc(220034).addOnKillEvent(questId);
         qe.registerQuestNpc(220035).addOnKillEvent(questId);
 
     }
@@ -67,7 +67,7 @@ public class _25060TakeDownTheBarricade extends QuestHandler {
                 int targetId = env.getTargetId();
                 int var1 = qs.getQuestVarById(1);
                 int var2 = qs.getQuestVarById(2);
-				int var3 = qs.getQuestVarById(3);
+                int var3 = qs.getQuestVarById(3);
                 switch (targetId) {
                     case 220033: {
                         if (var1 < 0) {
@@ -75,8 +75,8 @@ public class _25060TakeDownTheBarricade extends QuestHandler {
                         } else if (var1 == 0) {
                             if (var2 == 1 && var3 == 1) {
                                 qs.setQuestVar(1);
-								qs.setStatus(QuestStatus.REWARD);
-								updateQuestStatus(env);
+                                qs.setStatus(QuestStatus.REWARD);
+                                updateQuestStatus(env);
                                 return true;
                             } else {
                                 return defaultOnKillEvent(env, 220033, 0, 1, 1);
@@ -90,8 +90,8 @@ public class _25060TakeDownTheBarricade extends QuestHandler {
                         } else if (var2 == 0) {
                             if (var1 == 1 && var3 == 1) {
                                 qs.setQuestVar(1);
-								qs.setStatus(QuestStatus.REWARD);
-								updateQuestStatus(env);
+                                qs.setStatus(QuestStatus.REWARD);
+                                updateQuestStatus(env);
                                 return true;
                             } else {
                                 return defaultOnKillEvent(env, 220034, 0, 1, 2);
@@ -99,14 +99,14 @@ public class _25060TakeDownTheBarricade extends QuestHandler {
                         }
                         break;
                     }
-					case 220035: {
+                    case 220035: {
                         if (var3 < 0) {
                             return defaultOnKillEvent(env, 220035, 0, 0, 3);
                         } else if (var3 == 0) {
                             if (var1 == 1 && var2 == 1) {
                                 qs.setQuestVar(1);
-								qs.setStatus(QuestStatus.REWARD);
-								updateQuestStatus(env);
+                                qs.setStatus(QuestStatus.REWARD);
+                                updateQuestStatus(env);
                                 return true;
                             } else {
                                 return defaultOnKillEvent(env, 220035, 0, 1, 3);
@@ -137,7 +137,7 @@ public class _25060TakeDownTheBarricade extends QuestHandler {
             }
         } else if (qs.getStatus() == QuestStatus.START) {
             if (targetId == 804730) {
-                if (env.getDialog() == DialogAction.QUEST_SELECT) { 
+                if (env.getDialog() == DialogAction.QUEST_SELECT) {
                     qs.setStatus(QuestStatus.REWARD);
                     updateQuestStatus(env);
                     return sendQuestDialog(env, 1352);

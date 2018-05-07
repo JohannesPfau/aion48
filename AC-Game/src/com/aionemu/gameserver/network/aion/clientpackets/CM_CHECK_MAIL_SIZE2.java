@@ -33,8 +33,8 @@ import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 
-
 public class CM_CHECK_MAIL_SIZE2 extends AionClientPacket {
+
     /**
      * @param opcode
      * @param state
@@ -44,7 +44,8 @@ public class CM_CHECK_MAIL_SIZE2 extends AionClientPacket {
         super(opcode, state, restStates);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionlightning.commons.network.packet.BaseClientPacket#readImpl()
      */
     @Override
@@ -52,7 +53,8 @@ public class CM_CHECK_MAIL_SIZE2 extends AionClientPacket {
         PacketLoggerService.getInstance().logPacketCM(this.getPacketName());
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionlightning.commons.network.packet.BaseClientPacket#runImpl()
      */
     @Override

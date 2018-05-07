@@ -29,6 +29,8 @@
  */
 package ai.siege;
 
+import java.util.concurrent.Future;
+
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
@@ -37,8 +39,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-
-import java.util.concurrent.Future;
 
 /**
  * @author cheatkiller
@@ -92,6 +92,7 @@ public class GuardTowerAI2 extends NpcAI2 {
     private void attack() {
         final Player p = (Player) getOwner().getTarget();
         task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (p == null || p.getLifeStats().isAlreadyDead()) {

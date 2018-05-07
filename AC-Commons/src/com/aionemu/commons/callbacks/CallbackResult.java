@@ -32,10 +32,11 @@ package com.aionemu.commons.callbacks;
 /**
  * This class represents callback result
  *
- * @param <T> Type of callback result
+ * @param <T>
+ *            Type of callback result
  * @author SoulKeeper
  */
-@SuppressWarnings({"unchecked", "rawtypes"})
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class CallbackResult<T> {
 
     /**
@@ -84,7 +85,8 @@ public class CallbackResult<T> {
     /**
      * Creates new callback with specified blocking policy
      *
-     * @param blockPolicy what this callback should block
+     * @param blockPolicy
+     *            what this callback should block
      */
     private CallbackResult(int blockPolicy) {
         this(null, blockPolicy);
@@ -93,8 +95,10 @@ public class CallbackResult<T> {
     /**
      * Creates new callback with specified blocking policy and result
      *
-     * @param result      result of callback
-     * @param blockPolicy what this callback blocks
+     * @param result
+     *            result of callback
+     * @param blockPolicy
+     *            what this callback blocks
      */
     private CallbackResult(T result, int blockPolicy) {
         this.result = result;
@@ -132,7 +136,8 @@ public class CallbackResult<T> {
      * Returns callback for continue action, for perfomance reasons returns
      * cached instance
      *
-     * @param <T> type of result object, ignored, always null
+     * @param <T>
+     *            type of result object, ignored, always null
      * @return callback with result type continue
      */
     public static <T> CallbackResult<T> newContinue() {
@@ -143,7 +148,8 @@ public class CallbackResult<T> {
      * Returns callback that blocks another callbacks, cached instance is used
      * for perfomance reasons
      *
-     * @param <T> type of result object, ignored, always null
+     * @param <T>
+     *            type of result object, ignored, always null
      * @return callback that blocks invocation of another callbacks
      */
     public static <T> CallbackResult<T> newCallbackBlocker() {
@@ -155,12 +161,14 @@ public class CallbackResult<T> {
      * {@link com.aionemu.commons.callbacks.Callback#afterCall(Object, Object[], Object)}
      * will be invoked with the result from this call.
      *
-     * @param result Result of callback
-     * @param <T>    type of result
+     * @param result
+     *            Result of callback
+     * @param <T>
+     *            type of result
      * @return new callback instance with given result that will be returned as
-     * method result
+     *         method result
      */
     public static <T> CallbackResult<T> newFullBlocker(T result) {
-        return new CallbackResult<T>(result, BLOCK_ALL);
+        return new CallbackResult<>(result, BLOCK_ALL);
     }
 }

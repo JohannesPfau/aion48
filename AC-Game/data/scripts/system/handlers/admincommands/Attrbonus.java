@@ -17,6 +17,9 @@
 
 package admincommands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
@@ -28,31 +31,26 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * @author xXMashUpXx
- *
  */
-public class Attrbonus extends AdminCommand implements StatOwner
-{
+public class Attrbonus extends AdminCommand implements StatOwner {
+
     /**
      * @param
      */
-    public Attrbonus()
-    {
+    public Attrbonus() {
         super("attrbonus");
     }
 
-    /* (non-Javadoc)
-     * @see com.aionlightning.gameserver.utils.chathandlers.ChatCommand#execute(com.aionlightning.gameserver.model.gameobjects.player.Player, java.lang.String[])
+    /*
+     * (non-Javadoc)
+     * @see com.aionlightning.gameserver.utils.chathandlers.ChatCommand#execute(com.aionlightning.gameserver.model.gameobjects.player.Player,
+     * java.lang.String[])
      */
     @Override
-    public void execute(Player admin, String... params)
-    {
-        if (params == null || params.length < 1)
-        {
+    public void execute(Player admin, String... params) {
+        if (params == null || params.length < 1) {
 
             PacketSendUtility.sendMessage(admin, "Syntax //attrbonus <modifier> <value>");
 
@@ -60,861 +58,606 @@ public class Attrbonus extends AdminCommand implements StatOwner
         }
 
         int parameter = 0;
-        try
-        {
+        try {
             parameter = Integer.parseInt(params[1]);
-        }
-        catch (NumberFormatException e)
-        {
+        } catch (NumberFormatException e) {
 
             PacketSendUtility.sendMessage(admin, "Parameter Invalid");
 
             return;
         }
 
-        if (params[0].equalsIgnoreCase("speed"))
-        {
+        if (params[0].equalsIgnoreCase("speed")) {
             if (parameter < 1000) {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.SPEED, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("maxhp") || params[0].equalsIgnoreCase("hp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("maxhp") || params[0].equalsIgnoreCase("hp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.MAXHP, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("hpregen"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("hpregen")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.REGEN_HP, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("maxmp") || params[0].equalsIgnoreCase("mp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("maxmp") || params[0].equalsIgnoreCase("mp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.MAXMP, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("mpregen"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("mpregen")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.REGEN_MP, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("flyspeed"))
-        {
+        } else if (params[0].equalsIgnoreCase("flyspeed")) {
             if (parameter < 1000) {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.FLY_SPEED, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("maxdp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("maxdp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.MAXDP, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("ARALL"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("ARALL")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.ABNORMAL_RESISTANCE_ALL, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("allpara"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("allpara")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.ALLRESIST, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("strvit"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("strvit")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.STRVIT, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("knowil"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("knowil")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.KNOWIL, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("agidex"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("agidex")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.AGIDEX, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("str"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("str")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.POWER, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("vit"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("vit")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.HEALTH, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("agi"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("agi")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.ACCURACY, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("dex"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("dex")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.AGILITY, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("kno"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("kno")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.KNOWLEDGE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("wil"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("wil")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.WILL, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("ElementalDefendWater"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("ElementalDefendWater")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.WATER_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("ElementalDefendAir"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("ElementalDefendAir")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.WIND_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("ElementalDefendEarth"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("ElementalDefendEarth")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.EARTH_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("ElementalDefendFire"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("ElementalDefendFire")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.FIRE_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("FPRegen"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("FPRegen")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.REGEN_FP, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("physicaldefend"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("physicaldefend")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.PHYSICAL_DEFENSE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("magicalAttack"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("magicalAttack")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.MAGICAL_ATTACK, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("magicalResist"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("magicalResist")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.MAGICAL_RESIST, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("attackDelay"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("attackDelay")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.ATTACK_SPEED, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("dodge"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("dodge")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.EVASION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("parry"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("parry")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.PARRY, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("block"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("block")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.BLOCK, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("critical"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("critical")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.PHYSICAL_CRITICAL, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("hitCount"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("hitCount")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.HIT_COUNT, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("attackRange"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("attackRange")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.ATTACK_RANGE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("magicalCritical"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("magicalCritical")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.MAGICAL_CRITICAL, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("concentration"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("concentration")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.CONCENTRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arPoison"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arPoison")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.POISON_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arBleed"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arBleed")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.BLEED_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arBleed"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arBleed")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.BLEED_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arParalyze"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arParalyze")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.PARALYZE_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arSleep"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arSleep")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.SLEEP_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arRoot"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arRoot")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.ROOT_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arBlind"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arBlind")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.BLIND_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arCharm"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arCharm")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.CHARM_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arDisease"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arDisease")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.DISEASE_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arSilence"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arSilence")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.SILENCE_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arFear"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arFear")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.FEAR_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arConfuse"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arConfuse")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.CONFUSE_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arStun"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arStun")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.STUN_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arPerification"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arPerification")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.PERIFICATION_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arStumble"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arStumble")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.STUMBLE_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arStagger"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arStagger")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.STAGGER_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arOpenAreial"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arOpenAreial")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.OPENAREIAL_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arSnare"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arSnare")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.SNARE_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arSlow"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arSlow")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.SLOW_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("arSpin"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("arSpin")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.SPIN_RESISTANCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Poison Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Poison Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.POISON_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Bleed Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Bleed Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.BLEED_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Paralyze Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Paralyze Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.PARALYZE_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Sleep Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Sleep Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.SLEEP_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Root Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Root Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.ROOT_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Blind Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Blind Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.BLIND_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Charm Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Charm Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.CHARM_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Disease Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Disease Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.DISEASE_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Silence Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Silence Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.SILENCE_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Fear Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Fear Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.FEAR_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Curse Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Curse Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.CURSE_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Confuse Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Confuse Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.CONFUSE_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Stun Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Stun Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.STUN_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Perification Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Perification Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.PERIFICATION_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Stumble Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Stumble Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.STUMBLE_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Stagger Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Stagger Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.STAGGER_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("OpenAreial Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("OpenAreial Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.OPENAREIAL_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Snare Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Snare Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.SNARE_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Slow Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Slow Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.SLOW_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("Spin Arp"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("Spin Arp")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.SPIN_RESISTANCE_PENETRATION, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("MagicalSkillBoost"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("MagicalSkillBoost")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.BOOST_MAGICAL_SKILL, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("MagicalHitAccuracy"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("MagicalHitAccuracy")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.MAGICAL_ACCURACY, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("BoostCastingTime"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("BoostCastingTime")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.BOOST_CASTING_TIME, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("HealSkillBoost"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("HealSkillBoost")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.HEAL_BOOST, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("PhysicalCriticalReduceRate"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("PhysicalCriticalReduceRate")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.PHYSICAL_CRITICAL_RESIST, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("MagicalCriticalReduceRate"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("MagicalCriticalReduceRate")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.MAGICAL_CRITICAL_RESIST, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("PhysicalCriticalDamageReduce"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("PhysicalCriticalDamageReduce")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("MagicalCriticalDamageReduce"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("MagicalCriticalDamageReduce")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("magicalDefend"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("magicalDefend")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.MAGICAL_DEFEND, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
             }
-        }
-        else if (params[0].equalsIgnoreCase("MagicalSkillBoostResist"))
-        {
-            if (parameter < 99999999)
-            {
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        } else if (params[0].equalsIgnoreCase("MagicalSkillBoostResist")) {
+            if (parameter < 99999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.MAGIC_SKILL_BOOST_RESIST, parameter));
                 admin.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(admin, new SM_EMOTION(admin, EmotionType.START_EMOTE2, 0, 0), true);
@@ -922,31 +665,28 @@ public class Attrbonus extends AdminCommand implements StatOwner
         }
     }
 
-    class StatChangeFunction extends StatFunction
-    {
+    class StatChangeFunction extends StatFunction {
+
         static final int speed = 6000;
         static final int flyspeed = 9000;
         static final int maxDp = 4000;
         int modifier = 1;
 
-        StatChangeFunction(StatEnum stat, int modifier)
-        {
+        StatChangeFunction(StatEnum stat, int modifier) {
             this.stat = stat;
             this.modifier = modifier;
         }
 
         @Override
-        public void apply(Stat2 stat)
-        {
-            switch (this.stat)
-            {
+        public void apply(Stat2 stat) {
+            switch (this.stat) {
                 case SPEED:
                     stat.setBase(speed + (speed * modifier) / 100);
                     break;
                 case FLY_SPEED:
                     stat.setBase(flyspeed + (flyspeed * modifier) / 100);
                     break;
-                case POWER :
+                case POWER:
                     short modifierPower = (short) modifier;
                     stat.setBase(Math.round(modifierPower));
                     break;
@@ -1275,23 +1015,20 @@ public class Attrbonus extends AdminCommand implements StatOwner
                     stat.setBase(Math.round(modifierMSBResist));
                     break;
                 default:
-                	break;
+                    break;
             }
         }
-        
+
         @Override
-        public int getPriority()
-        {
-        	return 60;
+        public int getPriority() {
+            return 60;
         }
     }
-    
+
     @Override
-    public void onFail(Player player, String message)
-    {
+    public void onFail(Player player, String message) {
 
-    	PacketSendUtility.sendMessage(player, "Syntax //attrbonus <modifier> <value>");
-
+        PacketSendUtility.sendMessage(player, "Syntax //attrbonus <modifier> <value>");
 
     }
 }

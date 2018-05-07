@@ -133,8 +133,7 @@ public class SkillEngine {
         return getChargeSkill(creature, skillId, skillLevel, firstTarget, null);
     }
 
-    public ChargeSkill getChargeSkill(Player creature, int skillId, int skillLevel, VisibleObject firstTarget,
-                                      ItemTemplate itemTemplate) {
+    public ChargeSkill getChargeSkill(Player creature, int skillId, int skillLevel, VisibleObject firstTarget, ItemTemplate itemTemplate) {
         SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 
         if (template == null) {
@@ -160,8 +159,9 @@ public class SkillEngine {
      * @param skillId
      * @param effector
      * @param effected
-     * @param duration => 0 takes duration from skill_templates, >0 forced
-     *                 duration
+     * @param duration
+     *            => 0 takes duration from skill_templates, >0 forced
+     *            duration
      */
     public void applyEffectDirectly(int skillId, Creature effector, Creature effected, int duration) {
         SkillTemplate st = DataManager.SKILL_DATA.getSkillTemplate(skillId);

@@ -47,6 +47,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="NpcShout">
  *   &lt;complexContent>

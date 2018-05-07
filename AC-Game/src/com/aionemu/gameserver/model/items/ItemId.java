@@ -89,7 +89,7 @@ public enum ItemId {
     RADIANT_TOKEN(186000101), //Aion 2.0
     FORTUNEERS_TOKEN(186000102), //Aion 2.0
     WARD_TOKEN(186000103), //Aion 2.0
-    CRUSADER_TOKEN(186000104),//Aion 2.0
+    CRUSADER_TOKEN(186000104), //Aion 2.0
     DAEMON_TOKEN(186000105), //Aion 2.0
     ORICHALCUM_TOKEN(186000114), //Aion 2.5
     CIRCLE_TOKEN(186000115), //Aion 2.5
@@ -124,6 +124,7 @@ public enum ItemId {
     ASCENSION_CRYSTAL(186000221), //Aion 3.7
     VETERAN_CRYSTAL(186000222), //Aion 3.7
     GLORIOUS_INSIGNIA(182213259); //Aion 3.5
+
     private int itemId;
 
     private ItemId(int itemId) {

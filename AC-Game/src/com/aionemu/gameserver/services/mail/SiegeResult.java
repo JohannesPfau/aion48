@@ -40,6 +40,7 @@ public enum SiegeResult {
     DEFENDER(3),
     EMPTY(4),
     FAIL(5);
+
     private int value;
 
     private SiegeResult(int value) {

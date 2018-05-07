@@ -29,22 +29,24 @@
  */
 package com.aionemu.commons.scripting.impl.javacompiler;
 
-import com.aionemu.commons.scripting.CompilationResult;
-import com.aionemu.commons.scripting.ScriptClassLoader;
-import com.aionemu.commons.scripting.ScriptCompiler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.tools.DiagnosticListener;
-import javax.tools.JavaCompiler;
-import javax.tools.JavaFileObject;
-import javax.tools.ToolProvider;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+
+import javax.tools.DiagnosticListener;
+import javax.tools.JavaCompiler;
+import javax.tools.JavaFileObject;
+import javax.tools.ToolProvider;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.scripting.CompilationResult;
+import com.aionemu.commons.scripting.ScriptClassLoader;
+import com.aionemu.commons.scripting.ScriptCompiler;
 
 /**
  * Wrapper for JavaCompiler api
@@ -74,7 +76,8 @@ public class ScriptCompilerImpl implements ScriptCompiler {
      * Creates new instance of JavaCompilerImpl. If system compiler is not
      * available - throws RuntimeExcetion
      *
-     * @throws RuntimeException if compiler is not available
+     * @throws RuntimeException
+     *             if compiler is not available
      */
     public ScriptCompilerImpl() {
         javaCompiler = ToolProvider.getSystemJavaCompiler();
@@ -86,7 +89,8 @@ public class ScriptCompilerImpl implements ScriptCompiler {
     /**
      * Sets parent classLoader for this JavaCompilerImpl
      *
-     * @param classLoader parent classloader
+     * @param classLoader
+     *            parent classloader
      */
     @Override
     public void setParentClassLoader(ScriptClassLoader classLoader) {
@@ -96,7 +100,8 @@ public class ScriptCompilerImpl implements ScriptCompiler {
     /**
      * Sets jar files that should be used for this compiler as libraries
      *
-     * @param files list of jar files
+     * @param files
+     *            list of jar files
      */
     @Override
     public void setLibraires(Iterable<File> files) {
@@ -106,26 +111,33 @@ public class ScriptCompilerImpl implements ScriptCompiler {
     /**
      * Compiles given class.
      *
-     * @param className  Name of the class
-     * @param sourceCode source code
+     * @param className
+     *            Name of the class
+     * @param sourceCode
+     *            source code
      * @return CompilationResult with the class
-     * @throws RuntimeException if compilation failed with errros
+     * @throws RuntimeException
+     *             if compilation failed with errros
      */
     @Override
     public CompilationResult compile(String className, String sourceCode) {
-        return compile(new String[]{className}, new String[]{sourceCode});
+        return compile(new String[] { className }, new String[] { sourceCode });
     }
 
     /**
      * Compiles list of classes. Amount of classNames must be equal to amount of
      * sourceCodes
      *
-     * @param classNames classNames
-     * @param sourceCode list of source codes
+     * @param classNames
+     *            classNames
+     * @param sourceCode
+     *            list of source codes
      * @return CompilationResult with needed files
-     * @throws IllegalArgumentException if size of classNames not equals to size
-     *                                  of sourceCodes
-     * @throws RuntimeException         if compilation failed with errors
+     * @throws IllegalArgumentException
+     *             if size of classNames not equals to size
+     *             of sourceCodes
+     * @throws RuntimeException
+     *             if compilation failed with errors
      */
     @Override
     public CompilationResult compile(String[] classNames, String[] sourceCode) throws IllegalArgumentException {
@@ -147,9 +159,11 @@ public class ScriptCompilerImpl implements ScriptCompiler {
     /**
      * Compiles given files. Files must be java sources.
      *
-     * @param compilationUnits files to compile
+     * @param compilationUnits
+     *            files to compile
      * @return CompilationResult with classes
-     * @throws RuntimeException if compilation failed with errros
+     * @throws RuntimeException
+     *             if compilation failed with errros
      */
     @Override
     public CompilationResult compile(Iterable<File> compilationUnits) {
@@ -166,9 +180,11 @@ public class ScriptCompilerImpl implements ScriptCompiler {
      * Actually performs compilation. Compiler expects sources in UTF-8
      * encoding. Also compiler generates full debugging info for classes.
      *
-     * @param compilationUnits Units that will be compiled
+     * @param compilationUnits
+     *            Units that will be compiled
      * @return CompilationResult with compiledClasses
-     * @throws RuntimeException if compilation failed with errors
+     * @throws RuntimeException
+     *             if compilation failed with errors
      */
     protected CompilationResult doCompilation(Iterable<JavaFileObject> compilationUnits) {
         List<String> options = Arrays.asList("-encoding", "UTF-8", "-g");
@@ -198,10 +214,13 @@ public class ScriptCompilerImpl implements ScriptCompiler {
     /**
      * Reolves list of classes by their names
      *
-     * @param classNames names of the classes
-     * @param cl         classLoader to use to resove classes
+     * @param classNames
+     *            names of the classes
+     * @param cl
+     *            classLoader to use to resove classes
      * @return resolved classes
-     * @throws RuntimeException if can't find class
+     * @throws RuntimeException
+     *             if can't find class
      */
     protected Class<?>[] classNamesToClasses(Collection<String> classNames, ScriptClassLoader cl) {
         Class<?>[] classes = new Class<?>[classNames.size()];
@@ -227,6 +246,6 @@ public class ScriptCompilerImpl implements ScriptCompiler {
      */
     @Override
     public String[] getSupportedFileTypes() {
-        return new String[]{"java"};
+        return new String[] { "java" };
     }
 }

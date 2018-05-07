@@ -84,14 +84,14 @@ public class SystemMailService {
      * @param letterType
      * @return
      */
-    public boolean sendMail(String sender, String recipientName, String title, String message, int attachedItemObjId,
-                            long attachedItemCount, long attachedKinahCount, LetterType letterType) {
+    public boolean sendMail(String sender, String recipientName, String title, String message, int attachedItemObjId, long attachedItemCount,
+        long attachedKinahCount, LetterType letterType) {
 
         if (attachedItemObjId != 0) {
             ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(attachedItemObjId);
             if (itemTemplate == null) {
-                log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] RETURN ITEM ID:"
-                        + itemTemplate + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " ITEM TEMPLATE IS MISSING ");
+                log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] RETURN ITEM ID:" + itemTemplate
+                    + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " ITEM TEMPLATE IS MISSING ");
                 return false;
             }
         }
@@ -101,14 +101,14 @@ public class SystemMailService {
         }
 
         if (recipientName.length() > 16) {
-            log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN"
-                    + attachedItemObjId + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " RECIPIENT NAME LENGTH > 16 ");
+            log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN" + attachedItemObjId
+                + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " RECIPIENT NAME LENGTH > 16 ");
             return false;
         }
 
         if (!sender.startsWith("$$") && sender.length() > 16) {
-            log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN"
-                    + attachedItemObjId + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " SENDER NAME LENGTH > 16 ");
+            log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] ITEM RETURN" + attachedItemObjId
+                + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " SENDER NAME LENGTH > 16 ");
             return false;
         }
 
@@ -130,8 +130,8 @@ public class SystemMailService {
         Player recipient = World.getInstance().findPlayer(recipientCommonData.getPlayerObjId());
         if (recipient != null) {
             if (recipient.getMailbox() != null && !(recipient.getMailbox().size() < 200)) {
-                log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientCommonData.getName()
-                        + "] ITEM RETURN" + attachedItemObjId + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MAILBOX FULL ");
+                log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientCommonData.getName() + "] ITEM RETURN"
+                    + attachedItemObjId + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MAILBOX FULL ");
                 return false;
             }
         } else if (recipientCommonData.getMailboxLetters() > 199) {
@@ -158,8 +158,8 @@ public class SystemMailService {
 
         String finalSender = sender;
         Timestamp time = new Timestamp(Calendar.getInstance().getTimeInMillis());
-        Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(), attachedItem,
-                finalAttachedKinahCount, title, message, finalSender, time, true, letterType);
+        Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(), attachedItem, finalAttachedKinahCount,
+            title, message, finalSender, time, true, letterType);
 
         if (!DAOManager.getDAO(MailDAO.class).storeLetter(time, newLetter)) {
             return false;
@@ -201,7 +201,7 @@ public class SystemMailService {
         }
         if (LoggingConfig.LOG_SYSMAIL) {
             log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientName + "] RETURN ITEM ID:" + itemId
-                    + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MESSAGE SUCCESSFULLY SENDED ");
+                + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MESSAGE SUCCESSFULLY SENDED ");
         }
         return true;
     }
@@ -216,7 +216,8 @@ public class SystemMailService {
      * @param LetterType
      * @return {@link Boolean}
      */
-    public boolean sendSystemMail(String sender, String sysTitle, String sysMessage, String recipientName, Item item, long attachedKinahCount, LetterType type) {
+    public boolean sendSystemMail(String sender, String sysTitle, String sysMessage, String recipientName, Item item, long attachedKinahCount,
+        LetterType type) {
         String title = sysTitle;
         String message = sysMessage;
         Item attachedItem = item;
@@ -236,8 +237,8 @@ public class SystemMailService {
         Player recipient = World.getInstance().findPlayer(recipientCommonData.getPlayerObjId());
         if (recipient != null) {
             if (recipient.getMailbox() != null && !(recipient.getMailbox().size() < 200)) {
-                log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientCommonData.getName()
-                        + "] ITEM RETURN" + attachedItemObjId + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MAILBOX FULL ");
+                log.info("[SYSMAILSERVICE] > [SenderName: " + sender + "] [RecipientName: " + recipientCommonData.getName() + "] ITEM RETURN"
+                    + attachedItemObjId + " ITEM COUNT " + attachedItemCount + " KINAH COUNT " + attachedKinahCount + " MAILBOX FULL ");
                 return false;
             }
         } else if (recipientCommonData.getMailboxLetters() > 199) {
@@ -257,8 +258,8 @@ public class SystemMailService {
         attachedItem.setItemLocation(StorageType.MAILBOX.getId());
 
         Timestamp time = new Timestamp(System.currentTimeMillis());
-        Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(),
-                attachedItem, attachedKinahCount, title, message, sender, time, true, type);
+        Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(), attachedItem, attachedKinahCount, title,
+            message, sender, time, true, type);
 
         if (!DAOManager.getDAO(MailDAO.class).storeLetter(time, newLetter)) {
             return false;

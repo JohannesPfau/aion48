@@ -75,6 +75,7 @@ public class IdianStone extends ItemStone {
     public void onEquip(final Player player) {
         if (polishCharge > 0) {
             actionListener = new ActionObserver(ObserverType.ALL) {
+
                 @Override
                 public void attacked(Creature creature) {
                     decreasePolishCharge(player, true);

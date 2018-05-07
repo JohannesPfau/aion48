@@ -79,7 +79,7 @@ public class TalkInfo {
         return funcDialogIds;
     }
 
-    public String getSubDialogType(){
+    public String getSubDialogType() {
         return subDialogType;
     }
 }

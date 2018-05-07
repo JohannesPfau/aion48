@@ -36,25 +36,25 @@ import com.aionemu.gameserver.model.beritra.BeritraStateType;
  * @author Cx3
  */
 
-public class Invade extends BeritraInvasion<BeritraLocation>
-{
-	public Invade(BeritraLocation beritra) {
-		super(beritra);
-	}
-	
-	@Override
-	public void startBeritraInvasion() {
-		getBeritraLocation().setActiveBeritra(this);
-		despawn();
-		spawn(BeritraStateType.INVASION);
-		initWorldBoss();
-	}
-	
-	@Override
-	public void stopBeritraInvasion() {
-		getBeritraLocation().setActiveBeritra(null);
-		rmvWorldBossListener();
-		despawn();
-		spawn(BeritraStateType.PEACE);
-	}
+public class Invade extends BeritraInvasion<BeritraLocation> {
+
+    public Invade(BeritraLocation beritra) {
+        super(beritra);
+    }
+
+    @Override
+    public void startBeritraInvasion() {
+        getBeritraLocation().setActiveBeritra(this);
+        despawn();
+        spawn(BeritraStateType.INVASION);
+        initWorldBoss();
+    }
+
+    @Override
+    public void stopBeritraInvasion() {
+        getBeritraLocation().setActiveBeritra(null);
+        rmvWorldBossListener();
+        despawn();
+        spawn(BeritraStateType.PEACE);
+    }
 }

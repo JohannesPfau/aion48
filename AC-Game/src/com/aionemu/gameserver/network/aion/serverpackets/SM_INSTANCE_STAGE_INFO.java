@@ -50,7 +50,7 @@ public class SM_INSTANCE_STAGE_INFO extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(type);
         writeD(0);
         writeH(event);

@@ -53,6 +53,7 @@ public class AlwaysDodgeEffect extends EffectTemplate {
     @Override
     public void startEffect(final Effect effect) {
         AttackCalcObserver acObserver = new AttackStatusObserver(value, AttackStatus.DODGE) {
+
             @Override
             public boolean checkStatus(AttackStatus status) {
                 if (status == AttackStatus.DODGE) {

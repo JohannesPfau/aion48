@@ -49,7 +49,7 @@ import com.aionemu.gameserver.skillengine.change.Func;
 public class AbyssRaceBuff implements StatOwner {
 
     private Future<?> task;
-    private List<IStatFunction> functions = new ArrayList<IStatFunction>();
+    private List<IStatFunction> functions = new ArrayList<>();
     private AbyssRaceBonus abyssRaceBonusAttr;
     private long startTime;
 

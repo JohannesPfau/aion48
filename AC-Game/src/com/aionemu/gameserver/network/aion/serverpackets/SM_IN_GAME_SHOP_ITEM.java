@@ -49,7 +49,7 @@ public class SM_IN_GAME_SHOP_ITEM extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(item.getObjectId()); // nrItem
         writeQ(item.getItemPrice()); // price
         writeH(0);

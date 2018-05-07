@@ -30,8 +30,10 @@
 
 package ai.instance.eternalBastion;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.handler.AggroEventHandler;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -41,9 +43,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Alcapwnd
@@ -54,7 +54,7 @@ public class CommanderAI2 extends AggressiveNpcAI2 {
 
     int attackCount;
 
-    private List<Integer> percents = new ArrayList<Integer>();
+    private List<Integer> percents = new ArrayList<>();
 
     @Override
     protected void handleSpawned() {
@@ -116,6 +116,7 @@ public class CommanderAI2 extends AggressiveNpcAI2 {
 
     private void shout_attack() { // MSG Notice 05
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401827));
@@ -125,9 +126,8 @@ public class CommanderAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{98, 80, 70, 60, 50, 40, 30, 20, 5});
+        Collections.addAll(percents, new Integer[] { 98, 80, 70, 60, 50, 40, 30, 20, 5 });
     }
-
 
     @Override
     protected void handleDespawned() {

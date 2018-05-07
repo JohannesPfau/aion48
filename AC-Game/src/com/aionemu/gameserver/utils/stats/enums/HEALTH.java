@@ -51,6 +51,7 @@ public enum HEALTH {
     GUNNER(100),
     ARTIST(90),
     BARD(95);
+
     private int value;
 
     private HEALTH(int value) {

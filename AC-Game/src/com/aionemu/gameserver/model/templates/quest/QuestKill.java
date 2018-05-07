@@ -65,7 +65,7 @@ public class QuestKill {
      */
     public Set<Integer> getNpcIds() {
         if (npcIdSet == null) {
-            npcIdSet = new HashSet<Integer>();
+            npcIdSet = new HashSet<>();
         }
         if (npcIds != null) {
             npcIdSet.addAll(npcIds);

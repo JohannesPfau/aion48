@@ -29,12 +29,12 @@
  */
 package quest.cygnea;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -53,19 +53,20 @@ public class _10501ResearchTheRuins extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {804700, 731536, 731535};
-		qe.registerOnLevelUp(questId);
+        int[] npcs = { 804700, 731536, 731535 };
+        qe.registerOnLevelUp(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }
-		qe.registerQuestItem(182215598, questId);
+        qe.registerQuestItem(182215598, questId);
     }
 
-	@Override
+    @Override
     public boolean onLvlUpEvent(QuestEnv env) {
         return defaultOnLvlUpEvent(env, 10500, true);
     }
-	@Override
+
+    @Override
     public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -74,16 +75,16 @@ public class _10501ResearchTheRuins extends QuestHandler {
             if (var == 1) {
                 return HandlerResult.fromBoolean(useQuestItem(env, item, 1, 2, false));
             }
-			if (var == 3) {
+            if (var == 3) {
                 return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 4, false));
             }
-			if (var == 5) {
+            if (var == 5) {
                 return HandlerResult.fromBoolean(useQuestItem(env, item, 5, 6, false));
             }
         }
         return HandlerResult.FAILED;
     }
-	
+
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         final Player player = env.getPlayer();
@@ -103,52 +104,51 @@ public class _10501ResearchTheRuins extends QuestHandler {
                     case QUEST_SELECT:
                         if (var == 0) {
                             return sendQuestDialog(env, 1011);
-                        }
-						else if (var == 6) {
+                        } else if (var == 6) {
                             return sendQuestDialog(env, 3057);
                         }
                     case SETPRO1:
-						giveQuestItem(env, 182215598, 1);
-                        changeQuestStep(env, 0, 1, false); 
-						return closeDialogWindow(env);
-					case CHECK_USER_HAS_QUEST_ITEM:
-                    if (QuestService.collectItemCheck(env, true)) {
-                        qs.setStatus(QuestStatus.REWARD);
-                        updateQuestStatus(env);
-                        return sendQuestDialog(env, 10000);
-                    } else {
-                        return sendQuestDialog(env, 10001);
-                    }
-					case SET_SUCCEED:						
-                        changeQuestStep(env, 6, 6, true); 
-						return closeDialogWindow(env);
+                        giveQuestItem(env, 182215598, 1);
+                        changeQuestStep(env, 0, 1, false);
+                        return closeDialogWindow(env);
+                    case CHECK_USER_HAS_QUEST_ITEM:
+                        if (QuestService.collectItemCheck(env, true)) {
+                            qs.setStatus(QuestStatus.REWARD);
+                            updateQuestStatus(env);
+                            return sendQuestDialog(env, 10000);
+                        } else {
+                            return sendQuestDialog(env, 10001);
+                        }
+                    case SET_SUCCEED:
+                        changeQuestStep(env, 6, 6, true);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 731536) {
+            if (targetId == 731536) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 2) {
                             return sendQuestDialog(env, 1693);
                         }
                     case SETPRO3:
-						giveQuestItem(env, 182215598, 1);
-                        changeQuestStep(env, 2, 3, false); 
-						return closeDialogWindow(env);
+                        giveQuestItem(env, 182215598, 1);
+                        changeQuestStep(env, 2, 3, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 731535) {
+            if (targetId == 731535) {
                 switch (env.getDialog()) {
                     case USE_OBJECT:
                         if (var == 4) {
                             return sendQuestDialog(env, 2375);
                         }
                     case SETPRO5:
-						QuestService.addNewSpawn(210070000, 1, 236250, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
-						giveQuestItem(env, 182215598, 1);
-                        changeQuestStep(env, 4, 5, false); 
-						return closeDialogWindow(env);
+                        QuestService.addNewSpawn(210070000, 1, 236250, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
+                        giveQuestItem(env, 182215598, 1);
+                        changeQuestStep(env, 4, 5, false);
+                        return closeDialogWindow(env);
                 }
-            }		
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 804700) {
                 if (env.getDialog() == DialogAction.QUEST_SELECT) {

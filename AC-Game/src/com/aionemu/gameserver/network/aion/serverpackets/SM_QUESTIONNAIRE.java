@@ -55,7 +55,7 @@ public class SM_QUESTIONNAIRE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(messageId);
         writeC(chunk);
         writeC(count);

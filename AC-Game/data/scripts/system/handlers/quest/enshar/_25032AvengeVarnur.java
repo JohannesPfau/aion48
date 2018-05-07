@@ -29,9 +29,9 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -53,14 +53,14 @@ public class _25032AvengeVarnur extends QuestHandler {
         qe.registerQuestNpc(804912).addOnTalkEvent(questId);
         qe.registerQuestNpc(804913).addOnTalkEvent(questId);
         qe.registerQuestNpc(804914).addOnTalkEvent(questId);
-		qe.registerQuestNpc(220057).addOnKillEvent(questId);
+        qe.registerQuestNpc(220057).addOnKillEvent(questId);
     }
-	
-	@Override
+
+    @Override
     public boolean onKillEvent(QuestEnv env) {
         return defaultOnKillEvent(env, 220057, 0, 1);
     }
-	
+
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         Player player = env.getPlayer();
@@ -84,17 +84,17 @@ public class _25032AvengeVarnur extends QuestHandler {
                         return sendQuestDialog(env, 1352);
                     }
                 } else if (dialog == DialogAction.SETPRO2) {
-					changeQuestStep(env, 1, 2, false); 
+                    changeQuestStep(env, 1, 2, false);
                     return closeDialogWindow(env);
-				}
-            } 
-			if (targetId == 804913) { 
+                }
+            }
+            if (targetId == 804913) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     if (var == 2) {
                         return sendQuestDialog(env, 1693);
                     }
                 } else if (dialog == DialogAction.SET_SUCCEED) {
-					changeQuestStep(env, 2, 3, true); 
+                    changeQuestStep(env, 2, 3, true);
                     return closeDialogWindow(env);
                 }
             }

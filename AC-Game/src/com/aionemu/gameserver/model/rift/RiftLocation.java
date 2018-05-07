@@ -42,7 +42,7 @@ public class RiftLocation {
 
     private boolean opened;
     protected RiftTemplate template;
-    private List<VisibleObject> spawned = new ArrayList<VisibleObject>();
+    private List<VisibleObject> spawned = new ArrayList<>();
 
     public RiftLocation() {
     }

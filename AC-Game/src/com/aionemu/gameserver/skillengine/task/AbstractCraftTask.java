@@ -56,6 +56,7 @@ public abstract class AbstractCraftTask extends AbstractInteractionTask {
         INSTANT(1), // Junk - Gray
         BLUE(2), // Common - White
         PURPLE(3); // Superior - Green
+
         private int critId;
 
         private CraftCritType(int critId) {

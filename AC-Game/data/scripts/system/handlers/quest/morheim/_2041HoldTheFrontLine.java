@@ -34,13 +34,13 @@ import java.util.List;
 
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AbstractAI;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team2.group.PlayerGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -60,8 +60,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _2041HoldTheFrontLine extends QuestHandler {
 
     private final static int questId = 2041;
-    private final static int[] npcIds = {204301, 204403, 204432};
-    private final static int[] mobIds = {280818, 211624, 213578, 213579};
+    private final static int[] npcIds = { 204301, 204403, 204432 };
+    private final static int[] mobIds = { 280818, 211624, 213578, 213579 };
 
     public _2041HoldTheFrontLine() {
         super(questId);
@@ -153,17 +153,17 @@ public class _2041HoldTheFrontLine extends QuestHandler {
                                 }
                             }
                             if (!areSpawned) {
-                                List<Npc> mobs = new ArrayList<Npc>();
+                                List<Npc> mobs = new ArrayList<>();
                                 // Crusader (2)
-                                mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f,
-                                        256.9302f, 226.6418f, (byte) 93));
-                                mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f,
-                                        256.9302f, 226.6418f, (byte) 93));
+                                mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f, 226.6418f,
+                                    (byte) 93));
+                                mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f, 226.6418f,
+                                    (byte) 93));
                                 // Draconute Scout (2)
-                                mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f,
-                                        256.9302f, 226.6418f, (byte) 93));
-                                mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f,
-                                        256.9302f, 226.6418f, (byte) 93));
+                                mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f,
+                                    (byte) 93));
+                                mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f,
+                                    (byte) 93));
 
                                 for (Npc mob : mobs) {
                                     mob.setTarget(player);
@@ -225,19 +225,19 @@ public class _2041HoldTheFrontLine extends QuestHandler {
                     switch (targetId) {
                         case 211624:
                         case 280818:
-                            List<Npc> mobs = new ArrayList<Npc>();
+                            List<Npc> mobs = new ArrayList<>();
                             qs.setQuestVarById(1, 4); // 1: 4
                             // Draconute Scout (2)
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
                             // Crusader (1)
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
                             // Chandala Scaleguard (1)
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
 
                             for (Npc mob : mobs) {
                                 mob.getAggroList().addHate(player, 1);
@@ -258,20 +258,20 @@ public class _2041HoldTheFrontLine extends QuestHandler {
                         case 211624:
                         case 280818:
                         case 213578:
-                            List<Npc> mobs = new ArrayList<Npc>();
+                            List<Npc> mobs = new ArrayList<>();
                             qs.setQuestVarById(2, 4); // 2: 4
                             // Draconute Scout (1)
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
                             // Crusader (1)
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
                             // Chandala Scaleguard (1)
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
                             // Chandala Fangblade (1)
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213579, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213579, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
 
                             for (Npc mob : mobs) {
                                 mob.getAggroList().addHate(player, 1);
@@ -294,22 +294,22 @@ public class _2041HoldTheFrontLine extends QuestHandler {
                         case 280818:
                         case 213578:
                         case 213579:
-                            List<Npc> mobs = new ArrayList<Npc>();
+                            List<Npc> mobs = new ArrayList<>();
                             qs.setQuestVarById(3, 4); // 3: 4
                             // Draconute Scout (1)
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 280818, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
                             // Crusader (1)
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 211624, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
                             // Chandala Scaleguard (2)
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213578, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
                             // Chandala Fangblade (1)
-                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213579, 254.21326f, 256.9302f,
-                                    226.6418f, (byte) 93));
+                            mobs.add((Npc) QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213579, 254.21326f, 256.9302f, 226.6418f,
+                                (byte) 93));
 
                             for (Npc mob : mobs) {
                                 mob.getAggroList().addHate(player, 1);

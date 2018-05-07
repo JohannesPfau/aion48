@@ -29,10 +29,10 @@
  */
 package com.aionemu.loginserver.dao;
 
+import java.util.ArrayList;
+
 import com.aionemu.commons.database.dao.DAO;
 import com.aionemu.loginserver.taskmanager.trigger.TaskFromDBTrigger;
-
-import java.util.ArrayList;
 
 /**
  * @author Divinity, nrg

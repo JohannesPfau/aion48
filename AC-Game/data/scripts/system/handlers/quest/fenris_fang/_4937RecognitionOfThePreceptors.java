@@ -29,9 +29,9 @@
  */
 package quest.fenris_fang;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,7 +51,7 @@ public class _4937RecognitionOfThePreceptors extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {204053, 204059, 204058, 204057, 204056, 204075, 801222, 801223};
+        int[] npcs = { 204053, 204059, 204058, 204057, 204056, 204075, 801222, 801223 };
         qe.registerQuestNpc(204053).addOnQuestStart(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);

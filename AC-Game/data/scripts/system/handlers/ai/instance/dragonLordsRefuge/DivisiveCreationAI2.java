@@ -29,7 +29,9 @@
  */
 package ai.instance.dragonLordsRefuge;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -41,8 +43,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import java.util.ArrayList;
-import java.util.List;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -54,6 +55,7 @@ public class DivisiveCreationAI2 extends AggressiveNpcAI2 {
     protected void handleSpawned() {
         super.handleSpawned();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 attackPlayer();
@@ -62,7 +64,7 @@ public class DivisiveCreationAI2 extends AggressiveNpcAI2 {
     }
 
     private void attackPlayer() {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (Player player : getKnownList().getKnownPlayers().values()) {
             if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 200)) {
                 players.add(player);
@@ -80,6 +82,7 @@ public class DivisiveCreationAI2 extends AggressiveNpcAI2 {
     public void handleBackHome() {
         super.handleBackHome();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 attackPlayer();

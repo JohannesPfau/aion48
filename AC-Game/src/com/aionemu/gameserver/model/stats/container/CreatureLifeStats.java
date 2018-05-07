@@ -101,7 +101,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
     /**
      * @return the alreadyDead There is no setter method cause life stats should
-     * be completely renewed on revive
+     *         be completely renewed on revive
      */
     public boolean isAlreadyDead() {
         return alreadyDead;
@@ -111,7 +111,8 @@ public abstract class CreatureLifeStats<T extends Creature> {
      * This method is called whenever caller wants to absorb creatures's HP
      *
      * @param value
-     * @param attacker attacking creature or self
+     * @param attacker
+     *            attacking creature or self
      * @return currentHp
      */
     public int reduceHp(int value, @Nonnull Creature attacker) {

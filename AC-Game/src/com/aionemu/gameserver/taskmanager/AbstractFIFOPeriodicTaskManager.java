@@ -41,8 +41,8 @@ import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodicTaskManager {
 
     protected static final Logger log = LoggerFactory.getLogger(AbstractFIFOPeriodicTaskManager.class);
-    private final AEFastSet<T> queue = new AEFastSet<T>();
-    private final AEFastSet<T> activeTasks = new AEFastSet<T>();
+    private final AEFastSet<T> queue = new AEFastSet<>();
+    private final AEFastSet<T> activeTasks = new AEFastSet<>();
 
     public AbstractFIFOPeriodicTaskManager(int period) {
         super(period);
@@ -68,7 +68,7 @@ public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodi
             writeUnlock();
         }
 
-        for (T task; (task = activeTasks.removeFirst()) != null; ) {
+        for (T task; (task = activeTasks.removeFirst()) != null;) {
             final long begin = System.nanoTime();
 
             try {

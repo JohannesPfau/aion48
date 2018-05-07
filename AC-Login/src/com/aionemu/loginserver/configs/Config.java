@@ -29,15 +29,16 @@
  */
 package com.aionemu.loginserver.configs;
 
+import java.util.Properties;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.configs.DatabaseConfig;
 import com.aionemu.commons.configuration.ConfigurableProcessor;
 import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.utils.PropertiesUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.Properties;
 
 /**
  * @author -Nemesiss-

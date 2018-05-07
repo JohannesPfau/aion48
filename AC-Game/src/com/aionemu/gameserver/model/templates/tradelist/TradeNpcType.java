@@ -42,6 +42,7 @@ public enum TradeNpcType {
     NORMAL(1),
     ABYSS(2),
     REWARD(4);
+
     private final int index;
 
     private TradeNpcType(int index) {

@@ -42,6 +42,7 @@ public enum LegionRank {
     CENTURION(2),
     LEGIONARY(3),
     VOLUNTEER(4);
+
     private byte rank;
 
     private LegionRank(int rank) {

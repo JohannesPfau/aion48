@@ -29,7 +29,8 @@
  */
 package ai.instance.aturamSkyFortress;
 
-import ai.AggressiveNpcAI2;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -39,7 +40,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author xTz
@@ -69,12 +70,14 @@ public class ExplosionShadowsAI2 extends AggressiveNpcAI2 {
     private void doSchedule() {
         if (!isAlreadyDead()) {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     if (!isAlreadyDead()) {
                         SkillEngine.getInstance().getSkill(getOwner(), 19425, 49, getOwner()).useNoAnimationSkill();
 
                         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                             @Override
                             public void run() {
                                 if (!isAlreadyDead()) {
@@ -93,12 +96,14 @@ public class ExplosionShadowsAI2 extends AggressiveNpcAI2 {
         getPosition().getWorldMapInstance().getDoors().get(17).setOpen(false);
         getPosition().getWorldMapInstance().getDoors().get(2).setOpen(false);
         getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 if (player.getEffectController().hasAbnormalEffect(19502)) {
                     final Npc npc = (Npc) spawn(799657, player.getX(), player.getY(), player.getZ(), player.getHeading());
                     player.getEffectController().removeEffect(19502);
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             if (npc != null && !npc.getLifeStats().isAlreadyDead()) {

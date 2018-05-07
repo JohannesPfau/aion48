@@ -29,7 +29,10 @@
  */
 package ai.instance.dragonLordsRefuge;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -46,9 +49,7 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Future;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -64,6 +65,7 @@ public class GravityCrusherAI2 extends AggressiveNpcAI2 {
         super.handleSpawned();
         transform();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 attackPlayer();
@@ -73,6 +75,7 @@ public class GravityCrusherAI2 extends AggressiveNpcAI2 {
 
     private void transform() {
         transformTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
@@ -82,6 +85,7 @@ public class GravityCrusherAI2 extends AggressiveNpcAI2 {
                     AI2Actions.useSkill(GravityCrusherAI2.this, 20967); //self destruct
 
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             NpcShoutsService.getInstance().sendMsg(getOwner(), 1401554);
@@ -99,6 +103,7 @@ public class GravityCrusherAI2 extends AggressiveNpcAI2 {
     public void handleMoveArrived() {
         super.handleMoveArrived();
         skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 AI2Actions.useSkill(GravityCrusherAI2.this, 20987);
@@ -107,7 +112,7 @@ public class GravityCrusherAI2 extends AggressiveNpcAI2 {
     }
 
     private void attackPlayer() {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (Player player : getKnownList().getKnownPlayers().values()) {
             if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 200)) {
                 players.add(player);

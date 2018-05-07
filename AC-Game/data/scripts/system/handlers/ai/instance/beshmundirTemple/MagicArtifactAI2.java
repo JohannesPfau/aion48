@@ -29,11 +29,12 @@
  */
 package ai.instance.beshmundirTemple;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Luzien
@@ -56,6 +57,7 @@ public class MagicArtifactAI2 extends AggressiveNpcAI2 {
         cooldown = true;
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 cooldown = false;

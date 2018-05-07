@@ -38,13 +38,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastMap;
-
 import org.joda.time.DateTime;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.services.instance.InstanceService;
+
+import javolution.util.FastMap;
 
 /**
  * @author VladimirZ
@@ -55,8 +55,8 @@ public class InstanceCooltimeData {
 
     @XmlElement(name = "instance_cooltime", required = true)
     protected List<InstanceCooltime> instanceCooltime;
-    private FastMap<Integer, InstanceCooltime> instanceCooltimes = new FastMap<Integer, InstanceCooltime>();
-    private HashMap<Integer, Integer> syncIdToMapId = new HashMap<Integer, Integer>();
+    private FastMap<Integer, InstanceCooltime> instanceCooltimes = new FastMap<>();
+    private HashMap<Integer, Integer> syncIdToMapId = new HashMap<>();
 
     /**
      * @param u
@@ -78,9 +78,11 @@ public class InstanceCooltimeData {
         return instanceCooltimes.get(worldId);
     }
 
-    /*public InstanceCooltime getInstanceCountByWorldId(int worldId) {
-     return instanceCooltimes.get(worldId);
-     }*/
+    /*
+     * public InstanceCooltime getInstanceCountByWorldId(int worldId) {
+     * return instanceCooltimes.get(worldId);
+     * }
+     */
     public int getWorldId(int syncId) {
         if (!syncIdToMapId.containsKey(syncId)) {
             return 0;
@@ -123,35 +125,37 @@ public class InstanceCooltimeData {
         return instanceCoolTime;
     }
 
-    /*public long getInstanceEntranceCount(Player player, int worldId) {
-     long instanceCoolTime = 0;
-     InstanceCooltime clt = getInstanceCooltimeByWorldId(worldId);
-     if (clt != null) {
-
-     instanceCoolTime = clt.getMaxEntriesCount();
-     }
-     return instanceCoolTime;*/
-    /*if (clt != null) {
-     instanceCoolTime = clt.getMaxEntriesCount();
-     if (clt.getCoolTimeType().isDaily()) {
-     DateTime now = DateTime.now();
-     DateTime repeatDate = new DateTime(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), (int) (instanceCoolTime / 100), 0, 0);
-     if (now.isAfter(repeatDate)) {
-     repeatDate = repeatDate.plusHours(24);
-     instanceCoolTime = repeatDate.getMillis();
-     } else {
-     instanceCoolTime = repeatDate.getMillis();
-     }
-     } else if (clt.getCoolTimeType().isWeekly()) {
-     String[] days = clt.getTypeValue().split(",");
-     instanceCoolTime = getUpdateHours(days, (int) (instanceCoolTime / 100));
-     } else {
-     instanceCoolTime = System.currentTimeMillis() + (instanceCoolTime * 60 * 1000);
-     }
-     }
-     instanceCoolTime = System.currentTimeMillis() + ((instanceCoolTime - System.currentTimeMillis()) / instanceCooldownRate);
-        
-     return instanceCoolTime;*/
+    /*
+     * public long getInstanceEntranceCount(Player player, int worldId) {
+     * long instanceCoolTime = 0;
+     * InstanceCooltime clt = getInstanceCooltimeByWorldId(worldId);
+     * if (clt != null) {
+     * instanceCoolTime = clt.getMaxEntriesCount();
+     * }
+     * return instanceCoolTime;
+     */
+    /*
+     * if (clt != null) {
+     * instanceCoolTime = clt.getMaxEntriesCount();
+     * if (clt.getCoolTimeType().isDaily()) {
+     * DateTime now = DateTime.now();
+     * DateTime repeatDate = new DateTime(now.getYear(), now.getMonthOfYear(), now.getDayOfMonth(), (int) (instanceCoolTime / 100), 0, 0);
+     * if (now.isAfter(repeatDate)) {
+     * repeatDate = repeatDate.plusHours(24);
+     * instanceCoolTime = repeatDate.getMillis();
+     * } else {
+     * instanceCoolTime = repeatDate.getMillis();
+     * }
+     * } else if (clt.getCoolTimeType().isWeekly()) {
+     * String[] days = clt.getTypeValue().split(",");
+     * instanceCoolTime = getUpdateHours(days, (int) (instanceCoolTime / 100));
+     * } else {
+     * instanceCoolTime = System.currentTimeMillis() + (instanceCoolTime * 60 * 1000);
+     * }
+     * }
+     * instanceCoolTime = System.currentTimeMillis() + ((instanceCoolTime - System.currentTimeMillis()) / instanceCooldownRate);
+     * return instanceCoolTime;
+     */
     //}
     private long getUpdateHours(String[] days, int hour) {
         DateTime now = DateTime.now();

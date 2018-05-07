@@ -46,7 +46,6 @@ import com.aionemu.gameserver.model.PlayerClass;
 @XmlType(name = "SelectItems")
 public class SelectItems {
 
-
     @XmlAttribute(name = "player_class")
     private PlayerClass playerClass = PlayerClass.ALL;
     @XmlElement(name = "item")

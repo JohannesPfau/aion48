@@ -46,7 +46,6 @@ import com.aionemu.gameserver.model.team2.league.League;
 import com.aionemu.gameserver.services.BaseService;
 
 /**
- *
  * @author Source
  */
 @SuppressWarnings("rawtypes")
@@ -74,7 +73,7 @@ public class BossDeathListener extends OnDieEventCallback {
             race = ((PlayerAllianceGroup) killer).getRace();
         } else if (killer instanceof League) {
             race = ((League) killer).getRace();
-			for (PlayerAlliance playerAlliance : ((League) killer).getMembers()) {
+            for (PlayerAlliance playerAlliance : ((League) killer).getMembers()) {
             }
         } else if (killer instanceof Player) {
             race = ((Player) killer).getRace();

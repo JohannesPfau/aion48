@@ -46,6 +46,7 @@ public class GameServerService {
     public static GameServerService getInstance() {
         return instance;
     }
+
     public static byte GAMESERVER_ID;
     private boolean isOnline = false;
 

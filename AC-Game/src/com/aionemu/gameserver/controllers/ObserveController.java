@@ -36,8 +36,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
@@ -52,19 +50,20 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
+import javolution.util.FastList;
+
 /**
  * Notes:<br>
  * 1) There should be locking against onceUsedObservers<br>
  * 2) Check observers size before iteration to minimize memory allocations
  *
  * @author ATracer
-
  */
 public class ObserveController {
 
     private ReentrantLock lock = new ReentrantLock();
     protected Collection<ActionObserver> observers = new FastList<ActionObserver>(0).shared();
-    protected FastList<ActionObserver> onceUsedObservers = new FastList<ActionObserver>(0);
+    protected FastList<ActionObserver> onceUsedObservers = new FastList<>(0);
     protected Collection<AttackCalcObserver> attackCalcObservers = new FastList<AttackCalcObserver>(0).shared();
 
     /**
@@ -125,7 +124,7 @@ public class ObserveController {
         lock.lock();
         try {
             if (onceUsedObservers.size() > 0) {
-                tempOnceused = new ArrayList<ActionObserver>();
+                tempOnceused = new ArrayList<>();
                 Iterator<ActionObserver> iterator = onceUsedObservers.iterator();
                 while (iterator.hasNext()) {
                     ActionObserver observer = iterator.next();
@@ -197,7 +196,8 @@ public class ObserveController {
     }
 
     /**
-     * @param notify that creature died
+     * @param notify
+     *            that creature died
      */
     public void notifyDeathObservers(Creature creature) {
         notifyObservers(ObserverType.DEATH, creature);

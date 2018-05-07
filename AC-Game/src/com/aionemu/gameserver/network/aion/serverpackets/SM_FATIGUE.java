@@ -33,7 +33,6 @@ import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
-
 /**
  * @author Alcapwnd
  *         this fatigue system isnt implemented on official servers
@@ -47,8 +46,8 @@ public class SM_FATIGUE extends AionServerPacket {
     private int iconSet;
 
     /**
-	 * @param fatigueRecover  
-	 */
+     * @param fatigueRecover
+     */
     public SM_FATIGUE(int effectEnabled, int isFull, int fatigueRecover, int iconSet) {
         this.effectEnabled = effectEnabled;
         this.isFull = isFull;
@@ -58,7 +57,7 @@ public class SM_FATIGUE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(0);//unk
         writeC(0);//unk
         writeC(effectEnabled);// 1=effect enabled | 0=effect disabled //VERIFIED!

@@ -33,9 +33,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.configs.main.CustomConfig;
+
+import javolution.util.FastMap;
 
 /**
  * @author Sarynth
@@ -45,7 +45,7 @@ public class KillList {
     private FastMap<Integer, List<Long>> killList;
 
     public KillList() {
-        killList = new FastMap<Integer, List<Long>>();
+        killList = new FastMap<>();
     }
 
     /**
@@ -63,7 +63,7 @@ public class KillList {
         long now = System.currentTimeMillis();
         int killCount = 0;
 
-        for (Iterator<Long> i = killTimes.iterator(); i.hasNext(); ) {
+        for (Iterator<Long> i = killTimes.iterator(); i.hasNext();) {
             if (now - i.next().longValue() > CustomConfig.PVP_DAY_DURATION) {
                 i.remove();
             } else {
@@ -80,7 +80,7 @@ public class KillList {
     public void addKillFor(int victimId) {
         List<Long> killTimes = killList.get(victimId);
         if (killTimes == null) {
-            killTimes = new ArrayList<Long>();
+            killTimes = new ArrayList<>();
             killList.put(victimId, killTimes);
         }
 

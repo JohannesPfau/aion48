@@ -29,11 +29,11 @@
  */
 package quest.verteron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,9 +45,9 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _14014TurningTheIde extends QuestHandler {
 
     private final static int questId = 14014;
-    private final static int[] npcs = {203146, 203147, 802045, 203098}; //Estino, Meteina, Livanon, Spatalos
-    private final static int[] mobs = {210178, 216892}; //Veteran Tursin Smackstopper, Tursin Senior Command Soldier
-    private final static int[] items = {182200505}; //Transformation Potion
+    private final static int[] npcs = { 203146, 203147, 802045, 203098 }; //Estino, Meteina, Livanon, Spatalos
+    private final static int[] mobs = { 210178, 216892 }; //Veteran Tursin Smackstopper, Tursin Senior Command Soldier
+    private final static int[] items = { 182200505 }; //Transformation Potion
 
     public _14014TurningTheIde() {
         super(questId);

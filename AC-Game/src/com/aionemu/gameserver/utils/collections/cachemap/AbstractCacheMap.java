@@ -51,8 +51,8 @@ abstract class AbstractCacheMap<K, V> implements CacheMap<K, V> {
     /**
      * Map storing references to cached objects
      */
-    protected final Map<K, Reference<V>> cacheMap = new HashMap<K, Reference<V>>();
-    protected final ReferenceQueue<V> refQueue = new ReferenceQueue<V>();
+    protected final Map<K, Reference<V>> cacheMap = new HashMap<>();
+    protected final ReferenceQueue<V> refQueue = new ReferenceQueue<>();
 
     /**
      * @param cacheName

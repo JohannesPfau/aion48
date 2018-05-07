@@ -65,7 +65,7 @@ public class TradeListTemplate {
      */
     public List<TradeTab> getTradeTablist() {
         if (tradeTablist == null) {
-            tradeTablist = new ArrayList<TradeTab>();
+            tradeTablist = new ArrayList<>();
         }
         return this.tradeTablist;
     }
@@ -106,6 +106,7 @@ public class TradeListTemplate {
      * The following schema fragment specifies the expected content contained
      * within this class.
      * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>

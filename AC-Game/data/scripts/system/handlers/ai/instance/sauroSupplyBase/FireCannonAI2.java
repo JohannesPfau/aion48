@@ -29,13 +29,13 @@
  */
 package ai.instance.sauroSupplyBase;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Alcapwnd
@@ -44,24 +44,25 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 @AIName("fire_cannon")
 public class FireCannonAI2 extends AggressiveNpcAI2 {
-	Npc beacon;
-	
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-		 @Override
-		 public void run() {
-				beacon = getPosition().getWorldMapInstance().getNpc(284454);
-				AI2Actions.targetCreature(FireCannonAI2.this, beacon);
-				SkillEngine.getInstance().getSkill(getOwner(), 21228, 65, beacon).useSkill();
-		}
-	  }, 1, 4000);
-   }
 
-	@Override
-	public int modifyDamage(int damage) {
-		return 1;
-	}
+    Npc beacon;
+
+    @Override
+    protected void handleSpawned() {
+        super.handleSpawned();
+        ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
+            @Override
+            public void run() {
+                beacon = getPosition().getWorldMapInstance().getNpc(284454);
+                AI2Actions.targetCreature(FireCannonAI2.this, beacon);
+                SkillEngine.getInstance().getSkill(getOwner(), 21228, 65, beacon).useSkill();
+            }
+        }, 1, 4000);
+    }
+
+    @Override
+    public int modifyDamage(int damage) {
+        return 1;
+    }
 }
-

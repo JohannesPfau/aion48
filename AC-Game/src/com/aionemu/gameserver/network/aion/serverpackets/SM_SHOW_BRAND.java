@@ -48,7 +48,7 @@ public class SM_SHOW_BRAND extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(0x01);
         writeD(0x01); // unk
         writeD(brandId);

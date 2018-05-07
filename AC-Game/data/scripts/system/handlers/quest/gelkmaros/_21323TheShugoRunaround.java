@@ -29,9 +29,9 @@
  */
 package quest.gelkmaros;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -39,7 +39,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author pralinka
  */
- 
+
 public class _21323TheShugoRunaround extends QuestHandler {
 
     private final static int questId = 21323;
@@ -50,7 +50,7 @@ public class _21323TheShugoRunaround extends QuestHandler {
 
     @Override
     public void register() {
-		int[] npcs = {799226, 702726, 702748, 702728, 702747, 702746};
+        int[] npcs = { 799226, 702726, 702748, 702728, 702747, 702746 };
         qe.registerQuestNpc(799226).addOnQuestStart(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -85,7 +85,7 @@ public class _21323TheShugoRunaround extends QuestHandler {
                     }
                     break;
                 }
-                case 702746: { 
+                case 702746: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT: {
                             if (var == 1) {
@@ -98,7 +98,7 @@ public class _21323TheShugoRunaround extends QuestHandler {
                     }
                     break;
                 }
-                case 702748: { 
+                case 702748: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT: {
                             if (var == 2) {
@@ -111,7 +111,7 @@ public class _21323TheShugoRunaround extends QuestHandler {
                     }
                     break;
                 }
-                case 702747: { 
+                case 702747: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT: {
                             if (var == 3) {
@@ -125,7 +125,7 @@ public class _21323TheShugoRunaround extends QuestHandler {
                     break;
                 }
 
-                case 702728: { 
+                case 702728: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT: {
                             if (var == 4) {
@@ -140,7 +140,7 @@ public class _21323TheShugoRunaround extends QuestHandler {
                 }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-            if (targetId == 799226) { 
+            if (targetId == 799226) {
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
                 } else if (env.getDialog() == DialogAction.SELECT_QUEST_REWARD) {

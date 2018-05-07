@@ -29,11 +29,11 @@
  */
 package quest.reshanta;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -84,10 +84,9 @@ public class _2701TheGovernorsSummons extends QuestHandler {
             return false;
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (env.getDialogId() == DialogAction.SELECTED_QUEST_NOREWARD.id()) {
-                int[] ids = {2071, 2072, 2073, 2074, 2075, 2076};
+                int[] ids = { 2071, 2072, 2073, 2074, 2075, 2076 };
                 for (int id : ids) {
-                    QuestEngine.getInstance().onEnterZoneMissionEnd(
-                            new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
+                    QuestEngine.getInstance().onEnterZoneMissionEnd(new QuestEnv(env.getVisibleObject(), env.getPlayer(), id, env.getDialogId()));
                 }
             }
             return sendQuestEndDialog(env);

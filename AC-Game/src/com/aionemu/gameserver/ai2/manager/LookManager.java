@@ -42,12 +42,10 @@ import com.aionemu.gameserver.model.templates.npc.NpcUiType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-
 /**
  * @author Alcapwnd
  */
 public class LookManager {
-
 
     private static byte hBeforeChange = 0;
     private static byte hAfterChange = 0;
@@ -62,7 +60,8 @@ public class LookManager {
 
         if (npc.isBoss() || npc.isAttackableNpc()) {
             randomHeading(npc, player);
-        } else if (npc.isFlag() || npc.isRaidMonster() || isValidRace(npc.getRace()) || isValidTribe(npc.getTribe()) || isValidUiType(npc.getUiType())) {
+        } else if (npc.isFlag() || npc.isRaidMonster() || isValidRace(npc.getRace()) || isValidTribe(npc.getTribe())
+            || isValidUiType(npc.getUiType())) {
             return;
         } else {
             coordinateHeading(npc, player);
@@ -109,7 +108,6 @@ public class LookManager {
                 return false;
         }
     }
-
 
     private static void randomHeading(Npc npc, Player player) {
         hBeforeChange = npc.getPosition().getHeading();
@@ -159,7 +157,6 @@ public class LookManager {
         hFinalChange = 0;
         log.info("LookManager initialized");
     }
-
 
     @SuppressWarnings("synthetic-access")
     private static class SingletonHolder {

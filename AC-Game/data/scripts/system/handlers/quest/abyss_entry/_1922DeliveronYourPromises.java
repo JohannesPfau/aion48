@@ -52,8 +52,8 @@ public class _1922DeliveronYourPromises extends QuestHandler {
 
     private final static int questId = 1922;
     private int choice = 0;
-    private final static int[] npc_ids = {203830, 203901, 203764};
-    private final static int[] mob_ids = {213580, 213581, 213582};
+    private final static int[] npc_ids = { 203830, 203901, 203764 };
+    private final static int[] mob_ids = { 213580, 213581, 213582 };
 
     public _1922DeliveronYourPromises() {
         super(questId);

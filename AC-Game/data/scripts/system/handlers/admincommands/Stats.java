@@ -1,5 +1,8 @@
 package admincommands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
@@ -13,40 +16,36 @@ import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 /**
  * Created by Kill3r
  */
 public class Stats extends AdminCommand implements StatOwner {
 
-    public Stats(){
+    public Stats() {
         super("stats");
     }
 
-    public void execute(Player player, String...params){
+    public void execute(Player player, String... params) {
         int value = 1;
-        try{
+        try {
             value = Integer.parseInt(params[1]);
-        }catch(NumberFormatException e){
+        } catch (NumberFormatException e) {
             PacketSendUtility.sendMessage(player, "Wrong Param");
             return;
         }
 
-        if(params[0].equals("hp")){
-            if(value < 9999999){
-                List<IStatFunction> functions = new ArrayList<IStatFunction>();
+        if (params[0].equals("hp")) {
+            if (value < 9999999) {
+                List<IStatFunction> functions = new ArrayList<>();
                 functions.add(new StatChangeFunction(StatEnum.MAXHP, value));
                 player.getGameStats().addEffect(this, functions);
                 PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_EMOTE2, 0, 0), true);
-                PacketSendUtility.sendMessage(player, "You've changed you're MAX HP to "+value);
-            }else{
+                PacketSendUtility.sendMessage(player, "You've changed you're MAX HP to " + value);
+            } else {
                 PacketSendUtility.sendMessage(player, "You've exceeded the max amount! Use a lower value!");
             }
-        } else if (params[0].equals("dev")){
-            if (player.getAccessLevel() < 5){
+        } else if (params[0].equals("dev")) {
+            if (player.getAccessLevel() < 5) {
                 PacketSendUtility.sendMessage(player, "Need Access!");
                 return;
             }
@@ -60,31 +59,28 @@ public class Stats extends AdminCommand implements StatOwner {
         }
     }
 
-    class StatChangeFunction extends StatFunction
-    {
+    class StatChangeFunction extends StatFunction {
+
         static final int speed = 6000;
         static final int flyspeed = 9000;
         static final int maxDp = 4000;
         int modifier = 1;
 
-        StatChangeFunction(StatEnum stat, int modifier)
-        {
+        StatChangeFunction(StatEnum stat, int modifier) {
             this.stat = stat;
             this.modifier = modifier;
         }
 
         @Override
-        public void apply(com.aionemu.gameserver.model.stats.calc.Stat2 stat)
-        {
-            switch (this.stat)
-            {
+        public void apply(com.aionemu.gameserver.model.stats.calc.Stat2 stat) {
+            switch (this.stat) {
                 case SPEED:
                     stat.setBase(speed + (speed * modifier) / 100);
                     break;
                 case FLY_SPEED:
                     stat.setBase(flyspeed + (flyspeed * modifier) / 100);
                     break;
-                case POWER :
+                case POWER:
                     short modifierPower = (short) modifier;
                     stat.setBase(Math.round(modifierPower));
                     break;
@@ -418,13 +414,12 @@ public class Stats extends AdminCommand implements StatOwner {
         }
 
         @Override
-        public int getPriority()
-        {
+        public int getPriority() {
             return 60;
         }
     }
 
-    public void onFail(Player player,String msg){
+    public void onFail(Player player, String msg) {
         PacketSendUtility.sendMessage(player, "Synax : //stat hp <value>");
 
     }

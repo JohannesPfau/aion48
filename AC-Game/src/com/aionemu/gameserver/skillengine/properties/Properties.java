@@ -224,6 +224,7 @@ public class Properties {
 
         CAST_START(true),
         CAST_END(false);
+
         private final boolean isCastStart;
 
         CastState(boolean isCastStart) {

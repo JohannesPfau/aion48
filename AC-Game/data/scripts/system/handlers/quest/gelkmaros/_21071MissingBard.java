@@ -47,7 +47,7 @@ public class _21071MissingBard extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {799407, 799329};
+        int[] npcs = { 799407, 799329 };
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }

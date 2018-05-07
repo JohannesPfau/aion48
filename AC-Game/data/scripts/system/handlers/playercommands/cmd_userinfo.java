@@ -53,11 +53,12 @@ public class cmd_userinfo extends PlayerCommand {
             PacketSendUtility.sendMessage(player, "Du darfst dir keine Infos von anderen Spielern holen");
         } else if (target instanceof Npc) {
             Npc npc = (Npc) player.getTarget();
-            PacketSendUtility.sendMessage(player, "[NPC Info]" + "\nName: " + npc.getName() + "\nId: " + npc.getNpcId() + "\nMap ID: " + player.getTarget().getWorldId());
+            PacketSendUtility.sendMessage(player,
+                "[NPC Info]" + "\nName: " + npc.getName() + "\nId: " + npc.getNpcId() + "\nMap ID: " + player.getTarget().getWorldId());
         } else if (target instanceof Gatherable) {
             Gatherable gather = (Gatherable) target;
-            PacketSendUtility.sendMessage(player, "[Gather Info]\n" + "Name: " + gather.getName() + "\nId: " + gather.getObjectTemplate().getTemplateId() + "\nMap ID: "
-                    + player.getTarget().getWorldId());
+            PacketSendUtility.sendMessage(player, "[Gather Info]\n" + "Name: " + gather.getName() + "\nId: "
+                + gather.getObjectTemplate().getTemplateId() + "\nMap ID: " + player.getTarget().getWorldId());
         }
     }
 

@@ -50,7 +50,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class RelicRewards extends QuestHandler {
 
     private final int questId;
-    private final Set<Integer> startNpcs = new HashSet<Integer>();
+    private final Set<Integer> startNpcs = new HashSet<>();
     private final int relicVar1;
     private final int relicVar2;
     private final int relicVar3;
@@ -102,9 +102,9 @@ public class RelicRewards extends QuestHandler {
                     case EXCHANGE_COIN: {
                         if (player.getCommonData().getLevel() >= 30) {
                             if ((player.getInventory().getItemCountByItemId(relicVar1) > 0)
-                                    || (player.getInventory().getItemCountByItemId(relicVar2) > 0)
-                                    || (player.getInventory().getItemCountByItemId(relicVar3) > 0)
-                                    || (player.getInventory().getItemCountByItemId(relicVar4) > 0)) {
+                                || (player.getInventory().getItemCountByItemId(relicVar2) > 0)
+                                || (player.getInventory().getItemCountByItemId(relicVar3) > 0)
+                                || (player.getInventory().getItemCountByItemId(relicVar4) > 0)) {
                                 QuestService.startQuest(env);
                                 return sendQuestDialog(env, 1011);
                             } else {

@@ -76,23 +76,21 @@ public class AttackShieldObserver extends AttackCalcObserver {
      * @param value
      * @param status
      */
-    public AttackShieldObserver(int hit, int totalHit, boolean percent, Effect effect, HitType type, int shieldType, int probability)
-    {
-      this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0, 0);
-    }
-    
-    public AttackShieldObserver(int hit, int effectorDamage, int totalHit, boolean percent, Effect effect, HitType type, int shieldType, int probability)
-    {
-      this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, effectorDamage, 0);
-    }
-    
-    public AttackShieldObserver(int hit, int totalHit, boolean percent, Effect effect, HitType type, int shieldType, int probability, int mpValue)
-    {
-      this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0, mpValue);
+    public AttackShieldObserver(int hit, int totalHit, boolean percent, Effect effect, HitType type, int shieldType, int probability) {
+        this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0, 0);
     }
 
-    public AttackShieldObserver(int hit, int totalHit, boolean hitPercent, boolean totalHitPercent, Effect effect,
-                                HitType type, int shieldType, int probability, int minradius, int maxradius, HealType healType, int effectorDamage, int mpValue) {
+    public AttackShieldObserver(int hit, int effectorDamage, int totalHit, boolean percent, Effect effect, HitType type, int shieldType,
+        int probability) {
+        this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, effectorDamage, 0);
+    }
+
+    public AttackShieldObserver(int hit, int totalHit, boolean percent, Effect effect, HitType type, int shieldType, int probability, int mpValue) {
+        this(hit, totalHit, percent, false, effect, type, shieldType, probability, 0, 100, null, 0, mpValue);
+    }
+
+    public AttackShieldObserver(int hit, int totalHit, boolean hitPercent, boolean totalHitPercent, Effect effect, HitType type, int shieldType,
+        int probability, int minradius, int maxradius, HealType healType, int effectorDamage, int mpValue) {
         this.hit = hit;
         this.totalHit = totalHit;// total absorbed dmg for shield, percentage for reflector
         this.effect = effect;
@@ -113,7 +111,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
         for (AttackResult attackResult : attackList) {
 
             if (AttackStatus.getBaseStatus(attackResult.getAttackStatus()) == AttackStatus.DODGE
-                    || AttackStatus.getBaseStatus(attackResult.getAttackStatus()) == AttackStatus.RESIST) {
+                || AttackStatus.getBaseStatus(attackResult.getAttackStatus()) == AttackStatus.RESIST) {
                 continue;
             }
             // Handle Hit Types for Shields
@@ -150,12 +148,11 @@ public class AttackShieldObserver extends AttackCalcObserver {
                 if (absorbedDamage >= damage && !isPunchShield(attackerEffect)) {
                     attackResult.setLaunchSubEffect(false);
                 }
-                
-                if (this.mpValue > 0)
-                {
-                  attackResult.setShieldMp((int)(absorbedDamage * this.mpValue * 0.01F));
-                  this.effect.getEffected().getLifeStats().reduceMp((int)(absorbedDamage * this.mpValue * 0.01F));
-                  attackResult.setReflectedSkillId(this.effect.getSkillId());
+
+                if (this.mpValue > 0) {
+                    attackResult.setShieldMp((int) (absorbedDamage * this.mpValue * 0.01F));
+                    this.effect.getEffected().getLifeStats().reduceMp((int) (absorbedDamage * this.mpValue * 0.01F));
+                    attackResult.setReflectedSkillId(this.effect.getSkillId());
                 }
 
                 if (totalHit <= 0) {
@@ -182,7 +179,8 @@ public class AttackShieldObserver extends AttackCalcObserver {
                     attacker.getController().onAttack(effect.getEffected(), reflectedHit, false);
 
                     if (effect.getEffected() instanceof Player) {
-                        PacketSendUtility.sendPacket((Player) effect.getEffected(), SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(effect.getSkillTemplate().getNameId()));
+                        PacketSendUtility.sendPacket((Player) effect.getEffected(),
+                            SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(effect.getSkillTemplate().getNameId()));
                     }
                 }
                 break;
@@ -193,7 +191,8 @@ public class AttackShieldObserver extends AttackCalcObserver {
                     effect.endEffect();
                     break;
                 }
-                if (effect.getEffector() instanceof Summon && (((Summon) effect.getEffector()).getMode() == SummonMode.RELEASE || ((Summon) effect.getEffector()).getMaster() == null)) {
+                if (effect.getEffector() instanceof Summon
+                    && (((Summon) effect.getEffector()).getMode() == SummonMode.RELEASE || ((Summon) effect.getEffector()).getMaster() == null)) {
                     effect.endEffect();
                     break;
                 }

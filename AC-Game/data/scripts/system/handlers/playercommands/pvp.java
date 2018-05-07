@@ -1,6 +1,7 @@
 package playercommands;
 
-import com.aionemu.commons.utils.Rnd;
+import java.util.Calendar;
+
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.ecfunctions.ffa.FFaStruct;
@@ -15,8 +16,6 @@ import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
-import java.util.Calendar;
-
 /**
  * Created by Ghostfur
  */
@@ -26,52 +25,52 @@ public class pvp extends PlayerCommand {
         super("pvp");
     }
 
-    public void execute(Player player, String...param){
+    public void execute(Player player, String... param) {
 
-        if (player.isAttackMode()){
+        if (player.isAttackMode()) {
             PacketSendUtility.sendMessage(player, "You cannot Go to Insane PvP while in Attack Mode!");
             return;
         }
 
-        if(player.isInDuelArena()){
+        if (player.isInDuelArena()) {
             PacketSendUtility.sendMessage(player, "You cannot go to Insane PvP While in 1 vs 1 !");
             return;
         }
 
-        if (player.isInFFA()){
+        if (player.isInFFA()) {
             PacketSendUtility.sendMessage(player, "You cannot Go to Insane PvP While in FFA Arena!");
             return;
         }
 
         Calendar calendar = Calendar.getInstance();
 
-        if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY){
+        if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SUNDAY) {
             monPvP(player);
             givePvPWelcomeMsg(player, "monPvP");
-        }else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY){
+        } else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.MONDAY) {
             wedPvP(player);
             givePvPWelcomeMsg(player, "wedPvP");
-        }else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY){
+        } else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.TUESDAY) {
             monPvP(player);
             givePvPWelcomeMsg(player, "monPvP");
-        }else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY){
+        } else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.WEDNESDAY) {
             wedPvP(player);
             givePvPWelcomeMsg(player, "wedPvP");
-        }else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY){
+        } else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.THURSDAY) {
             monPvP(player);
             givePvPWelcomeMsg(player, "monPvP");
-        }else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY){
+        } else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.FRIDAY) {
             wedPvP(player);
             givePvPWelcomeMsg(player, "wedPvP");
-        }else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY){
+        } else if (calendar.get(Calendar.DAY_OF_WEEK) == Calendar.SATURDAY) {
             monPvP(player);
             givePvPWelcomeMsg(player, "monPvP");
         }
     }
-		
-	  private void monPvP(Player player){
+
+    private void monPvP(Player player) {
         checkotherEvents(player);
-        if(player.getWorldId() == 220040000){
+        if (player.getWorldId() == 220040000) {
             PacketSendUtility.sendMessage(player, "You cannot use the command inside the Insane PvP Map!");
             return;
         }
@@ -80,36 +79,36 @@ public class pvp extends PlayerCommand {
         } else if (player.getRace() == Race.ELYOS && !player.isInPrison()) {
             goTo(player, WorldMapType.BELUSLAN.getId(), 2366.439f, 2034.8425f, 652.47253f);
         }
-    } 				
+    }
 
-    private void tuePvP(Player player){
+    private void tuePvP(Player player) {
         checkotherEvents(player);
-        if(player.getWorldId() == 600100000){
+        if (player.getWorldId() == 600100000) {
             PacketSendUtility.sendMessage(player, "You cannot use the command inside the Insane PvP Map!");
             return;
         }
         if (player.getRace() == Race.ASMODIANS && !player.isInPrison()) {
-            goTo(player, WorldMapType.LEVINSHOR.getId(), 1841.7157f ,1781.8903f,305.25f);
+            goTo(player, WorldMapType.LEVINSHOR.getId(), 1841.7157f, 1781.8903f, 305.25f);
         } else if (player.getRace() == Race.ELYOS && !player.isInPrison()) {
-            goTo(player, WorldMapType.LEVINSHOR.getId(), 98.4f ,109.3f, 347.5f);
+            goTo(player, WorldMapType.LEVINSHOR.getId(), 98.4f, 109.3f, 347.5f);
         }
-    } 				
+    }
 
-    private void wedPvP(Player player){
+    private void wedPvP(Player player) {
         checkotherEvents(player);
-        if (player.getRace() == Race.ASMODIANS  && player.getWorldId() != 210040000 && !player.isInPrison()) {
-            goTo(player, WorldMapType.HEIRON.getId(), 1871.135f,1724.2709f,188.16214f);
+        if (player.getRace() == Race.ASMODIANS && player.getWorldId() != 210040000 && !player.isInPrison()) {
+            goTo(player, WorldMapType.HEIRON.getId(), 1871.135f, 1724.2709f, 188.16214f);
         } else if (player.getRace() == Race.ELYOS && player.getWorldId() != 210040000 && !player.isInPrison()) {
-            goTo(player, WorldMapType.HEIRON.getId(), 1576.9691f,2726.3843f,118.25f);
+            goTo(player, WorldMapType.HEIRON.getId(), 1576.9691f, 2726.3843f, 118.25f);
         }
-    }					
+    }
 
-    private void checkotherEvents(Player player){
+    private void checkotherEvents(Player player) {
         if (player.isAttackMode()) {
             PacketSendUtility.sendMessage(player, LanguageHandler.translate(CustomMessageId.NOT_USE_WHILE_FIGHT));
             return;
         }
-        if (player.isInDuelArena()){
+        if (player.isInDuelArena()) {
             return;
         }
         if (player.isInFFA() && player.getWorldId() == FFaStruct.worldId) {
@@ -138,44 +137,41 @@ public class pvp extends PlayerCommand {
         return newInstance.getInstanceId();
     }
 
-    private void givePvPWelcomeMsg(Player player, String PvPMap){
+    private void givePvPWelcomeMsg(Player player, String PvPMap) {
         String msg = "";
-        if(PvPMap.equalsIgnoreCase("monPvP")){
-            if(player.getWorldId() == 220080000){
+        if (PvPMap.equalsIgnoreCase("monPvP")) {
+            if (player.getWorldId() == 220080000) {
                 return;
             }
-        }else if(PvPMap.equalsIgnoreCase("TuePvP")){
-            if(player.getWorldId() == 600100000){
-                return;
-            }
-        }else if(PvPMap.equalsIgnoreCase("wedPvP")){
-            if(player.getWorldId() == 210070000){
-                return;
-            }
-        }else if(PvPMap.equalsIgnoreCase("monPvP")){
-            if(player.getWorldId() == 220080000){
-                return;
-            }
-        }else if(PvPMap.equalsIgnoreCase("TuePvP")) {
+        } else if (PvPMap.equalsIgnoreCase("TuePvP")) {
             if (player.getWorldId() == 600100000) {
                 return;
             }
-	    }else if(PvPMap.equalsIgnoreCase("wedPvP")) {
+        } else if (PvPMap.equalsIgnoreCase("wedPvP")) {
+            if (player.getWorldId() == 210070000) {
+                return;
+            }
+        } else if (PvPMap.equalsIgnoreCase("monPvP")) {
+            if (player.getWorldId() == 220080000) {
+                return;
+            }
+        } else if (PvPMap.equalsIgnoreCase("TuePvP")) {
+            if (player.getWorldId() == 600100000) {
+                return;
+            }
+        } else if (PvPMap.equalsIgnoreCase("wedPvP")) {
             if (player.getWorldId() == 210070000) {
                 return;
             }
         }
-		 
-        if(player.getRace() == Race.ASMODIANS){
+
+        if (player.getRace() == Race.ASMODIANS) {
             msg = "all the ELYOS :]";
-        }else if(player.getRace() == Race.ELYOS){
+        } else if (player.getRace() == Race.ELYOS) {
             msg = "all the ASMODIANS :]";
         }
         PacketSendUtility.sendYellowMessageOnCenter(player, "[PvP Zone] Welcome to the Insane PvP Zone!!");
-        PacketSendUtility.sendYellowMessage(player, "\n[PvP Rules]" +
-                "\n # No Camping at Spawn Area" +
-                "\n # No Hacking" +
-                "\n # No Bug Abusing" +
-                "\n # And as always remember to kill "+ msg);
+        PacketSendUtility.sendYellowMessage(player, "\n[PvP Rules]" + "\n # No Camping at Spawn Area" + "\n # No Hacking" + "\n # No Bug Abusing"
+            + "\n # And as always remember to kill " + msg);
     }
 }

@@ -47,6 +47,7 @@ public class BroadcastService {
     public static BroadcastService getInstance() {
         return instance;
     }
+
     private Map<Integer, ChatClient> clients = PlatformDependent.newConcurrentHashMap();
 
     /**

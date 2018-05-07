@@ -61,6 +61,7 @@ public class GameTime implements Cloneable {
         OCTOBER(31),
         NOVEMBER(30),
         DECEMBER(31);
+
         private int _days;
 
         Monthes(int days) {
@@ -78,7 +79,8 @@ public class GameTime implements Cloneable {
      * Constructs a GameTime with the given time in minutes since midnight
      * 01.01.0000
      *
-     * @param time Minutes since midnight 01.01.0000
+     * @param time
+     *            Minutes since midnight 01.01.0000
      */
     public GameTime(int time) {
         if (time < 0) {
@@ -245,7 +247,8 @@ public class GameTime implements Cloneable {
     /**
      * Subtract the given game time from this game time
      *
-     * @param game time to subtract
+     * @param game
+     *            time to subtract
      * @return new game time
      */
     public GameTime minus(GameTime gt) {
@@ -255,7 +258,8 @@ public class GameTime implements Cloneable {
     /**
      * Add the given game time to this game time
      *
-     * @param game time to add
+     * @param game
+     *            time to add
      * @return new game time
      */
     public GameTime plus(GameTime gt) {
@@ -285,7 +289,8 @@ public class GameTime implements Cloneable {
     /**
      * Compare two game times
      *
-     * @param GameTime object
+     * @param GameTime
+     *            object
      * @return true or false
      * @author vlog
      */

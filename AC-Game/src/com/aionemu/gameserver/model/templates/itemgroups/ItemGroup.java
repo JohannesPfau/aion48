@@ -50,6 +50,7 @@ import com.aionemu.gameserver.model.templates.rewards.IdReward;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="ItemGroup">
  *   &lt;complexContent>
@@ -63,8 +64,8 @@ import com.aionemu.gameserver.model.templates.rewards.IdReward;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ItemGroup")
-@XmlSeeAlso({CraftItemGroup.class, CraftRecipeGroup.class, ManastoneGroup.class, FoodGroup.class, MedicineGroup.class,
-        OreGroup.class, GatherGroup.class, EnchantGroup.class, BossGroup.class})
+@XmlSeeAlso({ CraftItemGroup.class, CraftRecipeGroup.class, ManastoneGroup.class, FoodGroup.class, MedicineGroup.class, OreGroup.class,
+    GatherGroup.class, EnchantGroup.class, BossGroup.class })
 public abstract class ItemGroup {
 
     @XmlAttribute(name = "bonusType", required = true)

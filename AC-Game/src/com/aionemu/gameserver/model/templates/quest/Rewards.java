@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Rewards", propOrder = {"selectableRewardItem", "rewardItem"})
+@XmlType(name = "Rewards", propOrder = { "selectableRewardItem", "rewardItem" })
 public class Rewards {
 
     @XmlElement(name = "selectable_reward_item")
@@ -71,6 +71,7 @@ public class Rewards {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getSelectableRewardItem().add(newItem);
      * </pre>
@@ -80,7 +81,7 @@ public class Rewards {
      */
     public List<QuestItems> getSelectableRewardItem() {
         if (selectableRewardItem == null) {
-            selectableRewardItem = new ArrayList<QuestItems>();
+            selectableRewardItem = new ArrayList<>();
         }
         return this.selectableRewardItem;
     }
@@ -95,6 +96,7 @@ public class Rewards {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getRewardItem().add(newItem);
      * </pre>
@@ -104,7 +106,7 @@ public class Rewards {
      */
     public List<QuestItems> getRewardItem() {
         if (rewardItem == null) {
-            rewardItem = new ArrayList<QuestItems>();
+            rewardItem = new ArrayList<>();
         }
         return this.rewardItem;
     }

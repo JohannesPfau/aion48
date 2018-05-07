@@ -55,7 +55,8 @@ public class SkillAttackManager {
      */
     public static void performAttack(NpcAI2 npcAI, int delay) {
         if (npcAI.getOwner().getObjectTemplate().getAttackRange() == 0) {
-            if (npcAI.getOwner().getTarget() != null && !MathUtil.isInRange(npcAI.getOwner(), npcAI.getOwner().getTarget(), npcAI.getOwner().getAggroRange())) {
+            if (npcAI.getOwner().getTarget() != null
+                && !MathUtil.isInRange(npcAI.getOwner(), npcAI.getOwner().getTarget(), npcAI.getOwner().getAggroRange())) {
                 npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
                 npcAI.getOwner().getController().abortCast();
                 return;
@@ -63,7 +64,8 @@ public class SkillAttackManager {
         }
         if (npcAI.setSubStateIfNot(AISubState.CAST)) {
             if (delay > 0) {
-                ThreadPoolManager.getInstance().schedule(new SkillAction(npcAI), delay + DataManager.SKILL_DATA.getSkillTemplate(npcAI.getSkillId()).getDuration());
+                ThreadPoolManager.getInstance().schedule(new SkillAction(npcAI),
+                    delay + DataManager.SKILL_DATA.getSkillTemplate(npcAI.getSkillId()).getDuration());
             } else {
                 skillAction(npcAI);
             }
@@ -76,7 +78,8 @@ public class SkillAttackManager {
     protected static void skillAction(NpcAI2 npcAI) {
         Creature target = (Creature) npcAI.getOwner().getTarget();
         if (npcAI.getOwner().getObjectTemplate().getAttackRange() == 0) {
-            if (npcAI.getOwner().getTarget() != null && !MathUtil.isInRange(npcAI.getOwner(), npcAI.getOwner().getTarget(), npcAI.getOwner().getAggroRange())) {
+            if (npcAI.getOwner().getTarget() != null
+                && !MathUtil.isInRange(npcAI.getOwner(), npcAI.getOwner().getTarget(), npcAI.getOwner().getAggroRange())) {
                 npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
                 npcAI.getOwner().getController().abortCast();
                 return;
@@ -153,8 +156,8 @@ public class SkillAttackManager {
                     // Check for Bind/Silence/Fear debuffs on npc
                     SkillTemplate template = npcSkill.getSkillTemplate();
                     if ((template.getType() == SkillType.MAGICAL && owner.getEffectController().isAbnormalSet(AbnormalState.SILENCE))
-                            || (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
-                            || (owner.getEffectController().isUnderFear())) {
+                        || (template.getType() == SkillType.PHYSICAL && owner.getEffectController().isAbnormalSet(AbnormalState.BIND))
+                        || (owner.getEffectController().isUnderFear())) {
                         return null;
                     }
 

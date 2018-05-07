@@ -29,10 +29,10 @@
  */
 package quest.gelkmaros;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,7 +45,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _24062ADarkPlan extends QuestHandler {
 
     private final static int questId = 24062;
-    private final static int[] mob_ids = {216061, 216062, 216055, 216056, 216757, 216067};
+    private final static int[] mob_ids = { 216061, 216062, 216055, 216056, 216757, 216067 };
 
     public _24062ADarkPlan() {
         super(questId);

@@ -29,16 +29,15 @@
  */
 package quest.rentus_base;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
  * @author Ritsu
- *
  */
 public class _30504TheSearchforPaios extends QuestHandler {
 
@@ -84,7 +83,7 @@ public class _30504TheSearchforPaios extends QuestHandler {
                             return defaultCloseDialog(env, 1, 2, true, false);//reward
                     }
                 }
-                break;
+                    break;
                 case 701098: {
                     switch (dialog) {
                         case USE_OBJECT:

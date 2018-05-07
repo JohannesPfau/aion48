@@ -29,7 +29,11 @@
  */
 package ai.instance.darkPoeta;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -37,10 +41,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Ritsu
@@ -50,7 +51,7 @@ public class Noah_sFuriousShadeAI2 extends AggressiveNpcAI2 {
 
     private Future<?> skillTask;
     private Future<?> skill2Task;
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
 
     @Override
     public void handleSpawned() {
@@ -88,10 +89,12 @@ public class Noah_sFuriousShadeAI2 extends AggressiveNpcAI2 {
 
     private void useSkillTree() {
         skillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 SkillEngine.getInstance().getSkill(getOwner(), 17736, 50, getTarget()).useSkill();
                 skill2Task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         SkillEngine.getInstance().getSkill(getOwner(), 18531, 50, getTarget()).useSkill();
@@ -103,7 +106,7 @@ public class Noah_sFuriousShadeAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{30});
+        Collections.addAll(percents, new Integer[] { 30 });
     }
 
     private void cancelTask() {

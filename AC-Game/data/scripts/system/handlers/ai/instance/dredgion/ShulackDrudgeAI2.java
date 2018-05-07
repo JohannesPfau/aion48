@@ -29,7 +29,6 @@
  */
 package ai.instance.dredgion;
 
-import ai.GeneralNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.CreatureType;
@@ -40,6 +39,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author cheatkiller
@@ -65,6 +66,7 @@ public class ShulackDrudgeAI2 extends GeneralNpcAI2 {
             ItemService.addItem(player, itemId, 1);
             getOwner().setNpcType(CreatureType.PEACE.getId());
             getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player player) {
                     PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(getOwner().getObjectId(), 0, getOwner().getType(player), 0));

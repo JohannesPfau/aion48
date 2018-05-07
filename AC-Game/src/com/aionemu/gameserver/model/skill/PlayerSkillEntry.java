@@ -60,13 +60,13 @@ public class PlayerSkillEntry extends SkillEntry {
     public boolean isStigma() {
         return this.isStigma;
     }
-    
+
     public boolean isLinked() {
         return this.isLinked;
     }
 
     @Override
-	public void setSkillLvl(int skillLevel) {
+    public void setSkillLvl(int skillLevel) {
         super.setSkillLvl(skillLevel);
         setPersistentState(PersistentState.UPDATE_REQUIRED);
     }
@@ -107,7 +107,8 @@ public class PlayerSkillEntry extends SkillEntry {
     }
 
     /**
-     * @param currentXp the currentXp to set
+     * @param currentXp
+     *            the currentXp to set
      */
     public void setCurrentXp(int currentXp) {
         this.currentXp = currentXp;
@@ -181,7 +182,8 @@ public class PlayerSkillEntry extends SkillEntry {
     }
 
     /**
-     * @param persistentState the pState to set
+     * @param persistentState
+     *            the pState to set
      */
     public void setPersistentState(PersistentState persistentState) {
         switch (persistentState) {

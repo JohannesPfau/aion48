@@ -29,67 +29,65 @@
 */
 package admincommands;
 
+import java.util.Collection;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-     
-import java.util.Collection;
-     
+
 public class Who extends AdminCommand {
-     
+
     public Who() {
         super("who");
     }
-     
+
     @Override
     public void execute(Player admin, String... params) {
-     
+
         int playerCount = DAOManager.getDAO(PlayerDAO.class).getOnlinePlayerCount();
-     
+
         Collection<Player> players = World.getInstance().getAllPlayers();
-     
+
         PacketSendUtility.sendMessage(admin, "--------------------------\nPlayers Online: " + (playerCount) + "\n--------------------------");
-     
+
         for (Player player : players) {
             if (params != null && params.length > 0) {
                 String cmd = params[0].toLowerCase();
-     
+
                 if (("ely").startsWith(cmd)) {
                     if (player.getCommonData().getRace() == Race.ASMODIANS) {
                         continue;
                     }
                 }
-     
+
                 if (("asmo").startsWith(cmd)) {
                     if (player.getCommonData().getRace() == Race.ELYOS) {
                         continue;
                     }
                 }
-     
+
                 if (("member").startsWith(cmd) || ("premium").startsWith(cmd)) {
                     if (player.getPlayerAccount().getMembership() == 0) {
                         continue;
                     }
                 }
             }
-     
-    	String raceColor;
-     
-    	if (player.getCommonData().getRace() == Race.ELYOS)
-          	raceColor = "\ue052";
-    	else
-          	raceColor = "\ue053";
-     
-    	PacketSendUtility.sendMessage(admin, "\ue099 " + player.getName() + " \ue099 " 
-    		+ player.getLevel() + " \ue099 " 
-    		+ player.getPlayerClass() + "\n" + raceColor + " " + player.getCommonData().getRace().name() + " " + raceColor + " Acc: " 
-    		+ player.getAcountName() + "\n--------------------------");
-     
+
+            String raceColor;
+
+            if (player.getCommonData().getRace() == Race.ELYOS)
+                raceColor = "\ue052";
+            else
+                raceColor = "\ue053";
+
+            PacketSendUtility.sendMessage(admin,
+                "\ue099 " + player.getName() + " \ue099 " + player.getLevel() + " \ue099 " + player.getPlayerClass() + "\n" + raceColor + " "
+                    + player.getCommonData().getRace().name() + " " + raceColor + " Acc: " + player.getAcountName() + "\n--------------------------");
+
         }
     }
 }

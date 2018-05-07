@@ -94,6 +94,7 @@ public class PlayerLeaveWorldService {
         player.getController().stopMoving();
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 startLeaveWorld(player);
@@ -104,12 +105,15 @@ public class PlayerLeaveWorldService {
     /**
      * This method is called when player leaves the game, which includes just
      * two cases: either player goes back to char selection screen or it's
-     * leaving the game [closing client].<br> <br> <b><font color='red'>NOTICE:
+     * leaving the game [closing client].<br>
+     * <br>
+     * <b><font color='red'>NOTICE:
      * </font> This method is called only from {@link GameConnection} and
      * {@link CM_QUIT} and must not be called from anywhere else</b>
      */
     public static final void startLeaveWorld(Player player) {
-        log.info("Player logged out: " + player.getName() + " Account: " + (player.getClientConnection() != null ? player.getClientConnection().getAccount().getName() : "disconnected"));
+        log.info("Player logged out: " + player.getName() + " Account: "
+            + (player.getClientConnection() != null ? player.getClientConnection().getAccount().getName() : "disconnected"));
         FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
         FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());
         player.onLoggedOut();
@@ -144,16 +148,16 @@ public class PlayerLeaveWorldService {
             log.info("Player disconnected into Studio => Send to Bind Point");
         }
         if (player.isInDuoFFA()) {
-        	DFFAService.getInstance().TeleOut(player);
+            DFFAService.getInstance().TeleOut(player);
         } else if (player.isInPkMode()) {
-        	player.setInPkMode(false);
-        	TeleportService2.moveToBindLocation(player, true);            
+            player.setInPkMode(false);
+            TeleportService2.moveToBindLocation(player, true);
         } else if (player.isInArena()) {
-        	ArenaService.getInstance().TeleOut(player);
+            ArenaService.getInstance().TeleOut(player);
         }
-        
+
         if (player.arenaWaiting) {
-        	ArenaService.getInstance().unRegister(player);
+            ArenaService.getInstance().unRegister(player);
         }
 
         // store current effects
@@ -202,8 +206,8 @@ public class PlayerLeaveWorldService {
         if (player.isLegionMember()) {
             LegionService.getInstance().onLogout(player);
         }
-		PlayerGroupService.onPlayerLogout(player);
-		PlayerAllianceService.onPlayerLogout(player);
+        PlayerGroupService.onPlayerLogout(player);
+        PlayerAllianceService.onPlayerLogout(player);
 
         QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0, 0));
 

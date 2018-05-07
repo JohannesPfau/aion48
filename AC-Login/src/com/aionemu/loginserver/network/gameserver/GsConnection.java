@@ -29,6 +29,15 @@
  */
 package com.aionemu.loginserver.network.gameserver;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.loginserver.GameServerInfo;
@@ -36,14 +45,6 @@ import com.aionemu.loginserver.PingPongThread;
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.network.factories.GsPacketHandlerFactory;
 import com.aionemu.loginserver.utils.ThreadPoolManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
-import java.util.ArrayDeque;
-import java.util.Deque;
 
 /**
  * Object representing connection between LoginServer and GameServer.
@@ -75,7 +76,7 @@ public class GsConnection extends AConnection {
     /**
      * Server Packet "to send" Queue
      */
-    private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<GsServerPacket>();
+    private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<>();
     /**
      * Current state of this connection
      */
@@ -104,7 +105,7 @@ public class GsConnection extends AConnection {
      *
      * @param data
      * @return True if data was processed correctly, False if some error
-     * occurred and connection should be closed NOW.
+     *         occurred and connection should be closed NOW.
      */
     @Override
     public boolean processData(ByteBuffer data) {
@@ -123,7 +124,7 @@ public class GsConnection extends AConnection {
      *
      * @param data
      * @return True if data was written to buffer, False indicating that there
-     * are not any more data to write.
+     *         are not any more data to write.
      */
     @Override
     protected final boolean writeData(ByteBuffer data) {
@@ -143,7 +144,7 @@ public class GsConnection extends AConnection {
      * closed.
      *
      * @return time in ms after witch onDisconnect() method will be called.
-     * Always return 0.
+     *         Always return 0.
      */
     @Override
     protected final long getDisconnectionDelay() {
@@ -178,7 +179,8 @@ public class GsConnection extends AConnection {
     /**
      * Sends GsServerPacket to this client.
      *
-     * @param bp GsServerPacket to be sent.
+     * @param bp
+     *            GsServerPacket to be sent.
      */
     public final void sendPacket(GsServerPacket bp) {
         synchronized (guard) {
@@ -202,8 +204,10 @@ public class GsConnection extends AConnection {
      * other things. forced means that server shouldn't wait with removing this
      * connection.
      *
-     * @param closePacket Packet that will be send before closing.
-     * @param forced      have no effect in this implementation.
+     * @param closePacket
+     *            Packet that will be send before closing.
+     * @param forced
+     *            have no effect in this implementation.
      */
     public final void close(GsServerPacket closePacket, boolean forced) {
         synchronized (guard) {
@@ -227,7 +231,8 @@ public class GsConnection extends AConnection {
     }
 
     /**
-     * @param state Set current state of this connection.
+     * @param state
+     *            Set current state of this connection.
      */
     public void setState(State state) {
         this.state = state;
@@ -240,14 +245,15 @@ public class GsConnection extends AConnection {
 
     /**
      * @return GameServerInfo for this GsConnection or null if this GsConnection
-     * is not authenticated yet.
+     *         is not authenticated yet.
      */
     public GameServerInfo getGameServerInfo() {
         return gameServerInfo;
     }
 
     /**
-     * @param gameServerInfo Set GameServerInfo for this GsConnection.
+     * @param gameServerInfo
+     *            Set GameServerInfo for this GsConnection.
      */
     public void setGameServerInfo(GameServerInfo gameServerInfo) {
         this.gameServerInfo = gameServerInfo;

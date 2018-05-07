@@ -76,14 +76,16 @@ public abstract class DamageEffect extends EffectTemplate {
                     cannotMiss = ((SkillAttackInstantEffect) this).isCannotmiss();
                 }
                 int rndDmg = (this instanceof SkillAttackInstantEffect ? ((SkillAttackInstantEffect) this).getRnddmg() : 0);
-                AttackUtil.calculateSkillResult(effect, valueWithDelta, modifier, this.getMode(), rndDmg, accMod, this.critProbMod2, critAddDmg, cannotMiss, shared, false, false);
+                AttackUtil.calculateSkillResult(effect, valueWithDelta, modifier, this.getMode(), rndDmg, accMod, this.critProbMod2, critAddDmg,
+                    cannotMiss, shared, false, false);
                 break;
             case MAGICAL:
                 boolean useKnowledge = true;
                 if (this instanceof ProcAtkInstantEffect) {
                     useKnowledge = false;
                 }
-                AttackUtil.calculateMagicalSkillResult(effect, valueWithDelta, modifier, getElement(), true, useKnowledge, false, this.getMode(), this.critProbMod2, critAddDmg, shared, false);
+                AttackUtil.calculateMagicalSkillResult(effect, valueWithDelta, modifier, getElement(), true, useKnowledge, false, this.getMode(),
+                    this.critProbMod2, critAddDmg, shared, false);
                 break;
             default:
                 AttackUtil.calculateSkillResult(effect, 0, null, this.getMode(), 0, accMod, 100, 0, false, shared, false, false);

@@ -80,6 +80,7 @@ import org.xml.sax.helpers.DefaultHandler;
  * <p>
  * Schema:
  * <p/>
+ * 
  * <pre>
  * &lt;xs:element name="import"&gt;
  * &lt;xs:annotation&gt;
@@ -129,8 +130,10 @@ public class XmlMerger {
      * Create new instance of <tt>XmlMerger </tt>. Base directory is set to
      * directory which contains source file.
      *
-     * @param source Source file.
-     * @param target Destination file.
+     * @param source
+     *            Source file.
+     * @param target
+     *            Destination file.
      */
     public XmlMerger(File source, File target) {
         this(source, target, source.getParentFile());
@@ -139,9 +142,12 @@ public class XmlMerger {
     /**
      * Create new instance of <tt>XmlMerger </tt>
      *
-     * @param source  Source file.
-     * @param target  Destination file.
-     * @param baseDir Root directory.
+     * @param source
+     *            Source file.
+     * @param target
+     *            Destination file.
+     * @param baseDir
+     *            Root directory.
      */
     public XmlMerger(File source, File target, File baseDir) {
         this.baseDir = baseDir;
@@ -157,8 +163,10 @@ public class XmlMerger {
      * existing one if the source file has modification.<br />
      * If there are no changes - nothing happens.
      *
-     * @throws FileNotFoundException when source file doesn't exists.
-     * @throws XMLStreamException    when XML processing error was occurred.
+     * @throws FileNotFoundException
+     *             when source file doesn't exists.
+     * @throws XMLStreamException
+     *             when XML processing error was occurred.
      */
     public void process() throws Exception {
         logger.debug("Processing " + sourceFile + " files into " + destFile);
@@ -198,11 +206,14 @@ public class XmlMerger {
      * Check for modifications of included files.
      *
      * @return <code>true</code> if at least one of included files has
-     * modifications.
-     * @throws IOException                  IO Error.
-     * @throws SAXException                 Document parsing error.
-     * @throws ParserConfigurationException if a SAX parser cannot be created
-     *                                      which satisfies the requested configuration.
+     *         modifications.
+     * @throws IOException
+     *             IO Error.
+     * @throws SAXException
+     *             Document parsing error.
+     * @throws ParserConfigurationException
+     *             if a SAX parser cannot be created
+     *             which satisfies the requested configuration.
      */
     private boolean checkFileModifications() throws Exception {
         long destFileTime = destFile.lastModified();
@@ -234,10 +245,12 @@ public class XmlMerger {
      * This method processes the source file, replacing all of the 'import' tags
      * by the data from the relevant files.
      *
-     * @throws XMLStreamException on event writing error.
-     * @throws IOException        if the destination file exists but is a directory
-     *                            rather than a regular file, does not exist but cannot be created, or
-     *                            cannot be opened for any other reason
+     * @throws XMLStreamException
+     *             on event writing error.
+     * @throws IOException
+     *             if the destination file exists but is a directory
+     *             rather than a regular file, does not exist but cannot be created, or
+     *             cannot be opened for any other reason
      */
     private void doUpdate() throws XMLStreamException, IOException {
         XMLEventReader reader = null;
@@ -315,11 +328,12 @@ public class XmlMerger {
      * This method processes the 'import' element, replacing it by the data from
      * the relevant files.
      *
-     * @throws XMLStreamException    on event writing error.
-     * @throws FileNotFoundException of imported file was not found.
+     * @throws XMLStreamException
+     *             on event writing error.
+     * @throws FileNotFoundException
+     *             of imported file was not found.
      */
-    private void processImportElement(StartElement element, XMLEventWriter writer, Properties metadata)
-            throws XMLStreamException, IOException {
+    private void processImportElement(StartElement element, XMLEventWriter writer, Properties metadata) throws XMLStreamException, IOException {
         File file = new File(baseDir, getAttributeValue(element, qNameFile, null, "Attribute 'file' is missing or empty."));
 
         if (!file.exists()) {
@@ -346,26 +360,28 @@ public class XmlMerger {
     private static Collection<File> listFiles(File root, boolean recursive) {
         IOFileFilter dirFilter = recursive ? makeSVNAware(HiddenFileFilter.VISIBLE) : null;
 
-        return FileUtils.listFiles(
-                root,
-                andFileFilter(andFileFilter(notFileFilter(prefixFileFilter("new")), suffixFileFilter(".xml")),
-                        HiddenFileFilter.VISIBLE), dirFilter);
+        return FileUtils.listFiles(root,
+            andFileFilter(andFileFilter(notFileFilter(prefixFileFilter("new")), suffixFileFilter(".xml")), HiddenFileFilter.VISIBLE), dirFilter);
     }
 
     /**
      * Extract an attribute value from a
      * <code>StartElement </code> event.
      *
-     * @param element        Event object.
-     * @param name           Attribute QName
-     * @param def            Default value.
-     * @param onErrorMessage On error message.
+     * @param element
+     *            Event object.
+     * @param name
+     *            Attribute QName
+     * @param def
+     *            Default value.
+     * @param onErrorMessage
+     *            On error message.
      * @return attribute value
-     * @throws XMLStreamException if attribute is missing and there is no
-     *                            default value set.
+     * @throws XMLStreamException
+     *             if attribute is missing and there is no
+     *             default value set.
      */
-    private String getAttributeValue(StartElement element, QName name, String def, String onErrorMessage)
-            throws XMLStreamException {
+    private String getAttributeValue(StartElement element, QName name, String def, String onErrorMessage) throws XMLStreamException {
         Attribute attribute = element.getAttributeByName(name);
 
         if (attribute == null) {
@@ -383,16 +399,20 @@ public class XmlMerger {
      * Read all {@link javax.xml.stream.events.XMLEvent}'s from specified file
      * and write them onto the {@link javax.xml.stream.XMLEventWriter}
      *
-     * @param file     File to import
-     * @param skipRoot Skip-root flag
-     * @param writer   Destenation writer
-     * @throws XMLStreamException    On event reading/writing error.
-     * @throws FileNotFoundException if the reading file does not exist, is a
-     *                               directory rather than a regular file, or for some other reason cannot be
-     *                               opened for reading.
+     * @param file
+     *            File to import
+     * @param skipRoot
+     *            Skip-root flag
+     * @param writer
+     *            Destenation writer
+     * @throws XMLStreamException
+     *             On event reading/writing error.
+     * @throws FileNotFoundException
+     *             if the reading file does not exist, is a
+     *             directory rather than a regular file, or for some other reason cannot be
+     *             opened for reading.
      */
-    private void importFile(File file, boolean skipRoot, XMLEventWriter writer, Properties metadata)
-            throws XMLStreamException, IOException {
+    private void importFile(File file, boolean skipRoot, XMLEventWriter writer, Properties metadata) throws XMLStreamException, IOException {
         logger.debug("Appending file " + file);
         metadata.setProperty(file.getPath(), makeHash(file));
 
@@ -525,8 +545,9 @@ public class XmlMerger {
                     return true;
                 }
             } catch (IOException e) {
-                logger.warn("File varification error. File: " + file.getPath() + ", location=" + locator.getLineNumber() + ":"
-                        + locator.getColumnNumber(), e);
+                logger.warn(
+                    "File varification error. File: " + file.getPath() + ", location=" + locator.getLineNumber() + ":" + locator.getColumnNumber(),
+                    e);
                 return true;// was modified.
             }
 
@@ -578,9 +599,11 @@ public class XmlMerger {
     /**
      * Create a unique identifier of file and it contents.
      *
-     * @param file the file to checksum, must not be <code>null</code>
+     * @param file
+     *            the file to checksum, must not be <code>null</code>
      * @return String identifier
-     * @throws IOException if an IO error occurs reading the file
+     * @throws IOException
+     *             if an IO error occurs reading the file
      */
     private static String makeHash(File file) throws IOException {
         return String.valueOf(FileUtils.checksumCRC32(file));

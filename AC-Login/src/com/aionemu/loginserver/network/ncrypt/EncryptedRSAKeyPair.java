@@ -56,8 +56,9 @@ public class EncryptedRSAKeyPair {
     /**
      * Default constructor. Stores RSA key pair and encrypts rsa modulus N
      *
-     * @param RSAKeyPair standard RSA KeyPair generated with standard
-     *                   KeyPairGenerator {@link java.security.KeyPairGenerator}
+     * @param RSAKeyPair
+     *            standard RSA KeyPair generated with standard
+     *            KeyPairGenerator {@link java.security.KeyPairGenerator}
      */
     public EncryptedRSAKeyPair(KeyPair RSAKeyPair) {
         this.RSAKeyPair = RSAKeyPair;
@@ -67,7 +68,8 @@ public class EncryptedRSAKeyPair {
     /**
      * Encrypt RSA modulus N
      *
-     * @param modulus RSA modulus from public/private pairs (e,n), (d,n)
+     * @param modulus
+     *            RSA modulus from public/private pairs (e,n), (d,n)
      * @return encrypted modulus
      */
     private byte[] encryptModulus(BigInteger modulus) {

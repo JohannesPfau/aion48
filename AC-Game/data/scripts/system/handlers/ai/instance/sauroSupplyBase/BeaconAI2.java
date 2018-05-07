@@ -29,10 +29,11 @@
  */
 package ai.instance.sauroSupplyBase;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author blackfire
@@ -40,15 +41,14 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 
 @AIName("sauro_beacon")
 public class BeaconAI2 extends AggressiveNpcAI2 {
-	
-	Npc cannon;
-		
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		cannon = getPosition().getWorldMapInstance().getNpc(284453);
-		AI2Actions.targetCreature(BeaconAI2.this, cannon);
+
+    Npc cannon;
+
+    @Override
+    protected void handleSpawned() {
+        super.handleSpawned();
+        cannon = getPosition().getWorldMapInstance().getNpc(284453);
+        AI2Actions.targetCreature(BeaconAI2.this, cannon);
         getAggroList().addHate(cannon, 100000);
     }
 }
-

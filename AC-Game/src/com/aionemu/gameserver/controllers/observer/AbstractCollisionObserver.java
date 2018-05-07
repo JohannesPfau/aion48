@@ -38,7 +38,6 @@ import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
 /**
  * @author MrPoke
  * @moved Rolandas
@@ -63,6 +62,7 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
     public void moved() {
         if (!isRunning.getAndSet(true)) {
             ThreadPoolManager.getInstance().execute(new Runnable() {
+
                 @Override
                 public void run() {
                     try {
@@ -72,9 +72,10 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
                         dir.subtractLocal(pos).normalizeLocal();
                         Ray r = new Ray(pos, dir);
                         r.setLimit(limit);/*
-                         CollisionResults results = new CollisionResults(intentions, true, creature.getInstanceId());
-                         geometry.collideWith(r, results);*/
-                        /*onMoved(results);*/
+                                           * CollisionResults results = new CollisionResults(intentions, true, creature.getInstanceId());
+                                           * geometry.collideWith(r, results);
+                                           */
+                        /* onMoved(results); */
 
                         oldPos = pos;
                     } finally {

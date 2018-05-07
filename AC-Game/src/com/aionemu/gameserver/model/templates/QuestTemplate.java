@@ -176,6 +176,7 @@ public class QuestTemplate {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getRewards().add(newItem);
      * </pre>
@@ -184,21 +185,21 @@ public class QuestTemplate {
      */
     public List<Rewards> getRewards() {
         if (rewards == null) {
-            rewards = new ArrayList<Rewards>();
+            rewards = new ArrayList<>();
         }
         return this.rewards;
     }
 
     public List<Rewards> getExtendedRewards() {
         if (extendedRewards == null) {
-            extendedRewards = new ArrayList<Rewards>();
+            extendedRewards = new ArrayList<>();
         }
         return this.extendedRewards;
     }
 
     public List<QuestBonuses> getBonus() {
         if (bonus == null) {
-            bonus = new ArrayList<QuestBonuses>();
+            bonus = new ArrayList<>();
         }
         return this.bonus;
     }
@@ -213,6 +214,7 @@ public class QuestTemplate {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getQuestDrop().add(newItem);
      * </pre>
@@ -222,21 +224,21 @@ public class QuestTemplate {
      */
     public List<QuestDrop> getQuestDrop() {
         if (questDrop == null) {
-            questDrop = new ArrayList<QuestDrop>();
+            questDrop = new ArrayList<>();
         }
         return this.questDrop;
     }
 
     public List<QuestKill> getQuestKill() {
         if (questKill == null) {
-            questKill = new ArrayList<QuestKill>();
+            questKill = new ArrayList<>();
         }
         return this.questKill;
     }
 
     public List<XMLStartCondition> getXMLStartConditions() {
         if (startConds == null) {
-            startConds = new ArrayList<XMLStartCondition>();
+            startConds = new ArrayList<>();
         }
         return startConds;
     }
@@ -251,6 +253,7 @@ public class QuestTemplate {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getClassPermitted().add(newItem);
      * </pre>
@@ -260,7 +263,7 @@ public class QuestTemplate {
      */
     public List<PlayerClass> getClassPermitted() {
         if (classPermitted == null) {
-            classPermitted = new ArrayList<PlayerClass>();
+            classPermitted = new ArrayList<>();
         }
         return this.classPermitted;
     }
@@ -293,6 +296,7 @@ public class QuestTemplate {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getFighterSelectableReward().add(newItem);
      * </pre>
@@ -302,7 +306,7 @@ public class QuestTemplate {
      */
     public List<QuestItems> getFighterSelectableReward() {
         if (fighterSelectableReward == null) {
-            fighterSelectableReward = new ArrayList<QuestItems>();
+            fighterSelectableReward = new ArrayList<>();
         }
         return this.fighterSelectableReward;
     }
@@ -317,6 +321,7 @@ public class QuestTemplate {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getKnightSelectableReward().add(newItem);
      * </pre>
@@ -326,7 +331,7 @@ public class QuestTemplate {
      */
     public List<QuestItems> getKnightSelectableReward() {
         if (knightSelectableReward == null) {
-            knightSelectableReward = new ArrayList<QuestItems>();
+            knightSelectableReward = new ArrayList<>();
         }
         return this.knightSelectableReward;
     }
@@ -341,6 +346,7 @@ public class QuestTemplate {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getRangerSelectableReward().add(newItem);
      * </pre>
@@ -350,7 +356,7 @@ public class QuestTemplate {
      */
     public List<QuestItems> getRangerSelectableReward() {
         if (rangerSelectableReward == null) {
-            rangerSelectableReward = new ArrayList<QuestItems>();
+            rangerSelectableReward = new ArrayList<>();
         }
         return this.rangerSelectableReward;
     }
@@ -365,6 +371,7 @@ public class QuestTemplate {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getAssassinSelectableReward().add(newItem);
      * </pre>
@@ -374,7 +381,7 @@ public class QuestTemplate {
      */
     public List<QuestItems> getAssassinSelectableReward() {
         if (assassinSelectableReward == null) {
-            assassinSelectableReward = new ArrayList<QuestItems>();
+            assassinSelectableReward = new ArrayList<>();
         }
         return this.assassinSelectableReward;
     }
@@ -389,6 +396,7 @@ public class QuestTemplate {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getWizardSelectableReward().add(newItem);
      * </pre>
@@ -398,7 +406,7 @@ public class QuestTemplate {
      */
     public List<QuestItems> getWizardSelectableReward() {
         if (wizardSelectableReward == null) {
-            wizardSelectableReward = new ArrayList<QuestItems>();
+            wizardSelectableReward = new ArrayList<>();
         }
         return this.wizardSelectableReward;
     }
@@ -413,6 +421,7 @@ public class QuestTemplate {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getElementalistSelectableReward().add(newItem);
      * </pre>
@@ -422,7 +431,7 @@ public class QuestTemplate {
      */
     public List<QuestItems> getElementalistSelectableReward() {
         if (elementalistSelectableReward == null) {
-            elementalistSelectableReward = new ArrayList<QuestItems>();
+            elementalistSelectableReward = new ArrayList<>();
         }
         return this.elementalistSelectableReward;
     }
@@ -437,6 +446,7 @@ public class QuestTemplate {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getPriestSelectableReward().add(newItem);
      * </pre>
@@ -446,7 +456,7 @@ public class QuestTemplate {
      */
     public List<QuestItems> getPriestSelectableReward() {
         if (priestSelectableReward == null) {
-            priestSelectableReward = new ArrayList<QuestItems>();
+            priestSelectableReward = new ArrayList<>();
         }
         return this.priestSelectableReward;
     }
@@ -461,6 +471,7 @@ public class QuestTemplate {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getChanterSelectableReward().add(newItem);
      * </pre>
@@ -470,28 +481,28 @@ public class QuestTemplate {
      */
     public List<QuestItems> getChanterSelectableReward() {
         if (chanterSelectableReward == null) {
-            chanterSelectableReward = new ArrayList<QuestItems>();
+            chanterSelectableReward = new ArrayList<>();
         }
         return this.chanterSelectableReward;
     }
 
     public List<QuestItems> getGunnerSelectableReward() {
         if (gunnerSelectableReward == null) {
-            gunnerSelectableReward = new ArrayList<QuestItems>();
+            gunnerSelectableReward = new ArrayList<>();
         }
         return this.gunnerSelectableReward;
     }
 
     public List<QuestItems> getBardSelectableReward() {
         if (bardSelectableReward == null) {
-            bardSelectableReward = new ArrayList<QuestItems>();
+            bardSelectableReward = new ArrayList<>();
         }
         return this.bardSelectableReward;
     }
 
     public List<QuestItems> getRiderSelectableReward() {
         if (riderSelectableReward == null) {
-            riderSelectableReward = new ArrayList<QuestItems>();
+            riderSelectableReward = new ArrayList<>();
         }
         return this.riderSelectableReward;
     }
@@ -575,7 +586,7 @@ public class QuestTemplate {
             return cannotGiveup;
         }
     }
-    
+
     /**
      * Gets the value of the canReport property.
      *

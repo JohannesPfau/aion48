@@ -58,7 +58,8 @@ public class AntiHackService {
         AionServerPacket normalMove = new SM_MOVE(player);
 
         if (SecurityConfig.ABNORMAL) {
-            if (!player.canPerformMove() && !player.getEffectController().isAbnormalSet(AbnormalState.CANNOT_MOVE) && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
+            if (!player.canPerformMove() && !player.getEffectController().isAbnormalSet(AbnormalState.CANNOT_MOVE)
+                && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
                 if (player.abnormalHackCounter > SecurityConfig.ABNORMAL_COUNTER) {
                     punish(player, x, y, type, forcedMove, "Detected illegal Action (Anti-Abnormal Hack)");
                     return false;
@@ -86,11 +87,8 @@ public class AntiHackService {
                         }
 
                         if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER) {
-                            return punish(player, x, y, type, forcedMove, "Detected illegal action (Speed Hack)"
-                                    + " SHC:" + player.speedHackCounter
-                                    + " S:" + speed
-                                    + " V:" + Math.rint(1000.0 * vector2D) / 1000.0
-                                    + " type:" + type);
+                            return punish(player, x, y, type, forcedMove, "Detected illegal action (Speed Hack)" + " SHC:" + player.speedHackCounter
+                                + " S:" + speed + " V:" + Math.rint(1000.0 * vector2D) / 1000.0 + " type:" + type);
                         }
                     }
                 } else if ((type & MovementMask.MOUSE) == MovementMask.MOUSE && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
@@ -101,7 +99,8 @@ public class AntiHackService {
                         boolean isMoveToTarget = false;
                         if (player.getTarget() != null && player.getTarget() != player) {
                             PlayerMoveController m = player.getMoveController();
-                            double distDiff = MathUtil.getDistance(Math.round(player.getTarget().getX()), Math.round(player.getTarget().getY()), Math.round(m.getTargetX2()), Math.round(m.getTargetY2()));
+                            double distDiff = MathUtil.getDistance(Math.round(player.getTarget().getX()), Math.round(player.getTarget().getY()),
+                                Math.round(m.getTargetX2()), Math.round(m.getTargetY2()));
                             isMoveToTarget = distDiff <= 5;
                         }
 
@@ -121,12 +120,10 @@ public class AntiHackService {
                     }
 
                     if (SecurityConfig.PUNISH > 0 && player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 5) {
-                        return punish(player, x, y, type, forcedMove, "Detected illegal action (Speed Hack)"
-                                + " SHC:" + player.speedHackCounter
-                                + " SMS:" + Math.rint(100.0 * (timeDiff * (speed + 0.25) * 0.001)) / 100.0
-                                + " TDF:" + timeDiff
-                                + " VTD:" + Math.rint(1000.0 * (timeDiff * (speed + 0.85) * 0.001)) / 1000.0
-                                + " VS:" + Math.rint(100.0 * vector) / 100.0
+                        return punish(player, x, y, type, forcedMove,
+                            "Detected illegal action (Speed Hack)" + " SHC:" + player.speedHackCounter + " SMS:"
+                                + Math.rint(100.0 * (timeDiff * (speed + 0.25) * 0.001)) / 100.0 + " TDF:" + timeDiff + " VTD:"
+                                + Math.rint(1000.0 * (timeDiff * (speed + 0.85) * 0.001)) / 1000.0 + " VS:" + Math.rint(100.0 * vector) / 100.0
                                 + " type:" + type);
                     } else if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER) {
                         moveBack(player, x, y, type, forcedMove);
@@ -142,11 +139,9 @@ public class AntiHackService {
                 }
 
                 if (SecurityConfig.PUNISH > 0 && player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 5) {
-                    return punish(player, x, y, type, forcedMove, "Detected illegal action (Speed Hack)"
-                            + " SHC:" + player.speedHackCounter
-                            + " TD:" + Math.rint(1000.0 * timeDiff) / 1000.0
-                            + " VTD:" + Math.rint(1000.0 * (timeDiff * speed * 0.00075)) / 1000.0
-                            + " VS:" + Math.rint(100.0 * vector) / 100.0
+                    return punish(player, x, y, type, forcedMove,
+                        "Detected illegal action (Speed Hack)" + " SHC:" + player.speedHackCounter + " TD:" + Math.rint(1000.0 * timeDiff) / 1000.0
+                            + " VTD:" + Math.rint(1000.0 * (timeDiff * speed * 0.00075)) / 1000.0 + " VS:" + Math.rint(100.0 * vector) / 100.0
                             + " type:" + type);
                 } else if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER + 2) {
                     moveBack(player, x, y, type, forcedMove);
@@ -166,10 +161,8 @@ public class AntiHackService {
             double delta = MathUtil.getDistance(x, y, player.getX(), player.getY()) / speed;
             if (speed > 5.0 && delta > 5.0 && (type & MovementMask.GLIDE) != MovementMask.GLIDE) {
                 World.getInstance().updatePosition(player, player.getX(), player.getY(), player.getZ(), player.getHeading());
-                return punish(player, x, y, type, normalMove, "Detected illegal action (Teleportation)"
-                        + " S:" + speed
-                        + " D:" + Math.rint(1000.0 * delta) / 1000.0
-                        + " type:" + type);
+                return punish(player, x, y, type, normalMove,
+                    "Detected illegal action (Teleportation)" + " S:" + speed + " D:" + Math.rint(1000.0 * delta) / 1000.0 + " type:" + type);
             }
         }
 
@@ -186,7 +179,7 @@ public class AntiHackService {
                 AuditLogger.info(player, message);
                 moveBack(player, x, y, type, pkt);
                 if (player.speedHackCounter > SecurityConfig.SPEEDHACK_COUNTER * 3
-                        || player.abnormalHackCounter > SecurityConfig.ABNORMAL_COUNTER * 3) {
+                    || player.abnormalHackCounter > SecurityConfig.ABNORMAL_COUNTER * 3) {
                     player.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
                 }
                 return false;
@@ -216,12 +209,12 @@ public class AntiHackService {
     public static void checkAionBin(int size, Player player) {
         int legitSize = 212; //AION 4.7.5.7
         //int legitSize = 224; //AION 4.8.0.x
-        
+
         if (size != legitSize) {
             AuditLogger.info(player, "Detected modified aion.bin");
             player.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
         }
-        
+
         PacketSendUtility.sendPacket(player, new SM_GAMEGUARD(size));
     }
 }

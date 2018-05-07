@@ -29,14 +29,14 @@
  */
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PortalCooldownList;
 import com.aionemu.gameserver.model.team2.TemporaryPlayerTeam;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+
+import javolution.util.FastMap;
 
 /**
  * @author nrg
@@ -64,7 +64,9 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
         this.isAnswer = false;
         this.playerTeam = null;
         this.worldId = instanceId;
-        this.cooldownId = DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(instanceId) != null ? DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(instanceId).getId() : 0;
+        this.cooldownId = DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(instanceId) != null
+            ? DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(instanceId).getId()
+            : 0;
         //this.maxcount = DataManager.INSTANCE_COOLTIME_DATA.getInstanceCountByWorldId(instanceId) != null ? DataManager.INSTANCE_COOLTIME_DATA.getInstanceCountByWorldId(instanceId).getId() : 0;
     }
 
@@ -77,7 +79,7 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
         //writeH(maxcount); // 4.5 need to be the instance max count entry per days
 
         if (isAnswer) {
-            if (hasTeam) {    //all cooldowns from team
+            if (hasTeam) { //all cooldowns from team
                 writeH(playerTeam.getMembers().size());
 
                 for (Player p : playerTeam.getMembers()) {
@@ -85,7 +87,8 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
                     writeD(p.getObjectId());
                     writeH(cooldownList.size()); // cooldownList.size() must become countOfSomething => player count entry already set in portal_cooldown database ?
 
-                    for (FastMap.Entry<Integer, Long> e = cooldownList.getPortalCoolDowns().head(), end = cooldownList.getPortalCoolDowns().tail(); (e = e.getNext()) != end; ) {
+                    for (FastMap.Entry<Integer, Long> e = cooldownList.getPortalCoolDowns().head(), end = cooldownList.getPortalCoolDowns()
+                        .tail(); (e = e.getNext()) != end;) {
                         writeD(DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(e.getKey()).getId());
                         writeD(0x0);
                         writeD((int) (e.getValue() - System.currentTimeMillis()) / 1000);
@@ -94,13 +97,14 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
                     }
                     writeS(p.getName());
                 }
-            } else {    //current cooldowns of player
+            } else { //current cooldowns of player
                 writeH(1);
                 PortalCooldownList cooldownList = player.getPortalCooldownList();
                 writeD(player.getObjectId());
                 writeH(cooldownList.size()); // cooldownList.size() must become countOfSomething => player count entry already set in portal_cooldown database ?
 
-                for (FastMap.Entry<Integer, Long> e = cooldownList.getPortalCoolDowns().head(), end = cooldownList.getPortalCoolDowns().tail(); (e = e.getNext()) != end; ) {
+                for (FastMap.Entry<Integer, Long> e = cooldownList.getPortalCoolDowns().head(), end = cooldownList.getPortalCoolDowns()
+                    .tail(); (e = e.getNext()) != end;) {
                     writeD(DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(e.getKey()).getId());
                     writeD(0x0);
                     writeD((int) (e.getValue() - System.currentTimeMillis()) / 1000);
@@ -111,13 +115,14 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
                 writeS(player.getName());
             }
         } else {
-            if (cooldownId == 0) {    //all current cooldowns from player
+            if (cooldownId == 0) { //all current cooldowns from player
                 writeH(1);
                 PortalCooldownList cooldownList = player.getPortalCooldownList();
                 writeD(player.getObjectId());
                 writeH(cooldownList.size()); // cooldownList.size() must become countOfSomething => player count entry already set in portal_cooldown database ?
 
-                for (FastMap.Entry<Integer, Long> e = cooldownList.getPortalCoolDowns().head(), end = cooldownList.getPortalCoolDowns().tail(); (e = e.getNext()) != end; ) {
+                for (FastMap.Entry<Integer, Long> e = cooldownList.getPortalCoolDowns().head(), end = cooldownList.getPortalCoolDowns()
+                    .tail(); (e = e.getNext()) != end;) {
                     writeD(DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(e.getKey()).getId());
                     writeD(0x0);
                     writeD((int) (e.getValue() - System.currentTimeMillis()) / 1000);
@@ -125,7 +130,7 @@ public class SM_INSTANCE_INFO extends AionServerPacket {
                     //writeD(0x0); // unk 4.5
                 }
                 writeS(player.getName());
-            } else {    //just new cooldown from instance enter
+            } else { //just new cooldown from instance enter
                 writeH(1);
                 writeD(player.getObjectId());
                 writeH(1);

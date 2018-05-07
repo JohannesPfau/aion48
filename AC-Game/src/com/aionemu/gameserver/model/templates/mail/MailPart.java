@@ -42,7 +42,7 @@ import org.apache.commons.lang.StringUtils;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MailPart")
-@XmlSeeAlso({Sender.class, Header.class, Body.class, Tail.class, Title.class})
+@XmlSeeAlso({ Sender.class, Header.class, Body.class, Tail.class, Title.class })
 public abstract class MailPart extends StringParamList implements IMailFormatter {
 
     @XmlAttribute(name = "id")
@@ -82,7 +82,7 @@ public abstract class MailPart extends StringParamList implements IMailFormatter
     }
 
     @Override
-	public String getFormattedString(MailPartType partType) {
+    public String getFormattedString(MailPartType partType) {
         String result = "";
         if (id > 0) {
             result += id.toString();

@@ -29,6 +29,8 @@
  */
 package ai.instance.unstableSplinterpath;
 
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -39,8 +41,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.WorldPosition;
-
-import java.util.concurrent.Future;
 
 @AIName("unstablekaluvaspawn")
 public class UnstableKaluvaSpawnAI2 extends NpcAI2 {
@@ -93,6 +93,7 @@ public class UnstableKaluvaSpawnAI2 extends NpcAI2 {
 
     private void scheduleHatch() {
         task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {

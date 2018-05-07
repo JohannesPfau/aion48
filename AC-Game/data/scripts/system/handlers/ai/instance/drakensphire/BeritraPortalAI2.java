@@ -29,35 +29,35 @@
  */
 package ai.instance.drakensphire;
 
-import ai.ActionItemNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
-import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
+import ai.ActionItemNpcAI2;
+
 /**
- * 
  * @author blackfire
- *
  */
 @AIName("beritra_portal")
-public class BeritraPortalAI2 extends ActionItemNpcAI2
-{
-	@Override
-	protected void handleUseItemFinish(final Player player) {
-		switch (getNpcId()) {
-		  case 804697:
-				TeleportService2.teleportTo(player, 301390000, 174.7f, 518.2f, 1749.6f, (byte) 59, TeleportAnimation.BEAM_ANIMATION);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
+public class BeritraPortalAI2 extends ActionItemNpcAI2 {
+
+    @Override
+    protected void handleUseItemFinish(final Player player) {
+        switch (getNpcId()) {
+            case 804697:
+                TeleportService2.teleportTo(player, 301390000, 174.7f, 518.2f, 1749.6f, (byte) 59, TeleportAnimation.BEAM_ANIMATION);
+                ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
-                       PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 915));
+                        PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 915));
                     }
                 }, 3000);
-		  break;
-		}
-	}
+                break;
+        }
+    }
 }

@@ -29,6 +29,7 @@
  */
 package quest.reshanta;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,7 +37,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -48,7 +48,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _2075PuttingontheSpeed extends QuestHandler {
 
     private final static int questId = 2075;
-    private final static int[] npc_ids = {278034, 279004, 279024, 279006};
+    private final static int[] npc_ids = { 278034, 279004, 279024, 279006 };
 
     public _2075PuttingontheSpeed() {
         super(questId);

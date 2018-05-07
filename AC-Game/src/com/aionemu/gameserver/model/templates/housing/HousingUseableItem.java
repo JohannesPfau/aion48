@@ -39,7 +39,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "HousingUseableItem", propOrder = {"action"})
+@XmlType(name = "HousingUseableItem", propOrder = { "action" })
 public class HousingUseableItem extends PlaceableHouseObject {
 
     @XmlElement(required = true)

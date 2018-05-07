@@ -38,9 +38,6 @@ import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javolution.util.FastMap;
-import javolution.util.FastMap.Entry;
-
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,10 +56,11 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
+import javolution.util.FastMap;
+import javolution.util.FastMap.Entry;
+
 /**
  * Just some part of map.
- *
-
  */
 public class MapRegion {
 
@@ -150,7 +148,7 @@ public class MapRegion {
     }
 
     public Map<Integer, StaticDoor> getDoors() {
-        Map<Integer, StaticDoor> doors = new HashMap<Integer, StaticDoor>();
+        Map<Integer, StaticDoor> doors = new HashMap<>();
         for (VisibleObject obj : objects.values()) {
             if (obj instanceof StaticDoor) {
                 StaticDoor door = (StaticDoor) obj;
@@ -226,6 +224,7 @@ public class MapRegion {
 
     final void startActivation() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 log.debug("Activating in map {} region {}", getMapId(), regionId);
@@ -239,6 +238,7 @@ public class MapRegion {
 
     final void startDeactivation() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 log.debug("Deactivating in map {} region {}", getMapId(), regionId);
@@ -280,7 +280,8 @@ public class MapRegion {
      */
     private void deactivateObjects() {
         for (VisibleObject visObject : objects.values()) {
-            if (visObject instanceof Creature && !(SiegeConfig.BALAUR_AUTO_ASSAULT && visObject instanceof SiegeNpc) && !((Creature) visObject).isFlag() && !((Creature) visObject).isRaidMonster()) {
+            if (visObject instanceof Creature && !(SiegeConfig.BALAUR_AUTO_ASSAULT && visObject instanceof SiegeNpc)
+                && !((Creature) visObject).isFlag() && !((Creature) visObject).isRaidMonster()) {
                 Creature creature = (Creature) visObject;
                 creature.getAi2().onGeneralEvent(AIEventType.DEACTIVATE);
             }
@@ -302,7 +303,7 @@ public class MapRegion {
     }
 
     public void revalidateZones(Creature creature) {
-        for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd; ) {
+        for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd;) {
             boolean foundZone = false;
             int category = e.getKey();
             TreeSet<ZoneInstance> zones = e.getValue();
@@ -325,8 +326,8 @@ public class MapRegion {
     }
 
     public List<ZoneInstance> getZones(Creature creature) {
-        List<ZoneInstance> z = new ArrayList<ZoneInstance>();
-        for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd; ) {
+        List<ZoneInstance> z = new ArrayList<>();
+        for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd;) {
             TreeSet<ZoneInstance> zones = e.getValue();
             for (ZoneInstance zone : zones) {
                 if (zone.isInsideCreature(creature)) {
@@ -338,7 +339,7 @@ public class MapRegion {
     }
 
     public boolean onDie(Creature attacker, Creature target) {
-        for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd; ) {
+        for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd;) {
             TreeSet<ZoneInstance> zones = e.getValue();
             for (ZoneInstance zone : zones) {
                 if (zone.isInsideCreature(target)) {
@@ -352,7 +353,7 @@ public class MapRegion {
     }
 
     public boolean isInsideZone(ZoneName zoneName, float x, float y, float z) {
-        for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd; ) {
+        for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd;) {
             TreeSet<ZoneInstance> zones = e.getValue();
             for (ZoneInstance zone : zones) {
                 if (zone.getZoneTemplate().getName() != zoneName) {
@@ -365,7 +366,7 @@ public class MapRegion {
     }
 
     public boolean isInsideZone(ZoneName zoneName, Creature creature) {
-        for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd; ) {
+        for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd;) {
             TreeSet<ZoneInstance> zones = e.getValue();
             for (ZoneInstance zone : zones) {
                 if (zone.getZoneTemplate().getName() != zoneName) {
@@ -386,7 +387,7 @@ public class MapRegion {
      * @return
      */
     public boolean isInsideItemUseZone(ZoneName zoneName, Creature creature) {
-        for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd; ) {
+        for (Entry<Integer, TreeSet<ZoneInstance>> e = zoneMap.head(), mapEnd = zoneMap.tail(); (e = e.getNext()) != mapEnd;) {
             TreeSet<ZoneInstance> zones = e.getValue();
             for (ZoneInstance zone : zones) {
                 if (!zone.getZoneTemplate().getXmlName().startsWith(zoneName.toString())) {
@@ -402,7 +403,7 @@ public class MapRegion {
     }
 
     private void createZoneMap(ZoneInstance[] zones) {
-        zoneMap = new FastMap<Integer, TreeSet<ZoneInstance>>();
+        zoneMap = new FastMap<>();
         for (int i = 0; i < zones.length; i++) {
             ZoneInstance zone = zones[i];
             int category = -1;
@@ -411,7 +412,7 @@ public class MapRegion {
             }
             TreeSet<ZoneInstance> zoneCategory = zoneMap.get(category);
             if (zoneCategory == null) {
-                zoneCategory = new TreeSet<ZoneInstance>();
+                zoneCategory = new TreeSet<>();
                 zoneMap.put(category, zoneCategory);
             }
             zoneCategory.add(zone);

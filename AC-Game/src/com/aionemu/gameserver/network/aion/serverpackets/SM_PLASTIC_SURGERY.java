@@ -51,7 +51,7 @@ public class SM_PLASTIC_SURGERY extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(playerObjId);
         writeC(check_ticket);
         writeC(change_sex);

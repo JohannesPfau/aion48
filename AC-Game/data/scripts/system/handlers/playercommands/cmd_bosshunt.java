@@ -31,35 +31,36 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
  * @author Ghostfur
  */
 public class cmd_bosshunt extends PlayerCommand {
-    
+
     public cmd_bosshunt() {
         super("bosshunt");
     }
 
     @Override
     public void execute(final Player player, String... params) {
-       if (player.isInBH()) {
-        	if (player.getLifeStats().isAlreadyDead()) {
-        		PacketSendUtility.sendMessage(player, "BOSSHUNT: You cannot use this command while dead.");
-        		return;
-        	}
-        	PacketSendUtility.sendMessage(player, "BOSSHUNT: Please wait 5 seconds.");
-        	PVPManager.getInstance().paralizePlayer(player, true);
-        	PlayerGroupService.removePlayer(player); //remove player from group in bosshunt
+        if (player.isInBH()) {
+            if (player.getLifeStats().isAlreadyDead()) {
+                PacketSendUtility.sendMessage(player, "BOSSHUNT: You cannot use this command while dead.");
+                return;
+            }
+            PacketSendUtility.sendMessage(player, "BOSSHUNT: Please wait 5 seconds.");
+            PVPManager.getInstance().paralizePlayer(player, true);
+            PlayerGroupService.removePlayer(player); //remove player from group in bosshunt
             PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), 0, 0, (int) TimeUnit.SECONDS.toMillis(5), 0, 0));
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
-                	PVPManager.getInstance().paralizePlayer(player, false);
+                    PVPManager.getInstance().paralizePlayer(player, false);
                     PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), 0, 0, 0, 1, 0));
-                    BHService.getInstance().TeleOut(player);  
+                    BHService.getInstance().TeleOut(player);
                 }
             }, (int) TimeUnit.SECONDS.toMillis(5));
-       }
+        }
     }
+
     @Override
     public void onFail(Player player, String message) {
         PacketSendUtility.sendMessage(player, "Syntax: Type '.bosshunt' to exit.");
     }
 }
-

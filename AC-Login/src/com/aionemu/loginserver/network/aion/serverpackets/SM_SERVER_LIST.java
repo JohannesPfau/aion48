@@ -29,14 +29,14 @@
  */
 package com.aionemu.loginserver.network.aion.serverpackets;
 
+import java.util.Collection;
+import java.util.Map;
+
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.network.aion.AionServerPacket;
 import com.aionemu.loginserver.network.aion.LoginConnection;
-
-import java.util.Collection;
-import java.util.Map;
 
 /**
  * @author -Nemesiss-

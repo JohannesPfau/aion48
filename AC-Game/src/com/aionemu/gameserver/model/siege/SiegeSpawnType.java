@@ -40,6 +40,7 @@ public enum SiegeSpawnType {
     GENERATOR(6),
     SPRING(7),
     RACEPROTECTOR(8);
+
     private int id;
 
     private SiegeSpawnType(int id) {

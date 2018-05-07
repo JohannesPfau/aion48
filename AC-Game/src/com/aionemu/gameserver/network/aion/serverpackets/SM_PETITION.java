@@ -52,7 +52,7 @@ public class SM_PETITION extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         if (petition == null) {
             writeD(0x00);
             writeD(0x00);

@@ -29,6 +29,11 @@
  */
 package admincommands;
 
+import java.util.concurrent.Future;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -38,10 +43,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.Future;
 
 /**
  * @author Watson
@@ -86,6 +87,7 @@ public class Gag extends AdminCommand {
                 player.getController().cancelTask(TaskId.GAG);
             }
             player.getController().addTask(TaskId.GAG, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     player.setGagged(false);
@@ -100,7 +102,8 @@ public class Gag extends AdminCommand {
         }
 
         PacketSendUtility.sendMessage(player, "You have been gagged" + (time != 0 ? " for " + time + " minutes" : ""));
-        log.info("[gag] GM : " + admin.getName() + " has gagged the player [" + player.getName() + "] " + (time != 0 ? " for " + time + " minutes" : "infinity") + " in mapId '" + player.getWorldId() + "'");
+        log.info("[gag] GM : " + admin.getName() + " has gagged the player [" + player.getName() + "] "
+            + (time != 0 ? " for " + time + " minutes" : "infinity") + " in mapId '" + player.getWorldId() + "'");
         PacketSendUtility.sendMessage(admin, "Player " + name + " gagged" + (time != 0 ? " for " + time + " minutes" : ""));
     }
 

@@ -43,7 +43,8 @@ public class NameRestrictionService {
     /**
      * Checks if a name is valid. It should contain only english letters
      *
-     * @param character name
+     * @param character
+     *            name
      * @return true if name is valid, false otherwise
      */
     public static boolean isValidName(String name) {

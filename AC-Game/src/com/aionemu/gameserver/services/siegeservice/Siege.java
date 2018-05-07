@@ -53,7 +53,7 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.world.World;
 
 /**
-, Source
+ * , Source
  */
 public abstract class Siege<SL extends SiegeLocation> {
 

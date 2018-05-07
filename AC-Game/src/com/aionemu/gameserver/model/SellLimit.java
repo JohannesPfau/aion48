@@ -41,6 +41,7 @@ public enum SellLimit {
     LIMIT_41_55(41, 55, 12050047),
     LIMIT_56_60(56, 60, 14600047),
     LIMIT_61_65(61, 65, 17150047);
+
     private int playerMinLevel;
     private int playerMaxLevel;
     private long limit;

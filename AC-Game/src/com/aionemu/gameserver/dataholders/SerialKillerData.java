@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -44,25 +42,25 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.serial_killer.RankRestriction;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author Dtem, Alcapwnd
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-        "rankRestriction"
-})
+@XmlType(name = "", propOrder = { "rankRestriction" })
 @XmlRootElement(name = "serial_killers")
 public class SerialKillerData {
 
     @XmlElement(name = "rank_restriction")
     protected List<RankRestriction> rankRestriction;
     @XmlTransient
-    private TIntObjectHashMap<RankRestriction> templates = new TIntObjectHashMap<RankRestriction>();
+    private TIntObjectHashMap<RankRestriction> templates = new TIntObjectHashMap<>();
 
     /**
-	 * @param u 
-     * @param parent  
-	 */
+     * @param u
+     * @param parent
+     */
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (RankRestriction template : rankRestriction) {
             templates.put(template.getRankNum(), template);
@@ -76,14 +74,14 @@ public class SerialKillerData {
     }
 
     public RankRestriction getRankRestriction(int rank, Race race) {
-    	for (int i = 0; i < this.templates.size(); i++) {
-    		RankRestriction rr = this.templates.get(i);
-    		if (rr.getRankNum() != rank && rr.getRace() != race) {
-    			continue;
-    		} else {
-    			return rr;
-    		}
+        for (int i = 0; i < this.templates.size(); i++) {
+            RankRestriction rr = this.templates.get(i);
+            if (rr.getRankNum() != rank && rr.getRace() != race) {
+                continue;
+            } else {
+                return rr;
+            }
         }
-		return null;
+        return null;
     }
 }

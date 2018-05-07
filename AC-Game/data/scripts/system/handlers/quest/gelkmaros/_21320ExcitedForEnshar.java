@@ -29,9 +29,9 @@
  */
 package quest.gelkmaros;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -39,7 +39,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * @author pralinka
  */
- 
+
 public class _21320ExcitedForEnshar extends QuestHandler {
 
     private final static int questId = 21320;
@@ -51,7 +51,7 @@ public class _21320ExcitedForEnshar extends QuestHandler {
     @Override
     public void register() {
         qe.registerQuestNpc(205847).addOnQuestStart(questId);
-		qe.registerQuestNpc(205847).addOnTalkEvent(questId);
+        qe.registerQuestNpc(205847).addOnTalkEvent(questId);
         qe.registerQuestNpc(804753).addOnTalkEvent(questId);
 
     }
@@ -83,7 +83,7 @@ public class _21320ExcitedForEnshar extends QuestHandler {
             if (targetId == 804753) {
                 return sendQuestEndDialog(env);
             }
-        } 
+        }
         return false;
     }
 }

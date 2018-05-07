@@ -33,7 +33,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceBuff;
 
-
 /**
  * @author GiGatR00n (Aion-Core)
  */
@@ -41,11 +40,11 @@ public class IdgelDomePlayerReward extends InstancePlayerReward {
 
     /**
      * BUFF_SHIELD applies when your score in Idgel Dome is lower than the enemy's.
-     * Increases PvP Physical Attack, PvP Magic Attack, PvP Physical Defense, and PvP Magical Defense by 30% 
+     * Increases PvP Physical Attack, PvP Magic Attack, PvP Physical Defense, and PvP Magical Defense by 30%
      */
     private InstanceBuff ResurrectionBuff;
     private int InstanceBuffTime = 30;//30-Seconds
-    
+
     private int timeBonus;
     private long logoutTime;
     private float timeBonusModifier;
@@ -64,10 +63,7 @@ public class IdgelDomePlayerReward extends InstancePlayerReward {
     private int AdditionalReward;
     private float AdditionalRewardCount;
 
-    
-    
-    
-    public IdgelDomePlayerReward (Integer object, int timeBonus, Race race) {
+    public IdgelDomePlayerReward(Integer object, int timeBonus, Race race) {
         super(object);
         this.timeBonus = timeBonus;
         timeBonusModifier = ((float) this.timeBonus / (float) 660000);
@@ -80,11 +76,11 @@ public class IdgelDomePlayerReward extends InstancePlayerReward {
     }
 
     public void applyResurrectionBuff(Player player) {
-    	ResurrectionBuff.applyEffect(player, InstanceBuffTime * 1000);
+        ResurrectionBuff.applyEffect(player, InstanceBuffTime * 1000);
     }
 
     public void endResurrectionBuff(Player player) {
-    	ResurrectionBuff.endEffect(player);
+        ResurrectionBuff.endEffect(player);
     }
 
     public int getRemaningResurrectionBuffTime() {
@@ -93,8 +89,8 @@ public class IdgelDomePlayerReward extends InstancePlayerReward {
             return (InstanceBuffTime - time);
         }
         return 0;
-    }    
-    
+    }
+
     public float getParticipation() {
         return (float) getTimeBonus() / timeBonus;
     }
@@ -123,10 +119,10 @@ public class IdgelDomePlayerReward extends InstancePlayerReward {
     public int getRewardAp() {
         return rewardAp;
     }
-    
+
     public void setRewardAp(int ap) {
         this.rewardAp = ap;
-    }    
+    }
 
     public int getBonusAp() {
         return bonusAp;
@@ -139,15 +135,15 @@ public class IdgelDomePlayerReward extends InstancePlayerReward {
     public int getReward1() {
         return reward1;
     }
-    
+
     public void setReward1(int reward) {
         this.reward1 = reward;
     }
-    
+
     public int getReward1Count() {
         return (int) reward1Count;
     }
-    
+
     public void setReward1Count(float rewardCount) {
         this.reward1Count = rewardCount;
     }
@@ -155,15 +151,15 @@ public class IdgelDomePlayerReward extends InstancePlayerReward {
     public int getReward2() {
         return reward2;
     }
-    
+
     public void setReward2(int reward) {
         this.reward2 = reward;
     }
-    
+
     public int getReward2Count() {
         return (int) reward2Count;
     }
-    
+
     public void setReward2Count(float rewardCount) {
         this.reward2Count = rewardCount;
     }
@@ -175,27 +171,27 @@ public class IdgelDomePlayerReward extends InstancePlayerReward {
     public void setBonusReward(int reward) {
         this.bonusReward = reward;
     }
-    
-	public int getBonusReward2() {
-		return bonusReward2;
-	}
 
-	public void setBonusReward2(int bonusReward2) {
-		this.bonusReward2 = bonusReward2;
-	}
-	
-	public int getAdditionalReward() {
-		return AdditionalReward;
-	}
+    public int getBonusReward2() {
+        return bonusReward2;
+    }
 
-	public void setAdditionalReward(int additionalReward) {
-		this.AdditionalReward = additionalReward;
-	}
-	
+    public void setBonusReward2(int bonusReward2) {
+        this.bonusReward2 = bonusReward2;
+    }
+
+    public int getAdditionalReward() {
+        return AdditionalReward;
+    }
+
+    public void setAdditionalReward(int additionalReward) {
+        this.AdditionalReward = additionalReward;
+    }
+
     public int getAdditionalRewardCount() {
         return (int) AdditionalRewardCount;
     }
-    
+
     public void setAdditionalRewardCount(float rewardCount) {
         this.AdditionalRewardCount = rewardCount;
     }
@@ -216,11 +212,11 @@ public class IdgelDomePlayerReward extends InstancePlayerReward {
         this.rewardGp = rewardGp;
     }
 
-	public int getBonusGp() {
-		return bonusGp;
-	}
+    public int getBonusGp() {
+        return bonusGp;
+    }
 
-	public void setBonusGp(int bonusGp) {
-		this.bonusGp = bonusGp;
-	}
+    public void setBonusGp(int bonusGp) {
+        this.bonusGp = bonusGp;
+    }
 }

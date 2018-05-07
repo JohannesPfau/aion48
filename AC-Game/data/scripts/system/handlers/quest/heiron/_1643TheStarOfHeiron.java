@@ -29,11 +29,11 @@
  */
 package quest.heiron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -110,8 +110,7 @@ public class _1643TheStarOfHeiron extends QuestHandler {
                             removeQuestItem(env, 182201764, 1);
                             updateQuestStatus(env);
                             PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
-                            QuestService.addNewSpawn(210040000, 1, 204614, (float) 1591.4327, (float) 2774.2283, (float) 127.63001,
-                                    (byte) 0);
+                            QuestService.addNewSpawn(210040000, 1, 204614, (float) 1591.4327, (float) 2774.2283, (float) 127.63001, (byte) 0);
                             return true;
                         }
                         case SET_SUCCEED: {
@@ -135,6 +134,7 @@ public class _1643TheStarOfHeiron extends QuestHandler {
                             PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
                             final Npc npc = (Npc) env.getVisibleObject();
                             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                 @Override
                                 public void run() {
                                     npc.getController().onDelete();

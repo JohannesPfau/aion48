@@ -34,15 +34,13 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.world.zone.ZoneAttributes;
 
+import javolution.util.FastMap;
+
 /**
  * This object is representing one in-game map and can have instances.
- *
-
  */
 public class WorldMap {
 

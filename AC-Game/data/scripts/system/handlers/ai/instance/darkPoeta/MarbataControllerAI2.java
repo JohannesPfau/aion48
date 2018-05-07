@@ -109,6 +109,7 @@ public class MarbataControllerAI2 extends NpcAI2 {
         super.handleSpawned();
         apllyEffect(false);
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 useSkill();

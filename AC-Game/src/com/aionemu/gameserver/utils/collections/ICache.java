@@ -32,7 +32,7 @@ package com.aionemu.gameserver.utils.collections;
 /**
  * @author Rolandas
  */
-@SuppressWarnings({"rawtypes"})
+@SuppressWarnings({ "rawtypes" })
 public interface ICache<K extends Comparable, V> {
 
     V get(K obj);

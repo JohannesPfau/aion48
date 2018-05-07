@@ -39,84 +39,86 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-
 /**
  * @author GiGatR00n (Aion-Core)
  */
 @AIName("unstable_ide_energy") //855008, 855012
 public class UnstableIdeEnergyAI2 extends NpcAI2 {
 
-	private Player LuckyPlayer;
-	private boolean gotIt = false;
-	
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		switch (getNpcId()) {
-			case 855008:
-				AttackPlayers();
-			case 855012:
-				useSkill(21559);//SkillId:21559 (Ide Explosion)
-		}
-		DeleteNpc();//After 3-Seconds the Unstable Ide Energy will be deleted.
-	}
+    private Player LuckyPlayer;
+    private boolean gotIt = false;
 
-	@Override
-	public void handleDespawned() {
-		super.handleDespawned();
-	}
-    
-	@Override
-	protected void handleDied() {
-		super.handleDied();
-	}	
-	
+    @Override
+    protected void handleSpawned() {
+        super.handleSpawned();
+        switch (getNpcId()) {
+            case 855008:
+                AttackPlayers();
+            case 855012:
+                useSkill(21559);//SkillId:21559 (Ide Explosion)
+        }
+        DeleteNpc();//After 3-Seconds the Unstable Ide Energy will be deleted.
+    }
+
+    @Override
+    public void handleDespawned() {
+        super.handleDespawned();
+    }
+
+    @Override
+    protected void handleDied() {
+        super.handleDied();
+    }
+
     private void useSkill(int skillId) {
         SkillEngine.getInstance().getSkill(getOwner(), skillId, 1, getOwner()).useSkill();
     }
-    
+
     private Player getLuckyPlayer() {
-    	LuckyPlayer = null; gotIt = false;
-    	getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+        LuckyPlayer = null;
+        gotIt = false;
+        getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
-            	if (!gotIt) {
-            		/* if it couldn't find any lucky player, then it returns the last player */
-            		LuckyPlayer = player;
-	        		int rand = Rnd.get(1, 3);
-	        		if (rand == 3) {
-	        			gotIt = true;
-	        		}            		
-            	}
+                if (!gotIt) {
+                    /* if it couldn't find any lucky player, then it returns the last player */
+                    LuckyPlayer = player;
+                    int rand = Rnd.get(1, 3);
+                    if (rand == 3) {
+                        gotIt = true;
+                    }
+                }
             }
-    	});
-    	return LuckyPlayer;
+        });
+        return LuckyPlayer;
     }
-    
+
     private void AttackPlayers() {
-    	/*
-    	 * The Players got lucky. No one is intended to be attacked.
-    	 */
-    	Player player = getLuckyPlayer();
-    	if (player == null) {
-    		return;
-    	}
-    			
-		WorldPosition Pos = player.getPosition();
-    	if (!MathUtil.isInSphere(player, 284.359385f, 334.957915f, 80f, 25f) && !MathUtil.isInSphere(player, 245.880305f, 183.984715f, 80f, 25f)) {
-    		float r1 = Rnd.get(-15, 15);
-    		float r2 = Rnd.get(-15, 15);
-    		getOwner().setXYZH(Pos.getX() + r1, Pos.getY() + r2, Pos.getZ(), Pos.getHeading());
-    		useSkill(21559);//SkillId:21559 (Ide Explosion)
-    	}
+        /*
+         * The Players got lucky. No one is intended to be attacked.
+         */
+        Player player = getLuckyPlayer();
+        if (player == null) {
+            return;
+        }
+
+        WorldPosition Pos = player.getPosition();
+        if (!MathUtil.isInSphere(player, 284.359385f, 334.957915f, 80f, 25f) && !MathUtil.isInSphere(player, 245.880305f, 183.984715f, 80f, 25f)) {
+            float r1 = Rnd.get(-15, 15);
+            float r2 = Rnd.get(-15, 15);
+            getOwner().setXYZH(Pos.getX() + r1, Pos.getY() + r2, Pos.getZ(), Pos.getHeading());
+            useSkill(21559);//SkillId:21559 (Ide Explosion)
+        }
     }
-    
+
     private void DeleteNpc() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				getOwner().getController().onDelete();
-			}
-		}, 3000);//After 3-Seconds the Unstable Ide Energy will be deleted.
+        ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+            @Override
+            public void run() {
+                getOwner().getController().onDelete();
+            }
+        }, 3000);//After 3-Seconds the Unstable Ide Energy will be deleted.
     }
 }

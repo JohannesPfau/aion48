@@ -29,13 +29,14 @@
  */
 package com.aionemu.loginserver.taskmanager;
 
-import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.loginserver.dao.TaskFromDBDAO;
-import com.aionemu.loginserver.taskmanager.trigger.TaskFromDBTrigger;
+import java.util.ArrayList;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.ArrayList;
+import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.loginserver.dao.TaskFromDBDAO;
+import com.aionemu.loginserver.taskmanager.trigger.TaskFromDBTrigger;
 
 /**
  * @author nrg

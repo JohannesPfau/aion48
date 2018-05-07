@@ -37,7 +37,6 @@ import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 
-
 /**
  * @author GiGatR00n (Aion-Core)
  */
@@ -47,48 +46,48 @@ public class ShallowWaterAI2 extends NpcAI2 {
     @Override
     protected void handleCreatureSee(Creature creature) {
         checkDistance(this, creature);
-    }  
+    }
 
     @Override
     protected void handleCreatureMoved(Creature creature) {
         checkDistance(this, creature);
-    } 
-    
+    }
+
     /*
      * Way #1 (More Efficient and Accurate using new mathematics formula)
      */
     private void checkDistance(NpcAI2 ai, Creature creature) {
         if (creature instanceof Player && !creature.getLifeStats().isAlreadyDead()) {
-        	if (MathUtil.isInAnnulus(creature, new Point3D(264.4382f, 258.58527f, 85.81963f), 30.04288f, 16.70f)) {
-	    		if (creature.getZ() < 86) {
-	            	if (!creature.getEffectController().hasAbnormalEffect(8853)) {
-	            		applyEffect(8853, creature);//SkillId:8853 (Contaminated Ide Pool)
-	            	}	            			
-	    		}        		
-        	}
+            if (MathUtil.isInAnnulus(creature, new Point3D(264.4382f, 258.58527f, 85.81963f), 30.04288f, 16.70f)) {
+                if (creature.getZ() < 86) {
+                    if (!creature.getEffectController().hasAbnormalEffect(8853)) {
+                        applyEffect(8853, creature);//SkillId:8853 (Contaminated Ide Pool)
+                    }
+                }
+            }
         }
     }
-    
-      /*
-       * Way #2
-       */
-//    private void checkDistance(NpcAI2 ai, Creature creature) {
-//        if (creature instanceof Player && !creature.getLifeStats().isAlreadyDead()) {
-//        	if (MathUtil.isIn3dRangeLimited(getOwner(), creature, 16.70f, 29.32f)) {
-//        		if (creature.getZ() < 86) {
-//	        		if (!creature.getEffectController().hasAbnormalEffect(8853)) {
-//	        			applyEffect(8853, creature);//SkillId:8853 (Contaminated Ide Pool)
-//	        		}
-//        		}
-//        	}
-//    	}
-//    }  
-    
+
+    /*
+     * Way #2
+     */
+    //    private void checkDistance(NpcAI2 ai, Creature creature) {
+    //        if (creature instanceof Player && !creature.getLifeStats().isAlreadyDead()) {
+    //        	if (MathUtil.isIn3dRangeLimited(getOwner(), creature, 16.70f, 29.32f)) {
+    //        		if (creature.getZ() < 86) {
+    //	        		if (!creature.getEffectController().hasAbnormalEffect(8853)) {
+    //	        			applyEffect(8853, creature);//SkillId:8853 (Contaminated Ide Pool)
+    //	        		}
+    //        		}
+    //        	}
+    //    	}
+    //    }  
+
     private void useSkill(int skillId) {
         SkillEngine.getInstance().getSkill(getOwner(), skillId, 65, getOwner().getTarget()).useNoAnimationSkill();
     }
-    
+
     private void applyEffect(int skillId, Creature creature) {
-    	SkillEngine.getInstance().applyEffectDirectly(skillId, getOwner(), creature, 0);
+        SkillEngine.getInstance().applyEffectDirectly(skillId, getOwner(), creature, 0);
     }
 }

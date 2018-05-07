@@ -29,9 +29,9 @@
  */
 package quest.sanctum;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,12 +50,12 @@ public class _1919WelcomeToTheArtisansHall extends QuestHandler {
     @Override
     public void register() {
         qe.registerOnLevelUp(questId);
-		qe.registerOnEnterWorld(questId);
+        qe.registerOnEnterWorld(questId);
         qe.registerQuestNpc(798316).addOnTalkEvent(questId);
-		qe.registerQuestNpc(203779).addOnQuestStart(questId);
+        qe.registerQuestNpc(203779).addOnQuestStart(questId);
     }
-	
-	@Override
+
+    @Override
     public boolean onDialogEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -66,13 +66,11 @@ public class _1919WelcomeToTheArtisansHall extends QuestHandler {
             if (targetId == 203779) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 4762);
-                }
-				else if ((dialog == DialogAction.QUEST_ACCEPT_1) || (dialog == DialogAction.QUEST_ACCEPT_SIMPLE)) {
+                } else if ((dialog == DialogAction.QUEST_ACCEPT_1) || (dialog == DialogAction.QUEST_ACCEPT_SIMPLE)) {
                     return sendQuestStartDialog(env);
-                    }
-				}	
+                }
             }
-        else if (qs.getStatus() == QuestStatus.START) {
+        } else if (qs.getStatus() == QuestStatus.START) {
             if (targetId == 798316) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 10002);

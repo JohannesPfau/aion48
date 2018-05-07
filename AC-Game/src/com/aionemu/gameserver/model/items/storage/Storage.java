@@ -33,8 +33,6 @@ import java.util.List;
 import java.util.Queue;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -48,6 +46,8 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemDeleteType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
+
+import javolution.util.FastList;
 
 /**
  * @author KID, ATracer
@@ -71,7 +71,7 @@ public abstract class Storage implements IStorage {
         itemStorage = new ItemStorage(storageType);
         this.storageType = storageType;
         if (withDeletedItems) {
-            this.deletedItems = new ConcurrentLinkedQueue<Item>();
+            this.deletedItems = new ConcurrentLinkedQueue<>();
         }
     }
 

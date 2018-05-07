@@ -29,20 +29,21 @@
  */
 package quest.morheim;
 
-import com.aionemu.commons.utils.Rnd;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.ai2.AbstractAI;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.TeleportAnimation;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,7 +52,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapType;
-import java.util.Collection;
 
 /**
  * @author pralinka
@@ -60,7 +60,7 @@ public class _24026AHandFromEachSide extends QuestHandler {
 
     private final static int questId = 24026;
 
-    private static List<Integer> mobs = new ArrayList<Integer>();
+    private static List<Integer> mobs = new ArrayList<>();
 
     static {
         mobs.add(280818);
@@ -90,13 +90,13 @@ public class _24026AHandFromEachSide extends QuestHandler {
 
     @Override
     public boolean onZoneMissionEndEvent(QuestEnv env) {
-        int[] quests = {24021, 24022, 24023, 24024, 24025};
+        int[] quests = { 24021, 24022, 24023, 24024, 24025 };
         return defaultOnZoneMissionEndEvent(env, quests);
     }
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {24021, 24022, 24023, 24024, 24025};
+        int[] quests = { 24021, 24022, 24023, 24024, 24025 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 
@@ -162,7 +162,8 @@ public class _24026AHandFromEachSide extends QuestHandler {
                             removeQuestItem(env, 182215371, 1);
                             qs.setStatus(QuestStatus.REWARD);
                             updateQuestStatus(env);
-                            TeleportService2.teleportTo(player, WorldMapType.MORHEIM.getId(), 3030.8676f, 875.6538f, 363.2065f, (byte) 50, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, WorldMapType.MORHEIM.getId(), 3030.8676f, 875.6538f, 363.2065f, (byte) 50,
+                                TeleportAnimation.BEAM_ANIMATION);
                             return true;
                         }
                     }

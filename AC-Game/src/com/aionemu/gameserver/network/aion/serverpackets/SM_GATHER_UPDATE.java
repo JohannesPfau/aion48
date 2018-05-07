@@ -60,7 +60,7 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(template.getHarvestSkill());
         writeC(this.action);
         writeD(this.itemId);

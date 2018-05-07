@@ -29,9 +29,9 @@
  */
 package quest.miragent_holy_templar;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -56,7 +56,7 @@ public class _3939PersistenceAndLuck extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {203701, 203780, 203781, 203752, 700537};
+        int[] npcs = { 203701, 203780, 203781, 203752, 700537 };
         qe.registerQuestNpc(203701).addOnQuestStart(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);

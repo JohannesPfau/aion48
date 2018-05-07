@@ -29,18 +29,19 @@
  */
 package ai.instance.beshmundirTemple;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.services.NpcShoutsService;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Antraxx
@@ -52,11 +53,11 @@ public class VirhanaTheGreatAI2 extends AggressiveNpcAI2 {
     private Future<?> taskRage;
     private Future<?> taskRageExec;
     private int count;
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{50});
+        Collections.addAll(percents, new Integer[] { 50 });
     }
 
     private synchronized void checkPercentage(int hpPercentage) {
@@ -119,6 +120,7 @@ public class VirhanaTheGreatAI2 extends AggressiveNpcAI2 {
         }
         AI2Actions.useSkill(this, 19121);
         taskRage = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 startRage();
@@ -135,6 +137,7 @@ public class VirhanaTheGreatAI2 extends AggressiveNpcAI2 {
             AI2Actions.useSkill(this, 18897);
             count++;
             taskRageExec = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     startRage();

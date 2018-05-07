@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -42,6 +40,8 @@ import com.aionemu.gameserver.model.templates.towns.TownLevel;
 import com.aionemu.gameserver.model.templates.towns.TownSpawn;
 import com.aionemu.gameserver.model.templates.towns.TownSpawnMap;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author ViAl
  */
@@ -50,7 +50,7 @@ public class TownSpawnsData {
 
     @XmlElement(name = "spawn_map")
     private List<TownSpawnMap> spawnMap;
-    private TIntObjectHashMap<TownSpawnMap> spawnMapsData = new TIntObjectHashMap<TownSpawnMap>();
+    private TIntObjectHashMap<TownSpawnMap> spawnMapsData = new TIntObjectHashMap<>();
 
     /**
      * @param u

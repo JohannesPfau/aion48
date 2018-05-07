@@ -48,8 +48,8 @@ public class SM_SKILL_REMOVE extends AionServerPacket {
         this.skillLevel = skillLevel;
         this.isStigma = isStigma;
     }
-    
- // linked skill
+
+    // linked skill
     public SM_SKILL_REMOVE(int skillId, int skillLevel, boolean isStigma, boolean isLinked) {
         this.skillId = skillId;
         this.skillLevel = skillLevel;
@@ -62,7 +62,7 @@ public class SM_SKILL_REMOVE extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(skillId);
         if (skillId >= 30001 && skillId <= 30003 || skillId >= 40001 && skillId <= 40010) {
             writeC(0);

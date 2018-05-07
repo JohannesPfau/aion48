@@ -50,7 +50,7 @@ public class SM_TARGET_IMMOBILIZE extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(creature.getObjectId());
         writeF(creature.getX());
         writeF(creature.getY());

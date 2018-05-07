@@ -64,7 +64,7 @@ public class SM_ABYSS_RANKING_LEGIONS extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(race.getRaceId());// 0:Elyos 1:Asmo
         writeD(updateTime);// Date
         writeD(sendData);// 0:Nothing 1:Update Table

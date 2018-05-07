@@ -54,7 +54,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class PrivateStoreService {
 
     private static final Logger log = LoggerFactory.getLogger("EXCHANGE_LOG");
-    
+
     /**
      * This method will move the item to the new player and move kinah to item
      * owner
@@ -63,7 +63,8 @@ public class PrivateStoreService {
         /**
          * 1. Check if we are busy with two valid participants
          */
-        if (!validateParticipants(seller, buyer)) return;
+        if (!validateParticipants(seller, buyer))
+            return;
 
         /**
          * Define store to make life easier
@@ -74,7 +75,8 @@ public class PrivateStoreService {
          * 2. Load all item object id's and validate if seller really owns them
          */
         tradeList = loadObjIds(seller, tradeList);
-        if (tradeList == null) return; // Invalid items found or store was empty
+        if (tradeList == null)
+            return; // Invalid items found or store was empty
 
         /**
          * 3. Check free slots
@@ -85,14 +87,15 @@ public class PrivateStoreService {
         if (freeSlots < tradeList.size()) {
             return; // TODO message
         }
-        
+
         /**
          * Create total price and items
          */
         long price = getTotalPrice(store, tradeList);
 
         // Kinah exploit fix
-        if (price < 0) return;
+        if (price < 0)
+            return;
 
         /**
          * Check if player has enough kinah
@@ -116,7 +119,8 @@ public class PrivateStoreService {
                     }
 
                     // Log the trade
-                    log.info("[PRIVATE STORE] > [Seller: " + seller.getName() + "] sold [Item: " + item.getItemId() + "][Amount: " + item.getItemCount() + "] to [Buyer: " + buyer.getName() + "] for [Price: " + price + "]");
+                    log.info("[PRIVATE STORE] > [Seller: " + seller.getName() + "] sold [Item: " + item.getItemId() + "][Amount: "
+                        + item.getItemCount() + "] to [Buyer: " + buyer.getName() + "] for [Price: " + price + "]");
                 }
             }
             // Decrease kinah for buyer and Increase kinah for seller
@@ -132,7 +136,7 @@ public class PrivateStoreService {
             return;
         }
     }
-    
+
     /**
      * @param activePlayer
      */
@@ -144,24 +148,30 @@ public class PrivateStoreService {
             if (CustomConfig.SPEAKING_BETWEEN_FACTIONS) {
                 PacketSendUtility.broadcastPacket(playerActive, new SM_PRIVATE_STORE_NAME(playerActive.getObjectId(), name), true);
             } else {
-                PacketSendUtility.broadcastPacket(playerActive, new SM_PRIVATE_STORE_NAME(playerActive.getObjectId(), name), true, new ObjectFilter<Player>() {
-                    @Override
-                    public boolean acceptObject(Player object) {
-                        return ((senderRace == object.getRace().getRaceId() && !object.getBlockList().contains(playerActive.getObjectId())) || object.isGM());
-                    }
-                });
-                PacketSendUtility.broadcastPacket(playerActive, new SM_PRIVATE_STORE_NAME(playerActive.getObjectId(), ""), false, new ObjectFilter<Player>() {
-                    @Override
-                    public boolean acceptObject(Player object) {
-                        return senderRace != object.getRace().getRaceId() && !object.getBlockList().contains(playerActive.getObjectId()) && !object.isGM();
-                    }
-                });
+                PacketSendUtility.broadcastPacket(playerActive, new SM_PRIVATE_STORE_NAME(playerActive.getObjectId(), name), true,
+                    new ObjectFilter<Player>() {
+
+                        @Override
+                        public boolean acceptObject(Player object) {
+                            return ((senderRace == object.getRace().getRaceId() && !object.getBlockList().contains(playerActive.getObjectId()))
+                                || object.isGM());
+                        }
+                    });
+                PacketSendUtility.broadcastPacket(playerActive, new SM_PRIVATE_STORE_NAME(playerActive.getObjectId(), ""), false,
+                    new ObjectFilter<Player>() {
+
+                        @Override
+                        public boolean acceptObject(Player object) {
+                            return senderRace != object.getRace().getRaceId() && !object.getBlockList().contains(playerActive.getObjectId())
+                                && !object.isGM();
+                        }
+                    });
             }
         } else {
             PacketSendUtility.broadcastPacket(playerActive, new SM_PRIVATE_STORE_NAME(playerActive.getObjectId(), ""), true);
         }
-    }    
-    
+    }
+
     /**
      * @param activePlayer
      * @param itemObjId
@@ -195,18 +205,21 @@ public class PrivateStoreService {
                     store.addItemToSell(tradePSItems[i].getItemObjId(), tradePSItems[i]);
                 }
             }
-        
-    	}
+
+        }
     }
 
     private static final boolean validateItem(PrivateStore store, Item item, TradePSItem psItem) {
         int itemId = psItem.getItemId();
         long itemCount = psItem.getCount();
-        if (item.getItemTemplate().getTemplateId() != itemId) return false;
-        if (itemCount > item.getItemCount() || itemCount < 1) return false;
+        if (item.getItemTemplate().getTemplateId() != itemId)
+            return false;
+        if (itemCount > item.getItemCount() || itemCount < 1)
+            return false;
 
         TradePSItem addedPsItem = store.getTradeItemByObjId(psItem.getItemObjId());
-        if (addedPsItem != null) return false;
+        if (addedPsItem != null)
+            return false;
 
         return true;
     }
@@ -224,7 +237,7 @@ public class PrivateStoreService {
         activePlayer.setStore(new PrivateStore(activePlayer));
         activePlayer.setState(CreatureState.PRIVATE_SHOP);
         PacketSendUtility.broadcastPacket(activePlayer, new SM_EMOTION(activePlayer, EmotionType.OPEN_PRIVATESHOP, 0, 0), true);
-    
+
     }
 
     /**
@@ -288,8 +301,8 @@ public class PrivateStoreService {
             totalprice += item.getPrice() * tradeItem.getCount();
         }
         return totalprice;
-    }    
-    
+    }
+
     /**
      * @param seller
      * @param tradeList

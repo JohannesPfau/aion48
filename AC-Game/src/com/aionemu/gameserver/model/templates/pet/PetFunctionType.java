@@ -43,6 +43,7 @@ public enum PetFunctionType {
     // non writable to packets
     BAG(-1),
     WING(-2);
+
     private short id;
     private boolean isPlayerFunc = false;
 

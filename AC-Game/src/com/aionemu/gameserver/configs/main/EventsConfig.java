@@ -42,12 +42,12 @@ public class EventsConfig {
     @Property(key = "gameserver.event.enable", defaultValue = "false")
     public static boolean EVENT_ENABLED;
 
-	/**
-	 * Enable the Server Event Decorations 00 = no decoration/also means normal usage of event service 01 = christmas 02
-	 * = halloween 03 = braxcafe 04 = valentine
-	 */
-	@Property(key = "gameserver.enable.decor", defaultValue = "0")
-	public static int ENABLE_DECOR;
+    /**
+     * Enable the Server Event Decorations 00 = no decoration/also means normal usage of event service 01 = christmas 02
+     * = halloween 03 = braxcafe 04 = valentine
+     */
+    @Property(key = "gameserver.enable.decor", defaultValue = "0")
+    public static int ENABLE_DECOR;
 
     /**
      * Event Rewarding Membership

@@ -65,10 +65,11 @@ public class PlayerSecurityTokenService {
     }
 
     public void sendToken(Player player, String token) {
-        if (player == null) return;
+        if (player == null)
+            return;
         PacketSendUtility.sendPacket(player, new SM_SECURITY_TOKEN(token));
-    }    
-    
+    }
+
     public String MD5(String md5) {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
@@ -84,14 +85,13 @@ public class PlayerSecurityTokenService {
         return null;
     }
 
-    public static final PlayerSecurityTokenService getInstance() 
-    {
+    public static final PlayerSecurityTokenService getInstance() {
         return SingletonHolder.instance;
     }
 
     @SuppressWarnings("synthetic-access")
-    private static class SingletonHolder 
-    {
+    private static class SingletonHolder {
+
         protected static final PlayerSecurityTokenService instance = new PlayerSecurityTokenService();
     }
 }

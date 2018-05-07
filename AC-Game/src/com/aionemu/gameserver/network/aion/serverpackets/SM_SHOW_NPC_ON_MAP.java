@@ -51,7 +51,7 @@ public class SM_SHOW_NPC_ON_MAP extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(this.npcid);
         writeD(this.worldid);
         writeD(this.worldid);

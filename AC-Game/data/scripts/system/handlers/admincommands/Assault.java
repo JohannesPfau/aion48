@@ -29,6 +29,9 @@
  */
 package admincommands;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -37,9 +40,6 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author ginho1
@@ -85,7 +85,7 @@ public class Assault extends AdminCommand {
             return;
         }
 
-        List<Integer> idList = new ArrayList<Integer>();
+        List<Integer> idList = new ArrayList<>();
         if ((params[2]).equals("tier20")) {
             idList.add(210799);
             idList.add(211961);
@@ -162,7 +162,7 @@ public class Assault extends AdminCommand {
         int spawnCount = 0;
 
         VisibleObject visibleObject;
-        List<VisibleObject> despawnList = new ArrayList<VisibleObject>();//will hold the list of spawned mobs
+        List<VisibleObject> despawnList = new ArrayList<>();//will hold the list of spawned mobs
 
         for (int i = 0; amount > i; i++) {
             templateId = idList.get((int) (Math.random() * idList.size()));
@@ -194,6 +194,7 @@ public class Assault extends AdminCommand {
 
     private void despawnThem(final Player admin, final List<VisibleObject> despawnList, final int despawnTime) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 int despawnCount = 0;

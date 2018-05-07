@@ -65,6 +65,7 @@ public abstract class Executor<T extends AionObject> {
             runImpl(objects);
         } else {
             ThreadPoolManager.getInstance().execute(new Runnable() {
+
                 @Override
                 public void run() {
                     runImpl(objects);

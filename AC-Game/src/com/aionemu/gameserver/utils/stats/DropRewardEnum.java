@@ -37,6 +37,7 @@ public enum DropRewardEnum {
     MINUS_19(-19, 39),
     MINUS_18(-18, 79),
     MINUS_17(-17, 100);
+
     private int dropRewardPercent;
     private int levelDifference;
 
@@ -50,7 +51,8 @@ public enum DropRewardEnum {
     }
 
     /**
-     * @param levelDifference between two objects
+     * @param levelDifference
+     *            between two objects
      * @return Drop reward percentage
      */
     public static int dropRewardFrom(int levelDifference) {

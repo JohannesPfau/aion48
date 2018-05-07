@@ -47,7 +47,7 @@ public class SM_PLAYER_REGION extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(con.getActivePlayer().getObjectId());
         writeC(0);
         writeC(0);

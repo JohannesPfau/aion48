@@ -42,7 +42,7 @@ import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author ATracer
- (Aion-Core)
+ *         (Aion-Core)
  */
 public class SimpleAttackManager {
 

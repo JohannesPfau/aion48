@@ -42,6 +42,7 @@ public enum StateEvents {
     CREATED_EVENTS(AIEventType.SPAWNED),
     DESPAWN_EVENTS(AIEventType.RESPAWNED, AIEventType.SPAWNED),
     DEAD_EVENTS(AIEventType.DESPAWNED, AIEventType.DROP_REGISTERED);
+
     private EnumSet<AIEventType> events;
 
     private StateEvents(AIEventType... aiEventTypes) {

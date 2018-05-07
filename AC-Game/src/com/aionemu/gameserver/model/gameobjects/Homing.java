@@ -74,7 +74,8 @@ public class Homing extends SummonedObject<Creature> {
     }
 
     /**
-     * @param attackCount the attackCount to set
+     * @param attackCount
+     *            the attackCount to set
      */
     public void setAttackCount(int attackCount) {
         this.attackCount = attackCount;

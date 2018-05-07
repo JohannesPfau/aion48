@@ -61,10 +61,9 @@ public class SM_OBJECT_USE_UPDATE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(object.getObjectTemplate().getTypeId());
-        if (object instanceof PostboxObject
-                || object instanceof StorageObject) {
+        if (object instanceof PostboxObject || object instanceof StorageObject) {
             writeD(usingPlayerId);
             writeC(1); // unk
             writeD(object.getObjectId());

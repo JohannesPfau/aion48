@@ -50,10 +50,13 @@ public class CM_COMPOSITE_STONES extends AionClientPacket {
      * Constructs new client packet instance. ByBuffer and ClientConnection
      * should be later set manually, after using this constructor.
      *
-     * @param opcode     packet id
-     * @param state      connection valid state
-     * @param restStates rest of connection valid state (optional - if there are
-     *                   more than one)
+     * @param opcode
+     *            packet id
+     * @param state
+     *            connection valid state
+     * @param restStates
+     *            rest of connection valid state (optional - if there are
+     *            more than one)
      */
     public CM_COMPOSITE_STONES(int opcode, AionConnection.State state, AionConnection.State... restStates) {
         super(opcode, state, restStates);

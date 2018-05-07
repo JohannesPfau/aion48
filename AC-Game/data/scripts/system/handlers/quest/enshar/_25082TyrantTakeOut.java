@@ -29,10 +29,10 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -54,32 +54,32 @@ public class _25082TyrantTakeOut extends QuestHandler {
         qe.registerQuestNpc(804923).addOnQuestStart(questId);
         qe.registerQuestNpc(804923).addOnTalkEvent(questId);
         qe.registerQuestNpc(731559).addOnTalkEvent(questId);
-		qe.registerQuestNpc(804924).addOnTalkEvent(questId);
-		qe.registerQuestNpc(220037).addOnKillEvent(questId);
+        qe.registerQuestNpc(804924).addOnTalkEvent(questId);
+        qe.registerQuestNpc(220037).addOnKillEvent(questId);
     }
-	
-	@Override
-	public boolean onKillEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() != QuestStatus.START) {
-			return false;
-		}		
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc) {
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-		}
-		switch (targetId) {
-			case 220037:
-				if (qs.getQuestVarById(0) == 2) {
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
+
+    @Override
+    public boolean onKillEvent(QuestEnv env) {
+        Player player = env.getPlayer();
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (qs == null || qs.getStatus() != QuestStatus.START) {
+            return false;
+        }
+        int targetId = 0;
+        if (env.getVisibleObject() instanceof Npc) {
+            targetId = ((Npc) env.getVisibleObject()).getNpcId();
+        }
+        switch (targetId) {
+            case 220037:
+                if (qs.getQuestVarById(0) == 2) {
+                    qs.setStatus(QuestStatus.REWARD);
+                    updateQuestStatus(env);
                     return true;
-				}
-		}
-		return false;
-	}
-	
+                }
+        }
+        return false;
+    }
+
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         Player player = env.getPlayer();
@@ -96,27 +96,25 @@ public class _25082TyrantTakeOut extends QuestHandler {
             }
         } else if (qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
-			if (targetId == 731559) { 
+            if (targetId == 731559) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     if (var == 0 && player.getInventory().getItemCountByItemId(182215728) == 1) {
                         return sendQuestDialog(env, 1011);
-                    }
-					else if (var == 1) {
+                    } else if (var == 1) {
                         return sendQuestDialog(env, 1352);
-					}
+                    }
                 } else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
-					removeQuestItem(env, 182215728, 1);
-					QuestService.addNewSpawn(220080000, player.getInstanceId(), 833465, 1056.4f, 194.3f, 227.1f, (byte) 90);
-					changeQuestStep(env, 0, 1, false); 
+                    removeQuestItem(env, 182215728, 1);
+                    QuestService.addNewSpawn(220080000, player.getInstanceId(), 833465, 1056.4f, 194.3f, 227.1f, (byte) 90);
+                    changeQuestStep(env, 0, 1, false);
                     return closeDialogWindow(env);
                 } else if (dialog == DialogAction.SETPRO2) {
-					QuestService.addNewSpawn(220080000, player.getInstanceId(), 220037, 1050.5f, 200.4f, 228.2f, (byte) 90);
-					changeQuestStep(env, 1, 2, false); 
+                    QuestService.addNewSpawn(220080000, player.getInstanceId(), 220037, 1050.5f, 200.4f, 228.2f, (byte) 90);
+                    changeQuestStep(env, 1, 2, false);
                     return closeDialogWindow(env);
                 }
             }
-		}
-			else if (qs.getStatus() == QuestStatus.REWARD) {
+        } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 804924) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 2034);

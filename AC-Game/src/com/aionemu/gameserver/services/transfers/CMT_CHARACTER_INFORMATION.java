@@ -31,8 +31,6 @@ package com.aionemu.gameserver.services.transfers;
 
 import java.util.List;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 
 import com.aionemu.commons.database.dao.DAOManager;
@@ -78,6 +76,8 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
+
+import javolution.util.FastList;
 
 /**
  * @author KID
@@ -206,11 +206,11 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
             FastList<int[]> manastones = FastList.newInstance(), fusions = FastList.newInstance();
             int len = readD();
             for (int b = 0; b < len; b++) {
-                manastones.add(new int[]{readD(), readD()});
+                manastones.add(new int[] { readD(), readD() });
             }
             len = readD();
             for (int b = 0; b < len; b++) {
-                fusions.add(new int[]{readD(), readD()});
+                fusions.add(new int[] { readD(), readD() });
             }
             int godstone = 0;
             if (readC() == 1) {
@@ -240,7 +240,9 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
                 int newId = IDFactory.getInstance().nextId();
                 // bonus probably is lost, don't know [RR]
                 // dye expiration is lost
-                Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped, itemSoulBound, equipSlot, location, enchant, skinId, fusionId, optSocket, optFusion, charge, bonusNum, randomNum, packNum, authorizeNum, itemPacked, itemAmplified, buffSkill);
+                Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped,
+                    itemSoulBound, equipSlot, location, enchant, skinId, fusionId, optSocket, optFusion, charge, bonusNum, randomNum, packNum,
+                    authorizeNum, itemPacked, itemAmplified, buffSkill);
                 if (manastones.size() > 0) {
                     for (int[] stone : manastones) {
                         ItemSocketService.addManaStone(item, stone[0], stone[1]);
@@ -255,7 +257,10 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
                     item.addGodStone(godstone);
                 }
 
-                String itemTxt = "(cube)#itemId=" + itemId + "; objectIdChange[" + objIdOld + "->" + newId + "] " + item.getItemCount() + ";" + item.getItemColor() + ";" + item.getItemCreator() + ";" + item.getExpireTime() + ";" + item.getActivationCount() + ";" + item.getEnchantLevel() + ";" + item.getItemSkinTemplate().getTemplateId() + ";" + item.getFusionedItemTemplate() + ";" + item.getOptionalSocket() + ";" + item.getOptionalFusionSocket() + ";" + item.getChargePoints();
+                String itemTxt = "(cube)#itemId=" + itemId + "; objectIdChange[" + objIdOld + "->" + newId + "] " + item.getItemCount() + ";"
+                    + item.getItemColor() + ";" + item.getItemCreator() + ";" + item.getExpireTime() + ";" + item.getActivationCount() + ";"
+                    + item.getEnchantLevel() + ";" + item.getItemSkinTemplate().getTemplateId() + ";" + item.getFusionedItemTemplate() + ";"
+                    + item.getOptionalSocket() + ";" + item.getOptionalFusionSocket() + ";" + item.getChargePoints();
                 itemOut.add(itemTxt);
                 item.setPersistentState(PersistentState.NEW);
                 player.getInventory().add(item);
@@ -284,11 +289,11 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
             FastList<int[]> manastones = FastList.newInstance(), fusions = FastList.newInstance();
             byte len = readSC();
             for (byte b = 0; b < len; b++) {
-                manastones.add(new int[]{readD(), readD()});
+                manastones.add(new int[] { readD(), readD() });
             }
             len = readSC();
             for (byte b = 0; b < len; b++) {
-                fusions.add(new int[]{readD(), readD()});
+                fusions.add(new int[] { readD(), readD() });
             }
 
             int godstone = 0;
@@ -319,7 +324,9 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
                 int newId = IDFactory.getInstance().nextId();
                 // bonus probably is lost, don't know [RR]
                 // dye expiration is lost
-                Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped, itemSoulBound, equipSlot, location, enchant, skinId, fusionId, optSocket, optFusion, charge, bonusNum, randomNum, packNum, authorizeNum, itemPacked, itemAmplified, buffSkill);
+                Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped,
+                    itemSoulBound, equipSlot, location, enchant, skinId, fusionId, optSocket, optFusion, charge, bonusNum, randomNum, packNum,
+                    authorizeNum, itemPacked, itemAmplified, buffSkill);
                 if (manastones.size() > 0) {
                     for (int[] stone : manastones) {
                         ItemSocketService.addManaStone(item, stone[0], stone[1]);
@@ -334,7 +341,10 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
                     item.addGodStone(godstone);
                 }
 
-                String itemTxt = "(warehouse)#itemId=" + itemId + "; objectIdChange[" + objIdOld + "->" + newId + "] " + item.getItemCount() + ";" + item.getItemColor() + ";" + item.getItemCreator() + ";" + item.getExpireTime() + ";" + item.getActivationCount() + ";" + item.getEnchantLevel() + ";" + item.getItemSkinTemplate().getTemplateId() + ";" + item.getFusionedItemTemplate() + ";" + item.getOptionalSocket() + ";" + item.getOptionalFusionSocket() + ";" + item.getChargePoints();
+                String itemTxt = "(warehouse)#itemId=" + itemId + "; objectIdChange[" + objIdOld + "->" + newId + "] " + item.getItemCount() + ";"
+                    + item.getItemColor() + ";" + item.getItemCreator() + ";" + item.getExpireTime() + ";" + item.getActivationCount() + ";"
+                    + item.getEnchantLevel() + ";" + item.getItemSkinTemplate().getTemplateId() + ";" + item.getFusionedItemTemplate() + ";"
+                    + item.getOptionalSocket() + ";" + item.getOptionalFusionSocket() + ";" + item.getChargePoints();
                 itemOut.add(itemTxt);
                 item.setPersistentState(PersistentState.NEW);
                 player.getWarehouse().add(item);
@@ -386,7 +396,8 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
         player.setNpcFactions(new NpcFactions(player));
         for (int a = 0; a < cnt; a++) { //npc factions
             if (PlayerTransferConfig.ALLOW_NPCFACTIONS) {
-                player.getNpcFactions().addNpcFaction(new NpcFaction(readD(), readD(), readD() == 1, ENpcFactionQuestState.valueOf(readS()), readD()));
+                player.getNpcFactions()
+                    .addNpcFaction(new NpcFaction(readD(), readD(), readD() == 1, ENpcFactionQuestState.valueOf(readS()), readD()));
             } else {
                 readB(12);
                 readS();
@@ -476,7 +487,8 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
                 break;
         }
 
-        player.setBindPoint(new BindPointPosition(Integer.parseInt(posBind[0]), Float.parseFloat(posBind[1]), Float.parseFloat(posBind[2]), Float.parseFloat(posBind[3]), Byte.parseByte(posBind[4])));
+        player.setBindPoint(new BindPointPosition(Integer.parseInt(posBind[0]), Float.parseFloat(posBind[1]), Float.parseFloat(posBind[2]),
+            Float.parseFloat(posBind[3]), Byte.parseByte(posBind[4])));
         DAOManager.getDAO(PlayerBindPointDAO.class).store(player);
 
         int uilen = readD(), shortlen = readD();
@@ -489,7 +501,8 @@ public class CMT_CHARACTER_INFORMATION extends AionClientPacket {
         for (int a = 0; a < cnt; a++) { //quests
             int questId = readD();
             if (PlayerTransferConfig.ALLOW_QUESTS) {
-                player.getQuestStateList().addQuest(questId, new QuestState(questId, QuestStatus.valueOf(readS()), readD(), readD(), null, readD(), null)); //TODO null timestamp
+                player.getQuestStateList().addQuest(questId,
+                    new QuestState(questId, QuestStatus.valueOf(readS()), readD(), readD(), null, readD(), null)); //TODO null timestamp
             } else {
                 readS();
                 readB(12);

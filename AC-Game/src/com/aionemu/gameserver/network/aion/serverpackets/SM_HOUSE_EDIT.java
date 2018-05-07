@@ -69,7 +69,7 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         Player player = con.getActivePlayer();
         if (player == null || player.getHouseRegistry() == null) {
             return;

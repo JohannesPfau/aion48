@@ -71,8 +71,9 @@ abstract class DataLoader {
     /**
      * Constructor that is supposed to be called from subclass.
      *
-     * @param file file or directory in the static data directory, containing
-     *             data that will be loaded
+     * @param file
+     *            file or directory in the static data directory, containing
+     *            data that will be loaded
      */
     DataLoader(String file) {
         this.dataFile = new File(PATH + file);
@@ -96,11 +97,10 @@ abstract class DataLoader {
     @SuppressWarnings("deprecation")
     protected void loadData() {
         if (dataFile.isDirectory()) {
-            Collection<?> files = FileUtils.listFiles(
-                    dataFile,
-                    FileFilterUtils.andFileFilter(FileFilterUtils.andFileFilter(
-                            FileFilterUtils.notFileFilter(FileFilterUtils.nameFileFilter("new")),
-                            FileFilterUtils.suffixFileFilter(".txt")), HiddenFileFilter.VISIBLE), HiddenFileFilter.VISIBLE);
+            Collection<?> files = FileUtils.listFiles(dataFile,
+                FileFilterUtils.andFileFilter(FileFilterUtils.andFileFilter(FileFilterUtils.notFileFilter(FileFilterUtils.nameFileFilter("new")),
+                    FileFilterUtils.suffixFileFilter(".txt")), HiddenFileFilter.VISIBLE),
+                HiddenFileFilter.VISIBLE);
 
             for (Object file1 : files) {
                 File f = (File) file1;
@@ -114,11 +114,12 @@ abstract class DataLoader {
     /**
      * This method is loading data from particular .txt file.
      *
-     * @param file a file which the data is loaded from.<br>
-     *             The method is loading the file row by row, omitting those started with
-     *             "#" sign.<br>
-     *             Every read row is then forwarded to {@link #parse(String)} method, which
-     *             should be overriden in subclcass.
+     * @param file
+     *            a file which the data is loaded from.<br>
+     *            The method is loading the file row by row, omitting those started with
+     *            "#" sign.<br>
+     *            Every read row is then forwarded to {@link #parse(String)} method, which
+     *            should be overriden in subclcass.
      */
     private void loadFile(File file) {
         LineIterator it = null;
@@ -143,8 +144,9 @@ abstract class DataLoader {
      * parsing given <tt>dataEntry</tt> String which represents one row from
      * data file.
      *
-     * @param dataEntry A String containing data about a data entry, that is to
-     *                  be parsed by this method.
+     * @param dataEntry
+     *            A String containing data about a data entry, that is to
+     *            be parsed by this method.
      */
     protected abstract void parse(String dataEntry);
 
@@ -152,7 +154,7 @@ abstract class DataLoader {
      * Saves data to the file. Used only by {@link SpawnData}.
      *
      * @return true if the data was successfully saved, false - if some error
-     * occurred.
+     *         occurred.
      */
     public boolean saveData() {
         String desc = PATH + getSaveFile();

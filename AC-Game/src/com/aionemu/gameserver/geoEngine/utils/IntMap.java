@@ -74,7 +74,7 @@ public final class IntMap<T> implements Iterable<Entry>, Cloneable {
     }
 
     @Override
-	@SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
     public IntMap<T> clone() {
         try {
             IntMap<T> clone = (IntMap<T>) super.clone();
@@ -93,7 +93,7 @@ public final class IntMap<T> implements Iterable<Entry>, Cloneable {
 
     public boolean containsValue(Object value) {
         Entry[] table = this.table;
-        for (int i = table.length; i-- > 0; ) {
+        for (int i = table.length; i-- > 0;) {
             for (Entry e = table[i]; e != null; e = e.next) {
                 if (e.value.equals(value)) {
                     return true;
@@ -192,14 +192,14 @@ public final class IntMap<T> implements Iterable<Entry>, Cloneable {
 
     public void clear() {
         Entry[] table = this.table;
-        for (int index = table.length; --index >= 0; ) {
+        for (int index = table.length; --index >= 0;) {
             table[index] = null;
         }
         size = 0;
     }
 
     @Override
-	public Iterator<Entry> iterator() {
+    public Iterator<Entry> iterator() {
         return new IntMapIterator();
     }
 
@@ -223,12 +223,12 @@ public final class IntMap<T> implements Iterable<Entry>, Cloneable {
         }
 
         @Override
-		public boolean hasNext() {
+        public boolean hasNext() {
             return el < size;
         }
 
         @Override
-		public Entry next() {
+        public Entry next() {
             if (el >= size) {
                 throw new IllegalStateException("No more elements!");
             }
@@ -239,12 +239,12 @@ public final class IntMap<T> implements Iterable<Entry>, Cloneable {
                 el++;
                 return e;
             }
-//            if (cur != null && cur.next != null){
+            //            if (cur != null && cur.next != null){
             // if we have a current entry, continue to the next entry in the list
-//                cur = cur.next;
-//                el++;
-//                return cur;
-//            }
+            //                cur = cur.next;
+            //                el++;
+            //                return cur;
+            //            }
 
             do {
                 // either we exhausted the current entry list, or
@@ -258,7 +258,7 @@ public final class IntMap<T> implements Iterable<Entry>, Cloneable {
         }
 
         @Override
-		public void remove() {
+        public void remove() {
         }
     }
 
@@ -283,12 +283,12 @@ public final class IntMap<T> implements Iterable<Entry>, Cloneable {
         }
 
         @Override
-		public String toString() {
+        public String toString() {
             return key + " => " + value;
         }
 
         @Override
-		@SuppressWarnings("unchecked")
+        @SuppressWarnings("unchecked")
         public Entry<T> clone() {
             try {
                 Entry<T> clone = (Entry<T>) super.clone();

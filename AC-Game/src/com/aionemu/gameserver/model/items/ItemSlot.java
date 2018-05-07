@@ -81,6 +81,7 @@ public enum ItemSlot {
     MAJ_STIGMA(1L << 35), // 34359738368L Major Stigma
     MAJOR_STIGMAS(MAJ_STIGMA.slotIdMask, true),
     ALL_STIGMA(REGULAR_STIGMAS.slotIdMask | ADVANCED_STIGMAS.slotIdMask | MAJOR_STIGMAS.slotIdMask, true);
+
     private long slotIdMask;
     private boolean combo;
 
@@ -121,7 +122,7 @@ public enum ItemSlot {
     }
 
     public static ItemSlot[] getSlotsFor(long slot) {
-        List<ItemSlot> slots = new ArrayList<ItemSlot>();
+        List<ItemSlot> slots = new ArrayList<>();
         for (ItemSlot itemSlot : values()) {
             if (slot != 0 && !itemSlot.isCombo() && (slot & itemSlot.slotIdMask) == itemSlot.slotIdMask) {
                 slots.add(itemSlot);

@@ -39,7 +39,6 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
  * This blob is sent for weapons. It keeps info about slots that weapon can be
  * equipped to.
  *
-
  * @modified Rolandas
  */
 public class WeaponInfoBlobEntry extends ItemBlobEntry {

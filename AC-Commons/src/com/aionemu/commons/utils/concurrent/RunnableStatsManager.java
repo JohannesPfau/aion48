@@ -29,15 +29,22 @@
  */
 package com.aionemu.commons.utils.concurrent;
 
+import java.io.PrintStream;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EnumSet;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.locks.ReentrantLock;
+
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.PrintStream;
-import java.text.NumberFormat;
-import java.util.*;
-import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * @author NB4L1
@@ -47,7 +54,7 @@ public final class RunnableStatsManager {
 
     private static final Logger log = LoggerFactory.getLogger(RunnableStatsManager.class);
 
-    private static final Map<Class<?>, ClassStat> classStats = new HashMap<Class<?>, ClassStat>();
+    private static final Map<Class<?>, ClassStat> classStats = new HashMap<>();
 
     private static final class ClassStat {
 
@@ -61,8 +68,8 @@ public final class RunnableStatsManager {
             className = clazz.getName().replace("com.aionemu.gameserver.", "");
             runnableStat = new MethodStat(className, "run()");
 
-            methodNames = new String[]{"run()"};
-            methodStats = new MethodStat[]{runnableStat};
+            methodNames = new String[] { "run()" };
+            methodStats = new MethodStat[] { runnableStat };
 
             classStats.put(clazz, this);
         }
@@ -247,7 +254,7 @@ public final class RunnableStatsManager {
     }
 
     public static void dumpClassStats(final SortBy sortBy) {
-        final List<MethodStat> methodStats = new ArrayList<MethodStat>();
+        final List<MethodStat> methodStats = new ArrayList<>();
 
         synchronized (RunnableStatsManager.class) {
             for (ClassStat classStat : classStats.values()) {
@@ -263,7 +270,7 @@ public final class RunnableStatsManager {
             Collections.sort(methodStats, sortBy.comparator);
         }
 
-        final List<String> lines = new ArrayList<String>();
+        final List<String> lines = new ArrayList<>();
 
         lines.add("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>");
         lines.add("<entries>");

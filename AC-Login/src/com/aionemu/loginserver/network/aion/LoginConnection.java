@@ -29,6 +29,18 @@
  */
 package com.aionemu.loginserver.network.aion;
 
+import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.SocketChannel;
+import java.security.interfaces.RSAPrivateKey;
+import java.util.ArrayDeque;
+import java.util.Deque;
+
+import javax.crypto.SecretKey;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.commons.network.PacketProcessor;
@@ -40,16 +52,6 @@ import com.aionemu.loginserver.network.factories.AionPacketHandlerFactory;
 import com.aionemu.loginserver.network.ncrypt.CryptEngine;
 import com.aionemu.loginserver.network.ncrypt.EncryptedRSAKeyPair;
 import com.aionemu.loginserver.network.ncrypt.KeyGen;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.crypto.SecretKey;
-import java.io.IOException;
-import java.nio.ByteBuffer;
-import java.nio.channels.SocketChannel;
-import java.security.interfaces.RSAPrivateKey;
-import java.util.ArrayDeque;
-import java.util.Deque;
 
 /**
  * Object representing connection between LoginServer and Aion Client.
@@ -65,11 +67,11 @@ public class LoginConnection extends AConnection {
     /**
      * PacketProcessor for executing packets.
      */
-    private final static PacketProcessor<LoginConnection> processor = new PacketProcessor<LoginConnection>(1, 8, 50, 3);
+    private final static PacketProcessor<LoginConnection> processor = new PacketProcessor<>(1, 8, 50, 3);
     /**
      * Server Packet "to send" Queue
      */
-    private final Deque<AionServerPacket> sendMsgQueue = new ArrayDeque<AionServerPacket>();
+    private final Deque<AionServerPacket> sendMsgQueue = new ArrayDeque<>();
     /**
      * Unique Session Id of this connection
      */
@@ -137,7 +139,7 @@ public class LoginConnection extends AConnection {
      *
      * @param data
      * @return True if data was processed correctly, False if some error
-     * occurred and connection should be closed NOW.
+     *         occurred and connection should be closed NOW.
      */
     @Override
     protected final boolean processData(ByteBuffer data) {
@@ -163,7 +165,7 @@ public class LoginConnection extends AConnection {
      *
      * @param data
      * @return True if data was written to buffer, False indicating that there
-     * are not any more data to write.
+     *         are not any more data to write.
      */
     @Override
     protected final synchronized boolean writeData(ByteBuffer data) {
@@ -184,7 +186,7 @@ public class LoginConnection extends AConnection {
      * closed.
      *
      * @return time in ms after witch onDisconnect() method will be called.
-     * Always return 0.
+     *         Always return 0.
      */
     @Override
     protected final long getDisconnectionDelay() {
@@ -250,7 +252,8 @@ public class LoginConnection extends AConnection {
     /**
      * Sends AionServerPacket to this client.
      *
-     * @param bp AionServerPacket to be sent.
+     * @param bp
+     *            AionServerPacket to be sent.
      */
     public final synchronized void sendPacket(AionServerPacket bp) {
         /**
@@ -273,8 +276,10 @@ public class LoginConnection extends AConnection {
      * other things. forced means that server shouldn't wait with removing this
      * connection.
      *
-     * @param closePacket Packet that will be send before closing.
-     * @param forced      have no effect in this implementation.
+     * @param closePacket
+     *            Packet that will be send before closing.
+     * @param forced
+     *            have no effect in this implementation.
      */
     public final synchronized void close(AionServerPacket closePacket, boolean forced) {
         if (isWriteDisabled()) {

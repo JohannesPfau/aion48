@@ -36,8 +36,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * This packet is informing client that some AionObject is no longer visible.
- *
-
  */
 public class SM_DELETE extends AionServerPacket {
 
@@ -62,7 +60,7 @@ public class SM_DELETE extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         int action = 0;
         if (action != 1) {
             writeD(objectId);

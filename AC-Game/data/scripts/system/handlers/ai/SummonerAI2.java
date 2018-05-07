@@ -29,6 +29,10 @@
  */
 package ai;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -42,17 +46,13 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.world.World;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 /**
  * @author xTz
  */
 @AIName("summoner")
 public class SummonerAI2 extends AggressiveNpcAI2 {
 
-    private final List<Integer> spawnedNpc = new ArrayList<Integer>();
+    private final List<Integer> spawnedNpc = new ArrayList<>();
     private List<Percentage> percentage = Collections.emptyList();
     private int spawnedPercent = 0;
 
@@ -134,6 +134,7 @@ public class SummonerAI2 extends AggressiveNpcAI2 {
                     for (SummonGroup summonGroup : percent.getSummons()) {
                         final SummonGroup sg = summonGroup;
                         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                             @Override
                             public void run() {
                                 spawnHelpers(sg);
@@ -160,8 +161,8 @@ public class SummonerAI2 extends AggressiveNpcAI2 {
                 if (summonGroup.getDistance() != 0) {
                     summon = rndSpawnInRange(summonGroup.getNpcId(), summonGroup.getDistance());
                 } else {
-                    summon = SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), summonGroup.getNpcId(),
-                            summonGroup.getX(), summonGroup.getY(), summonGroup.getZ(), summonGroup.getH());
+                    summon = SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), summonGroup.getNpcId(), summonGroup.getX(),
+                        summonGroup.getY(), summonGroup.getZ(), summonGroup.getH());
                 }
                 VisibleObject npc = SpawnEngine.spawnObject(summon, getPosition().getInstanceId());
                 addHelpersSpawn(npc.getObjectId());
@@ -174,8 +175,8 @@ public class SummonerAI2 extends AggressiveNpcAI2 {
         float direction = Rnd.get(0, 199) / 100f;
         float x = (float) (Math.cos(Math.PI * direction) * distance);
         float y = (float) (Math.sin(Math.PI * direction) * distance);
-        return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x, getPosition().getY()
-                + y, getPosition().getZ(), getPosition().getHeading());
+        return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x, getPosition().getY() + y,
+            getPosition().getZ(), getPosition().getHeading());
     }
 
     protected boolean checkBeforeSpawn() {

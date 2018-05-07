@@ -46,6 +46,7 @@ public enum NpcRating {
     ELITE(CreatureSeeState.SEARCH1),
     HERO(CreatureSeeState.SEARCH2),
     LEGENDARY(CreatureSeeState.SEARCH2);
+
     private final CreatureSeeState congenitalSeeState;
 
     private NpcRating(CreatureSeeState congenitalSeeState) {

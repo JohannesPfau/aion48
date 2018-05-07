@@ -73,6 +73,7 @@ public class ShutdownHook extends Thread {
         NONE("terminating"),
         SHUTDOWN("shutting down"),
         RESTART("restarting");
+
         private final String text;
 
         private ShutdownMode(String text) {
@@ -184,8 +185,9 @@ public class ShutdownHook extends Thread {
     public void doShutdown(int delay, int announceInterval, ShutdownMode mode) {
         shutdownHook(delay, announceInterval, mode);
     }
-	private static final class SingletonHolder {
 
-		private static final ShutdownHook INSTANCE = new ShutdownHook();
-	}
+    private static final class SingletonHolder {
+
+        private static final ShutdownHook INSTANCE = new ShutdownHook();
+    }
 }

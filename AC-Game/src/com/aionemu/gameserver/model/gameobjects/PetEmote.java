@@ -45,10 +45,11 @@ public enum PetEmote {
     FLY(-125),
     UNK_M128(-128),
     UNKNOWN(255);
+
     private static TIntObjectHashMap<PetEmote> petEmotes;
 
     static {
-        petEmotes = new TIntObjectHashMap<PetEmote>();
+        petEmotes = new TIntObjectHashMap<>();
         for (PetEmote emote : values()) {
             petEmotes.put(emote.getEmoteId(), emote);
         }

@@ -97,7 +97,7 @@ public class BoundingBox extends BoundingVolume {
     }
 
     @Override
-	public Type getType() {
+    public Type getType() {
         return Type.AABB;
     }
 
@@ -106,10 +106,11 @@ public class BoundingBox extends BoundingVolume {
      * set of points. It uses the
      * <code>containAABB</code> method as default.
      *
-     * @param points the points to contain.
+     * @param points
+     *            the points to contain.
      */
     @Override
-	public void computeFromPoints(FloatBuffer points) {
+    public void computeFromPoints(FloatBuffer points) {
         containAABB(points);
     }
 
@@ -209,7 +210,8 @@ public class BoundingBox extends BoundingVolume {
      * box of the points, then selects the smallest enclosing sphere of the box
      * with the sphere centered at the boxes center.
      *
-     * @param points the list of points.
+     * @param points
+     *            the list of points.
      */
     public void containAABB(FloatBuffer points) {
         if (points == null) {
@@ -258,7 +260,7 @@ public class BoundingBox extends BoundingVolume {
     }
 
     @Override
-	public BoundingVolume transform(Matrix4f trans, BoundingVolume store) {
+    public BoundingVolume transform(Matrix4f trans, BoundingVolume store) {
         BoundingBox box;
         if (store == null || store.getType() != Type.AABB) {
             box = new BoundingBox();
@@ -292,12 +294,13 @@ public class BoundingBox extends BoundingVolume {
      * <code>whichSide</code> takes a plane (typically provided by a view
      * frustum) to determine which side this bound is on.
      *
-     * @param plane the plane to check against.
+     * @param plane
+     *            the plane to check against.
      */
     @Override
-	public Plane.Side whichSide(Plane plane) {
+    public Plane.Side whichSide(Plane plane) {
         float radius = FastMath.abs(xExtent * plane.getNormal().getX()) + FastMath.abs(yExtent * plane.getNormal().getY())
-                + FastMath.abs(zExtent * plane.getNormal().getZ());
+            + FastMath.abs(zExtent * plane.getNormal().getZ());
 
         float distance = plane.pseudoDistance(center);
 
@@ -315,11 +318,12 @@ public class BoundingBox extends BoundingVolume {
      * <code>merge</code> combines this sphere with a second bounding sphere.
      * This new sphere contains both bounding spheres and is returned.
      *
-     * @param volume the sphere to combine with this sphere.
+     * @param volume
+     *            the sphere to combine with this sphere.
      * @return the new sphere
      */
     @Override
-	public BoundingVolume merge(BoundingVolume volume) {
+    public BoundingVolume merge(BoundingVolume volume) {
         if (volume == null) {
             return this;
         }
@@ -345,11 +349,12 @@ public class BoundingBox extends BoundingVolume {
      * sphere locally. Altering this sphere to contain both the original and the
      * additional sphere volumes;
      *
-     * @param volume the sphere to combine with this sphere.
+     * @param volume
+     *            the sphere to combine with this sphere.
      * @return this
      */
     @Override
-	public BoundingVolume mergeLocal(BoundingVolume volume) {
+    public BoundingVolume mergeLocal(BoundingVolume volume) {
         if (volume == null) {
             return this;
         }
@@ -371,7 +376,8 @@ public class BoundingBox extends BoundingVolume {
     /**
      * Merges this AABB with the given OBB.
      *
-     * @param volume the OBB to merge this AABB with.
+     * @param volume
+     *            the OBB to merge this AABB with.
      * @return This AABB extended to fit the given OBB.
      */
     // private BoundingBox mergeOBB(OrientedBoundingBox volume) {
@@ -415,11 +421,16 @@ public class BoundingBox extends BoundingVolume {
      * <code>merge</code> combines this bounding box with another box which is
      * defined by the center, x, y, z extents.
      *
-     * @param boxCenter the center of the box to merge with
-     * @param boxX      the x extent of the box to merge with.
-     * @param boxY      the y extent of the box to merge with.
-     * @param boxZ      the z extent of the box to merge with.
-     * @param rVal      the resulting merged box.
+     * @param boxCenter
+     *            the center of the box to merge with
+     * @param boxX
+     *            the x extent of the box to merge with.
+     * @param boxY
+     *            the y extent of the box to merge with.
+     * @param boxZ
+     *            the z extent of the box to merge with.
+     * @param rVal
+     *            the resulting merged box.
      * @return the resulting merged box.
      */
     private BoundingBox merge(Vector3f boxCenter, float boxX, float boxY, float boxZ, BoundingBox rVal) {
@@ -467,12 +478,13 @@ public class BoundingBox extends BoundingVolume {
      * <code>clone</code> creates a new BoundingBox object containing the same
      * data as this one.
      *
-     * @param store where to store the cloned information. if null or wrong
-     *              class, a new store is created.
+     * @param store
+     *            where to store the cloned information. if null or wrong
+     *            class, a new store is created.
      * @return the new BoundingBox
      */
     @Override
-	public BoundingBox clone(BoundingVolume store) {
+    public BoundingBox clone(BoundingVolume store) {
         if (store != null && store.getType() == Type.AABB) {
             BoundingBox rVal = (BoundingBox) store;
             rVal.center.set(center);
@@ -495,8 +507,7 @@ public class BoundingBox extends BoundingVolume {
      */
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " [Center: " + center + "  xExtent: " + xExtent + "  yExtent: " + yExtent + "  zExtent: " + zExtent
-                + "]";
+        return getClass().getSimpleName() + " [Center: " + center + "  xExtent: " + xExtent + "  yExtent: " + yExtent + "  zExtent: " + zExtent + "]";
     }
 
     /**
@@ -505,10 +516,9 @@ public class BoundingBox extends BoundingVolume {
      * @see com.jme.bounding.BoundingVolume#intersectsSphere(com.jme.bounding.BoundingSphere)
      */
     @Override
-	public boolean intersectsSphere(BoundingSphere bs) {
-        return ((FastMath.abs(center.x - bs.center.x) < bs.getRadius() + xExtent)
-                && (FastMath.abs(center.y - bs.center.y) < bs.getRadius() + yExtent) && (FastMath.abs(center.z - bs.center.z) < bs.getRadius()
-                + zExtent));
+    public boolean intersectsSphere(BoundingSphere bs) {
+        return ((FastMath.abs(center.x - bs.center.x) < bs.getRadius() + xExtent) && (FastMath.abs(center.y - bs.center.y) < bs.getRadius() + yExtent)
+            && (FastMath.abs(center.z - bs.center.z) < bs.getRadius() + zExtent));
     }
 
     /**
@@ -518,7 +528,7 @@ public class BoundingBox extends BoundingVolume {
      * @see com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingVolume#intersects(com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingVolume)
      */
     @Override
-	public boolean intersects(BoundingVolume bv) {
+    public boolean intersects(BoundingVolume bv) {
         return bv.intersectsBoundingBox(this);
     }
 
@@ -530,7 +540,7 @@ public class BoundingBox extends BoundingVolume {
      * @see com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingVolume#intersectsBoundingBox(com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingBox)
      */
     @Override
-	public boolean intersectsBoundingBox(BoundingBox bb) {
+    public boolean intersectsBoundingBox(BoundingBox bb) {
         assert Vector3f.isValidVector(center) && Vector3f.isValidVector(bb.center);
 
         if (center.x + xExtent < bb.center.x - bb.xExtent || center.x - xExtent > bb.center.x + bb.xExtent) {
@@ -549,7 +559,7 @@ public class BoundingBox extends BoundingVolume {
      * box.
      *
      * @see
-     * com.jme.bounding.BoundingVolume#intersectsOrientedBoundingBox(com.jme.bounding.OrientedBoundingBox)
+     *      com.jme.bounding.BoundingVolume#intersectsOrientedBoundingBox(com.jme.bounding.OrientedBoundingBox)
      */
     // public boolean intersectsOrientedBoundingBox(OrientedBoundingBox obb) {
     // return obb.intersectsBoundingBox(this);
@@ -562,7 +572,7 @@ public class BoundingBox extends BoundingVolume {
      * @see com.aionemu.gameserver.geoEngine.bounding.jme.bounding.BoundingVolume#intersects(com.jme.math.Ray)
      */
     @Override
-	public boolean intersects(Ray ray) {
+    public boolean intersects(Ray ray) {
         // assert Vector3f.isValidVector(center);
 
         float rhs;
@@ -679,20 +689,20 @@ public class BoundingBox extends BoundingVolume {
         Vector3f diff = Vector3f.newInstance().set(ray.origin).subtractLocal(center);
         Vector3f direction = Vector3f.newInstance().set(ray.direction);
 
-        float[] t = {0f, Float.POSITIVE_INFINITY};
+        float[] t = { 0f, Float.POSITIVE_INFINITY };
 
         float saveT0 = t[0], saveT1 = t[1];
         boolean notEntirelyClipped = clip(+direction.x, -diff.x - xExtent, t) && clip(-direction.x, +diff.x - xExtent, t)
-                && clip(+direction.y, -diff.y - yExtent, t) && clip(-direction.y, +diff.y - yExtent, t) && clip(+direction.z, -diff.z - zExtent, t)
-                && clip(-direction.z, +diff.z - zExtent, t);
+            && clip(+direction.y, -diff.y - yExtent, t) && clip(-direction.y, +diff.y - yExtent, t) && clip(+direction.z, -diff.z - zExtent, t)
+            && clip(-direction.z, +diff.z - zExtent, t);
         Vector3f.recycle(diff);
         Vector3f.recycle(direction);
 
         if (notEntirelyClipped && (t[0] != saveT0 || t[1] != saveT1)) {
             if (t[1] > t[0]) {
                 float[] distances = t;
-                Vector3f[] points = new Vector3f[]{new Vector3f(ray.direction).multLocal(distances[0]).addLocal(ray.origin),
-                        new Vector3f(ray.direction).multLocal(distances[1]).addLocal(ray.origin)};
+                Vector3f[] points = new Vector3f[] { new Vector3f(ray.direction).multLocal(distances[0]).addLocal(ray.origin),
+                    new Vector3f(ray.direction).multLocal(distances[1]).addLocal(ray.origin) };
 
                 CollisionResult result = new CollisionResult(points[0], distances[0]);
                 results.addCollision(result);
@@ -710,7 +720,7 @@ public class BoundingBox extends BoundingVolume {
     }
 
     @Override
-	public int collideWith(Collidable other, CollisionResults results) {
+    public int collideWith(Collidable other, CollisionResults results) {
         if (other instanceof Ray) {
             Ray ray = (Ray) other;
             return collideWithRay(ray, results);
@@ -742,18 +752,17 @@ public class BoundingBox extends BoundingVolume {
 
     @Override
     public boolean contains(Vector3f point) {
-        return FastMath.abs(center.x - point.x) < xExtent && FastMath.abs(center.y - point.y) < yExtent
-                && FastMath.abs(center.z - point.z) < zExtent;
+        return FastMath.abs(center.x - point.x) < xExtent && FastMath.abs(center.y - point.y) < yExtent && FastMath.abs(center.z - point.z) < zExtent;
     }
 
     @Override
     public boolean intersects(Vector3f point) {
         return FastMath.abs(center.x - point.x) <= xExtent && FastMath.abs(center.y - point.y) <= yExtent
-                && FastMath.abs(center.z - point.z) <= zExtent;
+            && FastMath.abs(center.z - point.z) <= zExtent;
     }
 
     @Override
-	public float distanceToEdge(Vector3f point) {
+    public float distanceToEdge(Vector3f point) {
         // compute coordinates of point in box coordinate system
         Vector3f closest = point.subtract(center);
 
@@ -798,9 +807,12 @@ public class BoundingBox extends BoundingVolume {
      * <code>clip</code> determines if a line segment intersects the current
      * test plane.
      *
-     * @param denom the denominator of the line segment.
-     * @param numer the numerator of the line segment.
-     * @param t     test values of the plane.
+     * @param denom
+     *            the denominator of the line segment.
+     * @param numer
+     *            the numerator of the line segment.
+     * @param t
+     *            test values of the plane.
      * @return true if the line segment intersects the plane, false otherwise.
      */
     private boolean clip(float denom, float numer, float[] t) {
@@ -831,7 +843,8 @@ public class BoundingBox extends BoundingVolume {
     /**
      * Query extent.
      *
-     * @param store where extent gets stored - null to return a new vector
+     * @param store
+     *            where extent gets stored - null to return a new vector
      * @return store / new vector
      */
     public Vector3f getExtent(Vector3f store) {

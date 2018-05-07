@@ -40,7 +40,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author boscar
- *
  */
 @AIName("saurobossportal")
 public class SauroBossPortalAI2 extends NpcAI2 {
@@ -52,7 +51,9 @@ public class SauroBossPortalAI2 extends NpcAI2 {
 
     @Override
     public boolean onDialogSelect(Player player, int dialogId, int questId, int extendedRewardIndex) {
-        long keyCount = ((Item) player.getInventory().getFirstItemByItemId(185000179) != null ? ((Item) player.getInventory().getFirstItemByItemId(185000179)).getItemCount() : 0);
+        long keyCount = ((Item) player.getInventory().getFirstItemByItemId(185000179) != null
+            ? ((Item) player.getInventory().getFirstItemByItemId(185000179)).getItemCount()
+            : 0);
         boolean spawnportal = false;
         int portal = 0;
         DialogAction finalAction = DialogAction.getActionByDialogId(dialogId);

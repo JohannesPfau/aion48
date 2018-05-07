@@ -122,8 +122,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
         }
         Stat2 newSpeedStat = null;
         if (owner.isFlying()) {
-            newSpeedStat = getStat(StatEnum.FLY_SPEED,
-                    Math.round(owner.getObjectTemplate().getStatsTemplate().getRunSpeed() * 1.3f * 1000));
+            newSpeedStat = getStat(StatEnum.FLY_SPEED, Math.round(owner.getObjectTemplate().getStatsTemplate().getRunSpeed() * 1.3f * 1000));
         } else if (owner.isInState(CreatureState.WEAPON_EQUIPPED)) {
             float speed = 0;
             if (owner.getWalkerGroup() != null) {
@@ -141,8 +140,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
             }
             newSpeedStat = getStat(StatEnum.SPEED, Math.round(speed * 1000));
         } else {
-            newSpeedStat = getStat(StatEnum.SPEED,
-                    Math.round(owner.getObjectTemplate().getStatsTemplate().getRunSpeed() * 1000));
+            newSpeedStat = getStat(StatEnum.SPEED, Math.round(owner.getObjectTemplate().getStatsTemplate().getRunSpeed() * 1000));
         }
         cachedState = currentState;
         cachedSpeedStat = newSpeedStat;
@@ -346,9 +344,11 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
     }
 
     //not used at the moment
-    /*public void renewLastSkilledTime() {
-     this.lastSkilledTime = System.currentTimeMillis();
-     }*/
+    /*
+     * public void renewLastSkilledTime() {
+     * this.lastSkilledTime = System.currentTimeMillis();
+     * }
+     */
     public void renewLastChangeTargetTime() {
         this.lastChangeTarget = System.currentTimeMillis();
     }
@@ -358,9 +358,11 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
     }
 
     //not used at the moment
-    /*public int getLastSkilledTimeDelta() {
-     return Math.round((System.currentTimeMillis() - lastSkilledTime) / 1000f);
-     }*/
+    /*
+     * public int getLastSkilledTimeDelta() {
+     * return Math.round((System.currentTimeMillis() - lastSkilledTime) / 1000f);
+     * }
+     */
     public int getLastChangeTargetTimeDelta() {
         return Math.round((System.currentTimeMillis() - lastChangeTarget) / 1000f);
     }
@@ -385,7 +387,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
     }
 
     /**
-     * @param lastGeoZUpdate the lastGeoZUpdate to set
+     * @param lastGeoZUpdate
+     *            the lastGeoZUpdate to set
      */
     public void setLastGeoZUpdate(long lastGeoZUpdate) {
         this.lastGeoZUpdate = lastGeoZUpdate;

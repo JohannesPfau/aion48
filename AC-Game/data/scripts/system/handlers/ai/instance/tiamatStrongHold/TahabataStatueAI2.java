@@ -29,7 +29,6 @@
  */
 package ai.instance.tiamatStrongHold;
 
-import ai.ActionItemNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TeleportAnimation;
@@ -37,6 +36,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.ActionItemNpcAI2;
 
 /**
  * @author Cheatkiller

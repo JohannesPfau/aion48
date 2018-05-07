@@ -29,7 +29,10 @@
  */
 package ai.instance.empyreanCrucible;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
@@ -41,9 +44,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Luzien
@@ -51,7 +52,7 @@ import java.util.List;
 @AIName("mage_preceptor")
 public class MagePreceptorAI2 extends AggressiveNpcAI2 {
 
-    private List<Integer> percents = new ArrayList<Integer>();
+    private List<Integer> percents = new ArrayList<>();
 
     @Override
     public void handleSpawned() {
@@ -96,11 +97,13 @@ public class MagePreceptorAI2 extends AggressiveNpcAI2 {
                 break;
             case 50:
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         if (!isAlreadyDead()) {
                             SkillEngine.getInstance().getSkill(getOwner(), 19609, 10, getOwner()).useNoAnimationSkill();
                             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                 @Override
                                 public void run() {
                                     WorldPosition p = getPosition();
@@ -125,6 +128,7 @@ public class MagePreceptorAI2 extends AggressiveNpcAI2 {
 
     private void scheduleSkill(int delay) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
@@ -136,7 +140,7 @@ public class MagePreceptorAI2 extends AggressiveNpcAI2 {
     }
 
     private Player getTargetPlayer() {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (Player player : getKnownList().getKnownPlayers().values()) {
             if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 37)) {
                 players.add(player);
@@ -157,7 +161,7 @@ public class MagePreceptorAI2 extends AggressiveNpcAI2 {
 
     private void addPercents() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{75, 50, 25});
+        Collections.addAll(percents, new Integer[] { 75, 50, 25 });
     }
 
     private void despawnNpcs() {

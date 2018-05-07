@@ -138,8 +138,8 @@ public class SurveyFactory {
         html += "<tr><td><center>Pos.</center></td><td><center>Name</center></td><td><center>&nbsp;Points&nbsp;</center></td><td><center>&nbsp;&nbsp;Kills&nbsp;&nbsp;</center></td><td><center>&nbsp;&nbsp;Deaths&nbsp;&nbsp;</center></td>";
         int counter = 1;
         for (Player e : elyos) {
-            html += "<tr><td>" + counter + ". </td><td>" + e.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + e.battlegroundSessionPoints + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionKills
-                    + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionDeaths + "</td></tr>";
+            html += "<tr><td>" + counter + ". </td><td>" + e.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + e.battlegroundSessionPoints
+                + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionKills + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionDeaths + "</td></tr>";
             counter++;
         }
         html += "</table>";
@@ -161,8 +161,8 @@ public class SurveyFactory {
         html += "<tr><td><center>Pos.</center></td><td><center>Name</center></td><td><center>&nbsp;Points&nbsp;</center></td><td><center>&nbsp;&nbsp;Kills&nbsp;&nbsp;</center></td><td><center>&nbsp;Deaths&nbsp;</center></td>";
         counter = 1;
         for (Player a : asmos) {
-            html += "<tr><td>" + counter + ". </td><td>" + a.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + a.battlegroundSessionPoints + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionKills
-                    + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionDeaths + "</td></tr>";
+            html += "<tr><td>" + counter + ". </td><td>" + a.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + a.battlegroundSessionPoints
+                + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionKills + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionDeaths + "</td></tr>";
             counter++;
         }
         html += "</table>";
@@ -193,8 +193,10 @@ public class SurveyFactory {
 
             html += "your total BG points is now : " + (player.getCommonData().getBattleGroundPoints() + earnedPoints) + ".<br><br>";
 
-            for (BattleGroundTemplate template : BattleGroundManager.getUnlockedBattleGrounds(oldPoints, player.getCommonData().getBattleGroundPoints())) {
-                html += "You have unlocked the following battleground : " + template.getName() + " (" + template.getJoinConditions().getRequiredBgPoints() + " pts.)<br><br>";
+            for (BattleGroundTemplate template : BattleGroundManager.getUnlockedBattleGrounds(oldPoints,
+                player.getCommonData().getBattleGroundPoints())) {
+                html += "You have unlocked the following battleground : " + template.getName() + " ("
+                    + template.getJoinConditions().getRequiredBgPoints() + " pts.)<br><br>";
             }
         } else if (player.battlegroundObserve > 0) {
             if (player.battlegroundBetE == 0 && player.battlegroundBetA == 0) {
@@ -204,26 +206,30 @@ public class SurveyFactory {
                 if (winner.equals("Elyos")) {
                     html += "" + winner + " win, so you have earned : " + Kinah1E + " kinah !";
                     inventory.increaseKinah(Kinah2E);
-                    LoggerFactory.getLogger(ChatCommand.class).info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah2E + " | Faction : e"));
+                    LoggerFactory.getLogger(ChatCommand.class)
+                        .info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah2E + " | Faction : e"));
                 } else if (winner.equals("Asmodians")) {
                     html += "" + winner + " win, so you have lost : " + Kinah0E + " kinah !";
                 } else if (winner.equals("The two factions")) {
                     html += "" + winner + " win, so you have recovered your bet : " + Kinah0E + " kinah !";
                     inventory.increaseKinah(Kinah0E);
-                    LoggerFactory.getLogger(ChatCommand.class).info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah0E + " | Faction : 0"));
+                    LoggerFactory.getLogger(ChatCommand.class)
+                        .info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah0E + " | Faction : 0"));
                 }
             } else if (player.battlegroundBetA > 0) {
                 html += "You have bet : " + Kinah0A + " kinah for the asmodians.<br><br>";
                 if (winner.equals("Asmodians")) {
                     html += "" + winner + " win, so you have earned : " + Kinah1A + " kinah !";
                     inventory.increaseKinah(Kinah2A);
-                    LoggerFactory.getLogger(ChatCommand.class).info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah2A + " | Faction : a"));
+                    LoggerFactory.getLogger(ChatCommand.class)
+                        .info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah2A + " | Faction : a"));
                 } else if (winner.equals("Elyos")) {
                     html += "" + winner + " win, so you have lost : " + Kinah0A + " kinah !";
                 } else if (winner.equals("The two factions")) {
                     html += "" + winner + " win, so you have recovered your bet : " + Kinah0A + " kinah !";
                     inventory.increaseKinah(Kinah0A);
-                    LoggerFactory.getLogger(ChatCommand.class).info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah0A + " | Faction : 0"));
+                    LoggerFactory.getLogger(ChatCommand.class)
+                        .info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah0A + " | Faction : 0"));
                 }
             }
         }
@@ -342,8 +348,8 @@ public class SurveyFactory {
         html += "<tr><td><center>Pos.</center></td><td><center>Name</center></td><td><center>&nbsp;Points&nbsp;</center></td><td><center>&nbsp;&nbsp;Kills&nbsp;&nbsp;</center></td><td><center>&nbsp;&nbsp;Flags&nbsp;&nbsp;</center></td>";
         int counter = 1;
         for (Player e : elyos) {
-            html += "<tr><td>" + counter + ". </td><td>" + e.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + e.battlegroundSessionPoints + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionKills
-                    + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionFlags + "</td></tr>";
+            html += "<tr><td>" + counter + ". </td><td>" + e.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + e.battlegroundSessionPoints
+                + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionKills + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionFlags + "</td></tr>";
             counter++;
         }
         html += "</table>";
@@ -365,8 +371,8 @@ public class SurveyFactory {
         html += "<tr><td><center>Pos.</center></td><td><center>Name</center></td><td><center>&nbsp;Points&nbsp;</center></td><td><center>&nbsp;&nbsp;Kills&nbsp;&nbsp;</center></td><td><center>&nbsp;&nbsp;Flags&nbsp;&nbsp;</center></td>";
         counter = 1;
         for (Player a : asmos) {
-            html += "<tr><td>" + counter + ". </td><td>" + a.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + a.battlegroundSessionPoints + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionKills
-                    + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionFlags + "</td></tr>";
+            html += "<tr><td>" + counter + ". </td><td>" + a.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + a.battlegroundSessionPoints
+                + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionKills + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionFlags + "</td></tr>";
             counter++;
         }
         html += "</table>";
@@ -397,8 +403,10 @@ public class SurveyFactory {
 
             html += "your total BG points is now : " + (player.getCommonData().getBattleGroundPoints() + earnedPoints) + ".<br><br>";
 
-            for (BattleGroundTemplate template : BattleGroundManager.getUnlockedBattleGrounds(oldPoints, player.getCommonData().getBattleGroundPoints())) {
-                html += "You have unlocked the following battleground : " + template.getName() + " (" + template.getJoinConditions().getRequiredBgPoints() + " pts.)<br><br>";
+            for (BattleGroundTemplate template : BattleGroundManager.getUnlockedBattleGrounds(oldPoints,
+                player.getCommonData().getBattleGroundPoints())) {
+                html += "You have unlocked the following battleground : " + template.getName() + " ("
+                    + template.getJoinConditions().getRequiredBgPoints() + " pts.)<br><br>";
             }
         } else if (player.battlegroundObserve > 0) {
             if (player.battlegroundBetE == 0 && player.battlegroundBetA == 0) {
@@ -408,26 +416,30 @@ public class SurveyFactory {
                 if (winner.equals("Elyos")) {
                     html += "" + winner + " win, so you have earned : " + Kinah1E + " kinah !";
                     inventory.increaseKinah(Kinah2E);
-                    LoggerFactory.getLogger(ChatCommand.class).info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah2E + " | Faction : e"));
+                    LoggerFactory.getLogger(ChatCommand.class)
+                        .info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah2E + " | Faction : e"));
                 } else if (winner.equals("Asmodians")) {
                     html += "" + winner + " win, so you have lost : " + Kinah0E + " kinah !";
                 } else if (winner.equals("The two factions")) {
                     html += "" + winner + " win, so you have recovered your bet : " + Kinah0E + " kinah !";
                     inventory.increaseKinah(Kinah0E);
-                    LoggerFactory.getLogger(ChatCommand.class).info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah0E + " | Faction : 0"));
+                    LoggerFactory.getLogger(ChatCommand.class)
+                        .info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah0E + " | Faction : 0"));
                 }
             } else if (player.battlegroundBetA > 0) {
                 html += "You have bet : " + Kinah0A + " kinah for the asmodians.<br><br>";
                 if (winner.equals("Asmodians")) {
                     html += "" + winner + " win, so you have earned : " + Kinah1A + " kinah !";
                     inventory.increaseKinah(Kinah2A);
-                    LoggerFactory.getLogger(ChatCommand.class).info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah2A + " | Faction : a"));
+                    LoggerFactory.getLogger(ChatCommand.class)
+                        .info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah2A + " | Faction : a"));
                 } else if (winner.equals("Elyos")) {
                     html += "" + winner + " win, so you have lost : " + Kinah0A + " kinah !";
                 } else if (winner.equals("The two factions")) {
                     html += "" + winner + " win, so you have recovered your bet : " + Kinah0A + " kinah !";
                     inventory.increaseKinah(Kinah0A);
-                    LoggerFactory.getLogger(ChatCommand.class).info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah0A + " | Faction : 0"));
+                    LoggerFactory.getLogger(ChatCommand.class)
+                        .info(String.format("[BET] - Player : " + player.getName() + " | Get : " + Kinah0A + " | Faction : 0"));
                 }
             }
         }
@@ -531,7 +543,8 @@ public class SurveyFactory {
         html += "       <title>\n";
         html += "           <![CDATA[\n";
         html += "<br><br>";
-        html += "<font size='+2' style='font-weight: bold;'>Current winner : </font><font color='" + winnerColor + "' size='+2' style='font-weight: bold;'>" + winner + "</font>";
+        html += "<font size='+2' style='font-weight: bold;'>Current winner : </font><font color='" + winnerColor
+            + "' size='+2' style='font-weight: bold;'>" + winner + "</font>";
         html += "           ]]>\n";
         html += "       </title>\n";
         html += "       <select>\n";
@@ -551,8 +564,8 @@ public class SurveyFactory {
             html += "<tr><td><center>Pos.</center></td><td><center>Name</center></td><td><center>&nbsp;Points&nbsp;</center></td><td><center>&nbsp;&nbsp;Kills&nbsp;&nbsp;</center></td><td><center>&nbsp;&nbsp;Flags&nbsp;&nbsp;</center></td>";
             counter = 1;
             for (Player e : elyos) {
-                html += "<tr><td>" + counter + ". </td><td>" + e.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + e.battlegroundSessionPoints + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionKills
-                        + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionFlags + "</td></tr>";
+                html += "<tr><td>" + counter + ". </td><td>" + e.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + e.battlegroundSessionPoints
+                    + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionKills + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionFlags + "</td></tr>";
                 counter++;
             }
             html += "</table>";
@@ -565,8 +578,8 @@ public class SurveyFactory {
             html += "<tr><td><center>Pos.</center></td><td><center>Name</center></td><td><center>&nbsp;Points&nbsp;</center></td><td><center>&nbsp;&nbsp;Kills&nbsp;&nbsp;</center></td><td><center>&nbsp;&nbsp;Deaths&nbsp;&nbsp;</center></td>";
             counter = 1;
             for (Player e : elyos) {
-                html += "<tr><td>" + counter + ". </td><td>" + e.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + e.battlegroundSessionPoints + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionKills
-                        + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionDeaths + "</td></tr>";
+                html += "<tr><td>" + counter + ". </td><td>" + e.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + e.battlegroundSessionPoints
+                    + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionKills + " &nbsp;</td><td>&nbsp; " + e.battlegroundSessionDeaths + "</td></tr>";
                 counter++;
             }
             html += "</table>";
@@ -589,8 +602,8 @@ public class SurveyFactory {
             html += "<tr><td><center>Pos.</center></td><td><center>Name</center></td><td><center>&nbsp;Points&nbsp;</center></td><td><center>&nbsp;&nbsp;Kills&nbsp;&nbsp;</center></td><td><center>&nbsp;&nbsp;Flags&nbsp;&nbsp;</center></td>";
             counter = 1;
             for (Player a : asmos) {
-                html += "<tr><td>" + counter + ". </td><td>" + a.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + a.battlegroundSessionPoints + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionKills
-                        + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionFlags + "</td></tr>";
+                html += "<tr><td>" + counter + ". </td><td>" + a.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + a.battlegroundSessionPoints
+                    + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionKills + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionFlags + "</td></tr>";
                 counter++;
             }
             html += "</table>";
@@ -603,8 +616,8 @@ public class SurveyFactory {
             html += "<tr><td><center>Pos.</center></td><td><center>Name</center></td><td><center>Points</center></td><td><center>Kills</center></td><td><center>Deaths</center></td>";
             counter = 1;
             for (Player a : asmos) {
-                html += "<tr><td>" + counter + ". </td><td>" + a.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + a.battlegroundSessionPoints + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionKills
-                        + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionDeaths + "</td></tr>";
+                html += "<tr><td>" + counter + ". </td><td>" + a.getName() + "&nbsp;&nbsp;</td><td>&nbsp; " + a.battlegroundSessionPoints
+                    + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionKills + " &nbsp;</td><td>&nbsp; " + a.battlegroundSessionDeaths + "</td></tr>";
                 counter++;
             }
             html += "</table>";

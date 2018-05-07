@@ -29,12 +29,12 @@
  */
 package com.aionemu.commons.configuration.transformers;
 
-import com.aionemu.commons.configuration.PropertyTransformer;
-import com.aionemu.commons.configuration.TransformationException;
-
 import java.lang.reflect.Field;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+
+import com.aionemu.commons.configuration.PropertyTransformer;
+import com.aionemu.commons.configuration.TransformationException;
 
 /**
  * Thransforms string to InetSocketAddress. InetSocketAddress can be represented
@@ -57,10 +57,13 @@ public class InetSocketAddressTransformer implements PropertyTransformer<InetSoc
     /**
      * Transforms string to InetSocketAddress
      *
-     * @param value value that will be transformed
-     * @param field value will be assigned to this field
+     * @param value
+     *            value that will be transformed
+     * @param field
+     *            value will be assigned to this field
      * @return InetSocketAddress that represetns value
-     * @throws TransformationException if somehting went wrong
+     * @throws TransformationException
+     *             if somehting went wrong
      */
     @Override
     public InetSocketAddress transform(String value, Field field) throws TransformationException {

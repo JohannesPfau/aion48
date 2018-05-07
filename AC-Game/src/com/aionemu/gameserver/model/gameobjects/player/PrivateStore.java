@@ -49,7 +49,7 @@ public class PrivateStore {
      */
     public PrivateStore(Player owner) {
         this.owner = owner;
-        this.items = new LinkedHashMap<Integer, TradePSItem>();
+        this.items = new LinkedHashMap<>();
     }
 
     /**
@@ -87,7 +87,7 @@ public class PrivateStore {
      */
     public void removeItem(int itemObjId) {
         if (items.containsKey(itemObjId)) {
-            LinkedHashMap<Integer, TradePSItem> newItems = new LinkedHashMap<Integer, TradePSItem>();
+            LinkedHashMap<Integer, TradePSItem> newItems = new LinkedHashMap<>();
             for (int itemObjIds : items.keySet()) {
                 if (itemObjId != itemObjIds) {
                     newItems.put(itemObjIds, items.get(itemObjIds));
@@ -98,14 +98,16 @@ public class PrivateStore {
     }
 
     /**
-     * @param itemId return tradeItem
+     * @param itemId
+     *            return tradeItem
      */
     public TradePSItem getTradeItemByObjId(int itemObjId) {
         return items.get(itemObjId);
     }
 
     /**
-     * @param storeMessage the storeMessage to set
+     * @param storeMessage
+     *            the storeMessage to set
      */
     public void setStoreMessage(String storeMessage) {
         this.storeMessage = storeMessage;

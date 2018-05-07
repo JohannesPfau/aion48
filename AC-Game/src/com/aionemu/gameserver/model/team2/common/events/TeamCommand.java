@@ -29,9 +29,9 @@
  */
 package com.aionemu.gameserver.model.team2.common.events;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import com.google.common.base.Preconditions;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -57,10 +57,11 @@ public enum TeamCommand {
     ALLIANCE_CHANGE_GROUP(27),
     LEAGUE_LEAVE(29),
     LEAGUE_EXPEL(30);
+
     private static TIntObjectHashMap<TeamCommand> teamCommands;
 
     static {
-        teamCommands = new TIntObjectHashMap<TeamCommand>();
+        teamCommands = new TIntObjectHashMap<>();
         for (TeamCommand eventCode : values()) {
             teamCommands.put(eventCode.getCodeId(), eventCode);
         }

@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -44,20 +42,20 @@ import com.aionemu.gameserver.model.templates.item.ArmorType;
 import com.aionemu.gameserver.model.templates.item.ItemCategory;
 import com.aionemu.gameserver.model.templates.item.ItemEnchantTable;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author Alcapwnd
  * @Reworked Kill3r
- *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "enchant_tables")
 public class ItemEnchantTableData {
 
-	@XmlElement(name = "enchant_table", required = true)
+    @XmlElement(name = "enchant_table", required = true)
     protected List<ItemEnchantTable> enchantTables;
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @XmlTransient
     private TIntObjectHashMap<ItemEnchantTable> enchants = new TIntObjectHashMap();
 
@@ -72,51 +70,51 @@ public class ItemEnchantTableData {
     }
 
     public ItemEnchantTable getTableWeapon(ItemCategory cType) {
-    	for (ItemEnchantTable it : this.enchantTables){
-    		if (it.getType().equalsIgnoreCase(cType.toString())) {
-    			return it;
-    		} 
-    		
-    	}
-    	return null;
+        for (ItemEnchantTable it : this.enchantTables) {
+            if (it.getType().equalsIgnoreCase(cType.toString())) {
+                return it;
+            }
+
+        }
+        return null;
     }
-    
+
     public ItemEnchantTable getTableArmor(ArmorType aType, ItemCategory cType) {
-    	for (ItemEnchantTable it : this.enchantTables){
-    		if (it.getPart() == null)
-    			continue;
-    		else if (aType == ArmorType.NO_ARMOR) 
-    			continue;
+        for (ItemEnchantTable it : this.enchantTables) {
+            if (it.getPart() == null)
+                continue;
+            else if (aType == ArmorType.NO_ARMOR)
+                continue;
             else if (cType == ItemCategory.SHARD)
                 continue;
-    		if (it.getType().equalsIgnoreCase(aType.toString()) && it.getPart().equalsIgnoreCase(cType.toString())) {
-    			return it;
-    		} 
-    		
-    	}
-    	return null;
+            if (it.getType().equalsIgnoreCase(aType.toString()) && it.getPart().equalsIgnoreCase(cType.toString())) {
+                return it;
+            }
+
+        }
+        return null;
     }
-    
+
     public ItemEnchantTable getTablePlume() {
-    	for (ItemEnchantTable it : this.enchantTables){
-    		if (it.getType() != "PLUME") {
-    			continue;
-    		}
-    		return it;
-    		
-    	}
-    	return null;
+        for (ItemEnchantTable it : this.enchantTables) {
+            if (it.getType() != "PLUME") {
+                continue;
+            }
+            return it;
+
+        }
+        return null;
     }
-    
+
     public ItemEnchantTable getTableAuthorize() {
-    	for (ItemEnchantTable it : this.enchantTables){
-    		if (it.getType() != "AUTHORIZE") {
-    			continue;
-    		}
-    		return it;
-    		
-    	}
-    	return null;
+        for (ItemEnchantTable it : this.enchantTables) {
+            if (it.getType() != "AUTHORIZE") {
+                continue;
+            }
+            return it;
+
+        }
+        return null;
     }
 
     public int size() {

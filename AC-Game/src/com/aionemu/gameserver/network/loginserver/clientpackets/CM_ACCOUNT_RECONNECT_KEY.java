@@ -35,8 +35,6 @@ import com.aionemu.gameserver.network.loginserver.LsClientPacket;
 /**
  * In this packet LoginServer is sending response for SM_ACCOUNT_RECONNECT_KEY
  * with account name and reconnectionKey.
- *
-
  */
 public class CM_ACCOUNT_RECONNECT_KEY extends LsClientPacket {
 

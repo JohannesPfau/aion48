@@ -33,7 +33,15 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AttackIntention;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.event.AIEventType;
-import com.aionemu.gameserver.ai2.handler.*;
+import com.aionemu.gameserver.ai2.handler.AggroEventHandler;
+import com.aionemu.gameserver.ai2.handler.AttackEventHandler;
+import com.aionemu.gameserver.ai2.handler.CreatureEventHandler;
+import com.aionemu.gameserver.ai2.handler.DiedEventHandler;
+import com.aionemu.gameserver.ai2.handler.MoveEventHandler;
+import com.aionemu.gameserver.ai2.handler.ReturningEventHandler;
+import com.aionemu.gameserver.ai2.handler.TalkEventHandler;
+import com.aionemu.gameserver.ai2.handler.TargetEventHandler;
+import com.aionemu.gameserver.ai2.handler.ThinkEventHandler;
 import com.aionemu.gameserver.ai2.manager.SkillAttackManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -146,12 +154,9 @@ public class GeneralNpcAI2 extends NpcAI2 {
 
         switch (eventType) {
             case CREATURE_MOVED:
-                return canHandle
-                        || DataManager.NPC_SHOUT_DATA.hasAnyShout(getOwner().getWorldId(), getOwner().getNpcId(), ShoutEventType.SEE);
+                return canHandle || DataManager.NPC_SHOUT_DATA.hasAnyShout(getOwner().getWorldId(), getOwner().getNpcId(), ShoutEventType.SEE);
             case CREATURE_NEEDS_SUPPORT:
-                return canHandle
-                        && isNonFightingState()
-                        && DataManager.TRIBE_RELATIONS_DATA.hasSupportRelations(getOwner().getTribe());
+                return canHandle && isNonFightingState() && DataManager.TRIBE_RELATIONS_DATA.hasSupportRelations(getOwner().getTribe());
         }
         return canHandle;
     }

@@ -29,9 +29,9 @@
  */
 package quest.daevation;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -56,7 +56,7 @@ public class _1990ASagesGift extends QuestHandler {
 
     @Override
     public void register() {
-        int[] mobs = {256617, 253721, 253720, 254514, 254513};
+        int[] mobs = { 256617, 253721, 253720, 254514, 254513 };
         qe.registerQuestNpc(203771).addOnQuestStart(questId);
         qe.registerQuestNpc(203771).addOnTalkEvent(questId);
         for (int mob : mobs) {

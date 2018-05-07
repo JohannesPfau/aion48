@@ -86,6 +86,7 @@ public class CubeExpandService {
             final int price = getPriceByLevel(expandTemplate, player.getNpcExpands() + 1);
 
             RequestResponseHandler responseHandler = new RequestResponseHandler(npc) {
+
                 @Override
                 public void acceptRequest(Creature requester, Player responder) {
                     if (price > player.getInventory().getKinah()) {
@@ -102,11 +103,10 @@ public class CubeExpandService {
                 }
             };
 
-            boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING,
-                    responseHandler);
+            boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, responseHandler);
             if (result) {
-                PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, 0, 0,
-                        String.valueOf(price)));
+                PacketSendUtility.sendPacket(player,
+                    new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, 0, 0, String.valueOf(price)));
             }
         } else {
             PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1300430));
@@ -181,7 +181,7 @@ public class CubeExpandService {
     private static int getCompletedCubeQuests(Player player) {
         int result = 0;
         QuestStateList qs = player.getQuestStateList();
-        int[] questIds = {1800, 1947, 2833, 2937, 1797};
+        int[] questIds = { 1800, 1947, 2833, 2937, 1797 };
         for (int q : questIds) {
             if (qs.getQuestState(q) != null && qs.getQuestState(q).getStatus().equals(QuestStatus.COMPLETE)) {
                 result++;

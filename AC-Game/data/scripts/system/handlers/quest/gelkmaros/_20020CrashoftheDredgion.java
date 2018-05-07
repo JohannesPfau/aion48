@@ -29,11 +29,11 @@
  */
 package quest.gelkmaros;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -46,7 +46,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _20020CrashoftheDredgion extends QuestHandler {
 
     private final static int questId = 20020;
-    private final static int[] npcs = {799225, 799226, 799239, 798703, 700977};
+    private final static int[] npcs = { 799225, 799226, 799239, 798703, 700977 };
 
     public _20020CrashoftheDredgion() {
         super(questId);

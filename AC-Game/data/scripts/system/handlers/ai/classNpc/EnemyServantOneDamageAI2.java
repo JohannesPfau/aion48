@@ -41,10 +41,8 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-
 /**
  * @author Alcapwnd
- *
  */
 @AIName("enemyservantonedmg")
 public class EnemyServantOneDamageAI2 extends NpcAI2 {
@@ -53,6 +51,7 @@ public class EnemyServantOneDamageAI2 extends NpcAI2 {
     protected void handleSpawned() {
         super.handleSpawned();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (getCreator() == null || getCreator().getTarget() == null) {
@@ -66,6 +65,7 @@ public class EnemyServantOneDamageAI2 extends NpcAI2 {
 
     private void attack() {
         Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 getOwner().getController().useSkill(16907, 1);
@@ -73,7 +73,7 @@ public class EnemyServantOneDamageAI2 extends NpcAI2 {
         }, 1000, 6000);
         getOwner().getController().addTask(TaskId.SKILL_USE, task);
     }
-    
+
     @Override
     public int modifyDamage(int damage) {
         return 1;

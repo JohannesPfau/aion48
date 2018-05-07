@@ -29,9 +29,9 @@
  */
 package quest.raksang;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -39,12 +39,11 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _28700_The_Prison_of_Death extends QuestHandler {
 
     private final static int questId = 28700;
-    private final static int[] mobs = {730453, 730454, 730455, 730456, 217392, 217425, 217451, 217764, 217647};
+    private final static int[] mobs = { 730453, 730454, 730455, 730456, 217392, 217425, 217451, 217764, 217647 };
 
     public _28700_The_Prison_of_Death() {
         super(questId);

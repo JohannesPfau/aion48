@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.model.siege;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.IActor;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
@@ -41,6 +39,8 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
 
+import javolution.util.FastMap;
+
 /**
  * Shields have material ID 11 in geo.
  *
@@ -48,7 +48,7 @@ import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
  */
 public class SiegeShield implements ZoneHandler {
 
-    FastMap<Integer, IActor> observed = new FastMap<Integer, IActor>();
+    FastMap<Integer, IActor> observed = new FastMap<>();
     private Spatial geometry;
     private int siegeLocationId;
     private boolean isEnabled = false;

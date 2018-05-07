@@ -54,7 +54,6 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * @author Ranastic
- 
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AuthorizeAction")
@@ -72,7 +71,7 @@ public class AuthorizeAction extends AbstractItemAction {
             return false;
         }
         if (targetItem.getItemTemplate().getAuthorize() >= 21) {
-        	//PacketSendUtility.sendMessage(player, "You cannot enchant higher than level 20");
+            //PacketSendUtility.sendMessage(player, "You cannot enchant higher than level 20");
             return false;
         }
         if (targetItem.getAuthorize() >= targetItem.getItemTemplate().getAuthorize()) {
@@ -83,57 +82,67 @@ public class AuthorizeAction extends AbstractItemAction {
 
     @Override
     public void act(final Player player, final Item parentItem, final Item targetItem) {
-        PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(), parentItem.getObjectId().intValue(), parentItem.getItemTemplate().getTemplateId(), 5000, 0, 0));
+        PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId().intValue(),
+            parentItem.getObjectId().intValue(), parentItem.getItemTemplate().getTemplateId(), 5000, 0, 0));
 
         final ItemUseObserver observer = new ItemUseObserver() {
+
             @Override
             public void abort() {
                 player.getController().cancelTask(TaskId.ITEM_USE);
                 player.getObserveController().removeObserver(this);
-                PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 3, 0));
+                PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
+                    parentItem.getItemTemplate().getTemplateId(), 0, 3, 0));
                 ItemPacketService.updateItemAfterInfoChange(player, targetItem);
                 PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_CANCEL(targetItem.getNameId()));
             }
         };
         player.getObserveController().attach(observer);
         player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (player.getInventory().decreaseByItemId(parentItem.getItemId(), 1L)) {
                     if (!AuthorizeAction.this.isSuccess()) {
-                        PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 2, 0));
+                        PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(),
+                            parentItem.getObjectId(), parentItem.getItemId(), 0, 2, 0));
                         targetItem.setAuthorize(0);
-                        if (targetItem.getItemTemplate().isPlume()){
-                            if (CustomConfig.DESTROY_PLUME_WHEN_FAIL){
-                                if(targetItem.isEquipped()){
-                                    player.getEquipment().unEquipItem(targetItem.getObjectId(), player.getEquipment().getEquipedPlume().getEquipmentSlot());
+                        if (targetItem.getItemTemplate().isPlume()) {
+                            if (CustomConfig.DESTROY_PLUME_WHEN_FAIL) {
+                                if (targetItem.isEquipped()) {
+                                    player.getEquipment().unEquipItem(targetItem.getObjectId(),
+                                        player.getEquipment().getEquipedPlume().getEquipmentSlot());
                                     player.getInventory().decreaseByObjectId(targetItem.getObjectId(), targetItem.getItemCount());
-                                }else{
+                                } else {
                                     player.getInventory().decreaseByObjectId(targetItem.getObjectId(), targetItem.getItemCount());
                                 }
                             }
                         }
-                        if (targetItem.getItemTemplate().isPlume()){
+                        if (targetItem.getItemTemplate().isPlume()) {
                             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STR_MSG_ITEM_AUTHORIZE_FAILED_TSHIRT(targetItem.getNameId()));
-                        }else{
+                        } else {
                             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_FAILED(targetItem.getNameId()));
                         }
-                    }else{
-                        PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
+                    } else {
+                        PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), player.getObjectId(),
+                            parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
                         targetItem.setAuthorize(targetItem.getAuthorize() + 1);
-                        PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_SUCCEEDED(targetItem.getNameId(), targetItem.getAuthorize()));
-        				//announce by Dev. Goong_ADM
-						if ((CustomConfig.ENABLE_ENCHANT_ANNOUNCE)) {
-							Iterator<Player> iter = World.getInstance().getPlayersIterator();
-							while (iter.hasNext()) {
-								Player player2 = iter.next();								
-								if (targetItem.getAuthorize() >= 5) {
-									if (player.getAccessLevel() < 5) {
-										PacketSendUtility.sendBrightYellowMessageOnCenter(player2, String.format("%s has succeeded in tempering (%s) to level %s.", player.getName(),targetItem.getItemTemplate().getName(), targetItem.getAuthorize()));
-									}	
-								}
-							}
-						}
+                        PacketSendUtility.sendPacket(player,
+                            SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_SUCCEEDED(targetItem.getNameId(), targetItem.getAuthorize()));
+                        //announce by Dev. Goong_ADM
+                        if ((CustomConfig.ENABLE_ENCHANT_ANNOUNCE)) {
+                            Iterator<Player> iter = World.getInstance().getPlayersIterator();
+                            while (iter.hasNext()) {
+                                Player player2 = iter.next();
+                                if (targetItem.getAuthorize() >= 5) {
+                                    if (player.getAccessLevel() < 5) {
+                                        PacketSendUtility.sendBrightYellowMessageOnCenter(player2,
+                                            String.format("%s has succeeded in tempering (%s) to level %s.", player.getName(),
+                                                targetItem.getItemTemplate().getName(), targetItem.getAuthorize()));
+                                    }
+                                }
+                            }
+                        }
                     }
                     PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, targetItem));
                     player.getObserveController().removeObserver(observer);
@@ -151,21 +160,19 @@ public class AuthorizeAction extends AbstractItemAction {
         }, 5000L));
     }
 
-    public boolean isSuccess() 
-    {
+    public boolean isSuccess() {
         return Rnd.get(0, 100) < calcTemperingRate();
     }
-    
+
     /*
      * New Formula which makes accurate tolerance for FaileRate calculation.
      */
-    private float calcTemperingRate() 
-    {
-    	float base = 5;
-    	float staticRate = 40;
-    	float failRate = Rnd.get(0, 2);
-    	float resultRate = RateConfig.TEMPERING_RATE > 10 ? 10 : RateConfig.TEMPERING_RATE;
-    	resultRate = (resultRate * base) - failRate;
-    	return (resultRate + staticRate);
+    private float calcTemperingRate() {
+        float base = 5;
+        float staticRate = 40;
+        float failRate = Rnd.get(0, 2);
+        float resultRate = RateConfig.TEMPERING_RATE > 10 ? 10 : RateConfig.TEMPERING_RATE;
+        resultRate = (resultRate * base) - failRate;
+        return (resultRate + staticRate);
     }
 }

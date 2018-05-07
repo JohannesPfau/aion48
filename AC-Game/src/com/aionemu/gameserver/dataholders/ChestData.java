@@ -29,9 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.THashMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -42,6 +39,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.chest.ChestTemplate;
+
+import gnu.trove.map.hash.THashMap;
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author Wakizashi
@@ -55,9 +55,9 @@ public class ChestData {
     /**
      * A map containing all npc templates
      */
-    private TIntObjectHashMap<ChestTemplate> chestData = new TIntObjectHashMap<ChestTemplate>();
-    private TIntObjectHashMap<ArrayList<ChestTemplate>> instancesMap = new TIntObjectHashMap<ArrayList<ChestTemplate>>();
-    private THashMap<String, ChestTemplate> namedChests = new THashMap<String, ChestTemplate>();
+    private TIntObjectHashMap<ChestTemplate> chestData = new TIntObjectHashMap<>();
+    private TIntObjectHashMap<ArrayList<ChestTemplate>> instancesMap = new TIntObjectHashMap<>();
+    private THashMap<String, ChestTemplate> namedChests = new THashMap<>();
 
     /**
      * - Inititialize all maps for subsequent use - Don't nullify initial chest
@@ -99,7 +99,8 @@ public class ChestData {
     }
 
     /**
-     * @param chests the chests to set
+     * @param chests
+     *            the chests to set
      */
     public void setChests(List<ChestTemplate> chests) {
         this.chests = chests;

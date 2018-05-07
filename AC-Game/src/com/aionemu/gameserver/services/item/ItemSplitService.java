@@ -55,8 +55,8 @@ public class ItemSplitService {
     /**
      * Move part of stack into different slot
      */
-    public static final void splitItem(Player player, int itemObjId, int destinationObjId, long splitAmount, short slotNum,
-                                       byte sourceStorageType, byte destinationStorageType) {
+    public static final void splitItem(Player player, int itemObjId, int destinationObjId, long splitAmount, short slotNum, byte sourceStorageType,
+        byte destinationStorageType) {
         if (splitAmount <= 0) {
             return;
         }
@@ -70,7 +70,7 @@ public class ItemSplitService {
         IStorage destStorage = player.getStorage(destinationStorageType);
         if (sourceStorage == null || destStorage == null) {
             log.warn(String.format("storage null playerName sourceStorage destStorage %s %d %d", player.getName(), sourceStorageType,
-                    destinationStorageType));
+                destinationStorageType));
             return;
         }
         Item sourceItem = sourceStorage.getItemByObjId(itemObjId);
@@ -84,9 +84,8 @@ public class ItemSplitService {
             }
         }
 
-        if (sourceStorageType != destinationStorageType
-                && (ItemRestrictionService.isItemRestrictedTo(player, sourceItem, destinationStorageType) || ItemRestrictionService
-                .isItemRestrictedFrom(player, sourceItem, sourceStorageType))) {
+        if (sourceStorageType != destinationStorageType && (ItemRestrictionService.isItemRestrictedTo(player, sourceItem, destinationStorageType)
+            || ItemRestrictionService.isItemRestrictedFrom(player, sourceItem, sourceStorageType))) {
             sendStorageUpdatePacket(player, StorageType.getStorageTypeById(sourceStorageType), sourceItem);
             return;
         }
@@ -110,7 +109,7 @@ public class ItemSplitService {
                 newItem.setEquipmentSlot(slotNum);
             }
             sourceStorage.decreaseItemCount(sourceItem, splitAmount,
-                    sourceStorageType == destinationStorageType ? ItemUpdateType.DEC_ITEM_SPLIT : ItemUpdateType.DEC_ITEM_SPLIT_MOVE);
+                sourceStorageType == destinationStorageType ? ItemUpdateType.DEC_ITEM_SPLIT : ItemUpdateType.DEC_ITEM_SPLIT_MOVE);
             PacketSendUtility.sendPacket(player, SM_CUBE_UPDATE.cubeSize(sourceStorage.getStorageType(), player));
             if (destStorage.add(newItem) == null) {
                 // if item was not added - we can release its id
@@ -132,9 +131,9 @@ public class ItemSplitService {
             long freeCount = targetItem.getFreeCount();
             count = count > freeCount ? freeCount : count;
             long leftCount = destStorage.increaseItemCount(targetItem, count,
-                    sourceStorage.getStorageType() == destStorage.getStorageType() ? ItemUpdateType.INC_ITEM_MERGE : ItemUpdateType.INC_ITEM_COLLECT);
+                sourceStorage.getStorageType() == destStorage.getStorageType() ? ItemUpdateType.INC_ITEM_MERGE : ItemUpdateType.INC_ITEM_COLLECT);
             sourceStorage.decreaseItemCount(sourceItem, count - leftCount,
-                    sourceStorage.getStorageType() == destStorage.getStorageType() ? ItemUpdateType.DEC_ITEM_SPLIT : ItemUpdateType.DEC_ITEM_SPLIT_MOVE);
+                sourceStorage.getStorageType() == destStorage.getStorageType() ? ItemUpdateType.DEC_ITEM_SPLIT : ItemUpdateType.DEC_ITEM_SPLIT_MOVE);
         }
 
     }

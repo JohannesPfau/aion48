@@ -51,8 +51,6 @@ import com.aionemu.gameserver.services.TownService;
 
 /**
  * This packet is displaying visible npc/monsters.
- *
-
  */
 public class SM_NPC_INFO extends AionServerPacket {
 
@@ -72,7 +70,8 @@ public class SM_NPC_INFO extends AionServerPacket {
      * Constructs new <tt>SM_NPC_INFO </tt> packet
      *
      * @param player
-     * @param kisk   - the visible npc.
+     * @param kisk
+     *            - the visible npc.
      */
     public SM_NPC_INFO(Npc npc, Player player) {
         this._npc = npc;
@@ -94,9 +93,9 @@ public class SM_NPC_INFO extends AionServerPacket {
         npcTypeId = !player.isEnemy(owner) ? CreatureType.SUPPORT.getId() : CreatureType.ATTACKABLE.getId();
         if (owner != null) {
             creatorId = owner.getObjectId();
-            if (player.isInFFA()){
+            if (player.isInFFA()) {
                 masterName = "Summon Creature";
-            }else{
+            } else {
                 masterName = owner.getName();
             }
             speed = owner.getGameStats().getMovementSpeedFloat();
@@ -106,7 +105,8 @@ public class SM_NPC_INFO extends AionServerPacket {
     }
 
     /**
-     * @param add mob
+     * @param add
+     *            mob
      */
     public SM_NPC_INFO(Npc npc, String master) {
         this._npc = npc;
@@ -121,7 +121,7 @@ public class SM_NPC_INFO extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeF(_npc.getX());// x
         writeF(_npc.getY());// y
         writeF(_npc.getZ());// z

@@ -29,7 +29,6 @@
  */
 package com.aionemu.gameserver.controllers.effect;
 
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
@@ -37,8 +36,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import javolution.util.FastMap;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -57,6 +54,8 @@ import com.aionemu.gameserver.taskmanager.tasks.PacketBroadcaster.BroadcastMode;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Collections2;
+
+import javolution.util.FastMap;
 
 /**
  * @author ATracer modified by Wakizashi, Sippolo, Cheatkiller
@@ -90,7 +89,8 @@ public class EffectController {
     }
 
     /**
-     * @param isUnderShield the isUnderShield to set
+     * @param isUnderShield
+     *            the isUnderShield to set
      */
     public void setUnderShield(boolean isUnderShield) {
         this.isUnderShield = isUnderShield;
@@ -160,7 +160,7 @@ public class EffectController {
 
                     // check skill level (when stack level same)
                     if (existingEffect.getSkillStackLvl() == nextEffect.getSkillStackLvl()
-                            && existingEffect.getSkillLevel() > nextEffect.getSkillLevel()) {
+                        && existingEffect.getSkillLevel() > nextEffect.getSkillLevel()) {
                         return;
                     }
                     existingEffect.endEffect();
@@ -422,7 +422,8 @@ public class EffectController {
             }
 
             //check for targetslot, effects with target slot higher or equal to 2 cant be removed (ex. skillId: 11885)
-            if (tragetSlot != SkillTargetSlot.BUFF && (tragetSlot != SkillTargetSlot.DEBUFF && dispelCat != DispelCategoryType.ALL) || effect.getTargetSlotLevel() >= 2) {
+            if (tragetSlot != SkillTargetSlot.BUFF && (tragetSlot != SkillTargetSlot.DEBUFF && dispelCat != DispelCategoryType.ALL)
+                || effect.getTargetSlotLevel() >= 2) {
                 continue;
             }
 
@@ -439,7 +440,8 @@ public class EffectController {
         return number;
     }
 
-    public void removeEffectByDispelCat(DispelCategoryType dispelCat, SkillTargetSlot targetSlot, int count, int dispelLevel, int power, boolean itemTriggered) {
+    public void removeEffectByDispelCat(DispelCategoryType dispelCat, SkillTargetSlot targetSlot, int count, int dispelLevel, int power,
+        boolean itemTriggered) {
         for (Effect effect : abnormalEffectMap.values()) {
             if (count == 0) {
                 break;
@@ -468,30 +470,25 @@ public class EffectController {
             boolean remove = false;
             switch (dispelCat) {
                 case ALL: //DispelDebuffEffect
-                    if ((effect.getDispelCategory() == DispelCategoryType.ALL
-                            || effect.getDispelCategory() == DispelCategoryType.DEBUFF_MENTAL
-                            || effect.getDispelCategory() == DispelCategoryType.DEBUFF_PHYSICAL)
-                            && effect.getReqDispelLevel() <= dispelLevel) {
+                    if ((effect.getDispelCategory() == DispelCategoryType.ALL || effect.getDispelCategory() == DispelCategoryType.DEBUFF_MENTAL
+                        || effect.getDispelCategory() == DispelCategoryType.DEBUFF_PHYSICAL) && effect.getReqDispelLevel() <= dispelLevel) {
                         remove = true;
                     }
                     break;
                 case DEBUFF_MENTAL: //DispelDebuffMentalEffect
-                    if ((effect.getDispelCategory() == DispelCategoryType.ALL
-                            || effect.getDispelCategory() == DispelCategoryType.DEBUFF_MENTAL)
-                            && effect.getReqDispelLevel() <= dispelLevel) {
+                    if ((effect.getDispelCategory() == DispelCategoryType.ALL || effect.getDispelCategory() == DispelCategoryType.DEBUFF_MENTAL)
+                        && effect.getReqDispelLevel() <= dispelLevel) {
                         remove = true;
                     }
                     break;
                 case DEBUFF_PHYSICAL: //DispelDebuffPhysicalEffect
-                    if ((effect.getDispelCategory() == DispelCategoryType.ALL
-                            || effect.getDispelCategory() == DispelCategoryType.DEBUFF_PHYSICAL)
-                            && effect.getReqDispelLevel() <= dispelLevel) {
+                    if ((effect.getDispelCategory() == DispelCategoryType.ALL || effect.getDispelCategory() == DispelCategoryType.DEBUFF_PHYSICAL)
+                        && effect.getReqDispelLevel() <= dispelLevel) {
                         remove = true;
                     }
                     break;
                 case BUFF: //DispelBuffEffect or DispelBuffCounterAtkEffect
-                    if (effect.getDispelCategory() == DispelCategoryType.BUFF
-                            && effect.getReqDispelLevel() <= dispelLevel) {
+                    if (effect.getDispelCategory() == DispelCategoryType.BUFF && effect.getReqDispelLevel() <= dispelLevel) {
                         remove = true;
                     }
                     break;
@@ -542,7 +539,8 @@ public class EffectController {
                 continue;
             }
 
-            if (tragetSlot != SkillTargetSlot.BUFF && (tragetSlot != SkillTargetSlot.DEBUFF && dispelCat != DispelCategoryType.ALL) || effect.getTargetSlotLevel() >= 2) {
+            if (tragetSlot != SkillTargetSlot.BUFF && (tragetSlot != SkillTargetSlot.DEBUFF && dispelCat != DispelCategoryType.ALL)
+                || effect.getTargetSlotLevel() >= 2) {
                 continue;
             }
 
@@ -733,7 +731,7 @@ public class EffectController {
      * @return copy of anbornals list
      */
     public List<Effect> getAbnormalEffects() {
-        List<Effect> effects = new ArrayList<Effect>();
+        List<Effect> effects = new ArrayList<>();
         Iterator<Effect> iterator = iterator();
         while (iterator.hasNext()) {
             Effect effect = iterator.next();
@@ -749,6 +747,7 @@ public class EffectController {
      */
     public Collection<Effect> getAbnormalEffectsToShow() {
         return Collections2.filter(abnormalEffectMap.values(), new Predicate<Effect>() {
+
             @Override
             public boolean apply(Effect effect) {
                 return effect.getSkillTemplate().getTargetSlot() != SkillTargetSlot.NOSHOW;
@@ -758,15 +757,17 @@ public class EffectController {
 
     public Collection<Effect> getChantEffects() {
         return Collections2.filter(abnormalEffectMap.values(), new Predicate<Effect>() {
+
             @Override
             public boolean apply(Effect effect) {
                 return effect.isChant();
             }
         });
     }
-    
+
     public Collection<Effect> getBuffEffects() {
         return Collections2.filter(abnormalEffectMap.values(), new Predicate<Effect>() {
+
             @Override
             public boolean apply(Effect effect) {
                 return effect.isBuff();
@@ -863,8 +864,7 @@ public class EffectController {
             Iterator<Effect> iter2 = effects.iterator();
             while (iter2.hasNext()) {
                 Effect nextEffect = iter2.next();
-                if (nextEffect.getSkillTemplate().getCooldownId() == rDelay
-                        && nextEffect.getTargetSlot() == effect.getTargetSlot()) {
+                if (nextEffect.getSkillTemplate().getCooldownId() == rDelay && nextEffect.getTargetSlot() == effect.getTargetSlot()) {
                     i++;
                     if (toRemove == null) {
                         toRemove = nextEffect;
@@ -922,8 +922,7 @@ public class EffectController {
     private boolean priorityStigmaEffect(Effect nextEffect) {
         for (Effect effect : abnormalEffectMap.values()) {
             if (effect.getSkillTemplate().getStigmaType().getId() < nextEffect.getSkillTemplate().getStigmaType().getId()
-                    && effect.getTargetSlot() == nextEffect.getTargetSlot()
-                    && effect.getTargetSlotLevel() == nextEffect.getTargetSlotLevel()) {
+                && effect.getTargetSlot() == nextEffect.getTargetSlot() && effect.getTargetSlotLevel() == nextEffect.getTargetSlotLevel()) {
                 for (EffectTemplate et : effect.getEffectTemplates()) {
                     if (et.getEffectid() == 0) {
                         continue;

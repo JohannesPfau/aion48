@@ -9,11 +9,12 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
  * Created by Kill3r
  */
 public class Skin extends PlayerCommand {
-    public Skin(){
+
+    public Skin() {
         super("skin");
     }
 
-    public void execute(Player player, String...params){
+    public void execute(Player player, String... params) {
         int skin = 0;
         player.getTransformModel().setModelId(skin);
         PacketSendUtility.broadcastPacketAndReceive(player, new SM_TRANSFORM(player, true));

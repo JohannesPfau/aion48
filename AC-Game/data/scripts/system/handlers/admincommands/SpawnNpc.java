@@ -29,6 +29,8 @@
  */
 package admincommands;
 
+import java.io.IOException;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,8 +38,6 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-
-import java.io.IOException;
 
 /**
  * @author Luno
@@ -66,15 +66,15 @@ public class SpawnNpc extends AdminCommand {
 
         if (params.length == 2) {
             respawnTime = Integer.valueOf(params[1]);
-	        
+
         } else if (params.length == 6) {
             respawnTime = Integer.valueOf(params[1]);
-	        x = Float.valueOf(params[2]);
-	        y = Float.valueOf(params[3]);
-	        z = Float.valueOf(params[4]);
-	        heading = Byte.valueOf(params[5]);
+            x = Float.valueOf(params[2]);
+            y = Float.valueOf(params[3]);
+            z = Float.valueOf(params[4]);
+            heading = Byte.valueOf(params[5]);
         }
-        
+
         SpawnTemplate spawn = SpawnEngine.addNewSpawn(worldId, templateId, x, y, z, heading, respawnTime);
 
         if (spawn == null) {

@@ -29,11 +29,11 @@
  */
 package quest.morheim;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -46,7 +46,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _24023ABlazingRescue extends QuestHandler {
 
     private final static int questId = 24023;
-    private final static int[] npc_ids = {204317, 204408, 204372};
+    private final static int[] npc_ids = { 204317, 204408, 204372 };
 
     public _24023ABlazingRescue() {
         super(questId);
@@ -115,7 +115,7 @@ public class _24023ABlazingRescue extends QuestHandler {
                             }
                     }
                 }
-                break;
+                    break;
                 case 204408: {
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
@@ -149,7 +149,7 @@ public class _24023ABlazingRescue extends QuestHandler {
 
                     }
                 }
-                break;
+                    break;
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 204372) {

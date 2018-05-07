@@ -77,8 +77,7 @@ public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Predicate<Le
                 break;
             case EXPEL:
                 // TODO getLeaderName in team2
-                alliance.sendPacket(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_EXPELLED, league.getLeaderObject()
-                        .getLeader().getName()));
+                alliance.sendPacket(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_EXPELLED, league.getLeaderObject().getLeader().getName()));
                 checkDisband();
                 break;
             case DISBAND:
@@ -98,17 +97,18 @@ public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Predicate<Le
 
         PlayerAlliance leagueAlliance = member.getObject();
         leagueAlliance.applyOnMembers(new Predicate<Player>() {
+
             @Override
             public boolean apply(Player member) {
                 switch (reason) {
                     case LEAVE:
-                        PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_LEFT, alliance
-                                .getLeader().getName()));
+                        PacketSendUtility.sendPacket(member,
+                            new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_LEFT, alliance.getLeader().getName()));
                         break;
                     case EXPEL:
                         //TODO may be EXPEL message only to leader
-                        PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_EXPEL, alliance
-                                .getLeader().getName()));
+                        PacketSendUtility.sendPacket(member,
+                            new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_EXPEL, alliance.getLeader().getName()));
                         break;
                 }
                 return true;

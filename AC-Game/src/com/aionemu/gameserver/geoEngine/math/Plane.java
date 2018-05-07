@@ -42,8 +42,7 @@ import java.util.logging.Logger;
  */
 public class Plane implements Cloneable {
 
-    private static final Logger logger = Logger
-            .getLogger(Plane.class.getName());
+    private static final Logger logger = Logger.getLogger(Plane.class.getName());
 
     public static enum Side {
 
@@ -75,8 +74,10 @@ public class Plane implements Cloneable {
      * <code>Plane</code> object. The normal and constant values are set at
      * creation.
      *
-     * @param normal   the normal of the plane.
-     * @param constant the constant of the plane.
+     * @param normal
+     *            the normal of the plane.
+     * @param constant
+     *            the constant of the plane.
      */
     public Plane(Vector3f normal, float constant) {
         if (normal == null) {
@@ -90,7 +91,8 @@ public class Plane implements Cloneable {
     /**
      * <code>setNormal</code> sets the normal of the plane.
      *
-     * @param normal the new normal of the plane.
+     * @param normal
+     *            the new normal of the plane.
      */
     public void setNormal(Vector3f normal) {
         if (normal == null) {
@@ -103,7 +105,8 @@ public class Plane implements Cloneable {
     /**
      * <code>setNormal</code> sets the normal of the plane.
      *
-     * @param normal the new normal of the plane.
+     * @param normal
+     *            the new normal of the plane.
      */
     public void setNormal(float x, float y, float z) {
         if (normal == null) {
@@ -126,7 +129,8 @@ public class Plane implements Cloneable {
      * <code>setConstant</code> sets the constant value that helps define the
      * plane.
      *
-     * @param constant the new constant value.
+     * @param constant
+     *            the new constant value.
      */
     public void setConstant(float constant) {
         this.constant = constant;
@@ -142,8 +146,8 @@ public class Plane implements Cloneable {
     }
 
     public Vector3f getClosestPoint(Vector3f point, Vector3f store) {
-//        float t = constant - normal.dot(point);
-//        return store.set(normal).multLocal(t).addLocal(point);
+        //        float t = constant - normal.dot(point);
+        //        return store.set(normal).multLocal(t).addLocal(point);
         float t = (constant - normal.dot(point)) / normal.dot(normal);
         return store.set(normal).multLocal(t).addLocal(point);
     }
@@ -169,7 +173,8 @@ public class Plane implements Cloneable {
      * distance returned is negative, otherwise it is positive. If the point is
      * on the plane, it is zero.
      *
-     * @param point the point to check.
+     * @param point
+     *            the point to check.
      * @return the signed distance from the plane to a point.
      */
     public float pseudoDistance(Vector3f point) {
@@ -181,7 +186,8 @@ public class Plane implements Cloneable {
      * plane. The positive values returned are: NEGATIVE_SIDE, POSITIVE_SIDE and
      * NO_SIDE.
      *
-     * @param point the point to check.
+     * @param point
+     *            the point to check.
      * @return the side at which the point lies.
      */
     public Side whichSide(Vector3f point) {
@@ -207,7 +213,8 @@ public class Plane implements Cloneable {
     /**
      * Initialize this plane using the three points of the given triangle.
      *
-     * @param t the triangle
+     * @param t
+     *            the triangle
      */
     public void setPlanePoints(AbstractTriangle t) {
         setPlanePoints(t.get1(), t.get2(), t.get3());
@@ -227,14 +234,16 @@ public class Plane implements Cloneable {
     /**
      * Initialize the Plane using the given 3 points as coplanar.
      *
-     * @param v1 the first point
-     * @param v2 the second point
-     * @param v3 the third point
+     * @param v1
+     *            the first point
+     * @param v2
+     *            the second point
+     * @param v3
+     *            the third point
      */
     public void setPlanePoints(Vector3f v1, Vector3f v2, Vector3f v3) {
         normal.set(v2).subtractLocal(v1);
-        normal.crossLocal(v3.x - v1.x, v3.y - v1.y, v3.z - v1.z)
-                .normalizeLocal();
+        normal.crossLocal(v3.x - v1.x, v3.y - v1.y, v3.z - v1.z).normalizeLocal();
         constant = normal.dot(v1);
     }
 
@@ -249,8 +258,7 @@ public class Plane implements Cloneable {
      */
     @Override
     public String toString() {
-        return getClass().getSimpleName() + " [Normal: " + normal + " - Constant: "
-                + constant + "]";
+        return getClass().getSimpleName() + " [Normal: " + normal + " - Constant: " + constant + "]";
     }
 
     public Class<? extends Plane> getClassTag() {

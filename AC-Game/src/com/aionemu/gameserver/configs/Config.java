@@ -83,7 +83,6 @@ import com.aionemu.gameserver.utils.Util;
 
 /**
  * @author Nemesiss, SoulKeeper
-
  */
 public class Config {
 
@@ -123,11 +122,11 @@ public class Config {
             PropertiesUtils.overrideProperties(mainProps, myProps);
 
             ConfigurableProcessor.process(BrokerConfig.class, mainProps);
-            log.info("Loading: " + main + "/broker.properties");			
-            
+            log.info("Loading: " + main + "/broker.properties");
+
             ConfigurableProcessor.process(ReturnScrollsConfig.class, mainProps);
-            log.info("Loading: " + main + "/returnscrolls.properties");            
-			
+            log.info("Loading: " + main + "/returnscrolls.properties");
+
             ConfigurableProcessor.process(AIConfig.class, mainProps);
             log.info("Loading: " + main + "/ai.properties");
 
@@ -157,7 +156,7 @@ public class Config {
 
             ConfigurableProcessor.process(EventsConfig.class, mainProps);
             log.info("Loading: " + main + "/events.properties");
-            
+
             ConfigurableProcessor.process(EventSystem.class, mainProps);
             log.info("Loading: " + main + "/eventsystem.properties");
 
@@ -289,11 +288,11 @@ public class Config {
             PropertiesUtils.overrideProperties(mainProps, myProps);
 
             ConfigurableProcessor.process(BrokerConfig.class, mainProps);
-            log.info("Reload: " + main + "/broker.properties");				
-            
+            log.info("Reload: " + main + "/broker.properties");
+
             ConfigurableProcessor.process(ReturnScrollsConfig.class, mainProps);
-            log.info("Reload: " + main + "/returnscrolls.properties");	            
-			
+            log.info("Reload: " + main + "/returnscrolls.properties");
+
             ConfigurableProcessor.process(AIConfig.class, mainProps);
             log.info("Reload: " + main + "/ai.properties");
 
@@ -320,7 +319,7 @@ public class Config {
 
             ConfigurableProcessor.process(EventsConfig.class, mainProps);
             log.info("Reload: " + main + "/events.properties");
-            
+
             ConfigurableProcessor.process(EventSystem.class, mainProps);
             log.info("Reload: " + main + "/eventsystem.properties");
 

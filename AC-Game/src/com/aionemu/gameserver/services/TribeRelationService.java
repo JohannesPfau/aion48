@@ -39,50 +39,49 @@ import com.aionemu.gameserver.model.templates.tribe.Tribe;
 
 /**
  * @author Cheatkiller
- (Aion-Core)
+ *         (Aion-Core)
  */
 public class TribeRelationService {
 
-    public static boolean isAggressive(Creature creature1, Creature creature2) 
-    {
-    	Tribe tribe1 = DataManager.TRIBE_RELATIONS_DATA.getTribeData(creature1.getTribe());
-    	Tribe tribe2 = DataManager.TRIBE_RELATIONS_DATA.getTribeData(creature2.getTribe());
-    	
-    	if (tribe1.getAggro().isEmpty() && tribe2.getAggro().isEmpty()) {
-	        switch (creature1.getBaseTribe()) {
-	            case GUARD_DARK: // Asmo Guard
-	                switch (creature2.getBaseTribe()) {
-	                    case PC:
-	                    case GUARD:
-	                    case GENERAL:
-	                    case GUARD_DRAGON:
-	                        return true;
-	                }
-	                break;
-	            case GUARD: // Elyos Guard
-	                switch (creature2.getBaseTribe()) {
-	                    case PC_DARK:
-	                    case GUARD_DARK:
-	                    case GENERAL_DARK:
-	                    case GUARD_DRAGON:
-	                        return true;
-	
-	                }
-	                break;
-	            case GUARD_DRAGON: // Balaur
-	                switch (creature2.getBaseTribe()) {
-	                    case PC_DARK:
-	                    case PC:
-	                    case GUARD:
-	                    case GUARD_DARK:
-	                    case GENERAL_DARK:
-	                    case GENERAL:
-	                        return true;
-	
-	                }
-	                break;
-	        }
-    	}        
+    public static boolean isAggressive(Creature creature1, Creature creature2) {
+        Tribe tribe1 = DataManager.TRIBE_RELATIONS_DATA.getTribeData(creature1.getTribe());
+        Tribe tribe2 = DataManager.TRIBE_RELATIONS_DATA.getTribeData(creature2.getTribe());
+
+        if (tribe1.getAggro().isEmpty() && tribe2.getAggro().isEmpty()) {
+            switch (creature1.getBaseTribe()) {
+                case GUARD_DARK: // Asmo Guard
+                    switch (creature2.getBaseTribe()) {
+                        case PC:
+                        case GUARD:
+                        case GENERAL:
+                        case GUARD_DRAGON:
+                            return true;
+                    }
+                    break;
+                case GUARD: // Elyos Guard
+                    switch (creature2.getBaseTribe()) {
+                        case PC_DARK:
+                        case GUARD_DARK:
+                        case GENERAL_DARK:
+                        case GUARD_DRAGON:
+                            return true;
+
+                    }
+                    break;
+                case GUARD_DRAGON: // Balaur
+                    switch (creature2.getBaseTribe()) {
+                        case PC_DARK:
+                        case PC:
+                        case GUARD:
+                        case GUARD_DARK:
+                        case GENERAL_DARK:
+                        case GENERAL:
+                            return true;
+
+                    }
+                    break;
+            }
+        }
         return DataManager.TRIBE_RELATIONS_DATA.isAggressiveRelation(creature1.getTribe(), creature2.getTribe());
     }
 
@@ -122,7 +121,7 @@ public class TribeRelationService {
                         return true;
 
                 }
-                break;   
+                break;
             case GUARD_DARK:
                 switch (creature2.getBaseTribe()) {
                     case PC_DARK:
@@ -135,68 +134,67 @@ public class TribeRelationService {
                         return true;
 
                 }
-                break;                
+                break;
         }
         return DataManager.TRIBE_RELATIONS_DATA.isFriendlyRelation(creature1.getTribe(), creature2.getTribe());
     }
 
     public static boolean isSupport(Creature creature1, Creature creature2) {
-//        switch (creature1.getBaseTribe()) {
-//            case GUARD_DARK:
-//                switch (creature2.getBaseTribe()) {
-//                    case PC_DARK:
-//                        return true;
-//                }
-//                break;
-//            case GUARD:
-//                switch (creature2.getBaseTribe()) {
-//                    case PC:
-//                        return true;
-//
-//                }
-//                break;
-//        }
+        //        switch (creature1.getBaseTribe()) {
+        //            case GUARD_DARK:
+        //                switch (creature2.getBaseTribe()) {
+        //                    case PC_DARK:
+        //                        return true;
+        //                }
+        //                break;
+        //            case GUARD:
+        //                switch (creature2.getBaseTribe()) {
+        //                    case PC:
+        //                        return true;
+        //
+        //                }
+        //                break;
+        //        }
         return DataManager.TRIBE_RELATIONS_DATA.isSupportRelation(creature1.getTribe(), creature2.getTribe());
     }
 
-    public static boolean isInvulnerable(Creature creature1, Creature creature2) 
-    {
+    public static boolean isInvulnerable(Creature creature1, Creature creature2) {
         switch (creature1.getTribe()) {
-        	case IDFORTRESS_VRITRA:
+            case IDFORTRESS_VRITRA:
                 switch (creature2.getBaseTribe()) {
-                	case PC:
-	                case PC_DARK:
-	                	if (creature1 instanceof Npc) {
-	                		Npc targetNpc = (Npc) creature1;
-	                		if (targetNpc.getObjectTemplate().getNpcUiType().equals(NpcUiType.NONE)) {
-	                			return true;
-	                		}
-	                	}
-		        }            	
-	        	break;
+                    case PC:
+                    case PC_DARK:
+                        if (creature1 instanceof Npc) {
+                            Npc targetNpc = (Npc) creature1;
+                            if (targetNpc.getObjectTemplate().getNpcUiType().equals(NpcUiType.NONE)) {
+                                return true;
+                            }
+                        }
+                }
+                break;
             case IDFORTRESS_SWITCH_LIGHT:
             case IDKAMAR_PROTECTGUARD_LIGHT:
                 switch (creature2.getBaseTribe()) {
-	                case PC_DARK:
-	                    return true;
-                }            	
-            	break;
+                    case PC_DARK:
+                        return true;
+                }
+                break;
             case IDFORTRESS_SWITCH_DARK:
             case IDKAMAR_PROTECTGUARD_DARK:
                 switch (creature2.getBaseTribe()) {
-	                case PC:
-	                    return true;
-	            }            	
+                    case PC:
+                        return true;
+                }
                 break;
         }
-		return false;
-    }    
-    
+        return false;
+    }
+
     public static boolean isNone(Creature creature1, Creature creature2) {
         if (DataManager.TRIBE_RELATIONS_DATA.isAggressiveRelation(creature1.getTribe(), creature2.getTribe())
-                || creature1 instanceof Npc && checkSiegeRelation((Npc) creature1, creature2)
-                || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(creature1.getTribe(), creature2.getTribe())
-                || DataManager.TRIBE_RELATIONS_DATA.isNeutralRelation(creature1.getTribe(), creature2.getTribe())) {
+            || creature1 instanceof Npc && checkSiegeRelation((Npc) creature1, creature2)
+            || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(creature1.getTribe(), creature2.getTribe())
+            || DataManager.TRIBE_RELATIONS_DATA.isNeutralRelation(creature1.getTribe(), creature2.getTribe())) {
             return false;
         }
         switch (creature1.getBaseTribe()) {
@@ -242,9 +240,8 @@ public class TribeRelationService {
     }
 
     public static boolean checkSiegeRelation(Npc npc, Creature creature) {
-        return npc.getObjectTemplate().getAbyssNpcType() != AbyssNpcType.ARTIFACT
-                && npc.getObjectTemplate().getAbyssNpcType() != AbyssNpcType.NONE
-                && ((npc.getBaseTribe() == TribeClass.GENERAL && creature.getTribe() == TribeClass.PC_DARK)
+        return npc.getObjectTemplate().getAbyssNpcType() != AbyssNpcType.ARTIFACT && npc.getObjectTemplate().getAbyssNpcType() != AbyssNpcType.NONE
+            && ((npc.getBaseTribe() == TribeClass.GENERAL && creature.getTribe() == TribeClass.PC_DARK)
                 || (npc.getBaseTribe() == TribeClass.GENERAL_DARK && creature.getTribe() == TribeClass.PC)
                 || npc.getBaseTribe() == TribeClass.GENERAL_DRAGON);
     }

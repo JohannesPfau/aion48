@@ -132,7 +132,8 @@ public class XmlDataLoader {
      *
      * @param cachedXml
      * @param cleanMainXml
-     * @throws Error is thrown if some problem occured.
+     * @throws Error
+     *             is thrown if some problem occured.
      * @see XmlMerger
      */
     private void mergeXmlFiles(File cachedXml, File cleanMainXml) throws Error {

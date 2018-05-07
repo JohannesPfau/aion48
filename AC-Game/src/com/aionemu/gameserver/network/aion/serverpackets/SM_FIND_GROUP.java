@@ -37,7 +37,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
-, MrPoke
+ * , MrPoke
  */
 public class SM_FIND_GROUP extends AionServerPacket {
 
@@ -68,7 +68,7 @@ public class SM_FIND_GROUP extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(action);
         switch (action) {
             case 0x00:

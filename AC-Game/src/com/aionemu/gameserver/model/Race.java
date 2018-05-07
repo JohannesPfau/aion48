@@ -37,8 +37,6 @@ import org.apache.commons.lang.NotImplementedException;
  * Basic enum with races.<br>
  * I believe that NPCs will have their own races, so it's quite comfortable to
  * have it in the same place
- *
-
  */
 @XmlEnum
 public enum Race {
@@ -103,7 +101,8 @@ public enum Race {
     SIEGEDRAKAN(42),
     GCHIEF_DRAGON(43),
     WORLD_EVENT_BONFIRE(44),
-	LF5_Q_ITEM(45);
+    LF5_Q_ITEM(45);
+
     private int raceId;
     private DescriptionId descriptionId;
 

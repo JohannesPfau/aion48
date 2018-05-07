@@ -131,14 +131,16 @@ public class ChatClient {
     }
 
     /**
-     * @param channelHandler the channelHandler to set
+     * @param channelHandler
+     *            the channelHandler to set
      */
     public void setChannelHandler(ClientChannelHandler channelHandler) {
         this.channelHandler = channelHandler;
     }
 
     /**
-     * @param identifier the identifier to set
+     * @param identifier
+     *            the identifier to set
      * @param realAccount
      * @param realName
      */

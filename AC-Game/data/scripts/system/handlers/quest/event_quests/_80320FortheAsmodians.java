@@ -37,9 +37,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * 
  * @author Alcapwnd
- *
  */
 
 public class _80320FortheAsmodians extends QuestHandler {

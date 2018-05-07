@@ -45,15 +45,14 @@ import com.aionemu.gameserver.network.PacketWriteHelper;
 /**
  * Entry item info packet data (contains blob entries with detailed info).
  *
-
  * @modified Rolandas - complete rewrite, no trees (blob size must be known in
- * advance!), just sequences
+ *           advance!), just sequences
  */
 public class ItemInfoBlob extends PacketWriteHelper {
 
     protected final Player player;
     protected final Item item;
-    private List<ItemBlobEntry> itemBlobEntries = new ArrayList<ItemBlobEntry>();
+    private List<ItemBlobEntry> itemBlobEntries = new ArrayList<>();
 
     public ItemInfoBlob(Player player, Item item) {
         this.player = player;
@@ -174,42 +173,49 @@ public class ItemInfoBlob extends PacketWriteHelper {
     public enum ItemBlobType {
 
         GENERAL_INFO(0x00) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new GeneralInfoBlobEntry();
             }
         },
         SLOTS_WEAPON(0x01) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new WeaponInfoBlobEntry();
             }
         },
         SLOTS_ARMOR(0x02) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new ArmorInfoBlobEntry();
             }
         },
         SLOTS_SHIELD(0x03) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new ShieldInfoBlobEntry();
             }
         },
         SLOTS_ACCESSORY(0x04) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new AccessoryInfoBlobEntry();
             }
         },
         SLOTS_ARROW(0x05) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new ArrowInfoBlobEntry();
             }
         },
         EQUIPPED_SLOT(0x06) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new EquippedSlotBlobEntry();
@@ -217,12 +223,14 @@ public class ItemInfoBlob extends PacketWriteHelper {
         },
         // Removed from 3.5
         STIGMA_INFO(0x07) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new StigmaInfoBlobEntry();
             }
         },
         STIGMA_SHARD(0x08) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new StigmaShardInfoBlobEntry();
@@ -230,30 +238,35 @@ public class ItemInfoBlob extends PacketWriteHelper {
         },
         // missing(0x09), //15? [Not handled before]
         PREMIUM_OPTION(0x10) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new PremiumOptionInfoBlobEntry();
             }
         },
         POLISH_INFO(0x11) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new PolishInfoBlobEntry();
             }
         },
         PACK_INFO(0x12) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new PackInfoBlobEntry();
             }
         },
         PLUME_INFO(0x13) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new PlumeInfoBlobEntry();
             }
         },
         STAT_BONUSES(0x0A) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new BonusInfoBlobEntry();
@@ -261,6 +274,7 @@ public class ItemInfoBlob extends PacketWriteHelper {
         },
         // [Not handled before] retail send it xx times (smth dynamically changed)
         MANA_SOCKETS(0x0B) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new ManaStoneInfoBlobEntry();
@@ -268,23 +282,27 @@ public class ItemInfoBlob extends PacketWriteHelper {
         },
         // 0x0C - not used?
         SLOTS_WING(0x0D) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new WingInfoBlobEntry();
             }
         },
         COMPOSITE_ITEM(0x0E) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new CompositeItemBlobEntry();
             }
         },
         CONDITIONING_INFO(0x0F) {
+
             @Override
             ItemBlobEntry newBlobEntry() {
                 return new ConditioningInfoBlobEntry();
             }
         };
+
         private int entryId;
 
         private ItemBlobType(int entryId) {

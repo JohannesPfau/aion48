@@ -38,7 +38,8 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 /**
  * This server command is used for creating and sending custom packets from
  * server to client. It's used in development purpose.<br>
- * <b>command name: //fsc</b></br> <b>params:</b>
+ * <b>command name: //fsc</b></br>
+ * <b>params:</b>
  * <ul>
  * <li>packet id (it's one byte) - maybe in dec format (for example 227), but
  * may be also in hex format (for example 0xE3)</li>

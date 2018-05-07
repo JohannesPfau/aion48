@@ -59,7 +59,7 @@ public class SM_GROUP_MEMBER_INFO extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         PlayerLifeStats pls = player.getLifeStats();
         PlayerCommonData pcd = player.getCommonData();
         WorldPosition wp = pcd.getPosition();
@@ -142,7 +142,7 @@ public class SM_GROUP_MEMBER_INFO extends AionServerPacket {
                     writeC(effect.getTargetSlot());
                     writeD(effect.getRemainingTime());
                 }
-            writeB(new byte[32]);   
+                writeB(new byte[32]);
         }
     }
 }

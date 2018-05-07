@@ -27,12 +27,12 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public interface FFaStruct {
 
-	int worldId = EventSystem.EVENTSYSTEM_FFAMAP;
+    int worldId = EventSystem.EVENTSYSTEM_FFAMAP;
 
-	ScheduledFuture<?> announceTask(int delayInMinutes);
+    ScheduledFuture<?> announceTask(int delayInMinutes);
 
-	int getPlayerCount();
+    int getPlayerCount();
 
-	boolean isEnemy(Player effector, Player effected);
+    boolean isEnemy(Player effector, Player effected);
 
 }

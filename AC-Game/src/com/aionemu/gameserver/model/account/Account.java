@@ -45,13 +45,12 @@ import com.aionemu.gameserver.model.items.storage.Storage;
  * <ul>
  * <li>account id</li>
  * <li>account name</li>
- * <li> {@link AccountTime account time info}</li>
+ * <li>{@link AccountTime account time info}</li>
  * <li>a list of {@link PlayerAccountData} objects each of which keeping
  * information about player that must be available on character selection
  * screen.</li>
  * </ul>
  *
-
  * @modified cura
  */
 public class Account implements Iterable<PlayerAccountData> {
@@ -73,7 +72,7 @@ public class Account implements Iterable<PlayerAccountData> {
      */
     private byte membership;
     private AccountTime accountTime;
-    private Map<Integer, PlayerAccountData> players = new HashMap<Integer, PlayerAccountData>();
+    private Map<Integer, PlayerAccountData> players = new HashMap<>();
     private Storage accountWarehouse;
     private int numberOfAsmos = 0;
     private int numberOfElyos = 0;
@@ -116,7 +115,8 @@ public class Account implements Iterable<PlayerAccountData> {
     }
 
     /**
-     * @param accessLevel the accessLevel to set
+     * @param accessLevel
+     *            the accessLevel to set
      */
     public void setAccessLevel(byte accessLevel) {
         this.accessLevel = accessLevel;
@@ -130,7 +130,8 @@ public class Account implements Iterable<PlayerAccountData> {
     }
 
     /**
-     * @param membership the membership to set
+     * @param membership
+     *            the membership to set
      */
     public void setMembership(byte membership) {
         this.membership = membership;
@@ -187,7 +188,8 @@ public class Account implements Iterable<PlayerAccountData> {
     }
 
     /**
-     * @param accountWarehouse the accountWarehouse to set
+     * @param accountWarehouse
+     *            the accountWarehouse to set
      */
     public void setAccountWarehouse(Storage accountWarehouse) {
         this.accountWarehouse = accountWarehouse;
@@ -214,9 +216,10 @@ public class Account implements Iterable<PlayerAccountData> {
      * Sorts the accounts on last online.
      */
     public ArrayList<PlayerAccountData> getSortedAccountsList() {
-        ArrayList<PlayerAccountData> list = new ArrayList<PlayerAccountData>();
+        ArrayList<PlayerAccountData> list = new ArrayList<>();
         list.addAll(players.values());
         Collections.sort(list, new Comparator<PlayerAccountData>() {
+
             @Override
             public int compare(PlayerAccountData x, PlayerAccountData y) {
                 Timestamp t1 = x.getPlayerCommonData().getLastOnline();

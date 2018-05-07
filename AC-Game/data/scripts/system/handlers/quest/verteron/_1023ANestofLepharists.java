@@ -76,7 +76,7 @@ public class _1023ANestofLepharists extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {1130, 1013};
+        int[] quests = { 1130, 1013 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 

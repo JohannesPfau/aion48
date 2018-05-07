@@ -32,8 +32,6 @@ package com.aionemu.gameserver.world.exceptions;
 /**
  * This Exception will be thrown when some AionObject will be stored more then
  * one time. This Exception indicating serious error.
- *
-
  */
 @SuppressWarnings("serial")
 public class DuplicateAionObjectException extends RuntimeException {
@@ -51,7 +49,8 @@ public class DuplicateAionObjectException extends RuntimeException {
      * <code>DuplicateAionObjectException</code> with the specified detail
      * message.
      *
-     * @param s the detail message.
+     * @param s
+     *            the detail message.
      */
     public DuplicateAionObjectException(String s) {
         super(s);
@@ -60,8 +59,10 @@ public class DuplicateAionObjectException extends RuntimeException {
     /**
      * Creates new error
      *
-     * @param message exception description
-     * @param cause   reason of this exception
+     * @param message
+     *            exception description
+     * @param cause
+     *            reason of this exception
      */
     public DuplicateAionObjectException(String message, Throwable cause) {
         super(message, cause);
@@ -70,7 +71,8 @@ public class DuplicateAionObjectException extends RuntimeException {
     /**
      * Creates new error
      *
-     * @param cause reason of this exception
+     * @param cause
+     *            reason of this exception
      */
     public DuplicateAionObjectException(Throwable cause) {
         super(cause);

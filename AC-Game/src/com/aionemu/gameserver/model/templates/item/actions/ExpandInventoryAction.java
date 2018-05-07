@@ -72,7 +72,7 @@ public class ExpandInventoryAction extends AbstractItemAction {
         }
         ItemTemplate itemTemplate = parentItem.getItemTemplate();
         PacketSendUtility.broadcastPacket(player,
-                new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), itemTemplate.getTemplateId()), true);
+            new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), itemTemplate.getTemplateId()), true);
 
         switch (storage) {
             case CUBE:

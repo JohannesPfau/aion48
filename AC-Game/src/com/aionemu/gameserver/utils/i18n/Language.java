@@ -40,8 +40,8 @@ import javolution.util.FastMap;
  */
 public class Language {
 
-    private final List<String> supportedLanguages = new FastList<String>();
-    private final Map<CustomMessageId, String> translatedMessages = new FastMap<CustomMessageId, String>();
+    private final List<String> supportedLanguages = new FastList<>();
+    private final Map<CustomMessageId, String> translatedMessages = new FastMap<>();
 
     public Language() {
     }

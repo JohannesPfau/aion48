@@ -43,14 +43,16 @@ public class CmdRemoveSkillDelayAll extends AbstractGMHandler {
 
     //TODO its a little bit odd
     private void run() {
-        /*Player t = target != null ? target : admin;
-		if (t.getRemoveSkillDelay() == 1) {
-			t.setRemoveSkillDelay(0);
-			PacketSendUtility.sendMessage(t, "Now you got your normal Skill Cooldowns!");
-		} else if (t.getRemoveSkillDelay() == 0) {
-			t.setRemoveSkillDelay(1);
-			PacketSendUtility.sendMessage(t, "Now you wont have any Skill Cooldowns!");
-		}*/
+        /*
+         * Player t = target != null ? target : admin;
+         * if (t.getRemoveSkillDelay() == 1) {
+         * t.setRemoveSkillDelay(0);
+         * PacketSendUtility.sendMessage(t, "Now you got your normal Skill Cooldowns!");
+         * } else if (t.getRemoveSkillDelay() == 0) {
+         * t.setRemoveSkillDelay(1);
+         * PacketSendUtility.sendMessage(t, "Now you wont have any Skill Cooldowns!");
+         * }
+         */
     }
 
 }

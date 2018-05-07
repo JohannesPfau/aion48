@@ -39,6 +39,7 @@ public enum HousePermissions {
     DOOR_OPENED_ALL(1 << 8),
     DOOR_OPENED_FRIENDS(2 << 8),
     DOOR_CLOSED(3 << 8);
+
     private int value;
 
     private HousePermissions(int value) {

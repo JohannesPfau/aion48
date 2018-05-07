@@ -31,7 +31,7 @@ package com.aionemu.gameserver.model;
 
 /**
  * @author ATracer
- (Aion-Core)
+ *         (Aion-Core)
  */
 public enum TaskId {
 

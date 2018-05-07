@@ -29,19 +29,12 @@
  */
 package admincommands;
 
-import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.AdminService;
-import com.aionemu.gameserver.services.BeritraService;
-import com.aionemu.gameserver.services.item.ItemService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.Util;
-import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.aionemu.gameserver.world.World;
 import org.apache.commons.lang.math.NumberUtils;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.services.BeritraService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
  * @author Lyras
@@ -59,23 +52,21 @@ public class Beritra extends AdminCommand {
             return;
         }
 
-        if(params[0].equalsIgnoreCase("start"))
-        {
+        if (params[0].equalsIgnoreCase("start")) {
             int loc = NumberUtils.toInt(params[1]);
-            if(!isValidLoc(player, loc))
+            if (!isValidLoc(player, loc))
                 return;
-            if(!BeritraService.getInstance().isInvasionInProgress(loc))
+            if (!BeritraService.getInstance().isInvasionInProgress(loc))
                 BeritraService.getInstance().startBeritraInvasion(loc);
             else
                 PacketSendUtility.sendMessage(player, "Already under Invasion");
         }
 
-        if(params[0].equalsIgnoreCase("stop"))
-        {
+        if (params[0].equalsIgnoreCase("stop")) {
             int loc = NumberUtils.toInt(params[1]);
-            if(!isValidLoc(player, loc))
+            if (!isValidLoc(player, loc))
                 return;
-            if(BeritraService.getInstance().isInvasionInProgress(loc))
+            if (BeritraService.getInstance().isInvasionInProgress(loc))
                 BeritraService.getInstance().stopBeritraInvasion(loc);
             else
                 PacketSendUtility.sendMessage(player, "Invasion already stopped");
@@ -83,9 +74,8 @@ public class Beritra extends AdminCommand {
 
     }
 
-    private boolean isValidLoc(Player player, int locId)
-    {
-        if(!BeritraService.getInstance().getBeritraLocations().keySet().contains(locId)) {
+    private boolean isValidLoc(Player player, int locId) {
+        if (!BeritraService.getInstance().getBeritraLocations().keySet().contains(locId)) {
             PacketSendUtility.sendMessage(player, "Id " + locId + " is invalid");
             return false;
         }

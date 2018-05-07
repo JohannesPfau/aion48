@@ -45,15 +45,12 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
  * @author Mr. Poke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "QuestConditions", propOrder = {"conditions"})
+@XmlType(name = "QuestConditions", propOrder = { "conditions" })
 public class QuestConditions {
 
-    @XmlElements({
-            @XmlElement(name = "quest_status", type = QuestStatusCondition.class),
-            @XmlElement(name = "npc_id", type = NpcIdCondition.class),
-            @XmlElement(name = "pc_inventory", type = PcInventoryCondition.class),
-            @XmlElement(name = "quest_var", type = QuestVarCondition.class),
-            @XmlElement(name = "dialog_id", type = DialogIdCondition.class)})
+    @XmlElements({ @XmlElement(name = "quest_status", type = QuestStatusCondition.class), @XmlElement(name = "npc_id", type = NpcIdCondition.class),
+        @XmlElement(name = "pc_inventory", type = PcInventoryCondition.class), @XmlElement(name = "quest_var", type = QuestVarCondition.class),
+        @XmlElement(name = "dialog_id", type = DialogIdCondition.class) })
     protected List<QuestCondition> conditions;
     @XmlAttribute(required = true)
     protected ConditionUnionType operate;

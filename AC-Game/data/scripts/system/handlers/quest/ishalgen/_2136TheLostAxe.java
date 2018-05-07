@@ -29,6 +29,7 @@
  */
 package quest.ishalgen;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,7 +37,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -51,7 +51,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class _2136TheLostAxe extends QuestHandler {
 
     private final static int questId = 2136;
-    private final static int[] npc_ids = {700146, 790009};
+    private final static int[] npc_ids = { 700146, 790009 };
 
     public _2136TheLostAxe() {
         super(questId);
@@ -94,6 +94,7 @@ public class _2136TheLostAxe extends QuestHandler {
             if (targetId == 790009) {
                 final Npc npc = (Npc) env.getVisibleObject();
                 ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         npc.getController().onDelete();
@@ -153,8 +154,7 @@ public class _2136TheLostAxe extends QuestHandler {
         if (id != 182203130) {
             return HandlerResult.UNKNOWN;
         }
-        PacketSendUtility.broadcastPacket(player,
-                new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
+        PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
         if (qs == null || qs.getStatus() == QuestStatus.NONE) {
             if (QuestService.startQuest(env)) {
                 return HandlerResult.fromBoolean(sendQuestDialog(env, 4));

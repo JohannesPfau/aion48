@@ -36,8 +36,6 @@ import static ch.lambdaj.Lambda.sum;
 import java.util.Comparator;
 import java.util.List;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
@@ -47,12 +45,14 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
+import javolution.util.FastList;
+
 /**
  * @author xTz
  */
 public class HarmonyArenaReward extends PvPArenaReward {
 
-    private FastList<HarmonyGroupReward> groups = new FastList<HarmonyGroupReward>();
+    private FastList<HarmonyGroupReward> groups = new FastList<>();
 
     public HarmonyArenaReward(Integer mapId, int instanceId, WorldMapInstance instance) {
         super(mapId, instanceId, instance);
@@ -69,7 +69,7 @@ public class HarmonyArenaReward extends PvPArenaReward {
     }
 
     public FastList<HarmonyGroupReward> getHarmonyGroupInside() {
-        FastList<HarmonyGroupReward> harmonyGroups = new FastList<HarmonyGroupReward>();
+        FastList<HarmonyGroupReward> harmonyGroups = new FastList<>();
         for (HarmonyGroupReward group : groups) {
             for (AGPlayer agp : group.getAGPlayers()) {
                 if (agp.isInInstance()) {
@@ -82,7 +82,7 @@ public class HarmonyArenaReward extends PvPArenaReward {
     }
 
     public FastList<Player> getPlayersInside(HarmonyGroupReward group) {
-        FastList<Player> players = new FastList<Player>();
+        FastList<Player> players = new FastList<>();
         for (Player playerInside : instance.getPlayersInside()) {
             if (group.containPlayer(playerInside.getObjectId())) {
                 players.add(playerInside);
@@ -101,6 +101,7 @@ public class HarmonyArenaReward extends PvPArenaReward {
 
     public void sendPacket(final int type, final Integer object) {
         instance.doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(type, getTime(), getInstanceReward(), object));
@@ -121,6 +122,7 @@ public class HarmonyArenaReward extends PvPArenaReward {
 
     public List<HarmonyGroupReward> sortGroupPoints() {
         return sort(groups, on(HarmonyGroupReward.class).getPoints(), new Comparator<Integer>() {
+
             @Override
             public int compare(Integer o1, Integer o2) {
                 return o2 != null ? o2.compareTo(o1) : -o1.compareTo(o2);

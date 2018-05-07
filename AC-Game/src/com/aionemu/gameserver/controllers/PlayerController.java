@@ -145,8 +145,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * This class is for controlling players.
- *
-, ATracer, xavier, Sarynth, RotO, xTz, KID, Sippolo
+ * , ATracer, xavier, Sarynth, RotO, xTz, KID, Sippolo
  */
 public class PlayerController extends CreatureController<Player> {
 
@@ -170,7 +169,8 @@ public class PlayerController extends CreatureController<Player> {
                 PacketSendUtility.sendPacket(getOwner(), new SM_EMOTION(player, EmotionType.RIDE, 0, player.ride.getNpcId()));
             }
             if (player.getPet() != null) {
-                LoggerFactory.getLogger(PlayerController.class).debug("Player " + getOwner().getName() + " sees " + object.getName() + " that has toypet");
+                LoggerFactory.getLogger(PlayerController.class)
+                    .debug("Player " + getOwner().getName() + " sees " + object.getName() + " that has toypet");
                 PacketSendUtility.sendPacket(getOwner(), new SM_PET(3, player.getPet()));
             }
             player.getEffectController().sendEffectIconsTo(getOwner());
@@ -263,7 +263,7 @@ public class PlayerController extends CreatureController<Player> {
         if (getOwner().getPosition().getWorldMapInstance().getParent().isExceptBuff()) {
             getOwner().getEffectController().removeAllEffects();
         }
-        
+
         if (getOwner().getBattleGround() != null && getOwner().getWorldId() != getOwner().getBattleGround().getWorldId()) {
             BattleGroundManager.unregisterPlayer(getOwner());
             getOwner().battlegroundWaiting = false;
@@ -346,7 +346,7 @@ public class PlayerController extends CreatureController<Player> {
                 CrazyDaevaService.getInstance().crazyOnDie(player, master, true);
             }
         }
-        
+
         // Battelground
         if (master instanceof Player) {
             if (((Player) master).getBattleGround() != null && ((Player) master).getBattleGround() instanceof AssaultBattleGround) {
@@ -354,7 +354,6 @@ public class PlayerController extends CreatureController<Player> {
             }
         }
 
-        
         // High ranked kill announce
         AbyssRank ar = player.getAbyssRank();
         if (AbyssService.isOnPvpMap(player) && ar != null) {
@@ -399,11 +398,11 @@ public class PlayerController extends CreatureController<Player> {
 
         if (player.isInInstance()) {
             if (player.getPosition().getWorldMapInstance().getInstanceHandler().onDie(player, lastAttacker)) {
-            	if (player.isInFFA() || player.isInArena() || player.isInPkMode() || player.isInDuoFFA()) {
-            		super.onDieEvent(lastAttacker);
-            	} else {
-            		super.onDie(lastAttacker);
-            	}            
+                if (player.isInFFA() || player.isInArena() || player.isInPkMode() || player.isInDuoFFA()) {
+                    super.onDieEvent(lastAttacker);
+                } else {
+                    super.onDie(lastAttacker);
+                }
                 return;
             }
         }
@@ -415,21 +414,24 @@ public class PlayerController extends CreatureController<Player> {
 
         this.doReward();
 
-		if (master instanceof Npc || master == player) {
-			if (player.getLevel() > 4 && !isNoDeathPenaltyInEffect())
-				player.getCommonData().calculateExpLoss();
-		}
+        if (master instanceof Npc || master == player) {
+            if (player.getLevel() > 4 && !isNoDeathPenaltyInEffect())
+                player.getCommonData().calculateExpLoss();
+        }
         // Effects removed with super.onDie()
         super.onDie(lastAttacker);
-        
-      //test it if bug (maybe not needed)
+
+        //test it if bug (maybe not needed)
         if (player.getBattleGround() != null && player.getBattleGround() instanceof CTFBattleGround && master instanceof Player) {
             int tplId = player.getBattleGround().getTplId();
             template = DataManager.BATTLEGROUND_DATA.getBattleGroundTemplate(tplId);
             player.getBattleGround().increasePoints((Player) master, template.getRules().getKillPlayer());
         }
         if (player.battlegroundFlag != null) {
-            player.getBattleGround().broadcastToBattleGround(player.getCommonData().getName() + (player.getLegion() != null ? " de " + player.getLegion().getLegionName() : "") + " got the " + (player.battlegroundFlag.getRace() == Race.ELYOS ? "Elyséen" : "Asmodien") + " !", null);
+            player.getBattleGround().broadcastToBattleGround(
+                player.getCommonData().getName() + (player.getLegion() != null ? " de " + player.getLegion().getLegionName() : "") + " got the "
+                    + (player.battlegroundFlag.getRace() == Race.ELYOS ? "Elyséen" : "Asmodien") + " !",
+                null);
             if (master instanceof Player) {
                 player.getBattleGround().increasePoints((Player) master, template.getRules().getFlagBase());
             }
@@ -446,7 +448,7 @@ public class PlayerController extends CreatureController<Player> {
 
         // send sm_emotion with DIE
         // have to be send after state is updated!
-		sendDieFromCreature(lastAttacker, showPacket);
+        sendDieFromCreature(lastAttacker, showPacket);
 
         QuestEngine.getInstance().onDie(new QuestEnv(null, player, 0, 0));
 
@@ -467,11 +469,13 @@ public class PlayerController extends CreatureController<Player> {
     private void sendDieFromCreature(@Nonnull Creature lastAttacker, boolean showPacket) {
         Player player = this.getOwner();
 
-        PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
+        PacketSendUtility.broadcastPacket(player,
+            new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
 
         if (showPacket) {
             int kiskTimeRemaining = (player.getKisk() != null ? player.getKisk().getRemainingLifetime() : 0);
-            PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), kiskTimeRemaining, 0, isInvader(player)));
+            PacketSendUtility.sendPacket(player,
+                new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), kiskTimeRemaining, 0, isInvader(player)));
         }
 
         PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH);
@@ -494,14 +498,14 @@ public class PlayerController extends CreatureController<Player> {
     public void onBeforeSpawn() {
         this.onBeforeSpawn(true);
         /*
-         super.onBeforeSpawn();
-         startProtectionActiveTask();
-         if (getOwner().getIsFlyingBeforeDeath()) {
-         getOwner().unsetState(CreatureState.FLOATING_CORPSE);
-         } else {
-         getOwner().unsetState(CreatureState.DEAD);
-         }
-         getOwner().setState(CreatureState.ACTIVE);
+         * super.onBeforeSpawn();
+         * startProtectionActiveTask();
+         * if (getOwner().getIsFlyingBeforeDeath()) {
+         * getOwner().unsetState(CreatureState.FLOATING_CORPSE);
+         * } else {
+         * getOwner().unsetState(CreatureState.DEAD);
+         * }
+         * getOwner().setState(CreatureState.ACTIVE);
          */
     }
 
@@ -568,7 +572,7 @@ public class PlayerController extends CreatureController<Player> {
         if (getOwner().isInvul() || getOwner().isProtectionActive()) {
             damage = 0;
         }
-        
+
         if (getOwner().getBattleGround() != null && !getOwner().getBattleGround().running) {
             damage = 0;
         }
@@ -621,8 +625,7 @@ public class PlayerController extends CreatureController<Player> {
      * @param z
      * @param clientHitTime
      */
-    public void useSkill(SkillTemplate template, int targetType, float x, float y, float z, int clientHitTime,
-                         int skillLevel) {
+    public void useSkill(SkillTemplate template, int targetType, float x, float y, float z, int clientHitTime, int skillLevel) {
         Player player = getOwner();
         Skill skill = null;
         skill = SkillEngine.getInstance().getSkillFor(player, template, player.getTarget());
@@ -687,7 +690,8 @@ public class PlayerController extends CreatureController<Player> {
         } else if (castingSkill.getSkillMethod() == SkillMethod.ITEM) {
             PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED(new DescriptionId(castingSkill.getItemTemplate().getNameId())));
             player.removeItemCoolDown(castingSkill.getItemTemplate().getUseLimits().getDelayId());
-            PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), castingSkill.getFirstTarget().getObjectId(), castingSkill.getItemObjectId(), castingSkill.getItemTemplate().getTemplateId(), 0, 3, 0), true);
+            PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), castingSkill.getFirstTarget().getObjectId(),
+                castingSkill.getItemObjectId(), castingSkill.getItemTemplate().getTemplateId(), 0, 3, 0), true);
         }
     }
 
@@ -698,7 +702,8 @@ public class PlayerController extends CreatureController<Player> {
         player.setUsingItem(null);
         if (hasTask(TaskId.ITEM_USE)) {
             cancelTask(TaskId.ITEM_USE);
-            PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), usingItem == null ? 0 : usingItem.getObjectId(), usingItem == null ? 0 : usingItem.getItemTemplate().getTemplateId(), 0, 3, 0), true);
+            PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(),
+                usingItem == null ? 0 : usingItem.getObjectId(), usingItem == null ? 0 : usingItem.getItemTemplate().getTemplateId(), 0, 3, 0), true);
         }
     }
 
@@ -822,6 +827,7 @@ public class PlayerController extends CreatureController<Player> {
             AttackUtil.removeTargetFrom(getOwner());
             PacketSendUtility.broadcastPacket(getOwner(), new SM_PLAYER_STATE(getOwner()), true);
             Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     stopProtectionActiveTask();
@@ -865,13 +871,12 @@ public class PlayerController extends CreatureController<Player> {
                 FlyPathEntry path = player.getCurrentFlyPath();
 
                 if (player.getWorldId() != path.getEndWorldId()) {
-                    AuditLogger.info(player, "Player tried to use flyPath #" + path.getId() + " from not native start world "
-                            + player.getWorldId() + ". expected " + path.getEndWorldId());
+                    AuditLogger.info(player, "Player tried to use flyPath #" + path.getId() + " from not native start world " + player.getWorldId()
+                        + ". expected " + path.getEndWorldId());
                 }
 
                 if (diff < path.getTimeInMs()) {
-                    AuditLogger.info(player,
-                            "Player " + player.getName() + " used flypath bug " + diff + " instead of " + path.getTimeInMs());
+                    AuditLogger.info(player, "Player " + player.getName() + " used flypath bug " + diff + " instead of " + path.getTimeInMs());
                     /*
                      * todo if works teleport player to start_* xyz, or even ban
                      */
@@ -1009,6 +1014,7 @@ public class PlayerController extends CreatureController<Player> {
     }
 
     public static abstract interface Listener {
+
         public abstract void onPlayerUsedSkill(int paramInt, Player paramPlayer);
     }
 }

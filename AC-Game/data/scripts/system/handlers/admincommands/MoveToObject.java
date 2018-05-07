@@ -68,8 +68,7 @@ public class MoveToObject extends AdminCommand {
 
         VisibleObject spawn = (VisibleObject) object;
 
-        TeleportService2.teleportTo(admin, spawn.getWorldId(), spawn.getSpawn().getX(), spawn.getSpawn().getY(), spawn
-                .getSpawn().getZ());
+        TeleportService2.teleportTo(admin, spawn.getWorldId(), spawn.getSpawn().getX(), spawn.getSpawn().getY(), spawn.getSpawn().getZ());
         admin.getController().stopProtectionActiveTask();
     }
 

@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.model.templates.item;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -42,6 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author Alcapwnd
@@ -54,18 +53,18 @@ public class ItemEnchantTemplate {
     private int id;
     @XmlElement(name = "item_enchant", required = false)
     private List<ItemEnchantBonus> item_enchant;
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @XmlTransient
     private TIntObjectHashMap<List<StatFunction>> enchants = new TIntObjectHashMap();
 
     public List<StatFunction> getStats(int level) {
-    	if (getItemEnchant() == null) 
-    		return null;
-    	for (ItemEnchantBonus ib : getItemEnchant()) {
-        	if (ib.getLevel() != level)
-        		continue;
-        	
-        	return ib.getModifiers();
+        if (getItemEnchant() == null)
+            return null;
+        for (ItemEnchantBonus ib : getItemEnchant()) {
+            if (ib.getLevel() != level)
+                continue;
+
+            return ib.getModifiers();
         }
         return null;
     }

@@ -54,7 +54,8 @@ public class TradeItem {
     }
 
     /**
-     * @param itemTemplate the itemTemplate to set
+     * @param itemTemplate
+     *            the itemTemplate to set
      */
     public void setItemTemplate(ItemTemplate itemTemplate) {
         this.itemTemplate = itemTemplate;

@@ -56,11 +56,11 @@ public class SM_FRIEND_UPDATE extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         Friend f = con.getActivePlayer().getFriendList().getFriend(friendObjId);
         if (f == null) {
             log.debug("Attempted to update friend list status of " + friendObjId + " for " + con.getActivePlayer().getName()
-                    + " - object ID not found on friend list");
+                + " - object ID not found on friend list");
         } else {
             writeS(f.getName());
             writeD(f.getLevel());

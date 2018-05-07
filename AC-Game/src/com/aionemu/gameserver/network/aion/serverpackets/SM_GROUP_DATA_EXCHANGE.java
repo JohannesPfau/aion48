@@ -55,7 +55,7 @@ public class SM_GROUP_DATA_EXCHANGE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(action); // action
 
         if (action != 1) {

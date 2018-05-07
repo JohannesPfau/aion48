@@ -29,17 +29,18 @@
  */
 package ai.instance.empyreanCrucible;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Luzien
@@ -47,7 +48,7 @@ import java.util.concurrent.Future;
 @AIName("alukina_emp")
 public class QueenAlukinaAI2 extends AggressiveNpcAI2 {
 
-    private List<Integer> percents = new ArrayList<Integer>();
+    private List<Integer> percents = new ArrayList<>();
     private Future<?> task;
 
     @Override
@@ -99,6 +100,7 @@ public class QueenAlukinaAI2 extends AggressiveNpcAI2 {
                 break;
             case 25:
                 task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
                     @Override
                     public void run() {
                         if (isAlreadyDead()) {
@@ -122,6 +124,7 @@ public class QueenAlukinaAI2 extends AggressiveNpcAI2 {
 
     private void scheduleSkill(final int skillId, int delay) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {
@@ -144,6 +147,6 @@ public class QueenAlukinaAI2 extends AggressiveNpcAI2 {
 
     private void addPercents() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{75, 50, 25});
+        Collections.addAll(percents, new Integer[] { 75, 50, 25 });
     }
 }

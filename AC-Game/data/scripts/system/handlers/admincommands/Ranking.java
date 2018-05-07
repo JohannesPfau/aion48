@@ -50,7 +50,8 @@ public class Ranking extends AdminCommand {
         } else if ("update".equalsIgnoreCase(params[0])) {
             AbyssRankUpdateService.getInstance().performUpdate();
 
-        }PacketSendUtility.sendMessage(admin, "Ranks Has Been Updated Successfully.");
+        }
+        PacketSendUtility.sendMessage(admin, "Ranks Has Been Updated Successfully.");
     }
 
     @Override

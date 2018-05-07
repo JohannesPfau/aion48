@@ -47,9 +47,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastMap;
-import javolution.util.FastSet;
-
 import org.apache.commons.lang.math.IntRange;
 
 import com.aionemu.gameserver.model.templates.itemgroups.BonusItemGroup;
@@ -87,16 +84,19 @@ import com.aionemu.gameserver.model.templates.rewards.CraftRecipe;
 import com.aionemu.gameserver.model.templates.rewards.CraftReward;
 import com.aionemu.gameserver.model.templates.rewards.IdLevelReward;
 
+import javolution.util.FastMap;
+import javolution.util.FastSet;
+
 /**
  * @author Rolandas
  */
 @XmlRootElement(name = "item_groups")
-@XmlType(name = "", propOrder = {"craftMaterials", "craftShop", "craftBundles", "craftRecipes", "manastonesCommon",
-        "manastonesRare", "medals", "foodCommon", "foodRare", "foodLegendary", "medicineCommon", "medicineRare", "medicineLegendary",
-        "oresRare", "oresLegendary", "oresUnique", "oresEpic", "gatherRare", "enchants", "bossRare", "bossLegendary",
-        "feedFluids", "feedArmor", "feedThorns", "feedBones", "feedBalaurScales", "feedSouls", "feedExcludes",
-        "stinkingJunk", "healthyFoodAll", "healthyFoodSpicy", "aetherPowderBiscuit", "aetherCrystalBiscuit",
-        "aetherGemBiscuit", "poppySnack", "poppySnackTasty", "poppySnackNutritious", "shugoCoins"})
+@XmlType(name = "",
+    propOrder = { "craftMaterials", "craftShop", "craftBundles", "craftRecipes", "manastonesCommon", "manastonesRare", "medals", "foodCommon",
+        "foodRare", "foodLegendary", "medicineCommon", "medicineRare", "medicineLegendary", "oresRare", "oresLegendary", "oresUnique", "oresEpic",
+        "gatherRare", "enchants", "bossRare", "bossLegendary", "feedFluids", "feedArmor", "feedThorns", "feedBones", "feedBalaurScales", "feedSouls",
+        "feedExcludes", "stinkingJunk", "healthyFoodAll", "healthyFoodSpicy", "aetherPowderBiscuit", "aetherCrystalBiscuit", "aetherGemBiscuit",
+        "poppySnack", "poppySnackTasty", "poppySnackNutritious", "shugoCoins" })
 @XmlAccessorType(XmlAccessType.NONE)
 public class ItemGroupsData {
 
@@ -177,10 +177,10 @@ public class ItemGroupsData {
     protected PoppySnackNutritiousGroup poppySnackNutritious;
     @XmlElement(name = "feed_shugo_event_coin")
     protected ShugoEventCoinGroup shugoCoins;
-    FastMap<Integer, FastMap<IntRange, List<CraftReward>>> craftMaterialsBySkill = new FastMap<Integer, FastMap<IntRange, List<CraftReward>>>();
-    FastMap<Integer, FastMap<IntRange, List<CraftReward>>> craftShopBySkill = new FastMap<Integer, FastMap<IntRange, List<CraftReward>>>();
-    FastMap<Integer, FastMap<IntRange, List<CraftReward>>> craftBundlesBySkill = new FastMap<Integer, FastMap<IntRange, List<CraftReward>>>();
-    FastMap<Integer, FastMap<IntRange, List<CraftReward>>> craftRecipesBySkill = new FastMap<Integer, FastMap<IntRange, List<CraftReward>>>();
+    FastMap<Integer, FastMap<IntRange, List<CraftReward>>> craftMaterialsBySkill = new FastMap<>();
+    FastMap<Integer, FastMap<IntRange, List<CraftReward>>> craftShopBySkill = new FastMap<>();
+    FastMap<Integer, FastMap<IntRange, List<CraftReward>>> craftBundlesBySkill = new FastMap<>();
+    FastMap<Integer, FastMap<IntRange, List<CraftReward>>> craftRecipesBySkill = new FastMap<>();
     BonusItemGroup[] craftGroups;
     BonusItemGroup[] manastoneGroups;
     BonusItemGroup[] medalGroups;
@@ -190,7 +190,7 @@ public class ItemGroupsData {
     BonusItemGroup[] gatherGroups;
     BonusItemGroup[] enchantGroups;
     BonusItemGroup[] bossGroups;
-    Map<FoodType, FastSet<Integer>> petFood = new HashMap<FoodType, FastSet<Integer>>();
+    Map<FoodType, FastSet<Integer>> petFood = new HashMap<>();
     private int count = 0;
     private int petFoodCount = 0;
 
@@ -231,15 +231,15 @@ public class ItemGroupsData {
         craftRecipes.getItems().clear();
         craftRecipes.setDataHolder(craftRecipesBySkill);
 
-        craftGroups = new BonusItemGroup[]{craftMaterials, craftShop, craftBundles, craftRecipes};
-        manastoneGroups = new BonusItemGroup[]{manastonesCommon, manastonesRare};
-        medalGroups = new BonusItemGroup[]{medals};
-        foodGroups = new BonusItemGroup[]{foodCommon, foodRare, foodLegendary};
-        medicineGroups = new BonusItemGroup[]{medicineCommon, medicineRare, medicineLegendary};
-        oreGroups = new BonusItemGroup[]{oresRare, oresLegendary, oresUnique, oresEpic};
-        gatherGroups = new BonusItemGroup[]{gatherRare};
-        enchantGroups = new BonusItemGroup[]{enchants};
-        bossGroups = new BonusItemGroup[]{bossRare, bossLegendary};
+        craftGroups = new BonusItemGroup[] { craftMaterials, craftShop, craftBundles, craftRecipes };
+        manastoneGroups = new BonusItemGroup[] { manastonesCommon, manastonesRare };
+        medalGroups = new BonusItemGroup[] { medals };
+        foodGroups = new BonusItemGroup[] { foodCommon, foodRare, foodLegendary };
+        medicineGroups = new BonusItemGroup[] { medicineCommon, medicineRare, medicineLegendary };
+        oreGroups = new BonusItemGroup[] { oresRare, oresLegendary, oresUnique, oresEpic };
+        gatherGroups = new BonusItemGroup[] { gatherRare };
+        enchantGroups = new BonusItemGroup[] { enchants };
+        bossGroups = new BonusItemGroup[] { bossRare, bossLegendary };
 
         for (FoodType foodType : FoodType.values()) {
             List<ItemRaceEntry> food = getPetFood(foodType);
@@ -278,7 +278,7 @@ public class ItemGroupsData {
         if (dataHolder.containsKey(reward.getSkill())) {
             ranges = dataHolder.get(reward.getSkill());
         } else {
-            ranges = new FastMap<IntRange, List<CraftReward>>();
+            ranges = new FastMap<>();
             dataHolder.put(reward.getSkill(), ranges);
         }
 
@@ -286,7 +286,7 @@ public class ItemGroupsData {
         if (ranges.containsKey(range)) {
             items = ranges.get(range);
         } else {
-            items = new ArrayList<CraftReward>();
+            items = new ArrayList<>();
             ranges.put(range, items);
         }
         items.add(reward);
@@ -296,7 +296,7 @@ public class ItemGroupsData {
         if (craftMaterialsBySkill.containsKey(skillId)) {
             return Collections.emptyList();
         }
-        List<CraftReward> result = new ArrayList<CraftReward>();
+        List<CraftReward> result = new ArrayList<>();
         for (List<CraftReward> items : craftMaterialsBySkill.get(skillId).values()) {
             result.addAll(items);
         }
@@ -311,7 +311,7 @@ public class ItemGroupsData {
         if (craftShopBySkill.containsKey(skillId)) {
             return Collections.emptyList();
         }
-        List<CraftReward> result = new ArrayList<CraftReward>();
+        List<CraftReward> result = new ArrayList<>();
         for (List<CraftReward> items : craftShopBySkill.get(skillId).values()) {
             result.addAll(items);
         }
@@ -326,7 +326,7 @@ public class ItemGroupsData {
         if (craftBundlesBySkill.containsKey(skillId)) {
             return Collections.emptyList();
         }
-        List<CraftReward> result = new ArrayList<CraftReward>();
+        List<CraftReward> result = new ArrayList<>();
         for (List<CraftReward> items : craftBundlesBySkill.get(skillId).values()) {
             result.addAll(items);
         }
@@ -341,7 +341,7 @@ public class ItemGroupsData {
         if (craftRecipesBySkill.containsKey(skillId)) {
             return Collections.emptyList();
         }
-        List<CraftReward> result = new ArrayList<CraftReward>();
+        List<CraftReward> result = new ArrayList<>();
         for (List<CraftReward> items : craftRecipesBySkill.get(skillId).values()) {
             result.addAll(items);
         }
@@ -627,11 +627,10 @@ public class ItemGroupsData {
 
     public int bonusSize() {
         return count + manastonesCommon.getItems().size() + manastonesRare.getItems().size() + foodCommon.getItems().size()
-                + foodRare.getItems().size() + foodLegendary.getItems().size() + medicineCommon.getItems().size()
-                + medicineRare.getItems().size() + medicineLegendary.getItems().size() + oresRare.getItems().size()
-                + oresLegendary.getItems().size() + oresUnique.getItems().size() + oresEpic.getItems().size()
-                + gatherRare.getItems().size() + enchants.getItems().size() + bossRare.getItems().size()
-                + bossLegendary.getItems().size();
+            + foodRare.getItems().size() + foodLegendary.getItems().size() + medicineCommon.getItems().size() + medicineRare.getItems().size()
+            + medicineLegendary.getItems().size() + oresRare.getItems().size() + oresLegendary.getItems().size() + oresUnique.getItems().size()
+            + oresEpic.getItems().size() + gatherRare.getItems().size() + enchants.getItems().size() + bossRare.getItems().size()
+            + bossLegendary.getItems().size();
     }
 
     public int petFoodSize() {

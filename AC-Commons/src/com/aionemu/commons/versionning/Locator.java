@@ -54,9 +54,10 @@ public final class Locator {
     /**
      * Find the directory or jar file the class has been loaded from.
      *
-     * @param c the class whose location is required.
+     * @param c
+     *            the class whose location is required.
      * @return the file or jar with the class or null if we cannot determine the
-     * location.
+     *         location.
      * @since Ant 1.6
      */
     public static File getClassSource(Class<?> c) {
@@ -67,10 +68,12 @@ public final class Locator {
     /**
      * Find the directory or jar a given resource has been loaded from.
      *
-     * @param c        the classloader to be consulted for the source.
-     * @param resource the resource whose location is required.
+     * @param c
+     *            the classloader to be consulted for the source.
+     * @param resource
+     *            the resource whose location is required.
      * @return the file with the resource source or null if we cannot determine
-     * the location.
+     *         the location.
      * @since Ant 1.6
      */
     public static File getResourceSource(ClassLoader c, String resource) {
@@ -108,7 +111,8 @@ public final class Locator {
      * non-ASCII characters.
      * </p>
      *
-     * @param uri the URI designating a file in the local filesystem.
+     * @param uri
+     *            the URI designating a file in the local filesystem.
      * @return the local file system path for the file.
      * @since Ant 1.6
      */
@@ -133,7 +137,7 @@ public final class Locator {
         uri = buf.toString().replace('/', File.separatorChar);
 
         if (File.pathSeparatorChar == ';' && uri.startsWith("\\") && uri.length() > 2 && Character.isLetter(uri.charAt(1))
-                && uri.lastIndexOf(':') > -1) {
+            && uri.lastIndexOf(':') > -1) {
             uri = uri.substring(1);
         }
         String path = decodeUri(uri);
@@ -143,7 +147,8 @@ public final class Locator {
     /**
      * Decodes an Uri with % characters.
      *
-     * @param uri String with the uri possibly containing % characters.
+     * @param uri
+     *            String with the uri possibly containing % characters.
      * @return The decoded Uri
      */
     private static String decodeUri(String uri) {
@@ -217,12 +222,14 @@ public final class Locator {
      * of the array. If the location is a directory, it is scanned for jar
      * files.
      *
-     * @param location the location to scan for Jars.
+     * @param location
+     *            the location to scan for Jars.
      * @return an array of URLs for all jars in the given location.
-     * @throws MalformedURLException if the URLs for the jars cannot be formed.
+     * @throws MalformedURLException
+     *             if the URLs for the jars cannot be formed.
      */
     public static URL[] getLocationURLs(File location) throws MalformedURLException {
-        return getLocationURLs(location, new String[]{".jar"});
+        return getLocationURLs(location, new String[] { ".jar" });
     }
 
     /**
@@ -231,11 +238,14 @@ public final class Locator {
      * returned as the only element of the array. If the location is a
      * directory, it is scanned for matching files.
      *
-     * @param location   the location to scan for files.
-     * @param extensions an array of extension that are to match in the
-     *                   directory search.
+     * @param location
+     *            the location to scan for files.
+     * @param extensions
+     *            an array of extension that are to match in the
+     *            directory search.
      * @return an array of URLs of matching files.
-     * @throws MalformedURLException if the URLs for the files cannot be formed.
+     * @throws MalformedURLException
+     *             if the URLs for the files cannot be formed.
      */
     public static URL[] getLocationURLs(File location, final String[] extensions) throws MalformedURLException {
 

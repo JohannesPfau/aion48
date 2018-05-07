@@ -42,15 +42,15 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class _30350ABetterWeapon extends QuestHandler {
 
-	private final static int questId = 30350;
+    private final static int questId = 30350;
 
-	public _30350ABetterWeapon() {
-		super(questId);
-	}
+    public _30350ABetterWeapon() {
+        super(questId);
+    }
 
-	@Override
-	public void register() {
-        int[] debilkarims = {286904, 281419, 215795};
+    @Override
+    public void register() {
+        int[] debilkarims = { 286904, 281419, 215795 };
         qe.registerQuestNpc(799336).addOnQuestStart(questId);
         qe.registerQuestNpc(799336).addOnTalkEvent(questId);
         qe.registerGetingItem(182213560, questId);

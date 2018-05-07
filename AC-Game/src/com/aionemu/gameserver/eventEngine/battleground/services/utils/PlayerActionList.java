@@ -72,7 +72,7 @@ public class PlayerActionList {
 
     public ArrayList<Player> getFinalHealList() {
         lock = true;
-        ArrayList<Player> sortedPlayers = new ArrayList<Player>();
+        ArrayList<Player> sortedPlayers = new ArrayList<>();
         synchronized (hated) {
             for (Entry<Player, Integer> entry : healers.entrySet()) {
                 int retainedIndex = 0;
@@ -93,7 +93,7 @@ public class PlayerActionList {
 
     public ArrayList<Creature> getFinalHatedList() {
         lock = true;
-        ArrayList<Creature> sortedCreatures = new ArrayList<Creature>();
+        ArrayList<Creature> sortedCreatures = new ArrayList<>();
         synchronized (hated) {
             for (Entry<Creature, Integer> entry : hated.entrySet()) {
                 int retainedIndex = 0;

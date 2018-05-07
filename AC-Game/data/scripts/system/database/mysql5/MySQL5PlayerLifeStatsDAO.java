@@ -29,17 +29,18 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerLifeStatsDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 /**
  * @author Mr. Poke
@@ -73,8 +74,7 @@ public class MySQL5PlayerLifeStatsDAO extends PlayerLifeStatsDAO {
             rset.close();
             stmt.close();
         } catch (Exception e) {
-            log.error("Could not restore PlayerLifeStat data for playerObjId: " + player.getObjectId() + " from DB: "
-                    + e.getMessage(), e);
+            log.error("Could not restore PlayerLifeStat data for playerObjId: " + player.getObjectId() + " from DB: " + e.getMessage(), e);
         } finally {
             DatabaseFactory.close(con);
         }

@@ -106,7 +106,7 @@ public class _4542TheSecretOfTheSeirenTreasure extends QuestHandler {
                         }
                     }
                     break;
-                case 204768:  // sleipnir
+                case 204768: // sleipnir
                     switch (env.getDialog()) {
                         case QUEST_SELECT:
                             if (var == 1) {

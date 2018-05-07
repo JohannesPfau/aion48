@@ -41,9 +41,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author MrPoke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "TradeinList", propOrder = {
-        "tradeinItem"
-})
+@XmlType(name = "TradeinList", propOrder = { "tradeinItem" })
 public class TradeinList {
 
     @XmlAttribute
@@ -58,11 +56,11 @@ public class TradeinList {
         return this.tradeinItem;
     }
 
-    public int getAp(){
+    public int getAp() {
         return ap;
     }
 
-    public int getPrice(){
+    public int getPrice() {
         return price;
     }
 }

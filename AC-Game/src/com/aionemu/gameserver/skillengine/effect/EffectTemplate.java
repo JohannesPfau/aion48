@@ -39,8 +39,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -67,6 +65,8 @@ import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
 import com.aionemu.gameserver.skillengine.model.TransformType;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
+
+import javolution.util.FastList;
 
 /**
  * @author ATracer
@@ -156,6 +156,7 @@ public abstract class EffectTemplate {
     public void setDuration(int newDuration) {
         this.duration2 = newDuration;
     }
+
     /**
      * @return the duration1
      */
@@ -458,7 +459,7 @@ public abstract class EffectTemplate {
     }
 
     private FastList<Integer> getPreEffects() {
-        FastList<Integer> preEffects = new FastList<Integer>();
+        FastList<Integer> preEffects = new FastList<>();
 
         if (this.getPreEffect() == null) {
             return preEffects;
@@ -603,8 +604,8 @@ public abstract class EffectTemplate {
      * @return true = no resist, false = resisted
      */
     public boolean calculateEffectResistRate(Effect effect, StatEnum statEnum) {
-        if (effect.getEffected() == null || effect.getEffected().getGameStats() == null
-                || effect.getEffector() == null || effect.getEffector().getGameStats() == null) {
+        if (effect.getEffected() == null || effect.getEffected().getGameStats() == null || effect.getEffector() == null
+            || effect.getEffector().getGameStats() == null) {
             return false;
         }
 
@@ -655,14 +656,12 @@ public abstract class EffectTemplate {
         if (effected != effect.getEffector()) {
             if (effected instanceof Npc) {
                 Npc npc = (Npc) effected;
-                if (npc.isBoss() || npc.hasStatic() || npc instanceof Kisk
-                        || npc.getAi2().ask(AIQuestion.CAN_RESIST_ABNORMAL).isPositive()) {
+                if (npc.isBoss() || npc.hasStatic() || npc instanceof Kisk || npc.getAi2().ask(AIQuestion.CAN_RESIST_ABNORMAL).isPositive()) {
                     return true;
                 }
                 if (npc.getObjectTemplate().getStatsTemplate().getRunSpeed() == 0) {
-                    if (statEnum == StatEnum.PULLED_RESISTANCE
-                            || statEnum == StatEnum.STAGGER_RESISTANCE
-                            || statEnum == StatEnum.STUMBLE_RESISTANCE) {
+                    if (statEnum == StatEnum.PULLED_RESISTANCE || statEnum == StatEnum.STAGGER_RESISTANCE
+                        || statEnum == StatEnum.STUMBLE_RESISTANCE) {
                         return true;
                     }
                 }
@@ -681,7 +680,7 @@ public abstract class EffectTemplate {
     /**
      * @param statEnum
      * @return true = it's an altered state effect, false = it is Poison/Bleed
-     * dot (normal Dots have statEnum null here)
+     *         dot (normal Dots have statEnum null here)
      */
     private boolean isAlteredState(StatEnum stat) {
         switch (stat) {
@@ -766,18 +765,9 @@ public abstract class EffectTemplate {
      * @return
      */
     private boolean isMagicalEffectTemp() {
-        if (this instanceof SilenceEffect
-                || this instanceof SleepEffect
-                || this instanceof RootEffect
-                || this instanceof SnareEffect
-                || this instanceof StunEffect
-                || this instanceof PoisonEffect
-                || this instanceof BindEffect
-                || this instanceof BleedEffect
-                || this instanceof BlindEffect
-                || this instanceof DeboostHealEffect
-                || this instanceof ParalyzeEffect
-                || this instanceof SlowEffect) {
+        if (this instanceof SilenceEffect || this instanceof SleepEffect || this instanceof RootEffect || this instanceof SnareEffect
+            || this instanceof StunEffect || this instanceof PoisonEffect || this instanceof BindEffect || this instanceof BleedEffect
+            || this instanceof BlindEffect || this instanceof DeboostHealEffect || this instanceof ParalyzeEffect || this instanceof SlowEffect) {
             return true;
         }
 
@@ -785,15 +775,17 @@ public abstract class EffectTemplate {
     }
 
     /**
-	 * @param u  
-     * @param parent 
-	 */
+     * @param u
+     * @param parent
+     */
     void afterUnmarshal(Unmarshaller u, Object parent) {
         EffectType temp = null;
         try {
-            temp = EffectType.valueOf(this.getClass().getName().replaceAll("com.aionemu.gameserver.skillengine.effect.", "").replaceAll("Effect", "").toUpperCase());
+            temp = EffectType.valueOf(
+                this.getClass().getName().replaceAll("com.aionemu.gameserver.skillengine.effect.", "").replaceAll("Effect", "").toUpperCase());
         } catch (Exception e) {
-            log.info("missing effectype for " + this.getClass().getName().replaceAll("com.aionemu.gameserver.skillengine.effect.", "").replaceAll("Effect", "").toUpperCase());
+            log.info("missing effectype for "
+                + this.getClass().getName().replaceAll("com.aionemu.gameserver.skillengine.effect.", "").replaceAll("Effect", "").toUpperCase());
         }
 
         this.effectType = temp;

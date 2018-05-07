@@ -29,15 +29,15 @@
  */
 package playercommands;
 
+import com.aionemu.gameserver.eventEngine.battleground.services.battleground.BattleGroundManager;
+import com.aionemu.gameserver.eventEngine.battleground.services.factories.SurveyFactory;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
 import com.aionemu.gameserver.services.HTMLService;
-import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
-import com.aionemu.gameserver.eventEngine.battleground.services.battleground.BattleGroundManager;
-import com.aionemu.gameserver.eventEngine.battleground.services.factories.SurveyFactory;
+import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 
@@ -97,7 +97,8 @@ public class cmd_bg extends PlayerCommand {
                 PacketSendUtility.sendMessage(player, "You are now mortal.");
 
                 if (player.battlegroundBetE > 0 || player.battlegroundBetA > 0) {
-                    PacketSendUtility.sendMessage(player, "You have lost your bet of " + (player.battlegroundBetE + player.battlegroundBetA) + "kinah.");
+                    PacketSendUtility.sendMessage(player,
+                        "You have lost your bet of " + (player.battlegroundBetE + player.battlegroundBetA) + "kinah.");
                     player.battlegroundBetE = 0;
                     player.battlegroundBetA = 0;
                 }
@@ -118,9 +119,12 @@ public class cmd_bg extends PlayerCommand {
                 HTMLService.showHTML(player, SurveyFactory.getBattleGroundRanking(player.getBattleGround()), 151000001);
             }
         } else if (params[0].equals("stat") && player.getAccessLevel() > 0) {
-            PacketSendUtility.sendMessage(player, BattleGroundManager.getElyosWaitList().get(1).size() + " Elyos " + BattleGroundManager.getAsmodiansWaitList().get(1).size() + " Asmodians for Triniel");
-            PacketSendUtility.sendMessage(player, BattleGroundManager.getElyosWaitList().get(2).size() + " Elyos " + BattleGroundManager.getAsmodiansWaitList().get(2).size() + " Asmodians for Sanctum");
-            PacketSendUtility.sendMessage(player, BattleGroundManager.getElyosWaitList().get(3).size() + " Elyos " + BattleGroundManager.getAsmodiansWaitList().get(3).size() + " Asmodians for Haramel");
+            PacketSendUtility.sendMessage(player, BattleGroundManager.getElyosWaitList().get(1).size() + " Elyos "
+                + BattleGroundManager.getAsmodiansWaitList().get(1).size() + " Asmodians for Triniel");
+            PacketSendUtility.sendMessage(player, BattleGroundManager.getElyosWaitList().get(2).size() + " Elyos "
+                + BattleGroundManager.getAsmodiansWaitList().get(2).size() + " Asmodians for Sanctum");
+            PacketSendUtility.sendMessage(player, BattleGroundManager.getElyosWaitList().get(3).size() + " Elyos "
+                + BattleGroundManager.getAsmodiansWaitList().get(3).size() + " Asmodians for Haramel");
         } else if (params[0].equals("exchange")) {
             if (player.getAccessLevel() < 1) {
                 PacketSendUtility.sendMessage(player, "The exchange tool is not available.");
@@ -167,7 +171,9 @@ public class cmd_bg extends PlayerCommand {
             PacketSendUtility.sendMessage(player, ".bg points : to see your points");
             PacketSendUtility.sendMessage(player, ".bet : bet on a faction during observe mode");
         } else if (params[0].equals("points")) {
-            PacketSendUtility.sendMessage(player, "You have actually " + (player.getCommonData().getBattleGroundPoints() + player.battlegroundSessionPoints) + " BG points" + (player.battlegroundSessionPoints > 0 ? ", including " + player.battlegroundSessionPoints + " in the current BG " : "") + ".");
+            PacketSendUtility.sendMessage(player,
+                "You have actually " + (player.getCommonData().getBattleGroundPoints() + player.battlegroundSessionPoints) + " BG points"
+                    + (player.battlegroundSessionPoints > 0 ? ", including " + player.battlegroundSessionPoints + " in the current BG " : "") + ".");
         } else {
             PacketSendUtility.sendMessage(player, "This command doesn't exist, use .bg help");
         }

@@ -39,7 +39,6 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
  * This blob is sent for accessory items (such as ring, earring, waist). It
  * keeps info about slots that item can be equipped to.
  *
-
  * @modified Rolandas
  */
 public class AccessoryInfoBlobEntry extends ItemBlobEntry {

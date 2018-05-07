@@ -93,7 +93,8 @@ public abstract class GLObject implements Cloneable {
      * Sets the ID of the GLObject. This method is used in Renderer and must not
      * be called by the user.
      *
-     * @param id The ID to set
+     * @param id
+     *            The ID to set
      */
     public void setId(int id) {
         if (this.id != -1) {
@@ -105,7 +106,7 @@ public abstract class GLObject implements Cloneable {
 
     /**
      * @return The ID of the object. Should not be used by user code in most
-     * cases.
+     *         cases.
      */
     public int getId() {
         return id;
@@ -138,7 +139,7 @@ public abstract class GLObject implements Cloneable {
      * @return
      */
     @Override
-	protected GLObject clone() {
+    protected GLObject clone() {
         try {
             GLObject obj = (GLObject) super.clone();
             obj.handleRef = new Object();
@@ -150,14 +151,14 @@ public abstract class GLObject implements Cloneable {
         }
     }
 
-//    @Override
-//    public boolean equals(Object other){
-//        if (this == other)
-//            return true;
-//        if (!(other instanceof GLObject))
-//            return false;
-//
-//    }
+    //    @Override
+    //    public boolean equals(Object other){
+    //        if (this == other)
+    //            return true;
+    //        if (!(other instanceof GLObject))
+    //            return false;
+    //
+    //    }
     // Specialized calls to be used by object manager only.
 
     /**

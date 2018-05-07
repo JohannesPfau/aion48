@@ -38,6 +38,7 @@ public enum ChallengeType {
 
     LEGION(1),
     TOWN(2);
+
     private int id;
 
     public int getId() {

@@ -66,6 +66,7 @@ public class SummonGroupGateEffect extends SummonEffect {
         final GroupGate groupgate = VisibleObjectSpawner.spawnGroupGate(spawn, instanceId, effector);
 
         Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
 

@@ -29,11 +29,11 @@
  */
 package quest.cygnea;
 
+import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.TeleportAnimation;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -54,23 +54,23 @@ public class _10506MindOverMatter extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {804709, 804710, 702666, 702667};
-		qe.registerQuestNpc(236259).addOnKillEvent(questId);
-		qe.registerQuestNpc(236263).addOnKillEvent(questId);
-		qe.registerOnLevelUp(questId);
+        int[] npcs = { 804709, 804710, 702666, 702667 };
+        qe.registerQuestNpc(236259).addOnKillEvent(questId);
+        qe.registerQuestNpc(236263).addOnKillEvent(questId);
+        qe.registerOnLevelUp(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }
-		qe.registerQuestItem(182215604, questId);
-		qe.registerOnEnterZone(ZoneName.get("LF5_SensoryArea_Q10506"), questId);
+        qe.registerQuestItem(182215604, questId);
+        qe.registerOnEnterZone(ZoneName.get("LF5_SensoryArea_Q10506"), questId);
     }
 
-	@Override
+    @Override
     public boolean onLvlUpEvent(QuestEnv env) {
         return defaultOnLvlUpEvent(env, 10505, true);
     }
-	
-	@Override
+
+    @Override
     public boolean onKillEvent(QuestEnv env) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);
@@ -82,17 +82,18 @@ public class _10506MindOverMatter extends QuestHandler {
                     return defaultOnKillEvent(env, 236259, var1, var1 + 1, 1);
                 } else if (var1 == 1) {
                     qs.setQuestVar(4);
-					updateQuestStatus(env);
+                    updateQuestStatus(env);
                     return true;
                 }
             }
-			if (var == 6) {
+            if (var == 6) {
                 return defaultOnKillEvent(env, 236263, 6, 7);
-                
+
             }
         }
         return false;
     }
+
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         final Player player = env.getPlayer();
@@ -112,51 +113,49 @@ public class _10506MindOverMatter extends QuestHandler {
                     case QUEST_SELECT:
                         if (var == 0) {
                             return sendQuestDialog(env, 1011);
-                        }						
+                        }
                     case SETPRO1:
-                        changeQuestStep(env, 0, 1, false); 
-						return closeDialogWindow(env);
+                        changeQuestStep(env, 0, 1, false);
+                        return closeDialogWindow(env);
                 }
             }
-			if (targetId == 804710) {
+            if (targetId == 804710) {
                 switch (env.getDialog()) {
                     case QUEST_SELECT:
                         if (var == 1) {
                             return sendQuestDialog(env, 1352);
-                        }
-						else if (var == 5) {
+                        } else if (var == 5) {
                             return sendQuestDialog(env, 2716);
-                        }
-						else if (var == 7) {
+                        } else if (var == 7) {
                             return sendQuestDialog(env, 3399);
                         }
-					case SETPRO2:
-                        changeQuestStep(env, 1, 2, false); 
-						return closeDialogWindow(env);
-					case SETPRO6:
-						QuestService.addNewSpawn(210070000, 1, 236263, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
-						changeQuestStep(env, 5, 6, false); 
-						return closeDialogWindow(env);
-					case SET_SUCCEED:
-						giveQuestItem(env, 182215613, 1);
-						changeQuestStep(env, 7, 8, true); 
-						return closeDialogWindow(env);
+                    case SETPRO2:
+                        changeQuestStep(env, 1, 2, false);
+                        return closeDialogWindow(env);
+                    case SETPRO6:
+                        QuestService.addNewSpawn(210070000, 1, 236263, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
+                        changeQuestStep(env, 5, 6, false);
+                        return closeDialogWindow(env);
+                    case SET_SUCCEED:
+                        giveQuestItem(env, 182215613, 1);
+                        changeQuestStep(env, 7, 8, true);
+                        return closeDialogWindow(env);
 
                 }
             }
-			if (targetId == 702666) {
+            if (targetId == 702666) {
                 switch (env.getDialog()) {
                     case USE_OBJECT:
-						TeleportService2.teleportTo(env.getPlayer(), 210070000, 2837, 2991, 680, (byte) 67, TeleportAnimation.BEAM_ANIMATION);
+                        TeleportService2.teleportTo(env.getPlayer(), 210070000, 2837, 2991, 680, (byte) 67, TeleportAnimation.BEAM_ANIMATION);
                         changeQuestStep(env, 4, 5, false);
-						return true; 
+                        return true;
                 }
             }
-			if (targetId == 702667) {
+            if (targetId == 702667) {
                 switch (env.getDialog()) {
                     case USE_OBJECT:
-						TeleportService2.teleportTo(env.getPlayer(), 210070000, 2774, 3007, 275, (byte) 100, TeleportAnimation.BEAM_ANIMATION);
-						return true; 
+                        TeleportService2.teleportTo(env.getPlayer(), 210070000, 2774, 3007, 275, (byte) 100, TeleportAnimation.BEAM_ANIMATION);
+                        return true;
                 }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
@@ -170,8 +169,8 @@ public class _10506MindOverMatter extends QuestHandler {
         }
         return false;
     }
-	
-	@Override
+
+    @Override
     public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);

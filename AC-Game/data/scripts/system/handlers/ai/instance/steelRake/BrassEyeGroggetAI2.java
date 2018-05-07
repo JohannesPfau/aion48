@@ -29,10 +29,11 @@
  */
 package ai.instance.steelRake;
 
-import ai.SummonerAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.ai.Percentage;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import ai.SummonerAI2;
 
 /**
  * @author xTz
@@ -66,6 +67,7 @@ public class BrassEyeGroggetAI2 extends SummonerAI2 {
         // to do move boss to initial position and set pause move and atack
         // after 9 sec first spawn
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
 
@@ -92,6 +94,7 @@ public class BrassEyeGroggetAI2 extends SummonerAI2 {
 
         // next spawn after 35 sec
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 spawnHelpers2(nrSpawn);
@@ -119,6 +122,7 @@ public class BrassEyeGroggetAI2 extends SummonerAI2 {
 
         // remove effect after 21 sec
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (getEffectController().hasAbnormalEffect(18191)) {

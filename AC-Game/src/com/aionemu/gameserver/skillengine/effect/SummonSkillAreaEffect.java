@@ -78,6 +78,7 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 
         final Servant servant = spawnServant(effect, useTime, NpcObjectType.SKILLAREA, x, y, z);
         Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 servant.getController().useSkill(skillId);

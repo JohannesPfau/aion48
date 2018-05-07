@@ -54,6 +54,7 @@ public enum APRewardEnum {
     GREAT_GENERAL(16, 6.25f),
     COMMANDER(17, 6.25f),
     SUPREME_COMMANDER(18, 6.25f);
+
     private int playerRank;
     private float rewardPercent;
 
@@ -67,7 +68,8 @@ public enum APRewardEnum {
     }
 
     /**
-     * @param playerRank current Abyss Rank
+     * @param playerRank
+     *            current Abyss Rank
      * @return AP reward percentage
      */
     public static float apReward(int playerRank) {

@@ -53,6 +53,7 @@ public class AlwaysBlockEffect extends EffectTemplate {
     @Override
     public void startEffect(final Effect effect) {
         AttackCalcObserver acObserver = new AttackStatusObserver(value, AttackStatus.BLOCK) {
+
             @Override
             public boolean checkStatus(AttackStatus status) {
                 if (status == AttackStatus.BLOCK) {

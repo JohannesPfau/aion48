@@ -29,6 +29,9 @@
  */
 package admincommands;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -36,8 +39,6 @@ import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author Watson
@@ -84,7 +85,8 @@ public class UnBan extends AdminCommand {
 
         // Sends time -1 to unban
         LoginServer.getInstance().sendBanPacket(type, accountId, "", -1, admin.getObjectId());
-        log.info("[unban] GM : " + admin.getName() + " has unbanned the in config [" + type + "] of player [" + name + "] in mapId '" + admin.getWorldId() + "'");
+        log.info("[unban] GM : " + admin.getName() + " has unbanned the in config [" + type + "] of player [" + name + "] in mapId '"
+            + admin.getWorldId() + "'");
     }
 
     @Override

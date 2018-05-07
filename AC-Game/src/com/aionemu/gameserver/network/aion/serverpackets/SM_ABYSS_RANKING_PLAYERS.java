@@ -40,7 +40,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * @author Rhys2002, zdead, LokiReborn
- (Aion-Core) v4.7.5.18
+ *         (Aion-Core) v4.7.5.18
  */
 public class SM_ABYSS_RANKING_PLAYERS extends AionServerPacket {
 
@@ -68,7 +68,7 @@ public class SM_ABYSS_RANKING_PLAYERS extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(race); // 0:Elyos 1:Asmo
         writeD(lastUpdate); // Date
         writeD(page); // Current page

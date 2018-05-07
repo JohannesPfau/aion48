@@ -29,9 +29,9 @@
  */
 package quest.inggison;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -64,9 +64,9 @@ public class _10020ProvingYourselfToOutremus extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {798926, 798928, 730223, 730224, 730225, 798927, 798955, 700628, 700629, 700630};
-        int[] mobs = {215504, 216782, 215505, 216463, 216783, 216464, 216692, 215517, 216648, 215519, 216691, 215516,
-            216647, 215518, 215508, 215509};
+        int[] npcs = { 798926, 798928, 730223, 730224, 730225, 798927, 798955, 700628, 700629, 700630 };
+        int[] mobs = { 215504, 216782, 215505, 216463, 216783, 216464, 216692, 215517, 216648, 215519, 216691, 215516, 216647, 215518, 215508,
+            215509 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         for (int npc : npcs) {
@@ -264,9 +264,8 @@ public class _10020ProvingYourselfToOutremus extends QuestHandler {
         int var2 = qs.getQuestVarById(2);
         if (qs.getStatus() == QuestStatus.START) {
             if (var == 3) {
-                int[] mobs = {215504, 216782, 215505, 216463, 216783, 216464, 216692, 215517, 216648, 215519, 216691, 215516,
-                    216647, 215518};
-                int[] spellers = {215508, 215509};
+                int[] mobs = { 215504, 216782, 215505, 216463, 216783, 216464, 216692, 215517, 216648, 215519, 216691, 215516, 216647, 215518 };
+                int[] spellers = { 215508, 215509 };
                 if (targetId == spellers[0] || targetId == spellers[1]) {
                     if (var2 < 2) {
                         return defaultOnKillEvent(env, spellers, var2, var2 + 1, 2); // 2: 1 - 3

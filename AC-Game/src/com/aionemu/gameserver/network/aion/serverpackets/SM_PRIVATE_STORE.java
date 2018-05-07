@@ -58,7 +58,7 @@ public class SM_PRIVATE_STORE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         if (store != null) {
             Player storePlayer = store.getOwner();
             LinkedHashMap<Integer, TradePSItem> soldItems = store.getSoldItems();

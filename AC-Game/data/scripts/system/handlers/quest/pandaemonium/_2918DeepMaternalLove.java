@@ -29,12 +29,12 @@
  */
 package quest.pandaemonium;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -74,7 +74,7 @@ public class _2918DeepMaternalLove extends QuestHandler {
                     QuestService.startQuest(env);
                     return closeDialogWindow(env);
                 }
-								if (dialog == DialogAction.QUEST_REFUSE_1) {
+                if (dialog == DialogAction.QUEST_REFUSE_1) {
                     return closeDialogWindow(env);
                 }
             }

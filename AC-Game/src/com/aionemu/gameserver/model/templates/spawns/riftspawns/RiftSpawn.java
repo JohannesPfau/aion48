@@ -52,7 +52,7 @@ public class RiftSpawn {
     @XmlAttribute(name = "world")
     private int world;
     @XmlElement(name = "spawn")
-    private List<Spawn> spawns = new ArrayList<Spawn>();
+    private List<Spawn> spawns = new ArrayList<>();
 
     public int getId() {
         return id;

@@ -69,7 +69,8 @@ public class AttackResult {
     }
 
     /**
-     * @param damage the damage to set
+     * @param damage
+     *            the damage to set
      */
     public void setDamage(int damage) {
         this.damage = damage;
@@ -90,7 +91,8 @@ public class AttackResult {
     }
 
     /**
-     * @param type the Damage Type to set
+     * @param type
+     *            the Damage Type to set
      */
     public void setDamageType(HitType type) {
         this.hitType = type;
@@ -98,7 +100,6 @@ public class AttackResult {
 
     /**
      * shield effects related
-     *
      */
     /**
      * @return the shieldType
@@ -108,7 +109,8 @@ public class AttackResult {
     }
 
     /**
-     * @param shieldType the shieldType to set
+     * @param shieldType
+     *            the shieldType to set
      */
     public void setShieldType(int shieldType) {
         this.shieldType |= shieldType;
@@ -162,13 +164,11 @@ public class AttackResult {
         this.launchSubEffect = launchSubEffect;
     }
 
-    public int getShieldMp()
-    {
-      return this.shieldMp;
+    public int getShieldMp() {
+        return this.shieldMp;
     }
-    
-    public void setShieldMp(int shieldMp)
-    {
-      this.shieldMp = shieldMp;
+
+    public void setShieldMp(int shieldMp) {
+        this.shieldMp = shieldMp;
     }
 }

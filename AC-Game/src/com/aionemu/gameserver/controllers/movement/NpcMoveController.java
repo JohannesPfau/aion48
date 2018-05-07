@@ -42,7 +42,6 @@ import com.aionemu.gameserver.ai2.handler.TargetEventHandler;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.model.actions.CreatureActions;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -274,7 +273,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
             return;
         }
         if (GeoDataConfig.GEO_NPC_MOVE && GeoDataConfig.GEO_ENABLE && owner.getAi2().getSubState() != AISubState.WALK_PATH
-                && owner.getAi2().getState() != AIState.RETURNING && owner.getGameStats().getLastGeoZUpdate() < System.currentTimeMillis()) {
+            && owner.getAi2().getState() != AIState.RETURNING && owner.getGameStats().getLastGeoZUpdate() < System.currentTimeMillis()) {
             // fix Z if npc doesn't move to spawn point
             if (owner.getSpawn().getX() != targetDestX || owner.getSpawn().getY() != targetDestY || owner.getSpawn().getZ() != targetDestZ) {
                 float geoZ = GeoService.getInstance().getZ(owner.getWorldId(), newX, newY, newZ, 0, owner.getInstanceId());
@@ -367,7 +366,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
         Point2D dest = null;
         if (owner.getWalkerGroup() != null) {
             dest = WalkerGroup.getLinePoint(new Point2D(prevStep.getX(), prevStep.getY()), new Point2D(step.getX(), step.getY()),
-                    owner.getWalkerGroupShift());
+                owner.getWalkerGroupShift());
             this.pointZ = prevStep.getZ();
             if (GeoDataConfig.GEO_ENABLE && GeoDataConfig.GEO_NPC_MOVE) {
                 // TODO: fix Z
@@ -441,7 +440,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
             return;
         }
         if (lastSteps == null) {
-            lastSteps = new LastUsedCache<Byte, Point3D>(10);
+            lastSteps = new LastUsedCache<>(10);
         }
         Point3D currentStep = new Point3D(owner.getX(), owner.getY(), owner.getZ());
         if (owner.getAi2().isLogging()) {
@@ -454,7 +453,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 
     public Point3D recallPreviousStep() {
         if (lastSteps == null) {
-            lastSteps = new LastUsedCache<Byte, Point3D>(10);
+            lastSteps = new LastUsedCache<>(10);
         }
 
         Point3D result = stepSequenceNr == 0 ? null : lastSteps.get(stepSequenceNr--);
@@ -485,8 +484,8 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
         movementMask = MovementMask.IMMEDIATE;
     }
 
-	@Override
-	public void skillMovement() {
-		this.movementMask = MovementMask.IMMEDIATE;
-	}
+    @Override
+    public void skillMovement() {
+        this.movementMask = MovementMask.IMMEDIATE;
+    }
 }

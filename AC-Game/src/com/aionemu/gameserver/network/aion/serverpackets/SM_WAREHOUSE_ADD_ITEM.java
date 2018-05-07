@@ -43,7 +43,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 
 /**
  * @author kosyachok
-
  */
 public class SM_WAREHOUSE_ADD_ITEM extends AionServerPacket {
 
@@ -66,7 +65,7 @@ public class SM_WAREHOUSE_ADD_ITEM extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(warehouseType);
         writeH(addType.getMask());
         writeH(items.size());

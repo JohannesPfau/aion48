@@ -71,14 +71,16 @@ public class RestartHandler extends TaskFromDBHandler {
         log.info("Task[" + taskId + "] launched : restarting the server !");
 
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendBrightYellowMessageOnCenter(player, "Automatic Task: The server will restart in " + warnCountDown
-                        + " seconds ! Please find a safe place and disconnect your character.");
+                    + " seconds ! Please find a safe place and disconnect your character.");
             }
         });
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 ShutdownHook.getInstance().doShutdown(countDown, announceInterval, ShutdownHook.ShutdownMode.RESTART);

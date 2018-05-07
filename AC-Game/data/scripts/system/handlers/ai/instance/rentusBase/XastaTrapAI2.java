@@ -29,8 +29,6 @@
  */
 package ai.instance.rentusBase;
 
-import ai.AggressiveNpcAI2;
-
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -39,54 +37,56 @@ import com.aionemu.gameserver.ai2.poll.AIAnswers;
 import com.aionemu.gameserver.ai2.poll.AIQuestion;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
+import ai.AggressiveNpcAI2;
+
 /**
- * 
  * @author Ranastic
- *
  */
 
 @AIName("xastatrap")
-public class XastaTrapAI2 extends AggressiveNpcAI2
-{
-	@Override
-	public boolean canThink() {
-		return false;
-	}
-	
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				SkillEngine.getInstance().getSkill(getOwner(), 19922, 60, getOwner()).useNoAnimationSkill(); //Restraint Charm.
-				startLifeTask();
-			}
-		}, 1000);
-	}
-	
-	private void startLifeTask() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				AI2Actions.deleteOwner(XastaTrapAI2.this);
-			}
-		}, 15000);
-	}
-	
-	@Override
-	public AIAnswer ask(AIQuestion question) {
-		switch (question) {
-			case CAN_RESIST_ABNORMAL:
-				return AIAnswers.POSITIVE;
-			default:
-				return AIAnswers.NEGATIVE;
-		}
-	}
-	
-	@Override
-	protected void handleDied() {
-		super.handleDied();
-		AI2Actions.deleteOwner(this);
-	}
+public class XastaTrapAI2 extends AggressiveNpcAI2 {
+
+    @Override
+    public boolean canThink() {
+        return false;
+    }
+
+    @Override
+    protected void handleSpawned() {
+        super.handleSpawned();
+        ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+            @Override
+            public void run() {
+                SkillEngine.getInstance().getSkill(getOwner(), 19922, 60, getOwner()).useNoAnimationSkill(); //Restraint Charm.
+                startLifeTask();
+            }
+        }, 1000);
+    }
+
+    private void startLifeTask() {
+        ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+            @Override
+            public void run() {
+                AI2Actions.deleteOwner(XastaTrapAI2.this);
+            }
+        }, 15000);
+    }
+
+    @Override
+    public AIAnswer ask(AIQuestion question) {
+        switch (question) {
+            case CAN_RESIST_ABNORMAL:
+                return AIAnswers.POSITIVE;
+            default:
+                return AIAnswers.NEGATIVE;
+        }
+    }
+
+    @Override
+    protected void handleDied() {
+        super.handleDied();
+        AI2Actions.deleteOwner(this);
+    }
 }

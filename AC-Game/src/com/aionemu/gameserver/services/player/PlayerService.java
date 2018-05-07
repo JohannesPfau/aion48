@@ -117,11 +117,11 @@ import com.google.common.collect.Sets;
 
 /**
  * This class is designed to do all the work related with loading/storing
- * players.<br> Same with storing,
+ * players.<br>
+ * Same with storing,
  * {@link #storePlayer(com.aionemu.gameserver.model.gameobjects.player.Player)}
  * stores all player data like appearance, items, etc...
- *
-, Saelya, Cura
+ * , Saelya, Cura
  */
 public class PlayerService {
 
@@ -130,7 +130,8 @@ public class PlayerService {
     /**
      * Checks if name is already taken or not
      *
-     * @param name character name
+     * @param name
+     *            character name
      * @return true if is free, false in other case
      */
     public static boolean isFreeName(String name) {
@@ -142,19 +143,19 @@ public class PlayerService {
     }
 
     /**
-	public static boolean isValidName(String name) {
-		return NameConfig.CHAR_NAME_PATTERN.matcher(name).matches();
-	}
+     * public static boolean isValidName(String name) {
+     * return NameConfig.CHAR_NAME_PATTERN.matcher(name).matches();
+     * }
      * Stores newly created player
      *
-     * @param player player to store
+     * @param player
+     *            player to store
      * @return true if character was successful saved.
      */
     public static boolean storeNewPlayer(Player player, String accountName, int accountId) {
         return DAOManager.getDAO(PlayerDAO.class).saveNewPlayer(player.getCommonData(), accountId, accountName)
-                && DAOManager.getDAO(PlayerAppearanceDAO.class).store(player)
-                && DAOManager.getDAO(PlayerSkillListDAO.class).storeSkills(player)
-                && DAOManager.getDAO(InventoryDAO.class).store(player);
+            && DAOManager.getDAO(PlayerAppearanceDAO.class).store(player) && DAOManager.getDAO(PlayerSkillListDAO.class).storeSkills(player)
+            && DAOManager.getDAO(InventoryDAO.class).store(player);
     }
 
     /**
@@ -174,8 +175,7 @@ public class PlayerService {
         for (House house : player.getHouses()) {
             DAOManager.getDAO(HousesDAO.class).storeHouse(house);
             if (house.getRegistry() != null && house.getRegistry().getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-                DAOManager.getDAO(PlayerRegisteredItemsDAO.class).store(house.getRegistry(),
-                        player.getCommonData().getPlayerObjId());
+                DAOManager.getDAO(PlayerRegisteredItemsDAO.class).store(house.getRegistry(), player.getCommonData().getPlayerObjId());
             }
         }
         DAOManager.getDAO(ItemStoneListDAO.class).save(player);
@@ -249,8 +249,7 @@ public class PlayerService {
         player.setEquipment(equipment);
 
         for (int petBagId = StorageType.PET_BAG_MIN; petBagId <= StorageType.PET_BAG_MAX; petBagId++) {
-            Storage petBag = DAOManager.getDAO(InventoryDAO.class).loadStorage(playerObjId,
-                    StorageType.getStorageTypeById(petBagId));
+            Storage petBag = DAOManager.getDAO(InventoryDAO.class).loadStorage(playerObjId, StorageType.getStorageTypeById(petBagId));
             ItemService.loadItemStones(petBag.getItems());
 
             player.setStorage(petBag, StorageType.getStorageTypeById(petBagId));
@@ -259,8 +258,7 @@ public class PlayerService {
         for (int houseWhId = StorageType.HOUSE_WH_MIN; houseWhId <= StorageType.HOUSE_WH_MAX; houseWhId++) {
             StorageType whType = StorageType.getStorageTypeById(houseWhId);
             if (whType != null) {
-                Storage cabinet = DAOManager.getDAO(InventoryDAO.class).loadStorage(playerObjId,
-                        StorageType.getStorageTypeById(houseWhId));
+                Storage cabinet = DAOManager.getDAO(InventoryDAO.class).loadStorage(playerObjId, StorageType.getStorageTypeById(houseWhId));
                 ItemService.loadItemStones(cabinet.getItems());
                 player.setStorage(cabinet, StorageType.getStorageTypeById(houseWhId));
             }
@@ -305,7 +303,7 @@ public class PlayerService {
         // load craft cooldowns
         DAOManager.getDAO(CraftCooldownsDAO.class).loadCraftCooldowns(player);
 
-        if (player.getCommonData().getBonusTitleId() > 0) { 
+        if (player.getCommonData().getBonusTitleId() > 0) {
             TitleChangeListener.onBonusTitleChange(player.getGameStats(), player.getCommonData().getBonusTitleId(), true);
         }
         DAOManager.getDAO(PlayerLifeStatsDAO.class).loadPlayerLifeStat(player);
@@ -330,8 +328,7 @@ public class PlayerService {
         PlayerInitialData playerInitialData = DataManager.PLAYER_INITIAL_DATA;
         LocationData ld = playerInitialData.getSpawnLocation(playerCommonData.getRace());
 
-        WorldPosition position = World.getInstance().createPosition(ld.getMapId(), ld.getX(), ld.getY(), ld.getZ(),
-                ld.getHeading(), 0);
+        WorldPosition position = World.getInstance().createPosition(ld.getMapId(), ld.getX(), ld.getY(), ld.getZ(), ld.getHeading(), 0);
         playerCommonData.setPosition(position);
 
         Player newPlayer = new Player(new PlayerController(), playerCommonData, playerAppearance, account);
@@ -363,8 +360,7 @@ public class PlayerService {
                 // Make sure you will not put into xml file more items than possible to equip.
                 ItemTemplate itemTemplate = item.getItemTemplate();
 
-                if ((itemTemplate.isArmor() || itemTemplate.isWeapon())
-                        && !(equipment.isSlotEquipped(itemTemplate.getItemSlot()))) {
+                if ((itemTemplate.isArmor() || itemTemplate.isWeapon()) && !(equipment.isSlotEquipped(itemTemplate.getItemSlot()))) {
                     item.setEquipped(true);
                     ItemSlot itemSlot = ItemSlot.getSlotFor(itemTemplate.getItemSlot());
                     item.setEquipmentSlot(itemSlot.getSlotIdMask());
@@ -402,7 +398,8 @@ public class PlayerService {
     /**
      * Cancel Player deletion process if its possible.
      *
-     * @param accData PlayerAccountData
+     * @param accData
+     *            PlayerAccountData
      * @return True if deletion was successful canceled.
      */
     public static boolean cancelPlayerDeletion(PlayerAccountData accData) {
@@ -422,7 +419,8 @@ public class PlayerService {
      * Starts player deletion process if its possible. If deletion is possible
      * character should be deleted after 5 minutes.
      *
-     * @param accData PlayerAccountData
+     * @param accData
+     *            PlayerAccountData
      */
     public static void deletePlayer(PlayerAccountData accData) {
         if (accData.getDeletionDate() != null) {
@@ -436,7 +434,8 @@ public class PlayerService {
     /**
      * Completely removes player from database
      *
-     * @param playerId id of player to delete from db
+     * @param playerId
+     *            id of player to delete from db
      */
     public static void deletePlayerFromDB(int playerId) {
         DAOManager.getDAO(InventoryDAO.class).deletePlayerItems(playerId);
@@ -447,7 +446,8 @@ public class PlayerService {
     /**
      * Completely removes player from database
      *
-     * @param accountId id of account to delete player on
+     * @param accountId
+     *            id of account to delete player on
      * @return number of deleted chars
      */
     public static int deleteAccountsCharsFromDB(int accountId) {
@@ -462,11 +462,11 @@ public class PlayerService {
     /**
      * Updates deletion time in database
      *
-     * @param accData PlayerAccountData
+     * @param accData
+     *            PlayerAccountData
      */
     private static void storeDeletionTime(PlayerAccountData accData) {
-        DAOManager.getDAO(PlayerDAO.class).updateDeletionTime(accData.getPlayerCommonData().getPlayerObjId(),
-                accData.getDeletionDate());
+        DAOManager.getDAO(PlayerDAO.class).updateDeletionTime(accData.getPlayerCommonData().getPlayerObjId(), accData.getDeletionDate());
     }
 
     /**
@@ -480,9 +480,12 @@ public class PlayerService {
     /**
      * Add macro for player
      *
-     * @param player     Player
-     * @param macroOrder Macro order
-     * @param macroXML   Macro XML
+     * @param player
+     *            Player
+     * @param macroOrder
+     *            Macro order
+     * @param macroXML
+     *            Macro XML
      */
     public static void addMacro(Player player, int macroPosition, String macroXML) {
         if (player.getMacroList().addMacro(macroPosition, macroXML)) {
@@ -495,8 +498,10 @@ public class PlayerService {
     /**
      * Remove macro with specified index from specified player
      *
-     * @param player     Player
-     * @param macroOrder Macro order index
+     * @param player
+     *            Player
+     * @param macroOrder
+     *            Macro order index
      */
     public static void removeMacro(Player player, int macroOrder) {
         if (player.getMacroList().removeMacro(macroOrder)) {
@@ -534,6 +539,7 @@ public class PlayerService {
         // Certain names can be changed in runtime
         // this should prevent errors
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player object) {
                 if (playerObjIdsCopy.contains(object.getObjectId())) {

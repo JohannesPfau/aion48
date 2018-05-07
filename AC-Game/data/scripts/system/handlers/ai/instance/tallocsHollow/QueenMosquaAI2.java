@@ -29,7 +29,6 @@
  */
 package ai.instance.tallocsHollow;
 
-import ai.SummonerAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -44,6 +43,8 @@ import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import ai.SummonerAI2;
 
 /**
  * @author xTz
@@ -80,6 +81,7 @@ public class QueenMosquaAI2 extends SummonerAI2 {
             SpawnTemplate template = npc.getSpawn();
             spawn(700739, template.getX(), template.getY(), template.getZ(), template.getHeading(), 11);
             npc.getKnownList().doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player player) {
                     PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400476));

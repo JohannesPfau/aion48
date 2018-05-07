@@ -46,8 +46,8 @@ public class CuringObject extends VisibleObject {
 
     public CuringObject(CuringTemplate template, int instanceId) {
         super(IDFactory.getInstance().nextId(), new VisibleObjectController<CuringObject>() {
-        }, null, null, World.getInstance().
-                createPosition(template.getMapId(), template.getX(), template.getY(), template.getZ(), (byte) 0, instanceId));
+        }, null, null,
+            World.getInstance().createPosition(template.getMapId(), template.getX(), template.getY(), template.getZ(), (byte) 0, instanceId));
         this.template = template;
         this.range = template.getRange();
         setKnownlist(new NpcKnownList(this));

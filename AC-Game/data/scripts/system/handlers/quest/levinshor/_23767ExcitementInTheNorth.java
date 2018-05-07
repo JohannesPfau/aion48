@@ -29,9 +29,9 @@
  */
 package quest.levinshor;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -42,7 +42,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _23767ExcitementInTheNorth extends QuestHandler {
 
     private final static int questId = 23767;
-		int[] mobs = {235350, 235351};
+    int[] mobs = { 235350, 235351 };
 
     public _23767ExcitementInTheNorth() {
         super(questId);
@@ -51,12 +51,12 @@ public class _23767ExcitementInTheNorth extends QuestHandler {
     @Override
     public void register() {
         qe.registerQuestNpc(805282).addOnQuestStart(questId);
-		qe.registerQuestNpc(805283).addOnQuestStart(questId);
-		qe.registerQuestNpc(805284).addOnQuestStart(questId);
+        qe.registerQuestNpc(805283).addOnQuestStart(questId);
+        qe.registerQuestNpc(805284).addOnQuestStart(questId);
         qe.registerQuestNpc(805282).addOnTalkEvent(questId);
-		qe.registerQuestNpc(805283).addOnTalkEvent(questId);
-		qe.registerQuestNpc(805284).addOnTalkEvent(questId);
-		for (int mob : mobs) {
+        qe.registerQuestNpc(805283).addOnTalkEvent(questId);
+        qe.registerQuestNpc(805284).addOnTalkEvent(questId);
+        for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
     }
@@ -73,8 +73,8 @@ public class _23767ExcitementInTheNorth extends QuestHandler {
                     return defaultOnKillEvent(env, mobs, var1, var1 + 1, 1);
                 } else if (var1 == 4) {
                     qs.setQuestVar(1);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
+                    qs.setStatus(QuestStatus.REWARD);
+                    updateQuestStatus(env);
                     return true;
                 }
             }

@@ -44,7 +44,7 @@ public class Friend {
     private static final Logger log = LoggerFactory.getLogger(Friend.class);
     private PlayerCommonData pcd;
 
-	private String friendNote = "";
+    private String friendNote = "";
 
     public Friend(PlayerCommonData pcd) {
         this.pcd = pcd;
@@ -84,13 +84,13 @@ public class Friend {
         return pcd.getNote();
     }
 
-	public String getFriendNote() {
-		return friendNote;
-	}
+    public String getFriendNote() {
+        return friendNote;
+    }
 
-	public void setNote(String note) {
-		friendNote = note;
-	}
+    public void setNote(String note) {
+        friendNote = note;
+    }
 
     public PlayerClass getPlayerClass() {
         return pcd.getPlayerClass();

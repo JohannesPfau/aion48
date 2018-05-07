@@ -58,8 +58,7 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
      * @param objectTemplate
      * @param level
      */
-    public SummonedObject(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate,
-                          byte level) {
+    public SummonedObject(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, byte level) {
         super(objId, controller, spawnTemplate, objectTemplate, level);
         this.level = level;
     }

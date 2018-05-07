@@ -51,8 +51,7 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
         super(alliance, player);
     }
 
-    public PlayerGroupLeavedEvent(PlayerGroup team, Player player, PlayerLeavedEvent.LeaveReson reason,
-                                  String banPersonName) {
+    public PlayerGroupLeavedEvent(PlayerGroup team, Player player, PlayerLeavedEvent.LeaveReson reason, String banPersonName) {
         super(team, player, reason, banPersonName);
     }
 
@@ -93,6 +92,7 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 
         if (leavedPlayer.isInInstance()) {
             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     if (!leavedPlayer.isInGroup2()) {

@@ -29,17 +29,19 @@
  */
 package mysql5;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.loginserver.dao.PlayerTransferDAO;
 import com.aionemu.loginserver.service.ptransfer.PlayerTransferTask;
-import javolution.util.FastList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import javolution.util.FastList;
 
 /**
  * @author KID
@@ -87,6 +89,7 @@ public class MySQL5PlayerTransferDAO extends PlayerTransferDAO {
                 break;
         }
         return DB.insertUpdate("UPDATE player_transfers SET status=?, comment=?" + table + " WHERE id=?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
                 preparedStatement.setByte(1, task.status);

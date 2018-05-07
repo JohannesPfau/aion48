@@ -29,10 +29,10 @@
  */
 package quest.fort_tiamat;
 
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -43,7 +43,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _20072IsraphelTrueFace extends QuestHandler {
 
@@ -55,7 +54,7 @@ public class _20072IsraphelTrueFace extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {800365, 205617, 205579};
+        int[] npcs = { 800365, 205617, 205579 };
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }
@@ -100,7 +99,8 @@ public class _20072IsraphelTrueFace extends QuestHandler {
                     case SETPRO3: {
                         WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300500000);
                         InstanceService.registerPlayerWithInstance(newInstance, player);
-                        TeleportService2.teleportTo(player, 300500000, newInstance.getInstanceId(), 224f, 251f, 125f, (byte) 10, TeleportAnimation.BEAM_ANIMATION);
+                        TeleportService2.teleportTo(player, 300500000, newInstance.getInstanceId(), 224f, 251f, 125f, (byte) 10,
+                            TeleportAnimation.BEAM_ANIMATION);
                         QuestService.addNewSpawn(300500000, player.getInstanceId(), 701503, 250f, 245f, 129f, (byte) 119);
                         QuestService.addNewSpawn(300500000, player.getInstanceId(), 800365, 257f, 246f, 124f, (byte) 119);
                         removeQuestItem(env, 182213250, 1);

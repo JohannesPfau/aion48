@@ -29,10 +29,10 @@
  */
 package quest.beluslan;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -50,8 +50,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _4502EssenceOfFate extends QuestHandler {
 
     private final static int questId = 4502;
-    private final static int[] npcs = {204837, 730192, 204182};
-    private final static int[] mobs = {214894, 214895, 214896, 214897, 214904};
+    private final static int[] npcs = { 204837, 730192, 204182 };
+    private final static int[] mobs = { 214894, 214895, 214896, 214897, 214904 };
 
     public _4502EssenceOfFate() {
         super(questId);

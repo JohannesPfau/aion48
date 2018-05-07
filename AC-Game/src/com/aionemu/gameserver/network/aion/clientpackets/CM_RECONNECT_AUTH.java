@@ -37,8 +37,6 @@ import com.aionemu.gameserver.network.loginserver.LoginServer;
 
 /**
  * In this packets aion client is asking for fast reconnection to LoginServer.
- *
-
  */
 public class CM_RECONNECT_AUTH extends AionClientPacket {
 

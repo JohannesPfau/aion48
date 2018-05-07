@@ -29,19 +29,20 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerAppearanceDAO;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author SoulKeeper, AEJTester, srx47
@@ -134,77 +135,76 @@ public class MySQL5PlayerAppearanceDAO extends PlayerAppearanceDAO {
     @Override
     public boolean store(final int id, final PlayerAppearance pa) {
 
-        return DB
-                .insertUpdate(
-                        "REPLACE INTO player_appearance ("
-                                + "player_id, face, hair, deco, tattoo, face_contour, expression, jaw_line, skin_rgb, hair_rgb, lip_rgb, eye_rgb, face_shape,"
-                                + "forehead, eye_height, eye_space, eye_width, eye_size, eye_shape, eye_angle,"
-                                + "brow_height, brow_angle, brow_shape, nose, nose_bridge, nose_width, nose_tip, "
-                                + "cheek, lip_height, mouth_size, lip_size, smile, lip_shape, jaw_height, chin_jut, ear_shape,"
-                                + "head_size, neck, neck_length, shoulders, shoulder_size , torso, chest, waist, hips, arm_thickness, arm_length, hand_size,"
-                                + "leg_thickness, leg_length, foot_size, facial_rate, voice, height)" + " VALUES "
-                                + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,"
-                                + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?" + ")", new IUStH() {
-                            @Override
-                            public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
-                                log.debug("[DAO: MySQL5PlayerAppearanceDAO] storing appereance " + id);
-                                ps.setInt(1, id);
-                                ps.setInt(2, pa.getFace());
-                                ps.setInt(3, pa.getHair());
-                                ps.setInt(4, pa.getDeco());
-                                ps.setInt(5, pa.getTattoo());
-                                ps.setInt(6, pa.getFaceContour());
-                                ps.setInt(7, pa.getExpression());
-                                ps.setInt(8, pa.getJawLine());
-                                ps.setInt(9, pa.getSkinRGB());
-                                ps.setInt(10, pa.getHairRGB());
-                                ps.setInt(11, pa.getLipRGB());
-                                ps.setInt(12, pa.getEyeRGB());
-                                ps.setInt(13, pa.getFaceShape());
-                                ps.setInt(14, pa.getForehead());
-                                ps.setInt(15, pa.getEyeHeight());
-                                ps.setInt(16, pa.getEyeSpace());
-                                ps.setInt(17, pa.getEyeWidth());
-                                ps.setInt(18, pa.getEyeSize());
-                                ps.setInt(19, pa.getEyeShape());
-                                ps.setInt(20, pa.getEyeAngle());
-                                ps.setInt(21, pa.getBrowHeight());
-                                ps.setInt(22, pa.getBrowAngle());
-                                ps.setInt(23, pa.getBrowShape());
-                                ps.setInt(24, pa.getNose());
-                                ps.setInt(25, pa.getNoseBridge());
-                                ps.setInt(26, pa.getNoseWidth());
-                                ps.setInt(27, pa.getNoseTip());
-                                ps.setInt(28, pa.getCheek());
-                                ps.setInt(29, pa.getLipHeight());
-                                ps.setInt(30, pa.getMouthSize());
-                                ps.setInt(31, pa.getLipSize());
-                                ps.setInt(32, pa.getSmile());
-                                ps.setInt(33, pa.getLipShape());
-                                ps.setInt(34, pa.getJawHeigh());
-                                ps.setInt(35, pa.getChinJut());
-                                ps.setInt(36, pa.getEarShape());
-                                ps.setInt(37, pa.getHeadSize());
-                                ps.setInt(38, pa.getNeck());
-                                ps.setInt(39, pa.getNeckLength());
-                                ps.setInt(40, pa.getShoulders());
-                                ps.setInt(41, pa.getShoulderSize());
-                                ps.setInt(42, pa.getTorso());
-                                ps.setInt(43, pa.getChest());
-                                ps.setInt(44, pa.getWaist());
-                                ps.setInt(45, pa.getHips());
-                                ps.setInt(46, pa.getArmThickness());
-                                ps.setInt(47, pa.getArmLength());
-                                ps.setInt(48, pa.getHandSize());
-                                ps.setInt(49, pa.getLegThicnkess());
-                                ps.setInt(50, pa.getLegLength());
-                                ps.setInt(51, pa.getFootSize());
-                                ps.setInt(52, pa.getFacialRate());
-                                ps.setInt(53, pa.getVoice());
-                                ps.setFloat(54, pa.getHeight());
-                                ps.execute();
-                            }
-                        });
+        return DB.insertUpdate("REPLACE INTO player_appearance ("
+            + "player_id, face, hair, deco, tattoo, face_contour, expression, jaw_line, skin_rgb, hair_rgb, lip_rgb, eye_rgb, face_shape,"
+            + "forehead, eye_height, eye_space, eye_width, eye_size, eye_shape, eye_angle,"
+            + "brow_height, brow_angle, brow_shape, nose, nose_bridge, nose_width, nose_tip, "
+            + "cheek, lip_height, mouth_size, lip_size, smile, lip_shape, jaw_height, chin_jut, ear_shape,"
+            + "head_size, neck, neck_length, shoulders, shoulder_size , torso, chest, waist, hips, arm_thickness, arm_length, hand_size,"
+            + "leg_thickness, leg_length, foot_size, facial_rate, voice, height)" + " VALUES "
+            + "(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,"
+            + "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?, ?, ?" + ")", new IUStH() {
+
+                @Override
+                public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
+                    log.debug("[DAO: MySQL5PlayerAppearanceDAO] storing appereance " + id);
+                    ps.setInt(1, id);
+                    ps.setInt(2, pa.getFace());
+                    ps.setInt(3, pa.getHair());
+                    ps.setInt(4, pa.getDeco());
+                    ps.setInt(5, pa.getTattoo());
+                    ps.setInt(6, pa.getFaceContour());
+                    ps.setInt(7, pa.getExpression());
+                    ps.setInt(8, pa.getJawLine());
+                    ps.setInt(9, pa.getSkinRGB());
+                    ps.setInt(10, pa.getHairRGB());
+                    ps.setInt(11, pa.getLipRGB());
+                    ps.setInt(12, pa.getEyeRGB());
+                    ps.setInt(13, pa.getFaceShape());
+                    ps.setInt(14, pa.getForehead());
+                    ps.setInt(15, pa.getEyeHeight());
+                    ps.setInt(16, pa.getEyeSpace());
+                    ps.setInt(17, pa.getEyeWidth());
+                    ps.setInt(18, pa.getEyeSize());
+                    ps.setInt(19, pa.getEyeShape());
+                    ps.setInt(20, pa.getEyeAngle());
+                    ps.setInt(21, pa.getBrowHeight());
+                    ps.setInt(22, pa.getBrowAngle());
+                    ps.setInt(23, pa.getBrowShape());
+                    ps.setInt(24, pa.getNose());
+                    ps.setInt(25, pa.getNoseBridge());
+                    ps.setInt(26, pa.getNoseWidth());
+                    ps.setInt(27, pa.getNoseTip());
+                    ps.setInt(28, pa.getCheek());
+                    ps.setInt(29, pa.getLipHeight());
+                    ps.setInt(30, pa.getMouthSize());
+                    ps.setInt(31, pa.getLipSize());
+                    ps.setInt(32, pa.getSmile());
+                    ps.setInt(33, pa.getLipShape());
+                    ps.setInt(34, pa.getJawHeigh());
+                    ps.setInt(35, pa.getChinJut());
+                    ps.setInt(36, pa.getEarShape());
+                    ps.setInt(37, pa.getHeadSize());
+                    ps.setInt(38, pa.getNeck());
+                    ps.setInt(39, pa.getNeckLength());
+                    ps.setInt(40, pa.getShoulders());
+                    ps.setInt(41, pa.getShoulderSize());
+                    ps.setInt(42, pa.getTorso());
+                    ps.setInt(43, pa.getChest());
+                    ps.setInt(44, pa.getWaist());
+                    ps.setInt(45, pa.getHips());
+                    ps.setInt(46, pa.getArmThickness());
+                    ps.setInt(47, pa.getArmLength());
+                    ps.setInt(48, pa.getHandSize());
+                    ps.setInt(49, pa.getLegThicnkess());
+                    ps.setInt(50, pa.getLegLength());
+                    ps.setInt(51, pa.getFootSize());
+                    ps.setInt(52, pa.getFacialRate());
+                    ps.setInt(53, pa.getVoice());
+                    ps.setFloat(54, pa.getHeight());
+                    ps.execute();
+                }
+            });
     }
 
     /**

@@ -29,12 +29,13 @@
  */
 package ai.quests;
 
-import ai.GeneralNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
+import ai.GeneralNpcAI2;
 
 /**
  * @author Rolandas

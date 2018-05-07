@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -40,6 +38,8 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorWorld;
+
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author Wakizashi
@@ -53,7 +53,7 @@ public class StaticDoorData {
     /**
      * A map containing all door templates
      */
-    private TIntObjectHashMap<StaticDoorWorld> staticDoorData = new TIntObjectHashMap<StaticDoorWorld>();
+    private TIntObjectHashMap<StaticDoorWorld> staticDoorData = new TIntObjectHashMap<>();
 
     /**
      * @param u

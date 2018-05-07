@@ -31,8 +31,6 @@ package com.aionemu.gameserver.services.instance;
 
 import java.util.Iterator;
 
-import javolution.util.FastList;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -46,30 +44,33 @@ import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
+import javolution.util.FastList;
+
 /**
  * @author xTz
- (Aion-Core) 
+ *         (Aion-Core)
  */
 public class DredgionService {
 
     private static final Logger log = LoggerFactory.getLogger(DredgionService.class);
     private boolean registerAvailable;
-    private FastList<Integer> playersWithCooldown = new FastList<Integer>();
+    private FastList<Integer> playersWithCooldown = new FastList<>();
     private SM_AUTO_GROUP[] autoGroupUnreg, autoGroupReg;
     private final byte maskLvlGradeC = 1, maskLvlGradeB = 2, maskLvlGradeA = 3;
     public static final byte minlevel = 45, maxlevel = 61;
 
     /*
-     * instantiate class 
+     * instantiate class
      */
     private static class SingletonHolder {
+
         protected static final DredgionService instance = new DredgionService();
     }
 
     public static DredgionService getInstance() {
         return SingletonHolder.instance;
     }
-    
+
     public DredgionService() {
         this.autoGroupUnreg = new SM_AUTO_GROUP[this.maskLvlGradeA + 1];
         this.autoGroupReg = new SM_AUTO_GROUP[this.autoGroupUnreg.length];
@@ -83,6 +84,7 @@ public class DredgionService {
         String[] times = AutoGroupConfig.DREDGION_TIMES.split("\\|");
         for (String cron : times) {
             CronService.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     startDredgionRegistration();
@@ -94,6 +96,7 @@ public class DredgionService {
 
     private void startUregisterDredgionTask() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 registerAvailable = false;
@@ -177,19 +180,19 @@ public class DredgionService {
             PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId));
         }
     }
-    
+
     private boolean isInInstance(Player player) {
-    	if (player.isInInstance()) {
-    		return true;
-    	}
+        if (player.isInInstance()) {
+            return true;
+        }
         return false;
     }
 
     public boolean canPlayerJoin(Player player) {
-		if (registerAvailable && player.getLevel() > minlevel && player.getLevel() < maxlevel && !hasCoolDown(player) && !isInInstance(player)) {
-			 return true;
-		}
-		return false;
+        if (registerAvailable && player.getLevel() > minlevel && player.getLevel() < maxlevel && !hasCoolDown(player) && !isInInstance(player)) {
+            return true;
+        }
+        return false;
     }
-   
+
 }

@@ -38,7 +38,6 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
  * This block is sent for all items that can be equipped. If item is equipped.
  * This block says to which slot it's equipped. If not, then it says 0.
  *
-
  * @modified Rolandas
  */
 public class EquippedSlotBlobEntry extends ItemBlobEntry {
@@ -51,11 +50,13 @@ public class EquippedSlotBlobEntry extends ItemBlobEntry {
     public void writeThisBlob(ByteBuffer buf) {
         Item item = ownerItem;
 
-        /*if (item.isEquipped()) {
-         writeQ(buf, item.getEquipmentSlot());
-         } else {
-         writeQ(buf, 0);
-         }*/
+        /*
+         * if (item.isEquipped()) {
+         * writeQ(buf, item.getEquipmentSlot());
+         * } else {
+         * writeQ(buf, 0);
+         * }
+         */
         writeQ(buf, item.isEquipped() ? item.getEquipmentSlot() : 0);
     }
 

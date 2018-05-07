@@ -29,9 +29,6 @@
  */
 package com.aionemu.gameserver.services;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,6 +40,9 @@ import com.aionemu.gameserver.model.limiteditems.LimitedItem;
 import com.aionemu.gameserver.model.limiteditems.LimitedTradeNpc;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
+
+import javolution.util.FastList;
+import javolution.util.FastMap;
 
 /**
  * @author xTz
@@ -80,6 +80,7 @@ public class LimitedItemTradeService {
         for (LimitedTradeNpc limitedTradeNpc : limitedTradeNpcs.values()) {
             for (final LimitedItem limitedItem : limitedTradeNpc.getLimitedItems()) {
                 CronService.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         limitedItem.setToDefault();

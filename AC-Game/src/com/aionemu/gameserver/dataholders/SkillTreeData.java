@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,6 +42,8 @@ import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+
 /**
  * @author ATracer
  */
@@ -53,8 +53,8 @@ public class SkillTreeData {
 
     @XmlElement(name = "skill")
     private List<SkillLearnTemplate> skillTemplates;
-    private final TIntObjectHashMap<ArrayList<SkillLearnTemplate>> templates = new TIntObjectHashMap<ArrayList<SkillLearnTemplate>>();
-    private final TIntObjectHashMap<ArrayList<SkillLearnTemplate>> templatesById = new TIntObjectHashMap<ArrayList<SkillLearnTemplate>>();
+    private final TIntObjectHashMap<ArrayList<SkillLearnTemplate>> templates = new TIntObjectHashMap<>();
+    private final TIntObjectHashMap<ArrayList<SkillLearnTemplate>> templatesById = new TIntObjectHashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (SkillLearnTemplate template : skillTemplates) {
@@ -72,7 +72,7 @@ public class SkillTreeData {
         int hash = makeHash(template.getClassId().ordinal(), race.ordinal(), template.getMinLevel());
         ArrayList<SkillLearnTemplate> value = templates.get(hash);
         if (value == null) {
-            value = new ArrayList<SkillLearnTemplate>();
+            value = new ArrayList<>();
             templates.put(hash, value);
         }
 
@@ -80,7 +80,7 @@ public class SkillTreeData {
 
         value = templatesById.get(template.getSkillId());
         if (value == null) {
-            value = new ArrayList<SkillLearnTemplate>();
+            value = new ArrayList<>();
             templatesById.put(template.getSkillId(), value);
         }
 
@@ -104,7 +104,7 @@ public class SkillTreeData {
      * @return SkillLearnTemplate[]
      */
     public SkillLearnTemplate[] getTemplatesFor(PlayerClass playerClass, int level, Race race) {
-        List<SkillLearnTemplate> newSkills = new ArrayList<SkillLearnTemplate>();
+        List<SkillLearnTemplate> newSkills = new ArrayList<>();
 
         List<SkillLearnTemplate> classRaceSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), race.ordinal(), level));
         List<SkillLearnTemplate> classSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), Race.PC_ALL.ordinal(), level));
@@ -124,7 +124,7 @@ public class SkillTreeData {
     }
 
     public SkillLearnTemplate[] getTemplatesForSkill(int skillId) {
-        List<SkillLearnTemplate> searchSkills = new ArrayList<SkillLearnTemplate>();
+        List<SkillLearnTemplate> searchSkills = new ArrayList<>();
 
         List<SkillLearnTemplate> byId = templatesById.get(skillId);
         if (byId != null) {

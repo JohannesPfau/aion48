@@ -61,8 +61,7 @@ public class CM_LEGION_SEND_EMBLEM_INFO extends AionClientPacket {
             if (legionEmblem.getCustomEmblemData() == null) {
                 return;
             }
-            LegionService.getInstance().sendEmblemData(getConnection().getActivePlayer(), legionEmblem, legionId,
-                    legion.getLegionName());
+            LegionService.getInstance().sendEmblemData(getConnection().getActivePlayer(), legionEmblem, legionId, legion.getLegionName());
         }
     }
 }

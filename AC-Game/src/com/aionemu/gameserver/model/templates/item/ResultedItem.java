@@ -43,9 +43,9 @@ import com.aionemu.gameserver.model.Race;
  */
 @XmlType(name = "ResultedItem")
 public class ResultedItem {
-	
-	@XmlAttribute(name = "name")
-	public String itemName;
+
+    @XmlAttribute(name = "name")
+    public String itemName;
     @XmlAttribute(name = "id")
     public int itemId;
     @XmlAttribute(name = "count")
@@ -58,11 +58,11 @@ public class ResultedItem {
     public Race race = Race.PC_ALL;
     @XmlAttribute(name = "player_class")
     public PlayerClass playerClass = PlayerClass.ALL;
-	
-	public String getItemName() {
-		return itemName;
-	}
-	
+
+    public String getItemName() {
+        return itemName;
+    }
+
     public int getItemId() {
         return itemId;
     }

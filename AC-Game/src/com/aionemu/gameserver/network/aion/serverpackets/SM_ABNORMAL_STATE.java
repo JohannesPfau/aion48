@@ -51,12 +51,12 @@ public class SM_ABNORMAL_STATE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(abnormals);
         writeD(0);
         writeD(0); // unk 4.5
         writeC(0x7F);
-        
+
         writeH(effects.size());
 
         for (Effect effect : effects) {

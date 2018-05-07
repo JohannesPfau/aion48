@@ -29,6 +29,14 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.ParamReadStH;
@@ -37,13 +45,6 @@ import com.aionemu.gameserver.dao.PlayerTitleListDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.title.Title;
 import com.aionemu.gameserver.model.gameobjects.player.title.TitleList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author xavier
@@ -60,6 +61,7 @@ public class MySQL5PlayerTitleListDAO extends PlayerTitleListDAO {
         final TitleList tl = new TitleList();
 
         DB.select(LOAD_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, playerId);
@@ -102,7 +104,8 @@ public class MySQL5PlayerTitleListDAO extends PlayerTitleListDAO {
         return MySQL5DAOUtils.supports(databaseName, majorVersion, minorVersion);
     }
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.gameserver.dao.PlayerTitleListDAO#removeTitle(int, int)
      */
     @Override

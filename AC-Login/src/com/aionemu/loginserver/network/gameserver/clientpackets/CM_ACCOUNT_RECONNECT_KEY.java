@@ -29,14 +29,15 @@
  */
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.model.ReconnectingAccount;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_ACCOUNT_RECONNECT_KEY;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * This packet is sended by GameServer when player is requesting fast reconnect

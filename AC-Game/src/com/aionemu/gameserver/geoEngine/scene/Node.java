@@ -59,7 +59,7 @@ public class Node extends Spatial implements Cloneable {
     /**
      * This node's children.
      */
-    protected ArrayList<Spatial> children = new ArrayList<Spatial>(1);
+    protected ArrayList<Spatial> children = new ArrayList<>(1);
     protected short collisionFlags;
 
     /**
@@ -72,8 +72,9 @@ public class Node extends Spatial implements Cloneable {
      * Constructor instantiates a new
      * <code>Node</code> with a default empty list for containing children.
      *
-     * @param name the name of the scene element. This is required for
-     *             identification and comparision purposes.
+     * @param name
+     *            the name of the scene element. This is required for
+     *            identification and comparision purposes.
      */
     public Node(String name) {
         super(name);
@@ -132,9 +133,11 @@ public class Node extends Spatial implements Cloneable {
      * returned. <br>
      * If the child already had a parent it is detached from that former parent.
      *
-     * @param child the child to attach to this node.
+     * @param child
+     *            the child to attach to this node.
      * @return the number of children maintained by this node.
-     * @throws NullPointerException If child is null.
+     * @throws NullPointerException
+     *             If child is null.
      */
     public int attachChild(Spatial child) {
         if (child == null) {
@@ -158,9 +161,11 @@ public class Node extends Spatial implements Cloneable {
      * maintained is returned. <br>
      * If the child already had a parent it is detached from that former parent.
      *
-     * @param child the child to attach to this node.
+     * @param child
+     *            the child to attach to this node.
      * @return the number of children maintained by this node.
-     * @throws NullPointerException if child is null.
+     * @throws NullPointerException
+     *             if child is null.
      */
     public int attachChildAt(Spatial child, int index) {
         if (child == null) {
@@ -182,7 +187,8 @@ public class Node extends Spatial implements Cloneable {
      * <code>detachChild</code> removes a given child from the node's list. This
      * child will no longe be maintained.
      *
-     * @param child the child to remove.
+     * @param child
+     *            the child to remove.
      * @return the index the child was at. -1 if the child was not in the list.
      */
     public int detachChild(Spatial child) {
@@ -206,7 +212,8 @@ public class Node extends Spatial implements Cloneable {
      * child will no longe be maintained. Only the first child with a matching
      * name is removed.
      *
-     * @param childName the child to remove.
+     * @param childName
+     *            the child to remove.
      * @return the index the child was at. -1 if the child was not in the list.
      */
     public int detachChildNamed(String childName) {
@@ -228,7 +235,8 @@ public class Node extends Spatial implements Cloneable {
      * <code>detachChildAt</code> removes a child at a given index. That child
      * is returned for saving purposes.
      *
-     * @param index the index of the child to be removed.
+     * @param index
+     *            the index of the child to be removed.
      * @return the child at the supplied index.
      */
     public Spatial detachChildAt(int index) {
@@ -271,7 +279,8 @@ public class Node extends Spatial implements Cloneable {
     /**
      * <code>getChild</code> returns a child at a given index.
      *
-     * @param i the index to retrieve the child from.
+     * @param i
+     *            the index to retrieve the child from.
      * @return the child at a specified index.
      */
     public Spatial getChild(int i) {
@@ -282,8 +291,9 @@ public class Node extends Spatial implements Cloneable {
      * <code>getChild</code> returns the first child found with exactly the
      * given name (case sensitive.)
      *
-     * @param name the name of the child to retrieve. If null, we'll return
-     *             null.
+     * @param name
+     *            the name of the child to retrieve. If null, we'll return
+     *            null.
      * @return the child if found, or null.
      */
     public Spatial getChild(String name) {
@@ -309,7 +319,8 @@ public class Node extends Spatial implements Cloneable {
      * determines if the provided Spatial is contained in the children list of
      * this node.
      *
-     * @param spat the child object to look for.
+     * @param spat
+     *            the child object to look for.
      * @return true if the object is contained, false otherwise.
      */
     public boolean hasChild(Spatial spat) {
@@ -344,7 +355,7 @@ public class Node extends Spatial implements Cloneable {
     }
 
     @Override
-	public int collideWith(Collidable other, CollisionResults results) {
+    public int collideWith(Collidable other, CollisionResults results) {
         if ((getIntentions() & results.getIntentions()) == 0) {
             return 0;
         }
@@ -363,8 +374,7 @@ public class Node extends Spatial implements Cloneable {
                 // not used materialIds do not have collision intention for materials set
                 // not all material meshes have physical collisions set
                 // TODO: implement event mesh collisions
-                if ((child.getIntentions() & results.getIntentions()) == 0
-                        || (child.getIntentions() & CollisionIntention.EVENT.getId()) != 0) {
+                if ((child.getIntentions() & results.getIntentions()) == 0 || (child.getIntentions() & CollisionIntention.EVENT.getId()) != 0) {
                     continue;
                 }
                 if ((results.getIntentions() & CollisionIntention.MATERIAL.getId()) != 0 && child.getMaterialId() <= 0) {
@@ -381,7 +391,8 @@ public class Node extends Spatial implements Cloneable {
 
     /**
      * Returns flat list of Spatials implementing the specified class AND with
-     * name matching the specified pattern. </P>
+     * name matching the specified pattern.
+     * </P>
      * <p/>
      * Note that we are <i>matching</i> the pattern, therefore the pattern must
      * match the entire pattern (i.e. it behaves as if it is sandwiched between
@@ -401,18 +412,20 @@ public class Node extends Spatial implements Cloneable {
      * <code>node.descendantMatches(aClass, aRegex)</code>.
      * <p/>
      *
-     * @param spatialSubclass Subclass which matching Spatials must implement.
-     *                        Null causes all Spatials to qualify.
-     * @param nameRegex       Regular expression to match Spatial name against. Null
-     *                        causes all Names to qualify.
+     * @param spatialSubclass
+     *            Subclass which matching Spatials must implement.
+     *            Null causes all Spatials to qualify.
+     * @param nameRegex
+     *            Regular expression to match Spatial name against. Null
+     *            causes all Names to qualify.
      * @return Non-null, but possibly 0-element, list of matching Spatials (also
-     * Instances extending Spatials).
+     *         Instances extending Spatials).
      * @see java.util.regex.Pattern
      * @see Spatial#matches(Class<? extends Spatial>, String)
      */
     @SuppressWarnings("unchecked")
     public <T extends Spatial> List<T> descendantMatches(Class<T> spatialSubclass, String nameRegex) {
-        List<T> newList = new ArrayList<T>();
+        List<T> newList = new ArrayList<>();
         if (getQuantity() < 1) {
             return newList;
         }

@@ -29,7 +29,12 @@
  */
 package ai.instance.beshmundirTemple;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
@@ -38,11 +43,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Antraxx
@@ -51,7 +52,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class CaptainLakharaAI2 extends AggressiveNpcAI2 {
 
     private AtomicBoolean isHome = new AtomicBoolean(true);
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
     private Future<?> taskRage;
     private Future<?> taskDivineGrasp;
     private boolean canThink = true;
@@ -63,7 +64,7 @@ public class CaptainLakharaAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{25, 10});
+        Collections.addAll(percents, new Integer[] { 25, 10 });
     }
 
     private synchronized void checkPercentage(int hpPercentage) {
@@ -127,6 +128,7 @@ public class CaptainLakharaAI2 extends AggressiveNpcAI2 {
 
     private void taskDivineGraspStart() {
         taskDivineGrasp = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -139,6 +141,7 @@ public class CaptainLakharaAI2 extends AggressiveNpcAI2 {
                     AI2Actions.useSkill(CaptainLakharaAI2.this, 18890);
 
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             // pull player
@@ -151,6 +154,7 @@ public class CaptainLakharaAI2 extends AggressiveNpcAI2 {
                     }, 4500);
 
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             // Drehschmetterschlag #1
@@ -163,6 +167,7 @@ public class CaptainLakharaAI2 extends AggressiveNpcAI2 {
                     }, 6500);
 
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             // Drehschmetterschlag #2
@@ -175,6 +180,7 @@ public class CaptainLakharaAI2 extends AggressiveNpcAI2 {
                     }, 8500);
 
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             // normal weiter
@@ -218,6 +224,7 @@ public class CaptainLakharaAI2 extends AggressiveNpcAI2 {
 
     private void taskRageStart() {
         taskRage = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {

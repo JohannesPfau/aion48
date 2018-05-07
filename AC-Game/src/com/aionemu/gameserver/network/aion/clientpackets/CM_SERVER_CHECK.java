@@ -33,14 +33,12 @@ import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 
-
 /**
  * @author Alcapwnd
- *
  */
 public class CM_SERVER_CHECK extends AionClientPacket {
 
-	/**
+    /**
      * @param opcode
      * @param state
      * @param restStates
@@ -51,13 +49,13 @@ public class CM_SERVER_CHECK extends AionClientPacket {
 
     @Override
     protected void readImpl() {
-    	PacketLoggerService.getInstance().logPacketCM(this.getPacketName());
-    	//NOTHING
+        PacketLoggerService.getInstance().logPacketCM(this.getPacketName());
+        //NOTHING
     }
 
-	@Override
-	protected void runImpl() {
-		//TODO not sure about the handling
-		
-	}
+    @Override
+    protected void runImpl() {
+        //TODO not sure about the handling
+
+    }
 }

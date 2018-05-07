@@ -44,9 +44,7 @@ import com.aionemu.gameserver.model.Race;
  * @author Dtem
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "RankRestriction", propOrder = {
-        "penaltyAttr"
-})
+@XmlType(name = "RankRestriction", propOrder = { "penaltyAttr" })
 public class RankRestriction {
 
     @XmlElement(name = "penalty_attr")
@@ -70,7 +68,8 @@ public class RankRestriction {
     }
 
     /**
-     * @param restrictDirectPortal the restrictDirectPortal to set
+     * @param restrictDirectPortal
+     *            the restrictDirectPortal to set
      */
     public void setRestrictDirectPortal(boolean restrictDirectPortal) {
         this.restrictDirectPortal = restrictDirectPortal;
@@ -84,7 +83,8 @@ public class RankRestriction {
     }
 
     /**
-     * @param restrictDynamicBindstone the restrictDynamicBindstone to set
+     * @param restrictDynamicBindstone
+     *            the restrictDynamicBindstone to set
      */
     public void setRestrictDynamicBindstone(boolean restrictDynamicBindstone) {
         this.restrictDynamicBindstone = restrictDynamicBindstone;
@@ -92,7 +92,7 @@ public class RankRestriction {
 
     public List<RankPenaltyAttr> getPenaltyAttr() {
         if (penaltyAttr == null) {
-            penaltyAttr = new ArrayList<RankPenaltyAttr>();
+            penaltyAttr = new ArrayList<>();
         }
         return this.penaltyAttr;
     }
@@ -104,12 +104,12 @@ public class RankRestriction {
     public void setRankNum(int value) {
         this.rankNum = value;
     }
-    
+
     public int getId() {
-    	return id;
+        return id;
     }
-    
+
     public Race getRace() {
-    	return race;
+        return race;
     }
 }

@@ -31,9 +31,6 @@ package com.aionemu.gameserver.spawnengine;
 
 import java.util.HashSet;
 
-import javolution.util.FastList;
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -41,13 +38,16 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnGroup2;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.TemporarySpawn;
 
+import javolution.util.FastList;
+import javolution.util.FastMap;
+
 /**
  * @author xTz
  */
 public class TemporarySpawnEngine {
 
-	 private static final FastList<SpawnGroup2> temporarySpawns = new FastList<SpawnGroup2>();
-	 private static final FastMap<SpawnGroup2, HashSet<Integer>> tempSpawnInstanceMap = new FastMap<SpawnGroup2, HashSet<Integer>>();
+    private static final FastList<SpawnGroup2> temporarySpawns = new FastList<>();
+    private static final FastMap<SpawnGroup2, HashSet<Integer>> tempSpawnInstanceMap = new FastMap<>();
 
     public static void spawnAll() {
         spawn(true);
@@ -115,7 +115,7 @@ public class TemporarySpawnEngine {
         temporarySpawns.add(spawn);
         HashSet<Integer> instances = tempSpawnInstanceMap.get(spawn);
         if (instances == null) {
-            instances = new HashSet<Integer>();
+            instances = new HashSet<>();
             tempSpawnInstanceMap.put(spawn, instances);
         }
         instances.add(instanceId);

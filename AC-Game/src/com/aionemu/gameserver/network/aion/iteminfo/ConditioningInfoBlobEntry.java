@@ -37,7 +37,6 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 /**
  * This blob sends info about conditioning.
  *
-
  * @modified Rolandas
  */
 public class ConditioningInfoBlobEntry extends ItemBlobEntry {

@@ -139,7 +139,8 @@ public class GuideTemplate {
     }
 
     /**
-     * @param isActivated the isActivated to set
+     * @param isActivated
+     *            the isActivated to set
      */
     public void setActivated(boolean isActivated) {
         this.isActivated = isActivated;

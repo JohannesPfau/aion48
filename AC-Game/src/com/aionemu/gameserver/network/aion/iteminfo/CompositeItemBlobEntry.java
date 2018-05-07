@@ -40,7 +40,6 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 /**
  * This blob is sending info about the item that were fused with current item.
  *
-
  * @modified Rolandas
  */
 public class CompositeItemBlobEntry extends ItemBlobEntry {
@@ -64,8 +63,8 @@ public class CompositeItemBlobEntry extends ItemBlobEntry {
 
         if (item.hasFusionStones()) {
             Set<ManaStone> itemStones = item.getFusionStones();
-            ArrayList<ManaStone> basicStones = new ArrayList<ManaStone>();
-            ArrayList<ManaStone> ancientStones = new ArrayList<ManaStone>();
+            ArrayList<ManaStone> basicStones = new ArrayList<>();
+            ArrayList<ManaStone> ancientStones = new ArrayList<>();
 
             for (ManaStone itemStone : itemStones) {
                 if (itemStone.isBasic()) {

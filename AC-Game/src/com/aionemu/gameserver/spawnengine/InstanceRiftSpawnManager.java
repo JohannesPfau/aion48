@@ -51,13 +51,14 @@ import com.aionemu.gameserver.world.knownlist.Visitor;
 public class InstanceRiftSpawnManager {
 
     private static final Logger log = LoggerFactory.getLogger(InstanceRiftSpawnManager.class);
-    private static final ConcurrentLinkedQueue<VisibleObject> rifts = new ConcurrentLinkedQueue<VisibleObject>();
-    private static final int RIFT_RESPAWN_DELAY = 3600;    // 1 hour
-    private static final int RIFT_LIFETIME = 3500;    // 1 hour
+    private static final ConcurrentLinkedQueue<VisibleObject> rifts = new ConcurrentLinkedQueue<>();
+    private static final int RIFT_RESPAWN_DELAY = 3600; // 1 hour
+    private static final int RIFT_LIFETIME = 3500; // 1 hour
 
     public static void spawnAll() {
 
         ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
 
@@ -75,8 +76,7 @@ public class InstanceRiftSpawnManager {
     private static void spawnInstanceRift(RiftEnum rift) {
         log.info("Spawning Instance Rift: " + rift.name());
 
-        SpawnTemplate spawn = SpawnEngine.addNewSpawn(rift.getWorldId(), rift.getNpcId(),
-                rift.getX(), rift.getY(), rift.getZ(), (byte) 0, 0);
+        SpawnTemplate spawn = SpawnEngine.addNewSpawn(rift.getWorldId(), rift.getNpcId(), rift.getX(), rift.getY(), rift.getZ(), (byte) 0, 0);
 
         if (rift.getStaticId() > 0) {
             spawn.setStaticId(rift.getStaticId());
@@ -92,6 +92,7 @@ public class InstanceRiftSpawnManager {
 
     private static void scheduleDelete(final VisibleObject visObj) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (visObj != null && visObj.isSpawned()) {
@@ -106,6 +107,7 @@ public class InstanceRiftSpawnManager {
 
         //DraupnirCave(700564, 1617, Race.ELYOS, 210040000, 2528.662f, 2680.882f, 155.050f),
         IndratuFortress(700565, 0, Race.ASMODIANS, 220040000, 1466.8792f, 1947.9192f, 588.06555f);
+
         private int npc_id;
         private int static_id;
         private Race race;
@@ -166,6 +168,7 @@ public class InstanceRiftSpawnManager {
             WorldMapInstance worldInstance = visObj.getPosition().getMapRegion().getParent();
 
             worldInstance.doOnAllPlayers(new Visitor<Player>() {
+
                 @Override
                 public void visit(Player player) {
                     if (player.isSpawned()) {

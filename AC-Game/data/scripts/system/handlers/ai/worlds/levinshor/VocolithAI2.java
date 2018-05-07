@@ -31,15 +31,19 @@
 package ai.worlds.levinshor;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai2.*;
+import com.aionemu.gameserver.ai2.AI2Actions;
+import com.aionemu.gameserver.ai2.AIName;
+import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
 @AIName("vocolith")
 public class VocolithAI2 extends NpcAI2 {
+
     @Override
     protected void handleDialogStart(Player player) {
         if (player.getInventory().getFirstItemByItemId(185000216) != null) { //Ancestor's Relic.
@@ -231,6 +235,7 @@ public class VocolithAI2 extends NpcAI2 {
 
     private void announceLevinshorBoss() {
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_FNAMED_SPAWN);

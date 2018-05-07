@@ -44,8 +44,8 @@ public class SM_FORTRESS_INFO extends AionServerPacket {
     }
 
     @Override
-	protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+    protected void writeImpl(AionConnection con) {
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(locationId);
         writeC(teleportStatus ? 1 : 0);
     }

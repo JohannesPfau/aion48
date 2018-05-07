@@ -28,7 +28,6 @@
  * @Aion-Core Dev.742/22062015
  */
 
-
 package languages;
 
 import com.aionemu.gameserver.utils.i18n.CustomMessageId;
@@ -41,7 +40,8 @@ public class German extends Language {
         addSupportedLanguage("de_DE");
         addTranslatedMessage(CustomMessageId.INFO1, "Warnung: Benutzung von fremde software, wie (speed hack&Co ist strengst verboten.");
         addTranslatedMessage(CustomMessageId.INFO2, "Note: Je nach Fall, fuehrt ausnahmslos zu unbefristete Account Sperrung.");
-        addTranslatedMessage(CustomMessageId.INFO3, "Warnung: Werben andere Aion Server oder abwerben von Spieler hier auf dem Server, ist untersagt.");
+        addTranslatedMessage(CustomMessageId.INFO3,
+            "Warnung: Werben andere Aion Server oder abwerben von Spieler hier auf dem Server, ist untersagt.");
         addTranslatedMessage(CustomMessageId.INFO4, "Anmerkung: Das Team wird niemals nach Account Passwort fragen!");
         addTranslatedMessage(CustomMessageId.INFO5, "Chat: Benutze .faction, .ely, ,asmo <text> um in Chat zu schreiben. ");
         addTranslatedMessage(CustomMessageId.INFO6, "Chat: Benutze /1 /2 /3, um in Chatkanäle zu schreiben.");
@@ -93,7 +93,8 @@ public class German extends Language {
         addTranslatedMessage(CustomMessageId.CHANNEL_RELEASED_BOTH, "You are out of %s and %s");
         addTranslatedMessage(CustomMessageId.CHANNEL_BAN_ENDED, "You can rejoin the channels");
         addTranslatedMessage(CustomMessageId.CHANNEL_BAN_ENDED_FOR, "Player %s may again join the channel");
-        addTranslatedMessage(CustomMessageId.CHANNEL_BANNED, "Du kannst diesen Kanal nicht betreten, da %s dich gebannt hat wegen: %s, Zeit bis zu freigabe: %s");
+        addTranslatedMessage(CustomMessageId.CHANNEL_BANNED,
+            "Du kannst diesen Kanal nicht betreten, da %s dich gebannt hat wegen: %s, Zeit bis zu freigabe: %s");
         addTranslatedMessage(CustomMessageId.COMMAND_MISSING_SKILLS_STIGMAS_ADDED, "%d skill %d stigma given to you");
         addTranslatedMessage(CustomMessageId.COMMAND_MISSING_SKILLS_ADDED, "%d ability given to you");
         addTranslatedMessage(CustomMessageId.USER_COMMAND_DOES_NOT_EXIST, "DIeser Befehl ist hier nicht vorhanden ^^");
@@ -144,8 +145,10 @@ public class German extends Language {
         /**
          * Asmo, Ely and World Channel
          */
-        addTranslatedMessage(CustomMessageId.ASMO_FAIL, "Du bist Elyos! Du kannst diesen Chat nicht benutzen. Nutze .ely <Nachricht> um im Fraktions Chat zu schreiben!");
-        addTranslatedMessage(CustomMessageId.ELY_FAIL, "Du bist Asmo! Du kannst diesen Chat nicht benutzen. Nutze .asmo <Nachricht> um im Fraktions Chat zu schreiben!");
+        addTranslatedMessage(CustomMessageId.ASMO_FAIL,
+            "Du bist Elyos! Du kannst diesen Chat nicht benutzen. Nutze .ely <Nachricht> um im Fraktions Chat zu schreiben!");
+        addTranslatedMessage(CustomMessageId.ELY_FAIL,
+            "Du bist Asmo! Du kannst diesen Chat nicht benutzen. Nutze .asmo <Nachricht> um im Fraktions Chat zu schreiben!");
 
         /**
          * Wedding related
@@ -161,7 +164,6 @@ public class German extends Language {
         addTranslatedMessage(CustomMessageId.CANNOTCLEAN, "Du musst eine Item Id eingeben oder einen Link posten!");
         addTranslatedMessage(CustomMessageId.CANNOTCLEAN2, "Du besitzt dieses Item nicht!");
         addTranslatedMessage(CustomMessageId.SUCCESSCLEAN, "Item wurde erfolgreich aus deinem Wuerfel entfernt!");
-
 
         /**
          * Mission check command related
@@ -239,7 +241,8 @@ public class German extends Language {
         addTranslatedMessage(CustomMessageId.FFA_IS_ALREADY_IN, "Du bist bereits im FFA");
         addTranslatedMessage(CustomMessageId.FFA_FROZEN_MESSAGE, "Du bist für eine weile eingefrohren...");
         addTranslatedMessage(CustomMessageId.FFA_CURRENT_PLAYERS, "Jetzige Spieleranzahl :");
-        addTranslatedMessage(CustomMessageId.FFA_USAGE, "Anleitung: .FFA enter, um FFA zu betreten .FFA leave, um FFA zu verlassen.\n.FFA info, um die jetzige Anzahl von FFA Spielern zu bekommen ");
+        addTranslatedMessage(CustomMessageId.FFA_USAGE,
+            "Anleitung: .FFA enter, um FFA zu betreten .FFA leave, um FFA zu verlassen.\n.FFA info, um die jetzige Anzahl von FFA Spielern zu bekommen ");
         addTranslatedMessage(CustomMessageId.FFA_YOU_KICKED_OUT, "Du bist nicht mehr im FFA!");
         addTranslatedMessage(CustomMessageId.FFA_YOUR_NOT_IN, "Du bist zurzeit kein Mitglied von der FFA Map.");
         addTranslatedMessage(CustomMessageId.FFA_ANNOUNCE_1, "Komme auf die FFA Map mit .ffa enter ! ");

@@ -29,11 +29,11 @@
  */
 package quest.gelkmaros;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -45,7 +45,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _20035SilenteraSupport extends QuestHandler {
 
     private final static int questId = 20035;
-    private final static int[] mobs = {216107, 216450, 216104, 216449, 216112, 216451, 216109, 216108, 216101, 216448};
+    private final static int[] mobs = { 216107, 216450, 216104, 216449, 216112, 216451, 216109, 216108, 216101, 216448 };
 
     public _20035SilenteraSupport() {
         super(questId);
@@ -53,11 +53,11 @@ public class _20035SilenteraSupport extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {799226, 799329, 799323, 799283, 799309, 799225};
+        int[] npcs = { 799226, 799329, 799323, 799283, 799309, 799225 };
         qe.registerOnLevelUp(questId);
         qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerQuestItem(182215659, questId);
-		qe.registerQuestItem(182215660, questId);
+        qe.registerQuestItem(182215659, questId);
+        qe.registerQuestItem(182215660, questId);
         for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
@@ -79,7 +79,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 
         if (qs.getStatus() == QuestStatus.START) {
             switch (targetId) {
-                case 799226: { 
+                case 799226: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 0) {
@@ -91,14 +91,14 @@ public class _20035SilenteraSupport extends QuestHandler {
                         case SETPRO1: {
                             return defaultCloseDialog(env, 0, 1); // 1
                         }
-						case SET_SUCCEED: {
-							removeQuestItem(env, 182215660, 1);
+                        case SET_SUCCEED: {
+                            removeQuestItem(env, 182215660, 1);
                             return defaultCloseDialog(env, 7, 7, true, false); //reward
                         }
                     }
                     break;
                 }
-                case 799329: { 
+                case 799329: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 1) {
@@ -108,11 +108,11 @@ public class _20035SilenteraSupport extends QuestHandler {
                         case SETPRO2: {
                             return defaultCloseDialog(env, 1, 2); // 2
                         }
-                        
+
                     }
                     break;
                 }
-				case 799323: { 
+                case 799323: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 2) {
@@ -120,14 +120,14 @@ public class _20035SilenteraSupport extends QuestHandler {
                             }
                         }
                         case SETPRO3: {
-							giveQuestItem(env, 182215596, 1);
-							giveQuestItem(env, 182215597, 1);
+                            giveQuestItem(env, 182215596, 1);
+                            giveQuestItem(env, 182215597, 1);
                             return defaultCloseDialog(env, 2, 3); // 3
                         }
                     }
                     break;
                 }
-				case 799283: { 
+                case 799283: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 3) {
@@ -135,13 +135,13 @@ public class _20035SilenteraSupport extends QuestHandler {
                             }
                         }
                         case SETPRO4: {
-							removeQuestItem(env, 182215596, 1);
+                            removeQuestItem(env, 182215596, 1);
                             return defaultCloseDialog(env, 3, 4); // 4
                         }
                     }
                     break;
                 }
-                case 799309: { 
+                case 799309: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 4) {
@@ -149,9 +149,9 @@ public class _20035SilenteraSupport extends QuestHandler {
                             }
                         }
                         case SETPRO5: {
-							removeQuestItem(env, 182215597, 1);
-							giveQuestItem(env, 182215659, 1);
-							playQuestMovie(env, 567);
+                            removeQuestItem(env, 182215597, 1);
+                            giveQuestItem(env, 182215659, 1);
+                            playQuestMovie(env, 567);
                             return defaultCloseDialog(env, 4, 5); // 5
                         }
                     }
@@ -159,7 +159,7 @@ public class _20035SilenteraSupport extends QuestHandler {
                 }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-            if (targetId == 799225) { 
+            if (targetId == 799225) {
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
                 } else {
@@ -194,7 +194,7 @@ public class _20035SilenteraSupport extends QuestHandler {
     public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
         Player player = env.getPlayer();
         if (player.isInsideZone(ZoneName.get("DF4_ITEMUSEAREA_Q20035"))) {
-			giveQuestItem(env, 182215660, 1);
+            giveQuestItem(env, 182215660, 1);
             return HandlerResult.fromBoolean(useQuestItem(env, item, 6, 7, false)); // 7
         }
         return HandlerResult.FAILED;
@@ -207,7 +207,7 @@ public class _20035SilenteraSupport extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {20031, 20032};
+        int[] quests = { 20031, 20032 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 }

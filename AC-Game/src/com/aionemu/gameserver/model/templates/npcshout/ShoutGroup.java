@@ -49,6 +49,7 @@ import javax.xml.bind.annotation.XmlType;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="ShoutGroup">
  *   &lt;complexContent>
@@ -63,7 +64,7 @@ import javax.xml.bind.annotation.XmlType;
  * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ShoutGroup", propOrder = {"shoutNpcs"})
+@XmlType(name = "ShoutGroup", propOrder = { "shoutNpcs" })
 public class ShoutGroup {
 
     @XmlElement(name = "shout_npcs", required = true)
@@ -81,6 +82,7 @@ public class ShoutGroup {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getShoutNpcs().add(newItem);
      * </pre>
@@ -90,7 +92,7 @@ public class ShoutGroup {
      */
     public List<ShoutList> getShoutNpcs() {
         if (shoutNpcs == null) {
-            shoutNpcs = new ArrayList<ShoutList>();
+            shoutNpcs = new ArrayList<>();
         }
         return this.shoutNpcs;
     }

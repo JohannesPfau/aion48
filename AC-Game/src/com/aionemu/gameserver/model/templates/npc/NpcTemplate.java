@@ -51,7 +51,7 @@ import com.aionemu.gameserver.model.templates.stats.NpcStatsTemplate;
 
 /**
  * @author Luno
- (Aion-Core)
+ *         (Aion-Core)
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "npc_template")
@@ -213,7 +213,7 @@ public class NpcTemplate extends VisibleObjectTemplate {
     public void setAttackRange(int value) {
         this.attackRange = value;
     }
-    
+
     public void setAggroRange(int value) {
         this.aggrorange = value;
     }
@@ -278,8 +278,8 @@ public class NpcTemplate extends VisibleObjectTemplate {
         return talkInfo.getFuncDialogIds();
     }
 
-    public String getSubDialogType(){
-        if (talkInfo == null){
+    public String getSubDialogType() {
+        if (talkInfo == null) {
             return null;
         }
         return talkInfo.getSubDialogType();
@@ -293,7 +293,8 @@ public class NpcTemplate extends VisibleObjectTemplate {
     }
 
     /**
-     * @param npcDrop the npcDrop to set
+     * @param npcDrop
+     *            the npcDrop to set
      */
     public void setNpcDrop(NpcDrop npcDrop) {
         this.npcDrop = npcDrop;

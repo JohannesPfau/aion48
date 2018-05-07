@@ -46,7 +46,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TargetChangeEffect")
-public class TargetChangeEffect extends EffectTemplate{
+public class TargetChangeEffect extends EffectTemplate {
 
     @Override
     public void applyEffect(Effect effect) {
@@ -55,14 +55,15 @@ public class TargetChangeEffect extends EffectTemplate{
 
     /**
      * For Skill Shimmerbomb - 3236, 3237 , 3238
-      if the effected is EnemyPlayer target needs to be deselected
-      Also some other Taunt Skills does the same thing, but it changes the target to the effector
+     * if the effected is EnemyPlayer target needs to be deselected
+     * Also some other Taunt Skills does the same thing, but it changes the target to the effector
+     * 
      * @param effect
      */
     @Override
     public void startEffect(Effect effect) {
         Creature effected = effect.getEffected();
-        if (effected instanceof Player){
+        if (effected instanceof Player) {
             effected.setTarget(null);
             PacketSendUtility.sendPacket((Player) effected, new SM_TARGET_SELECTED(null));
             PacketSendUtility.broadcastPacket(effected, new SM_TARGET_UPDATE((Player) effected));

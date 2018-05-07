@@ -58,7 +58,7 @@ public class SM_VIEW_PLAYER_DETAILS extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
 
         writeD(targetObjId);
         writeC(11);

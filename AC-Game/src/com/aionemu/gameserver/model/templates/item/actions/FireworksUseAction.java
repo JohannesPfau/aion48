@@ -58,7 +58,7 @@ public class FireworksUseAction extends AbstractItemAction {
             player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1);
         }
 
-        PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
-                parentItem.getItemTemplate().getTemplateId(), 0, 1, 0));
+        PacketSendUtility.sendPacket(player,
+            new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 1, 0));
     }
 }

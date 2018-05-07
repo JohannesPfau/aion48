@@ -52,7 +52,7 @@ public class RoadData {
 
     public int size() {
         if (roadTemplates == null) {
-            roadTemplates = new ArrayList<RoadTemplate>();
+            roadTemplates = new ArrayList<>();
             return 0;
         }
         return roadTemplates.size();
@@ -60,14 +60,14 @@ public class RoadData {
 
     public List<RoadTemplate> getRoadTemplates() {
         if (roadTemplates == null) {
-            return new ArrayList<RoadTemplate>();
+            return new ArrayList<>();
         }
         return roadTemplates;
     }
 
     public void addAll(Collection<RoadTemplate> templates) {
         if (roadTemplates == null) {
-            roadTemplates = new ArrayList<RoadTemplate>();
+            roadTemplates = new ArrayList<>();
         }
         roadTemplates.addAll(templates);
     }

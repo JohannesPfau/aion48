@@ -53,7 +53,7 @@ public class SM_LEVEL_UPDATE extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(targetObjectId);
         writeH(effect); // unk
         writeH(level);

@@ -29,6 +29,9 @@
  */
 package ai;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.event.AIEventType;
@@ -40,9 +43,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.MathUtil;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * @author ATracer
@@ -77,7 +77,8 @@ public class AggressiveNpcAI2 extends GeneralNpcAI2 {
      * NPC calls for help. NPCs in range of distance are going aggressive to
      * first target of caller
      *
-     * @param distance (meters)
+     * @param distance
+     *            (meters)
      */
     protected void callForHelp(int distance) {
         Creature firstTarget = getAggroList().getMostHated();
@@ -97,7 +98,7 @@ public class AggressiveNpcAI2 extends GeneralNpcAI2 {
      * @return (Player)
      */
     protected Player getRandomTarget() {
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (Player player : getKnownList().getKnownPlayers().values()) {
             if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, getOwner(), 50)) {
                 players.add(player);

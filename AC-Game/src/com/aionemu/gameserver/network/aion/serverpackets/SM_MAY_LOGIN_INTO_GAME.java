@@ -35,8 +35,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * This packet is response for CM_MAY_LOGIN_INTO_GAME
- *
-
  */
 public class SM_MAY_LOGIN_INTO_GAME extends AionServerPacket {
 
@@ -45,7 +43,7 @@ public class SM_MAY_LOGIN_INTO_GAME extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         /**
          * probably here is msg if fail.
          */

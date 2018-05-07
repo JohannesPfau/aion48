@@ -47,7 +47,6 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
-
  * @author_fix nerolory
  * @Reworked Kill3r
  */
@@ -150,15 +149,15 @@ public class CM_EMOTION extends AionClientPacket {
 
         // check for stance
         if (player.getController().isUnderStance()) {
-            if (emotionType == EmotionType.SIT || emotionType == EmotionType.JUMP || emotionType == EmotionType.NEUTRALMODE || emotionType == EmotionType.NEUTRALMODE2
-                    || emotionType == EmotionType.ATTACKMODE || emotionType == EmotionType.ATTACKMODE2) {
+            if (emotionType == EmotionType.SIT || emotionType == EmotionType.JUMP || emotionType == EmotionType.NEUTRALMODE
+                || emotionType == EmotionType.NEUTRALMODE2 || emotionType == EmotionType.ATTACKMODE || emotionType == EmotionType.ATTACKMODE2) {
                 player.getController().stopStance();
                 //return; // because you cannot jump or sit etc while under stance..
             }
         }
 
-        if (player.getState() == CreatureState.PRIVATE_SHOP.getId() || player.isAttackMode()
-                && (emotionType == EmotionType.CHAIR_SIT || emotionType == EmotionType.JUMP)) {
+        if (player.getState() == CreatureState.PRIVATE_SHOP.getId()
+            || player.isAttackMode() && (emotionType == EmotionType.CHAIR_SIT || emotionType == EmotionType.JUMP)) {
             return;
         }
 
@@ -170,7 +169,6 @@ public class CM_EMOTION extends AionClientPacket {
         if (emotionType != EmotionType.SELECT_TARGET) {
             player.getController().cancelCurrentSkill();
         }
-
 
         switch (emotionType) {
             case SELECT_TARGET:
@@ -250,7 +248,7 @@ public class CM_EMOTION extends AionClientPacket {
                 break;
             case START_SPRINT:
                 if (!player.isInPlayerMode(PlayerMode.RIDE) || player.getLifeStats().getCurrentFp() < player.ride.getStartFp()
-                        || player.isInState(CreatureState.FLYING) || !player.ride.canSprint()) {
+                    || player.isInState(CreatureState.FLYING) || !player.ride.canSprint()) {
                     return;
                 }
                 player.setSprintMode(true);
@@ -268,7 +266,8 @@ public class CM_EMOTION extends AionClientPacket {
         }
 
         if (player.getEmotions().canUse(emotion)) {
-            PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, emotionType, emotion, x, y, z, heading, getTargetObjectId(player)), true);
+            PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, emotionType, emotion, x, y, z, heading, getTargetObjectId(player)),
+                true);
         }
     }
 

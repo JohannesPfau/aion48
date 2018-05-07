@@ -50,8 +50,7 @@ public class SiegeSpawnTemplate extends SpawnTemplate {
         super(spawnGroup, spot);
     }
 
-    public SiegeSpawnTemplate(SpawnGroup2 spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId,
-                              int staticId, int fly) {
+    public SiegeSpawnTemplate(SpawnGroup2 spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly) {
         super(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId, fly);
     }
 

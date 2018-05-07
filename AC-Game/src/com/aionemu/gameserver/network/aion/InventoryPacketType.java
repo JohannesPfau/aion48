@@ -39,6 +39,7 @@ public enum InventoryPacketType {
     MAIL_REPURCHASE(false, true, false),
     PRIVATE_STORE(false, false, true),
     WEAPON_SWITCH(true, false, false, true);
+
     private boolean isInventory;
     private boolean isMailOrRepurchase;
     private boolean isPrivateStore;

@@ -31,13 +31,13 @@ package quest.event_quests;
 
 import java.util.List;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.quest.QuestItems;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -72,8 +72,7 @@ public class _80039EventTheChosenFew extends QuestHandler {
             return false;
         }
 
-        if (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.COMPLETE
-                && QuestService.collectItemCheck(env, false)) {
+        if (qs.getStatus() == QuestStatus.START || qs.getStatus() == QuestStatus.COMPLETE && QuestService.collectItemCheck(env, false)) {
             if (targetId == 799780) {
                 if (env.getDialog() == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 1011);

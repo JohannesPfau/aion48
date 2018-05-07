@@ -44,14 +44,11 @@ import com.aionemu.gameserver.utils.Util;
 
 /**
  * Base class for every GS -> Aion Server Packet.
- *
-
-
  */
 public abstract class AionServerPacket extends BaseServerPacket {
 
-	public static final Logger log = LoggerFactory.getLogger(AionServerPacket.class);
-	
+    public static final Logger log = LoggerFactory.getLogger(AionServerPacket.class);
+
     /**
      * Constructs new server packet
      */
@@ -95,49 +92,48 @@ public abstract class AionServerPacket extends BaseServerPacket {
      */
     protected void writeImpl(AionConnection con) {
     }
-    
+
     public final ByteBuffer getBuf() {
         return this.buf;
-    }    
-    
+    }
+
     private boolean isPacketFilterd(String filterlist, String PacketName) {
-    	
-    	//If FilterList was empty, all packets will be shown.
-    	if (filterlist == null || filterlist.equalsIgnoreCase("*")) return true;
-    	
-    	String[] Parts = null;
-    	Parts = filterlist.trim().split(",");
-    	
-    	for (String p: Parts) {
-    		if (p.trim().equalsIgnoreCase(PacketName)) {
-    			return true;
-    		}
-    	}
-    	return false;
-    }    
-    
+
+        //If FilterList was empty, all packets will be shown.
+        if (filterlist == null || filterlist.equalsIgnoreCase("*"))
+            return true;
+
+        String[] Parts = null;
+        Parts = filterlist.trim().split(",");
+
+        for (String p : Parts) {
+            if (p.trim().equalsIgnoreCase(PacketName)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private ByteBuffer getByteBuffer(ByteBuffer buf, int count) {
-    	
-    	count = (count <= buf.capacity()) ? count : buf.capacity();
-    	ByteBuffer tmpBuffer = buf.asReadOnlyBuffer();
-    	tmpBuffer.position(5+2);
-    	tmpBuffer.limit(count);
-    	
-	   	 // Create an empty ByteBuffer with a Requested Capacity.
-	   	ByteBuffer PckBuffer = ByteBuffer.allocate(count);
+
+        count = (count <= buf.capacity()) ? count : buf.capacity();
+        ByteBuffer tmpBuffer = buf.asReadOnlyBuffer();
+        tmpBuffer.position(5 + 2);
+        tmpBuffer.limit(count);
+
+        // Create an empty ByteBuffer with a Requested Capacity.
+        ByteBuffer PckBuffer = ByteBuffer.allocate(count);
         try {
-        	do 
-	        	{
-	    		PckBuffer.put(tmpBuffer.get());
-	        	}
-    		while (tmpBuffer.remaining() > 0);
+            do {
+                PckBuffer.put(tmpBuffer.get());
+            } while (tmpBuffer.remaining() > 0);
         } catch (Exception e) {
-        	//e.printStackTrace();
+            //e.printStackTrace();
         }
         PckBuffer.position(0);
         return PckBuffer;
-    }    
-    
+    }
+
     /**
      * Write and encrypt this packet data for given connection, to given buffer.
      *
@@ -147,7 +143,8 @@ public abstract class AionServerPacket extends BaseServerPacket {
     public final void write(AionConnection con, ByteBuffer buffer) {
         if (con.getState().equals(AionConnection.State.IN_GAME) && con.getActivePlayer().getPlayerAccount().getMembership() == 10) {
             if (!this.getPacketName().equals("SM_MESSAGE")) {
-                PacketSendUtility.sendMessage(con.getActivePlayer(), "0x" + Integer.toHexString(this.getOpcode()).toUpperCase() + " : " + this.getPacketName());
+                PacketSendUtility.sendMessage(con.getActivePlayer(),
+                    "0x" + Integer.toHexString(this.getOpcode()).toUpperCase() + " : " + this.getPacketName());
             }
         }
 
@@ -159,33 +156,34 @@ public abstract class AionServerPacket extends BaseServerPacket {
         /**
          * Display Packets Name + Hex-Bytes in Chat Window
          */
-		int BufCurrentPos = buf.position();
-		buf.position(5+2);
-		
+        int BufCurrentPos = buf.position();
+        buf.position(5 + 2);
+
         Player player = con.getActivePlayer();
-        
-        if (con.getState().equals(State.IN_GAME) && player != null && this.getOpcode() != 24 && player.getAccessLevel() >= DeveloperConfig.SHOW_PACKETS_INCHAT_ACCESSLEVEL) {
-        	if (isPacketFilterd(DeveloperConfig.FILTERED_PACKETS_INCHAT, this.getPacketName())) {
-            	if (DeveloperConfig.SHOW_PACKET_BYTES_INCHAT) {
-                	String PckName = String.format("0x%04X : %s", this.getOpcode(), this.getPacketName());
-                	PacketSendUtility.sendMessage(player, "********************************************");
-                	PacketSendUtility.sendMessage(player, PckName);
-            		PacketSendUtility.sendMessage(player, Util.toHexStream(getByteBuffer(buf, DeveloperConfig.TOTAL_PACKET_BYTES_INCHAT)));
-            		
+
+        if (con.getState().equals(State.IN_GAME) && player != null && this.getOpcode() != 24
+            && player.getAccessLevel() >= DeveloperConfig.SHOW_PACKETS_INCHAT_ACCESSLEVEL) {
+            if (isPacketFilterd(DeveloperConfig.FILTERED_PACKETS_INCHAT, this.getPacketName())) {
+                if (DeveloperConfig.SHOW_PACKET_BYTES_INCHAT) {
+                    String PckName = String.format("0x%04X : %s", this.getOpcode(), this.getPacketName());
+                    PacketSendUtility.sendMessage(player, "********************************************");
+                    PacketSendUtility.sendMessage(player, PckName);
+                    PacketSendUtility.sendMessage(player, Util.toHexStream(getByteBuffer(buf, DeveloperConfig.TOTAL_PACKET_BYTES_INCHAT)));
+
                 } else if (DeveloperConfig.SHOW_PACKET_NAMES_INCHAT) {
-                	String PckName = String.format("0x%04X : %s", this.getOpcode(), this.getPacketName());
-                	PacketSendUtility.sendMessage(player, PckName);
-                } 
-        	} 	
-        }        
+                    String PckName = String.format("0x%04X : %s", this.getOpcode(), this.getPacketName());
+                    PacketSendUtility.sendMessage(player, PckName);
+                }
+            }
+        }
         buf.position(BufCurrentPos);
-        
+
         buf.putShort((short) buf.limit());
         ByteBuffer b = buf.slice();
         buf.position(0);
         con.encrypt(b);
     }
-    
+
     /**
      * Write String to buffer
      *

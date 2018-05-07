@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
@@ -50,13 +48,14 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.ecfunctions.ffa.FFaService;
 
+import javolution.util.FastList;
+
 /**
  * This packet is displaying visible players.
- *
-, Avol, srx47 modified cura
+ * , Avol, srx47 modified cura
+ * 
  * @modified -Enomine- -Artur-, Alcapwnd
  * @Reworked Kill3r
-
  * @Reworked Voidstar
  */
 public class SM_PLAYER_INFO extends AionServerPacket {
@@ -70,7 +69,8 @@ public class SM_PLAYER_INFO extends AionServerPacket {
     /**
      * Constructs new <tt>SM_PLAYER_INFO </tt> packet
      *
-     * @param player actual player.
+     * @param player
+     *            actual player.
      * @param enemy
      */
     public SM_PLAYER_INFO(Player player, boolean enemy) {
@@ -83,7 +83,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         Player activePlayer = con.getActivePlayer();
         if (activePlayer == null || player == null) {
             return;
@@ -92,7 +92,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
         final int raceId;
         if (player.getAdminNeutral() > 1 || activePlayer.getAdminNeutral() > 1 || player.isInPvEMode() || activePlayer.isInPvEMode()) {
             raceId = activePlayer.getRace().getRaceId();
-        } else if (activePlayer.isInFFA() || activePlayer.isInPkMode() || activePlayer.getTransformModel().getModelId() == 202635){
+        } else if (activePlayer.isInFFA() || activePlayer.isInPkMode() || activePlayer.getTransformModel().getModelId() == 202635) {
             if (player.getRace() == activePlayer.getRace() && player != activePlayer) {
                 raceId = (player.getRace().getRaceId() == 0 ? 1 : 0);
             } else if (player != activePlayer) {
@@ -124,26 +124,24 @@ public class SM_PLAYER_INFO extends AionServerPacket {
          */
         int model = player.getTransformModel().getModelId();
 
-
         writeD(model != 0 ? model : pcd.getTemplateId());
         writeC(0x00); // new 2.0 Packet --- probably pet info?
         writeD(player.getTransformModel().getType().getId());
         if (player.isInFFA() || activePlayer.isInFFA()) {
             writeC(0x00);
-        } else if  (player.isInArena() || activePlayer.isInArena()) {
-        	writeC(0x00);
-        } else if  (player.isInBattle() || activePlayer.isInBattle()) {
-        	writeC(0x00);
-        } else if  (player.isInDuoFFA() || activePlayer.isInDuoFFA()) {
-        	writeC(0x00);
-        } else if  (player.isInBH() || activePlayer.isInBH()) {
-        	writeC(0x00);
-        } else if  (player.isInPkMode() || activePlayer.isInPkMode()) {
-        	writeC(0x00);
+        } else if (player.isInArena() || activePlayer.isInArena()) {
+            writeC(0x00);
+        } else if (player.isInBattle() || activePlayer.isInBattle()) {
+            writeC(0x00);
+        } else if (player.isInDuoFFA() || activePlayer.isInDuoFFA()) {
+            writeC(0x00);
+        } else if (player.isInBH() || activePlayer.isInBH()) {
+            writeC(0x00);
+        } else if (player.isInPkMode() || activePlayer.isInPkMode()) {
+            writeC(0x00);
         } else {
             writeC(enemy ? 0x00 : 0x26);
         }
-
 
         writeC(raceId); // race
         writeC(pcd.getPlayerClass().getClassId());
@@ -157,32 +155,32 @@ public class SM_PLAYER_INFO extends AionServerPacket {
         String nameFormat = "%s";
         String playerName = player.getName();
         StringBuilder sb = new StringBuilder(nameFormat);
-        
+
         if (player.getClientConnection() != null) {
 
             // * = Premium & VIP Membership
             if (MembershipConfig.PREMIUM_TAG_DISPLAY) {
                 switch (player.getClientConnection().getAccount().getMembership()) {
                     case 1:
-                    	nameFormat = sb.replace(0, sb.length(), MembershipConfig.TAG_PREMIUM).toString();
+                        nameFormat = sb.replace(0, sb.length(), MembershipConfig.TAG_PREMIUM).toString();
                         break;
                     case 2:
-                    	nameFormat = sb.replace(0, sb.length(), MembershipConfig.TAG_VIP).toString();
+                        nameFormat = sb.replace(0, sb.length(), MembershipConfig.TAG_VIP).toString();
                         break;
                 }
             }
-            
+
             // * = Wedding
             if (player.isMarried()) {
                 nameFormat = sb.insert(0, WeddingsConfig.TAG_WEDDING.substring(0, 2)).toString();
             }
 
             // * = PvP Related Features
-            if (player.isInFFA() || player.isInDuoFFA() || player.isInBH() || player.isInArena()){
+            if (player.isInFFA() || player.isInDuoFFA() || player.isInBH() || player.isInArena()) {
                 playerName = FFaService.getInstance().getName(activePlayer, player);
             }
 
-            if (player.isInPvEMode()){
+            if (player.isInPvEMode()) {
                 nameFormat = sb.insert(0, CustomConfig.TAG_PVE.substring(0, 2)).toString();
             }
 
@@ -193,44 +191,44 @@ public class SM_PLAYER_INFO extends AionServerPacket {
             // * = Server Staff Access Level
 
             if (AdminConfig.CUSTOMTAG_ENABLE && player.isGmMode()) {
-            	
+
                 switch (player.getClientConnection().getAccount().getAccessLevel()) {
                     case 1:
-                    	nameFormat = AdminConfig.CUSTOMTAG_ACCESS1.replace("%s", sb.toString());
+                        nameFormat = AdminConfig.CUSTOMTAG_ACCESS1.replace("%s", sb.toString());
                         break;
                     case 2:
-                    	nameFormat = AdminConfig.CUSTOMTAG_ACCESS2.replace("%s", sb.toString());
+                        nameFormat = AdminConfig.CUSTOMTAG_ACCESS2.replace("%s", sb.toString());
                         break;
                     case 3:
-                    	nameFormat = AdminConfig.CUSTOMTAG_ACCESS3.replace("%s", sb.toString());
+                        nameFormat = AdminConfig.CUSTOMTAG_ACCESS3.replace("%s", sb.toString());
                         break;
                     case 4:
-                    	nameFormat = AdminConfig.CUSTOMTAG_ACCESS4.replace("%s", sb.toString());
+                        nameFormat = AdminConfig.CUSTOMTAG_ACCESS4.replace("%s", sb.toString());
                         break;
                     case 5:
-                    	nameFormat = AdminConfig.CUSTOMTAG_ACCESS5.replace("%s", sb.toString());
+                        nameFormat = AdminConfig.CUSTOMTAG_ACCESS5.replace("%s", sb.toString());
                         break;
                     case 6:
-                    	nameFormat = AdminConfig.CUSTOMTAG_ACCESS6.replace("%s", sb.toString());
+                        nameFormat = AdminConfig.CUSTOMTAG_ACCESS6.replace("%s", sb.toString());
                         break;
                     case 7:
-                    	nameFormat = AdminConfig.CUSTOMTAG_ACCESS7.replace("%s", sb.toString());
+                        nameFormat = AdminConfig.CUSTOMTAG_ACCESS7.replace("%s", sb.toString());
                         break;
                     case 8:
-                    	nameFormat = AdminConfig.CUSTOMTAG_ACCESS8.replace("%s", sb.toString());
+                        nameFormat = AdminConfig.CUSTOMTAG_ACCESS8.replace("%s", sb.toString());
                         break;
                     case 9:
-                    	nameFormat = AdminConfig.CUSTOMTAG_ACCESS9.replace("%s", sb.toString());
+                        nameFormat = AdminConfig.CUSTOMTAG_ACCESS9.replace("%s", sb.toString());
                         break;
                     case 10:
-                    	nameFormat = AdminConfig.CUSTOMTAG_ACCESS10.replace("%s", sb.toString());
+                        nameFormat = AdminConfig.CUSTOMTAG_ACCESS10.replace("%s", sb.toString());
                         break;
                 }
             }
         }
 
         // * == FFA TAGS , UNIQUE NAME INSIDE
-        if (player.isInFFA()  || player.isInArena() || player.isInPkMode() || player.isInBH() || player.isInDuoFFA()){
+        if (player.isInFFA() || player.isInArena() || player.isInPkMode() || player.isInBH() || player.isInDuoFFA()) {
             writeS(playerName);
         } else {
             writeS(String.format(nameFormat, player.getName()));
@@ -310,51 +308,51 @@ public class SM_PLAYER_INFO extends AionServerPacket {
         writeD(mask); // DBS size
 
         for (Item item : items) {
-            if (player.isInFFA() || player.isInDuoFFA() || player.isInBH() || player.isInArena()){
+            if (player.isInFFA() || player.isInDuoFFA() || player.isInBH() || player.isInArena()) {
                 writeD(FFaService.getDisplayTemplate(player, item));
                 GodStone godStone = item.getGodStone();
                 writeD(godStone != null ? 168000118 : 0);
                 writeD(item.getItemColor());
-                if (item.getAuthorize() > 0 && item.getItemTemplate().isAccessory()){
+                if (item.getAuthorize() > 0 && item.getItemTemplate().isAccessory()) {
                     if (item.getItemTemplate().isPlume()) {
                         float aLvl = item.getAuthorize() / 5;
-                        if (item.getAuthorize() >= 5){
+                        if (item.getAuthorize() >= 5) {
                             aLvl = aLvl > 2.0f ? 2.0f : aLvl;
                             writeD((int) aLvl << 3);
-                        }else{
+                        } else {
                             writeD(0);
                         }
-                    }else{
+                    } else {
                         writeD(item.getAuthorize() >= 5 ? 2 : 0);
                     }
-                }else{
-                    if (item.getItemTemplate().isWeapon() || item.getItemTemplate().isTwoHandWeapon()){
+                } else {
+                    if (item.getItemTemplate().isWeapon() || item.getItemTemplate().isTwoHandWeapon()) {
                         writeD(item.getEnchantLevel() == 15 ? 2 : item.getEnchantLevel() >= 20 ? 4 : 0);
-                    }else{
+                    } else {
                         writeD(0);
                     }
                 }
-            }else{
+            } else {
                 writeD(item.getItemSkinTemplate().getTemplateId());
                 GodStone godStone = item.getGodStone();
                 writeD(godStone != null ? godStone.getItemId() : 0);
                 writeD(item.getItemColor());
-                if (item.getAuthorize() > 0 && item.getItemTemplate().isAccessory()){
+                if (item.getAuthorize() > 0 && item.getItemTemplate().isAccessory()) {
                     if (item.getItemTemplate().isPlume()) {
                         float aLvl = item.getAuthorize() / 5;
-                        if (item.getAuthorize() >= 5){
+                        if (item.getAuthorize() >= 5) {
                             aLvl = aLvl > 2.0f ? 2.0f : aLvl;
                             writeD((int) aLvl << 3);
-                        }else{
+                        } else {
                             writeD(0);
                         }
-                    }else{
+                    } else {
                         writeD(item.getAuthorize() >= 5 ? 2 : 0);
                     }
-                }else{
-                    if (item.getItemTemplate().isWeapon() || item.getItemTemplate().isTwoHandWeapon()){
+                } else {
+                    if (item.getItemTemplate().isWeapon() || item.getItemTemplate().isTwoHandWeapon()) {
                         writeD(item.getEnchantLevel() == 15 ? 2 : item.getEnchantLevel() >= 20 ? 4 : 0);
-                    }else{
+                    } else {
                         writeD(0);
                     }
                 }
@@ -469,11 +467,11 @@ public class SM_PLAYER_INFO extends AionServerPacket {
         writeS(player.getCommonData().getNote()); // note show in right down windows if your target on player
 
         writeH(player.getLevel()); // [level]
-        if(player.isInFFA() || player.isInDuoFFA() || player.isInBH() || player.isInArena()){
+        if (player.isInFFA() || player.isInDuoFFA() || player.isInBH() || player.isInArena()) {
             writeH(0); //for helmet/cloak
             writeH(0);//config for auto deny invities
             writeH(0);//abyss rank
-        }else{
+        } else {
             writeH(player.getPlayerSettings().getDisplay());
             writeH(player.getPlayerSettings().getDeny()); // unk - 0x00
             writeH(player.getAbyssRank().getRank().getId()); // abyss rank
@@ -488,7 +486,7 @@ public class SM_PLAYER_INFO extends AionServerPacket {
         writeD(0x01);
         writeD(0x00);//unk 0x00 4.7 //TODO need to figure out
         writeC(raceId == 0 ? 3 : 5); // language asmo:3 ely:5
-		writeH(0x00); // 4.8
+        writeH(0x00); // 4.8
         writeC(0x00); // 4.8
     }
 }

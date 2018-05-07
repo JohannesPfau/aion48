@@ -189,7 +189,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
      * @param parent
      */
     void afterUnmarshal(Unmarshaller u, Object parent) {
-        if (id != null){
+        if (id != null) {
             setItemId(Integer.parseInt(id));
         }
         String[] parts = restrict.split(",");
@@ -218,14 +218,16 @@ public class ItemTemplate extends VisibleObjectTemplate {
         return 0;
     }
 
-    /*public int getMinLevelRestrict(Player player) {
-        if (restrict != null) {
-            byte restrictId = player.getPlayerClass().getClassId();
-            int restrictLevel = restricts[restrictId];
-            return player.getLevel() >= restrictLevel ? 0 : restrictLevel;
-        }
-        return 0;
-    }*/
+    /*
+     * public int getMinLevelRestrict(Player player) {
+     * if (restrict != null) {
+     * byte restrictId = player.getPlayerClass().getClassId();
+     * int restrictLevel = restricts[restrictId];
+     * return player.getLevel() >= restrictLevel ? 0 : restrictLevel;
+     * }
+     * return 0;
+     * }
+     */
 
     public int getMask() {
         return mask;
@@ -607,7 +609,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
     }
 
     public boolean isAccessory() {
-        return category == ItemCategory.EARRINGS || category == ItemCategory.RINGS || category == ItemCategory.NECKLACE || category == ItemCategory.PLUME || category == ItemCategory.HELMET || category == ItemCategory.BELT;
+        return category == ItemCategory.EARRINGS || category == ItemCategory.RINGS || category == ItemCategory.NECKLACE
+            || category == ItemCategory.PLUME || category == ItemCategory.HELMET || category == ItemCategory.BELT;
     }
 
     public int getAuthorize() {
@@ -629,9 +632,9 @@ public class ItemTemplate extends VisibleObjectTemplate {
     public boolean getExceedEnchant() {
         return exceedEnchant;
     }
-    
+
     public String getEnchantSkillSet() {
-    	return enchantSkillSet;
+        return enchantSkillSet;
     }
 
     public int getRobotId() {
@@ -642,7 +645,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
         return namedesc;
     }
 
-    public boolean isActivateCombat(){
+    public boolean isActivateCombat() {
         return activateCombat;
     }
 }

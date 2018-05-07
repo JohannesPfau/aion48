@@ -87,6 +87,7 @@ public abstract class AbstractInteractionTask {
     public void start() {
         onInteractionStart();
         task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (!validateParticipants()) {

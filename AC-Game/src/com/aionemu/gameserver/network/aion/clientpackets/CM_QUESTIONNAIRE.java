@@ -65,7 +65,7 @@ public class CM_QUESTIONNAIRE extends AionClientPacket {
         PacketLoggerService.getInstance().logPacketCM(this.getPacketName());
         objectId = readD();
         itemSize = readH();
-        items = new ArrayList<Integer>();
+        items = new ArrayList<>();
         for (int i = 0; i < itemSize; i++) {
             itemId = readD();
             items.add(itemId);
@@ -79,13 +79,13 @@ public class CM_QUESTIONNAIRE extends AionClientPacket {
      */
     @Override
     protected void runImpl() {
-    	if (objectId > 0) {
+        if (objectId > 0) {
             Player player = getConnection().getActivePlayer();
 
             switch (objectId) {
                 // battleground registration
                 case 150000001:
-                    List<BattleGroundTemplate> acceptedTemplates = new ArrayList<BattleGroundTemplate>();
+                    List<BattleGroundTemplate> acceptedTemplates = new ArrayList<>();
                     for (BattleGroundTemplate template : DataManager.BATTLEGROUND_DATA.getAllTemplates()) {
                         if (player.getLevel() < template.getJoinConditions().getRequiredLevel()) {
                             continue;
@@ -119,7 +119,7 @@ public class CM_QUESTIONNAIRE extends AionClientPacket {
                     break;
                 // Registering form for Observers in battleGround
                 case 151000001:
-                    List<BattleGroundTemplate> acceptedBattlegrounds = new ArrayList<BattleGroundTemplate>();
+                    List<BattleGroundTemplate> acceptedBattlegrounds = new ArrayList<>();
                     for (BattleGroundTemplate template : DataManager.BATTLEGROUND_DATA.getAllTemplates()) {
                         acceptedBattlegrounds.add(template);
                     }

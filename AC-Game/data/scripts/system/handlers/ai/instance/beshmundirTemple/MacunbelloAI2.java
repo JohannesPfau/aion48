@@ -29,16 +29,17 @@
  */
 package ai.instance.beshmundirTemple;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import java.util.ArrayList;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 @AIName("macunbello")
 public class MacunbelloAI2 extends AggressiveNpcAI2 {
@@ -46,7 +47,7 @@ public class MacunbelloAI2 extends AggressiveNpcAI2 {
     private AtomicBoolean isHome = new AtomicBoolean(true);
     private boolean wave1 = false;
     private boolean wave2 = false;
-    private ArrayList<Npc> wave_npcs = new ArrayList<Npc>();
+    private ArrayList<Npc> wave_npcs = new ArrayList<>();
     private Future<?> wave1_task;
     private Future<?> wave2_task;
 
@@ -100,6 +101,7 @@ public class MacunbelloAI2 extends AggressiveNpcAI2 {
             wave1 = true;
             NpcShoutsService.getInstance().sendMsg(getOwner(), 1500061, getObjectId(), 0, 0);
             wave1_task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     if (!isAlreadyDead()) {
@@ -118,6 +120,7 @@ public class MacunbelloAI2 extends AggressiveNpcAI2 {
             wave2 = true;
             NpcShoutsService.getInstance().sendMsg(getOwner(), 1500061, getObjectId(), 0, 0);
             wave2_task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                 @Override
                 public void run() {
                     if (!isAlreadyDead()) {

@@ -28,36 +28,35 @@
  * @Aion-Core Dev.
  */
 package quest.eltnen;
- 
+
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
- 
+
 /**
  * @author FrozenKiller
  */
- 
+
 public class _14123TheShadowofVengeance extends QuestHandler {
 
     private final static int questId = 14123;
 
     public _14123TheShadowofVengeance() {
         super(questId);
-    }    
-	
+    }
+
     @Override
     public void register() {
         qe.registerQuestNpc(203933).addOnQuestStart(questId);
         qe.registerQuestNpc(203933).addOnTalkEvent(questId); // Actaeon
-		qe.registerQuestNpc(203991).addOnTalkEvent(questId); // Dionera
-		qe.registerQuestNpc(206360).addOnKillEvent(questId); // Peddler Hippola
+        qe.registerQuestNpc(203991).addOnTalkEvent(questId); // Dionera
+        qe.registerQuestNpc(206360).addOnKillEvent(questId); // Peddler Hippola
     }
-	
-	
-	@Override
+
+    @Override
     public boolean onDialogEvent(final QuestEnv env) {
         final Player player = env.getPlayer();
         int targetId = env.getTargetId();
@@ -72,43 +71,43 @@ public class _14123TheShadowofVengeance extends QuestHandler {
                     return sendQuestStartDialog(env, -1);
                 }
             }
-		} else if (qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (targetId == 203991) { // Dionera
-				switch (dialog) {
-					case USE_OBJECT: {
-						if (var == 0) {
-							return sendQuestDialog(env, 1352);
-						} else if (var == 1) {
-							return sendQuestDialog(env, 2375);
-						}
-					}
-					case SETPRO1: {
-						qs.setQuestVar(0);
-						updateQuestStatus(env);
-						return closeDialogWindow(env);
-					}
-					case SELECT_QUEST_REWARD: {
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						return sendQuestDialog(env, 5);
-					}
-					case FINISH_DIALOG: {
+        } else if (qs.getStatus() == QuestStatus.START) {
+            int var = qs.getQuestVarById(0);
+            if (targetId == 203991) { // Dionera
+                switch (dialog) {
+                    case USE_OBJECT: {
+                        if (var == 0) {
+                            return sendQuestDialog(env, 1352);
+                        } else if (var == 1) {
+                            return sendQuestDialog(env, 2375);
+                        }
+                    }
+                    case SETPRO1: {
+                        qs.setQuestVar(0);
+                        updateQuestStatus(env);
+                        return closeDialogWindow(env);
+                    }
+                    case SELECT_QUEST_REWARD: {
+                        qs.setStatus(QuestStatus.REWARD);
+                        updateQuestStatus(env);
+                        return sendQuestDialog(env, 5);
+                    }
+                    case FINISH_DIALOG: {
                         return sendQuestSelectionDialog(env);
                     }
-				default:
-					break;
-				}
-			}
+                    default:
+                        break;
+                }
+            }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 203991) { // Dionera
+            if (targetId == 203991) { // Dionera
                 return sendQuestEndDialog(env);
-			}
-		}
+            }
+        }
         return false;
     }
-	
-	@Override
+
+    @Override
     public boolean onKillEvent(QuestEnv env) {
         return defaultOnKillEvent(env, 206360, 0, 1); // 1
     }

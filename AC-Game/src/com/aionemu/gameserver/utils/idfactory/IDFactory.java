@@ -51,8 +51,6 @@ import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
  * This class is Thread-Safe.<br>
  * This class is designed to be very strict with id usage. Any illegal operation
  * will throw {@link IDFactoryError}
- *
-
  */
 public class IDFactory {
 
@@ -76,7 +74,8 @@ public class IDFactory {
      * Returns next free id.
      *
      * @return next free id
-     * @throws IDFactoryError if there is no free id's
+     * @throws IDFactoryError
+     *             if there is no free id's
      */
     private IDFactory() {
         idList = new BitSet();
@@ -129,8 +128,10 @@ public class IDFactory {
     /**
      * Locks given ids.
      *
-     * @param ids ids to lock
-     * @throws IDFactoryError if some of the id's were locked before
+     * @param ids
+     *            ids to lock
+     * @throws IDFactoryError
+     *             if some of the id's were locked before
      */
     private void lockIds(int... ids) {
         try {
@@ -150,8 +151,10 @@ public class IDFactory {
     /**
      * Locks given ids.
      *
-     * @param ids ids to lock
-     * @throws IDFactoryError if some of the id's were locked before
+     * @param ids
+     *            ids to lock
+     * @throws IDFactoryError
+     *             if some of the id's were locked before
      */
     public void lockIds(Iterable<Integer> ids) {
         try {
@@ -171,8 +174,10 @@ public class IDFactory {
     /**
      * Releases given id
      *
-     * @param id id to release
-     * @throws IDFactoryError if id was not taken earlier
+     * @param id
+     *            id to release
+     * @throws IDFactoryError
+     *             if id was not taken earlier
      */
     public void releaseId(int id) {
         try {

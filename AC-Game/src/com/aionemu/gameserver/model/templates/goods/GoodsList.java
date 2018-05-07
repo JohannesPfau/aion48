@@ -39,9 +39,9 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.model.limiteditems.LimitedItem;
+
+import javolution.util.FastList;
 
 /**
  * @author ATracer
@@ -59,7 +59,7 @@ public class GoodsList {
     private List<Integer> itemIdList;
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
-        itemIdList = new ArrayList<Integer>();
+        itemIdList = new ArrayList<>();
         if (items == null) {
             return;
         }
@@ -73,7 +73,7 @@ public class GoodsList {
      * return the limitedItems.
      */
     public FastList<LimitedItem> getLimitedItems() {
-        FastList<LimitedItem> limitedItems = new FastList<LimitedItem>();
+        FastList<LimitedItem> limitedItems = new FastList<>();
         if (items != null) {
             for (Item item : items) {
                 if (item.getBuyLimit() != null && item.getSellLimit() != null) {
@@ -105,6 +105,7 @@ public class GoodsList {
      * The following schema fragment specifies the expected content contained
      * within this class.
      * <p/>
+     * 
      * <pre>
      * &lt;complexType>
      *   &lt;complexContent>

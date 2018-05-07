@@ -44,7 +44,7 @@ import com.aionemu.gameserver.model.templates.walker.RouteParent;
 import com.aionemu.gameserver.model.templates.walker.RouteVersion;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"routeGroups"})
+@XmlType(name = "", propOrder = { "routeGroups" })
 @XmlRootElement(name = "walker_versions")
 public class WalkerVersionsData {
 

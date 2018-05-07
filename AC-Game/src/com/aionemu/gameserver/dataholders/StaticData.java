@@ -223,7 +223,7 @@ public class StaticData {
     @XmlElement(name = "base_locations")
     public BaseData baseData;
     @XmlElement(name = "beritra_invasion")
-	public BeritraData beritraData;
+    public BeritraData beritraData;
     @XmlElement(name = "absolute_stats")
     public AbsoluteStatsData absoluteStatsData;
     @XmlElement(name = "walker_versions")
@@ -233,7 +233,7 @@ public class StaticData {
     @XmlElement(name = "arcadelist")
     public ArcadeUpgradeData arcadeUpgradeData;
     @XmlElement(name = "item_multi_returns")
-    public MultiReturnItemData multiReturnItemData;		
+    public MultiReturnItemData multiReturnItemData;
     @XmlElement(name = "battlegrounds")
     public BattleGroundData battlegroundData;
 
@@ -297,7 +297,7 @@ public class StaticData {
         DataManager.log.info("Loaded " + windstreamsData.size() + " windstream entries");
         DataManager.log.info("Loaded " + assembledNpcData.size() + " assembled npcs entries");
         DataManager.log.info("Loaded " + cosmeticItemsData.size() + " cosmetic items entries");
-    	//DataManager.log.info("Loaded " + npcDropData.size() + " npc drop entries");
+        //DataManager.log.info("Loaded " + npcDropData.size() + " npc drop entries");
         DataManager.log.info("Loaded " + autoGroupData.size() + " auto group entries");
         DataManager.log.info("Loaded " + spawnsData2.size() + " spawn maps entries");
         DataManager.log.info("Loaded " + eventData.size() + " active events");
@@ -331,7 +331,7 @@ public class StaticData {
         DataManager.log.info("Loaded " + beritraData.size() + " beritra invasion entries");
         DataManager.log.info("Loaded " + absoluteStatsData.size() + " absolute stat templates");
         DataManager.log.info("Loaded " + robotData.size() + " robot armor entries");
-        DataManager.log.info("Loaded " + multiReturnItemData.size() + " multi returns items");     
+        DataManager.log.info("Loaded " + multiReturnItemData.size() + " multi returns items");
         DataManager.log.info("Loaded " + battlegroundData.size() + " battleground templates");
     }
 }

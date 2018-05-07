@@ -52,7 +52,7 @@ public class FlyRingData {
 
     public int size() {
         if (flyRingTemplates == null) {
-            flyRingTemplates = new ArrayList<FlyRingTemplate>();
+            flyRingTemplates = new ArrayList<>();
             return 0;
         }
         return flyRingTemplates.size();
@@ -60,14 +60,14 @@ public class FlyRingData {
 
     public List<FlyRingTemplate> getFlyRingTemplates() {
         if (flyRingTemplates == null) {
-            return new ArrayList<FlyRingTemplate>();
+            return new ArrayList<>();
         }
         return flyRingTemplates;
     }
 
     public void addAll(Collection<FlyRingTemplate> templates) {
         if (flyRingTemplates == null) {
-            flyRingTemplates = new ArrayList<FlyRingTemplate>();
+            flyRingTemplates = new ArrayList<>();
         }
         flyRingTemplates.addAll(templates);
     }

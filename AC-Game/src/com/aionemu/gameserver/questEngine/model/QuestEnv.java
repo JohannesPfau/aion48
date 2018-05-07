@@ -69,7 +69,8 @@ public class QuestEnv {
     }
 
     /**
-     * @param visibleObject the visibleObject to set
+     * @param visibleObject
+     *            the visibleObject to set
      */
     public void setVisibleObject(VisibleObject visibleObject) {
         this.visibleObject = visibleObject;
@@ -83,7 +84,8 @@ public class QuestEnv {
     }
 
     /**
-     * @param player the player to set
+     * @param player
+     *            the player to set
      */
     public void setPlayer(Player player) {
         this.player = player;
@@ -97,7 +99,8 @@ public class QuestEnv {
     }
 
     /**
-     * @param questId the questId to set
+     * @param questId
+     *            the questId to set
      */
     public void setQuestId(Integer questId) {
         this.questId = questId;
@@ -119,7 +122,8 @@ public class QuestEnv {
     }
 
     /**
-     * @param dialogId the dialogId to set
+     * @param dialogId
+     *            the dialogId to set
      */
     public void setDialogId(Integer dialogId) {
         this.dialogId = dialogId;

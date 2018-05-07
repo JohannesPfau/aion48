@@ -43,7 +43,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"spawns"})
+@XmlType(name = "", propOrder = { "spawns" })
 @XmlRootElement(name = "house")
 public class HouseSpawns implements Comparable<HouseSpawns> {
 
@@ -54,7 +54,7 @@ public class HouseSpawns implements Comparable<HouseSpawns> {
 
     public List<HouseSpawn> getSpawns() {
         if (spawns == null) {
-            spawns = new ArrayList<HouseSpawn>();
+            spawns = new ArrayList<>();
         }
         return this.spawns;
     }

@@ -99,7 +99,8 @@ public class NpcFaction {
     }
 
     /**
-     * @param time the time to set
+     * @param time
+     *            the time to set
      */
     public void setTime(int time) {
         this.time = time;
@@ -107,7 +108,8 @@ public class NpcFaction {
     }
 
     /**
-     * @param active the active to set
+     * @param active
+     *            the active to set
      */
     public void setActive(boolean active) {
         this.active = active;
@@ -115,7 +117,8 @@ public class NpcFaction {
     }
 
     /**
-     * @param state the state to set
+     * @param state
+     *            the state to set
      */
     public void setState(ENpcFactionQuestState state) {
         this.setPersistentState(PersistentState.UPDATE_REQUIRED);
@@ -130,7 +133,8 @@ public class NpcFaction {
     }
 
     /**
-     * @param questId the questId to set
+     * @param questId
+     *            the questId to set
      */
     public void setQuestId(int questId) {
         this.questId = questId;
@@ -145,7 +149,8 @@ public class NpcFaction {
     }
 
     /**
-     * @param persistentState the persistentState to set
+     * @param persistentState
+     *            the persistentState to set
      */
     public void setPersistentState(PersistentState persistentState) {
         switch (persistentState) {

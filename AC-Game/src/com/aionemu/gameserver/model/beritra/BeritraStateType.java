@@ -30,11 +30,10 @@
 package com.aionemu.gameserver.model.beritra;
 
 /**
- * @author  Cx3
+ * @author Cx3
  */
 
-public enum BeritraStateType
-{
-	INVASION,
-	PEACE;
+public enum BeritraStateType {
+    INVASION,
+    PEACE;
 }

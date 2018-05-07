@@ -29,10 +29,10 @@
  */
 package quest.altgard;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -83,7 +83,7 @@ public class _2209TheScribbler extends QuestHandler {
                         }
                     }
                 }
-                break;
+                    break;
                 case 203572: {
                     if (qs.getQuestVarById(0) == 1) {
                         if (env.getDialog() == DialogAction.QUEST_SELECT) {
@@ -93,7 +93,7 @@ public class _2209TheScribbler extends QuestHandler {
                         }
                     }
                 }
-                break;
+                    break;
                 case 203592: {
                     if (qs.getQuestVarById(0) == 2) {
                         if (env.getDialog() == DialogAction.QUEST_SELECT) {
@@ -103,7 +103,7 @@ public class _2209TheScribbler extends QuestHandler {
                         }
                     }
                 }
-                break;
+                    break;
                 case 203555: {
                     if (qs.getQuestVarById(0) == 3) {
                         if (env.getDialog() == DialogAction.QUEST_SELECT) {

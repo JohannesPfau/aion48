@@ -36,7 +36,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.Race;
 
-
 /**
  * @author Alcapwnd
  */

@@ -122,12 +122,12 @@ public class StatFunction implements IStatFunction {
     }
 
     @Override
-	public boolean hasConditions() {
+    public boolean hasConditions() {
         return conditions != null;
     }
 
     @Override
-	public int getRandomNumber() {
+    public int getRandomNumber() {
         return rndNumber;
     }
 

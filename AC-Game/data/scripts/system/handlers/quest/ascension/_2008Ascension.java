@@ -252,7 +252,8 @@ public class _2008Ascension extends QuestHandler {
                             }
                             qs.setQuestVar(2);
                             updateQuestStatus(env);
-                            TeleportService2.teleportTo(player, 220010000, 940.74475f, 2295.5305f, 265.65674f, (byte) 46, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, 220010000, 940.74475f, 2295.5305f, 265.65674f, (byte) 46,
+                                TeleportAnimation.BEAM_ANIMATION);
                             return true;
                         }
                 }
@@ -271,7 +272,8 @@ public class _2008Ascension extends QuestHandler {
                             }
                             qs.setQuestVar(3);
                             updateQuestStatus(env);
-                            TeleportService2.teleportTo(player, 220010000, 1111.5637f, 1719.2745f, 270.114256f, (byte) 114, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, 220010000, 1111.5637f, 1719.2745f, 270.114256f, (byte) 114,
+                                TeleportAnimation.BEAM_ANIMATION);
                             return true;
                         }
                 }
@@ -290,7 +292,8 @@ public class _2008Ascension extends QuestHandler {
                             }
                             qs.setQuestVar(4);
                             updateQuestStatus(env);
-                            TeleportService2.teleportTo(player, 220010000, 383.10248f, 1895.3093f, 327.625f, (byte) 59, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, 220010000, 383.10248f, 1895.3093f, 327.625f, (byte) 59,
+                                TeleportAnimation.BEAM_ANIMATION);
                             return true;
                         }
                 }
@@ -306,11 +309,12 @@ public class _2008Ascension extends QuestHandler {
                             qs.setQuestVar(50);
                             updateQuestStatus(env);
                             ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                 @Override
                                 public void run() {
                                     qs.setQuestVar(51);
                                     updateQuestStatus(env);
-                                    List<Npc> mobs = new ArrayList<Npc>();
+                                    List<Npc> mobs = new ArrayList<>();
                                     mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 294f, 277f, 207f, (byte) 0));
                                     mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 305f, 279f, 206.5f, (byte) 0));
                                     mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 298f, 253f, 205.7f, (byte) 0));
@@ -332,7 +336,8 @@ public class _2008Ascension extends QuestHandler {
                 switch (env.getDialog()) {
                     case SELECTED_QUEST_NOREWARD:
                         if (player.getWorldId() == 320020000) {
-                            TeleportService2.teleportTo(player, 220010000, 386.03476f, 1893.9309f, 327.62283f, (byte) 59, TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, 220010000, 386.03476f, 1893.9309f, 327.62283f, (byte) 59,
+                                TeleportAnimation.BEAM_ANIMATION);
                         }
                         break;
                 }
@@ -357,8 +362,8 @@ public class _2008Ascension extends QuestHandler {
                 if (player.getWorldId() != 320020000) {
                     qs.setQuestVar(4);
                     updateQuestStatus(env);
-                    PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                            DataManager.QUEST_DATA.getQuestById(questId).getName()));
+                    PacketSendUtility.sendPacket(player,
+                        new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
                 } else {
                     PacketSendUtility.sendPacket(player, new SM_ASCENSION_MORPH(1));
                     return true;
@@ -393,8 +398,8 @@ public class _2008Ascension extends QuestHandler {
         if (var == 5 || (var == 6 && player.getPlayerClass().isStartingClass()) || (var >= 51 && var <= 53)) {
             qs.setQuestVar(4);
             updateQuestStatus(env);
-            PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                    DataManager.QUEST_DATA.getQuestById(questId).getName()));
+            PacketSendUtility.sendPacket(player,
+                new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
         }
         return false;
     }

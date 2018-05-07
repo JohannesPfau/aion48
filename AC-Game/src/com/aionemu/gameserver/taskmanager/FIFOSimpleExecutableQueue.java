@@ -38,7 +38,7 @@ import javolution.util.FastList;
  */
 public abstract class FIFOSimpleExecutableQueue<T> extends FIFOExecutableQueue {
 
-    private final FastList<T> queue = new FastList<T>();
+    private final FastList<T> queue = new FastList<>();
 
     public final void execute(T t) {
         synchronized (queue) {

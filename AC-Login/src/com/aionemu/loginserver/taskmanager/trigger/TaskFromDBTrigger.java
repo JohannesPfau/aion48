@@ -37,7 +37,7 @@ import com.aionemu.loginserver.taskmanager.handler.TaskFromDBHandler;
 public abstract class TaskFromDBTrigger implements Runnable {
 
     protected TaskFromDBHandler handlerToTrigger;
-    protected String[] params = {""};
+    protected String[] params = { "" };
 
     public int getTaskId() {
         return handlerToTrigger.getTaskId();

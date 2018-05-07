@@ -29,17 +29,18 @@
  */
 package admincommands;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * @author MrPoke, lord_rex and ginho1
@@ -103,7 +104,7 @@ public class MoveToNpc extends AdminCommand {
             }
             PacketSendUtility.sendMessage(player, message);
             TeleportService2.teleportToNpc(player, npcId);
-            log.info("[movetonpc] GM : " + player.getName()+ " has teleported to NPC [" + message + "]");
+            log.info("[movetonpc] GM : " + player.getName() + " has teleported to NPC [" + message + "]");
         }
     }
 

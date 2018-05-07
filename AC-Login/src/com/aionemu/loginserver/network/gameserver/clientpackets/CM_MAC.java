@@ -29,9 +29,10 @@
  */
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author nrg

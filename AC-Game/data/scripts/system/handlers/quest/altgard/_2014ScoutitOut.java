@@ -29,9 +29,9 @@
  */
 package quest.altgard;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -59,7 +59,7 @@ public class _2014ScoutitOut extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {203606, 700136, 203633, 203631};
+        int[] npcs = { 203606, 700136, 203633, 203631 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.registerGetingItem(182203015, questId);

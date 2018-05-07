@@ -48,7 +48,7 @@ public class SM_EXCHANGE_ADD_KINAH extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(action); // 0 -self 1-other
         writeD((int) itemCount); // itemId
         writeD(0); // unk

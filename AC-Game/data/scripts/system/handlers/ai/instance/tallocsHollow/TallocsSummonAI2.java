@@ -29,6 +29,8 @@
  */
 package ai.instance.tallocsHollow;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.controllers.SummonController;
@@ -41,8 +43,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TRANSFORM_IN_SUMMON;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-
-import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * @author xTz
@@ -61,7 +61,8 @@ public class TallocsSummonAI2 extends NpcAI2 {
                 return true;
             }
 
-            Summon summon = new Summon(getObjectId(), new SummonController(), getSpawnTemplate(), getObjectTemplate(), getObjectTemplate().getLevel(), 0);
+            Summon summon = new Summon(getObjectId(), new SummonController(), getSpawnTemplate(), getObjectTemplate(), getObjectTemplate().getLevel(),
+                0);
             player.setSummon(summon);
             summon.setMaster(player);
             summon.setTarget(player.getTarget());

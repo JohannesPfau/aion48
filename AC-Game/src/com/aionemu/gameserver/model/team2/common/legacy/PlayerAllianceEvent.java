@@ -51,6 +51,7 @@ public enum PlayerAllianceEvent {
     APPOINT_VICE_CAPTAIN(13),
     DEMOTE_VICE_CAPTAIN(13),
     APPOINT_CAPTAIN(13);
+
     private int id;
 
     private PlayerAllianceEvent(int id) {

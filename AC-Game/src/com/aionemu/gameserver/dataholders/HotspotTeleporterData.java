@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -41,6 +39,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import com.aionemu.gameserver.model.templates.teleport.HotspotTeleportTemplate;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author Alcapwnd
@@ -54,7 +53,7 @@ public class HotspotTeleporterData {
     /**
      * A map containing all teleport location templates
      */
-    private TIntObjectHashMap<HotspotTeleportTemplate> loctlistData = new TIntObjectHashMap<HotspotTeleportTemplate>();
+    private TIntObjectHashMap<HotspotTeleportTemplate> loctlistData = new TIntObjectHashMap<>();
 
     /**
      * @param u

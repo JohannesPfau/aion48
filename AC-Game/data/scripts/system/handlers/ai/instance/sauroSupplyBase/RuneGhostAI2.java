@@ -35,42 +35,40 @@ import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-
 /**
  * @author Alcapwnd
- *
  */
 @AIName("rune_ghost")
 public class RuneGhostAI2 extends NpcAI2 {
-	
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		useskill();
-		despawn();
-	}
-	
-	private void useskill() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-			@Override
-			public void run() {
-				if (!isAlreadyDead()) {
-					SkillEngine.getInstance().getSkill(getOwner(), 21185, 25, getOwner()).useNoAnimationSkill();
-				}
-			}
-		}, 2000);
-	}
-	
-	private void despawn() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
+    @Override
+    protected void handleSpawned() {
+        super.handleSpawned();
+        useskill();
+        despawn();
+    }
 
-			@Override
-			public void run() {
-				if (!isAlreadyDead()) {
-					AI2Actions.deleteOwner(RuneGhostAI2.this);
-				}
-			}
-		}, 4500);
-	}
+    private void useskill() {
+        ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+            @Override
+            public void run() {
+                if (!isAlreadyDead()) {
+                    SkillEngine.getInstance().getSkill(getOwner(), 21185, 25, getOwner()).useNoAnimationSkill();
+                }
+            }
+        }, 2000);
+    }
+
+    private void despawn() {
+        ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+            @Override
+            public void run() {
+                if (!isAlreadyDead()) {
+                    AI2Actions.deleteOwner(RuneGhostAI2.this);
+                }
+            }
+        }, 4500);
+    }
 }

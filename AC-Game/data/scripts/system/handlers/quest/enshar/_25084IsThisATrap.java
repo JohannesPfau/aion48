@@ -29,10 +29,10 @@
  */
 package quest.enshar;
 
+import com.aionemu.gameserver.model.DialogAction;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -55,51 +55,52 @@ public class _25084IsThisATrap extends QuestHandler {
         qe.registerQuestNpc(804926).addOnQuestStart(questId);
         qe.registerQuestNpc(804926).addOnTalkEvent(questId);
         qe.registerQuestNpc(804925).addOnTalkEvent(questId);
-		qe.registerQuestNpc(804927).addOnTalkEvent(questId);
-		qe.registerOnEnterZone(ZoneName.get("DF5_SensoryArea_Q25084"), questId);
+        qe.registerQuestNpc(804927).addOnTalkEvent(questId);
+        qe.registerOnEnterZone(ZoneName.get("DF5_SensoryArea_Q25084"), questId);
     }
-	
-	@Override
-	public boolean onKillEvent(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.getStatus() != QuestStatus.START) {
-			return false;
-		}		
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc) {
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-		}
-		switch (targetId) {
-			case 220037:
-				if (qs.getQuestVarById(0) == 2) {
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
+
+    @Override
+    public boolean onKillEvent(QuestEnv env) {
+        Player player = env.getPlayer();
+        QuestState qs = player.getQuestStateList().getQuestState(questId);
+        if (qs == null || qs.getStatus() != QuestStatus.START) {
+            return false;
+        }
+        int targetId = 0;
+        if (env.getVisibleObject() instanceof Npc) {
+            targetId = ((Npc) env.getVisibleObject()).getNpcId();
+        }
+        switch (targetId) {
+            case 220037:
+                if (qs.getQuestVarById(0) == 2) {
+                    qs.setStatus(QuestStatus.REWARD);
+                    updateQuestStatus(env);
                     return true;
-				}
-		}
-		return false;
-	}
-	@Override
-	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-		if (zoneName == ZoneName.get("DF5_SensoryArea_Q25084")) {
-			Player player = env.getPlayer();
-			if (player == null)
-				return false;
-			QuestState qs = player.getQuestStateList().getQuestState(questId);
-			if (qs != null && qs.getStatus() == QuestStatus.START) {
-				int var = qs.getQuestVarById(0);
-				if (var == 2) {
-					QuestService.addNewSpawn(220080000, player.getInstanceId(), 220038, 1471.4f, 58.2f, 202.3f, (byte) 19);
-					QuestService.addNewSpawn(220080000, player.getInstanceId(), 220038, 1475.5f, 58.3f, 202.3f, (byte) 53);
-					changeQuestStep(env, 2, 3, true);
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	
+                }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+        if (zoneName == ZoneName.get("DF5_SensoryArea_Q25084")) {
+            Player player = env.getPlayer();
+            if (player == null)
+                return false;
+            QuestState qs = player.getQuestStateList().getQuestState(questId);
+            if (qs != null && qs.getStatus() == QuestStatus.START) {
+                int var = qs.getQuestVarById(0);
+                if (var == 2) {
+                    QuestService.addNewSpawn(220080000, player.getInstanceId(), 220038, 1471.4f, 58.2f, 202.3f, (byte) 19);
+                    QuestService.addNewSpawn(220080000, player.getInstanceId(), 220038, 1475.5f, 58.3f, 202.3f, (byte) 53);
+                    changeQuestStep(env, 2, 3, true);
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
     @Override
     public boolean onDialogEvent(QuestEnv env) {
         Player player = env.getPlayer();
@@ -116,28 +117,25 @@ public class _25084IsThisATrap extends QuestHandler {
             }
         } else if (qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
-			if (targetId == 804925) { 
+            if (targetId == 804925) {
                 if (dialog == DialogAction.QUEST_SELECT) {
-                        return sendQuestDialog(env, 1011);
-					}
-                else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
-					if (QuestService.collectItemCheck(env, true)) {
-					changeQuestStep(env, 0, 1, false); 
-                    return closeDialogWindow(env);
-					}
-                }  
+                    return sendQuestDialog(env, 1011);
+                } else if (dialog == DialogAction.CHECK_USER_HAS_QUEST_ITEM) {
+                    if (QuestService.collectItemCheck(env, true)) {
+                        changeQuestStep(env, 0, 1, false);
+                        return closeDialogWindow(env);
+                    }
+                }
             }
-			if (targetId == 804926) { 
+            if (targetId == 804926) {
                 if (dialog == DialogAction.QUEST_SELECT) {
-                        return sendQuestDialog(env, 1352);
-					}
-                else if (dialog == DialogAction.SETPRO2) {
-					changeQuestStep(env, 1, 2, false); 
+                    return sendQuestDialog(env, 1352);
+                } else if (dialog == DialogAction.SETPRO2) {
+                    changeQuestStep(env, 1, 2, false);
                     return closeDialogWindow(env);
-                } 
+                }
             }
-		}
-			else if (qs.getStatus() == QuestStatus.REWARD) {
+        } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 804927) {
                 if (dialog == DialogAction.QUEST_SELECT) {
                     return sendQuestDialog(env, 2034);

@@ -29,14 +29,15 @@
  */
 package admincommands;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Admin revoke command.
@@ -75,7 +76,8 @@ public class Revoke extends AdminCommand {
             return;
         }
         LoginServer.getInstance().sendLsControlPacket(player.getAcountName(), player.getName(), admin.getName(), 0, type);
-        log.info("[revoke] GM : " + admin.getName() + " has revoked the player ["+ player.getName() +"] type[" + type +"] masklvl["+ 0 +"] in mapId '" + admin.getName() + "'");
+        log.info("[revoke] GM : " + admin.getName() + " has revoked the player [" + player.getName() + "] type[" + type + "] masklvl[" + 0
+            + "] in mapId '" + admin.getName() + "'");
     }
 
     @Override

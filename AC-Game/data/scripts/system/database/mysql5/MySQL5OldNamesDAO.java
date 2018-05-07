@@ -29,16 +29,17 @@
  */
 package mysql5;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.OldNamesDAO;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author synchro2
@@ -50,8 +51,7 @@ public class MySQL5OldNamesDAO extends OldNamesDAO {
 
     @Override
     public boolean isOldName(final String name) {
-        PreparedStatement s = DB
-                .prepareStatement("SELECT count(player_id) as cnt FROM old_names WHERE ? = old_names.old_name");
+        PreparedStatement s = DB.prepareStatement("SELECT count(player_id) as cnt FROM old_names WHERE ? = old_names.old_name");
         try {
             s.setString(1, name);
             ResultSet rs = s.executeQuery();
@@ -68,6 +68,7 @@ public class MySQL5OldNamesDAO extends OldNamesDAO {
     @Override
     public void insertNames(final int id, final String oldname, final String newname) {
         DB.insertUpdate(INSERT_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, id);

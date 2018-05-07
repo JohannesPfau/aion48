@@ -119,7 +119,7 @@ public class Spawn {
 
     public List<SpawnSpotTemplate> getSpawnSpotTemplates() {
         if (spawnTemplates == null) {
-            spawnTemplates = new ArrayList<SpawnSpotTemplate>();
+            spawnTemplates = new ArrayList<>();
         }
         return spawnTemplates;
     }

@@ -52,8 +52,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1031TheMandurisSecret extends QuestHandler {
 
     private final static int questId = 1031;
-    private final static int[] mob_ids = {210771, 210758, 210763, 210764, 210759, 210770};
-    private final static int[] npc_ids = {203902, 203936, 700179, 204043, 204030};
+    private final static int[] mob_ids = { 210771, 210758, 210763, 210764, 210759, 210770 };
+    private final static int[] npc_ids = { 203902, 203936, 700179, 204043, 204030 };
 
     public _1031TheMandurisSecret() {
         super(questId);

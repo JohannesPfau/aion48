@@ -56,25 +56,26 @@ public class CM_PTRANSFER_RESPONSE extends LsClientPacket {
                 byte[] db = this.readB(len);
                 PlayerTransferService.getInstance().cloneCharacter(taskId, targetAccount, name, account, db);
             }
-            break;
+                break;
             case 21://ok
             {
                 int taskId = readD();
                 PlayerTransferService.getInstance().onOk(taskId);
             }
-            break;
+                break;
             case 22://error
             {
                 int taskId = readD();
                 String reason = readS();
                 PlayerTransferService.getInstance().onError(taskId, reason);
             }
-            break;
+                break;
             case 23: {
                 byte serverId = readSC();
                 if (NetworkConfig.GAMESERVER_ID != serverId) {
                     try {
-                        throw new Exception("Requesting player transfer for server id " + serverId + " but this is " + NetworkConfig.GAMESERVER_ID + " omgshit!");
+                        throw new Exception(
+                            "Requesting player transfer for server id " + serverId + " but this is " + NetworkConfig.GAMESERVER_ID + " omgshit!");
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -87,7 +88,7 @@ public class CM_PTRANSFER_RESPONSE extends LsClientPacket {
                     PlayerTransferService.getInstance().startTransfer(account, targetAccount, playerId, targetServerId, taskId);
                 }
             }
-            break;
+                break;
         }
     }
 

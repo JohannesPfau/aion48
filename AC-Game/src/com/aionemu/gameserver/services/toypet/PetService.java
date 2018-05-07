@@ -102,6 +102,7 @@ public class PetService {
 
     private void schedule(final Pet pet, final Player player, final Item item, final int count, final int action) {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!pet.getCommonData().getCancelFeed()) {
@@ -127,8 +128,7 @@ public class PetService {
 
             if (foodType != null) {
                 player.getInventory().decreaseItemCount(item, 1, ItemUpdateType.DEC_PET_FOOD);
-                reward = flavour.processFeedResult(progress, foodType, item.getItemTemplate().getLevel(), player
-                        .getCommonData().getLevel());
+                reward = flavour.processFeedResult(progress, foodType, item.getItemTemplate().getLevel(), player.getCommonData().getLevel());
                 if (progress.getHungryLevel() == PetHungryLevel.FULL && reward != null) {
                     PacketSendUtility.sendPacket(player, new SM_PET(2, action, item.getObjectId(), 0, pet));
                 } else {
@@ -139,7 +139,7 @@ public class PetService {
                 PacketSendUtility.sendPacket(player, new SM_PET(5, action, 0, 0, pet));
                 PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
                 PacketSendUtility.sendPacket(player,
-                        SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(pet.getName(), item.getItemTemplate().getNameId()));
+                    SM_SYSTEM_MESSAGE.STR_MSG_TOYPET_FEED_FOOD_NOT_LOVEFLAVOR(pet.getName(), item.getItemTemplate().getNameId()));
                 return;
             }
 
@@ -202,7 +202,7 @@ public class PetService {
             action = 0;
         } else if (action == 3) { // use item
             List<Item> items = player.getInventory().getItemsByItemId(itemId);
-            for (; ; ) {
+            for (;;) {
                 Item useItem = items.get(0);
                 ItemActions itemActions = useItem.getItemTemplate().getActions();
                 ItemUseLimits limit = new ItemUseLimits();
@@ -219,6 +219,7 @@ public class PetService {
                     final int useSlot = slot;
                     // schedule re-check
                     ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             PacketSendUtility.sendPacket(player, new SM_PET(useAction, useItemId, useSlot));

@@ -29,6 +29,7 @@
  */
 package quest.verteron;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -36,7 +37,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -97,8 +97,8 @@ public class _1162AltenosWeddingRing extends QuestHandler {
                             qs = player.getQuestStateList().getQuestState(questId);
                             qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
                             updateQuestStatus(env);
-                            PacketSendUtility.broadcastPacket(player.getTarget(), new SM_EMOTION((Creature) player.getTarget(),
-                                    EmotionType.DIE, 128, 0)); // wtf ?
+                            PacketSendUtility.broadcastPacket(player.getTarget(),
+                                new SM_EMOTION((Creature) player.getTarget(), EmotionType.DIE, 128, 0)); // wtf ?
                             return true;
                         }
                     }
@@ -113,7 +113,7 @@ public class _1162AltenosWeddingRing extends QuestHandler {
                         return true;
                     }
                 }
-                return false;
+                    return false;
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 203095) {

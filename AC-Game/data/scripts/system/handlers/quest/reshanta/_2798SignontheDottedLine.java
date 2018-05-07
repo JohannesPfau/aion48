@@ -44,7 +44,7 @@ public class _2798SignontheDottedLine extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {279007, 263569, 263267, 264769, 271054, 266554, 270152, 269252, 268052, 260236};
+        int[] npcs = { 279007, 263569, 263267, 264769, 271054, 266554, 270152, 269252, 268052, 260236 };
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
         }

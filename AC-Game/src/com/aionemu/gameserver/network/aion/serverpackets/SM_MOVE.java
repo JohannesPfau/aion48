@@ -39,8 +39,6 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
  * This packet is displaying movement of players etc.
- *
-
  */
 public class SM_MOVE extends AionServerPacket {
 
@@ -55,7 +53,7 @@ public class SM_MOVE extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection client) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         MoveController moveData = creature.getMoveController();
         writeD(creature.getObjectId());
         writeF(creature.getX());

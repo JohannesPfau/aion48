@@ -65,9 +65,9 @@ public class WeatherService {
     }
 
     private WeatherService() {
-        worldZoneWeathers = new HashMap<WeatherKey, WeatherEntry[]>();
+        worldZoneWeathers = new HashMap<>();
         GameTime gameTime = (GameTime) GameTimeManager.getGameTime().clone();
-        for (Iterator<WorldMapTemplate> mapIterator = DataManager.WORLD_MAPS_DATA.iterator(); mapIterator.hasNext(); ) {
+        for (Iterator<WorldMapTemplate> mapIterator = DataManager.WORLD_MAPS_DATA.iterator(); mapIterator.hasNext();) {
             int mapId = mapIterator.next().getMapId();
             WeatherTable table = DataManager.MAP_WEATHER_DATA.getWeather(mapId);
             if (table != null) {
@@ -118,6 +118,7 @@ public class WeatherService {
      */
     public void checkWeathersTime() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 for (WeatherKey key : worldZoneWeathers.keySet()) {
@@ -160,7 +161,7 @@ public class WeatherService {
             rank = 1;
         }
 
-        List<WeatherEntry> chosenWeather = new ArrayList<WeatherEntry>();
+        List<WeatherEntry> chosenWeather = new ArrayList<>();
         while (rank >= 0) {
             for (WeatherEntry entry : weathers) {
                 if (entry.getRank() == -1) {
@@ -203,7 +204,7 @@ public class WeatherService {
             }
             chance = Rnd.get(0, 100);
             if ((newWeather.getRank() == 0 && chance > 33 / dayTimeCorrection) || (newWeather.getRank() == 1 && chance > 50 / dayTimeCorrection)
-                    || (newWeather.getRank() == 2 && chance > 66 / dayTimeCorrection)) {
+                || (newWeather.getRank() == 2 && chance > 66 / dayTimeCorrection)) {
                 newWeather = new WeatherEntry();
             }
 
@@ -273,7 +274,7 @@ public class WeatherService {
      * safe if run by admin
      */
     public synchronized void resetWeather() {
-        Set<WeatherKey> loadedWeathers = new HashSet<WeatherKey>(worldZoneWeathers.keySet());
+        Set<WeatherKey> loadedWeathers = new HashSet<>(worldZoneWeathers.keySet());
         for (WeatherKey key : loadedWeathers) {
             WeatherEntry[] oldEntries = worldZoneWeathers.get(key);
             for (int i = 0; i < oldEntries.length; i++) {
@@ -298,7 +299,8 @@ public class WeatherService {
      *
      * @param world
      * @param worldMap
-     * @param player   if null -> weather is broadcasted to all players in world
+     * @param player
+     *            if null -> weather is broadcasted to all players in world
      */
     private void onWeatherChange(int mapId, Player player) {
         WeatherEntry[] weatherEntries = getWeatherEntries(mapId);
@@ -308,7 +310,7 @@ public class WeatherService {
         }
 
         if (player == null) {
-            for (Iterator<Player> playerIterator = World.getInstance().getPlayersIterator(); playerIterator.hasNext(); ) {
+            for (Iterator<Player> playerIterator = World.getInstance().getPlayersIterator(); playerIterator.hasNext();) {
                 Player currentPlayer = playerIterator.next();
                 if (!currentPlayer.isSpawned()) {
                     continue;

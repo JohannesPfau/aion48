@@ -39,8 +39,8 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
-, Sweetkr
- (Aion-Core)
+ * , Sweetkr
+ * (Aion-Core)
  */
 public class SM_ATTACK extends AionServerPacket {
 
@@ -67,7 +67,7 @@ public class SM_ATTACK extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(attacker.getObjectId());
         writeC(attackno); // Attack Number e.g. 1, 2, 3, 5, ..., Max_Integer_Value
         writeH(time); // unknown
@@ -114,14 +114,14 @@ public class SM_ATTACK extends AionServerPacket {
                 writeD(0);
                 break;
         }
-        
+
         //setting counter skill from packet to have the best synchronization of time with client
         if (target instanceof Player) {
             if (attackList.get(0).getAttackStatus().isCounterSkill()) {
                 ((Player) target).setLastCounterSkill(attackList.get(0).getAttackStatus());
             }
         }
-         
+
         writeC(attackList.size());
         for (AttackResult attack : attackList) {
             writeD(attack.getDamage());
@@ -135,33 +135,33 @@ public class SM_ATTACK extends AionServerPacket {
              * skillId: 417 Bodyguard) TODO find out 4
              */
             switch (shieldType) {
-            	case 0: 
-                case 2: 
-                  break;
-                case 8: 
-                case 10: 
-                  writeD(attack.getProtectorId());
-                  writeD(attack.getProtectedDamage());
-                  writeD(attack.getProtectedSkillId());
-                  break;
-                case 16: 
-                  writeD(0);
-                  writeD(0);
-                  writeD(0);
-                  writeD(0);
-                  writeD(0);
-                  writeD(attack.getShieldMp());
-                  writeD(attack.getReflectedSkillId());
-                  break;
-                default: 
-                  writeD(attack.getProtectorId());
-                  writeD(attack.getProtectedDamage());
-                  writeD(attack.getProtectedSkillId());
-                  writeD(attack.getReflectedDamage());
-                  writeD(attack.getReflectedSkillId());
-                  writeD(0);
-                  writeD(0);
-                  break;
+                case 0:
+                case 2:
+                    break;
+                case 8:
+                case 10:
+                    writeD(attack.getProtectorId());
+                    writeD(attack.getProtectedDamage());
+                    writeD(attack.getProtectedSkillId());
+                    break;
+                case 16:
+                    writeD(0);
+                    writeD(0);
+                    writeD(0);
+                    writeD(0);
+                    writeD(0);
+                    writeD(attack.getShieldMp());
+                    writeD(attack.getReflectedSkillId());
+                    break;
+                default:
+                    writeD(attack.getProtectorId());
+                    writeD(attack.getProtectedDamage());
+                    writeD(attack.getProtectedSkillId());
+                    writeD(attack.getReflectedDamage());
+                    writeD(attack.getReflectedSkillId());
+                    writeD(0);
+                    writeD(0);
+                    break;
             }
         }
         writeC(0);//list size

@@ -65,7 +65,7 @@ public class SM_TRANSFORM extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(modelId);
         writeD(creature.getObjectId());
         writeD(modelId);
@@ -83,8 +83,10 @@ public class SM_TRANSFORM extends AionServerPacket {
         writeD(panelId); // display panel
     }
 
-    /* Exception for Steam Tachysphere and Rentus Tanks
-     * FIXME!: fix handling and remove! */
+    /*
+     * Exception for Steam Tachysphere and Rentus Tanks
+     * FIXME!: fix handling and remove!
+     */
     private boolean isMoveNpc(int npcId) {
         switch (npcId) {
             case 217384:

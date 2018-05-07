@@ -46,13 +46,13 @@ import com.aionemu.gameserver.model.templates.housing.Building;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"buildings"})
+@XmlType(name = "", propOrder = { "buildings" })
 public class HouseBuildingData {
 
     @XmlElement(name = "building")
     protected List<Building> buildings;
     @XmlTransient
-    Map<Integer, Building> buildingById = new HashMap<Integer, Building>();
+    Map<Integer, Building> buildingById = new HashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (buildings == null) {

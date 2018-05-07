@@ -45,8 +45,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _14025CookingUpDisasters extends QuestHandler {
 
     private final static int questId = 14025;
-    private final static int[] npcs = {203989, 204020, 203901};
-    private final static int[] mobs = {212025, 212029, 212039, 212351,};
+    private final static int[] npcs = { 203989, 204020, 203901 };
+    private final static int[] mobs = { 212025, 212029, 212039, 212351, };
 
     public _14025CookingUpDisasters() {
         super(questId);
@@ -71,7 +71,7 @@ public class _14025CookingUpDisasters extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-        int[] quests = {14020, 14024};
+        int[] quests = { 14020, 14024 };
         return defaultOnLvlUpEvent(env, quests, true);
     }
 
@@ -83,8 +83,8 @@ public class _14025CookingUpDisasters extends QuestHandler {
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
             if (var == 5) {
-                int[] kaidan = {212025, 212029, 212039};
-                int[] kalabar = {212351};
+                int[] kaidan = { 212025, 212029, 212039 };
+                int[] kalabar = { 212351 };
                 switch (targetId) {
                     case 212025:
                     case 212029:

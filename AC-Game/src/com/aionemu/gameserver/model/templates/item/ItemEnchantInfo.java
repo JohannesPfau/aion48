@@ -29,7 +29,6 @@
  */
 package com.aionemu.gameserver.model.templates.item;
 
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;

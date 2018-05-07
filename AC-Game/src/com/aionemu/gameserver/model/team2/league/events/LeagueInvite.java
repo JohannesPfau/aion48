@@ -74,7 +74,6 @@ public class LeagueInvite extends RequestResponseHandler {
     @Override
     public void denyRequest(Creature requester, Player responder) {
         // TODO correct message
-        PacketSendUtility.sendPacket(inviter,
-                SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_REJECT_INVITATION(responder.getName()));
+        PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_REJECT_INVITATION(responder.getName()));
     }
 }

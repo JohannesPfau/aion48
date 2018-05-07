@@ -44,7 +44,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
  * @author Mr. Poke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "QuestNpc", propOrder = {"dialog"})
+@XmlType(name = "QuestNpc", propOrder = { "dialog" })
 public class QuestNpc {
 
     protected List<QuestDialog> dialog;

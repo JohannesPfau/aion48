@@ -47,7 +47,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _14047ChainingMemories extends QuestHandler {
 
     private final static int questId = 14047;
-    private final static int[] npc_ids = {203704, 798154, 204574, 802051, 802052, 278500};
+    private final static int[] npc_ids = { 203704, 798154, 204574, 802051, 802052, 278500 };
 
     public _14047ChainingMemories() {
         super(questId);

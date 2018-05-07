@@ -77,10 +77,11 @@ public class BattleGroundAgent extends Npc {
     public NpcObjectType getNpcObjectType() {
         return NpcObjectType.NORMAL;
     }
+
     private Race race;
 
     @Override
-	public Race getRace() {
+    public Race getRace() {
         return race;
     }
 

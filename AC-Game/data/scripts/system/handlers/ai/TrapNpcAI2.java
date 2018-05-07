@@ -62,6 +62,7 @@ public class TrapNpcAI2 extends NpcAI2 {
     protected void handleSpawned() {
         getKnownList().doUpdate();
         getKnownList().doOnAllObjects(new Visitor<VisibleObject>() {
+
             @Override
             public void visit(VisibleObject object) {
                 if (!(object instanceof Creature)) {
@@ -109,13 +110,12 @@ public class TrapNpcAI2 extends NpcAI2 {
     }
 
     /**
-
-    @Override
-    protected void handleCustomEvent(int eventId, Object... args) {
-        if (eventId == EVENT_SET_TRAP_RANGE) {
-            trapRange = (Integer) args[0];
-        }
-    }
+     * @Override
+     *           protected void handleCustomEvent(int eventId, Object... args) {
+     *           if (eventId == EVENT_SET_TRAP_RANGE) {
+     *           trapRange = (Integer) args[0];
+     *           }
+     *           }
      */
 
     @Override

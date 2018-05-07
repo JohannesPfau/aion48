@@ -29,6 +29,17 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Map;
+
+import javax.annotation.Nullable;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /**
  * @author nrg
  */
@@ -42,15 +53,6 @@ import com.aionemu.gameserver.dao.PlayerCooldownsDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Maps;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import javax.annotation.Nullable;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Map;
 
 public class MySQL5PlayerCooldownsDAO extends PlayerCooldownsDAO {
 
@@ -59,6 +61,7 @@ public class MySQL5PlayerCooldownsDAO extends PlayerCooldownsDAO {
     public static final String DELETE_QUERY = "DELETE FROM `player_cooldowns` WHERE `player_id`=?";
     public static final String SELECT_QUERY = "SELECT `cooldown_id`, `reuse_delay` FROM `player_cooldowns` WHERE `player_id`=?";
     private static final Predicate<Long> cooldownPredicate = new Predicate<Long>() {
+
         @Override
         public boolean apply(@Nullable Long input) {
             return input != null && input - System.currentTimeMillis() > 28000;
@@ -68,6 +71,7 @@ public class MySQL5PlayerCooldownsDAO extends PlayerCooldownsDAO {
     @Override
     public void loadPlayerCooldowns(final Player player) {
         DB.select(SELECT_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, player.getObjectId());
@@ -126,6 +130,7 @@ public class MySQL5PlayerCooldownsDAO extends PlayerCooldownsDAO {
 
     private void deletePlayerCooldowns(final Player player) {
         DB.insertUpdate(DELETE_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, player.getObjectId());

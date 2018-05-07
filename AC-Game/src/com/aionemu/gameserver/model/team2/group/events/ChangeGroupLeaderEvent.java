@@ -65,6 +65,7 @@ public class ChangeGroupLeaderEvent extends ChangeLeaderEvent<PlayerGroup> {
     protected void changeLeaderTo(final Player player) {
         team.changeLeader(team.getMember(player.getObjectId()));
         team.applyOnMembers(new Predicate<Player>() {
+
             @Override
             public boolean apply(Player member) {
                 PacketSendUtility.sendPacket(member, new SM_GROUP_INFO(team));

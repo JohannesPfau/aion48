@@ -44,7 +44,8 @@ import com.aionemu.gameserver.utils.PositionUtil;
 @XmlType(name = "BackCondition")
 public class BackCondition extends Condition {
 
-    /* (non-Javadoc)
+    /*
+     * (non-Javadoc)
      * @see com.aionemu.gameserver.skillengine.condition.Condition#validate(com.aionemu.gameserver.skillengine.model.Skill)
      */
     @Override

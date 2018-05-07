@@ -85,6 +85,7 @@ public class RecipeTemplate {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getComponent().add(newItem);
      * </pre>
@@ -94,7 +95,7 @@ public class RecipeTemplate {
      */
     public List<Component> getComponent() {
         if (component == null) {
-            component = new ArrayList<Component>();
+            component = new ArrayList<>();
         }
         return this.component;
     }

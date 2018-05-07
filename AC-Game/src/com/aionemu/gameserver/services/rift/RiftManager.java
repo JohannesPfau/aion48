@@ -56,8 +56,8 @@ import com.aionemu.gameserver.world.knownlist.NpcKnownList;
 public class RiftManager {
 
     private static Logger log = LoggerFactory.getLogger(RiftManager.class);
-    private static List<Npc> rifts = new ArrayList<Npc>();
-    private static Map<String, SpawnTemplate> riftGroups = new HashMap<String, SpawnTemplate>();
+    private static List<Npc> rifts = new ArrayList<>();
+    private static Map<String, SpawnTemplate> riftGroups = new HashMap<>();
 
     public static void addRiftSpawnTemplate(SpawnGroup2 spawn) {
         if (spawn.hasPool()) {
@@ -123,8 +123,7 @@ public class RiftManager {
 
         World world = World.getInstance();
         world.storeObject(npc);
-        world.setPosition(npc, template.getWorldId(), instance, template.getX(),
-                template.getY(), template.getZ(), template.getHeading());
+        world.setPosition(npc, template.getWorldId(), instance, template.getX(), template.getY(), template.getZ(), template.getHeading());
         world.spawn(npc);
         rifts.add(npc);
 

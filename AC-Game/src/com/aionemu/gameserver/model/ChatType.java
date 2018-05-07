@@ -31,8 +31,7 @@ package com.aionemu.gameserver.model;
 
 /**
  * Chat types that are supported by Aion.
- *
-, Imaginary
+ * , Imaginary
  */
 public enum ChatType {
 
@@ -68,6 +67,7 @@ public enum ChatType {
     WHITE_CENTER(0x21, true), // Periodic Notice (White && Box on screen center)
     YELLOW_CENTER(0x22, true), // Periodic Announcement(Yellow && Box on screen center)
     BRIGHT_YELLOW_CENTER(0x23, true); // System Notice (Light Yellow && Box on screen center)
+
     private final int intValue;
     private boolean sysMsg;
 
@@ -90,9 +90,11 @@ public enum ChatType {
     /**
      * Returns ChatType by it's integer representation
      *
-     * @param integerValue integer value of chat type
+     * @param integerValue
+     *            integer value of chat type
      * @return ChatType
-     * @throws IllegalArgumentException if can't find suitable chat type
+     * @throws IllegalArgumentException
+     *             if can't find suitable chat type
      */
     public static ChatType getChatTypeByInt(int integerValue) throws IllegalArgumentException {
         for (ChatType ct : ChatType.values()) {

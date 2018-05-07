@@ -45,7 +45,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class _1052RootoftheRot extends QuestHandler {
 
     private final static int questId = 1052;
-    private final static int[] npc_ids = {204549, 730026, 730024};
+    private final static int[] npc_ids = { 204549, 730026, 730024 };
 
     public _1052RootoftheRot() {
         super(questId);

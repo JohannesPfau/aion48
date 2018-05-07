@@ -83,8 +83,7 @@ public class CM_PETITION extends AionClientPacket {
         }
 
         if (!PetitionService.getInstance().hasRegisteredPetition(playerObjId)) {
-            Petition petition = PetitionService.getInstance().registerPetition(player, action,
-                    title, text, additionalData);
+            Petition petition = PetitionService.getInstance().registerPetition(player, action, title, text, additionalData);
             sendPacket(new SM_PETITION(petition));
         }
     }

@@ -43,7 +43,7 @@ import com.aionemu.gameserver.model.templates.item.ItemQuality;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractHouseObject")
-@XmlSeeAlso({PlaceableHouseObject.class})
+@XmlSeeAlso({ PlaceableHouseObject.class })
 public abstract class AbstractHouseObject extends VisibleObjectTemplate {
 
     @XmlAttribute(name = "talking_distance", required = true)

@@ -54,9 +54,12 @@ public interface DAO {
      * Returns true if DAO implementation supports database or false if not.
      * Database information is provided by {@link java.sql.DatabaseMetaData}
      *
-     * @param databaseName name of database
-     * @param majorVersion major version of database
-     * @param minorVersion minor version of database
+     * @param databaseName
+     *            name of database
+     * @param majorVersion
+     *            major version of database
+     * @param minorVersion
+     *            minor version of database
      * @return true if database is supported or false in other case
      */
     public boolean supports(String databaseName, int majorVersion, int minorVersion);

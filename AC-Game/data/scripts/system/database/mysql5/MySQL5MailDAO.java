@@ -29,6 +29,19 @@
  */
 package mysql5;
 
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
@@ -45,14 +58,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
 
 /**
  * @author kosyachok
@@ -67,6 +72,7 @@ public class MySQL5MailDAO extends MailDAO {
         final Mailbox mailbox = new Mailbox(player);
         final int playerId = player.getObjectId();
         DB.select("SELECT * FROM mail WHERE mail_recipient_id = ? ORDER BY recieved_time DESC LIMIT 100", new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, playerId);
@@ -98,8 +104,8 @@ public class MySQL5MailDAO extends MailDAO {
                         }
                     }
 
-                    Letter letter = new Letter(mailUniqueId, recipientId, attachedItem, attachedKinahCount, mailTitle,
-                            mailMessage, senderName, recievedTime, unread == 1, letterType);
+                    Letter letter = new Letter(mailUniqueId, recipientId, attachedItem, attachedKinahCount, mailTitle, mailMessage, senderName,
+                        recievedTime, unread == 1, letterType);
                     letter.setPersistState(PersistentState.UPDATED);
                     mailbox.putLetterToMailbox(letter);
                 }
@@ -134,9 +140,10 @@ public class MySQL5MailDAO extends MailDAO {
     }
 
     private List<Item> loadMailboxItems(final int playerId) {
-        final List<Item> mailboxItems = new ArrayList<Item>();
+        final List<Item> mailboxItems = new ArrayList<>();
 
         DB.select("SELECT * FROM inventory WHERE `item_owner` = ? AND `item_location` = 127", new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, playerId);
@@ -170,8 +177,8 @@ public class MySQL5MailDAO extends MailDAO {
                     int isAmplified = rset.getInt("is_amplified");
                     int buffSkill = rset.getInt("buff_skill");
                     Item item = new Item(itemUniqueId, itemId, itemCount, itemColor, colorExpireTime, itemCreator, expireTime, activationCount,
-                            isEquiped == 1, isSoulBound == 1, slot, StorageType.MAILBOX.getId(), enchant, itemSkin, fusionedItem,
-                            optionalSocket, optionalFusionSocket, charge, randomBonus, rndCount, packCount, max_authorize, isPacked == 1, isAmplified == 1, buffSkill);
+                        isEquiped == 1, isSoulBound == 1, slot, StorageType.MAILBOX.getId(), enchant, itemSkin, fusionedItem, optionalSocket,
+                        optionalFusionSocket, charge, randomBonus, rndCount, packCount, max_authorize, isPacked == 1, isAmplified == 1, buffSkill);
                     item.setPersistentState(PersistentState.UPDATED);
                     mailboxItems.add(item);
                 }
@@ -222,23 +229,24 @@ public class MySQL5MailDAO extends MailDAO {
         final int fAttachedItemId = attachedItemId;
 
         return DB.insertUpdate(
-                "INSERT INTO `mail` (`mail_unique_id`, `mail_recipient_id`, `sender_name`, `mail_title`, `mail_message`, `unread`, `attached_item_id`, `attached_kinah_count`, `express`, `recieved_time`) VALUES(?,?,?,?,?,?,?,?,?,?)",
-                new IUStH() {
-                    @Override
-                    public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-                        stmt.setInt(1, letter.getObjectId());
-                        stmt.setInt(2, letter.getRecipientId());
-                        stmt.setString(3, letter.getSenderName());
-                        stmt.setString(4, letter.getTitle());
-                        stmt.setString(5, letter.getMessage());
-                        stmt.setBoolean(6, letter.isUnread());
-                        stmt.setInt(7, fAttachedItemId);
-                        stmt.setLong(8, letter.getAttachedKinah());
-                        stmt.setInt(9, letter.getLetterType().getId());
-                        stmt.setTimestamp(10, time);
-                        stmt.execute();
-                    }
-                });
+            "INSERT INTO `mail` (`mail_unique_id`, `mail_recipient_id`, `sender_name`, `mail_title`, `mail_message`, `unread`, `attached_item_id`, `attached_kinah_count`, `express`, `recieved_time`) VALUES(?,?,?,?,?,?,?,?,?,?)",
+            new IUStH() {
+
+                @Override
+                public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
+                    stmt.setInt(1, letter.getObjectId());
+                    stmt.setInt(2, letter.getRecipientId());
+                    stmt.setString(3, letter.getSenderName());
+                    stmt.setString(4, letter.getTitle());
+                    stmt.setString(5, letter.getMessage());
+                    stmt.setBoolean(6, letter.isUnread());
+                    stmt.setInt(7, fAttachedItemId);
+                    stmt.setLong(8, letter.getAttachedKinah());
+                    stmt.setInt(9, letter.getLetterType().getId());
+                    stmt.setTimestamp(10, time);
+                    stmt.execute();
+                }
+            });
     }
 
     private boolean updateLetter(final Timestamp time, final Letter letter) {
@@ -250,24 +258,26 @@ public class MySQL5MailDAO extends MailDAO {
         final int fAttachedItemId = attachedItemId;
 
         return DB.insertUpdate(
-                "UPDATE mail SET  unread=?, attached_item_id=?, attached_kinah_count=?, `express`=?, recieved_time=? WHERE mail_unique_id=?",
-                new IUStH() {
-                    @Override
-                    public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-                        stmt.setBoolean(1, letter.isUnread());
-                        stmt.setInt(2, fAttachedItemId);
-                        stmt.setLong(3, letter.getAttachedKinah());
-                        stmt.setInt(4, letter.getLetterType().getId());
-                        stmt.setTimestamp(5, time);
-                        stmt.setInt(6, letter.getObjectId());
-                        stmt.execute();
-                    }
-                });
+            "UPDATE mail SET  unread=?, attached_item_id=?, attached_kinah_count=?, `express`=?, recieved_time=? WHERE mail_unique_id=?",
+            new IUStH() {
+
+                @Override
+                public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
+                    stmt.setBoolean(1, letter.isUnread());
+                    stmt.setInt(2, fAttachedItemId);
+                    stmt.setLong(3, letter.getAttachedKinah());
+                    stmt.setInt(4, letter.getLetterType().getId());
+                    stmt.setTimestamp(5, time);
+                    stmt.setInt(6, letter.getObjectId());
+                    stmt.execute();
+                }
+            });
     }
 
     @Override
     public boolean deleteLetter(final int letterId) {
         return DB.insertUpdate("DELETE FROM mail WHERE mail_unique_id=?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, letterId);
@@ -279,6 +289,7 @@ public class MySQL5MailDAO extends MailDAO {
     @Override
     public void updateOfflineMailCounter(final PlayerCommonData recipientCommonData) {
         DB.insertUpdate("UPDATE players SET mailbox_letters=? WHERE name=?", new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
                 stmt.setInt(1, recipientCommonData.getMailboxLetters());
@@ -290,8 +301,8 @@ public class MySQL5MailDAO extends MailDAO {
 
     @Override
     public int[] getUsedIDs() {
-        PreparedStatement statement = DB.prepareStatement("SELECT mail_unique_id FROM mail",
-                ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+        PreparedStatement statement = DB.prepareStatement("SELECT mail_unique_id FROM mail", ResultSet.TYPE_SCROLL_INSENSITIVE,
+            ResultSet.CONCUR_READ_ONLY);
         try {
             ResultSet rs = statement.executeQuery();
             rs.last();

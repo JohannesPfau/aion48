@@ -45,11 +45,11 @@ import com.aionemu.gameserver.skillengine.model.Skill;
  *         useful system, you can use that for: game restrictions, events restrictions,
  *         quests restrictions, instances restrictions, customs restrictions.
  * @Example: Open a new class like this: public class AppleRestrictions extends
- * AbstractRestrictions {
+ *           AbstractRestrictions {
  * @Override public boolean canEatApple(Player player) {
- * if(player.getController().isInEvent()) { // only example, don't forget!
- * return true; // player can eat apple in event. } return false; // player
- * cannot eat apple in normal game. } }
+ *           if(player.getController().isInEvent()) { // only example, don't forget!
+ *           return true; // player can eat apple in event. } return false; // player
+ *           cannot eat apple in normal game. } }
  */
 public final class RestrictionsManager {
 
@@ -70,6 +70,7 @@ public final class RestrictionsManager {
         canUseWarehouse,
         canUseItem, // TODO
         ;
+
         private final Method METHOD;
 
         private RestrictionMode() {
@@ -167,7 +168,7 @@ public final class RestrictionsManager {
         for (RestrictionMode mode : RestrictionMode.VALUES) {
             Restrictions[] restrictions = RESTRICTIONS[mode.ordinal()];
 
-            for (int index; (index = ArrayUtils.indexOf(restrictions, restriction)) != -1; ) {
+            for (int index; (index = ArrayUtils.indexOf(restrictions, restriction)) != -1;) {
                 restrictions = (Restrictions[]) ArrayUtils.remove(restrictions, index);
             }
 

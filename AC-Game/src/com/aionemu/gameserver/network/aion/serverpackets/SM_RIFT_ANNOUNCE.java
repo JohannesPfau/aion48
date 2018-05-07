@@ -29,12 +29,12 @@
  */
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.controllers.RVController;
 import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+
+import javolution.util.FastMap;
 
 /**
  * @author Sweetkr
@@ -89,7 +89,7 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         switch (actionId) {
             case 0: //announce
                 writeH(0x21);//4.7 // old -->writeH(0x19); // 0x19

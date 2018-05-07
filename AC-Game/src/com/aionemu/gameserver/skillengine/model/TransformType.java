@@ -43,6 +43,7 @@ public enum TransformType {
     PC(1),
     AVATAR(2),
     FORM1(3);
+
     private int id;
 
     private TransformType(int id) {

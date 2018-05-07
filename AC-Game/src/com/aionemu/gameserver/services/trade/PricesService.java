@@ -132,9 +132,8 @@ public class PricesService {
      * @return sellingModifier
      */
     public static final int getVendorSellModifier(Race playerRace) {
-        return (int) ((int) ((int) (PricesConfig.VENDOR_SELL_MODIFIER * getGlobalPrices(playerRace) / 100F)
-                * getGlobalPricesModifier() / 100F)
-                * getTaxes(playerRace) / 100F);
+        return (int) ((int) ((int) (PricesConfig.VENDOR_SELL_MODIFIER * getGlobalPrices(playerRace) / 100F) * getGlobalPricesModifier() / 100F)
+            * getTaxes(playerRace) / 100F);
     }
 
     /**
@@ -144,8 +143,8 @@ public class PricesService {
     public static final long getPriceForService(long basePrice, Race playerRace) {
         // Tricky. Requires multiplication by Prices, Modifier, Taxes
         // In order, and round down each time to match client calculation.
-        return (long) ((long) ((long) (basePrice * getGlobalPrices(playerRace) / 100D) * getGlobalPricesModifier() / 100D)
-                * getTaxes(playerRace) / 100D);
+        return (long) ((long) ((long) (basePrice * getGlobalPrices(playerRace) / 100D) * getGlobalPricesModifier() / 100D) * getTaxes(playerRace)
+            / 100D);
     }
 
     /**
@@ -154,10 +153,8 @@ public class PricesService {
      */
     public static final long getKinahForBuy(long requiredKinah, Race playerRace) {
         // Requires double precision for 2mil+ kinah items
-        return (long) ((long) ((long) ((long) (requiredKinah * getVendorBuyModifier() / 100.0D)
-                * getGlobalPrices(playerRace) / 100.0D)
-                * getGlobalPricesModifier() / 100.0D)
-                * getTaxes(playerRace) / 100.0D);
+        return (long) ((long) ((long) ((long) (requiredKinah * getVendorBuyModifier() / 100.0D) * getGlobalPrices(playerRace) / 100.0D)
+            * getGlobalPricesModifier() / 100.0D) * getTaxes(playerRace) / 100.0D);
     }
 
     /**

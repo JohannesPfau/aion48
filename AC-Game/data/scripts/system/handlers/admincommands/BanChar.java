@@ -29,6 +29,9 @@
  */
 package admincommands;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -37,8 +40,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * @author nrg
@@ -90,8 +91,7 @@ public class BanChar extends AdminCommand {
 
         if (dayCount < 0) {
             PacketSendUtility.sendMessage(admin, "Second parameter has to be a positive daycount or 0 for infinity");
-            sendInfo(admin, true);
-            ;
+            sendInfo(admin, true);;
             return;
         }
 
@@ -101,7 +101,8 @@ public class BanChar extends AdminCommand {
         }
 
         PacketSendUtility.sendMessage(admin, "Char " + playerName + " is now banned for the next " + dayCount + " days!");
-        log.info("[banchar] GM : " + admin.getName() + " has banned char of player [" + playerName + "] for ["+ dayCount +"] day(s) because ["+ reason + "] in mapId '" + admin.getWorldId() + "'");
+        log.info("[banchar] GM : " + admin.getName() + " has banned char of player [" + playerName + "] for [" + dayCount + "] day(s) because ["
+            + reason + "] in mapId '" + admin.getWorldId() + "'");
         PunishmentService.banChar(playerId, dayCount, reason);
     }
 

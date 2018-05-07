@@ -29,9 +29,9 @@
  */
 package quest.event_quests;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -42,7 +42,7 @@ public class _50006AscensionExtavaganza extends QuestHandler {
 
     private final static int questId = 50006;
 
-	public _50006AscensionExtavaganza() {
+    public _50006AscensionExtavaganza() {
         super(questId);
     }
 

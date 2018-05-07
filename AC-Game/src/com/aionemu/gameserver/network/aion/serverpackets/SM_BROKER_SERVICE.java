@@ -42,7 +42,6 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 
 /**
  * @author IlBuono, kosyachok
-
  */
 public class SM_BROKER_SERVICE extends AionServerPacket {
 
@@ -54,7 +53,8 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
         SHOW_SETTLED_ICON(5),
         SETTLED_ITEMS(5),
         REMOVE_SETTLED_ICON(6),
-		AVE_LOW_HIGH_ITEM(7);
+        AVE_LOW_HIGH_ITEM(7);
+
         private int id;
 
         private BrokerPacketType(int id) {
@@ -72,16 +72,16 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
     private int startPage;
     private int message;
     private long settled_kinah;
-	
-	private int itemUniqueId;
-	private long Ave7day;
-	private long CurrentLow;
-	private long CurrentHigh;
-	private boolean IsLowHighSame;	
+
+    private int itemUniqueId;
+    private long Ave7day;
+    private long CurrentLow;
+    private long CurrentHigh;
+    private boolean IsLowHighSame;
 
     public SM_BROKER_SERVICE(BrokerItem brokerItem, int message, int itemsCount) {
         this.type = BrokerPacketType.REGISTER_ITEM;
-        this.brokerItems = new BrokerItem[]{brokerItem};
+        this.brokerItems = new BrokerItem[] { brokerItem };
         this.message = message;
         this.itemsCount = itemsCount;
     }
@@ -113,19 +113,19 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
         this.type = showSettledIcon ? BrokerPacketType.SHOW_SETTLED_ICON : BrokerPacketType.REMOVE_SETTLED_ICON;
         this.settled_kinah = settled_kinah;
     }
-	
-    public SM_BROKER_SERVICE(int itemUniqueId ,long Ave7day, long CurrentLow, long CurrentHigh, boolean IsLowHighSame) {
+
+    public SM_BROKER_SERVICE(int itemUniqueId, long Ave7day, long CurrentLow, long CurrentHigh, boolean IsLowHighSame) {
         this.type = BrokerPacketType.AVE_LOW_HIGH_ITEM;
-		this.itemUniqueId = itemUniqueId;
-		this.Ave7day = Ave7day;
-		this.CurrentLow = CurrentLow;
-		this.CurrentHigh = CurrentHigh;
-		this.IsLowHighSame = IsLowHighSame;
-    }	
+        this.itemUniqueId = itemUniqueId;
+        this.Ave7day = Ave7day;
+        this.CurrentLow = CurrentLow;
+        this.CurrentHigh = CurrentHigh;
+        this.IsLowHighSame = IsLowHighSame;
+    }
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         switch (type) {
             case SEARCHED_ITEMS:
                 writeSearchedItems();
@@ -153,16 +153,15 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
     }
 
     private void writeItemAveLowHigh() {
-		writeC(type.getId());
-		writeC(0x00);
-		writeD(itemUniqueId);
-		writeQ(Ave7day);
-		writeC(IsLowHighSame ? 0x02 : 0x00);
-		writeQ(CurrentLow);
-		writeQ(CurrentHigh);
+        writeC(type.getId());
+        writeC(0x00);
+        writeD(itemUniqueId);
+        writeQ(Ave7day);
+        writeC(IsLowHighSame ? 0x02 : 0x00);
+        writeQ(CurrentLow);
+        writeQ(CurrentHigh);
     }
 
-	
     private void writeSearchedItems() {
         writeC(type.getId());
         writeD(itemsCount);
@@ -224,8 +223,8 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
             }
             writeQ(settledItem.getItemCount());
             writeQ(settledItem.getItemCount());
-            writeD((int)((settledItem.getSettleTime().getTime() / 60000) & 0xffffffffl));
-            
+            writeD((int) ((settledItem.getSettleTime().getTime() / 60000) & 0xffffffffl));
+
             //TODO! thats really odd - looks like getItem() may return null...
             Item item = settledItem.getItem();
             if (item != null) {
@@ -235,9 +234,9 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
             }
 
             writeS(settledItem.getItemCreator());
-			
-			//writeC(0x00); // Is Wrappable? 1|0 must be implemented in future
-			//writeC(settledItem.isSplitSell() ? 0x01 : 0x00); // isSplitSell? 1 or 0
+
+            //writeC(0x00); // Is Wrappable? 1|0 must be implemented in future
+            //writeC(settledItem.isSplitSell() ? 0x01 : 0x00); // isSplitSell? 1 or 0
         }
     }
 
@@ -258,9 +257,9 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
         writeS(brokerItem.getItemCreator());
         ItemInfoBlob.newBlobEntry(ItemBlobType.PREMIUM_OPTION, null, item).writeThisBlob(getBuf());
         ItemInfoBlob.newBlobEntry(ItemBlobType.POLISH_INFO, null, item).writeThisBlob(getBuf());
-		
-		writeC(0x00); // Is Wrappable? 1|0 must be implemented in future
-		writeC(brokerItem.isSplitSell() ? 0x01 : 0x00); // isSplitSell? 1 or 0
+
+        writeC(0x00); // Is Wrappable? 1|0 must be implemented in future
+        writeC(brokerItem.isSplitSell() ? 0x01 : 0x00); // isSplitSell? 1 or 0
     }
 
     private void writeItemInfo(BrokerItem brokerItem) {
@@ -269,17 +268,17 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
         writeD(item.getObjectId());
         writeD(item.getItemTemplate().getTemplateId());
         writeQ(brokerItem.getPrice());
-		writeQ(brokerItem.getPrice()); // v4.7.5.2  7-days average price (Not implemented yet)
+        writeQ(brokerItem.getPrice()); // v4.7.5.2  7-days average price (Not implemented yet)
         writeQ(item.getItemCount());
-		
+
         ItemInfoBlob.newBlobEntry(ItemBlobType.MANA_SOCKETS, null, item).writeThisBlob(getBuf());
 
         writeS(brokerItem.getSeller());
         writeS(brokerItem.getItemCreator()); // creator
         ItemInfoBlob.newBlobEntry(ItemBlobType.PREMIUM_OPTION, null, item).writeThisBlob(getBuf());
         ItemInfoBlob.newBlobEntry(ItemBlobType.POLISH_INFO, null, item).writeThisBlob(getBuf());
-		
-		writeC(0x00); // Is Wrappable? 1|0 must be implemented in future
-		writeC(brokerItem.isSplitSell() ? 0x01 : 0x00); // isSplitSell? 1 or 0
+
+        writeC(0x00); // Is Wrappable? 1|0 must be implemented in future
+        writeC(brokerItem.isSplitSell() ? 0x01 : 0x00); // isSplitSell? 1 or 0
     }
 }

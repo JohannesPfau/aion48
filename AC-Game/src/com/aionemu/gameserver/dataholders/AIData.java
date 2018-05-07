@@ -37,10 +37,10 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.ai.Ai;
 import com.aionemu.gameserver.model.templates.ai.AITemplate;
+
+import javolution.util.FastMap;
 
 /**
  * @author xTz
@@ -51,12 +51,12 @@ public class AIData {
 
     @XmlElement(name = "ai", type = Ai.class)
     private List<Ai> templates;
-    private FastMap<Integer, AITemplate> aiTemplate = new FastMap<Integer, AITemplate>();
+    private FastMap<Integer, AITemplate> aiTemplate = new FastMap<>();
 
     /**
-	 * @param u  
-     * @param parent 
-	 */
+     * @param u
+     * @param parent
+     */
     void afterUnmarshal(Unmarshaller u, Object parent) {
         aiTemplate.clear();
         for (Ai template : templates) {

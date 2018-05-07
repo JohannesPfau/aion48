@@ -29,7 +29,11 @@
  */
 package ai.instance.tiamatStrongHold;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AI2Actions;
@@ -44,10 +48,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.MathUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -76,6 +77,7 @@ public class BrigadeGeneralLaksyakaAI2 extends AggressiveNpcAI2 {
 
     private void startSkillTask() {
         skeletonTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 if (isAlreadyDead()) {
@@ -95,7 +97,7 @@ public class BrigadeGeneralLaksyakaAI2 extends AggressiveNpcAI2 {
 
     private void startSkeletonEvent() {
         Npc tiamatEye = getPosition().getWorldMapInstance().getNpc(283089);
-        List<Player> players = new ArrayList<Player>();
+        List<Player> players = new ArrayList<>();
         for (Player player : getKnownList().getKnownPlayers().values()) {
             if (!PlayerActions.isAlreadyDead(player) && MathUtil.isIn3dRange(player, tiamatEye, 40)) {
                 players.add(player);
@@ -122,8 +124,8 @@ public class BrigadeGeneralLaksyakaAI2 extends AggressiveNpcAI2 {
         float direction = Rnd.get(0, 199) / 100f;
         float x1 = (float) (Math.cos(Math.PI * direction) * dist);
         float y1 = (float) (Math.sin(Math.PI * direction) * dist);
-        return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY()
-                + y1, getPosition().getZ(), getPosition().getHeading());
+        return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1,
+            getPosition().getZ(), getPosition().getHeading());
     }
 
     @Override

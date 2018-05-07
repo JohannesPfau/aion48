@@ -59,7 +59,7 @@ public class SM_LEGION_TABS extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         int size = legionHistory.size();
         /**
          * If history size is less than page*8 return

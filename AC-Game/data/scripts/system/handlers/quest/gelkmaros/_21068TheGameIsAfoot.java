@@ -29,9 +29,9 @@
  */
 package quest.gelkmaros;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -84,11 +84,11 @@ public class _21068TheGameIsAfoot extends QuestHandler {
                         return sendQuestDialog(env, 1693);
                     }
                 } else if (dialog == DialogAction.SETPRO2) {
-                        qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-                        qs.setStatus(QuestStatus.REWARD);
-                        updateQuestStatus(env);
-                        return defaultCloseDialog(env, 2, 3, true, false);
-                    }
+                    qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
+                    qs.setStatus(QuestStatus.REWARD);
+                    updateQuestStatus(env);
+                    return defaultCloseDialog(env, 2, 3, true, false);
+                }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 799406) {

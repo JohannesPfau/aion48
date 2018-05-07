@@ -57,7 +57,7 @@ public class SM_CUSTOM_SETTINGS extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(obj);
         writeC(unk); // unk
         writeH(display);

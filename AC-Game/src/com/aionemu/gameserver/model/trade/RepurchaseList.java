@@ -42,7 +42,7 @@ import com.aionemu.gameserver.services.RepurchaseService;
 public class RepurchaseList {
 
     private final int sellerObjId;
-    private List<Item> repurchases = new ArrayList<Item>();
+    private List<Item> repurchases = new ArrayList<>();
 
     public RepurchaseList(int sellerObjId) {
         this.sellerObjId = sellerObjId;

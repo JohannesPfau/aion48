@@ -38,12 +38,12 @@ import com.google.common.base.Function;
  * with, such as: npcs, monsters, players, items.<br>
  * <br>
  * Each AionObject is uniquely identified by objectId.
- *
-, SoulKeeper
+ * , SoulKeeper
  */
 public abstract class AionObject {
 
     public static Function<AionObject, Integer> OBJECT_TO_ID_TRANSFORMER = new Function<AionObject, Integer>() {
+
         @Override
         public Integer apply(@Nullable AionObject input) {
             return input != null ? input.getObjectId() : null;

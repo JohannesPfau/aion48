@@ -48,6 +48,7 @@ import com.aionemu.gameserver.model.templates.rewards.BonusType;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="QuestBonuses">
  *   &lt;complexContent>

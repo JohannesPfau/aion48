@@ -57,8 +57,8 @@ public class PlayerExperienceTable {
      *
      * @param level
      * @return count of experience. If <tt>level</tt> parameter is higher than
-     * the max level that player can gain, then IllegalArgumentException is
-     * thrown.
+     *         the max level that player can gain, then IllegalArgumentException is
+     *         thrown.
      */
     public long getStartExpForLevel(int level) {
         if (level > experience.length) {

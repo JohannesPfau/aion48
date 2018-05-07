@@ -57,7 +57,7 @@ public class SM_SERIAL_KILLER extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         switch (type) {
             case 0:
             case 1:

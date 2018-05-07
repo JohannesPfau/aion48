@@ -29,14 +29,6 @@
  */
 package com.aionemu.commons.utils.internal.chmv8;
 
-/**
- * @author Rolandas
- */
-
-import com.aionemu.commons.utils.SystemPropertyUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.lang.reflect.Field;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
@@ -47,6 +39,15 @@ import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+/**
+ * @author Rolandas
+ */
+
+import com.aionemu.commons.utils.SystemPropertyUtil;
 
 /**
  * Utility that detects various properties specific to the current runtime
@@ -66,8 +67,7 @@ public final class PlatformDependent {
         Logger logger = LoggerFactory.getLogger(PlatformDependent.class);
         if (!hasUnsafe()) {
             logger.warn("Your platform does not provide complete low-level API for accessing direct buffers reliably. "
-                    + "Unless explicitly requested, heap buffer will always be preferred "
-                    + "to avoid potential risk of getting OutOfMemoryError.");
+                + "Unless explicitly requested, heap buffer will always be preferred " + "to avoid potential risk of getting OutOfMemoryError.");
         }
     }
 
@@ -108,7 +108,7 @@ public final class PlatformDependent {
         if (hasUnsafe()) {
             PlatformDependent0.throwException(t);
         } else {
-            PlatformDependent.<RuntimeException>throwException0(t);
+            PlatformDependent.<RuntimeException> throwException0(t);
         }
     }
 
@@ -123,9 +123,9 @@ public final class PlatformDependent {
      */
     public static <K, V> ConcurrentMap<K, V> newConcurrentHashMap() {
         if (CAN_USE_CHM_V8) {
-            return new ConcurrentHashMapV8<K, V>();
+            return new ConcurrentHashMapV8<>();
         } else {
-            return new ConcurrentHashMap<K, V>();
+            return new ConcurrentHashMap<>();
         }
     }
 
@@ -135,9 +135,9 @@ public final class PlatformDependent {
      */
     public static <K, V> ConcurrentMap<K, V> newConcurrentHashMap(int initialCapacity) {
         if (CAN_USE_CHM_V8) {
-            return new ConcurrentHashMapV8<K, V>(initialCapacity);
+            return new ConcurrentHashMapV8<>(initialCapacity);
         } else {
-            return new ConcurrentHashMap<K, V>(initialCapacity);
+            return new ConcurrentHashMap<>(initialCapacity);
         }
     }
 
@@ -147,9 +147,9 @@ public final class PlatformDependent {
      */
     public static <K, V> ConcurrentMap<K, V> newConcurrentHashMap(int initialCapacity, float loadFactor) {
         if (CAN_USE_CHM_V8) {
-            return new ConcurrentHashMapV8<K, V>(initialCapacity, loadFactor);
+            return new ConcurrentHashMapV8<>(initialCapacity, loadFactor);
         } else {
-            return new ConcurrentHashMap<K, V>(initialCapacity, loadFactor);
+            return new ConcurrentHashMap<>(initialCapacity, loadFactor);
         }
     }
 
@@ -157,12 +157,11 @@ public final class PlatformDependent {
      * Creates a new fastest {@link ConcurrentMap} implementation for the
      * current platform.
      */
-    public static <K, V> ConcurrentMap<K, V> newConcurrentHashMap(
-            int initialCapacity, float loadFactor, int concurrencyLevel) {
+    public static <K, V> ConcurrentMap<K, V> newConcurrentHashMap(int initialCapacity, float loadFactor, int concurrencyLevel) {
         if (CAN_USE_CHM_V8) {
-            return new ConcurrentHashMapV8<K, V>(initialCapacity, loadFactor, concurrencyLevel);
+            return new ConcurrentHashMapV8<>(initialCapacity, loadFactor, concurrencyLevel);
         } else {
-            return new ConcurrentHashMap<K, V>(initialCapacity, loadFactor, concurrencyLevel);
+            return new ConcurrentHashMap<>(initialCapacity, loadFactor, concurrencyLevel);
         }
     }
 
@@ -172,9 +171,9 @@ public final class PlatformDependent {
      */
     public static <K, V> ConcurrentMap<K, V> newConcurrentHashMap(Map<? extends K, ? extends V> map) {
         if (CAN_USE_CHM_V8) {
-            return new ConcurrentHashMapV8<K, V>(map);
+            return new ConcurrentHashMapV8<>(map);
         } else {
-            return new ConcurrentHashMap<K, V>(map);
+            return new ConcurrentHashMap<>(map);
         }
     }
 

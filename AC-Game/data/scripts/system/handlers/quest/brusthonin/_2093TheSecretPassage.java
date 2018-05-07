@@ -29,9 +29,9 @@
  */
 package quest.brusthonin;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -62,7 +62,7 @@ public class _2093TheSecretPassage extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {205150, 205159, 205164, 205197, 205198, 730174, 700395};
+        int[] npcs = { 205150, 205159, 205164, 205197, 205198, 730174, 700395 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.addHandlerSideQuestDrop(questId, 730174, 182209011, 1, 100);

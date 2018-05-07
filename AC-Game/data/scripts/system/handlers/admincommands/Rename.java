@@ -29,6 +29,8 @@
  */
 package admincommands;
 
+import java.util.Iterator;
+
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dao.OldNamesDAO;
@@ -47,8 +49,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
-import java.util.Iterator;
-
 /**
  * @author xTz
  */
@@ -61,8 +61,8 @@ public class Rename extends AdminCommand {
     @Override
     public void execute(Player admin, String... params) {
         if (params.length < 1 || params.length > 2) {
-            PacketSendUtility.sendMessage(admin, "No parameters detected.\n" + "Please use //rename <Player name> <rename>\n"
-                    + "or use //rename [target] <rename>");
+            PacketSendUtility.sendMessage(admin,
+                "No parameters detected.\n" + "Please use //rename <Player name> <rename>\n" + "or use //rename [target] <rename>");
             return;
         }
 
@@ -163,7 +163,7 @@ public class Rename extends AdminCommand {
 
     @Override
     public void onFail(Player player, String message) {
-        PacketSendUtility.sendMessage(player, "No parameters detected.\n" + "Please use //rename <Player name> <rename>\n"
-                + "or use //rename [target] <rename>");
+        PacketSendUtility.sendMessage(player,
+            "No parameters detected.\n" + "Please use //rename <Player name> <rename>\n" + "or use //rename [target] <rename>");
     }
 }

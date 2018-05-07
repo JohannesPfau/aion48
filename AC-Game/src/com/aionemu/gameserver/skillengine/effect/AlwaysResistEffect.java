@@ -53,6 +53,7 @@ public class AlwaysResistEffect extends EffectTemplate {
     @Override
     public void startEffect(final Effect effect) {
         AttackCalcObserver acObserver = new AttackStatusObserver(value, AttackStatus.RESIST) {
+
             @Override
             public boolean checkStatus(AttackStatus status) {
                 if (status == AttackStatus.RESIST) {

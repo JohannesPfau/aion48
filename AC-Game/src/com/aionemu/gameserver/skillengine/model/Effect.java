@@ -35,8 +35,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 
-import javolution.util.FastMap;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
@@ -70,6 +68,8 @@ import com.aionemu.gameserver.skillengine.periodicaction.PeriodicAction;
 import com.aionemu.gameserver.skillengine.periodicaction.PeriodicActions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import javolution.util.FastMap;
 
 /**
  * @author ATracer
@@ -211,8 +211,7 @@ public class Effect implements StatOwner {
         this.power = initializePower(skillTemplate);
     }
 
-    public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, int duration,
-                  ItemTemplate itemTemplate) {
+    public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, int duration, ItemTemplate itemTemplate) {
         this(effector, effected, skillTemplate, skillLevel, duration);
         this.itemTemplate = itemTemplate;
     }
@@ -365,7 +364,7 @@ public class Effect implements StatOwner {
     public boolean isChant() {
         return skillTemplate.getTargetSlot() == SkillTargetSlot.CHANT;
     }
-    
+
     public boolean isBuff() {
         return skillTemplate.getTargetSlot() == SkillTargetSlot.BUFF;
     }
@@ -399,7 +398,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param attackStatusObserver the attackCalcObserver to set
+     * @param attackStatusObserver
+     *            the attackCalcObserver to set
      */
     public void setAttackStatusObserver(AttackCalcObserver attackStatusObserver, int i) {
         if (this.attackStatusObserver == null) {
@@ -417,7 +417,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param attackShieldObserver the attackShieldObserver to set
+     * @param attackShieldObserver
+     *            the attackShieldObserver to set
      */
     public void setAttackShieldObserver(AttackCalcObserver attackShieldObserver, int i) {
         if (this.attackShieldObserver == null) {
@@ -445,7 +446,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param launchSubEffect the launchSubEffect to set
+     * @param launchSubEffect
+     *            the launchSubEffect to set
      */
     public void setLaunchSubEffect(boolean launchSubEffect) {
         this.launchSubEffect = launchSubEffect;
@@ -459,7 +461,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param shieldDefense the shieldDefense to set
+     * @param shieldDefense
+     *            the shieldDefense to set
      */
     public void setShieldDefense(int shieldDefense) {
         this.shieldDefense = shieldDefense;
@@ -518,7 +521,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param spellStatus the spellStatus to set
+     * @param spellStatus
+     *            the spellStatus to set
      */
     public void setSpellStatus(SpellStatus spellStatus) {
         this.spellStatus = spellStatus;
@@ -532,7 +536,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param dashStatus the dashStatus to set
+     * @param dashStatus
+     *            the dashStatus to set
      */
     public void setDashStatus(DashStatus dashStatus) {
         this.dashStatus = dashStatus;
@@ -559,7 +564,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param subEffect the subEffect to set
+     * @param subEffect
+     *            the subEffect to set
      */
     public void setSubEffect(Effect subEffect) {
         this.subEffect = subEffect;
@@ -747,66 +753,66 @@ public class Effect implements StatOwner {
         }
     }
 
-	public boolean isRiderEffect(int skillId) {
-		switch (skillId) {
-			case 3597: // Embark
-			case 3598:
-			case 3599:
-			case 3600:
-			case 3601:
-			case 3766: // Kinetic Battery
-			case 3767:
-			case 3768:
-			case 3769:
-			case 3770:
-			case 3771: // Kinetic Bulwark
-			case 3772:
-			case 3773:
-			case 3774:
-			case 3776: // Mobility Thrusters
-			case 3777:
-			case 3778:
-			case 3779: // Stability Thrusters
-			case 3780:
-			case 3781:
-			case 3782:
-			case 3783:
-			case 3784:
-			case 3785:
-				return true;
-		}
+    public boolean isRiderEffect(int skillId) {
+        switch (skillId) {
+            case 3597: // Embark
+            case 3598:
+            case 3599:
+            case 3600:
+            case 3601:
+            case 3766: // Kinetic Battery
+            case 3767:
+            case 3768:
+            case 3769:
+            case 3770:
+            case 3771: // Kinetic Bulwark
+            case 3772:
+            case 3773:
+            case 3774:
+            case 3776: // Mobility Thrusters
+            case 3777:
+            case 3778:
+            case 3779: // Stability Thrusters
+            case 3780:
+            case 3781:
+            case 3782:
+            case 3783:
+            case 3784:
+            case 3785:
+                return true;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-    public int checkForToggleBardEffect(int skillId){
+    public int checkForToggleBardEffect(int skillId) {
         // returns 0 if its Impassion
         // returns 1 if its exultation
         // returns 2 if its another skill
         int Impassion = 3156;
         int Exultation = 3155;
 
-        if (skillId == Impassion){
+        if (skillId == Impassion) {
             return 0;
-        }else{
-            if (skillId == Exultation){
+        } else {
+            if (skillId == Exultation) {
                 return 1;
             }
             return 2;
         }
     }
 
-    public int checkForToggleRideEffect(int skillId){
-        int[] Battery = {3766, 3767, 3768, 3769, 3770};
-        int[] Bulwark = {3771, 3772, 3773, 3774};
+    public int checkForToggleRideEffect(int skillId) {
+        int[] Battery = { 3766, 3767, 3768, 3769, 3770 };
+        int[] Bulwark = { 3771, 3772, 3773, 3774 };
 
-        for (int id : Battery){
-            if (id == skillId){
+        for (int id : Battery) {
+            if (id == skillId) {
                 return 0;
             }
         }
-        for (int id : Bulwark){
-            if (id == skillId){
+        for (int id : Bulwark) {
+            if (id == skillId) {
                 return 1;
             }
         }
@@ -831,38 +837,41 @@ public class Effect implements StatOwner {
             checkCancelOnDmg();
         }
 
-		if (isToggle() && effector instanceof Player || isRiderEffect(getSkillId())) {
-			activateToggleSkill();
-		}
-		if (!restored && !forcedDuration) {
-			duration = getEffectsDuration();
-		}
-        if (checkForToggleBardEffect(getSkillId()) == 0 || checkForToggleBardEffect(getSkillId()) == 1 && checkForToggleBardEffect(getSkillId()) != 2) {
-            if (checkForToggleBardEffect(getSkillId()) == 0){
+        if (isToggle() && effector instanceof Player || isRiderEffect(getSkillId())) {
+            activateToggleSkill();
+        }
+        if (!restored && !forcedDuration) {
+            duration = getEffectsDuration();
+        }
+        if (checkForToggleBardEffect(getSkillId()) == 0
+            || checkForToggleBardEffect(getSkillId()) == 1 && checkForToggleBardEffect(getSkillId()) != 2) {
+            if (checkForToggleBardEffect(getSkillId()) == 0) {
                 checkBardEffects(0);
-            }else{
+            } else {
                 checkBardEffects(1);
             }
         }
-        if (checkForToggleRideEffect(getSkillId()) == 0 || checkForToggleRideEffect(getSkillId()) == 1 && checkForToggleRideEffect(getSkillId()) != 2){
-            if (checkForToggleRideEffect(getSkillId()) == 0){
+        if (checkForToggleRideEffect(getSkillId()) == 0
+            || checkForToggleRideEffect(getSkillId()) == 1 && checkForToggleRideEffect(getSkillId()) != 2) {
+            if (checkForToggleRideEffect(getSkillId()) == 0) {
                 checkRideEffects(0);
-            }else{
+            } else {
                 checkRideEffects(1);
             }
         }
-        if (isKineticSkill()){
+        if (isKineticSkill()) {
             duration = skillTemplate.getToggleTimer();
         }
-		if (isToggle()) {
-			duration = skillTemplate.getToggleTimer();
-		}
-		if (duration == 0) {
+        if (isToggle()) {
+            duration = skillTemplate.getToggleTimer();
+        }
+        if (duration == 0) {
             return;
         }
         endTime = System.currentTimeMillis() + duration;
 
         task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 endEffect();
@@ -873,8 +882,8 @@ public class Effect implements StatOwner {
     /**
      * Just for Rider class skills
      */
-    private boolean isKineticSkill(){
-        switch (getSkillId()){
+    private boolean isKineticSkill() {
+        switch (getSkillId()) {
             case 3766:
             case 3767:
             case 3768:
@@ -892,24 +901,24 @@ public class Effect implements StatOwner {
     /**
      * Check if ride has Kinetic Bulwark and Kinetic BAttery turned on same time
      */
-    private void checkRideEffects(int code){
-        int[] Battery = {3766, 3767, 3768, 3769, 3770};
-        int[] Bulwark = {3771, 3772, 3773, 3774};
+    private void checkRideEffects(int code) {
+        int[] Battery = { 3766, 3767, 3768, 3769, 3770 };
+        int[] Bulwark = { 3771, 3772, 3773, 3774 };
         // 0 = Kinetic Battery
         // 1 = Kinetic Bulwark
         // 2 = NULL
-        if (effector instanceof Player){
+        if (effector instanceof Player) {
             Player player = (Player) effector;
 
-            if (code == 0){
-                for (int skillId : Bulwark){
-                    if (player.getEffectController().isNoshowPresentBySkillId(skillId)){
+            if (code == 0) {
+                for (int skillId : Bulwark) {
+                    if (player.getEffectController().isNoshowPresentBySkillId(skillId)) {
                         player.getEffectController().removeNoshowEffect(skillId);
                     }
                 }
-            }else{
-                for (int skillId : Battery){
-                    if (player.getEffectController().isNoshowPresentBySkillId(skillId)){
+            } else {
+                for (int skillId : Battery) {
+                    if (player.getEffectController().isNoshowPresentBySkillId(skillId)) {
                         player.getEffectController().removeNoshowEffect(skillId);
                     }
                 }
@@ -920,18 +929,18 @@ public class Effect implements StatOwner {
     /**
      * Check if bard has Impassion and Exultation activated at same time.
      */
-    private void checkBardEffects(int code){
+    private void checkBardEffects(int code) {
         // 0 = Impassion == 3156
         // 1 = Excultation == 3155
-        if (effector instanceof Player){
+        if (effector instanceof Player) {
             Player player = (Player) effector;
 
-            if (code == 0){
-                if (player.getEffectController().isNoshowPresentBySkillId(3155)){ // if Impassion is on check for Excultation
+            if (code == 0) {
+                if (player.getEffectController().isNoshowPresentBySkillId(3155)) { // if Impassion is on check for Excultation
                     player.getEffectController().removeNoshowEffect(3155);
                 }
-            }else{
-                if (player.getEffectController().isNoshowPresentBySkillId(3156)){ // if Excultation is on Check for Impassion
+            } else {
+                if (player.getEffectController().isNoshowPresentBySkillId(3156)) { // if Excultation is on Check for Impassion
                     player.getEffectController().removeNoshowEffect(3156);
                 }
             }
@@ -975,22 +984,22 @@ public class Effect implements StatOwner {
             }
         }
 
-		// TODO better way to finish
-		/*
-		 * if (getSkillTemplate().getTargetSlot() == SkillTargSetSlot.SPEC2) {
-		 * getEffected().getLifeStats().increaseHp(TYPE.HP, (int)
-		 * (getEffected().getLifeStats().getMaxHp() * 0.2));
-		 * getEffected().getLifeStats().increaseMp(TYPE.MP, (int)
-		 * (getEffected().getLifeStats().getMaxMp() * 0.2)); }
-		 */
-		if (isToggle() && effector instanceof Player || isRiderEffect(getSkillId())) {
-			deactivateToggleSkill();
-		}
-		stopTasks();
-		effected.getEffectController().clearEffect(this);
-		this.isStopped = true;
-		this.addedToController = false;
-	}
+        // TODO better way to finish
+        /*
+         * if (getSkillTemplate().getTargetSlot() == SkillTargSetSlot.SPEC2) {
+         * getEffected().getLifeStats().increaseHp(TYPE.HP, (int)
+         * (getEffected().getLifeStats().getMaxHp() * 0.2));
+         * getEffected().getLifeStats().increaseMp(TYPE.MP, (int)
+         * (getEffected().getLifeStats().getMaxMp() * 0.2)); }
+         */
+        if (isToggle() && effector instanceof Player || isRiderEffect(getSkillId())) {
+            deactivateToggleSkill();
+        }
+        stopTasks();
+        effected.getEffectController().clearEffect(this);
+        this.isStopped = true;
+        this.addedToController = false;
+    }
 
     /**
      * Stop all scheduled tasks
@@ -1060,7 +1069,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param effectHate the effectHate to set
+     * @param effectHate
+     *            the effectHate to set
      */
     public void setEffectHate(int effectHate) {
         this.effectHate = effectHate;
@@ -1074,7 +1084,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param tauntHate the tauntHate to set
+     * @param tauntHate
+     *            the tauntHate to set
      */
     public void setTauntHate(int tauntHate) {
         this.tauntHate = tauntHate;
@@ -1089,7 +1100,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param observer the observer to set
+     * @param observer
+     *            the observer to set
      */
     public void setActionObserver(ActionObserver observer, int i) {
         if (actionObserver == null) {
@@ -1129,12 +1141,12 @@ public class Effect implements StatOwner {
     }
 
     private void schedulePeriodicActions() {
-        if (periodicActions == null || periodicActions.getPeriodicActions() == null
-                || periodicActions.getPeriodicActions().isEmpty()) {
+        if (periodicActions == null || periodicActions.getPeriodicActions() == null || periodicActions.getPeriodicActions().isEmpty()) {
             return;
         }
         int checktime = periodicActions.getChecktime();
         periodicActionsTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
             @Override
             public void run() {
                 for (PeriodicAction action : periodicActions.getPeriodicActions()) {
@@ -1225,7 +1237,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param skillMoveType the skillMoveType to set
+     * @param skillMoveType
+     *            the skillMoveType to set
      */
     public void setSkillMoveType(SkillMoveType skillMoveType) {
         this.skillMoveType = skillMoveType;
@@ -1314,9 +1327,9 @@ public class Effect implements StatOwner {
     private void checkUseEquipmentConditions() {
         // If skill has use equipment conditions
         // Observe for unequip event and remove effect if event occurs
-        if ((getSkillTemplate().getUseEquipmentconditions() != null)
-                && (getSkillTemplate().getUseEquipmentconditions().getConditions().size() > 0)) {
+        if ((getSkillTemplate().getUseEquipmentconditions() != null) && (getSkillTemplate().getUseEquipmentconditions().getConditions().size() > 0)) {
             ActionObserver observer = new ActionObserver(ObserverType.UNEQUIP) {
+
                 @Override
                 public void unequip(Item item, Player owner) {
                     if (!useEquipmentConditionsCheck()) {
@@ -1338,6 +1351,7 @@ public class Effect implements StatOwner {
     private void checkCancelOnDmg() {
         if (isCancelOnDmg()) {
             effected.getObserveController().attach(new ActionObserver(ObserverType.ATTACKED) {
+
                 @Override
                 public void attacked(Creature creature) {
                     effected.getEffectController().removeEffect(getSkillId());
@@ -1345,6 +1359,7 @@ public class Effect implements StatOwner {
             });
 
             effected.getObserveController().attach(new ActionObserver(ObserverType.DOT_ATTACKED) {
+
                 @Override
                 public void dotattacked(Creature creature, Effect dotEffect) {
                     effected.getEffectController().removeEffect(getSkillId());
@@ -1487,7 +1502,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param power the power to set
+     * @param power
+     *            the power to set
      */
     public void setPower(int power) {
         this.power = power;
@@ -1527,7 +1543,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param isDamageEffect the isDamageEffect to set
+     * @param isDamageEffect
+     *            the isDamageEffect to set
      */
     public void setDamageEffect(boolean isDamageEffect) {
         this.isDamageEffect = isDamageEffect;
@@ -1541,7 +1558,8 @@ public class Effect implements StatOwner {
     }
 
     /**
-     * @param signetBurstedCount the signetBurstedCount to set
+     * @param signetBurstedCount
+     *            the signetBurstedCount to set
      */
     public void setSignetBurstedCount(int signetBurstedCount) {
         this.signetBurstedCount = signetBurstedCount;
@@ -1571,13 +1589,11 @@ public class Effect implements StatOwner {
         this.isMagicalState = isMagicalState;
     }
 
-    public int getMpShield()
-    {
-      return this.mpShield;
+    public int getMpShield() {
+        return this.mpShield;
     }
-    
-    public void setMpShield(int mpShield)
-    {
-      this.mpShield = mpShield;
+
+    public void setMpShield(int mpShield) {
+        this.mpShield = mpShield;
     }
 }

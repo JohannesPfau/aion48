@@ -29,7 +29,6 @@
  */
 package ai.instance.crucibleChallenge;
 
-import ai.ActionItemNpcAI2;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -38,6 +37,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import ai.ActionItemNpcAI2;
 
 /**
  * @author xTz
@@ -82,6 +83,7 @@ public class CrucibleRiftAI2 extends ActionItemNpcAI2 {
 
     private void announceRift() {
         getPosition().getWorldMapInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 if (player.isOnline()) {

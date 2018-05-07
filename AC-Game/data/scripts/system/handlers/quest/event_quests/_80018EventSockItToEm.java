@@ -71,8 +71,7 @@ public class _80018EventSockItToEm extends QuestHandler {
             return false;
         }
 
-        if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE
-                && qs.getCompleteCount() < 10) {
+        if (qs == null || qs.getStatus() == QuestStatus.NONE || qs.getStatus() == QuestStatus.COMPLETE && qs.getCompleteCount() < 10) {
             if (env.getTargetId() == 799778) {
                 switch (env.getDialog()) {
                     case USE_OBJECT:

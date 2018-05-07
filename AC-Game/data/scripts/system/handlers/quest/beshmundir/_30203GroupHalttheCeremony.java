@@ -29,10 +29,10 @@
  */
 package quest.beshmundir;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -43,7 +43,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _30203GroupHalttheCeremony extends QuestHandler {
 
     private final static int questId = 30203;
-    private final static int[] npc_ids = {798926};
+    private final static int[] npc_ids = { 798926 };
 
     public _30203GroupHalttheCeremony() {
         super(questId);

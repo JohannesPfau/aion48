@@ -64,7 +64,7 @@ public class SpawnGroup2 extends AbstractLockManager {
     private TemporarySpawn temporarySpawn;
     private int respawnTime;
     private SpawnHandlerType handlerType;
-    private List<SpawnTemplate> spots = new ArrayList<SpawnTemplate>();
+    private List<SpawnTemplate> spots = new ArrayList<>();
     private HashMap<Integer, HashMap<SpawnTemplate, Boolean>> poolUsedTemplates;
 
     public SpawnGroup2(int worldId, Spawn spawn) {
@@ -110,17 +110,17 @@ public class SpawnGroup2 extends AbstractLockManager {
             spots.add(spawnTemplate);
         }
     }
-    
+
     public SpawnGroup2(int worldId, Spawn spawn, int id, BeritraStateType type) {
-		this.worldId = worldId;
-		initializing(spawn);
-		for (SpawnSpotTemplate template : spawn.getSpawnSpotTemplates()) {
-			BeritraSpawnTemplate spawnTemplate = new BeritraSpawnTemplate(this, template);
-			spawnTemplate.setId(id);
-			spawnTemplate.setBStateType(type);
-			spots.add(spawnTemplate);
-		}
-	}
+        this.worldId = worldId;
+        initializing(spawn);
+        for (SpawnSpotTemplate template : spawn.getSpawnSpotTemplates()) {
+            BeritraSpawnTemplate spawnTemplate = new BeritraSpawnTemplate(this, template);
+            spawnTemplate.setId(id);
+            spawnTemplate.setBStateType(type);
+            spots.add(spawnTemplate);
+        }
+    }
 
     public SpawnGroup2(int worldId, Spawn spawn, int siegeId, SiegeRace race, SiegeModType mod) {
         this.worldId = worldId;
@@ -141,7 +141,7 @@ public class SpawnGroup2 extends AbstractLockManager {
         npcId = spawn.getNpcId();
         handlerType = spawn.getSpawnHandlerType();
         difficultId = spawn.getDifficultId();
-        poolUsedTemplates = new HashMap<Integer, HashMap<SpawnTemplate, Boolean>>();
+        poolUsedTemplates = new HashMap<>();
     }
 
     public SpawnGroup2(int worldId, int npcId) {
@@ -200,7 +200,7 @@ public class SpawnGroup2 extends AbstractLockManager {
 
     public SpawnTemplate getRndTemplate(int instanceId) {
         final List<SpawnTemplate> allTemplates = spots;
-        List<SpawnTemplate> templates = new ArrayList<SpawnTemplate>();
+        List<SpawnTemplate> templates = new ArrayList<>();
         super.readLock();
         try {
             for (SpawnTemplate template : allTemplates) {
@@ -225,7 +225,7 @@ public class SpawnGroup2 extends AbstractLockManager {
         try {
             HashMap<SpawnTemplate, Boolean> states = poolUsedTemplates.get(instanceId);
             if (states == null) {
-                states = new HashMap<SpawnTemplate, Boolean>();
+                states = new HashMap<>();
                 poolUsedTemplates.put(instanceId, states);
             }
             states.put(template, isUsed);

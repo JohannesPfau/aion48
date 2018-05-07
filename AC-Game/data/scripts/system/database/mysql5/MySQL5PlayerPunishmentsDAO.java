@@ -29,6 +29,10 @@
  */
 package mysql5;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
 import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
@@ -37,10 +41,6 @@ import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
 import com.aionemu.gameserver.model.account.CharacterBanInfo;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.PunishmentService.PunishmentType;
-
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 /**
  * @author lord_rex, Cura, nrg
@@ -55,6 +55,7 @@ public class MySQL5PlayerPunishmentsDAO extends PlayerPunishmentsDAO {
     @Override
     public void loadPlayerPunishments(final Player player, final PunishmentType punishmentType) {
         DB.select(SELECT_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement ps) throws SQLException {
                 ps.setInt(1, player.getObjectId());
@@ -77,6 +78,7 @@ public class MySQL5PlayerPunishmentsDAO extends PlayerPunishmentsDAO {
     @Override
     public void storePlayerPunishments(final Player player, final PunishmentType punishmentType) {
         DB.insertUpdate(UPDATE_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
                 if (punishmentType == PunishmentType.PRISON) {
@@ -94,6 +96,7 @@ public class MySQL5PlayerPunishmentsDAO extends PlayerPunishmentsDAO {
     @Override
     public void punishPlayer(final int playerId, final PunishmentType punishmentType, final long duration, final String reason) {
         DB.insertUpdate(REPLACE_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
                 ps.setInt(1, playerId);
@@ -118,6 +121,7 @@ public class MySQL5PlayerPunishmentsDAO extends PlayerPunishmentsDAO {
     @Override
     public void unpunishPlayer(final int playerId, final PunishmentType punishmentType) {
         DB.insertUpdate(DELETE_QUERY, new IUStH() {
+
             @Override
             public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
                 ps.setInt(1, playerId);
@@ -131,6 +135,7 @@ public class MySQL5PlayerPunishmentsDAO extends PlayerPunishmentsDAO {
     public CharacterBanInfo getCharBanInfo(final int playerId) {
         final CharacterBanInfo[] charBan = new CharacterBanInfo[1];
         DB.select(SELECT_QUERY, new ParamReadStH() {
+
             @Override
             public void setParams(PreparedStatement ps) throws SQLException {
                 ps.setInt(1, playerId);

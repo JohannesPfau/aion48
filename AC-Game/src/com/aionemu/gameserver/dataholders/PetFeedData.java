@@ -47,14 +47,14 @@ import com.aionemu.gameserver.model.templates.pet.PetFlavour;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {"flavours"})
+@XmlType(name = "", propOrder = { "flavours" })
 @XmlRootElement(name = "pet_feed")
 public class PetFeedData {
 
     @XmlElement(name = "flavour")
     protected List<PetFlavour> flavours;
     @XmlTransient
-    private Map<Integer, PetFlavour> petFlavoursById = new HashMap<Integer, PetFlavour>();
+    private Map<Integer, PetFlavour> petFlavoursById = new HashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         if (flavours == null) {

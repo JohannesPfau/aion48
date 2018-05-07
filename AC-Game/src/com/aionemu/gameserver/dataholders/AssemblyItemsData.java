@@ -46,21 +46,19 @@ import com.aionemu.gameserver.model.templates.item.AssemblyItem;
  * @author xTz
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = {
-        "item"
-})
+@XmlType(name = "", propOrder = { "item" })
 @XmlRootElement(name = "assembly_items")
 public class AssemblyItemsData {
 
     @XmlElement(required = true)
     protected List<AssemblyItem> item;
     @XmlTransient
-    private List<AssemblyItem> items = new ArrayList<AssemblyItem>();
+    private List<AssemblyItem> items = new ArrayList<>();
 
     /**
-	 * @param unmarshaller  
-     * @param parent 
-	 */
+     * @param unmarshaller
+     * @param parent
+     */
     void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
         for (AssemblyItem template : item) {
             items.add(template);

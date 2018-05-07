@@ -54,7 +54,7 @@ public class SM_TRANSFORM_IN_SUMMON extends AionServerPacket {
 
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(summonObject);
         writeS(player.getName());
         writeD(player.getObjectId());

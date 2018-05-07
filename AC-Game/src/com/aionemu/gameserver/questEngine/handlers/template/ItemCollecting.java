@@ -48,17 +48,17 @@ import com.aionemu.gameserver.services.QuestService;
  */
 public class ItemCollecting extends QuestHandler {
 
-    private final Set<Integer> startNpcs = new HashSet<Integer>();
-    private final Set<Integer> actionItems = new HashSet<Integer>();
-    private final Set<Integer> endNpcs = new HashSet<Integer>();
+    private final Set<Integer> startNpcs = new HashSet<>();
+    private final Set<Integer> actionItems = new HashSet<>();
+    private final Set<Integer> endNpcs = new HashSet<>();
     private final int questMovie;
     private final int nextNpcId;
     private final int startDialogId;
     private final int startDialogId2;
     private final int itemId;
 
-    public ItemCollecting(int questId, List<Integer> startNpcIds, int nextNpcId, List<Integer> actionItemIds, List<Integer> endNpcIds,
-                          int questMovie, int startDialogId, int startDialogId2, int itemId) {
+    public ItemCollecting(int questId, List<Integer> startNpcIds, int nextNpcId, List<Integer> actionItemIds, List<Integer> endNpcIds, int questMovie,
+        int startDialogId, int startDialogId2, int itemId) {
         super(questId);
         startNpcs.addAll(startNpcIds);
         startNpcs.remove(0);

@@ -46,7 +46,8 @@ public class SM_PLAY_FAIL extends AionServerPacket {
     /**
      * Constructs new instance of <tt>SM_PLAY_FAIL</tt> packet.
      *
-     * @param response auth response
+     * @param response
+     *            auth response
      */
     public SM_PLAY_FAIL(AionAuthResponse response) {
         super(0x06);

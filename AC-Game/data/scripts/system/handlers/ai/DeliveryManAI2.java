@@ -69,21 +69,21 @@ public class DeliveryManAI2 extends FollowingNpcAI2 {
 
     @Override
     protected void handleDialogStart(Player player) {
-		if (owner != null) {
-			if (player.equals(owner)) {
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 18));
-				player.getMailbox().sendMailList(true);
-			}
-		}
+        if (owner != null) {
+            if (player.equals(owner)) {
+                PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 18));
+                player.getMailbox().sendMailList(true);
+            }
+        }
     }
 
     @Override
     protected void handleCreatureMoved(Creature creature) {
         if (owner != null) {
-			if (creature == owner) {
-				FollowEventHandler.creatureMoved(this, creature);
-			}			
-		}
+            if (creature == owner) {
+                FollowEventHandler.creatureMoved(this, creature);
+            }
+        }
     }
 
     @Override

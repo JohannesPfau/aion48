@@ -68,7 +68,8 @@ import com.google.common.collect.Collections2;
 public class ItemService {
 
     private static final Logger log = LoggerFactory.getLogger("ITEM_LOG");
-    public static final ItemUpdatePredicate DEFAULT_UPDATE_PREDICATE = new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_ITEM_COLLECT);
+    public static final ItemUpdatePredicate DEFAULT_UPDATE_PREDICATE = new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT,
+        ItemUpdateType.INC_ITEM_COLLECT);
 
     public static void loadItemStones(Collection<Item> itemList) {
         if (itemList != null && itemList.size() > 0) {
@@ -112,8 +113,9 @@ public class ItemService {
 
         if (LoggingConfig.LOG_ITEM) {
             log.info("[ITEM] ID/Count"
-                    + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "/Item Name - " + itemTemplate.getTemplateId() + "/" + count + "/"
-                    + itemTemplate.getName() : " - " + itemTemplate.getTemplateId() + "/" + count) + " to player " + player.getName());
+                + (LoggingConfig.ENABLE_ADVANCED_LOGGING ? "/Item Name - " + itemTemplate.getTemplateId() + "/" + count + "/" + itemTemplate.getName()
+                    : " - " + itemTemplate.getTemplateId() + "/" + count)
+                + " to player " + player.getName());
         }
 
         Storage inventory = player.getInventory();
@@ -155,7 +157,7 @@ public class ItemService {
         }
         return count;
     }
-	
+
     /**
      * Copy some item values like item stones and enchant level
      */
@@ -289,8 +291,8 @@ public class ItemService {
         }
 
         /**
-		 * @param item  
-		 */
+         * @param item
+         */
         public boolean changeItem(Item item) {
             return true;
         }
@@ -346,40 +348,40 @@ public class ItemService {
         return newItem;
     }
 
-	public static void makeUpgradeItem(Player player, Item sourceItem, Item newItem) {
-		Storage inventory = player.getInventory();
-		newItem.setOptionalSocket(sourceItem.getOptionalSocket());
-		if (sourceItem.getFusionedItemId() != 0){
-			newItem.setFusionedItem(sourceItem.getFusionedItemTemplate());
-		}
-		
-		ItemSocketService.copyManaStones(sourceItem, newItem);
-		
-		if (sourceItem.getGodStone() != null) {
+    public static void makeUpgradeItem(Player player, Item sourceItem, Item newItem) {
+        Storage inventory = player.getInventory();
+        newItem.setOptionalSocket(sourceItem.getOptionalSocket());
+        if (sourceItem.getFusionedItemId() != 0) {
+            newItem.setFusionedItem(sourceItem.getFusionedItemTemplate());
+        }
+
+        ItemSocketService.copyManaStones(sourceItem, newItem);
+
+        if (sourceItem.getGodStone() != null) {
             newItem.addGodStone(sourceItem.getGodStone().getItemId());
         }
-        
-		int enchantLevel = sourceItem.getEnchantLevel() - 5;
-		if (enchantLevel >= 20) {
-			newItem.setEnchantLevel(enchantLevel);
-			newItem.setBuffSkill(sourceItem.getBuffSkill());
-			newItem.setAmplified(true);
-		} else {
-			newItem.setEnchantLevel(enchantLevel);
-		}
-			
+
+        int enchantLevel = sourceItem.getEnchantLevel() - 5;
+        if (enchantLevel >= 20) {
+            newItem.setEnchantLevel(enchantLevel);
+            newItem.setBuffSkill(sourceItem.getBuffSkill());
+            newItem.setAmplified(true);
+        } else {
+            newItem.setEnchantLevel(enchantLevel);
+        }
+
         if (sourceItem.isSoulBound()) {
             newItem.setSoulBound(true);
         }
-		
-		if (sourceItem.getBonusNumber() > 0) {
-		newItem.setBonusNumber(sourceItem.getBonusNumber());
-        newItem.setRandomStats(sourceItem.getRandomStats());
-		newItem.setRandomCount(sourceItem.getRandomCount());
-		}
-		
+
+        if (sourceItem.getBonusNumber() > 0) {
+            newItem.setBonusNumber(sourceItem.getBonusNumber());
+            newItem.setRandomStats(sourceItem.getRandomStats());
+            newItem.setRandomCount(sourceItem.getRandomCount());
+        }
+
         ItemUpdatePredicate predicate = DEFAULT_UPDATE_PREDICATE;
-        predicate.changeItem(newItem);		
-		inventory.add(newItem, predicate.getAddType());
-	}
+        predicate.changeItem(newItem);
+        inventory.add(newItem, predicate.getAddType());
+    }
 }

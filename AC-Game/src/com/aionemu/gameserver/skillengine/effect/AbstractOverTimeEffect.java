@@ -55,7 +55,7 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
     protected boolean shared;
 
     @Override
-	public int getValue() {
+    public int getValue() {
         return value;
     }
 
@@ -82,6 +82,7 @@ public abstract class AbstractOverTimeEffect extends EffectTemplate {
         }
         try {
             Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+
                 @Override
                 public void run() {
                     onPeriodicAction(effect);

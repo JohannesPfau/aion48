@@ -42,10 +42,8 @@ public class CryptEngine {
     /**
      * A key
      */
-    private byte[] key = {(byte) 0x6b, (byte) 0x60, (byte) 0xcb, (byte) 0x5b,
-            (byte) 0x82, (byte) 0xce, (byte) 0x90, (byte) 0xb1, (byte) 0xcc,
-            (byte) 0x2b, (byte) 0x6c, (byte) 0x55, (byte) 0x6c, (byte) 0x6c,
-            (byte) 0x6c, (byte) 0x6c};
+    private byte[] key = { (byte) 0x6b, (byte) 0x60, (byte) 0xcb, (byte) 0x5b, (byte) 0x82, (byte) 0xce, (byte) 0x90, (byte) 0xb1, (byte) 0xcc,
+        (byte) 0x2b, (byte) 0x6c, (byte) 0x55, (byte) 0x6c, (byte) 0x6c, (byte) 0x6c, (byte) 0x6c };
     /**
      * Tells you whether the key is updated or not
      */
@@ -66,7 +64,8 @@ public class CryptEngine {
     /**
      * Update the key for packet encryption/decryption with the Blowfish Cipher
      *
-     * @param newKey new Blowfish Key
+     * @param newKey
+     *            new Blowfish Key
      */
     public void updateKey(byte[] newKey) {
         this.key = newKey;
@@ -75,9 +74,12 @@ public class CryptEngine {
     /**
      * Decrypt given data
      *
-     * @param data   byte array to be decrypted
-     * @param offset byte array offset
-     * @param length byte array length
+     * @param data
+     *            byte array to be decrypted
+     * @param offset
+     *            byte array offset
+     * @param length
+     *            byte array length
      * @return true, if decrypted packet has valid checksum, false overwise
      */
     public boolean decrypt(byte[] data, int offset, int length) {
@@ -89,9 +91,12 @@ public class CryptEngine {
     /**
      * Encrypt given data
      *
-     * @param data   byte array to be encrypted
-     * @param offset byte array offset
-     * @param length byte array length
+     * @param data
+     *            byte array to be encrypted
+     * @param offset
+     *            byte array offset
+     * @param length
+     *            byte array length
      * @return length of encrypted byte array
      */
     public int encrypt(byte[] data, int offset, int length) {
@@ -118,9 +123,12 @@ public class CryptEngine {
     /**
      * Verify checksum in a packet
      *
-     * @param data   byte array - encrypted packet
-     * @param offset byte array offset
-     * @param length byte array size
+     * @param data
+     *            byte array - encrypted packet
+     * @param offset
+     *            byte array offset
+     * @param length
+     *            byte array size
      * @return true, if checksum is ok, false overwise
      */
     private boolean verifyChecksum(byte[] data, int offset, int length) {
@@ -156,9 +164,12 @@ public class CryptEngine {
     /**
      * add checksum to the end of the packet
      *
-     * @param raw    byte array - encrypted packet
-     * @param offset byte array offset
-     * @param length byte array size
+     * @param raw
+     *            byte array - encrypted packet
+     * @param offset
+     *            byte array offset
+     * @param length
+     *            byte array size
      */
     private void appendChecksum(byte[] raw, int offset, int length) {
         long chksum = 0;
@@ -187,10 +198,14 @@ public class CryptEngine {
     /**
      * First packet encryption with XOR key (integer - 4 bytes)
      *
-     * @param data   byte array to be encrypted
-     * @param offset byte array offset
-     * @param length byte array length
-     * @param key    integer value as key
+     * @param data
+     *            byte array to be encrypted
+     * @param offset
+     *            byte array offset
+     * @param length
+     *            byte array length
+     * @param key
+     *            integer value as key
      */
     private void encXORPass(byte[] data, int offset, int length, int key) {
         int stop = length - 8;

@@ -47,15 +47,16 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class StunAlwaysEffect extends EffectTemplate {
 
     @Override
-    public void applyEffect(Effect effect){
-        if(!effect.getEffected().getEffectController().hasMagicalStateEffect() && !effect.getEffected().getEffectController().hasAbnormalEffect(AbnormalState.STUN.getId())){
+    public void applyEffect(Effect effect) {
+        if (!effect.getEffected().getEffectController().hasMagicalStateEffect()
+            && !effect.getEffected().getEffectController().hasAbnormalEffect(AbnormalState.STUN.getId())) {
             effect.addToEffectedController();
             effect.setIsMagicalState(true);
         }
     }
 
     @Override
-    public void startEffect(Effect effect){
+    public void startEffect(Effect effect) {
         final Creature effected = effect.getEffected();
         effected.getController().cancelCurrentSkill();
         effected.getMoveController().abortMove();
@@ -65,7 +66,7 @@ public class StunAlwaysEffect extends EffectTemplate {
     }
 
     @Override
-    public void endEffect(Effect effect){
+    public void endEffect(Effect effect) {
         effect.setIsMagicalState(false);
         effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.STUN.getId());
     }

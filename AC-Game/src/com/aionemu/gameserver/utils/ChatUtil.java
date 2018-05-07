@@ -60,34 +60,35 @@ public class ChatUtil {
     public static String quest(int questId) {
         return String.format("[quest: %d]", questId);
     }
-    
+
     public static String removePattern(String PlayerName, String Pattern) {
-		
-		int index = Pattern.indexOf("%s");
-		if (index == -1) return PlayerName;
-		
-		String RealName = "";
-		RealName = PlayerName.replace(Pattern.substring(0, index), "");
-		RealName = RealName.replace(Pattern.substring(index + 2), "");
-		
-		return RealName;
-	}
-	
+
+        int index = Pattern.indexOf("%s");
+        if (index == -1)
+            return PlayerName;
+
+        String RealName = "";
+        RealName = PlayerName.replace(Pattern.substring(0, index), "");
+        RealName = RealName.replace(Pattern.substring(index + 2), "");
+
+        return RealName;
+    }
+
     public static String getRealAdminName(String PlayerName) {
-    	String RealAdminName = "";
-    	RealAdminName = removePattern(PlayerName, MembershipConfig.TAG_VIP);
-    	RealAdminName = removePattern(RealAdminName, MembershipConfig.TAG_PREMIUM);
-    	RealAdminName = removePattern(RealAdminName, WeddingsConfig.TAG_WEDDING);
-    	RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS1);
-    	RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS2);
-    	RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS3);
-    	RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS4);
-    	RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS5);
-    	RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS6);
-    	RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS7);
-    	RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS8);
-    	RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS9);
-    	RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS10);
-		return RealAdminName;
-	}
+        String RealAdminName = "";
+        RealAdminName = removePattern(PlayerName, MembershipConfig.TAG_VIP);
+        RealAdminName = removePattern(RealAdminName, MembershipConfig.TAG_PREMIUM);
+        RealAdminName = removePattern(RealAdminName, WeddingsConfig.TAG_WEDDING);
+        RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS1);
+        RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS2);
+        RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS3);
+        RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS4);
+        RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS5);
+        RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS6);
+        RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS7);
+        RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS8);
+        RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS9);
+        RealAdminName = removePattern(RealAdminName, AdminConfig.CUSTOMTAG_ACCESS10);
+        return RealAdminName;
+    }
 }

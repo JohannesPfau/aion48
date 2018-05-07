@@ -50,7 +50,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class InstanceBuff implements StatOwner {
 
     private Future<?> task;
-    private List<IStatFunction> functions = new ArrayList<IStatFunction>();
+    private List<IStatFunction> functions = new ArrayList<>();
     private InstanceBonusAttr instanceBonusAttr;
     private long startTime;
 

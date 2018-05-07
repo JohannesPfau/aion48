@@ -31,15 +31,15 @@ package quest.clash_of_destiny;
 
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.SystemMessageId;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.network.aion.SystemMessageId;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -53,7 +53,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _24031EnemyAtTheDoorstep extends QuestHandler {
 
     private final static int questId = 24031;
-    private final static int[] npc_ids = {204052, 801224, 203550, 203654, 204369, 730888, 730898};
+    private final static int[] npc_ids = { 204052, 801224, 203550, 203654, 204369, 730888, 730898 };
 
     public _24031EnemyAtTheDoorstep() {
         super(questId);
@@ -208,8 +208,8 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
         int var = qs.getQuestVarById(0);
         if (targetId == 233879) {
             if (var == 9) {
-                QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 730888, player.getX(), player.getY(),
-                        player.getZ(), player.getHeading());
+                QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 730888, player.getX(), player.getY(), player.getZ(),
+                    player.getHeading());
                 qs.setQuestVarById(0, var + 1);
                 updateQuestStatus(env);
                 return true;
@@ -234,16 +234,14 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
             if (!player.isInsideZone(ZoneName.get("DF1_ITEMUSEAREA_Q24031"))) {
                 return HandlerResult.UNKNOWN;
             }
-            PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000,
-                    0, 0), true);
+            PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
             ThreadPoolManager.getInstance().schedule(new Runnable() {
 
                 @Override
                 public void run() {
                     removeQuestItem(env, 182215394, 1);
                     int var = qs.getQuestVarById(0);
-                    PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-                            1, 0), true);
+                    PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
                     qs.setQuestVarById(0, var + 1);
                     updateQuestStatus(env);
                 }
@@ -253,16 +251,14 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
             if (!player.isInsideZone(ZoneName.get("DF1A_ITEMUSEAREA_Q24031"))) {
                 return HandlerResult.UNKNOWN;
             }
-            PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000,
-                    0, 0), true);
+            PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
             ThreadPoolManager.getInstance().schedule(new Runnable() {
 
                 @Override
                 public void run() {
                     removeQuestItem(env, 182215395, 1);
                     int var = qs.getQuestVarById(0);
-                    PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-                            1, 0), true);
+                    PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
                     qs.setQuestVarById(0, var + 1);
                     updateQuestStatus(env);
                 }
@@ -273,15 +269,13 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
             if (!player.isInsideZone(ZoneName.get("DF2_ITEMUSEAREA_Q24031"))) {
                 return HandlerResult.UNKNOWN;
             }
-            PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000,
-                    0, 0), true);
+            PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
             ThreadPoolManager.getInstance().schedule(new Runnable() {
 
                 @Override
                 public void run() {
                     removeQuestItem(env, 182215396, 1);
-                    PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0,
-                            1, 0), true);
+                    PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
                     qs.setQuestVarById(0, var + 1);
                     updateQuestStatus(env);
                 }
@@ -301,8 +295,8 @@ public class _24031EnemyAtTheDoorstep extends QuestHandler {
             if (var >= 9 && var < 11) {
                 qs.setQuestVar(8);
                 updateQuestStatus(env);
-                PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1,
-                        DataManager.QUEST_DATA.getQuestById(questId).getName()));
+                PacketSendUtility.sendPacket(player,
+                    new SM_SYSTEM_MESSAGE(SystemMessageId.QUEST_FAILED_$1, DataManager.QUEST_DATA.getQuestById(questId).getName()));
                 return true;
             }
         }

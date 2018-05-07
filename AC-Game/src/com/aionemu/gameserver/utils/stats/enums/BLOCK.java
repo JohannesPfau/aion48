@@ -51,6 +51,7 @@ public enum BLOCK {
     GUNNER(0),
     ARTIST(0),
     BARD(0);
+
     private int value;
 
     private BLOCK(int value) {

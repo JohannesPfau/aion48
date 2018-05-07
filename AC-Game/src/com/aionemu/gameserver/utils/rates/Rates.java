@@ -31,7 +31,7 @@ package com.aionemu.gameserver.utils.rates;
 
 /**
  * @author ATracer
- (Aion-Core)
+ *         (Aion-Core)
  */
 public abstract class Rates {
 
@@ -42,7 +42,7 @@ public abstract class Rates {
     public abstract float getApNpcRate();
 
     public abstract float getApPlayerGainRate();
-    
+
     public abstract float getGpNpcRate();
 
     public abstract float getXpPlayerGainRate();
@@ -62,8 +62,8 @@ public abstract class Rates {
     public abstract float getQuestKinahRate();
 
     public abstract float getQuestApRate();
-	
-	public abstract float getQuestGpRate();
+
+    public abstract float getQuestGpRate();
 
     public abstract float getDpNpcRate();
 
@@ -84,7 +84,7 @@ public abstract class Rates {
     public abstract float getSellLimitRate();
 
     public abstract float getKamarRewardRate();
-    
+
     public abstract float getIdgelDomeBoxRewardRate();
 
     /**

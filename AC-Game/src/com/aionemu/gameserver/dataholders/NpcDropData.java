@@ -29,9 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-import gnu.trove.procedure.TObjectProcedure;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
@@ -50,9 +47,11 @@ import com.aionemu.gameserver.model.drop.DropGroup;
 import com.aionemu.gameserver.model.drop.NpcDrop;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+import gnu.trove.procedure.TObjectProcedure;
+
 /**
  * @author MrPoke, reworked by Voidstar for Dual NPC DROP .dat&xml
- *
  */
 public class NpcDropData {
 
@@ -66,26 +65,25 @@ public class NpcDropData {
         return npcDrop;
     }
 
-	/**
-	 * @param npcDrop
-	 *            the npcDrop to set
-	 */
-	public void setNpcDrop(List<NpcDrop> npcDrop) {
-		this.npcDrop = npcDrop;
-	}
+    /**
+     * @param npcDrop
+     *            the npcDrop to set
+     */
+    public void setNpcDrop(List<NpcDrop> npcDrop) {
+        this.npcDrop = npcDrop;
+    }
 
-	public int size() {
-		return npcDrop.size();
-	}
+    public int size() {
+        return npcDrop.size();
+    }
 
+    public static NpcDropData load() {
 
-	public static NpcDropData load() {
-
-		List<Drop> drops = new ArrayList<Drop>();
-		List<String> names = new ArrayList<String>();
-		List<NpcDrop> npcDrops = new ArrayList<NpcDrop>();
-		FileChannel roChannel = null;
-		MappedByteBuffer buffer;
+        List<Drop> drops = new ArrayList<>();
+        List<String> names = new ArrayList<>();
+        List<NpcDrop> npcDrops = new ArrayList<>();
+        FileChannel roChannel = null;
+        MappedByteBuffer buffer;
 
         try {
             roChannel = new RandomAccessFile("data/static_data/npc_drop.dat", "r").getChannel();
@@ -112,7 +110,7 @@ public class NpcDropData {
                 int npcId = buffer.getInt();
 
                 int groupCount = buffer.getInt();
-                List<DropGroup> dropGroupList = new ArrayList<DropGroup>(groupCount);
+                List<DropGroup> dropGroupList = new ArrayList<>(groupCount);
                 for (int groupIndex = 0; groupIndex < groupCount; groupIndex++) {
                     Race race;
                     byte raceId = buffer.get();
@@ -131,7 +129,7 @@ public class NpcDropData {
                     String groupName = names.get(buffer.getShort());
 
                     int dropCount = buffer.getInt();
-                    List<Drop> dropList = new ArrayList<Drop>(dropCount);
+                    List<Drop> dropList = new ArrayList<>(dropCount);
                     for (int dropIndex = 0; dropIndex < dropCount; dropIndex++) {
                         dropList.add(drops.get(buffer.getInt()));
                     }
@@ -174,6 +172,7 @@ public class NpcDropData {
     public static void reload() {
         TIntObjectHashMap<NpcTemplate> npcData = DataManager.NPC_DATA.getNpcData();
         npcData.forEachValue(new TObjectProcedure<NpcTemplate>() {
+
             @Override
             public boolean execute(NpcTemplate npcTemplate) {
                 npcTemplate.setNpcDrop(null);

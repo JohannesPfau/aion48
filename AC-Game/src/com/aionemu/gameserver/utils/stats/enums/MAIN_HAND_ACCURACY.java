@@ -51,6 +51,7 @@ public enum MAIN_HAND_ACCURACY {
     GUNNER(0),
     ARTIST(0),
     BARD(0);
+
     private int value;
 
     private MAIN_HAND_ACCURACY(int value) {

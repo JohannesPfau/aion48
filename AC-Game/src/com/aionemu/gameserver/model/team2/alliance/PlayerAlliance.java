@@ -47,8 +47,8 @@ import com.google.common.base.Preconditions;
  */
 public class PlayerAlliance extends TemporaryPlayerTeam<PlayerAllianceMember> {
 
-    private final Map<Integer, PlayerAllianceGroup> groups = new HashMap<Integer, PlayerAllianceGroup>();
-    private final List<Integer> viceCaptainIds = new CopyOnWriteArrayList<Integer>();
+    private final Map<Integer, PlayerAllianceGroup> groups = new HashMap<>();
+    private final List<Integer> viceCaptainIds = new CopyOnWriteArrayList<>();
     private int allianceReadyStatus;
     private TeamType type;
     private League league;

@@ -53,7 +53,7 @@ import com.aionemu.gameserver.world.knownlist.VisitorWithOwner;
  */
 public class MovementNotifyTask extends AbstractFIFOPeriodicTaskManager<Creature> {
 
-    private static Map<Integer, int[]> moveBroadcastCounts = new HashMap<Integer, int[]>();
+    private static Map<Integer, int[]> moveBroadcastCounts = new HashMap<>();
 
     static {
         Iterator<WorldMapTemplate> iter = DataManager.WORLD_MAPS_DATA.iterator();
@@ -101,7 +101,7 @@ public class MovementNotifyTask extends AbstractFIFOPeriodicTaskManager<Creature
     }
 
     public String[] dumpBroadcastStats() {
-        List<String> lines = new ArrayList<String>();
+        List<String> lines = new ArrayList<>();
         lines.add("------- Movement broadcast counts -------");
         for (Entry<Integer, int[]> entry : moveBroadcastCounts.entrySet()) {
             lines.add("WorldId=" + entry.getKey() + ": " + entry.getValue()[0] + " (NpcId " + entry.getValue()[1] + ")");

@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TShortObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -42,6 +40,8 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.model.templates.pet.PetDopingEntry;
 
+import gnu.trove.map.hash.TShortObjectHashMap;
+
 /**
  * @author Rolandas
  */
@@ -52,7 +52,7 @@ public class PetDopingData {
     @XmlElement(name = "doping")
     private List<PetDopingEntry> list;
     @XmlTransient
-    private TShortObjectHashMap<PetDopingEntry> dopingsById = new TShortObjectHashMap<PetDopingEntry>();
+    private TShortObjectHashMap<PetDopingEntry> dopingsById = new TShortObjectHashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (PetDopingEntry dope : list) {

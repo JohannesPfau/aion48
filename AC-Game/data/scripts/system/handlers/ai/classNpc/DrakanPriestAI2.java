@@ -29,7 +29,6 @@
  */
 package ai.classNpc;
 
-import ai.AggressiveNpcAI2;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -39,6 +38,8 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.world.knownlist.Visitor;
+
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Cheatkiller
@@ -76,6 +77,7 @@ public class DrakanPriestAI2 extends AggressiveNpcAI2 {
 
     private void despawnServant() {
         getOwner().getKnownList().doOnAllNpcs(new Visitor<Npc>() {
+
             @Override
             public void visit(Npc object) {
                 Npc healServant = getPosition().getWorldMapInstance().getNpc(282988);
@@ -97,7 +99,7 @@ public class DrakanPriestAI2 extends AggressiveNpcAI2 {
         float direction = Rnd.get(0, 199) / 100f;
         float x1 = (float) (Math.cos(Math.PI * direction) * 5);
         float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-        return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY()
-                + y1, getPosition().getZ(), getPosition().getHeading());
+        return SpawnEngine.addNewSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1,
+            getPosition().getZ(), getPosition().getHeading());
     }
 }

@@ -114,7 +114,7 @@ public class Util {
         }
         return result.toString();
     }
-    
+
     /**
      * Convert data from given ByteBuffer to hex
      *
@@ -135,7 +135,7 @@ public class Util {
             }
         }
         return result.toString();
-    }    
+    }
 
     /**
      * Gets last <tt>cnt</tt> read bytes from the <tt>data</tt> buffer and puts

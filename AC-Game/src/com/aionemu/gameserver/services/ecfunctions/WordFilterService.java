@@ -26,7 +26,7 @@ public class WordFilterService {
     private static Logger log = LoggerFactory.getLogger("BADWORD_LOG");
     private FileInputStream wordFilterFile;
     private Scanner scanner;
-    static List<String> banWordList = new ArrayList<String>();
+    static List<String> banWordList = new ArrayList<>();
 
     public WordFilterService() {
         try {
@@ -63,6 +63,7 @@ public class WordFilterService {
                         player.getController().cancelTask(TaskId.GAG);
                     }
                     player.getController().addTask(TaskId.GAG, ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                         @Override
                         public void run() {
                             player.setGagged(false);

@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.dataholders;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
@@ -42,6 +40,7 @@ import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.model.templates.item.ItemEnchantTemplate;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author Alcapwnd
@@ -53,7 +52,7 @@ public class ItemEnchantData {
     @XmlElement(name = "enchant_template", required = true)
     protected List<ItemEnchantTemplate> enchantTemplates;
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @XmlTransient
     private TIntObjectHashMap<ItemEnchantTemplate> authorizes = new TIntObjectHashMap();
 

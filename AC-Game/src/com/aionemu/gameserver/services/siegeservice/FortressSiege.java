@@ -73,8 +73,6 @@ import com.google.common.collect.Lists;
  * Object that controls siege of certain fortress. Siege object is not reusable.
  * New siege = new instance.
  * <p/>
- *
-
  */
 public class FortressSiege extends Siege<FortressLocation> {
 
@@ -90,7 +88,8 @@ public class FortressSiege extends Siege<FortressLocation> {
     @Override
     public void onSiegeStart() {
         if (LoggingConfig.LOG_SIEGE) {
-            log.info("[SIEGE] > Siege started. [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LegionId:" + getSiegeLocation().getLegionId() + "]");
+            log.info("[SIEGE] > Siege started. [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LegionId:"
+                + getSiegeLocation().getLegionId() + "]");
         }
         // Mark fortress as vulnerable
         getSiegeLocation().setVulnerable(true);
@@ -134,9 +133,12 @@ public class FortressSiege extends Siege<FortressLocation> {
         SiegeRace looser = getSiegeLocation().getRace();
         if (LoggingConfig.LOG_SIEGE) {
             if (winner != null) {
-                log.info("[SIEGE] > Siege finished. [FORTRESS:" + getSiegeLocationId() + "] [OLD RACE: " + getSiegeLocation().getRace() + "] [OLD LegionId:" + getSiegeLocation().getLegionId() + "] [NEW RACE: " + winner.getSiegeRace() + "] [NEW LegionId:" + (winner.getWinnerLegionId() == null ? 0 : winner.getWinnerLegionId()) + "]");
+                log.info("[SIEGE] > Siege finished. [FORTRESS:" + getSiegeLocationId() + "] [OLD RACE: " + getSiegeLocation().getRace()
+                    + "] [OLD LegionId:" + getSiegeLocation().getLegionId() + "] [NEW RACE: " + winner.getSiegeRace() + "] [NEW LegionId:"
+                    + (winner.getWinnerLegionId() == null ? 0 : winner.getWinnerLegionId()) + "]");
             } else {
-                log.info("[SIEGE] > Siege finished. No winner found [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LegionId:" + getSiegeLocation().getLegionId() + "]");
+                log.info("[SIEGE] > Siege finished. No winner found [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace()
+                    + "] [LegionId:" + getSiegeLocation().getLegionId() + "]");
             }
         }
 
@@ -184,6 +186,7 @@ public class FortressSiege extends Siege<FortressLocation> {
         DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(getSiegeLocation());
 
         getSiegeLocation().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 player.unsetInsideZoneType(ZoneType.SIEGE);
@@ -216,6 +219,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 
         final Influence inf = Influence.getInstance();
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 instanceReward = new SiegePlayerReward(player.getWorldId());
@@ -277,7 +281,8 @@ public class FortressSiege extends Siege<FortressLocation> {
         // We do not give rewards if fortress was captured for first time
         if (isBossKilled()) {
             if (LoggingConfig.LOG_SIEGE) {
-                log.info("[SIEGE] > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LEGION :" + getSiegeLocation().getLegionId() + "] Legion Reward not sending because fortress was captured(siege boss killed).");
+                log.info("[SIEGE] > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LEGION :"
+                    + getSiegeLocation().getLegionId() + "] Legion Reward not sending because fortress was captured(siege boss killed).");
             }
             return;
         }
@@ -285,7 +290,8 @@ public class FortressSiege extends Siege<FortressLocation> {
         // Legion with id 0 = not exists?
         if (getSiegeLocation().getLegionId() == 0) {
             if (LoggingConfig.LOG_SIEGE) {
-                log.info("[SIEGE] > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LEGION :" + getSiegeLocation().getLegionId() + "] Legion Reward not sending because fortress not owned by any legion.");
+                log.info("[SIEGE] > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] [LEGION :"
+                    + getSiegeLocation().getLegionId() + "] Legion Reward not sending because fortress not owned by any legion.");
             }
             return;
         }
@@ -295,16 +301,17 @@ public class FortressSiege extends Siege<FortressLocation> {
         if (legionBGeneral != 0) {
             PlayerCommonData BGeneral = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(legionBGeneral);
             if (LoggingConfig.LOG_SIEGE) {
-                log.info("[SIEGE] > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] Legion Reward in process... LegionId:"
-                        + getSiegeLocation().getLegionId() + " General Name:" + BGeneral.getName());
+                log.info("[SIEGE] > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace()
+                    + "] Legion Reward in process... LegionId:" + getSiegeLocation().getLegionId() + " General Name:" + BGeneral.getName());
             }
             if (legionRewards != null) {
                 for (SiegeLegionReward medalsType : legionRewards) {
                     if (LoggingConfig.LOG_SIEGE) {
-                        log.info("[SIEGE] > [Legion Reward to: " + BGeneral.getName() + "] ITEM RETURN "
-                                + medalsType.getItemId() + " ITEM COUNT " + medalsType.getCount() * SiegeConfig.SIEGE_MEDAL_RATE);
+                        log.info("[SIEGE] > [Legion Reward to: " + BGeneral.getName() + "] ITEM RETURN " + medalsType.getItemId() + " ITEM COUNT "
+                            + medalsType.getCount() * SiegeConfig.SIEGE_MEDAL_RATE);
                     }
-                    MailFormatter.sendAbyssRewardMail(getSiegeLocation(), BGeneral, AbyssSiegeLevel.NONE, SiegeResult.PROTECT, System.currentTimeMillis(), medalsType.getItemId(), medalsType.getCount() * SiegeConfig.SIEGE_MEDAL_RATE, 0);
+                    MailFormatter.sendAbyssRewardMail(getSiegeLocation(), BGeneral, AbyssSiegeLevel.NONE, SiegeResult.PROTECT,
+                        System.currentTimeMillis(), medalsType.getItemId(), medalsType.getCount() * SiegeConfig.SIEGE_MEDAL_RATE, 0);
 
                 }
             }
@@ -315,6 +322,7 @@ public class FortressSiege extends Siege<FortressLocation> {
         if (race == SiegeRace.BALAUR)// this shouldn't happen, but secure is secure :)
             return;
         getSiegeLocation().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
                 if (player.getRace().name() == race.name()) {//dont know if this works...
@@ -374,9 +382,12 @@ public class FortressSiege extends Siege<FortressLocation> {
                 PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
                 ++rewardedPC;
                 if (LoggingConfig.LOG_SIEGE) {
-                    log.info("[SIEGE]  > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] Player Reward to: " + playerNames.get(playerId) + "] ITEM RETURN " + topGrade.getItemId() + " ITEM COUNT " + topGrade.getCount() * SiegeConfig.SIEGE_MEDAL_RATE);
+                    log.info("[SIEGE]  > [FORTRESS:" + getSiegeLocationId() + "] [RACE: " + getSiegeLocation().getRace() + "] Player Reward to: "
+                        + playerNames.get(playerId) + "] ITEM RETURN " + topGrade.getItemId() + " ITEM COUNT "
+                        + topGrade.getCount() * SiegeConfig.SIEGE_MEDAL_RATE);
                 }
-                MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), topGrade.getItemId(), topGrade.getCount() * SiegeConfig.SIEGE_MEDAL_RATE, 0);
+                MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, level, result, System.currentTimeMillis(), topGrade.getItemId(),
+                    topGrade.getCount() * SiegeConfig.SIEGE_MEDAL_RATE, 0);
 
                 switch (level) {//gp reward for fotress occupation
                     case HERO_DECORATION:
@@ -403,7 +414,8 @@ public class FortressSiege extends Siege<FortressLocation> {
                 Integer playerId = topPlayersIds.get(i);
                 PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
                 //Send Announcement Mails without reward to the rest
-                MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, AbyssSiegeLevel.NONE, SiegeResult.EMPTY, System.currentTimeMillis(), 0, 0, 0);
+                MailFormatter.sendAbyssRewardMail(getSiegeLocation(), pcd, AbyssSiegeLevel.NONE, SiegeResult.EMPTY, System.currentTimeMillis(), 0, 0,
+                    0);
             }
         }
     }

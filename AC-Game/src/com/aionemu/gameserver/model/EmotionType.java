@@ -78,6 +78,7 @@ public enum EmotionType {
     WINDSTREAM_STRAFE(52),
     START_SPRINT(53),
     END_SPRINT(54);
+
     private int id;
 
     private EmotionType(int id) {

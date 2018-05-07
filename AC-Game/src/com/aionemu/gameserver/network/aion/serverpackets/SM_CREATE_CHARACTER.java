@@ -90,9 +90,11 @@ public class SM_CREATE_CHARACTER extends PlayerInfo {
     /**
      * Constructs new <tt>SM_CREATE_CHARACTER </tt> packet
      *
-     * @param accPlData    playerAccountData of player that was created
-     * @param responseCode response code (invalid nickname, nickname is already
-     *                     taken, ok)
+     * @param accPlData
+     *            playerAccountData of player that was created
+     * @param responseCode
+     *            response code (invalid nickname, nickname is already
+     *            taken, ok)
      */
     public SM_CREATE_CHARACTER(PlayerAccountData accPlData, int responseCode) {
         this.player = accPlData;
@@ -104,7 +106,7 @@ public class SM_CREATE_CHARACTER extends PlayerInfo {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(responseCode);
 
         if (responseCode == RESPONSE_OK) {

@@ -48,6 +48,7 @@ import com.aionemu.gameserver.model.templates.itemgroups.ItemRaceEntry;
  * The following schema fragment specifies the expected content contained within
  * this class.
  * <p/>
+ * 
  * <pre>
  * &lt;complexType name="IdLevelReward">
  *   &lt;complexContent>

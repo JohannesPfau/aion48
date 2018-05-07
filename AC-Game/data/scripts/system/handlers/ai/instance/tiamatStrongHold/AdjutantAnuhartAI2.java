@@ -29,18 +29,19 @@
  */
 package ai.instance.tiamatStrongHold;
 
-import ai.AggressiveNpcAI2;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AI2Actions;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.AggressiveNpcAI2;
 
 /**
  * @author Antraxx
@@ -55,13 +56,14 @@ public class AdjutantAnuhartAI2 extends AggressiveNpcAI2 {
     private Future<?> task4;
     private Future<?> task5;
     private Future<?> task6;
-    protected List<Integer> percents = new ArrayList<Integer>();
+    protected List<Integer> percents = new ArrayList<>();
 
     private void startTask(int taskId) {
         switch (taskId) {
             case 1:
                 // Schmerzwelle
                 task1 = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         AI2Actions.useSkill(AdjutantAnuhartAI2.this, 20745);
@@ -72,6 +74,7 @@ public class AdjutantAnuhartAI2 extends AggressiveNpcAI2 {
             case 2:
                 // Ausladender Angriff
                 task2 = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         AI2Actions.useSkill(AdjutantAnuhartAI2.this, 20746);
@@ -82,6 +85,7 @@ public class AdjutantAnuhartAI2 extends AggressiveNpcAI2 {
             case 3:
                 // Adjutanten-Schlag
                 task2 = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         AI2Actions.useSkill(AdjutantAnuhartAI2.this, 20744);
@@ -92,6 +96,7 @@ public class AdjutantAnuhartAI2 extends AggressiveNpcAI2 {
             case 4:
                 // Wave of Pain
                 task3 = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         AI2Actions.useSkill(AdjutantAnuhartAI2.this, 20745);
@@ -102,6 +107,7 @@ public class AdjutantAnuhartAI2 extends AggressiveNpcAI2 {
             case 5:
                 // Wirbelklinge
                 task4 = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         // Schild
@@ -117,6 +123,7 @@ public class AdjutantAnuhartAI2 extends AggressiveNpcAI2 {
             case 6:
                 // Wave of Pain
                 task5 = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                     @Override
                     public void run() {
                         // fallback to task1
@@ -188,7 +195,7 @@ public class AdjutantAnuhartAI2 extends AggressiveNpcAI2 {
 
     private void addPercent() {
         percents.clear();
-        Collections.addAll(percents, new Integer[]{50, 25, 10});
+        Collections.addAll(percents, new Integer[] { 50, 25, 10 });
     }
 
     @Override

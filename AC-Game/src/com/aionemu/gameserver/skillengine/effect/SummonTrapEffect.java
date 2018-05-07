@@ -81,13 +81,13 @@ public class SummonTrapEffect extends SummonEffect {
         int worldId = effector.getWorldId();
         int instanceId = effector.getInstanceId();
 
-        if (npcId == 749300 || npcId == 749301){
+        if (npcId == 749300 || npcId == 749301) {
             x = effector.getX();
             y = effector.getY();
             z = effector.getZ();
         }
 
-        if (skillId == 0){
+        if (skillId == 0) {
             String descSplits[], nameDesc, trapDesc, trapDescFinal;
             int newSkillid = 0;
             List<SkillTemplate> skill = DataManager.SKILL_DATA.getSkillTemplates();
@@ -97,8 +97,8 @@ public class SummonTrapEffect extends SummonEffect {
             trapDesc = descSplits[2] + "_" + descSplits[3]; // Combining SpikeTrap + _ + G1
             trapDescFinal = "RA_N_" + trapDesc; // RA_N_SpikeTrap_G1  Now
 
-            for (SkillTemplate s : skill){
-                if (s.getNamedesc().equalsIgnoreCase(trapDescFinal)){
+            for (SkillTemplate s : skill) {
+                if (s.getNamedesc().equalsIgnoreCase(trapDescFinal)) {
                     newSkillid = s.getSkillId();
                     break;
                 }
@@ -110,6 +110,7 @@ public class SummonTrapEffect extends SummonEffect {
         final Trap trap = VisibleObjectSpawner.spawnTrap(spawn, instanceId, effector, skillId);
 
         Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 trap.getController().onDelete();

@@ -75,7 +75,8 @@ public class DropItem {
     }
 
     /**
-     * @param index the index to set
+     * @param index
+     *            the index to set
      */
     public void setIndex(int index) {
         this.index = index;
@@ -110,14 +111,16 @@ public class DropItem {
     }
 
     /**
-     * @param playerObjId the playerObjId to set
+     * @param playerObjId
+     *            the playerObjId to set
      */
     public void setPlayerObjId(int playerObjId) {
         this.playerObjId = playerObjId;
     }
 
     /**
-     * @param isFreeForAll to set
+     * @param isFreeForAll
+     *            to set
      */
     public void isFreeForAll(boolean isFreeForAll) {
         this.isFreeForAll = isFreeForAll;
@@ -138,14 +141,16 @@ public class DropItem {
     }
 
     /**
-     * @param highestValue to set
+     * @param highestValue
+     *            to set
      */
     public void setHighestValue(long highestValue) {
         this.highestValue = highestValue;
     }
 
     /**
-     * @param WinningPlayer to set
+     * @param WinningPlayer
+     *            to set
      */
     public void setWinningPlayer(Player winningPlayer) {
         this.winningPlayer = winningPlayer;
@@ -160,7 +165,8 @@ public class DropItem {
     }
 
     /**
-     * @param isItemWonNotCollected to set
+     * @param isItemWonNotCollected
+     *            to set
      */
     public void isItemWonNotCollected(boolean isItemWonNotCollected) {
         this.isItemWonNotCollected = isItemWonNotCollected;
@@ -174,7 +180,8 @@ public class DropItem {
     }
 
     /**
-     * @param isDistributeItem to set
+     * @param isDistributeItem
+     *            to set
      */
     public void isDistributeItem(boolean isDistributeItem) {
         this.isDistributeItem = isDistributeItem;

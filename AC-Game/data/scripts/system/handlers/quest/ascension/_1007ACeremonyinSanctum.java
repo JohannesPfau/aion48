@@ -30,10 +30,10 @@
 package quest.ascension;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -55,7 +55,7 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {790001, 203725, 203752, 203758, 203759, 203760, 203761, 801212, 801213};
+        int[] npcs = { 790001, 203725, 203752, 203758, 203759, 203760, 203761, 801212, 801213 };
         if (CustomConfig.ENABLE_SIMPLE_2NDCLASS) {
             return;
         }
@@ -153,10 +153,10 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
                                 return sendQuestSelectionDialog(env);
                             }
                         }
-                        break;
+                            break;
                     }
                 }
-                break;
+                    break;
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
             if (targetId == 203758 && var == 10) {
@@ -286,7 +286,7 @@ public class _1007ACeremonyinSanctum extends QuestHandler {
 
     @Override
     public boolean onLvlUpEvent(QuestEnv env) {
-	CraftSkillUpdateService.getInstance().setMorphRecipe(env.getPlayer());
+        CraftSkillUpdateService.getInstance().setMorphRecipe(env.getPlayer());
         return defaultOnLvlUpEvent(env, 1006);
     }
 }

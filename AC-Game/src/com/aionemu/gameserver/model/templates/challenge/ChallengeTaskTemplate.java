@@ -40,7 +40,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.Race;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "ChallengeTask", propOrder = {"quest", "contrib", "reward"})
+@XmlType(name = "ChallengeTask", propOrder = { "quest", "contrib", "reward" })
 public class ChallengeTaskTemplate {
 
     @XmlElement(required = true)

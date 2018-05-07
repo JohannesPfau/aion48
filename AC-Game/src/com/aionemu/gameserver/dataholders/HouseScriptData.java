@@ -94,7 +94,7 @@ public class HouseScriptData {
     @XmlElement(name = "lbox", required = true)
     protected List<LBox> scriptData;
     @XmlTransient
-    private final Map<Integer, LBox> defaultTemplates = new HashMap<Integer, LBox>();
+    private final Map<Integer, LBox> defaultTemplates = new HashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (LBox template : scriptData) {
@@ -154,7 +154,7 @@ public class HouseScriptData {
         result.setIcon(iconId);
 
         HouseScriptData fragment = new HouseScriptData();
-        fragment.scriptData = new ArrayList<LBox>();
+        fragment.scriptData = new ArrayList<>();
         fragment.scriptData.add(result);
 
         Writer writer = new StringWriter();

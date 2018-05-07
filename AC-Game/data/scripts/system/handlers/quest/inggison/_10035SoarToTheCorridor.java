@@ -29,9 +29,9 @@
  */
 package quest.inggison;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -44,7 +44,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class _10035SoarToTheCorridor extends QuestHandler {
 
     private final static int questId = 10035;
-    private final static int[] mobs = {220021, 220022, 216775};
+    private final static int[] mobs = { 220021, 220022, 216775 };
 
     public _10035SoarToTheCorridor() {
         super(questId);
@@ -52,10 +52,10 @@ public class _10035SoarToTheCorridor extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {798928, 799025, 798958, 798996, 702663, 798926};
+        int[] npcs = { 798928, 799025, 798958, 798996, 702663, 798926 };
         qe.registerOnLevelUp(questId);
         qe.registerOnEnterZoneMissionEnd(questId);
-		qe.registerOnEnterZone(ZoneName.get("ANGRIEF_GATE_210050000"), questId);
+        qe.registerOnEnterZone(ZoneName.get("ANGRIEF_GATE_210050000"), questId);
         for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
@@ -77,7 +77,7 @@ public class _10035SoarToTheCorridor extends QuestHandler {
 
         if (qs.getStatus() == QuestStatus.START) {
             switch (targetId) {
-                case 798928: { 
+                case 798928: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 0) {
@@ -89,13 +89,13 @@ public class _10035SoarToTheCorridor extends QuestHandler {
                         case SETPRO1: {
                             return defaultCloseDialog(env, 0, 1);
                         }
-						case SET_SUCCEED: {
+                        case SET_SUCCEED: {
                             return defaultCloseDialog(env, 7, 7, true, false);
                         }
                     }
                     break;
                 }
-                case 799025: { 
+                case 799025: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 1) {
@@ -103,13 +103,13 @@ public class _10035SoarToTheCorridor extends QuestHandler {
                             }
                         }
                         case SETPRO2: {
-                            return defaultCloseDialog(env, 1, 2); 
+                            return defaultCloseDialog(env, 1, 2);
                         }
-                        
+
                     }
                     break;
                 }
-				case 798958: { 
+                case 798958: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 2) {
@@ -122,7 +122,7 @@ public class _10035SoarToTheCorridor extends QuestHandler {
                     }
                     break;
                 }
-				case 798996: { 
+                case 798996: {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 3) {
@@ -130,20 +130,20 @@ public class _10035SoarToTheCorridor extends QuestHandler {
                             }
                         }
                         case SETPRO4: {
-							giveQuestItem(env, 182215629, 1);
-							playQuestMovie(env, 517);
+                            giveQuestItem(env, 182215629, 1);
+                            playQuestMovie(env, 517);
                             return defaultCloseDialog(env, 3, 4);
                         }
                     }
                     break;
                 }
-                case 702663: { 
+                case 702663: {
                     switch (dialog) {
                         case USE_OBJECT: {
                             if (var == 6) {
-                            removeQuestItem(env, 182215629, 1);
-							QuestService.addNewSpawn(210050000, player.getInstanceId(), 700641, 1377, 2297, 296, (byte) 90);
-                            return defaultCloseDialog(env, 6, 7);    
+                                removeQuestItem(env, 182215629, 1);
+                                QuestService.addNewSpawn(210050000, player.getInstanceId(), 700641, 1377, 2297, 296, (byte) 90);
+                                return defaultCloseDialog(env, 6, 7);
                             }
                         }
                     }
@@ -151,7 +151,7 @@ public class _10035SoarToTheCorridor extends QuestHandler {
                 }
             }
         } else if (qs.getStatus() == QuestStatus.REWARD) {
-            if (targetId == 798926) { 
+            if (targetId == 798926) {
                 if (env.getDialog() == DialogAction.USE_OBJECT) {
                     return sendQuestDialog(env, 10002);
                 } else {
@@ -181,7 +181,8 @@ public class _10035SoarToTheCorridor extends QuestHandler {
         }
         return false;
     }
-	@Override
+
+    @Override
     public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
         Player player = env.getPlayer();
         QuestState qs = player.getQuestStateList().getQuestState(questId);

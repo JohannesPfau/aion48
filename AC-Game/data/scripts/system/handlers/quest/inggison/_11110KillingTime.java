@@ -29,9 +29,9 @@
  */
 package quest.inggison;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -88,7 +88,7 @@ public class _11110KillingTime extends QuestHandler {
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
-            int[] mobs = {217039, 217040};
+            int[] mobs = { 217039, 217040 };
             if (var >= 0 && var < 9) {
                 return defaultOnKillEvent(env, mobs, 0, 9);
             } else if (var == 9) {

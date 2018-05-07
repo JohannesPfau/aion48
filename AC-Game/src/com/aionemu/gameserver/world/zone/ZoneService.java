@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.world.zone;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -40,8 +38,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
-
-import javolution.util.FastMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -77,6 +73,9 @@ import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandlerClassListener;
 import com.aionemu.gameserver.world.zone.handler.ZoneNameAnnotation;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastMap;
+
 /**
  * @author ATracer modified by antness
  */
@@ -84,8 +83,8 @@ public final class ZoneService implements GameEngine {
 
     private static final Logger log = LoggerFactory.getLogger(ZoneService.class);
     private TIntObjectHashMap<List<ZoneInfo>> zoneByMapIdMap;
-    private final Map<ZoneName, Class<? extends ZoneHandler>> handlers = new HashMap<ZoneName, Class<? extends ZoneHandler>>();
-    private final FastMap<ZoneName, ZoneHandler> collidableHandlers = new FastMap<ZoneName, ZoneHandler>();
+    private final Map<ZoneName, Class<? extends ZoneHandler>> handlers = new HashMap<>();
+    private final FastMap<ZoneName, ZoneHandler> collidableHandlers = new FastMap<>();
     public static final ZoneHandler DUMMY_ZONE_HANDLER = new GeneralZoneHandler();
     private static ScriptManager scriptManager = new ScriptManager();
     public static final File ZONE_DESCRIPTOR_FILE = new File("./data/scripts/system/zonehandlers.xml");
@@ -189,11 +188,10 @@ public final class ZoneService implements GameEngine {
      * @return
      */
     public Map<ZoneName, ZoneInstance> getZoneInstancesByWorldId(int mapId) {
-        Map<ZoneName, ZoneInstance> zones = new HashMap<ZoneName, ZoneInstance>();
+        Map<ZoneName, ZoneInstance> zones = new HashMap<>();
         int worldSize = DataManager.WORLD_MAPS_DATA.getTemplate(mapId).getWorldSize();
         WorldZoneTemplate zone = new WorldZoneTemplate(worldSize, mapId);
-        PolyArea fullArea = new PolyArea(zone.getName(), mapId, zone.getPoints().getPoint(), zone.getPoints().getBottom(), zone.getPoints()
-                .getTop());
+        PolyArea fullArea = new PolyArea(zone.getName(), mapId, zone.getPoints().getPoint(), zone.getPoints().getBottom(), zone.getPoints().getTop());
         ZoneInstance fullMap = new ZoneInstance(mapId, new ZoneInfo(fullArea, zone));
         fullMap.addHandler(getNewZoneHandler(zone.getName()));
         zones.put(zone.getName(), fullMap);
@@ -250,16 +248,16 @@ public final class ZoneService implements GameEngine {
 
     private InvasionZoneInstance getIZI(ZoneInfo area) {
         if (area.getZoneTemplate().getName().name().equals("WAILING_CLIFFS_220050000")
-                || area.getZoneTemplate().getName().name().equals("BALTASAR_CEMETERY_220050000")
-                || area.getZoneTemplate().getName().name().equals("THE_LEGEND_SHRINE_220050000")
-                || area.getZoneTemplate().getName().name().equals("SUDORVILLE_220050000")
-                || area.getZoneTemplate().getName().name().equals("BALTASAR_HILL_VILLAGE_220050000")
-                || area.getZoneTemplate().getName().name().equals("BRUSTHONIN_MITHRIL_MINE_220050000")) {
+            || area.getZoneTemplate().getName().name().equals("BALTASAR_CEMETERY_220050000")
+            || area.getZoneTemplate().getName().name().equals("THE_LEGEND_SHRINE_220050000")
+            || area.getZoneTemplate().getName().name().equals("SUDORVILLE_220050000")
+            || area.getZoneTemplate().getName().name().equals("BALTASAR_HILL_VILLAGE_220050000")
+            || area.getZoneTemplate().getName().name().equals("BRUSTHONIN_MITHRIL_MINE_220050000")) {
             return validateZone(area);
         } else if (area.getZoneTemplate().getName().name().equals("JAMANOK_INN_210060000")
-                || area.getZoneTemplate().getName().name().equals("THE_STALKING_GROUNDS_210060000")
-                || area.getZoneTemplate().getName().name().equals("BLACK_ROCK_HOT_SPRING_210060000")
-                || area.getZoneTemplate().getName().name().equals("FREGIONS_FLAME_210060000")) {
+            || area.getZoneTemplate().getName().name().equals("THE_STALKING_GROUNDS_210060000")
+            || area.getZoneTemplate().getName().name().equals("BLACK_ROCK_HOT_SPRING_210060000")
+            || area.getZoneTemplate().getName().name().equals("FREGIONS_FLAME_210060000")) {
             return validateZone(area);
         }
         return null;
@@ -334,14 +332,14 @@ public final class ZoneService implements GameEngine {
             // maybe add to zone data if needed search ?
             Area zoneInfoArea = null;
             if (zoneTemplate.getSphere() != null) {
-                zoneInfoArea = new SphereArea(zoneName, worldId, zoneTemplate.getSphere().getX(), zoneTemplate.getSphere().getY(), zoneTemplate
-                        .getSphere().getZ(), zoneTemplate.getSphere().getR());
+                zoneInfoArea = new SphereArea(zoneName, worldId, zoneTemplate.getSphere().getX(), zoneTemplate.getSphere().getY(),
+                    zoneTemplate.getSphere().getZ(), zoneTemplate.getSphere().getR());
             } else if (zoneTemplate.getCylinder() != null) {
                 zoneInfoArea = new CylinderArea(zoneName, worldId, zoneTemplate.getCylinder().getX(), zoneTemplate.getCylinder().getY(),
-                        zoneTemplate.getCylinder().getR(), zoneTemplate.getCylinder().getBottom(), zoneTemplate.getCylinder().getTop());
+                    zoneTemplate.getCylinder().getR(), zoneTemplate.getCylinder().getBottom(), zoneTemplate.getCylinder().getTop());
             } else if (zoneTemplate.getSemisphere() != null) {
                 zoneInfoArea = new SemisphereArea(zoneName, worldId, zoneTemplate.getSemisphere().getX(), zoneTemplate.getSemisphere().getY(),
-                        zoneTemplate.getSemisphere().getZ(), zoneTemplate.getSemisphere().getR());
+                    zoneTemplate.getSemisphere().getZ(), zoneTemplate.getSemisphere().getR());
             }
             if (zoneInfoArea != null) {
                 zoneInfo = new ZoneInfo(zoneInfoArea, zoneTemplate);
@@ -355,8 +353,9 @@ public final class ZoneService implements GameEngine {
      * later in XML
      *
      * @param geometry
-     * @param regionId   - generated by RegionUtil from Bounding Volume center
-     *                   coordinates
+     * @param regionId
+     *            - generated by RegionUtil from Bounding Volume center
+     *            coordinates
      * @param worldId
      * @param materialId
      */
@@ -366,7 +365,7 @@ public final class ZoneService implements GameEngine {
     }
 
     public void saveMaterialZones() {
-        List<ZoneTemplate> templates = new ArrayList<ZoneTemplate>();
+        List<ZoneTemplate> templates = new ArrayList<>();
         for (WorldMapTemplate map : DataManager.WORLD_MAPS_DATA) {
             Collection<ZoneInfo> areas = this.zoneByMapIdMap.get(map.getMapId());
             if (areas == null) {
@@ -379,6 +378,7 @@ public final class ZoneService implements GameEngine {
             }
         }
         Collections.sort(templates, new Comparator<ZoneTemplate>() {
+
             @Override
             public int compare(ZoneTemplate o1, ZoneTemplate o2) {
                 return o1.getMapid() - o2.getMapid();

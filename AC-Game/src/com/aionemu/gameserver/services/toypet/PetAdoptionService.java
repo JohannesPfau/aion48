@@ -70,7 +70,8 @@ public class PetAdoptionService {
         }
 
         int expireTime = template.getActions().getAdoptPetAction().getExpireMinutes() != 0
-                ? (int) ((System.currentTimeMillis() / 1000) + template.getActions().getAdoptPetAction().getExpireMinutes() * 60) : 0;
+            ? (int) ((System.currentTimeMillis() / 1000) + template.getActions().getAdoptPetAction().getExpireMinutes() * 60)
+            : 0;
 
         addPet(player, petId, name, decorationId, expireTime);
     }
@@ -95,7 +96,7 @@ public class PetAdoptionService {
 
     private static boolean validateAdoption(Player player, ItemTemplate template, int petId) {
         if (template == null || template.getActions() == null || template.getActions().getAdoptPetAction() == null
-                || template.getActions().getAdoptPetAction().getPetId() != petId) {
+            || template.getActions().getAdoptPetAction().getPetId() != petId) {
             return false;
         }
         if (player.getPetList().hasPet(petId)) {

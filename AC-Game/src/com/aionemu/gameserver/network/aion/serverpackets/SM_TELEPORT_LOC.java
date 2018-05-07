@@ -63,7 +63,7 @@ public class SM_TELEPORT_LOC extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeC(portAnimation); // portAnimation
         writeD(mapId);//new 4.3 NA    -->old //writeH(mapId & 0xFFFF);
         writeD(isInstance ? instanceId : mapId); // mapId | instanceId

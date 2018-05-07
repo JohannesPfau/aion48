@@ -29,12 +29,12 @@
  */
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import javolution.util.FastList;
-
 import com.aionemu.gameserver.network.PacketLoggerService;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.questEngine.model.QuestState;
+
+import javolution.util.FastList;
 
 public class SM_QUEST_LIST extends AionServerPacket {
 
@@ -49,7 +49,7 @@ public class SM_QUEST_LIST extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeH(0x01); // unk
         writeH(-questState.size() & 0xFFFF);
 

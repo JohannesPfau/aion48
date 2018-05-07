@@ -32,7 +32,6 @@ package com.aionemu.gameserver.dataholders;
 import static ch.lambdaj.Lambda.extractIterator;
 import static ch.lambdaj.Lambda.flatten;
 import static ch.lambdaj.Lambda.on;
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -55,8 +54,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
 import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
-
-import javolution.util.FastMap;
 
 import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
@@ -84,6 +81,9 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMap;
 
+import gnu.trove.map.hash.TIntObjectHashMap;
+import javolution.util.FastMap;
+
 /**
  * @author xTz
  * @modified Rolandas
@@ -96,20 +96,20 @@ public class SpawnsData2 {
     private static final Logger log = LoggerFactory.getLogger(SpawnsData2.class);
     @XmlElement(name = "spawn_map", type = SpawnMap.class)
     protected List<SpawnMap> templates;
-    private TIntObjectHashMap<FastMap<Integer, SimpleEntry<SpawnGroup2, Spawn>>> allSpawnMaps = new TIntObjectHashMap<FastMap<Integer, SimpleEntry<SpawnGroup2, Spawn>>>();
-    private TIntObjectHashMap<List<SpawnGroup2>> baseSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>();
-    private TIntObjectHashMap<List<SpawnGroup2>> riftSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>();
-    private TIntObjectHashMap<List<SpawnGroup2>> siegeSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>();
-    private TIntObjectHashMap<List<SpawnGroup2>> vortexSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>();
-    private TIntObjectHashMap<List<SpawnGroup2>> beritraSpawnMaps = new TIntObjectHashMap<List<SpawnGroup2>>();
-    private TIntObjectHashMap<Spawn> customs = new TIntObjectHashMap<Spawn>();
+    private TIntObjectHashMap<FastMap<Integer, SimpleEntry<SpawnGroup2, Spawn>>> allSpawnMaps = new TIntObjectHashMap<>();
+    private TIntObjectHashMap<List<SpawnGroup2>> baseSpawnMaps = new TIntObjectHashMap<>();
+    private TIntObjectHashMap<List<SpawnGroup2>> riftSpawnMaps = new TIntObjectHashMap<>();
+    private TIntObjectHashMap<List<SpawnGroup2>> siegeSpawnMaps = new TIntObjectHashMap<>();
+    private TIntObjectHashMap<List<SpawnGroup2>> vortexSpawnMaps = new TIntObjectHashMap<>();
+    private TIntObjectHashMap<List<SpawnGroup2>> beritraSpawnMaps = new TIntObjectHashMap<>();
+    private TIntObjectHashMap<Spawn> customs = new TIntObjectHashMap<>();
 
     /**
      * @param u
      * @param parent
      * @throws PropertyException
      */
-    @SuppressWarnings({"rawtypes", "unchecked"})
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     public void afterUnmarshal(Unmarshaller u, Object parent) {
         if (templates != null) {
             for (SpawnMap spawnMap : templates) {
@@ -190,8 +190,7 @@ public class SpawnsData2 {
                                 } else if (customs.containsKey(spawn.getNpcId())) {
                                     continue;
                                 }
-                                SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, siegeId, race.getSiegeRace(),
-                                        mod.getSiegeModType());
+                                SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, siegeId, race.getSiegeRace(), mod.getSiegeModType());
                                 allSpawnMaps.get(mapId).put(spawn.getNpcId(), new SimpleEntry(spawnGroup, spawn));
                                 siegeSpawnMaps.get(siegeId).add(spawnGroup);
                             }
@@ -222,28 +221,27 @@ public class SpawnsData2 {
                     }
                 }
                 for (BeritraSpawn BeritraSpawn : spawnMap.getBeritraSpawns()) {
-					int id = BeritraSpawn.getId();
-					if (!beritraSpawnMaps.containsKey(id)) {
-						beritraSpawnMaps.put(id, new ArrayList<SpawnGroup2>());
-					}
-					for (BeritraSpawn.BeritraStateTemplate type : BeritraSpawn.getSiegeModTemplates()) {
-						if (type == null || type.getSpawns() == null) {
-							continue;
-						}
-						for (Spawn spawn : type.getSpawns()) {
-							if (spawn.isCustom()) {
-								if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId())) {
-									allSpawnMaps.get(mapId).remove(spawn.getNpcId());
-								}
-								customs.put(spawn.getNpcId(), spawn);
-							}
-							else if (customs.containsKey(spawn.getNpcId()))
-								continue;
-							SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, id, type.getBeritraType());
-							beritraSpawnMaps.get(id).add(spawnGroup);
-						}
-					}
-				}
+                    int id = BeritraSpawn.getId();
+                    if (!beritraSpawnMaps.containsKey(id)) {
+                        beritraSpawnMaps.put(id, new ArrayList<SpawnGroup2>());
+                    }
+                    for (BeritraSpawn.BeritraStateTemplate type : BeritraSpawn.getSiegeModTemplates()) {
+                        if (type == null || type.getSpawns() == null) {
+                            continue;
+                        }
+                        for (Spawn spawn : type.getSpawns()) {
+                            if (spawn.isCustom()) {
+                                if (allSpawnMaps.get(mapId).containsKey(spawn.getNpcId())) {
+                                    allSpawnMaps.get(mapId).remove(spawn.getNpcId());
+                                }
+                                customs.put(spawn.getNpcId(), spawn);
+                            } else if (customs.containsKey(spawn.getNpcId()))
+                                continue;
+                            SpawnGroup2 spawnGroup = new SpawnGroup2(mapId, spawn, id, type.getBeritraType());
+                            beritraSpawnMaps.get(id).add(spawnGroup);
+                        }
+                    }
+                }
                 customs.clear();
             }
         }
@@ -285,10 +283,10 @@ public class SpawnsData2 {
     public List<SpawnGroup2> getVortexSpawnsByLocId(int id) {
         return vortexSpawnMaps.get(id);
     }
-    
+
     public List<SpawnGroup2> getBeritraSpawnsByLocId(int id) {
-		return beritraSpawnMaps.get(id);
-	}
+        return beritraSpawnMaps.get(id);
+    }
 
     public synchronized boolean saveSpawn(Player admin, VisibleObject visibleObject, boolean delete) throws IOException {
         SpawnTemplate spawn = visibleObject.getSpawn();
@@ -345,9 +343,8 @@ public class SpawnsData2 {
             addGroup = true;
         }
 
-        SpawnSpotTemplate spot = new SpawnSpotTemplate(visibleObject.getX(), visibleObject.getY(), visibleObject.getZ(),
-                visibleObject.getHeading(), visibleObject.getSpawn().getRandomWalk(), visibleObject.getSpawn().getWalkerId(),
-                visibleObject.getSpawn().getWalkerIndex());
+        SpawnSpotTemplate spot = new SpawnSpotTemplate(visibleObject.getX(), visibleObject.getY(), visibleObject.getZ(), visibleObject.getHeading(),
+            visibleObject.getSpawn().getRandomWalk(), visibleObject.getSpawn().getWalkerId(), visibleObject.getSpawn().getWalkerIndex());
         boolean changeX = visibleObject.getX() != spawn.getX();
         boolean changeY = visibleObject.getY() != spawn.getY();
         boolean changeZ = visibleObject.getZ() != spawn.getZ();
@@ -363,8 +360,7 @@ public class SpawnsData2 {
 
         SpawnSpotTemplate oldSpot = null;
         for (SpawnSpotTemplate s : oldGroup.getSpawnSpotTemplates()) {
-            if (s.getX() == spot.getX() && s.getY() == spot.getY() && s.getZ() == spot.getZ()
-                    && s.getHeading() == spot.getHeading()) {
+            if (s.getX() == spot.getX() && s.getY() == spot.getY() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading()) {
                 if (delete || !StringUtils.equals(s.getWalkerId(), spot.getWalkerId())) {
                     oldSpot = s;
                     break;
@@ -372,9 +368,9 @@ public class SpawnsData2 {
                     return false; // nothing to change
                 }
             } else if (changeX && s.getY() == spot.getY() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading()
-                    || changeY && s.getX() == spot.getX() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading()
-                    || changeZ && s.getX() == spot.getX() && s.getY() == spot.getY() && s.getHeading() == spot.getHeading()
-                    || changeH && s.getX() == spot.getX() && s.getY() == spot.getY() && s.getZ() == spot.getZ()) {
+                || changeY && s.getX() == spot.getX() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading()
+                || changeZ && s.getX() == spot.getX() && s.getY() == spot.getY() && s.getHeading() == spot.getHeading()
+                || changeH && s.getX() == spot.getX() && s.getY() == spot.getY() && s.getZ() == spot.getZ()) {
                 oldSpot = s;
                 break;
             }
@@ -390,7 +386,7 @@ public class SpawnsData2 {
 
         SpawnMap map = null;
         if (data.templates == null) {
-            data.templates = new ArrayList<SpawnMap>();
+            data.templates = new ArrayList<>();
             map = new SpawnMap(spawn.getWorldId());
             data.templates.add(map);
         } else {
@@ -445,7 +441,8 @@ public class SpawnsData2 {
     }
 
     /**
-     * @param worldId Optional. If provided, searches in this world first
+     * @param worldId
+     *            Optional. If provided, searches in this world first
      * @param npcId
      * @return template for the spot
      */
@@ -473,11 +470,12 @@ public class SpawnsData2 {
     /**
      * Used by Event Service to add additional spawns
      *
-     * @param spawnMap templates to add
+     * @param spawnMap
+     *            templates to add
      */
     public void addNewSpawnMap(SpawnMap spawnMap) {
         if (templates == null) {
-            templates = new ArrayList<SpawnMap>();
+            templates = new ArrayList<>();
         }
         templates.add(spawnMap);
     }
@@ -487,8 +485,7 @@ public class SpawnsData2 {
             if (!allSpawnMaps.contains(visObj.getWorldId())) {
                 continue;
             }
-            SimpleEntry<SpawnGroup2, Spawn> entry = allSpawnMaps.get(visObj.getWorldId()).get(
-                    visObj.getObjectTemplate().getTemplateId());
+            SimpleEntry<SpawnGroup2, Spawn> entry = allSpawnMaps.get(visObj.getWorldId()).get(visObj.getObjectTemplate().getTemplateId());
             if (!entry.getValue().isEventSpawn()) {
                 continue;
             }

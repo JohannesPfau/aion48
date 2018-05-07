@@ -173,7 +173,7 @@ public enum DialogAction {
     SELECTED_QUEST_REWARD6(13),
     SELECTED_QUEST_REWARD7(14),
     SELECTED_QUEST_REWARD8(15),
-    SELECTED_QUEST_REWARD9(16),    
+    SELECTED_QUEST_REWARD9(16),
     SELECTED_QUEST_REWARD10(17),
     SELECTED_QUEST_REWARD11(18),
     SELECTED_QUEST_REWARD12(19),
@@ -236,6 +236,7 @@ public enum DialogAction {
     ITEM_UPGRADE(109), // new 4.7 ?
     CHARGE_STIGMA(125), // 4.8
     USE_OBJECT(-1);
+
     private int id;
 
     private DialogAction(int id) {

@@ -141,23 +141,23 @@ public class CM_BUY_ITEM extends AionClientPacket {
             TradeListTemplate purchaseTemplate = DataManager.TRADE_LIST_DATA.getPurchaseTemplate(npc.getNpcId());
             switch (tradeActionId) {
                 case 1://sell to shop
-                    if (npc.getObjectTemplate().getTitleId() == 463495 ||  //<Ancient Relics Supervisor>
-                        npc.getObjectTemplate().getTitleId() == 463628 ||  //<Legion Relics Supervisor>
-						npc.getObjectTemplate().getTitleId() == 463230 ||  //<Battlefield Equipment Vendor> 
-                        npc.getObjectTemplate().getTitleId() == 463224 ||  //<Abyss Equipment Merchant>
-						npc.getObjectTemplate().getTitleId() == 463209 ||  //<Legion Abyss Equipment Merchant>
-                        npc.getObjectTemplate().getTitleId() == 463493 ||  //<Battlefield Equipment Vendor>                         
-						npc.getObjectTemplate().getTitleId() == 463491 ||  //<Abyss Equipment Merchant> 
-						npc.getObjectTemplate().getTitleId() == 463222 ||  //<Ceramium Medal Steward> 
-                        npc.getObjectTemplate().getTitleId() == 463648 ||  //<Stigma Vendor>
-                        npc.getObjectTemplate().getTitleId() == 463492 ) { //<Ancient Coin Reward Officer>
+                    if (npc.getObjectTemplate().getTitleId() == 463495 || //<Ancient Relics Supervisor>
+                        npc.getObjectTemplate().getTitleId() == 463628 || //<Legion Relics Supervisor>
+                        npc.getObjectTemplate().getTitleId() == 463230 || //<Battlefield Equipment Vendor> 
+                        npc.getObjectTemplate().getTitleId() == 463224 || //<Abyss Equipment Merchant>
+                        npc.getObjectTemplate().getTitleId() == 463209 || //<Legion Abyss Equipment Merchant>
+                        npc.getObjectTemplate().getTitleId() == 463493 || //<Battlefield Equipment Vendor>                         
+                        npc.getObjectTemplate().getTitleId() == 463491 || //<Abyss Equipment Merchant> 
+                        npc.getObjectTemplate().getTitleId() == 463222 || //<Ceramium Medal Steward> 
+                        npc.getObjectTemplate().getTitleId() == 463648 || //<Stigma Vendor>
+                        npc.getObjectTemplate().getTitleId() == 463492) { //<Ancient Coin Reward Officer>
                         TradeService.performSellForAPToShop(player, tradeList, purchaseTemplate);
                     }
-                        //Sell To Shop [Purchase List Kinah]
-			 		if (npc.getObjectTemplate().getTitleId() == 463203 || //<Special Vendor>
-                         npc.getObjectTemplate().getTitleId() == 463490 ||  //<Ancient Coin Equipment Vendor>
-                         npc.getObjectTemplate().getTitleId() == 463206) { //<Legion Special Vendor>
-                         TradeService.performSellForKinahToShop(player, tradeList, purchaseTemplate);
+                    //Sell To Shop [Purchase List Kinah]
+                    if (npc.getObjectTemplate().getTitleId() == 463203 || //<Special Vendor>
+                        npc.getObjectTemplate().getTitleId() == 463490 || //<Ancient Coin Equipment Vendor>
+                        npc.getObjectTemplate().getTitleId() == 463206) { //<Legion Special Vendor>
+                        TradeService.performSellForKinahToShop(player, tradeList, purchaseTemplate);
                     } else {
                         TradeService.performSellToShop(player, tradeList);
                     }

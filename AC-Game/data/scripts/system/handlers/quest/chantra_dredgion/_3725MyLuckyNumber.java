@@ -29,9 +29,9 @@
  */
 package quest.chantra_dredgion;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -96,7 +96,7 @@ public class _3725MyLuckyNumber extends QuestHandler {
 
     @Override
     public boolean onKillEvent(QuestEnv env) {
-        int[] mobs = {281866, 216866};
+        int[] mobs = { 281866, 216866 };
         return defaultOnKillEvent(env, mobs, 0, 15, 2); // 2: 0 - 15
     }
 

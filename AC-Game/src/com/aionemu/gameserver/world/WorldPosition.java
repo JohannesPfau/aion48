@@ -34,8 +34,6 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Position of object in the world.
- *
-
  */
 public class WorldPosition {
 
@@ -198,7 +196,8 @@ public class WorldPosition {
     /**
      * Set map region
      *
-     * @param r - map region
+     * @param r
+     *            - map region
      */
     void setMapRegion(MapRegion r) {
         mapRegion = r;
@@ -210,7 +209,8 @@ public class WorldPosition {
      * @param newX
      * @param newY
      * @param newZ
-     * @param newHeading Value from 0 to 120 (120==0 actually)
+     * @param newHeading
+     *            Value from 0 to 120 (120==0 actually)
      */
     public void setXYZH(Float newX, Float newY, Float newZ, Byte newHeading) {
         if (newX != null) {
@@ -246,7 +246,7 @@ public class WorldPosition {
 
     @Override
     public String toString() {
-        return "WorldPosition [heading=" + heading + ", isSpawned=" + isSpawned + ", mapRegion=" + mapRegion + ", x=" + x
-                + ", y=" + y + ", z=" + z + "]";
+        return "WorldPosition [heading=" + heading + ", isSpawned=" + isSpawned + ", mapRegion=" + mapRegion + ", x=" + x + ", y=" + y + ", z=" + z
+            + "]";
     }
 }

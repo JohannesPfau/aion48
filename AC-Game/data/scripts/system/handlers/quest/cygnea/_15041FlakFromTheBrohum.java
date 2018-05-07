@@ -29,9 +29,9 @@
  */
 package quest.cygnea;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -42,7 +42,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 public class _15041FlakFromTheBrohum extends QuestHandler {
 
     private final static int questId = 15041;
-		int[] mobs = {235852, 235853, 235854, 235855};
+    int[] mobs = { 235852, 235853, 235854, 235855 };
 
     public _15041FlakFromTheBrohum() {
         super(questId);
@@ -52,7 +52,7 @@ public class _15041FlakFromTheBrohum extends QuestHandler {
     public void register() {
         qe.registerQuestNpc(804704).addOnQuestStart(questId);
         qe.registerQuestNpc(804704).addOnTalkEvent(questId);
-		for (int mob : mobs) {
+        for (int mob : mobs) {
             qe.registerQuestNpc(mob).addOnKillEvent(questId);
         }
     }
@@ -69,8 +69,8 @@ public class _15041FlakFromTheBrohum extends QuestHandler {
                     return defaultOnKillEvent(env, mobs, var1, var1 + 1, 1);
                 } else if (var1 == 7) {
                     qs.setQuestVar(0);
-					qs.setStatus(QuestStatus.REWARD);
-					updateQuestStatus(env);
+                    qs.setStatus(QuestStatus.REWARD);
+                    updateQuestStatus(env);
                     return true;
                 }
             }

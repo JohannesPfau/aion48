@@ -40,7 +40,6 @@ import com.aionemu.chatserver.service.ChatService;
 
 /**
  * @author ViAl
- *
  */
 public class CM_PLAYER_GAG extends GsClientPacket {
 

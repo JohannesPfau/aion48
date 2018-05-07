@@ -37,7 +37,7 @@ import javax.xml.bind.annotation.XmlType;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Parts", propOrder = {"fence", "garden", "frame", "outwall", "roof", "infloor", "inwall", "door"})
+@XmlType(name = "Parts", propOrder = { "fence", "garden", "frame", "outwall", "roof", "infloor", "inwall", "door" })
 public class Parts {
 
     protected Integer fence;

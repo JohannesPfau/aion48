@@ -59,7 +59,7 @@ public abstract class FeedItemGroup {
 
     public List<ItemRaceEntry> getItems() {
         if (items == null) {
-            items = new ArrayList<ItemRaceEntry>();
+            items = new ArrayList<>();
         }
         return this.items;
     }

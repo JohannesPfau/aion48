@@ -29,11 +29,11 @@
  */
 package com.aionemu.commons.utils;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.logging.Level;
 import java.util.regex.Pattern;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A collection of utility methods to retrieve and parse the values of the Java
@@ -76,7 +76,7 @@ public final class SystemPropertyUtil {
      * property access fails.
      *
      * @return the property value. {@code def} if there's no such property or if
-     * an access to the specified property is not allowed.
+     *         an access to the specified property is not allowed.
      */
     public static String get(String key, String def) {
         if (key == null) {
@@ -109,7 +109,7 @@ public final class SystemPropertyUtil {
      * property access fails.
      *
      * @return the property value. {@code def} if there's no such property or if
-     * an access to the specified property is not allowed.
+     *         an access to the specified property is not allowed.
      */
     public static boolean getBoolean(String key, boolean def) {
         String value = get(key);
@@ -130,8 +130,7 @@ public final class SystemPropertyUtil {
             return false;
         }
 
-        log("Unable to parse the boolean system property '" + key + "':" + value + " - "
-                + "using the default value: " + def);
+        log("Unable to parse the boolean system property '" + key + "':" + value + " - " + "using the default value: " + def);
 
         return def;
     }
@@ -144,7 +143,7 @@ public final class SystemPropertyUtil {
      * property access fails.
      *
      * @return the property value. {@code def} if there's no such property or if
-     * an access to the specified property is not allowed.
+     *         an access to the specified property is not allowed.
      */
     public static int getInt(String key, int def) {
         String value = get(key);
@@ -161,8 +160,7 @@ public final class SystemPropertyUtil {
             }
         }
 
-        log("Unable to parse the integer system property '" + key + "':" + value + " - "
-                + "using the default value: " + def);
+        log("Unable to parse the integer system property '" + key + "':" + value + " - " + "using the default value: " + def);
 
         return def;
     }
@@ -173,7 +171,7 @@ public final class SystemPropertyUtil {
      * property access fails.
      *
      * @return the property value. {@code def} if there's no such property or if
-     * an access to the specified property is not allowed.
+     *         an access to the specified property is not allowed.
      */
     public static long getLong(String key, long def) {
         String value = get(key);
@@ -190,8 +188,7 @@ public final class SystemPropertyUtil {
             }
         }
 
-        log("Unable to parse the long integer system property '" + key + "':" + value + " - "
-                + "using the default value: " + def);
+        log("Unable to parse the long integer system property '" + key + "':" + value + " - " + "using the default value: " + def);
 
         return def;
     }

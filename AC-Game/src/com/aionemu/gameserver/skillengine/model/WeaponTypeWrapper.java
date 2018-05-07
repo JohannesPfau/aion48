@@ -99,7 +99,7 @@ public class WeaponTypeWrapper implements Comparable<WeaponTypeWrapper> {
     @Override
     public String toString() {
         return "mainHandType=\"" + (mainHand != null ? mainHand.toString() : "null") + "\"" + " offHandType=\""
-                + (offHand != null ? offHand.toString() : "null");
+            + (offHand != null ? offHand.toString() : "null");
     }
 
     /*

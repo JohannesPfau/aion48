@@ -122,6 +122,7 @@ public enum StageType {
     PVP_STAGE_5(5, 0),
     PVP_STAGE_6(6, 0),
     PVP_STAGE_OVER(0, 0);
+
     private int id;
     private int type;
 

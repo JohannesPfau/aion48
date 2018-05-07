@@ -61,6 +61,7 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
         switch (type) {
             case MAGICAL:
                 observer = new AttackCalcObserver() {
+
                     private int count = 0;
 
                     @Override
@@ -77,6 +78,7 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
                 break;
             case PHYSICAL:
                 observer = new AttackCalcObserver() {
+
                     private int count = 0;
 
                     @Override
@@ -98,6 +100,7 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
                 break;
             case ALL:
                 observer = new AttackCalcObserver() {
+
                     private int count = 0;
 
                     @Override

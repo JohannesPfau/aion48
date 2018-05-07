@@ -41,11 +41,11 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.Visitor;
 
-
 /**
  * @author Alcpawnd
  */
 public class FatigueHandler extends TaskFromDBHandler {
+
     private int countDown;
     private static final Logger log = LoggerFactory.getLogger(FatigueHandler.class);
     private Calendar calendar = Calendar.getInstance();
@@ -73,14 +73,15 @@ public class FatigueHandler extends TaskFromDBHandler {
         log.info("Task[" + taskId + "] launched : fatigue reset got started !");
 
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(Player player) {
-                PacketSendUtility.sendBrightYellowMessageOnCenter(player, "Automatic Task: The fatigue will be reset in " + countDown
-                        + " seconds !");
+                PacketSendUtility.sendBrightYellowMessageOnCenter(player, "Automatic Task: The fatigue will be reset in " + countDown + " seconds !");
             }
         });
 
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 FatigueService.getInstance().resetFatigue();

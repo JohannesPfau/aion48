@@ -94,10 +94,10 @@ public class OptimisticLinkedQueue<E> extends AbstractQueue<E> implements Queue<
 
     @SuppressWarnings("rawtypes")
     private static final AtomicReferenceFieldUpdater<OptimisticLinkedQueue, Node> tailUpdater = AtomicReferenceFieldUpdater
-            .newUpdater(OptimisticLinkedQueue.class, Node.class, "tail");
+        .newUpdater(OptimisticLinkedQueue.class, Node.class, "tail");
     @SuppressWarnings("rawtypes")
     private static final AtomicReferenceFieldUpdater<OptimisticLinkedQueue, Node> headUpdater = AtomicReferenceFieldUpdater
-            .newUpdater(OptimisticLinkedQueue.class, Node.class, "head");
+        .newUpdater(OptimisticLinkedQueue.class, Node.class, "head");
 
     private boolean casTail(Node<E> cmp, Node<E> val) {
         return tailUpdater.compareAndSet(this, cmp, val);
@@ -111,7 +111,7 @@ public class OptimisticLinkedQueue<E> extends AbstractQueue<E> implements Queue<
      * Pointer to the head node, initialized to a dummy node. The first actual
      * node is at head.getPrev().
      */
-    private transient volatile Node<E> head = new Node<E>(null, null);
+    private transient volatile Node<E> head = new Node<>(null, null);
     /**
      * Pointer to last node on list
      */
@@ -129,12 +129,12 @@ public class OptimisticLinkedQueue<E> extends AbstractQueue<E> implements Queue<
      * Enqueues the specified element at the tail of this queue.
      */
     @Override
-	public boolean offer(E e) {
+    public boolean offer(E e) {
         if (e == null) {
             throw new NullPointerException();
         }
-        Node<E> n = new Node<E>(e, null);
-        for (; ; ) {
+        Node<E> n = new Node<>(e, null);
+        for (;;) {
             Node<E> t = tail;
             n.setNext(t);
             count.incrementAndGet();
@@ -151,8 +151,8 @@ public class OptimisticLinkedQueue<E> extends AbstractQueue<E> implements Queue<
      * collection.
      */
     @Override
-	public E poll() {
-        for (; ; ) {
+    public E poll() {
+        for (;;) {
             Node<E> h = head;
             Node<E> t = tail;
             Node<E> first = h.getPrev();
@@ -190,8 +190,8 @@ public class OptimisticLinkedQueue<E> extends AbstractQueue<E> implements Queue<
     }
 
     @Override
-	public void clear() {
-        while (poll() != null) ;
+    public void clear() {
+        while (poll() != null);
     }
 
     public int leaveTail() {

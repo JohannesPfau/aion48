@@ -46,7 +46,8 @@ public class SM_LOGIN_FAIL extends AionServerPacket {
     /**
      * Constructs new instance of <tt>SM_LOGIN_FAIL</tt> packet.
      *
-     * @param response auth responce
+     * @param response
+     *            auth responce
      */
     public SM_LOGIN_FAIL(AionAuthResponse response) {
         super(0x01);

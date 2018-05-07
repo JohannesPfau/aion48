@@ -62,6 +62,7 @@ public class OneTimeBoostSkillCriticalEffect extends EffectTemplate {
         super.startEffect(effect);
 
         AttackerCriticalStatusObserver observer = new AttackerCriticalStatusObserver(AttackStatus.CRITICAL, count, value, percent) {
+
             @Override
             public AttackerCriticalStatus checkAttackerCriticalStatus(AttackStatus stat, boolean isSkill) {
                 if (stat == this.status && isSkill) {

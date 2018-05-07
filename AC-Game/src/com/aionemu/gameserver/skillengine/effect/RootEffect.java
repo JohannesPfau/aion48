@@ -72,6 +72,7 @@ public class RootEffect extends EffectTemplate {
         PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
 
         ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
+
             @Override
             public void attacked(Creature creature) {
                 if (Rnd.get(0, 100) > resistchance) {

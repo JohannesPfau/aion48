@@ -29,7 +29,8 @@
  */
 package ai.instance.rentusBase;
 
-import ai.GeneralNpcAI2;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.commons.network.util.ThreadPoolManager;
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
@@ -43,7 +44,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz
@@ -82,6 +83,7 @@ public class ReianBomberAI2 extends GeneralNpcAI2 {
         setSubStateIfNot(AISubState.NONE);
         SkillEngine.getInstance().getSkill(getOwner(), 19374, 60, getOwner()).useNoAnimationSkill();
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 if (!isAlreadyDead()) {

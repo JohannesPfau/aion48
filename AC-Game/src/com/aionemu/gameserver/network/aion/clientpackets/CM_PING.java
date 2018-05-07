@@ -39,7 +39,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- modified by Undertrey
+ * modified by Undertrey
  */
 public class CM_PING extends AionClientPacket {
 

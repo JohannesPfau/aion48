@@ -46,7 +46,7 @@ import com.aionemu.gameserver.questEngine.handlers.template.WorkOrders;
  * @author Mr. Poke, reworked Bobobear
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "WorkOrdersData", propOrder = {"giveComponent"})
+@XmlType(name = "WorkOrdersData", propOrder = { "giveComponent" })
 public class WorkOrdersData extends XMLQuest {
 
     @XmlElement(name = "give_component", required = true)
@@ -66,6 +66,7 @@ public class WorkOrdersData extends XMLQuest {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getGiveComponent().add(newItem);
      * </pre>
@@ -75,7 +76,7 @@ public class WorkOrdersData extends XMLQuest {
      */
     public List<QuestItems> getGiveComponent() {
         if (giveComponent == null) {
-            giveComponent = new ArrayList<QuestItems>();
+            giveComponent = new ArrayList<>();
         }
         return this.giveComponent;
     }

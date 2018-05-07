@@ -273,9 +273,12 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
     /**
      * Creates a new <tt>SM_QUESTION_WINDOW<tt> packet
      *
-     * @param code     code The string code to display, found in client_strings.xml
-     * @param senderId sender Object id
-     * @param params   params The parameters for the string, if any
+     * @param code
+     *            code The string code to display, found in client_strings.xml
+     * @param senderId
+     *            sender Object id
+     * @param params
+     *            params The parameters for the string, if any
      */
     public SM_QUESTION_WINDOW(int code, int senderId, int range, Object... params) {
         this.code = code;
@@ -289,7 +292,7 @@ public class SM_QUESTION_WINDOW extends AionServerPacket {
      */
     @Override
     protected void writeImpl(AionConnection con) {
-    	PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
+        PacketLoggerService.getInstance().logPacketSM(this.getPacketName());
         writeD(code);
 
         if (code == STR_INSTANCE_DUNGEON_WITH_DIFFICULTY_ENTER_CONFIRM) {

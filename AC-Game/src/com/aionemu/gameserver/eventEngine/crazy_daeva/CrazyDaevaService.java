@@ -82,6 +82,7 @@ public class CrazyDaevaService {
     //start choose rnd
     public void startChoose() {
         World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
             @Override
             public void visit(final Player player) {
                 int rnd = Rnd.get(1, 100);
@@ -89,8 +90,10 @@ public class CrazyDaevaService {
                 if (player.getRndCrazy() >= 50 && player.getLevel() >= 65) {
                     crazyCount++;
                     if (crazyCount == 1) {
-                        TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(), player.getZ(), player.getHeading(), TeleportAnimation.BEAM_ANIMATION);
-                        PacketSendUtility.event("A target has been choose ! It's " + player.getName() + " ! You have 30 min to find him, and kill him (you can kill him as many times as desired during this time). HAVE FUN :)");
+                        TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(), player.getZ(),
+                            player.getHeading(), TeleportAnimation.BEAM_ANIMATION);
+                        PacketSendUtility.event("A target has been choose ! It's " + player.getName()
+                            + " ! You have 30 min to find him, and kill him (you can kill him as many times as desired during this time). HAVE FUN :)");
                         log.info("[CRAZY] System choose " + player.getName() + ".");
                         player.setInCrazy(true);
                         PvpService.getInstance().doReward(player);
@@ -147,23 +150,26 @@ public class CrazyDaevaService {
     //end event clear all and reward
     public void clearCrazy() {
         ThreadPoolManager.getInstance().schedule(new Runnable() {
+
             @Override
             public void run() {
                 World.getInstance().doOnAllPlayers(new Visitor<Player>() {
+
                     @Override
                     public void visit(final Player player) {
                         if (player.isInCrazy()) {
-                            TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(), player.getZ(), player.getHeading(), TeleportAnimation.BEAM_ANIMATION);
+                            TeleportService2.teleportTo(player, player.getWorldId(), player.getInstanceId(), player.getX(), player.getY(),
+                                player.getZ(), player.getHeading(), TeleportAnimation.BEAM_ANIMATION);
                             if (player.getCrazyLevel() == 1) {
-                            	AbyssPointsService.addAp(player, 250);
+                                AbyssPointsService.addAp(player, 250);
                                 log.info("[CRAZY] Target " + player.getName() + " killed " + player.getCrazyKillCount() + " and get reward 250 AP.");
                             }
                             if (player.getCrazyLevel() == 2) {
-                            	AbyssPointsService.addAp(player, 500);
+                                AbyssPointsService.addAp(player, 500);
                                 log.info("[CRAZY] Target " + player.getName() + " killed " + player.getCrazyKillCount() + " and get reward 500 AP.");
                             }
                             if (player.getCrazyLevel() == 3) {
-                            	AbyssPointsService.addAp(player, 1000);
+                                AbyssPointsService.addAp(player, 1000);
                                 log.info("[CRAZY] Target " + player.getName() + " killed " + player.getCrazyKillCount() + " and get reward 1000 AP.");
                             }
                             player.setCrazyKillCount(0);

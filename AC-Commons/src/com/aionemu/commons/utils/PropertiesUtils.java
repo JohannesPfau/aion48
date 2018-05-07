@@ -29,13 +29,13 @@
  */
 package com.aionemu.commons.utils;
 
-import org.apache.commons.io.FileUtils;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Collection;
 import java.util.Properties;
+
+import org.apache.commons.io.FileUtils;
 
 /**
  * This class is designed to simplify routine job with properties
@@ -47,9 +47,11 @@ public class PropertiesUtils {
     /**
      * Loads properties by given file
      *
-     * @param file filename
+     * @param file
+     *            filename
      * @return loaded properties
-     * @throws java.io.IOException if can't load file
+     * @throws java.io.IOException
+     *             if can't load file
      */
     public static Properties load(String file) throws IOException {
         return load(new File(file));
@@ -58,9 +60,11 @@ public class PropertiesUtils {
     /**
      * Loads properties by given file
      *
-     * @param file filename
+     * @param file
+     *            filename
      * @return loaded properties
-     * @throws java.io.IOException if can't load file
+     * @throws java.io.IOException
+     *             if can't load file
      */
     public static Properties load(File file) throws IOException {
         FileInputStream fis = new FileInputStream(file);
@@ -73,9 +77,11 @@ public class PropertiesUtils {
     /**
      * Loades properties from given files
      *
-     * @param files list of string that represents files
+     * @param files
+     *            list of string that represents files
      * @return array of loaded properties
-     * @throws IOException if was unable to read properties
+     * @throws IOException
+     *             if was unable to read properties
      */
     public static Properties[] load(String... files) throws IOException {
         Properties[] result = new Properties[files.length];
@@ -88,9 +94,11 @@ public class PropertiesUtils {
     /**
      * Loades properties from given files
      *
-     * @param files list of files
+     * @param files
+     *            list of files
      * @return array of loaded properties
-     * @throws IOException if was unable to read properties
+     * @throws IOException
+     *             if was unable to read properties
      */
     public static Properties[] load(File... files) throws IOException {
         Properties[] result = new Properties[files.length];
@@ -103,9 +111,11 @@ public class PropertiesUtils {
     /**
      * Loads non-recursively all .property files form directory
      *
-     * @param dir string that represents directory
+     * @param dir
+     *            string that represents directory
      * @return array of loaded properties
-     * @throws IOException if was unable to read properties
+     * @throws IOException
+     *             if was unable to read properties
      */
     public static Properties[] loadAllFromDirectory(String dir) throws IOException {
         return loadAllFromDirectory(new File(dir), false);
@@ -114,9 +124,11 @@ public class PropertiesUtils {
     /**
      * Loads non-recursively all .property files form directory
      *
-     * @param dir directory
+     * @param dir
+     *            directory
      * @return array of loaded properties
-     * @throws IOException if was unable to read properties
+     * @throws IOException
+     *             if was unable to read properties
      */
     public static Properties[] loadAllFromDirectory(File dir) throws IOException {
         return loadAllFromDirectory(dir, false);
@@ -125,10 +137,13 @@ public class PropertiesUtils {
     /**
      * Loads all .property files form directory
      *
-     * @param dir       string that represents directory
-     * @param recursive parse subdirectories or not
+     * @param dir
+     *            string that represents directory
+     * @param recursive
+     *            parse subdirectories or not
      * @return array of loaded properties
-     * @throws IOException if was unable to read properties
+     * @throws IOException
+     *             if was unable to read properties
      */
     public static Properties[] loadAllFromDirectory(String dir, boolean recursive) throws IOException {
         return loadAllFromDirectory(new File(dir), recursive);
@@ -137,13 +152,16 @@ public class PropertiesUtils {
     /**
      * Loads all .property files form directory
      *
-     * @param dir       directory
-     * @param recursive parse subdirectories or not
+     * @param dir
+     *            directory
+     * @param recursive
+     *            parse subdirectories or not
      * @return array of loaded properties
-     * @throws IOException if was unable to read properties
+     * @throws IOException
+     *             if was unable to read properties
      */
     public static Properties[] loadAllFromDirectory(File dir, boolean recursive) throws IOException {
-        Collection<File> files = FileUtils.listFiles(dir, new String[]{"properties"}, recursive);
+        Collection<File> files = FileUtils.listFiles(dir, new String[] { "properties" }, recursive);
         return load(files.toArray(new File[files.size()]));
     }
 
@@ -151,7 +169,8 @@ public class PropertiesUtils {
      * All initial properties will be overriden with properties supplied as
      * second argument
      *
-     * @param initialProperties to be overriden
+     * @param initialProperties
+     *            to be overriden
      * @param properties
      * @return merged properties
      */

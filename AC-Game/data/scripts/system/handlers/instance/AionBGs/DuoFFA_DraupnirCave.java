@@ -1,4 +1,5 @@
 package instance.AionBGs;
+
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -12,15 +13,18 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 
 @InstanceID(320080000)
 public class DuoFFA_DraupnirCave extends DFFAService {
-	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-	}
-	@Override
-	public void onEnterInstance(Player player) {
-		player.getController().cancelCurrentSkill();
 
-	}
+    @Override
+    public void onInstanceCreate(WorldMapInstance instance) {
+        super.onInstanceCreate(instance);
+    }
+
+    @Override
+    public void onEnterInstance(Player player) {
+        player.getController().cancelCurrentSkill();
+
+    }
+
     @Override
     public boolean isEnemy(Player attacker, Player target) {
         if (attacker != target) {
@@ -28,25 +32,29 @@ public class DuoFFA_DraupnirCave extends DFFAService {
         }
         return super.isEnemy(attacker, target);
     }
+
     @Override
     public boolean onDie(Player player, Creature lastAttacker) {
-    	if (player.isInDuoFFA()) {
-    		DFFAService.getInstance().onDead(player, lastAttacker); 
-    	} else {
-            PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
+        if (player.isInDuoFFA()) {
+            DFFAService.getInstance().onDead(player, lastAttacker);
+        } else {
+            PacketSendUtility.broadcastPacket(player,
+                new SM_EMOTION(player, EmotionType.DIE, 0, player.equals(lastAttacker) ? 0 : lastAttacker.getObjectId()), true);
             PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
-    	}
-		return true;
-    }
-    @Override
-    public boolean onReviveEvent(Player player) {
- if (player.isInDuoFFA()) {
-    		DFFAService.getInstance().onRevive(player);
-    	}
+        }
         return true;
     }
+
+    @Override
+    public boolean onReviveEvent(Player player) {
+        if (player.isInDuoFFA()) {
+            DFFAService.getInstance().onRevive(player);
+        }
+        return true;
+    }
+
     @Override
     public void onPlayerLogOut(Player player) {
-   TeleportService2.moveToBindLocation(player, false);
+        TeleportService2.moveToBindLocation(player, false);
     }
 }

@@ -31,13 +31,13 @@ package quest.pandaemonium;
 
 import com.aionemu.gameserver.ai2.NpcAI2;
 import com.aionemu.gameserver.ai2.manager.WalkManager;
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -46,7 +46,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Cheatkiller
- *
  */
 public class _4212MissingSidrunerk extends QuestHandler {
 
@@ -110,7 +109,8 @@ public class _4212MissingSidrunerk extends QuestHandler {
                     npc.getSpawn().setWalkerId("4212");
                     WalkManager.startWalking((NpcAI2) npc.getAi2());
                     PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
-                    player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, npc, 505.69427f, 437.69382f, 885.1844f));
+                    player.getController().addTask(TaskId.QUEST_FOLLOW,
+                        QuestTasks.newFollowingToTargetCheckTask(env, npc, 505.69427f, 437.69382f, 885.1844f));
                     return defaultCloseDialog(env, 2, 3);
                 }
             } else if (targetId == 730208) {

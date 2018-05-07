@@ -131,7 +131,7 @@ public class ItemEquipmentListener {
             randomStats.onUnEquip(owner);
         }
         if (item.isAmplified() && item.getEnchantLevel() >= 20) {
-        	SkillLearnService.removeSkill(owner, item.getBuffSkill());
+            SkillLearnService.removeSkill(owner, item.getBuffSkill());
         }
     }
 
@@ -165,7 +165,8 @@ public class ItemEquipmentListener {
                 if (weaponStats != null) {
                     int boostMagicalSkill = Math.round(0.1f * weaponStats.getBoostMagicalSkill());
                     int attack = Math.round(0.1f * weaponStats.getMeanDamage());
-                    if (weaponType == WeaponType.ORB_2H || weaponType == WeaponType.BOOK_2H || weaponType == WeaponType.GUN_1H || weaponType == WeaponType.CANNON_2H || weaponType == WeaponType.HARP_2H || weaponType == WeaponType.KEYBLADE_2H) {
+                    if (weaponType == WeaponType.ORB_2H || weaponType == WeaponType.BOOK_2H || weaponType == WeaponType.GUN_1H
+                        || weaponType == WeaponType.CANNON_2H || weaponType == WeaponType.HARP_2H || weaponType == WeaponType.KEYBLADE_2H) {
                         allModifiers.add(new StatAddFunction(StatEnum.MAGICAL_ATTACK, attack, false));
                         allModifiers.add(new StatAddFunction(StatEnum.BOOST_MAGICAL_SKILL, boostMagicalSkill, false));
                     } else {
@@ -192,7 +193,7 @@ public class ItemEquipmentListener {
      * @return
      */
     private static List<StatFunction> wrapModifiers(Item item, List<StatFunction> modifiers) {
-        List<StatFunction> allModifiers = new ArrayList<StatFunction>();
+        List<StatFunction> allModifiers = new ArrayList<>();
         for (StatFunction modifier : modifiers) {
             switch (modifier.getName()) {
                 // why they are removed look at DuplicateStatFunction

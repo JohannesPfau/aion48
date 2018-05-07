@@ -29,13 +29,14 @@
  */
 package quest.gelkmaros;
 
-import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
-import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
-import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
+import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_FULL_INVENTORY;
+
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
+import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -57,11 +58,11 @@ public class _24061UntanglingTalocsHollow extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {799226, 799247, 799250, 799325, 799503, 799239};
+        int[] npcs = { 799226, 799247, 799250, 799325, 799503, 799239 };
         qe.registerOnEnterZoneMissionEnd(questId);
         qe.registerOnLevelUp(questId);
         qe.registerOnEnterWorld(questId);
-		qe.registerOnLogOut(questId);
+        qe.registerOnLogOut(questId);
         qe.registerOnDie(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -142,8 +143,8 @@ public class _24061UntanglingTalocsHollow extends QuestHandler {
                                     if (giveQuestItem(env, 182215381, 1) && giveQuestItem(env, 182215382, 1)) {
                                         WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300190000);
                                         InstanceService.registerPlayerWithInstance(newInstance, player);
-                                        TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f,
-                                                1098.236f, (byte) 30);
+                                        TeleportService2.teleportTo(player, 300190000, newInstance.getInstanceId(), 202.26694f, 226.0532f, 1098.236f,
+                                            (byte) 30);
                                         changeQuestStep(env, 3, 4, false);
                                         return closeDialogWindow(env);
                                     } else {
@@ -163,7 +164,8 @@ public class _24061UntanglingTalocsHollow extends QuestHandler {
                     switch (dialog) {
                         case QUEST_SELECT: {
                             if (var == 7) {
-                                TeleportService2.teleportTo(player, 220070000, 991.1934f, 2560.148f, 239.909f, (byte) 118, TeleportAnimation.BEAM_ANIMATION);
+                                TeleportService2.teleportTo(player, 220070000, 991.1934f, 2560.148f, 239.909f, (byte) 118,
+                                    TeleportAnimation.BEAM_ANIMATION);
                                 changeQuestStep(env, 7, 8, false);
                                 return closeDialogWindow(env);
                             }
@@ -254,7 +256,7 @@ public class _24061UntanglingTalocsHollow extends QuestHandler {
         QuestState qs = player.getQuestStateList().getQuestState(questId);
         if (qs != null && qs.getStatus() == QuestStatus.START) {
             int var = qs.getQuestVarById(0);
-		if  (var >= 4 || var <= 6) {
+            if (var >= 4 || var <= 6) {
                 removeQuestItem(env, 182215381, 1);
                 removeQuestItem(env, 182215382, 1);
                 qs.setQuestVar(3);

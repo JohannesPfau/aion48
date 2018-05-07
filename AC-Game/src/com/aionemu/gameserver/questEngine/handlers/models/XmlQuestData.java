@@ -47,7 +47,7 @@ import com.aionemu.gameserver.questEngine.handlers.template.XmlQuest;
  * @author Mr. Poke
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "XmlQuest", propOrder = {"onTalkEvent", "onKillEvent"})
+@XmlType(name = "XmlQuest", propOrder = { "onTalkEvent", "onKillEvent" })
 public class XmlQuestData extends XMLQuest {
 
     @XmlElement(name = "on_talk_event")
@@ -69,6 +69,7 @@ public class XmlQuestData extends XMLQuest {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getOnTalkEvent().add(newItem);
      * </pre>
@@ -78,7 +79,7 @@ public class XmlQuestData extends XMLQuest {
      */
     public List<OnTalkEvent> getOnTalkEvent() {
         if (onTalkEvent == null) {
-            onTalkEvent = new ArrayList<OnTalkEvent>();
+            onTalkEvent = new ArrayList<>();
         }
         return this.onTalkEvent;
     }
@@ -93,6 +94,7 @@ public class XmlQuestData extends XMLQuest {
      * <p/>
      * For example, to add a new item, do as follows:
      * <p/>
+     * 
      * <pre>
      * getOnKillEvent().add(newItem);
      * </pre>
@@ -102,7 +104,7 @@ public class XmlQuestData extends XMLQuest {
      */
     public List<OnKillEvent> getOnKillEvent() {
         if (onKillEvent == null) {
-            onKillEvent = new ArrayList<OnKillEvent>();
+            onKillEvent = new ArrayList<>();
         }
         return this.onKillEvent;
     }

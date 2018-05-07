@@ -52,6 +52,7 @@ public enum PlayerClass {
     ARTIST(15),
     BARD(16),
     ALL(17);
+
     private byte classId;
 
     /**

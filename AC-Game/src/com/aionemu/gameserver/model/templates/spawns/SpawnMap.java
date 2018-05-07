@@ -62,7 +62,7 @@ public class SpawnMap {
     @XmlElement(name = "vortex_spawn")
     private List<VortexSpawn> vortexSpawns;
     @XmlElement(name = "beritra_spawn")
-	private List<BeritraSpawn> beritraSpawns;
+    private List<BeritraSpawn> beritraSpawns;
     @XmlAttribute(name = "map_id")
     private int mapId;
 
@@ -79,7 +79,7 @@ public class SpawnMap {
 
     public List<Spawn> getSpawns() {
         if (spawns == null) {
-            spawns = new ArrayList<Spawn>();
+            spawns = new ArrayList<>();
         }
         return spawns;
     }
@@ -94,7 +94,7 @@ public class SpawnMap {
 
     public List<BaseSpawn> getBaseSpawns() {
         if (baseSpawns == null) {
-            baseSpawns = new ArrayList<BaseSpawn>();
+            baseSpawns = new ArrayList<>();
         }
         return baseSpawns;
     }
@@ -105,7 +105,7 @@ public class SpawnMap {
 
     public List<RiftSpawn> getRiftSpawns() {
         if (riftSpawns == null) {
-            riftSpawns = new ArrayList<RiftSpawn>();
+            riftSpawns = new ArrayList<>();
         }
         return riftSpawns;
     }
@@ -116,7 +116,7 @@ public class SpawnMap {
 
     public List<SiegeSpawn> getSiegeSpawns() {
         if (siegeSpawns == null) {
-            siegeSpawns = new ArrayList<SiegeSpawn>();
+            siegeSpawns = new ArrayList<>();
         }
         return siegeSpawns;
     }
@@ -127,7 +127,7 @@ public class SpawnMap {
 
     public List<VortexSpawn> getVortexSpawns() {
         if (vortexSpawns == null) {
-            vortexSpawns = new ArrayList<VortexSpawn>();
+            vortexSpawns = new ArrayList<>();
         }
         return vortexSpawns;
     }
@@ -135,15 +135,15 @@ public class SpawnMap {
     public void addVortexSpawns(VortexSpawn spawns) {
         getVortexSpawns().add(spawns);
     }
-    
+
     public List<BeritraSpawn> getBeritraSpawns() {
-		if (beritraSpawns == null) {
-			beritraSpawns = new ArrayList<BeritraSpawn>();
-		}
-		return beritraSpawns;
-	}
-	
-	public void addBeritraSpawns(BeritraSpawn spawns) {
-		getBeritraSpawns().add(spawns);
-	}
+        if (beritraSpawns == null) {
+            beritraSpawns = new ArrayList<>();
+        }
+        return beritraSpawns;
+    }
+
+    public void addBeritraSpawns(BeritraSpawn spawns) {
+        getBeritraSpawns().add(spawns);
+    }
 }

@@ -29,9 +29,9 @@
  */
 package quest.brusthonin;
 
+import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandler;
-import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -53,7 +53,7 @@ public class _4038AlasPoorGroznak extends QuestHandler {
 
     @Override
     public void register() {
-        int[] npcs = {205150, 730155, 700380, 700381, 700382};
+        int[] npcs = { 205150, 730155, 700380, 700381, 700382 };
         qe.registerQuestNpc(205150).addOnQuestStart(questId);
         for (int npc : npcs) {
             qe.registerQuestNpc(npc).addOnTalkEvent(questId);
@@ -94,7 +94,8 @@ public class _4038AlasPoorGroznak extends QuestHandler {
                             return checkQuestItems(env, 1, 2, false, 10000, 10001); // 2
                         }
                         case SETPRO3: {
-                        ThreadPoolManager.getInstance().schedule(new Runnable() {
+                            ThreadPoolManager.getInstance().schedule(new Runnable() {
+
                                 @Override
                                 public void run() {
                                     QuestService.addNewSpawn(220050000, 1, 214555, (float) 1075.55, (float) 2734.51, (float) 122.721, (byte) 4);
@@ -102,7 +103,7 @@ public class _4038AlasPoorGroznak extends QuestHandler {
                                     QuestService.addNewSpawn(220050000, 1, 214555, (float) 1079.35, (float) 2732.39, (float) 124.523, (byte) 25);
                                 }
                             }, 3000);
-                        
+
                             return defaultCloseDialog(env, 2, 2, true, false); // reward
                         }
                         case FINISH_DIALOG: {

@@ -29,14 +29,15 @@
  */
 package ai.instance.rentusBase;
 
-import ai.GeneralNpcAI2;
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.AIState;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import java.util.concurrent.atomic.AtomicBoolean;
+import ai.GeneralNpcAI2;
 
 /**
  * @author xTz

@@ -29,8 +29,6 @@
  */
 package com.aionemu.gameserver.services.vortexservice;
 
-import javolution.util.FastMap;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -46,14 +44,16 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService2;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
+import javolution.util.FastMap;
+
 /**
  * @author Source
  */
 public class Invasion extends DimensionalVortex<VortexLocation> {
 
     PlayerAlliance invAlliance, defAlliance;
-    protected FastMap<Integer, Player> invaders = new FastMap<Integer, Player>();
-    protected FastMap<Integer, Player> defenders = new FastMap<Integer, Player>();
+    protected FastMap<Integer, Player> invaders = new FastMap<>();
+    protected FastMap<Integer, Player> defenders = new FastMap<>();
 
     public Invasion(VortexLocation vortex) {
         super(vortex);
@@ -137,8 +137,7 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
             }
         }
 
-        if (isInvader && player.isOnline()
-                && player.getWorldId() == getVortexLocation().getInvasionWorldId()) {
+        if (isInvader && player.isOnline() && player.getWorldId() == getVortexLocation().getInvasionWorldId()) {
             // You will be returned to where you entered.
             PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1401474));
             TeleportService2.teleportTo(player, getVortexLocation().getHomePoint());
@@ -156,6 +155,7 @@ public class Invasion extends DimensionalVortex<VortexLocation> {
 
         if (defAlliance == null || !defAlliance.isFull()) {
             RequestResponseHandler responseHandler = new RequestResponseHandler(defender) {
+
                 @Override
                 public void acceptRequest(Creature requester, Player responder) {
                     if (responder.isInGroup2()) {

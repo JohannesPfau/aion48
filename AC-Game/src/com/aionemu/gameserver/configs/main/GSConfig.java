@@ -45,9 +45,6 @@ public class GSConfig {
     /* Server Credits Name */
     @Property(key = "gameserver.name", defaultValue = "Aion Lightning")
     public static String SERVER_NAME;
-    /* Server Credits Name */
-    @Property(key = "loginserver.database.name", defaultValue = "al_login_ls")
-    public static String LOGINSERVER_NAME;
     /* Server Version */
     @Property(key = "gameserver.version", defaultValue = "4.7")
     public static String SERVER_VERSION;

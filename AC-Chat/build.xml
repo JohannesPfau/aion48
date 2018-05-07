@@ -67,14 +67,12 @@
 		</javac>
 	</target>
 	<target name="jar" depends="compile" description="Create the jar file">
-		<exec dir="build" executable="svnversion.exe" outputproperty="revision"
-			failifexecutionfails="false" osfamily="windows">
-			<arg line="-n ." />
-		</exec>
-		<exec dir="build" executable="svnversion" outputproperty="revision"
-			failifexecutionfails="false" osfamily="unix">
-			<arg line="-n ." />
-		</exec>
+        <exec executable="git" outputproperty="revision" failifexecutionfails="false" errorproperty="">
+            <arg value="describe"/>
+            <arg value="--tags"/>
+            <arg value="--always"/>
+            <arg value="HEAD"/>
+        </exec>
 		<tstamp>
 			<format property="date" pattern="yyyy-MM-dd-HH:mm" />
 		</tstamp>

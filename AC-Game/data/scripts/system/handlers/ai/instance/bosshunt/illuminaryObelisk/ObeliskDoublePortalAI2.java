@@ -27,7 +27,7 @@
  * @Aion-NextGen
  * @Aion-Core Dev.
  */
-package ai.instance.illuminaryObelisk;
+package ai.instance.bosshunt.illuminaryObelisk;
 
 import ai.ActionItemNpcAI2;
 import com.aionemu.gameserver.ai2.AIName;

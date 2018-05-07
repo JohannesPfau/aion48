@@ -333,6 +333,8 @@ public class Player extends Creature {
     private int winCount = 0;
     private int arenaRound = 0;
     private int linkedSkill;
+    
+    private boolean isInBH;
 
     /**
      * Used for JUnit tests

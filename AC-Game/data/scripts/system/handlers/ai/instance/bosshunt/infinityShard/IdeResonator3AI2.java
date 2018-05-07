@@ -27,7 +27,7 @@
  * @Aion-NextGen
  * @Aion-Core Dev.
  */
-package ai.instance.infinityShard;
+package ai.instance.bosshunt.infinityShard;
 
 import com.aionemu.gameserver.ai2.AIName;
 import com.aionemu.gameserver.ai2.NpcAI2;

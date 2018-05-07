@@ -8,9 +8,7 @@
     <name>Aion Core Commons</name>
     <packaging>jar</packaging>
     <scm>
-        <developerConnection>scm:svn:https://subversion.assembla.com/svn/AionLightning/trunk/ac-commons
-        </developerConnection>
-        <url>http://aion-lightning.org/</url>
+        <developerConnection>scm:git:https://none</developerConnection>
     </scm>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -49,10 +47,11 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>buildnumber-maven-plugin</artifactId>
-                <version>1.0</version>
+                <version>1.4</version>
                 <configuration>
+                    <shortRevisionLength>5</shortRevisionLength>
                     <providerImplementations>
-                        <svn>javasvn</svn>
+                        <git>git</git>
                     </providerImplementations>
                     <revisionOnScmFailure>undefined</revisionOnScmFailure>
                 </configuration>

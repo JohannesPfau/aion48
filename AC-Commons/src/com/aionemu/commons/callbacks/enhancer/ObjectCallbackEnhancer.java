@@ -79,6 +79,7 @@ public class ObjectCallbackEnhancer extends CallbackClassFileTransformer {
      * @throws Exception
      *             is something went wrong
      */
+    @Override
     protected byte[] transformClass(ClassLoader loader, byte[] clazzBytes) throws Exception {
         ClassPool cp = new ClassPool();
         cp.appendClassPath(new LoaderClassPath(loader));
@@ -200,7 +201,7 @@ public class ObjectCallbackEnhancer extends CallbackClassFileTransformer {
         } else if (returnType.equals(CtClass.charType)) {
             sb.append("return 'a'");
         } else if (returnType.equals(CtClass.byteType) || returnType.equals(CtClass.shortType) || returnType.equals(CtClass.intType)
-            || returnType.equals(CtClass.floatType) || returnType.equals(CtClass.longType) || returnType.equals(CtClass.longType)) {
+            || returnType.equals(CtClass.floatType) || returnType.equals(CtClass.longType) || returnType.equals(CtClass.doubleType)) {
             sb.append("return 0");
         }
         sb.append(";}}");

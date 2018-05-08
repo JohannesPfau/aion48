@@ -30,12 +30,12 @@
 package com.aionemu.gameserver.taskmanager.parallel;
 
 import java.util.Collection;
+import java.util.concurrent.CountedCompleter;
+import java.util.concurrent.ForkJoinTask;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.utils.internal.chmv8.CountedCompleter;
-import com.aionemu.commons.utils.internal.chmv8.ForkJoinTask;
 import com.google.common.base.Predicate;
 
 /**

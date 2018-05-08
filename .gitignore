@@ -1,6 +1,7 @@
 */build/
 */target/
 */log/
+AC-Game/cache/
 AC-Game/dist/StartGS_loop.sh
 AC-Game/dist/StartGS.bat
 AC-Game/dist/StartGS.sh

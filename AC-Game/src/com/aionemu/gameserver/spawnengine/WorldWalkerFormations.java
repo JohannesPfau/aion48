@@ -30,8 +30,7 @@
 package com.aionemu.gameserver.spawnengine;
 
 import java.util.Map;
-
-import com.aionemu.commons.utils.internal.chmv8.PlatformDependent;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * @author Rolandas
@@ -41,7 +40,7 @@ public class WorldWalkerFormations {
     private Map<Integer, InstanceWalkerFormations> formations;
 
     public WorldWalkerFormations() {
-        formations = PlatformDependent.newConcurrentHashMap();
+        formations = new ConcurrentHashMap<>();
     }
 
     /**

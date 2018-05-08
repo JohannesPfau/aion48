@@ -33,6 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -46,7 +47,6 @@ import com.aionemu.commons.network.util.ThreadUncaughtExceptionHandler;
 import com.aionemu.commons.utils.concurrent.AionRejectedExecutionHandler;
 import com.aionemu.commons.utils.concurrent.PriorityThreadFactory;
 import com.aionemu.commons.utils.concurrent.RunnableWrapper;
-import com.aionemu.commons.utils.internal.chmv8.ForkJoinPool;
 import com.aionemu.gameserver.configs.main.ThreadConfig;
 
 /**

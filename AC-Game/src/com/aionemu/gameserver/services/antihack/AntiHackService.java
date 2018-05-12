@@ -212,7 +212,7 @@ public class AntiHackService {
 
         if (size != legitSize) {
             AuditLogger.info(player, "Detected modified aion.bin");
-            player.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
+            //player.getClientConnection().close(new SM_QUIT_RESPONSE(), false);
         }
 
         PacketSendUtility.sendPacket(player, new SM_GAMEGUARD(size));

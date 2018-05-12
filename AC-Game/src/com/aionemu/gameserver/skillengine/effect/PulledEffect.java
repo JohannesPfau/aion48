@@ -84,14 +84,17 @@ public class PulledEffect extends EffectTemplate {
     @Override
     public void startEffect(Effect effect) {
         final Creature effected = effect.getEffected();
-        effected.getEffectController().setAbnormal(AbnormalState.CANNOT_MOVE.getId());
-        effect.setAbnormal(AbnormalState.CANNOT_MOVE.getId());
+        //effected.getEffectController().setAbnormal(AbnormalState.CANNOT_MOVE.getId());
+        //effect.setAbnormal(AbnormalState.CANNOT_MOVE.getId());
+        effect.setAbnormal(AbnormalState.PARALYZE.getId());
+        effect.getEffected().getEffectController().setAbnormal(AbnormalState.PARALYZE.getId());
     }
 
     @Override
     public void endEffect(Effect effect) {
         effect.setIsPhysicalState(false);
         effect.getEffected().setCriticalEffectMulti(1);
-        effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.CANNOT_MOVE.getId());
+        //effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.CANNOT_MOVE.getId());
+        effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.PARALYZE.getId());
     }
 }

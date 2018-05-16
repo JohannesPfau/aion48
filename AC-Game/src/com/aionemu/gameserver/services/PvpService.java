@@ -126,36 +126,51 @@ public class PvpService {
 
         // Add Player Kill to record.
         if (this.getKillsFor(winner.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
-            winner.getAbyssRank().setAllKill();
-            int kills = winner.getAbyssRank().getAllKill();
-            // Pvp Kill Reward.
-            if (CustomConfig.ENABLE_KILL_REWARD) {
-                if (kills % CustomConfig.KILLS_NEEDED1 == 1) {
-                    ItemService.addItem(winner, CustomConfig.REWARD1, 1);
-                    PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD1 + "] for having killed "
-                        + CustomConfig.KILLS_NEEDED1 + " players !");
-                    log.info("[REWARD] Player [" + winner.getName() + "] win 2 [" + CustomConfig.REWARD1 + "]");
-                }
-                if (kills % CustomConfig.KILLS_NEEDED2 == 3) {
-                    ItemService.addItem(winner, CustomConfig.REWARD2, 1);
-                    PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD2 + "] for having killed "
-                        + CustomConfig.KILLS_NEEDED2 + " players !");
-                    log.info("[REWARD] Player [" + winner.getName() + "] win 4 [" + CustomConfig.REWARD2 + "]");
-                }
-                if (kills % CustomConfig.KILLS_NEEDED3 == 5) {
-                    ItemService.addItem(winner, CustomConfig.REWARD3, 1);
-                    PacketSendUtility.sendMessage(winner, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD3 + "] for having killed "
-                        + CustomConfig.KILLS_NEEDED3 + " players !");
-                    log.info("[REWARD] Player [" + winner.getName() + "] win 6 [" + CustomConfig.REWARD3 + "]");
+            
+            // Find group members in range
+            List<Player> players = new ArrayList<>();
+            PlayerGroup group = winner.getPlayerGroup2();
+            for (Player member : group.getMembers()) {
+                if (MathUtil.isIn3dRange(member, victim, GroupConfig.GROUP_MAX_DISTANCE)) {
+                    if (!member.getLifeStats().isAlreadyDead()) {
+                        players.add(member);
+                    }
                 }
             }
-            // PvP Toll Reward
-            if (CustomConfig.ENABLE_TOLL_REWARD) {
-                if (Rnd.get(0, 100) > CustomConfig.TOLL_CHANCE) {
-                    InGameShopEn.getInstance().addToll(winner, CustomConfig.TOLL_QUANTITY);
-                    PacketSendUtility.sendMessage(winner, "You've recived " + CustomConfig.TOLL_QUANTITY + " tolls from PvP!");
+
+            for (Player member : players) {
+                member.getAbyssRank().setAllKill();
+                int kills = member.getAbyssRank().getAllKill();
+                // Pvp Kill Reward.
+                if (CustomConfig.ENABLE_KILL_REWARD) {
+                    if (kills % CustomConfig.KILLS_NEEDED1 == 1) {
+                        ItemService.addItem(member, CustomConfig.REWARD1, 1);
+                        PacketSendUtility.sendMessage(member, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD1 + "] for having killed "
+                            + CustomConfig.KILLS_NEEDED1 + " players !");
+                        log.info("[REWARD] Player [" + member.getName() + "] win 2 [" + CustomConfig.REWARD1 + "]");
+                    }
+                    if (kills % CustomConfig.KILLS_NEEDED2 == 3) {
+                        ItemService.addItem(member, CustomConfig.REWARD2, 1);
+                        PacketSendUtility.sendMessage(member, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD2 + "] for having killed "
+                            + CustomConfig.KILLS_NEEDED2 + " players !");
+                        log.info("[REWARD] Player [" + member.getName() + "] win 4 [" + CustomConfig.REWARD2 + "]");
+                    }
+                    if (kills % CustomConfig.KILLS_NEEDED3 == 5) {
+                        ItemService.addItem(member, CustomConfig.REWARD3, 1);
+                        PacketSendUtility.sendMessage(member, "Congratulations, you have won " + "[item: " + CustomConfig.REWARD3 + "] for having killed "
+                            + CustomConfig.KILLS_NEEDED3 + " players !");
+                        log.info("[REWARD] Player [" + member.getName() + "] win 6 [" + CustomConfig.REWARD3 + "]");
+                    }
                 }
-            }
+                // PvP Toll Reward
+                if (CustomConfig.ENABLE_TOLL_REWARD) {
+                    if (Rnd.get(0, 100) > CustomConfig.TOLL_CHANCE) {
+                        InGameShopEn.getInstance().addToll(member, CustomConfig.TOLL_QUANTITY);
+                        PacketSendUtility.sendMessage(member, "You've recived " + CustomConfig.TOLL_QUANTITY + " tolls from PvP!");
+                    }
+                }
+            }            
+            
         }
 
         //Crazy kill
